@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputVector = ctx.ReadValue<Vector2>();
         direction = new Vector3(inputVector.x, inputVector.y, 0);
-        Debug.Log("Move: " + direction);
+        // Debug.Log("Move: " + direction);
     }
 
     void StopMove(InputAction.CallbackContext ctx)
@@ -68,4 +69,26 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
+    // Player needs to match gameobject's tag to be able to enter 
+    // Turns the object into trigger so player can walk through it
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision");
+        if(collision.gameObject.CompareTag(gameObject.tag))
+        {
+            collision.gameObject.GetComponent<Collider2D>().isTrigger = true;
+        }
+    }
+
+    // Reset collider when player exits
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        Debug.Log("Exited Collision");
+        if(collision.gameObject.CompareTag(gameObject.tag))
+        {
+            collision.gameObject.GetComponent<Collider2D>().isTrigger = false;
+        }
+    }
 }
+
