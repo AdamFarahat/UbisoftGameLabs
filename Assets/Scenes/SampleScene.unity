@@ -409,6 +409,18 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 2387454004056397051, guid: db6b94377e9f21441b9e4d4d0d0003ce, type: 3}
+    - target: {fileID: 2429309464571916556, guid: 8f5fac6e99624184ab46c3f45b8af15f, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429309464571916556, guid: 8f5fac6e99624184ab46c3f45b8af15f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429309464571916556, guid: 8f5fac6e99624184ab46c3f45b8af15f, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2530178048384208434, guid: 8f5fac6e99624184ab46c3f45b8af15f, type: 3}
       propertyPath: m_Name
       value: Player
