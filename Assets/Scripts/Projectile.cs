@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -9,6 +10,8 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
 
     private Collider2D coll;
+
+    GameObject owner;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +28,6 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void FixedUpdate()
