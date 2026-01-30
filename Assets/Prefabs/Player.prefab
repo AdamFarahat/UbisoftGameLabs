@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1564408816516337907}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 5
+  projectilePrefab: {fileID: 0}
 --- !u!50 &8394919808889667323
 Rigidbody2D:
   serializedVersion: 5

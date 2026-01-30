@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    
+    private Colored colored;
+
     [SerializeField] private float speed = 5.0f;
 
     [SerializeField] GameObject projectilePrefab;
@@ -19,13 +21,17 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Setup Player Inputs
+        // Get Colored component
+        colored = GetComponent<Colored>();
+        Assert.IsNotNull(colored);
+
+        // Setup Player Inputs
         playerInput = gameObject.GetComponent<PlayerInput>();
         playerInput.actions["Move"].performed += ctx => Move(ctx);
         playerInput.actions["Move"].canceled += ctx => StopMove(ctx);
         playerInput.actions["Shoot"].performed += _ => Shoot();
 
-        //Setup Rigidbody and Collider
+        // Setup Rigidbody and Collider
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
     }
@@ -55,11 +61,11 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        //Spawns the projectile and sets its direction
+        // Spawns the projectile and sets its direction
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
-        //If no direction, shoot right by default
-        if(direction == Vector3.zero)
+        // If no direction, shoot right by default
+        if (direction == Vector3.zero)
         {
             projectileScript.SetDirection(Vector2.right);
         }
@@ -75,8 +81,9 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision");
-        if(collision.gameObject.CompareTag(gameObject.tag))
+        if (collision.gameObject.TryGetComponent(out Colored other) && colored.MatchesColor(other))
         {
+            // TODO use better system than setting isTrigger so that different players collide independently.
             collision.gameObject.GetComponent<Collider2D>().isTrigger = true;
         }
     }
@@ -85,8 +92,9 @@ public class PlayerController : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("Exited Collision");
-        if(collision.gameObject.CompareTag(gameObject.tag))
+        if (collision.gameObject.TryGetComponent(out Colored other) && colored.MatchesColor(other))
         {
+            // TODO use better system than setting isTrigger so that different players collide independently.
             collision.gameObject.GetComponent<Collider2D>().isTrigger = false;
         }
     }
