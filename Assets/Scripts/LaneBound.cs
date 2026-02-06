@@ -8,7 +8,7 @@ public class LaneBound : MonoBehaviour
     public int LaneIndex
     {
         get => laneIndex;
-        set { laneIndex = value; SyncLane(); }
+        set { laneIndex = System.Math.Clamp(value, 0, LaneConfigSO.Instance.GetNumberOfLanes() - 1); SyncLane(); }
     }
 
     public float LaneDistance

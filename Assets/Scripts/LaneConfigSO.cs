@@ -26,6 +26,11 @@ public class LaneConfigSO : ScriptableObject
     [SerializeField] private List<Vector3> lanePositions;
     [SerializeField] private Vector3 laneDirection;
 
+    public int GetNumberOfLanes()
+    {
+        return lanePositions.Count;
+    }
+
     public Vector3 GetLanePosition(int laneIndex, float laneDistance)
     {
         return lanePositions[laneIndex] + laneDistance * laneDirection;
