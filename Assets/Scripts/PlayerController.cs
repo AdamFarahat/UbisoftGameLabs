@@ -4,9 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
-
     private LaneBound laneBound;
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -21,17 +19,10 @@ public class PlayerController : MonoBehaviour
         playerInput.actions["MoveRight"].performed += OnMoveRight;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            Debug.Log("Move Left");
             laneBound.LaneIndex--;
         }
     }
@@ -40,7 +31,6 @@ public class PlayerController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            Debug.Log("Move Right");
             laneBound.LaneIndex++;
         }
     }
