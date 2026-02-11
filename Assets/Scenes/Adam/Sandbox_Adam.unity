@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 400509941}
   - component: {fileID: 400509940}
   - component: {fileID: 400509939}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,9 +289,9 @@ GameObject:
   - component: {fileID: 486650651}
   - component: {fileID: 486650650}
   - component: {fileID: 486650649}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -511,9 +511,9 @@ GameObject:
   - component: {fileID: 578319683}
   - component: {fileID: 578319682}
   - component: {fileID: 578319681}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -827,9 +827,9 @@ GameObject:
   - component: {fileID: 736043274}
   - component: {fileID: 736043273}
   - component: {fileID: 736043272}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1371,9 +1371,9 @@ GameObject:
   - component: {fileID: 1681405897}
   - component: {fileID: 1681405896}
   - component: {fileID: 1681405895}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1670,8 +1670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9297ef4f3ee037441ad49da18bcb43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  player1: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-  player2: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+  playerG: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+  playerS: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
 --- !u!1 &1821376412
 GameObject:
   m_ObjectHideFlags: 0

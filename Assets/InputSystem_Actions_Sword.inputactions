@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "InputSystem_Actions",
+    "name": "InputSystem_Actions_Sword",
     "maps": [
         {
             "name": "Player",
@@ -19,6 +19,24 @@
                     "name": "MoveRight",
                     "type": "Button",
                     "id": "55a165b6-e56c-4440-8b8e-6b3c38801f4f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UpEffect",
+                    "type": "Button",
+                    "id": "14a6a163-a0b1-4c68-a84e-2f3fdd03340c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DownEffect",
+                    "type": "Button",
+                    "id": "9f4593e1-c445-4caf-be04-cfbcff9cd9b1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -50,17 +68,6 @@
                 },
                 {
                     "name": "",
-                    "id": "90a9af0a-f5e3-41d7-ae51-9f4068c1b2a4",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c390c771-0b8d-4b4d-99d1-d6a5c88fe639",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -83,12 +90,45 @@
                 },
                 {
                     "name": "",
-                    "id": "04b38e50-ad46-4364-91aa-c973453e2c7c",
-                    "path": "<Keyboard>/rightArrow",
+                    "id": "5a2c3139-dfe3-4390-b286-0e6ec37a9123",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveRight",
+                    "action": "UpEffect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8e75da18-7d44-437c-aab3-28742877d39a",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UpEffect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cea32448-5be9-4af5-abc3-bb608611b961",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DownEffect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "818827bb-d2d7-454d-993f-ab46f9837cc0",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DownEffect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

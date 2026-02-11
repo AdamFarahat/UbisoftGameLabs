@@ -3,16 +3,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private LaneBound laneBound;
-    private void Awake()
+    protected PlayerInput playerInput;
+    protected LaneBound laneBound;
+    protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         laneBound = GetComponent<LaneBound>();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         playerInput.SwitchCurrentActionMap("Player");
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
