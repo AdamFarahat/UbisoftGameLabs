@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Name
-      value: PlayerSword
+      value: GunPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 5474019668992448779, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Height
@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[13].m_ActionName
       value: 'Player/DownEffect[/Keyboard/s,/DualSenseGamepadHID/dpad/down]'
       objectReference: {fileID: 0}
+    - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b4990ce07388f544a1c1007c242470a, type: 2}
     m_RemovedComponents:
     - {fileID: 5505231937627613107, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
     m_RemovedGameObjects: []
@@ -103,7 +107,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5680664865622595728}
+      addedObject: {fileID: 6340666026545822551}
     - targetCorrespondingSourceObject: {fileID: 2897109236541268810, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8735051403653664842}
@@ -160,7 +164,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
   m_PrefabInstance: {fileID: 771891864670845371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5680664865622595728
+--- !u!114 &6340666026545822551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5608802524239182053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ebe73ad8e302ac45b1eb393fea98855, type: 3}
+  m_Script: {fileID: 11500000, guid: bdc212a1df3abd644b2f4f6d1c14f765, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwordPlayerController
-  jumpForce: 10
+  m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
+  jumpForce: 5

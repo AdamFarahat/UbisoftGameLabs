@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SwordPlayerController : PlayerController
+public class GunPlayerController : PlayerController
 {
     Rigidbody rb;
     
@@ -15,25 +15,18 @@ public class SwordPlayerController : PlayerController
         set => isGrounded = value;
     }
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     protected override void Awake()
     {
         base.Awake();
         rb = GetComponentInChildren<Rigidbody>();
         playerCollider = GetComponentInChildren<Collider>();
     }
+
     protected override void Start()
     {
         base.Start();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void Jump(InputAction.CallbackContext ctx)
