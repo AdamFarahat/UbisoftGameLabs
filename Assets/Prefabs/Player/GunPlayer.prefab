@@ -114,3 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc212a1df3abd644b2f4f6d1c14f765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
+  switchLaneDuration: 0.1
