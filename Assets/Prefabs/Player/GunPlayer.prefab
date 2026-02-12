@@ -52,22 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 5474019668992448779, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_Height
-      value: 2.0856133
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474019668992448779, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_Center.y
-      value: -0.042806655
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474019668992448779, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474019668992448779, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Actions
       value: 
@@ -75,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_DefaultActionMap
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -108,57 +96,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6340666026545822551}
-    - targetCorrespondingSourceObject: {fileID: 2897109236541268810, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8735051403653664842}
-    - targetCorrespondingSourceObject: {fileID: 2897109236541268810, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7313144649655659296}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
---- !u!1 &2486785308087261937 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2897109236541268810, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-  m_PrefabInstance: {fileID: 771891864670845371}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &8735051403653664842
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2486785308087261937}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
---- !u!114 &7313144649655659296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2486785308087261937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e8a718e60150442ba83bdbab844d22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
 --- !u!1 &5608802524239182053 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
@@ -176,4 +114,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc212a1df3abd644b2f4f6d1c14f765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
-  jumpForce: 5

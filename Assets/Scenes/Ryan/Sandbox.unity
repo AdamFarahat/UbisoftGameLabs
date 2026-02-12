@@ -1354,9 +1354,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6864494790772817345, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse (Gun)
+    - target: {fileID: 5608802524239182053, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1419,9 +1419,73 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse (Sword)
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[0].value
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[0].inSlope
+      value: 0.0015081267
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[1].inSlope
+      value: -10.013524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].inSlope
+      value: 14.51944
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[0].outSlope
+      value: 0.0015081267
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[1].inWeight
+      value: 0.1360007
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[1].outSlope
+      value: -10.013524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outSlope
+      value: 14.51944
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: fallCurve.m_Curve.Array.data[0].outWeight
+      value: 0.29657537
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outWeight
+      value: 0.14667659
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

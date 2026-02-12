@@ -1,30 +1,25 @@
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
 {
-    Rigidbody rb;
-    
-    Collider playerCollider;
-    [SerializeField] private float jumpForce = 5f;
-    private bool isGrounded = true;
+    [Header("Jumping")]
+    [SerializeField] private AnimationCurve jumpCurve;
+    [SerializeField] private AnimationCurve fallCurve;
 
-    public bool IsGrounded
-    {
-        get => isGrounded;
-        set => isGrounded = value;
-    }
-    
+    private bool jumping = false;
+
     protected override void Awake()
     {
         base.Awake();
-        rb = GetComponentInChildren<Rigidbody>();
-        playerCollider = GetComponentInChildren<Collider>();
     }
 
     protected override void Start()
     {
         base.Start();
+        playerInput.actions.Enable();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
     }
@@ -33,11 +28,38 @@ public class SwordPlayerController : PlayerController
     {
         if (ctx.performed)
         {
-            //If the player is on the ground, allow them to jump.
-            if (!isGrounded) return;
-            //Have the player jump upwards and then fall back down to the ground.
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            IsGrounded = false;
+            if (jumping)
+                return;
+
+            void SetY(float y)
+            {
+                transform.position = new(transform.position.x, y, transform.position.z);
+            }
+
+            IEnumerator Routine()
+            {
+                jumping = true;
+                SetY(0f);
+
+                // Animate jump
+                for (float t = 0f; t < jumpCurve.keys.Last().time; t += Time.deltaTime)
+                {
+                    SetY(jumpCurve.Evaluate(t));
+                    yield return null;
+                }
+
+                // Animate fall
+                for (float t = 0f; t < fallCurve.keys.Last().time; t += Time.deltaTime)
+                {
+                    SetY(fallCurve.Evaluate(t));
+                    yield return null;
+                }
+
+                SetY(0f);
+                jumping = false;
+            }
+
+            StartCoroutine(Routine());
         }
     }
 
