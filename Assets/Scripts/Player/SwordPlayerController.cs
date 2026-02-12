@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
 {
     [Header("Jumping")]
-    [SerializeField] private AnimationCurve jumpCurve;
-    [SerializeField] private AnimationCurve fallCurve;
+    [SerializeField] private float jumpSpeed = 100f;
+    [SerializeField] private float fallAcceleration = 500f;
 
-    private bool jumping = false;
+    private Coroutine jumpRoutine = null;
 
     protected override void Awake()
     {
@@ -28,7 +27,7 @@ public class SwordPlayerController : PlayerController
     {
         if (ctx.performed)
         {
-            if (jumping)
+            if (jumpRoutine != null)
                 return;
 
             void SetY(float y)
@@ -38,28 +37,34 @@ public class SwordPlayerController : PlayerController
 
             IEnumerator Routine()
             {
-                jumping = true;
-                SetY(0f);
+                float y = 0f;
+                SetY(y);
+                float velocity = jumpSpeed;
 
                 // Animate jump
-                for (float t = 0f; t < jumpCurve.keys.Last().time; t += Time.deltaTime)
+                while (velocity > 0f)
                 {
-                    SetY(jumpCurve.Evaluate(t));
+                    y += velocity * Time.deltaTime;
+                    velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
+                    SetY(y);
                     yield return null;
                 }
 
                 // Animate fall
-                for (float t = 0f; t < fallCurve.keys.Last().time; t += Time.deltaTime)
+                while (y > 0f)
                 {
-                    SetY(fallCurve.Evaluate(t));
+                    y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
+                    velocity -= fallAcceleration * Time.deltaTime;
+                    SetY(y);
                     yield return null;
                 }
 
-                SetY(0f);
-                jumping = false;
+                y = 0f;
+                SetY(y);
+                jumpRoutine = null;
             }
 
-            StartCoroutine(Routine());
+            jumpRoutine = StartCoroutine(Routine());
         }
     }
 

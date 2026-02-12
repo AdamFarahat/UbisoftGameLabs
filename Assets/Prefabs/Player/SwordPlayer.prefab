@@ -115,51 +115,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordPlayerController
   switchLaneDuration: 0.1
-  jumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 14.51944
-      outSlope: 14.51944
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.14667659
-    - serializedVersion: 3
-      time: 1
-      value: 8
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  fallCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 8
-      inSlope: 0.0015081267
-      outSlope: 0.0015081267
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.29657537
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -10.013524
-      outSlope: -10.013524
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1360007
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  jumpSpeed: 100
+  fallAcceleration: 500
