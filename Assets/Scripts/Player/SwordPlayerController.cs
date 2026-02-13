@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +8,22 @@ public class SwordPlayerController : PlayerController
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
+    [SerializeField] private float attackDuration = 0.5f;
+
+    private enum SwordPlayerStates
+    {
+        Normal,
+        Stunned,
+        Attacking,
+        Parrying,
+        Blocking
+    }
+
+    private SwordPlayerStates state = SwordPlayerStates.Normal;
 
     private Coroutine jumpRoutine = null;
+
+    private Coroutine attackRoutine = null;
 
     protected override void Awake()
     {
@@ -21,6 +36,12 @@ public class SwordPlayerController : PlayerController
         playerInput.actions.Enable();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
+        playerInput.actions["Attack"].performed += Attack;
+    }
+
+    public bool IsAttacking()
+    {
+        return state == SwordPlayerStates.Attacking;
     }
 
     private void Jump(InputAction.CallbackContext ctx)
@@ -73,6 +94,36 @@ public class SwordPlayerController : PlayerController
         if (ctx.performed)
         {
             Debug.Log("Duck");
+        }
+    }
+
+    private void Attack(InputAction.CallbackContext ctx)
+    {
+        if(state == SwordPlayerStates.Normal && ctx.performed)
+        {
+            //TODO trigger animation state change to Attacking
+            gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+            state = SwordPlayerStates.Attacking;
+            IEnumerator Routine()
+            {
+                yield return new WaitForSeconds(attackDuration);
+                //TODO trigger animation state change to Normal
+                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+                state = SwordPlayerStates.Normal;
+                attackRoutine = null;
+            }
+            attackRoutine = StartCoroutine(Routine());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            if(IsAttacking())
+            {
+                other.GetComponentInParent<DemoEnemy>().Death();
+            }
         }
     }
 }
