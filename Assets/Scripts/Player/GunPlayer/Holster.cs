@@ -3,12 +3,12 @@ using UnityEngine.Assertions;
 
 public class Holster : MonoBehaviour
 {
-    private IGun[] guns;
+    private Gun[] guns;
     private int activeGunIndex = 0;
 
     private void Awake()
     {
-        guns = GetComponents<IGun>();
+        guns = GetComponents<Gun>();
         Assert.IsTrue(guns.Length > 0);
     }
 

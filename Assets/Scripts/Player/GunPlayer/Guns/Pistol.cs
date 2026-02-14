@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class Pistol : MonoBehaviour, IGun
+public class Pistol : Gun
 {
-    public void Fire()
+    public override bool Fire()
     {
-        Debug.Log("Fire pistol!");
+        if (base.Fire())
+        {
+            Debug.Log("Fire pistol!");
+            return true;
+        }
+        return false;
     }
 }
