@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -87,15 +87,19 @@ PrefabInstance:
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0b4990ce07388f544a1c1007c242470a, type: 2}
+      objectReference: {fileID: 2100000, guid: 7653e3f5c2872ac40a29c6d097946ca1, type: 2}
     m_RemovedComponents:
     - {fileID: 5505231937627613107, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+    - {fileID: 8326994594020846065, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6340666026545822551}
+    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6090141376390437636}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
 --- !u!1 &5608802524239182053 stripped
 GameObject:
@@ -115,3 +119,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
   switchLaneDuration: 0.1
+--- !u!54 &6090141376390437636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608802524239182053}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

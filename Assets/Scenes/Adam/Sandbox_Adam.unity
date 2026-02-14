@@ -246,7 +246,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1f4a0085525a71d4fa2620190948b7d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -357,7 +357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1f4a0085525a71d4fa2620190948b7d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -579,7 +579,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1f4a0085525a71d4fa2620190948b7d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -895,7 +895,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1f4a0085525a71d4fa2620190948b7d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1126,23 +1126,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1095398310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2486785308087261937, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-  m_PrefabInstance: {fileID: 1816998014}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1095398316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095398310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 305e2f3d9fe2b9c4d953e25bc0ccabcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColliderChecker
 --- !u!1 &1371165232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,7 +1439,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1f4a0085525a71d4fa2620190948b7d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1695,10 +1678,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 701584600615957888, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      propertyPath: laneIndex
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5473658397883171689, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1743,62 +1722,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
-      value: 65fc550b-ce7a-4916-ba87-ecd09f11d9f2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
-      value: 'Player/Attack[/Keyboard/q]'
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8735051403653664842, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1816998016}
-    - targetCorrespondingSourceObject: {fileID: 2486785308087261937, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1095398316}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2347e190a256fd40be503e5e276a207, type: 3}
---- !u!1 &1816998015 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
-  m_PrefabInstance: {fileID: 1816998014}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1816998016
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816998015}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1821376412
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,10 +2112,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 701584600615957888, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
-      propertyPath: laneIndex
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5473658397883171689, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -2232,51 +2156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 5608802524239182053, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8735051403653664842, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5608802524239182053, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2060712134}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
---- !u!1 &2060712133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5608802524239182053, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
-  m_PrefabInstance: {fileID: 2060712132}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &2060712134
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060712133}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
