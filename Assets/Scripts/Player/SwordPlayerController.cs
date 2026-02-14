@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +8,12 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
     [SerializeField] private float attackDuration = 0.5f;
+
+    [SerializeField] private float parryWindow = 0.5f;
+
+    private float parryTimer = 0f;
+
+    bool canBlock = true;
 
     private enum SwordPlayerStates
     {
@@ -25,6 +30,8 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine attackRoutine = null;
 
+    private Coroutine parryRoutine = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,11 +44,8 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;
-    }
-
-    public bool IsAttacking()
-    {
-        return state == SwordPlayerStates.Attacking;
+        playerInput.actions["Block/Parry"].started += Block;
+        playerInput.actions["Block/Parry"].canceled += CancelBlock;
     }
 
     private void Jump(InputAction.CallbackContext ctx)
@@ -116,13 +120,77 @@ public class SwordPlayerController : PlayerController
         }
     }
 
+    public void Block(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Block/Parry");
+        if(canBlock)
+        {
+            parryRoutine = StartCoroutine(ParryWindow());
+        }
+        else
+        {
+            Debug.Log("Block on cooldown");
+        }
+        
+    }
+
+    public void CancelBlock(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Cancel Block");
+        if (ctx.canceled)
+        {
+            if(parryRoutine != null)
+            {
+                StopCoroutine(parryRoutine);
+                parryRoutine = null;
+            }
+            state = SwordPlayerStates.Normal;
+            //Trigger animation state change to Normal
+            GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+        }
+    }
+
+    private IEnumerator ParryWindow()
+    {
+        parryTimer = 0f;
+        state = SwordPlayerStates.Parrying;
+        GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+        while(parryTimer < parryWindow)
+        {
+            parryTimer += Time.deltaTime;
+            yield return null;
+        }
+        if(state == SwordPlayerStates.Parrying)
+        {
+            state = SwordPlayerStates.Blocking;
+            GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
+        }
+    }
+
+    private IEnumerator BlockCooldown()
+    {
+        canBlock = false;
+        yield return new WaitForSeconds(3f);
+        canBlock = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Enemy"))
         {
-            if(IsAttacking())
+            if(state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
                 other.GetComponentInParent<DemoEnemy>().Death();
+                if(state == SwordPlayerStates.Parrying)
+                {
+                    parryTimer = 0f;
+                }
+                
+            }
+            else if(state == SwordPlayerStates.Blocking)
+            {
+                other.GetComponentInParent<DemoEnemy>().Death();
+                StartCoroutine(BlockCooldown());
             }
         }
     }
