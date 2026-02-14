@@ -123,7 +123,7 @@ public class SwordPlayerController : PlayerController
     public void Block(InputAction.CallbackContext ctx)
     {
         Debug.Log("Block/Parry");
-        if(canBlock)
+        if(canBlock && state == SwordPlayerStates.Normal)
         {
             parryRoutine = StartCoroutine(ParryWindow());
         }
