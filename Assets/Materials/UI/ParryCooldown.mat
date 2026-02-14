@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HealthBar
-  m_Shader: {fileID: -6465566751694194690, guid: e3a005fbeb765274c8c10c2016cac0f8, type: 3}
+  m_Name: ParryCooldown
+  m_Shader: {fileID: -6465566751694194690, guid: ecedebec3f199664a8cc1d02e76548bd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,8 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AmountLeft: 1
     - _ColorMask: 15
-    - _FillAmount: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
