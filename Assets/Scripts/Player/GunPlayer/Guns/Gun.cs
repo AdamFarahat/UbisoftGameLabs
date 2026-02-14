@@ -1,13 +1,16 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class Gun : MonoBehaviour
 {
+    [Header("Base")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
-    [SerializeField] protected float bulletVelocity = 100.0f;
-    [SerializeField] protected float bulletAcceleration = 10.0f;
-    [SerializeField] protected float bulletLifetime = 3.0f;
+    [SerializeField] protected float bulletVelocity = 100f;
+    [SerializeField] protected float bulletAcceleration = 10f;
+    [SerializeField] protected float bulletRange = 100f;
+    [SerializeField] private int bulletDamage = 10;
     [SerializeField] protected float firingCooldown = 0.5f;
 
     private float cooldown = 0.0f;
@@ -23,12 +26,24 @@ public class Gun : MonoBehaviour
             cooldown -= Time.deltaTime;
     }
 
-    public virtual bool Fire()
+    public virtual void FirePrimary()
+    {
+        throw new NotImplementedException();
+    }
+
+    public virtual void HoldPrimary()
+    {
+    }
+
+    public virtual void ReleasePrimary()
+    {
+    }
+
+    protected bool PreFire()
     {
         if (cooldown <= 0.0f)
         {
             cooldown = firingCooldown;
-            InstantiateBullet();
             return true;
         }
         return false;
@@ -43,7 +58,8 @@ public class Gun : MonoBehaviour
         bullet.transform.position = firePosition.position;
         bullet.velocity = bulletVelocity;
         bullet.acceleration = bulletAcceleration;
-        bullet.lifetime = bulletLifetime;
+        bullet.range = bulletRange;
+        bullet.damage = bulletDamage;
         return bullet;
     }
 }

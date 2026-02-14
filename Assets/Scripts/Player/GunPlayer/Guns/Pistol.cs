@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class Pistol : Gun
 {
-    public override bool Fire()
+    public override void FirePrimary()
     {
-        if (base.Fire())
-        {
-            Debug.Log("Fire pistol!");
-            return true;
-        }
-        return false;
+        if (!PreFire())
+            return;
+
+        Debug.Log("Fire pistol!");
+        InstantiateBullet();
     }
 }

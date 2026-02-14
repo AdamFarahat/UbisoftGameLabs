@@ -2,25 +2,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Vector3 direction = Vector3.forward;
-    public float velocity = 1.0f;
-    public float acceleration = 0.0f;
-    public float lifetime = 3.0f;
+    public float velocity = 100f;
+    public float acceleration = 0f;
+    public float range = 100f;
+    public int damage = 10;
 
-    private float age = 0.0f;
-
-    private void Start()
-    {
-        direction.Normalize();
-    }
+    private float distance = 0f;
 
     private void Update()
     {
-        age += Time.deltaTime;
-        if (age > lifetime)
+        float deltaDistance = velocity * Time.deltaTime;
+        distance += deltaDistance;
+        if (distance > range)
             Destroy(gameObject);
 
-        transform.position += Time.deltaTime * velocity * direction;
+        transform.position += deltaDistance * transform.forward;
         velocity += acceleration * Time.deltaTime;
     }
 }

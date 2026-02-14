@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class Shotgun : Gun
 {
-    public override bool Fire()
+    [Header("Shotgun")]
+    [SerializeField] private float spreadAngle = 5f;
+
+    public override void FirePrimary()
     {
-        if (base.Fire())
-        {
-            Debug.Log("Fire shotgun!");
-            return true;
-        }
-        return false;
+        if (!PreFire())
+            return;
+
+        Debug.Log("Fire shotgun!");
+        InstantiateBullet();
+        InstantiateBullet().transform.forward = Quaternion.Euler(0f, spreadAngle, 0f) * transform.forward;
+        InstantiateBullet().transform.forward = Quaternion.Euler(0f, -spreadAngle, 0f) * transform.forward;
     }
 }
