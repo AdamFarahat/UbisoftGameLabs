@@ -9,12 +9,9 @@ public class SearchingBehavior : StateMachineBehaviour
     public string laneDestinationName = "LookTransform";
     public string foundTriggerName = "PlayerSeen";
     public float distanceTreshold = 2f;
-    [SerializeField]
     private GameObject[] lanes;
-    [SerializeField]
     private GameObject chosenLane;
-    [SerializeField]
-    private int currentLaneIndex = -1;
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -25,13 +22,7 @@ public class SearchingBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (chosenLane is null) {
-            //making sure to not stay in the same lane
-            int lastLaneIndex = currentLaneIndex;
-            do {
-                currentLaneIndex = Random.Range(0, lanes.Length);
-            } while (currentLaneIndex == lastLaneIndex);
-            
-            chosenLane = lanes[currentLaneIndex]; 
+            chosenLane = lanes[Random.Range(0, lanes.Length)]; 
         }
         Transform lookPoint = chosenLane.transform.Find(laneDestinationName);
         if (lookPoint is not null)
@@ -61,7 +52,10 @@ public class SearchingBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<ShooterEnemyAI>().shootingLane = chosenLane;
+        ShooterEnemyAI shooterAI;
+        if (animator.TryGetComponent<ShooterEnemyAI>(out shooterAI)) {
+            shooterAI.shootingLane = chosenLane; 
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
