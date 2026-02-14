@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -34,6 +35,14 @@ public class LaneConfigSO : ScriptableObject
     public Vector3 GetLanePosition(int laneIndex, float laneDistance)
     {
         return lanePositions[laneIndex] + laneDistance * laneDirection;
+    }
+
+    public Vector3 GetLanePosition(float laneIndex, float laneDistance)
+    {
+        int prevIndex = Math.Clamp(Mathf.FloorToInt(laneIndex), 0, lanePositions.Count);
+        int nextIndex = Math.Clamp(Mathf.CeilToInt(laneIndex), 0, lanePositions.Count);
+
+        return Vector3.Lerp(lanePositions[prevIndex], lanePositions[nextIndex], laneIndex - Mathf.Floor(laneIndex)) + laneDistance * laneDirection;
     }
 
     public Quaternion GetLaneDirection()

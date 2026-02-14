@@ -17,4 +17,10 @@ public class DemoEnemy : MonoBehaviour
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
     }
+
+    public void Death()
+    {
+        //Play Death Animation
+        Destroy(gameObject);
+    }
 }
