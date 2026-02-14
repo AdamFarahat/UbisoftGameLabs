@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5010419036025570478}
   m_Layer: 0
   m_Name: SearchCollider
-  m_TagString: Untagged
+  m_TagString: LaneCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
