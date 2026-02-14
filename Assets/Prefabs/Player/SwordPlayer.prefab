@@ -101,17 +101,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 8caffa8f5e1a55c4ea510d6200fe91b0, type: 2}
     m_RemovedComponents:
-    - {fileID: 5505231937627613107, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-    - {fileID: 8326994594020846065, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 5680664865622595728}
-    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 526861360568488602}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
 --- !u!1 &5608802524239182053 stripped
 GameObject:
@@ -134,30 +130,3 @@ MonoBehaviour:
   jumpSpeed: 100
   fallAcceleration: 500
   attackDuration: 0.5
---- !u!54 &526861360568488602
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5608802524239182053}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

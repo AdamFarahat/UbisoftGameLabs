@@ -33,7 +33,6 @@ public class SwordPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
-        playerInput.actions.Enable();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;

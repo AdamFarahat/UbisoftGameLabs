@@ -1423,6 +1423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: jumpSpeed
       value: 100
