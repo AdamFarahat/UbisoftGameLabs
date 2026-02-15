@@ -193,16 +193,25 @@ public class SwordPlayerController : PlayerController
             else if (state == SwordPlayerStates.Blocking)
             {
                 other.GetComponentInParent<DemoEnemy>().Death();
+
                 StartCoroutine(BlockCooldown());
             }
         }
         else if (other.TryGetComponent<Projectile>(out projectile)) {
             if (state == SwordPlayerStates.Parrying) {
-                Vector3 dir = (projectile.owner.transform.position - transform.position).normalized;
-                projectile.Initialize(dir);
-                projectile.speed = projectile.speed * parryBulletMultiplier;
+                reflectBackBullet(projectile);
                 parryTimer = 0f;
             }
+            else if (state == SwordPlayerStates.Blocking)
+            {
+                reflectBackBullet(projectile);
+                StartCoroutine(BlockCooldown());
+            }
         }
+    }
+    private void reflectBackBullet(Projectile projectile) {
+        Vector3 dir = (projectile.owner.transform.position - transform.position).normalized;
+        projectile.Initialize(dir);
+        projectile.speed *= parryBulletMultiplier;
     }
 }
