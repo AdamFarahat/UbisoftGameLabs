@@ -11,7 +11,7 @@ public class SearchingBehavior : StateMachineBehaviour
     public float distanceTreshold = 2f;
     private GameObject[] lanes;
     private GameObject chosenLane;
-    
+    private bool found;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -34,7 +34,14 @@ public class SearchingBehavior : StateMachineBehaviour
                 {
                     if (searchCollider.players.Count != 0)
                     {
+                        ShooterEnemyAI shooterAI;
+                        if (animator.TryGetComponent<ShooterEnemyAI>(out shooterAI))
+                        {
+                            shooterAI.shootingLane = chosenLane;
+                        }
+
                         animator.SetTrigger(foundTriggerName);
+
                     }
                 }
                 else {
@@ -50,13 +57,9 @@ public class SearchingBehavior : StateMachineBehaviour
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        ShooterEnemyAI shooterAI;
-        if (animator.TryGetComponent<ShooterEnemyAI>(out shooterAI)) {
-            shooterAI.shootingLane = chosenLane; 
-        }
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

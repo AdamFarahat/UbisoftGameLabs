@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1886042376576896640}
   - component: {fileID: 122528674860155798}
   - component: {fileID: 5010419036025570478}
+  - component: {fileID: 3667075552902914837}
   m_Layer: 0
   m_Name: SearchCollider
   m_TagString: LaneCollider
@@ -112,6 +113,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3667075552902914837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046207414548532799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a3240e82cdc8574aadf91d302a4a690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SearchCollider
 --- !u!1 &4177429480253328160
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 4177429480253328160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.151, z: 0.4845}
+  m_LocalPosition: {x: 0, y: 0.307, z: 0.4845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - LaneCollider
+  - Enemy
   layers:
   - Default
   - TransparentFX

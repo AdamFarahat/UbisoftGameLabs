@@ -15,6 +15,8 @@ public class SwordPlayerController : PlayerController
 
     bool canBlock = true;
 
+    [Header("Parrying")]
+    [SerializeField] private float parryBulletMultiplier = 2.0f;
     private enum SwordPlayerStates
     {
         Normal,
@@ -176,21 +178,30 @@ public class SwordPlayerController : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        Projectile projectile;
+        if (other.CompareTag("Enemy"))
         {
-            if(state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
+            if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
                 other.GetComponentInParent<DemoEnemy>().Death();
-                if(state == SwordPlayerStates.Parrying)
+                if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
                 }
-                
+
             }
-            else if(state == SwordPlayerStates.Blocking)
+            else if (state == SwordPlayerStates.Blocking)
             {
                 other.GetComponentInParent<DemoEnemy>().Death();
                 StartCoroutine(BlockCooldown());
+            }
+        }
+        else if (other.TryGetComponent<Projectile>(out projectile)) {
+            if (state == SwordPlayerStates.Parrying) {
+                Vector3 dir = (projectile.owner.transform.position - transform.position).normalized;
+                projectile.Initialize(dir);
+                projectile.speed = projectile.speed * parryBulletMultiplier;
+                parryTimer = 0f;
             }
         }
     }

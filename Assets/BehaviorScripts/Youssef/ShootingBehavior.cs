@@ -10,19 +10,24 @@ public class ShootingBehavior : StateMachineBehaviour
     private GameObject shootingLane;
     private GameObject shootingTarget;
     private float time;
+    private bool firstShoot;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         shootingLane = animator.GetComponent<ShooterEnemyAI>()?.shootingLane;
+        Debug.Log(shootingLane);
         shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
         time = 0f;
+        firstShoot = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         time += Time.deltaTime;
-        if (time >= shootingRate) {
+        if (time >= shootingRate || firstShoot) {
+            shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
+            firstShoot = false;
             time = 0f;
             if (shootingTarget != null)
             {
@@ -33,18 +38,17 @@ public class ShootingBehavior : StateMachineBehaviour
                     if (proj != null && proj.TryGetComponent<Projectile>(out projectileComponent)) {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
                         projectileComponent.Initialize(direction);
+                        projectileComponent.owner = animator.gameObject;
                     }
                 }
                 else {
                     Debug.Log("Projectile not set.");
                 }
             }
-            else {
-                shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
-                if (shootingTarget == null) {
-                    animator.SetTrigger(lostPlayerTrigger);
-                }
-            } 
+        }
+        if (shootingTarget == null)
+        {
+            animator.SetTrigger(lostPlayerTrigger);
         }
     }
 
