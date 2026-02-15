@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -18,5 +19,14 @@ public class Bullet : MonoBehaviour
 
         transform.position += deltaDistance * transform.forward;
         velocity += acceleration * Time.deltaTime;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInParent<DemoEnemy>() != null)
+        {
+            other.GetComponentInParent<DemoEnemy>().Death();
+            Destroy(gameObject);
+        }
     }
 }

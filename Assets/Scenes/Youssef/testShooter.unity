@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 573779484}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -793,7 +793,7 @@ GameObject:
   - component: {fileID: 664353302}
   m_Layer: 0
   m_Name: Enemy 3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1061,7 +1061,7 @@ GameObject:
   - component: {fileID: 969973393}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1276,7 +1276,7 @@ GameObject:
   - component: {fileID: 1371165233}
   m_Layer: 0
   m_Name: Enemy 4
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1338,7 +1338,7 @@ GameObject:
   - component: {fileID: 1475825643}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1495,6 +1495,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5608802524239182053, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
+      objectReference: {fileID: 0}
     - target: {fileID: 7997388281074341795, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1560,6 +1568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: jumpSpeed
       value: 100
@@ -1571,6 +1583,22 @@ PrefabInstance:
     - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: parryBulletMultiplier
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard&Mouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: 382ec127-fa37-468c-b1b6-b50bb110b581
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: 'Player/Block/Parry[/Keyboard/e]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1704,7 +1732,7 @@ GameObject:
   - component: {fileID: 1662920449}
   m_Layer: 0
   m_Name: Enemy 0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1877,7 +1905,7 @@ GameObject:
   - component: {fileID: 1731257798}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2044,7 +2072,7 @@ GameObject:
   - component: {fileID: 1821376413}
   m_Layer: 0
   m_Name: Enemy 2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2106,7 +2134,7 @@ GameObject:
   - component: {fileID: 1853634941}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2222,7 +2250,7 @@ GameObject:
   - component: {fileID: 1873218444}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2429,7 +2457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3826671818913854118, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.6
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 3826671818913854118, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
       propertyPath: m_LocalPosition.z
