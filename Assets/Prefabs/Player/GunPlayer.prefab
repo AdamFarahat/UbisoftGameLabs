@@ -1,5 +1,144 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4814459147427044228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882516828035149282}
+  m_Layer: 0
+  m_Name: FirePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882516828035149282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814459147427044228}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2834809351305179840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6126231153073736137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2834809351305179840}
+  - component: {fileID: 2945082772910549309}
+  - component: {fileID: 348414592283462057}
+  - component: {fileID: 6029176937551800676}
+  - component: {fileID: 7431069072442950947}
+  m_Layer: 0
+  m_Name: Holster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2834809351305179840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126231153073736137}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 882516828035149282}
+  m_Father: {fileID: 5473658397883171689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2945082772910549309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126231153073736137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2febe63e8ea1d548917f484d55b1021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Holster
+--- !u!114 &348414592283462057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126231153073736137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670c2b8e2ada76744bab44c6398fc446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pistol
+  bulletPrefab: {fileID: 97644797981636705, guid: 941f49f747e8ae44d8e359a3d155c025, type: 3}
+  firePosition: {fileID: 882516828035149282}
+  bulletVelocity: 100
+  bulletAcceleration: 10
+  bulletRange: 75
+  bulletDamage: 10
+  firingCooldown: 0.5
+--- !u!114 &6029176937551800676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126231153073736137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6bd02464e928814f9d89645502142a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shotgun
+  bulletPrefab: {fileID: 97644797981636705, guid: b898fd445e8e07d40b5fc9a74df98c34, type: 3}
+  firePosition: {fileID: 882516828035149282}
+  bulletVelocity: 200
+  bulletAcceleration: 200
+  bulletRange: 50
+  bulletDamage: 50
+  firingCooldown: 1
+  spreadAngle: 10
+--- !u!114 &7431069072442950947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126231153073736137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbce58c6bbd04d2448aabfa26e6e816d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MachineGun
+  bulletPrefab: {fileID: 97644797981636705, guid: ac7ebac81e0fa6c4ca130ef05441315b, type: 3}
+  firePosition: {fileID: 882516828035149282}
+  bulletVelocity: 300
+  bulletAcceleration: 10
+  bulletRange: 150
+  bulletDamage: 1
+  firingCooldown: 0.1
+  maxSpreadAngle: 1
+  spreadReduction: 2
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
@@ -77,6 +216,10 @@ PrefabInstance:
       value: 9f4593e1-c445-4caf-be04-cfbcff9cd9b1
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
+      value: 3e15582d-66e3-4474-be82-bc32c907f8a6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
       objectReference: {fileID: 0}
@@ -84,23 +227,31 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[13].m_ActionName
       value: 'Player/DownEffect[/Keyboard/s,/DualSenseGamepadHID/dpad/down]'
       objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
+      value: 'Player/Fire[/Keyboard/k]'
+      objectReference: {fileID: 0}
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7653e3f5c2872ac40a29c6d097946ca1, type: 2}
     m_RemovedComponents:
-    - {fileID: 5505231937627613107, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-    - {fileID: 8326994594020846065, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2834809351305179840}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6340666026545822551}
-    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6090141376390437636}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+--- !u!4 &5473658397883171689 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+  m_PrefabInstance: {fileID: 771891864670845371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5608802524239182053 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
@@ -119,30 +270,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
   switchLaneDuration: 0.1
---- !u!54 &6090141376390437636
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5608802524239182053}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

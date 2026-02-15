@@ -41,13 +41,22 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "3e15582d-66e3-4474-be82-bc32c907f8a6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "4b5aef04-cc8a-407e-bc65-108bfc3b6474",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -69,7 +78,7 @@
                 {
                     "name": "",
                     "id": "04b38e50-ad46-4364-91aa-c973453e2c7c",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -91,7 +100,7 @@
                 {
                     "name": "",
                     "id": "5a2c3139-dfe3-4390-b286-0e6ec37a9123",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -113,7 +122,7 @@
                 {
                     "name": "",
                     "id": "cea32448-5be9-4af5-abc3-bb608611b961",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -129,6 +138,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "DownEffect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e2bf610-9673-48fe-a40d-0375c699381c",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37b798dc-3483-4deb-b0d0-6811ba013608",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
