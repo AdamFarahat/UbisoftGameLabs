@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Pistol : Gun
 {
-    public override void FirePrimary()
+    public override void Fire()
     {
         if (!PreFire())
             return;

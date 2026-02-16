@@ -8,7 +8,7 @@ public class MachineGun : Gun
 
     private float holdingCooldown = 0f;
 
-    public override void FirePrimary()
+    public override void Fire()
     {
         if (!PreFire())
             return;
@@ -20,10 +20,10 @@ public class MachineGun : Gun
         holdingCooldown = firingCooldown;
     }
 
-    public override void HoldPrimary()
+    public override void HoldInput()
     {
         holdingCooldown -= Time.deltaTime;
         if (holdingCooldown <= 0f)
-            FirePrimary();
+            Fire();
     }
 }

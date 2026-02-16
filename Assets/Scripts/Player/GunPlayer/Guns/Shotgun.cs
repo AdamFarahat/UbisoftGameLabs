@@ -5,7 +5,7 @@ public class Shotgun : Gun
     [Header("Shotgun")]
     [SerializeField] private float spreadAngle = 5f;
 
-    public override void FirePrimary()
+    public override void Fire()
     {
         if (!PreFire())
             return;

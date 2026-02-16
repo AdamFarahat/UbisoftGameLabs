@@ -12,22 +12,22 @@ public class Holster : MonoBehaviour
         Assert.IsTrue(guns.Length > 0);
     }
 
-    public void FirePrimary()
+    public void Fire()
     {
-        guns[activeGunIndex].FirePrimary();
+        guns[activeGunIndex].Fire();
     }
 
-    public void HoldPrimary()
+    public void HoldInput()
     {
-        guns[activeGunIndex].HoldPrimary();
+        guns[activeGunIndex].HoldInput();
     }
 
-    public void ReleasePrimary()
+    public void ReleaseInput()
     {
-        guns[activeGunIndex].ReleasePrimary();
+        guns[activeGunIndex].ReleaseInput();
     }
 
-    public void ToggleUp()
+    public void Toggle()
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;
         Debug.Log("Switch to " + guns[activeGunIndex]);
