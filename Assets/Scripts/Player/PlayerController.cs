@@ -28,11 +28,10 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        playerInput.actions.Enable();
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
         playerInput.actions["MoveRight"].performed += OnMoveRight;
     }
-
-    // TODO animate switching lanes
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
