@@ -185,6 +185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeBelt
   grenadePrefab: {fileID: 2060265609765335002, guid: 4cc74f17f2165c74496d79666816829e, type: 3}
   maxChargeTime: 1
+  minThrowVelocity: 50
+  maxThrowVelocity: 100
+  throwCooldown: 3
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193,6 +196,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2897109236541268810, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -6,9 +7,12 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float gravity = 100f;
     public float velocity = 100f;
     [SerializeField] private Vector3 initialDirection = new(0f, 1f, 1f);
+    [SerializeField] private float aoeRadiusScale = 100f;
+    [SerializeField] private float explosionDuration = 0.5f;
 
     private float verticalVelocity = 0f;
     private float forwardVelocity = 0f;
+    private bool dead = false;
 
     private void Start()
     {
@@ -19,6 +23,8 @@ public class Grenade : MonoBehaviour
 
     private void Update()
     {
+        if (dead) return;
+
         if (transform.position.y <= 0f)
             Explode();
 
@@ -37,7 +43,20 @@ public class Grenade : MonoBehaviour
 
     private void Explode()
     {
-        // TODO get references to enemies/obstacles inside AOE.
-        Destroy(gameObject);
+        IEnumerator Explosion()
+        {
+            for (float t = 0f; t < explosionDuration; t += Time.deltaTime)
+            {
+                float scale = Mathf.Lerp(1f, aoeRadiusScale, Mathf.Clamp01(t / explosionDuration));
+                transform.localScale = new(scale, scale, scale);
+                yield return null;
+            }
+
+            // TODO get references to enemies/obstacles inside AOE.
+            Destroy(gameObject);
+        }
+
+        dead = true;
+        StartCoroutine(Explosion());
     }
 }

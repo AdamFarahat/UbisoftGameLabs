@@ -50,6 +50,8 @@ MonoBehaviour:
   gravity: 100
   velocity: 50
   initialDirection: {x: 0, y: 1, z: 1}
+  aoeRadiusScale: 50
+  explosionDuration: 0.5
 --- !u!54 &176808792632220056
 Rigidbody:
   m_ObjectHideFlags: 0

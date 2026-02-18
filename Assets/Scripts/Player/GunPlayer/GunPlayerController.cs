@@ -70,14 +70,16 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Press!");
         grenadeBelt.ChargeThrow();
-        // TODO stop gunfire
+        if (holdingGunInput != HoldingState.Released)
+        {
+            holdingGunInput = HoldingState.Released;
+            holster.StopFiring();
+        }
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Release!");
         grenadeBelt.Throw();
     }
 }
