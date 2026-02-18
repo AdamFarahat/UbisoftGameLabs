@@ -3,33 +3,38 @@ using UnityEngine.Assertions;
 
 public class GrenadeBelt : MonoBehaviour
 {
-    private GrenadeLauncher[] launchers;
-    private int activeLauncherIndex = 0;
+    [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private float maxChargeTime = 1f;
+    [SerializeField] private int grenadeDamage = 10;
+
+    private bool throwing = false;
+    private float throwChargeTime = 0f;
 
     private void Awake()
     {
-        launchers = GetComponents<GrenadeLauncher>();
-        Assert.IsTrue(launchers.Length > 0);
+        Assert.IsNotNull(grenadePrefab);
+    }
+
+    private void Update()
+    {
+        if (throwing)
+            throwChargeTime = Mathf.Min(throwChargeTime + Time.deltaTime, maxChargeTime);
+    }
+
+    public void ChargeThrow()
+    {
+        throwing = true;
     }
 
     public void Throw()
     {
-        launchers[activeLauncherIndex].Throw();
-    }
+        throwing = false;
+        GameObject go = Instantiate(grenadePrefab);
+        Grenade grenade = go.GetComponent<Grenade>();
+        Assert.IsNotNull(grenade);
 
-    public void HoldInput()
-    {
-        launchers[activeLauncherIndex].HoldInput();
-    }
-
-    public void ReleaseInput()
-    {
-        launchers[activeLauncherIndex].ReleaseInput();
-    }
-
-    public void Toggle()
-    {
-        activeLauncherIndex = (activeLauncherIndex + 1) % launchers.Length;
-        Debug.Log("Switch to " + launchers[activeLauncherIndex]);
+        grenade.transform.position = transform.position;
+        grenade.damage = grenadeDamage;
+        // TODO use charge time
     }
 }

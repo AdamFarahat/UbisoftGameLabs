@@ -14,7 +14,6 @@ public class GunPlayerController : PlayerController
     }
 
     private HoldingState holdingGunInput = HoldingState.Released;
-    private HoldingState holdingGrenadeInput = HoldingState.Released;
 
     protected override void Awake()
     {
@@ -31,10 +30,10 @@ public class GunPlayerController : PlayerController
         base.Start();
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
-        playerInput.actions["UpEffect"].performed += ToggleGun;
+        playerInput.actions["UpEffect"].performed += ToggleGunUp;
+        playerInput.actions["DownEffect"].performed += ToggleGunDown;
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
-        playerInput.actions["DownEffect"].performed += ToggleGrenade;
     }
 
     private void Update()
@@ -43,11 +42,6 @@ public class GunPlayerController : PlayerController
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
             holster.HoldInput();
-
-        if (holdingGrenadeInput == HoldingState.FirstFrame)
-            holdingGrenadeInput = HoldingState.Held;
-        else if (holdingGrenadeInput == HoldingState.Held)
-            grenadeBelt.HoldInput();
     }
 
     private void PressFire(InputAction.CallbackContext ctx)
@@ -66,31 +60,27 @@ public class GunPlayerController : PlayerController
             holster.ReleaseInput();
     }
 
-    private void ToggleGun(InputAction.CallbackContext ctx)
+    private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
-            holster.Toggle();
+            holster.ToggleUp();
+    }
+
+    private void ToggleGunDown(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+            holster.ToggleDown();
     }
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
-        {
-            grenadeBelt.Throw();
-            holdingGrenadeInput = HoldingState.FirstFrame;
-        }
+            grenadeBelt.ChargeThrow();
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        holdingGrenadeInput = HoldingState.Released;
         if (ctx.performed)
-            grenadeBelt.ReleaseInput();
-    }
-
-    private void ToggleGrenade(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-            grenadeBelt.Toggle();
+            grenadeBelt.Throw();
     }
 }
