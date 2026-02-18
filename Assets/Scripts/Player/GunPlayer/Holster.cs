@@ -12,19 +12,19 @@ public class Holster : MonoBehaviour
         Assert.IsTrue(guns.Length > 0);
     }
 
-    public void Fire()
+    public void StartFiring()
     {
-        guns[activeGunIndex].Fire();
+        guns[activeGunIndex].StartFiring();
     }
 
-    public void HoldInput()
+    public void KeepFiring()
     {
-        guns[activeGunIndex].HoldInput();
+        guns[activeGunIndex].KeepFiring();
     }
 
-    public void ReleaseInput()
+    public void StopFiring()
     {
-        guns[activeGunIndex].ReleaseInput();
+        guns[activeGunIndex].StopFiring();
     }
 
     public void ToggleUp()

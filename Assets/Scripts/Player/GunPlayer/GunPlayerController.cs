@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
@@ -41,46 +42,42 @@ public class GunPlayerController : PlayerController
         if (holdingGunInput == HoldingState.FirstFrame)
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
-            holster.HoldInput();
+            holster.KeepFiring();
     }
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            holster.Fire();
-            holdingGunInput = HoldingState.FirstFrame;
-        }
+        holster.StartFiring();
+        holdingGunInput = HoldingState.FirstFrame;
+        grenadeBelt.CancelThrow();
     }
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
         holdingGunInput = HoldingState.Released;
-        if (ctx.performed)
-            holster.ReleaseInput();
+        holster.StopFiring();
     }
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            holster.ToggleUp();
+        holster.ToggleUp();
     }
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            holster.ToggleDown();
+        holster.ToggleDown();
     }
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            grenadeBelt.ChargeThrow();
+        Debug.Log("Press!");
+        grenadeBelt.ChargeThrow();
+        // TODO stop gunfire
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            grenadeBelt.Throw();
+        Debug.Log("Release!");
+        grenadeBelt.Throw();
     }
 }

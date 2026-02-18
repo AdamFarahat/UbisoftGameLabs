@@ -8,22 +8,22 @@ public class MachineGun : Gun
 
     private float holdingCooldown = 0f;
 
-    public override void Fire()
+    public override void StartFiring()
     {
-        if (!PreFire())
+        if (!PreStartFiring())
             return;
         
-        Debug.Log("Fire machine gun!");
+        Debug.Log("StartFiring machine gun!");
         float spread = Random.Range(-1f, 1f);
         spread = maxSpreadAngle * Mathf.Sign(spread) * (1f - Mathf.Pow(1f - Mathf.Abs(spread), spreadReduction));
         InstantiateBullet().transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
         holdingCooldown = firingCooldown;
     }
 
-    public override void HoldInput()
+    public override void KeepFiring()
     {
         holdingCooldown -= Time.deltaTime;
         if (holdingCooldown <= 0f)
-            Fire();
+            StartFiring();
     }
 }
