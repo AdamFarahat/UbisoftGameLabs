@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 664353304}
   - component: {fileID: 664353303}
   - component: {fileID: 664353302}
+  - component: {fileID: 664353305}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Untagged
@@ -768,6 +769,19 @@ Transform:
   - {fileID: 1873218443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664353305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664353301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
 --- !u!1 &692699532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1029,7 @@ GameObject:
   - component: {fileID: 969973395}
   - component: {fileID: 969973394}
   - component: {fileID: 969973393}
+  - component: {fileID: 969973396}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Untagged
@@ -1065,6 +1080,19 @@ Transform:
   - {fileID: 1853634940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &969973396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969973392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
 --- !u!1 &1023221648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1196,7 @@ GameObject:
   - component: {fileID: 1371165235}
   - component: {fileID: 1371165234}
   - component: {fileID: 1371165233}
+  - component: {fileID: 1371165236}
   m_Layer: 0
   m_Name: Enemy 4
   m_TagString: Untagged
@@ -1218,6 +1247,19 @@ Transform:
   - {fileID: 573779483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1371165236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371165232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
 --- !u!1 &1475825641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1524,7 @@ GameObject:
   - component: {fileID: 1662920448}
   - component: {fileID: 1662920447}
   - component: {fileID: 1662920449}
+  - component: {fileID: 1662920450}
   m_Layer: 0
   m_Name: Enemy 0
   m_TagString: Untagged
@@ -1532,6 +1575,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   speed: 6
+--- !u!114 &1662920450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662920446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
 --- !u!1 &1681405893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1933,7 @@ GameObject:
   - component: {fileID: 1821376415}
   - component: {fileID: 1821376414}
   - component: {fileID: 1821376413}
+  - component: {fileID: 1821376416}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Untagged
@@ -1927,6 +1984,19 @@ Transform:
   - {fileID: 1475825642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1821376416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821376412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
 --- !u!1 &1853634939
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,9 +22,10 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<DemoEnemy>() != null)
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null)
         {
-            other.GetComponentInParent<DemoEnemy>().Death();
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
