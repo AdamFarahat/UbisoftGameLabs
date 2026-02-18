@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -12,7 +13,9 @@ public class Grenade : MonoBehaviour
 
     private float verticalVelocity = 0f;
     private float forwardVelocity = 0f;
-    private bool dead = false;
+    private bool exploding = false;
+
+    private readonly HashSet<Enemy> hitEnemies = new();
 
     private void Start()
     {
@@ -23,7 +26,7 @@ public class Grenade : MonoBehaviour
 
     private void Update()
     {
-        if (dead) return;
+        if (exploding) return;
 
         if (transform.position.y <= 0f)
             Explode();
@@ -37,7 +40,16 @@ public class Grenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player"))
+        if (exploding)
+        {
+            Enemy enemy = other.GetComponentInParent<Enemy>();
+            if (enemy != null && !hitEnemies.Contains(enemy))
+            {
+                hitEnemies.Add(enemy);
+                enemy.TakeDamage(damage);
+            }
+        }
+        else if (!other.GetComponentInParent<PlayerController>())
             Explode();
     }
 
@@ -52,11 +64,10 @@ public class Grenade : MonoBehaviour
                 yield return null;
             }
 
-            // TODO get references to enemies/obstacles inside AOE.
             Destroy(gameObject);
         }
 
-        dead = true;
+        exploding = true;
         StartCoroutine(Explosion());
     }
 }
