@@ -1862,8 +1862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70402bb0c190a6b4b822221a5fbc0981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  shooterEnemyPrefab: {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
-  demoEnemyPrefab: {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+  enemyPrefabs:
+  - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
+  - {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   spawnPoints:
   - {fileID: 712282968}
   - {fileID: 1577076008}
