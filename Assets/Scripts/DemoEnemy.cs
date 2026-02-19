@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Pool;
 
-public class DemoEnemy : MonoBehaviour, IPoolable
+public class DemoEnemy : Poolable
+
 {
     private float initialLaneDistance;
 
     [SerializeField] private float speed = 1f;
 
     private LaneBound laneBound;
-    private IObjectPool<GameObject> enemyPool;
 
     private void Awake()
     {
@@ -32,11 +32,6 @@ public class DemoEnemy : MonoBehaviour, IPoolable
         {
             Death();
         }
-    }
-
-    public void SetPool(IObjectPool<GameObject> pool)
-    {
-        enemyPool = pool;
     }
 
     public void Death()
