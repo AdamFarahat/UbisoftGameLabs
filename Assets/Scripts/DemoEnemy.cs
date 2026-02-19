@@ -19,6 +19,11 @@ public class DemoEnemy : Poolable
         initialLaneDistance = laneBound.LaneDistance;
     }
 
+    public override void OnTakeFromPool()
+    {
+        laneBound.LaneDistance = initialLaneDistance; // Reset state
+    }
+
     public void ResetState()
     {
         laneBound.LaneDistance = initialLaneDistance;

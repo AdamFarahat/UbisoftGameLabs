@@ -14,4 +14,9 @@ public abstract class Poolable : MonoBehaviour
     {
         enemyPool.Release(gameObject);
     }
+    
+    public virtual void OnTakeFromPool()
+    {
+        // Default: do nothing
+    }
 }
