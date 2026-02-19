@@ -4,9 +4,7 @@ using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
-    // TODO: Replace individual enemy prefab references with a GameObject[] enemyPrefabs.
-    [SerializeField] private GameObject shooterEnemyPrefab;
-    [SerializeField] private GameObject demoEnemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefabs;
 
     [SerializeField] private Transform [] spawnPoints;
     [SerializeField] private float timeBetweenSpawns = 5;
@@ -66,14 +64,7 @@ public class Spawner : MonoBehaviour
 
     private GameObject CreateEnemy()
     {
-        GameObject prefabToSpawn;
-
-        // TODO: Replace this binary random selection with a List<GameObject> of enemy prefabs.
-        if (Random.value < 0.5f)
-            prefabToSpawn = shooterEnemyPrefab;
-        else
-            prefabToSpawn = demoEnemyPrefab;
-
+        GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
         GameObject enemy = Instantiate(prefabToSpawn);
 
         Poolable poolable = enemy.GetComponent<Poolable>();
@@ -82,6 +73,7 @@ public class Spawner : MonoBehaviour
 
         return enemy;
     }
+
 
     void Update()
     {
