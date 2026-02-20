@@ -1,9 +1,11 @@
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class GunPlayerController : PlayerController
 {
     private Holster holster;
+    private GrenadeBelt grenadeBelt;
 
     private enum HoldingState
     {
@@ -12,7 +14,7 @@ public class GunPlayerController : PlayerController
         Held
     }
 
-    private HoldingState holdingPrimary = HoldingState.Released;
+    private HoldingState holdingGunInput = HoldingState.Released;
 
     protected override void Awake()
     {
@@ -20,6 +22,8 @@ public class GunPlayerController : PlayerController
 
         holster = GetComponentInChildren<Holster>();
         Assert.IsNotNull(holster);
+        grenadeBelt = GetComponentInChildren<GrenadeBelt>();
+        Assert.IsNotNull(grenadeBelt);
     }
 
     protected override void Start()
@@ -27,36 +31,55 @@ public class GunPlayerController : PlayerController
         base.Start();
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
-        playerInput.actions["UpEffect"].performed += ToggleUp;
+        playerInput.actions["UpEffect"].performed += ToggleGunUp;
+        playerInput.actions["DownEffect"].performed += ToggleGunDown;
+        playerInput.actions["Throw"].performed += PressThrow;
+        playerInput.actions["Throw"].canceled += ReleaseThrow;
     }
 
     private void Update()
     {
-        if (holdingPrimary == HoldingState.FirstFrame)
-            holdingPrimary = HoldingState.Held;
-        else if (holdingPrimary == HoldingState.Held)
-            holster.HoldPrimary();
+        if (holdingGunInput == HoldingState.FirstFrame)
+            holdingGunInput = HoldingState.Held;
+        else if (holdingGunInput == HoldingState.Held)
+            holster.KeepFiring();
     }
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            holster.FirePrimary();
-            holdingPrimary = HoldingState.FirstFrame;
-        }
+        holster.StartFiring();
+        holdingGunInput = HoldingState.FirstFrame;
+        grenadeBelt.CancelThrow();
     }
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
-        holdingPrimary = HoldingState.Released;
-        if (ctx.performed)
-            holster.ReleasePrimary();
+        holdingGunInput = HoldingState.Released;
+        holster.StopFiring();
     }
 
-    private void ToggleUp(InputAction.CallbackContext ctx)
+    private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            holster.ToggleUp();
+        holster.ToggleUp();
+    }
+
+    private void ToggleGunDown(InputAction.CallbackContext ctx)
+    {
+        holster.ToggleDown();
+    }
+
+    private void PressThrow(InputAction.CallbackContext ctx)
+    {
+        grenadeBelt.ChargeThrow();
+        if (holdingGunInput != HoldingState.Released)
+        {
+            holdingGunInput = HoldingState.Released;
+            holster.StopFiring();
+        }
+    }
+
+    private void ReleaseThrow(InputAction.CallbackContext ctx)
+    {
+        grenadeBelt.Throw();
     }
 }

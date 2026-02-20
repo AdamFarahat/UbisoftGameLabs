@@ -177,12 +177,12 @@ public class SwordPlayerController : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
-        Projectile projectile;
-        if (other.CompareTag("Enemy"))
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null)
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
-                other.GetComponentInParent<DemoEnemy>().Death();
+                enemy.OnParried();
                 if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
@@ -191,12 +191,12 @@ public class SwordPlayerController : PlayerController
             }
             else if (state == SwordPlayerStates.Blocking)
             {
-                other.GetComponentInParent<DemoEnemy>().Death();
+                enemy.OnParried();
 
                 StartCoroutine(BlockCooldown());
             }
         }
-        else if (other.TryGetComponent<Projectile>(out projectile)) {
+        else if (other.TryGetComponent(out Projectile projectile)) {
             if (state == SwordPlayerStates.Parrying) {
                 reflectBackBullet(projectile);
                 parryTimer = 0f;

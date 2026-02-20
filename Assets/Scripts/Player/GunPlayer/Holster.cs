@@ -12,24 +12,30 @@ public class Holster : MonoBehaviour
         Assert.IsTrue(guns.Length > 0);
     }
 
-    public void FirePrimary()
+    public void StartFiring()
     {
-        guns[activeGunIndex].FirePrimary();
+        guns[activeGunIndex].StartFiring();
     }
 
-    public void HoldPrimary()
+    public void KeepFiring()
     {
-        guns[activeGunIndex].HoldPrimary();
+        guns[activeGunIndex].KeepFiring();
     }
 
-    public void ReleasePrimary()
+    public void StopFiring()
     {
-        guns[activeGunIndex].ReleasePrimary();
+        guns[activeGunIndex].StopFiring();
     }
 
     public void ToggleUp()
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;
+        Debug.Log("Switch to " + guns[activeGunIndex]);
+    }
+
+    public void ToggleDown()
+    {
+        activeGunIndex = (activeGunIndex - 1 + guns.Length) % guns.Length;
         Debug.Log("Switch to " + guns[activeGunIndex]);
     }
 }
