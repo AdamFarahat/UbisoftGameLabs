@@ -57,6 +57,11 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
     }
 
+    public float GetBlockCooldownPercent()
+    {
+        return blockCooldownPercent;
+    }
+
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -236,7 +241,7 @@ public class SwordPlayerController : PlayerController
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
-                collider.GetComponentInParent<DemoEnemy>().Death();
+                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
                 if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
@@ -245,7 +250,7 @@ public class SwordPlayerController : PlayerController
             }
             else if (state == SwordPlayerStates.Blocking)
             {
-                collider.GetComponentInParent<DemoEnemy>().Death();
+                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
                 StartCoroutine(BlockCooldown());
             }
         }

@@ -16,6 +16,11 @@ public class Enemy : MonoBehaviour
             OnDeath();
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
     public void OnParried()
     {
         TakeDamage(health);
