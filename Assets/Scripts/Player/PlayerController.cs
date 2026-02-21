@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public abstract class PlayerController : MonoBehaviour
 {
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
@@ -66,5 +67,10 @@ public class PlayerController : MonoBehaviour
         }
         laneBound.LaneIndex = toIndex;
         switchingLanes = false;
+    }
+
+    public virtual float GetCooldownPercent()
+    {
+        throw new NotImplementedException();
     }
 }

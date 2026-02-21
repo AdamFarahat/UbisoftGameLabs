@@ -26,20 +26,20 @@ public class Gun : MonoBehaviour
             cooldown -= Time.deltaTime;
     }
 
-    public virtual void FirePrimary()
+    public virtual void StartFiring()
     {
         throw new NotImplementedException();
     }
 
-    public virtual void HoldPrimary()
+    public virtual void KeepFiring()
     {
     }
 
-    public virtual void ReleasePrimary()
+    public virtual void StopFiring()
     {
     }
 
-    protected bool PreFire()
+    protected bool PreStartFiring()
     {
         if (cooldown <= 0.0f)
         {
