@@ -82,4 +82,9 @@ public class GunPlayerController : PlayerController
     {
         grenadeBelt.Throw();
     }
+
+    public override float GetCooldownPercent()
+    {
+        return grenadeBelt.GetCooldownPercent();
+    }
 }

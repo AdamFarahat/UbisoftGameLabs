@@ -41,7 +41,6 @@ public class GrenadeBelt : MonoBehaviour
         throwing = false;
     }
 
-
     public void Throw()
     {
         throwing = false;
@@ -51,5 +50,10 @@ public class GrenadeBelt : MonoBehaviour
 
         grenade.transform.position = transform.position;
         grenade.velocity = Mathf.Lerp(minThrowVelocity, maxThrowVelocity, Mathf.Clamp01(throwChargeTime / maxChargeTime));
+    }
+
+    public float GetCooldownPercent()
+    {
+        return Mathf.Clamp01(cooldown / throwCooldown);
     }
 }

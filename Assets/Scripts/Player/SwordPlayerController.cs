@@ -183,7 +183,7 @@ public class SwordPlayerController : PlayerController
         canBlock = true;
     }
 
-    public float GetCooldownPercent()
+    public override float GetCooldownPercent()
     {
         return blockCooldownPercent;
     }
