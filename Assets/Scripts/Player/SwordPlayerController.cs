@@ -57,7 +57,7 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
     }
 
-    public float GetBlockCooldownPercent()
+    public override float GetCooldownPercent()
     {
         return blockCooldownPercent;
     }

@@ -3,15 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 public class UIManager : MonoBehaviour
 {
-    // [SerializeField] private GunPlayerController gunPlayerController;
-    // [SerializeField] private SwordPlayerController swordPlayerController;
+    private GunPlayerController gunPlayerController;
+    private SwordPlayerController swordPlayerController;
     [SerializeField] private Image gunPlayerCooldownUI;
     [SerializeField] private Image swordPlayerCooldownUI;
     [SerializeField] private Image healthBarUI;
 
     // temp
-    float grenadeCooldown = 1.0f;
-    float swordCooldown = 1.0f;
     float health = 1.0f;
 
     private readonly int amountLeftID = Shader.PropertyToID("_AmountLeft");
@@ -19,8 +17,8 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        // Assert.IsNotNull(gunPlayerController);
-        // Assert.IsNotNull(swordPlayerController);
+        gunPlayerController = GameObject.FindFirstObjectByType<GunPlayerController>();
+        swordPlayerController = GameObject.FindFirstObjectByType<SwordPlayerController>();
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
         Assert.IsNotNull(healthBarUI);
@@ -42,20 +40,25 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         // Update the materials
-        grenadeCooldown -= 0.01f; //temp
-        // float grenadeCooldown = gunPlayerController.GetCooldownPercentage();
-        gunPlayerCooldownUI.material.SetFloat(amountLeftID, grenadeCooldown);
 
-       // Assuming swordPlayerController has a getter like: public float GetCooldownPercentage()
-        swordCooldown -= 0.01f; //temp
-        // float swordCooldown = swordPlayerController.GetCooldownPercentage();
-        swordPlayerCooldownUI.material.SetFloat(amountLeftID, swordCooldown);
+        if (gunPlayerController != null)
+        {
+            float grenadeCooldown = gunPlayerController.GetCooldownPercent();
+            gunPlayerCooldownUI.material.SetFloat(amountLeftID, grenadeCooldown);
+            
+        }
+
+        if (swordPlayerController != null)
+        {   
+            float swordCooldown = swordPlayerController.GetCooldownPercent();
+            swordPlayerCooldownUI.material.SetFloat(amountLeftID, swordCooldown);    
+        }
 
         health -= 0.005f;// temp
-        // float health = getHealth from player 
+        // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountLeftID, health);
 
-        // also get multipliers when ready
+        // also get multipliers from gunPlayerController and swordPlayerController when ready
         
     }
 }
