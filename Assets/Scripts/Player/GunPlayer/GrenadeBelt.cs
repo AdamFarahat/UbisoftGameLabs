@@ -20,10 +20,10 @@ public class GrenadeBelt : MonoBehaviour
 
     private void Update()
     {
-        if (cooldown > 0f)
-            cooldown -= Time.deltaTime;
         if (throwing)
             throwChargeTime = Mathf.Min(throwChargeTime + Time.deltaTime, maxChargeTime);
+        else if (cooldown > 0f)
+            cooldown -= Time.deltaTime;
     }
 
     public void ChargeThrow()
@@ -43,6 +43,9 @@ public class GrenadeBelt : MonoBehaviour
 
     public void Throw()
     {
+        if (!throwing)
+            return;
+
         throwing = false;
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
