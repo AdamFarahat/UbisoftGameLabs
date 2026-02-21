@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleePlayerAbility
-  m_Shader: {fileID: -6465566751694194690, guid: e3a005fbeb765274c8c10c2016cac0f8, type: 3}
+  m_Name: Bar
+  m_Shader: {fileID: -6465566751694194690, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -42,7 +42,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _ColorMask: 15
-    - _FillAmount: 1
+    - _LeftAmount: 1
+    - _RightAmount: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -52,5 +53,7 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
+    - _LeftColor: {r: 1, g: 0.7861489, b: 0.091194846, a: 1}
+    - _RightColor: {r: 0.14779866, g: 0.8793871, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
