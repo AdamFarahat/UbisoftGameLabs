@@ -237,7 +237,7 @@ public class SwordPlayerController : PlayerController
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
         Projectile projectile;
-        if (collider.CompareTag("Enemy"))
+        if (collider.GetComponentInParent<Enemy>() != null)
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
