@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Pool;
 
 public class DemoEnemy : Poolable
-
 {
     private float initialLaneDistance;
 
