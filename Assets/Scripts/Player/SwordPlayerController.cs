@@ -14,6 +14,8 @@ public class SwordPlayerController : PlayerController
     private float parryTimer = 0f;
 
     bool canBlock = true;
+    [SerializeField] private float blockCooldown = 3f;
+    private float blockCooldownPercent = 0f;
 
     [Header("Parrying")]
     [SerializeField] private float parryBulletMultiplier = 2.0f;
@@ -171,8 +173,19 @@ public class SwordPlayerController : PlayerController
     private IEnumerator BlockCooldown()
     {
         canBlock = false;
-        yield return new WaitForSeconds(3f);
+        blockCooldownPercent = 1f;
+        for (float t = blockCooldown; t >= 0f; t -= Time.deltaTime)
+        {
+            blockCooldownPercent = Mathf.Clamp01(t / blockCooldown);
+            yield return null;
+        }
+        blockCooldownPercent = 0f;
         canBlock = true;
+    }
+
+    public float GetCooldownPercent()
+    {
+        return blockCooldownPercent;
     }
 
     private void OnTriggerEnter(Collider other)
