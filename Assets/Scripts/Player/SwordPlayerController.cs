@@ -4,12 +4,14 @@ using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
 {
+    private SwordHitBox swordHitBox;
+    [Header("Stunning")]
+    [SerializeField] private float stunCooldown = 1f;
+    
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
     [SerializeField] private float attackDuration = 0.5f;
-
-    [SerializeField] private float parryWindow = 0.5f;
 
     private float parryTimer = 0f;
 
@@ -19,6 +21,7 @@ public class SwordPlayerController : PlayerController
 
     [Header("Parrying")]
     [SerializeField] private float parryBulletMultiplier = 2.0f;
+    [SerializeField] private float parryWindow = 0.5f;
     private enum SwordPlayerStates
     {
         Normal,
@@ -36,9 +39,12 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
+    private Coroutine stunRoutine = null;
+
     protected override void Awake()
     {
         base.Awake();
+        swordHitBox = FindFirstObjectByType<SwordHitBox>();
     }
 
     protected override void Start()
@@ -111,6 +117,7 @@ public class SwordPlayerController : PlayerController
             //TODO trigger animation state change to Attacking
             gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
             state = SwordPlayerStates.Attacking;
+            swordHitBox.gameObject.SetActive(true);
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(attackDuration);
@@ -118,6 +125,7 @@ public class SwordPlayerController : PlayerController
                 gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
                 state = SwordPlayerStates.Normal;
                 attackRoutine = null;
+                swordHitBox.gameObject.SetActive(false);
             }
             attackRoutine = StartCoroutine(Routine());
         }
@@ -128,6 +136,7 @@ public class SwordPlayerController : PlayerController
         Debug.Log("Block/Parry");
         if(canBlock && state == SwordPlayerStates.Normal)
         {
+            swordHitBox.gameObject.SetActive(true);
             parryRoutine = StartCoroutine(ParryWindow());
         }
         else
@@ -140,7 +149,7 @@ public class SwordPlayerController : PlayerController
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
         Debug.Log("Cancel Block");
-        if (ctx.canceled)
+        if (ctx.canceled && state != SwordPlayerStates.Stunned)
         {
             if(parryRoutine != null)
             {
@@ -149,6 +158,7 @@ public class SwordPlayerController : PlayerController
             }
             state = SwordPlayerStates.Normal;
             //Trigger animation state change to Normal
+            swordHitBox.gameObject.SetActive(false);
             GetComponentInChildren<MeshRenderer>().material.color = Color.white;
         }
     }
@@ -160,6 +170,10 @@ public class SwordPlayerController : PlayerController
         GetComponentInChildren<MeshRenderer>().material.color = Color.green;
         while(parryTimer < parryWindow)
         {
+            if(state != SwordPlayerStates.Parrying)
+            {
+                yield break;
+            }
             parryTimer += Time.deltaTime;
             yield return null;
         }
@@ -183,19 +197,46 @@ public class SwordPlayerController : PlayerController
         canBlock = true;
     }
 
-    public override float GetCooldownPercent()
+    private IEnumerator StunCooldown()
     {
-        return blockCooldownPercent;
+        yield return new WaitForSeconds(stunCooldown);
+        state = SwordPlayerStates.Normal;
+        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Stun()
     {
-        Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy != null)
+        if(state != SwordPlayerStates.Stunned)
+        {
+            state = SwordPlayerStates.Stunned;
+            GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
+            IEnumerator Routine()
+            {
+                yield return new WaitForSeconds(2f);
+                state = SwordPlayerStates.Normal;
+                GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+            }
+            swordHitBox.gameObject.SetActive(false);
+            stunRoutine = StartCoroutine(Routine());
+        }
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if(collider.CompareTag("Enemy") || collider.GetComponent<Projectile>() != null)
+        {
+            Stun();
+        }
+    }
+
+    public void OnSwordHitBoxTriggerEnter(Collider collider)
+    {
+        Projectile projectile;
+        if (collider.CompareTag("Enemy"))
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
-                enemy.OnParried();
+                collider.GetComponentInParent<DemoEnemy>().Death();
                 if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
@@ -204,12 +245,11 @@ public class SwordPlayerController : PlayerController
             }
             else if (state == SwordPlayerStates.Blocking)
             {
-                enemy.OnParried();
-
+                collider.GetComponentInParent<DemoEnemy>().Death();
                 StartCoroutine(BlockCooldown());
             }
         }
-        else if (other.TryGetComponent(out Projectile projectile)) {
+        else if (collider.TryGetComponent<Projectile>(out projectile)) {
             if (state == SwordPlayerStates.Parrying) {
                 reflectBackBullet(projectile);
                 parryTimer = 0f;
