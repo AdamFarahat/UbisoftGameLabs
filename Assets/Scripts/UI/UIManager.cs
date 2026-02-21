@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 public class UIManager : MonoBehaviour
 {
-    // [SerializeField] private GrenadeBelt grenadeBelt;
+    // [SerializeField] private GunPlayerController gunPlayerController;
     // [SerializeField] private SwordPlayerController swordPlayerController;
     [SerializeField] private Image gunPlayerCooldownUI;
     [SerializeField] private Image swordPlayerCooldownUI;
@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        // Assert.IsNotNull(grenadeBelt);
+        // Assert.IsNotNull(gunPlayerController);
         // Assert.IsNotNull(swordPlayerController);
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
     {
         // Update the materials
         grenadeCooldown -= 0.01f; //temp
-        // float grenadeCooldown = grenadeBelt.GetCooldownPercentage();
+        // float grenadeCooldown = gunPlayerController.GetCooldownPercentage();
         gunPlayerCooldownUI.material.SetFloat(amountLeftID, grenadeCooldown);
 
        // Assuming swordPlayerController has a getter like: public float GetCooldownPercentage()
@@ -54,6 +54,8 @@ public class UIManager : MonoBehaviour
         health -= 0.005f;// temp
         // float health = getHealth from player 
         healthBarUI.material.SetFloat(amountLeftID, health);
+
+        // also get multipliers when ready
         
     }
 }
