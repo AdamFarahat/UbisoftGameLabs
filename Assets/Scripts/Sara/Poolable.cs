@@ -10,7 +10,7 @@ public abstract class Poolable : MonoBehaviour
         enemyPool = pool;
     }
 
-    protected void Release()
+    public void Death()
     {
         enemyPool.Release(gameObject);
     }

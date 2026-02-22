@@ -36,9 +36,4 @@ public class DemoEnemy : Poolable
             Death();
         }
     }
-
-    public void Death()
-    {
-        enemyPool.Release(gameObject);
-    }
 }

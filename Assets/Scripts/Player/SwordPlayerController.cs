@@ -154,7 +154,7 @@ public class SwordPlayerController : PlayerController
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
         Debug.Log("Cancel Block");
-        if (ctx.canceled && state != SwordPlayerStates.Stunned)
+        if (state != SwordPlayerStates.Stunned)
         {
             if(parryRoutine != null)
             {
@@ -193,6 +193,7 @@ public class SwordPlayerController : PlayerController
     {
         canBlock = false;
         blockCooldownPercent = 1f;
+        CancelBlock(new InputAction.CallbackContext());
         for (float t = blockCooldown; t >= 0f; t -= Time.deltaTime)
         {
             blockCooldownPercent = Mathf.Clamp01(t / blockCooldown);
@@ -248,7 +249,7 @@ public class SwordPlayerController : PlayerController
                 }
 
             }
-            else if (state == SwordPlayerStates.Blocking)
+            else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
                 StartCoroutine(BlockCooldown());
@@ -259,7 +260,7 @@ public class SwordPlayerController : PlayerController
                 reflectBackBullet(projectile);
                 parryTimer = 0f;
             }
-            else if (state == SwordPlayerStates.Blocking)
+            else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 reflectBackBullet(projectile);
                 StartCoroutine(BlockCooldown());
