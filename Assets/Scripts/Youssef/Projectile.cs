@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Projectile : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Projectile : MonoBehaviour
         direction = dir.normalized;
     }
 
+    
     void Update()
     {
         transform.position += speed * Time.deltaTime * direction;

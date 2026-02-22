@@ -33,7 +33,7 @@ public class ShootingBehavior : StateMachineBehaviour
             {
                 if (projObj != null)
                 {
-                    GameObject proj = GameObject.Instantiate(projObj, animator.transform.position, Quaternion.identity);
+                    GameObject proj = PoolObject.SharedInstance.Spawn(animator.transform.position, Quaternion.identity);
                     Projectile projectileComponent;
                     if (proj != null && proj.TryGetComponent<Projectile>(out projectileComponent)) {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
