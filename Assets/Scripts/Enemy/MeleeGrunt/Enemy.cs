@@ -29,7 +29,10 @@ public class Enemy : MonoBehaviour
     private void OnDeath()
     {
         dead = true;
-        // TODO Play Death Animation
-        Destroy(gameObject);
+        Poolable poolable = GetComponent<Poolable>();
+        if (poolable != null)
+            poolable.Death();
+        else
+            Destroy(gameObject);
     }
 }
