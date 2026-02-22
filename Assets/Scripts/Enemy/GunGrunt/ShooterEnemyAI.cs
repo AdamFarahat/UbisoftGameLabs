@@ -5,7 +5,7 @@ public class ShooterEnemyAI : Poolable
 {
     public GameObject shootingLane;
 
-        public override void OnTakeFromPool()
+    public override void OnTakeFromPool()
     {
         
     }
