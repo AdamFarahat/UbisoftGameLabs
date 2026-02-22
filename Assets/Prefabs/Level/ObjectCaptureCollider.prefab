@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 481702359763223888}
   - component: {fileID: 1584329148830341747}
   - component: {fileID: 525406090616280754}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: ObjectCaptureCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
