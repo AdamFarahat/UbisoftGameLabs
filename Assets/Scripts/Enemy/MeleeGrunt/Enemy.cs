@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     private void OnDeath()
     {
         dead = true;
+        // TODO Play Death Animation
         Poolable poolable = GetComponent<Poolable>();
         if (poolable != null)
             poolable.Death();
