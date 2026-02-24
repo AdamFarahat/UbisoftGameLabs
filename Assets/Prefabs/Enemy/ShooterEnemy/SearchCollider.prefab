@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 122528674860155798}
   - component: {fileID: 5010419036025570478}
   - component: {fileID: 3667075552902914837}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: SearchCollider
   m_TagString: LaneCollider
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046207414548532799}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 50}
   m_LocalScale: {x: 7, y: 15, z: 110}
   m_ConstrainProportionsScale: 0
