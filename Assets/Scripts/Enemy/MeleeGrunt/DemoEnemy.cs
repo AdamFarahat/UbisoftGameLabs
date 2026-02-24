@@ -9,12 +9,17 @@ public class DemoEnemy : Poolable
 
     private LaneBound laneBound;
 
+    private PlayerStats playerStats;
+
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
 
         initialLaneDistance = laneBound.LaneDistance;
+
+        playerStats = GameObject.FindFirstObjectByType<PlayerStats>();
+        Assert.IsNotNull(playerStats);
     }
 
     public override void OnTakeFromPool()
@@ -33,6 +38,7 @@ public class DemoEnemy : Poolable
 
         if (laneBound.LaneDistance <= 0f)
         {
+            playerStats.TakeDamage(25f);
             Death();
         }
     }

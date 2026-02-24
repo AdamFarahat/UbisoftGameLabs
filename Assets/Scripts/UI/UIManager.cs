@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image swordPlayerCooldownUI;
     [SerializeField] private Image healthBarUI;
 
+    private PlayerStats playerStats;
+
     // temp
     float health = 1.0f;
 
@@ -19,8 +21,10 @@ public class UIManager : MonoBehaviour
     {
         gunPlayerController = GameObject.FindFirstObjectByType<GunPlayerController>();
         swordPlayerController = GameObject.FindFirstObjectByType<SwordPlayerController>();
+        playerStats = GameObject.FindFirstObjectByType<PlayerStats>();
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
+        Assert.IsNotNull(playerStats);
         Assert.IsNotNull(healthBarUI);
 
         Assert.IsNotNull(gunPlayerCooldownUI.material);
@@ -54,7 +58,7 @@ public class UIManager : MonoBehaviour
             swordPlayerCooldownUI.material.SetFloat(amountLeftID, swordCooldown);    
         }
 
-        health -= 0.005f;// temp
+        health = Mathf.Lerp(health, playerStats.GetHealthPercentage(), 0.1f);
         // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountLeftID, health);
 
