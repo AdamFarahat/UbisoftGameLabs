@@ -237,7 +237,6 @@ public class SwordPlayerController : PlayerController
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
-        Projectile projectile;
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
@@ -262,21 +261,24 @@ public class SwordPlayerController : PlayerController
                 StartCoroutine(BlockCooldown());
             }
         }
-        else if (collider.TryGetComponent<Projectile>(out projectile)) {
-            if (state == SwordPlayerStates.Parrying) {
-                reflectBackBullet(projectile);
+        else if (collider.TryGetComponent(out Projectile projectile))
+        {
+            if (state == SwordPlayerStates.Parrying)
+            {
+                ReflectBackBullet(projectile);
                 parryTimer = 0f;
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
-                reflectBackBullet(projectile);
+                ReflectBackBullet(projectile);
                 StartCoroutine(BlockCooldown());
             }
         }
     }
-    private void reflectBackBullet(Projectile projectile) {
-        Vector3 dir = (projectile.owner.transform.position - transform.position).normalized;
-        projectile.Initialize(dir);
+
+    private void ReflectBackBullet(Projectile projectile)
+    {
+        projectile.FlipDirection();
         projectile.speed *= parryBulletMultiplier;
     }
 }
