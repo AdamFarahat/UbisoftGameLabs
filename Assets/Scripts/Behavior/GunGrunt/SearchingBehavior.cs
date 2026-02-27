@@ -11,26 +11,47 @@ public class SearchingBehavior : StateMachineBehaviour
     public float distanceTreshold = 2f;
     private GameObject[] lanes;
     private GameObject chosenLane;
+    private PlayerController playerShooter;
+    private PlayerController playerMelee;
+    private Transform lookPoint;
     private bool found;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         lanes = GameObject.FindGameObjectsWithTag(LaneTag);
+        ShooterEnemyAI component;
+        if (animator.gameObject.TryGetComponent<ShooterEnemyAI>(out component)) { 
+            playerMelee = component.playerMelee;
+            playerShooter = component.playerShooter;
+        }
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (chosenLane is null) {
-            chosenLane = lanes[Random.Range(0, lanes.Length)]; 
+            chosenLane = lanes[Random.Range(0, lanes.Length)];
+            lookPoint = chosenLane.transform.Find(laneDestinationName);
         }
-        Transform lookPoint = chosenLane.transform.Find(laneDestinationName);
+        
         if (lookPoint is not null)
         {
             animator.transform.position = Vector3.Lerp(animator.transform.position
                 , lookPoint.position, Time.deltaTime);
             if (Vector3.Distance(animator.transform.position, lookPoint.position) <= distanceTreshold) {
-                if (chosenLane.TryGetComponent<SearchCollider>(out var searchCollider))
+                if(playerShooter.layer)
+                
+                lookPoint = null;
+                chosenLane = null;
+            }
+        }
+        else {
+            Debug.Log(laneDestinationName + " does not exist as the child of the LaneCollider");
+        }
+
+    }
+    /*if (chosenLane.TryGetComponent<SearchCollider>(out var searchCollider))
                 {
                     if (searchCollider.players.Count != 0)
                     {
@@ -46,16 +67,7 @@ public class SearchingBehavior : StateMachineBehaviour
                 }
                 else {
                     Debug.Log("search collider script is not set line 41 SearchingBehavior.cs");
-                }
-                    chosenLane = null;
-            }
-        }
-        else {
-            Debug.Log(laneDestinationName + " does not exist as the child of the LaneCollider");
-        }
-
-    }
-
+                }*/
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
