@@ -9,10 +9,11 @@ public class SearchingBehavior : StateMachineBehaviour
     public string laneDestinationName = "LookTransform";
     public string foundTriggerName = "PlayerSeen";
     public float distanceTreshold = 2f;
+
     private GameObject[] lanes;
     private GameObject chosenLane;
-    private PlayerController playerShooter;
-    private PlayerController playerMelee;
+    private GameObject playerShooter;
+    private GameObject playerMelee;
     private Transform lookPoint;
     private bool found;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -40,16 +41,44 @@ public class SearchingBehavior : StateMachineBehaviour
             animator.transform.position = Vector3.Lerp(animator.transform.position
                 , lookPoint.position, Time.deltaTime);
             if (Vector3.Distance(animator.transform.position, lookPoint.position) <= distanceTreshold) {
-                if(playerShooter.layer)
+                LaneBound shooterPlayerLane;
+                LaneBound meleePlayerLane;
+                IndexPoint indexPoint;
+                if (playerShooter.TryGetComponent<LaneBound>(out shooterPlayerLane) && playerMelee.TryGetComponent<LaneBound>(out meleePlayerLane) && lookPoint.gameObject.TryGetComponent<IndexPoint>(out indexPoint))
+                {
+                    if (shooterPlayerLane.LaneIndex == indexPoint.Index) {
+                        setLane(animator);
+                        animator.SetTrigger(foundTriggerName);
+                    } else if (meleePlayerLane.LaneIndex == indexPoint.Index) {
+                        setLane(animator);
+                        animator.SetTrigger(foundTriggerName);
+                    } else
+                    {
+                        lookPoint = null;
+                        chosenLane = null;
+                    }
+
+                }
                 
-                lookPoint = null;
-                chosenLane = null;
+                
+                
             }
         }
         else {
             Debug.Log(laneDestinationName + " does not exist as the child of the LaneCollider");
         }
 
+    }
+    void setLane(Animator animator) {
+        ShooterEnemyAI shooterAI;
+        if (animator.TryGetComponent<ShooterEnemyAI>(out shooterAI))
+        {
+            shooterAI.shootingLane = chosenLane;
+        }
+        else
+        {
+            Debug.Log("ShooterEnemyAI script not attached to shooter animation controller.");
+        }
     }
     /*if (chosenLane.TryGetComponent<SearchCollider>(out var searchCollider))
                 {

@@ -15,7 +15,6 @@ public class ShootingBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         shootingLane = animator.GetComponent<ShooterEnemyAI>()?.shootingLane;
-        Debug.Log(shootingLane);
         shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
         time = 0f;
         firstShoot = true;

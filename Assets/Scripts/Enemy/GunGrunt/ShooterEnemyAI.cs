@@ -4,8 +4,8 @@ using UnityEngine.Pool;
 public class ShooterEnemyAI : Poolable
 {
     public GameObject shootingLane;
-    public PlayerController playerShooter;
-    public PlayerController playerMelee;
+    public GameObject playerShooter;
+    public GameObject playerMelee;
     public override void OnTakeFromPool()
     {
         
