@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class DemoEnemy : Poolable
+public class DemoEnemy : MonoBehaviour
 {
     private float initialLaneDistance;
 
@@ -15,11 +15,14 @@ public class DemoEnemy : Poolable
         Assert.IsNotNull(laneBound);
 
         initialLaneDistance = laneBound.LaneDistance;
+
+        if (TryGetComponent(out Enemy enemy))
+            enemy.OnTakeFromPool += OnTakeFromPool;
     }
 
-    public override void OnTakeFromPool()
+    private void OnTakeFromPool()
     {
-        laneBound.LaneDistance = initialLaneDistance; // Reset state
+        ResetState();
     }
 
     public void ResetState()
@@ -30,10 +33,5 @@ public class DemoEnemy : Poolable
     private void Update()
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
-
-        if (laneBound.LaneDistance <= 0f)
-        {
-            Death();
-        }
     }
 }

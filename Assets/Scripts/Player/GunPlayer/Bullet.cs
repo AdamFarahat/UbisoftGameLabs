@@ -25,8 +25,14 @@ public class Bullet : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            if (enemy.TakeDamage(damage))
+                OnEnemyKill(enemy);
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnemyKill(Enemy enemy)
+    {
+        // TODO handle score + multiplier gain
     }
 }

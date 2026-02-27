@@ -229,7 +229,7 @@ public class SwordPlayerController : PlayerController
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("Enemy") || collider.GetComponent<Projectile>() != null)
+        if (collider.GetComponentInParent<Enemy>() || collider.GetComponent<Projectile>() != null)
         {
             Stun();
         }
@@ -238,11 +238,15 @@ public class SwordPlayerController : PlayerController
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
         Projectile projectile;
-        if (collider.GetComponentInParent<Enemy>() != null)
+        Enemy enemy = collider.GetComponentInParent<Enemy>();
+        if (enemy != null)
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
-                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
+                if (enemy.OnParried())
+                {
+                    // TODO score + multiplier gain
+                }
                 if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
@@ -251,7 +255,10 @@ public class SwordPlayerController : PlayerController
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
-                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
+                if (enemy.OnParried())
+                {
+                    // TODO score + multiplier gain
+                }
                 StartCoroutine(BlockCooldown());
             }
         }
