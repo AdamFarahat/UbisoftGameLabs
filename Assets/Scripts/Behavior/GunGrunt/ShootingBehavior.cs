@@ -38,7 +38,6 @@ public class ShootingBehavior : StateMachineBehaviour
                     if (proj != null && proj.TryGetComponent<Projectile>(out projectileComponent)) {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
                         projectileComponent.Initialize(direction);
-                        projectileComponent.owner = animator.gameObject;
                     }
                 }
                 else {

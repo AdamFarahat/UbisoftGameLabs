@@ -1,13 +1,6 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class ShooterEnemyAI : Poolable
+public class ShooterEnemyAI : MonoBehaviour
 {
     public GameObject shootingLane;
-
-    public override void OnTakeFromPool()
-    {
-        
-    }
-
 }

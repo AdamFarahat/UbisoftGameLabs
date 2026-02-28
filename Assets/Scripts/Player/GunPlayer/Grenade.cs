@@ -46,7 +46,8 @@ public class Grenade : MonoBehaviour
             if (enemy != null && !hitEnemies.Contains(enemy))
             {
                 hitEnemies.Add(enemy);
-                enemy.TakeDamage(damage);
+                if (enemy.TakeDamage(damage))
+                    OnEnemyKill(enemy);
             }
         }
         else if (!other.GetComponentInParent<PlayerController>())
@@ -69,5 +70,10 @@ public class Grenade : MonoBehaviour
 
         exploding = true;
         StartCoroutine(Explosion());
+    }
+
+    private void OnEnemyKill(Enemy enemy)
+    {
+        // TODO handle score + multiplier gain
     }
 }

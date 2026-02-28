@@ -45,9 +45,8 @@ public class Spawner : MonoBehaviour
         enemy.transform.rotation = spawnPoint.rotation;
 
         // reset DemoEnemy if it exists
-        Poolable poolable = enemy.GetComponent<Poolable>();
-        if (poolable != null)
-            poolable.OnTakeFromPool();
+        if (enemy.TryGetComponent(out Poolable poolable))
+            poolable.TakeFromPool();
     }
 
     private void OnReturnToPool(GameObject enemy)
