@@ -36,7 +36,7 @@ public class SearchingBehavior : StateMachineBehaviour
     {
         if (chosenLane is null) {
             searchIndex = Random.Range(0, lanes.Length);
-            chosenLane = lanes[searchIndex];
+            chosenLane = lanes[searchIndex]; //basically the point GameObject now.
             lookPoint = chosenLane.transform;
         }
         
