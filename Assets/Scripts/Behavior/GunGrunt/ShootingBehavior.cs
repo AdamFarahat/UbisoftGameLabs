@@ -9,13 +9,21 @@ public class ShootingBehavior : StateMachineBehaviour
     public GameObject projObj;
     private GameObject shootingLane;
     private GameObject shootingTarget;
+
+    private GameObject playerShooter;
+    private GameObject playerMelee;
+    private int shootingIndex;
+
     private float time;
     private bool firstShoot;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        shootingLane = animator.GetComponent<ShooterEnemyAI>()?.shootingLane;
-        shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
+        shootingLane = animator.GetComponent<ShooterEnemyAI>()?.ShootingLane;
+        playerShooter = animator.GetComponent<ShooterEnemyAI>()?.playerShooter;
+        playerMelee = animator.GetComponent<ShooterEnemyAI>()?.playerMelee;
+        shootingIndex = animator.GetComponent<ShooterEnemyAI>().shootingIndex;
+        shootingTarget = findShootingTarget();
         time = 0f;
         firstShoot = true;
     }
@@ -25,7 +33,7 @@ public class ShootingBehavior : StateMachineBehaviour
     {
         time += Time.deltaTime;
         if (time >= shootingRate || firstShoot) {
-            shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
+            shootingTarget = findShootingTarget();
             firstShoot = false;
             time = 0f;
             if (shootingTarget != null)
@@ -50,6 +58,13 @@ public class ShootingBehavior : StateMachineBehaviour
         }
     }
 
+    //new way of finding target not using colliders
+    private GameObject findShootingTarget() { 
+        return (playerShooter.GetComponent<PlayerController>().getLaneIndex()
+            == shootingIndex) ? playerShooter :
+            (playerMelee.GetComponent<PlayerController>().getLaneIndex()
+            == shootingIndex) ? playerMelee : null;
+    }
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{

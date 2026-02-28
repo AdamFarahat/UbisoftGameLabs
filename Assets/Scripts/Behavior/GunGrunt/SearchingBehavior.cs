@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,20 +11,22 @@ public class SearchingBehavior : StateMachineBehaviour
     public string foundTriggerName = "PlayerSeen";
     public float distanceTreshold = 2f;
 
+
+    private int searchIndex;
     private GameObject[] lanes;
     private GameObject chosenLane;
     private GameObject playerShooter;
     private GameObject playerMelee;
     private Transform lookPoint;
-    private bool found;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        lanes = GameObject.FindGameObjectsWithTag(LaneTag);
         ShooterEnemyAI component;
         if (animator.gameObject.TryGetComponent<ShooterEnemyAI>(out component)) { 
             playerMelee = component.playerMelee;
             playerShooter = component.playerShooter;
+            lanes = component.lanes;
         }
         
     }
@@ -32,8 +35,9 @@ public class SearchingBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (chosenLane is null) {
-            chosenLane = lanes[Random.Range(0, lanes.Length)];
-            lookPoint = chosenLane.transform.Find(laneDestinationName);
+            searchIndex = Random.Range(0, lanes.Length);
+            chosenLane = lanes[searchIndex];
+            lookPoint = chosenLane.transform;
         }
         
         if (lookPoint is not null)
@@ -41,27 +45,33 @@ public class SearchingBehavior : StateMachineBehaviour
             animator.transform.position = Vector3.Lerp(animator.transform.position
                 , lookPoint.position, Time.deltaTime);
             if (Vector3.Distance(animator.transform.position, lookPoint.position) <= distanceTreshold) {
-                LaneBound shooterPlayerLane;
-                LaneBound meleePlayerLane;
-                IndexPoint indexPoint;
-                if (playerShooter.TryGetComponent<LaneBound>(out shooterPlayerLane) && playerMelee.TryGetComponent<LaneBound>(out meleePlayerLane) && lookPoint.gameObject.TryGetComponent<IndexPoint>(out indexPoint))
+                if (playerShooter.TryGetComponent<PlayerController>(out PlayerController shooterPlayerLane)
+                    && playerMelee.TryGetComponent<PlayerController>(out PlayerController meleePlayerLane))
                 {
-                    if (shooterPlayerLane.LaneIndex == indexPoint.Index) {
+                    if (shooterPlayerLane.getLaneIndex() == searchIndex)
+                    {
                         setLane(animator);
                         animator.SetTrigger(foundTriggerName);
-                    } else if (meleePlayerLane.LaneIndex == indexPoint.Index) {
+                    }
+                    else if (meleePlayerLane.getLaneIndex() == searchIndex)
+                    {
                         setLane(animator);
                         animator.SetTrigger(foundTriggerName);
-                    } else
+                    }
+                    else
                     {
                         lookPoint = null;
                         chosenLane = null;
                     }
 
                 }
-                
-                
-                
+                else
+                {
+                    Debug.Log("PlayerController not set on player shooter or melee shooter");
+                }
+
+
+
             }
         }
         else {
@@ -73,7 +83,8 @@ public class SearchingBehavior : StateMachineBehaviour
         ShooterEnemyAI shooterAI;
         if (animator.TryGetComponent<ShooterEnemyAI>(out shooterAI))
         {
-            shooterAI.shootingLane = chosenLane;
+            shooterAI.ShootingLane = chosenLane;
+            shooterAI.shootingIndex = searchIndex;
         }
         else
         {

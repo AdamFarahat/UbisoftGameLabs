@@ -73,4 +73,7 @@ public abstract class PlayerController : MonoBehaviour
     {
         throw new NotImplementedException();
     }
+    public float getLaneIndex() {
+        return laneBound.LaneIndex;
+    }
 }
