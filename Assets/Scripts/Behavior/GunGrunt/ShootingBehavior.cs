@@ -58,13 +58,20 @@ public class ShootingBehavior : StateMachineBehaviour
         }
     }
 
-    //new way of finding target not using colliders
+    /** 
+     * new way of finding target not using colliders,
+     * should discuss which player to give shooting priority to,
+     * for now, we first piorize shooting in the player shooter.
+    */
     private GameObject findShootingTarget() { 
         return (playerShooter.GetComponent<PlayerController>().getLaneIndex()
             == shootingIndex) ? playerShooter :
             (playerMelee.GetComponent<PlayerController>().getLaneIndex()
             == shootingIndex) ? playerMelee : null;
     }
+
+
+
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
