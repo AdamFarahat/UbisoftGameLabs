@@ -39,7 +39,7 @@ public class Spawner : MonoBehaviour
         if (lane != null)
         {
             lane.LaneIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
-            lane.LaneDistance = 20f;
+            lane.LaneDistance = 100f;
         }
 
         enemy.transform.rotation = spawnPoint.rotation;

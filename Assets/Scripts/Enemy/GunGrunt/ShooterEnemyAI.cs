@@ -3,15 +3,17 @@ using UnityEngine.Pool;
 
 public class ShooterEnemyAI : Poolable
 {
-    private GameObject shootingLane;
-    public GameObject playerShooter;
-    public GameObject playerMelee;
-    public GameObject[] lanes;
+    [SerializeField] private float minLaneDistance = 100f;
+    [SerializeField] private float maxLaneDistance = 150f;
+    [SerializeField] private float researchCooldown = 3f;
+
     public int shootingIndex;
-    public GameObject ShootingLane
+    public Transform projSpawnPoint;
+    public float ResearchCooldown => researchCooldown;
+
+    private void Start()
     {
-        get => shootingLane;
-        set { shootingLane = value; }
+        GetComponent<LaneBound>().LaneDistance = Random.Range(minLaneDistance, maxLaneDistance);
     }
 
     public override void OnTakeFromPool()

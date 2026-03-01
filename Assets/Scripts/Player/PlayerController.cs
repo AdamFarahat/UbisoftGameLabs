@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -10,9 +9,6 @@ public abstract class PlayerController : MonoBehaviour
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
-
-    [SerializeField] private float switchLaneDuration = 0.1f;
-    private bool switchingLanes = false;
 
     protected virtual void Awake()
     {
@@ -37,43 +33,22 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && laneBound.LaneIndex > 0)
-        {
-            if (!switchingLanes)
-                StartCoroutine(SwitchLanes(laneBound.LaneIndex - 1));
-            // TODO else dash
-        }
+        if (laneBound.LaneIndex > 0)
+            laneBound.MoveToLane(laneBound.LaneIndex - 1);
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && laneBound.LaneIndex < LaneConfigSO.Instance.GetNumberOfLanes() - 1)
-        {
-            if (!switchingLanes)
-                StartCoroutine(SwitchLanes(laneBound.LaneIndex + 1));
-            // TODO else dash
-        }
-    }
-
-    private IEnumerator SwitchLanes(float toIndex)
-    {
-        switchingLanes = true;
-        float fromIndex = laneBound.LaneIndex;
-        for (float t = 0f; t < switchLaneDuration; t += Time.deltaTime)
-        {
-            float a = Mathf.Clamp01(t / switchLaneDuration);
-            laneBound.LaneIndex = Mathf.Lerp(fromIndex, toIndex, a);
-            yield return null;
-        }
-        laneBound.LaneIndex = toIndex;
-        switchingLanes = false;
+        if (laneBound.LaneIndex < LaneConfigSO.Instance.GetNumberOfLanes() - 1)
+            laneBound.MoveToLane(laneBound.LaneIndex + 1);
     }
 
     public virtual float GetCooldownPercent()
     {
         throw new NotImplementedException();
     }
-    public float getLaneIndex() {
+
+    public float GetLaneIndex() {
         return laneBound.LaneIndex;
     }
 }

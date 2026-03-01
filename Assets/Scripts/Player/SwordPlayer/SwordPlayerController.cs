@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
 {
+    private static SwordPlayerController instance = null;
+    public static SwordPlayerController Instance => instance;
+    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+
     private SwordHitBox swordHitBox;
     [Header("Stunning")]
     [SerializeField] private float stunCooldown = 1f;
@@ -43,6 +47,7 @@ public class SwordPlayerController : PlayerController
 
     protected override void Awake()
     {
+        instance = this;
         base.Awake();
         swordHitBox = FindFirstObjectByType<SwordHitBox>();
     }
