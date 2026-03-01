@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7125224222790164296}
   - component: {fileID: 7226625706337693208}
   - component: {fileID: 5474019668992448779}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 219208488841186363}
   - component: {fileID: 6194096744229258362}
   - component: {fileID: 1006983404033960737}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerBase
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
   laneIndex: 1
   laneDistance: 0
+  switchLaneDuration: 0.1
 --- !u!114 &6194096744229258362
 MonoBehaviour:
   m_ObjectHideFlags: 0

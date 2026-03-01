@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a4ab8e86cafad48af98deb8fb75db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemyAI
+  spawnLaneDistance: 300
+  spawnArrivalDuration: 5
   minLaneDistance: 100
   maxLaneDistance: 150
   researchCooldown: 3

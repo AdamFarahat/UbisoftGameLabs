@@ -26,6 +26,15 @@ public class LaneBound : MonoBehaviour
         SyncLane();
     }
 
+    private void OnDisable()
+    {
+        if (switchLaneRoutine != null)
+        {
+            StopCoroutine(switchLaneRoutine);
+            switchLaneRoutine = null;
+        }
+    }
+
     private void SyncLane()
     {
         Vector3 position = LaneConfigSO.Instance.GetLanePosition(laneIndex, laneDistance);

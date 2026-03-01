@@ -7,8 +7,7 @@ public class ShootingBehavior : StateMachineBehaviour
     public GameObject projObj;
     private PlayerController shootingTarget;
 
-    private int shootingIndex;
-    private Transform projSpawnPoint;
+    private ShooterEnemyAI shooterAI;
 
     private float time;
     private bool firstShoot;
@@ -16,8 +15,7 @@ public class ShootingBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        shootingIndex = animator.GetComponent<ShooterEnemyAI>().shootingIndex;
-        projSpawnPoint = animator.GetComponent<ShooterEnemyAI>().projSpawnPoint;
+        shooterAI = animator.GetComponent<ShooterEnemyAI>();
         shootingTarget = FindShootingTarget();
         time = 0f;
         firstShoot = true;
@@ -26,6 +24,9 @@ public class ShootingBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (!shooterAI.ActiveAI)
+            return;
+
         time += Time.deltaTime;
         if (time >= shootingRate || firstShoot)
         {
@@ -36,7 +37,7 @@ public class ShootingBehavior : StateMachineBehaviour
             {
                 if (projObj != null)
                 {
-                    GameObject proj = PoolObject.SharedInstance.Spawn(projSpawnPoint.position, Quaternion.identity);
+                    GameObject proj = PoolObject.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
                     if (proj != null && proj.TryGetComponent(out Projectile projectileComponent))
                     {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
@@ -64,7 +65,7 @@ public class ShootingBehavior : StateMachineBehaviour
     */
     private PlayerController FindShootingTarget()
     {
-        return GunPlayerController.LaneIndex == shootingIndex ? GunPlayerController.Instance :
-            SwordPlayerController.LaneIndex == shootingIndex ? SwordPlayerController.Instance : null;
+        return GunPlayerController.LaneIndex == shooterAI.shootingIndex ? GunPlayerController.Instance :
+            SwordPlayerController.LaneIndex == shooterAI.shootingIndex ? SwordPlayerController.Instance : null;
     }
 }
