@@ -3,7 +3,7 @@ using UnityEngine;
 public class Shotgun : Gun
 {
     [Header("Shotgun")]
-    [SerializeField] private float spreadAngle = 5f;
+    [SerializeField] private float spreadAngle = 45f;
 
     public override void StartFiring()
     {
@@ -11,8 +11,6 @@ public class Shotgun : Gun
             return;
 
         Debug.Log("StartFiring shotgun!");
-        InstantiateBullet();
-        InstantiateBullet().transform.forward = Quaternion.Euler(0f, spreadAngle, 0f) * transform.forward;
-        InstantiateBullet().transform.forward = Quaternion.Euler(0f, -spreadAngle, 0f) * transform.forward;
+        InstantiateShotgunBlast().coneAngle = spreadAngle;
     }
 }
