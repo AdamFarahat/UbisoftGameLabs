@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3826671818913854118}
+  - component: {fileID: 4662849959842468795}
   - component: {fileID: 7919868912625521805}
   - component: {fileID: 8777358735681663577}
   - component: {fileID: 2846392887449748289}
   - component: {fileID: 1288897148810167743}
   - component: {fileID: 7360760649626617153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShooterAI
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -36,6 +37,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4662849959842468795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679675405416162139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 10
+  score: 10
 --- !u!33 &7919868912625521805
 MeshFilter:
   m_ObjectHideFlags: 0
