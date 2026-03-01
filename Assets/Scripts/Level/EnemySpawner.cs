@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
@@ -16,6 +17,9 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
+        Assert.IsTrue(enemyPrefabs.Length > 0);
+        Assert.IsTrue(spawnPoints.Length > 0);
+
         enemyPool = new ObjectPool<GameObject>(
             CreateEnemy,
             OnTakeFromPool,
@@ -34,17 +38,13 @@ public class Spawner : MonoBehaviour
         // spawn at random spawn point
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        LaneBound lane = enemy.GetComponent<LaneBound>();
-
-        if (lane != null)
+        if (enemy.TryGetComponent(out LaneBound lane))
         {
             lane.LaneIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
             lane.LaneDistance = 100f;
         }
 
         enemy.transform.rotation = spawnPoint.rotation;
-
-        // reset DemoEnemy if it exists
         if (enemy.TryGetComponent(out Poolable poolable))
             poolable.TakeFromPool();
     }
