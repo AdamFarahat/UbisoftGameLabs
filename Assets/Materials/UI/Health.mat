@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountLeft: 1
+    - _AmountLeft: 0.72
     - _ColorMask: 15
     - _FillAmount: 0.49
     - _Stencil: 0

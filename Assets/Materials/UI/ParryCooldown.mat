@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountLeft: -3.3699965
+    - _AmountLeft: 1
     - _ColorMask: 15
     - _Stencil: 0
     - _StencilComp: 8
@@ -56,6 +56,6 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _CooldownColor: {r: 0.7704402, g: 0.9893324, b: 1, a: 0.49019608}
+    - _CooldownColor: {r: 0.3291206, g: 0.7868021, b: 0.8113208, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
