@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CenterHealth
-  m_Shader: {fileID: -6465566751694194690, guid: e3a005fbeb765274c8c10c2016cac0f8, type: 3}
+  m_Name: GunMultiplier
+  m_Shader: {fileID: -6465566751694194690, guid: 19aa730cc9f155e4da76d970d8b3b15d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,9 +41,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountLeft: 0.65
+    - _AmountLeft: 1
     - _ColorMask: 15
-    - _FillAmount: 0.49
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -51,11 +50,8 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
-    - _WaveAmplitude: 0.05
-    - _WaveFrequency: -13
-    - _WaveSpeed: 2
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.5058824, b: 0.7568628, a: 1}
+    - _Color: {r: 0.7037662, g: 0.21698096, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
