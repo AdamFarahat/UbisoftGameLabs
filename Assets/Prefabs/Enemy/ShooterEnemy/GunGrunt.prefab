@@ -123,8 +123,9 @@ GameObject:
   - component: {fileID: 1288897148810167743}
   - component: {fileID: 7360760649626617153}
   - component: {fileID: 1308856832007123742}
+  - component: {fileID: 681042347012851451}
   m_Layer: 0
-  m_Name: ShooterAI
+  m_Name: GunGrunt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemyAI
   minLaneDistance: 100
   maxLaneDistance: 150
+  researchCooldown: 3
   shootingIndex: 0
   projSpawnPoint: {fileID: 3509866819470176090}
 --- !u!114 &1308856832007123742
@@ -199,3 +201,17 @@ MonoBehaviour:
   laneIndex: 0
   laneDistance: 200
   switchLaneDuration: 1
+--- !u!114 &681042347012851451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679675405416162139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 20
+  score: 20
