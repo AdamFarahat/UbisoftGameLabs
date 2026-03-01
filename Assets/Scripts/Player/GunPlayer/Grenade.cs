@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
+    public GunPlayerController gunPlayerControllerOwner;
+
     [SerializeField] private int damage = 10;
     [SerializeField] private float gravity = 100f;
     public float velocity = 100f;
@@ -74,6 +76,6 @@ public class Grenade : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        // TODO handle score + multiplier gain
+       gunPlayerControllerOwner.UpdateScore(ScoreManager.GRENADE_MULTIPLIER, enemy.Score);
     }
 }

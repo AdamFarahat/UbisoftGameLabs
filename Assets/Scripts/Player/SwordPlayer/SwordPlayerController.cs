@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -220,6 +221,8 @@ public class SwordPlayerController : PlayerController
         if(state != SwordPlayerStates.Stunned)
         {
             state = SwordPlayerStates.Stunned;
+            //reset of multiplier
+            deltaMultiplierGain = 1f;
             GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
             IEnumerator Routine()
             {
@@ -249,7 +252,10 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-                    // TODO score + multiplier gain
+                    // TODO score + multiplier gain, DONE
+                    deltaMultiplierGain +=  ScoreManager.PARRIED_MULTIPLER_FACTOR * ScoreManager.MULTIPLER_GAIN;
+                    score += deltaMultiplierGain * (ScoreManager.PARRIED_DEFAULT_SCORE);
+
                 }
                 if (state == SwordPlayerStates.Parrying)
                 {
@@ -261,7 +267,10 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-                    // TODO score + multiplier gain
+                    // TODO score + multiplier gain, DONE, might create function in future if we reuse this.
+                    deltaMultiplierGain += ScoreManager.BLOCKING_GAIN * ScoreManager.MULTIPLER_GAIN;
+                    score += deltaMultiplierGain * (ScoreManager.PARRIED_DEFAULT_SCORE);
+
                 }
                 StartCoroutine(BlockCooldown());
             }

@@ -41,7 +41,7 @@ public class GrenadeBelt : MonoBehaviour
         throwing = false;
     }
 
-    public void Throw()
+    public void Throw(GunPlayerController gunPlayerOwner)
     {
         if (!throwing)
             return;
@@ -53,6 +53,7 @@ public class GrenadeBelt : MonoBehaviour
 
         grenade.transform.position = transform.position;
         grenade.velocity = Mathf.Lerp(minThrowVelocity, maxThrowVelocity, Mathf.Clamp01(throwChargeTime / maxChargeTime));
+        grenade.gunPlayerControllerOwner = gunPlayerOwner;
     }
 
     public float GetCooldownPercent()

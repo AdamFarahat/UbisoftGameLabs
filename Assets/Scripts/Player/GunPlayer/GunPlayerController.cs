@@ -1,5 +1,8 @@
+using System;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using static UnityEngine.EventSystems.EventTrigger;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class GunPlayerController : PlayerController
 {
@@ -46,12 +49,12 @@ public class GunPlayerController : PlayerController
         if (holdingGunInput == HoldingState.FirstFrame)
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
-            holster.KeepFiring();
+            holster.KeepFiring(this);
     }
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
-        holster.StartFiring();
+        holster.StartFiring(this);
         holdingGunInput = HoldingState.FirstFrame;
         grenadeBelt.CancelThrow();
     }
@@ -84,11 +87,18 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        grenadeBelt.Throw();
+        grenadeBelt.Throw(this);
     }
 
     public override float GetCooldownPercent()
     {
         return grenadeBelt.GetCooldownPercent();
+    }
+
+    internal void UpdateScore(float multiplierGain, int scoreOfEnemy)
+    {
+        deltaMultiplierGain += multiplierGain;
+        score = deltaMultiplierGain * scoreOfEnemy;
+
     }
 }

@@ -5,12 +5,12 @@ public class Shotgun : Gun
     [Header("Shotgun")]
     [SerializeField] private float spreadAngle = 45f;
 
-    public override void StartFiring()
+    public override void StartFiring(GunPlayerController gunPlayerController)
     {
         if (!PreStartFiring())
             return;
 
         Debug.Log("StartFiring shotgun!");
-        InstantiateShotgunBlast().coneAngle = spreadAngle;
+        InstantiateShotgunBlast(gunPlayerController).coneAngle = spreadAngle;
     }
 }

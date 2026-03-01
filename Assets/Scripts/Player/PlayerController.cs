@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    public float score = 0;
+    public float deltaMultiplierGain = 1f;
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
-
+    
     protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
