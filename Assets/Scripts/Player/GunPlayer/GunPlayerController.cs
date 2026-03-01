@@ -1,9 +1,12 @@
-using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class GunPlayerController : PlayerController
 {
+    private static GunPlayerController instance = null;
+    public static GunPlayerController Instance => instance;
+    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+
     private Holster holster;
     private GrenadeBelt grenadeBelt;
 
@@ -18,6 +21,7 @@ public class GunPlayerController : PlayerController
 
     protected override void Awake()
     {
+        instance = this;
         base.Awake();
 
         holster = GetComponentInChildren<Holster>();
