@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class DemoEnemy : MonoBehaviour
+public class MeleeMovementAI : MonoBehaviour
 {
     private float initialLaneDistance;
 
