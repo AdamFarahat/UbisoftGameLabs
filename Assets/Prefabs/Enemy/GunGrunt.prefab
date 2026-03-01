@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1854281290051434547}
   - component: {fileID: 6414683663491004377}
   - component: {fileID: 3073832672728336411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7360760649626617153}
   - component: {fileID: 1308856832007123742}
   - component: {fileID: 681042347012851451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GunGrunt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
