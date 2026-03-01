@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GunMultiplier
-  m_Shader: {fileID: -6465566751694194690, guid: 19aa730cc9f155e4da76d970d8b3b15d, type: 3}
+  m_Name: GranadeCooldown
+  m_Shader: {fileID: -6465566751694194690, guid: ecedebec3f199664a8cc1d02e76548bd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmountLeft: 0.67
+    - _AmountLeft: 1
     - _ColorMask: 15
     - _Stencil: 0
     - _StencilComp: 8
@@ -52,6 +52,6 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.7037662, g: 0.21698096, b: 1, a: 1}
+    - _CooldownColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
