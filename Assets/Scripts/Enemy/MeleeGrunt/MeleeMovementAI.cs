@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class MeleeMovementAI : MonoBehaviour
 {
-    private float initialLaneDistance;
+    [SerializeField] private float initialLaneDistance = 300f;
 
     [SerializeField] private float speed = 1f;
 
@@ -14,18 +14,10 @@ public class MeleeMovementAI : MonoBehaviour
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
 
-        initialLaneDistance = laneBound.LaneDistance;
-
-        if (TryGetComponent(out Enemy enemy))
-            enemy.OnTakeFromPool += OnTakeFromPool;
+        GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
 
-    private void OnTakeFromPool()
-    {
-        ResetState();
-    }
-
-    public void ResetState()
+    private void ResetState()
     {
         laneBound.LaneDistance = initialLaneDistance;
     }

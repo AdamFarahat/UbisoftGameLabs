@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class Enemy : Poolable
 {
+    [SerializeField] protected int maxHealth = 10;
     [SerializeField] protected int health = 10;
     [SerializeField] protected int score = 10;
 
@@ -23,6 +24,11 @@ public class Enemy : Poolable
         Assert.IsNotNull(laneBound);
     }
 
+    private void Start()
+    {
+        ResetState();
+    }
+
     private void Update()
     {
         if (laneBound.LaneDistance <= 0f)
@@ -32,7 +38,16 @@ public class Enemy : Poolable
     public override void TakeFromPool()
     {
         base.TakeFromPool();
+        ResetState();
         OnTakeFromPool?.Invoke();
+    }
+
+    private void ResetState()
+    {
+        health = maxHealth;
+        dead = health <= 0;
+
+        laneBound.LaneIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
     }
 
     // returns true if enemy was killed by damage

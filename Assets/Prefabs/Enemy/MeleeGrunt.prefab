@@ -109,8 +109,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &8980648615144976386
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
   laneIndex: 1
   laneDistance: 200
+  switchLaneDuration: 0.1
 --- !u!114 &3450926691260433750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5496b40511f3ea84da6630399f6ddc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
+  initialLaneDistance: 300
   speed: 18
 --- !u!114 &1581637196576062325
 MonoBehaviour:
@@ -185,5 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHealth: 10
   health: 10
   score: 10

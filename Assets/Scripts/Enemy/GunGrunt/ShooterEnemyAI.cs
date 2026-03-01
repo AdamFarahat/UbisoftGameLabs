@@ -10,7 +10,17 @@ public class ShooterEnemyAI : MonoBehaviour
     public Transform projSpawnPoint;
     public float ResearchCooldown => researchCooldown;
 
+    private void Awake()
+    {
+        GetComponent<Enemy>().OnTakeFromPool += ResetState;
+    }
+
     private void Start()
+    {
+        ResetState();
+    }
+
+    private void ResetState()
     {
         GetComponent<LaneBound>().LaneDistance = Random.Range(minLaneDistance, maxLaneDistance);
     }
