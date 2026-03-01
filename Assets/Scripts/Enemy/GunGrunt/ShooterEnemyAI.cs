@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class ShooterEnemyAI : Poolable
+public class ShooterEnemyAI : MonoBehaviour
 {
     [SerializeField] private float minLaneDistance = 100f;
     [SerializeField] private float maxLaneDistance = 150f;
@@ -15,10 +14,4 @@ public class ShooterEnemyAI : Poolable
     {
         GetComponent<LaneBound>().LaneDistance = Random.Range(minLaneDistance, maxLaneDistance);
     }
-
-    public override void OnTakeFromPool()
-    {
-        
-    }
-
 }
