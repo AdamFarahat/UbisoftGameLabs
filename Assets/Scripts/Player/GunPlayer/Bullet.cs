@@ -33,6 +33,6 @@ public class Bullet : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        // TODO handle score + multiplier gain
+        GunPlayerController.Instance.UpdateScore(ScoreManagerSO.Instance.DEFAULT_BULLET_MULTIPLIER, enemy.Score);
     }
 }

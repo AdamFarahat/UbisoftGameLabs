@@ -54,7 +54,6 @@ public class Gun : MonoBehaviour
         GameObject go = Instantiate(bulletPrefab);
         Bullet bullet = go.GetComponent<Bullet>();
         Assert.IsNotNull(bullet);
-
         bullet.transform.position = firePosition.position;
         bullet.velocity = bulletVelocity;
         bullet.acceleration = bulletAcceleration;
@@ -68,7 +67,6 @@ public class Gun : MonoBehaviour
         GameObject go = Instantiate(bulletPrefab);
         ShotgunBlast blast = go.GetComponent<ShotgunBlast>();
         Assert.IsNotNull(blast);
-
         blast.transform.position = firePosition.position;
         blast.range = bulletRange;
         blast.damage = bulletDamage;
