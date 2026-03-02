@@ -15,6 +15,8 @@ public class MeleeMovementAI : MonoBehaviour
     {
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
+        playerStats = FindFirstObjectByType<PlayerStats>();
+        Assert.IsNotNull(playerStats);
 
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
@@ -27,5 +29,10 @@ public class MeleeMovementAI : MonoBehaviour
     private void Update()
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
+
+        if(laneBound.LaneDistance <= 0f)
+        {
+            playerStats.TakeDamage(10f);
+        }
     }
 }
