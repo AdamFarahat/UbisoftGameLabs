@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.Rendering;
 
 public class PoolObject : MonoBehaviour
 {

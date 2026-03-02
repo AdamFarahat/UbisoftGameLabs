@@ -1,22 +1,24 @@
-using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class ShootingBehavior : StateMachineBehaviour
 {
-    public string lostPlayerTrigger = "PlayerDisapearred";
+    public string lostPlayerTrigger = "PlayerDisappeared";
     public float shootingRate = 1.0f;
     public GameObject projObj;
-    private GameObject shootingLane;
-    private GameObject shootingTarget;
+    private PlayerController shootingTarget;
+
+    private int shootingIndex;
+    private Transform projSpawnPoint;
+
     private float time;
     private bool firstShoot;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        shootingLane = animator.GetComponent<ShooterEnemyAI>()?.shootingLane;
-        Debug.Log(shootingLane);
-        shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
+        shootingIndex = animator.GetComponent<ShooterEnemyAI>().shootingIndex;
+        projSpawnPoint = animator.GetComponent<ShooterEnemyAI>().projSpawnPoint;
+        shootingTarget = FindShootingTarget();
         time = 0f;
         firstShoot = true;
     }
@@ -25,22 +27,24 @@ public class ShootingBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         time += Time.deltaTime;
-        if (time >= shootingRate || firstShoot) {
-            shootingTarget = shootingLane?.GetComponent<SearchCollider>()?.players?.FirstOrDefault();
+        if (time >= shootingRate || firstShoot)
+        {
+            shootingTarget = FindShootingTarget();
             firstShoot = false;
             time = 0f;
             if (shootingTarget != null)
             {
                 if (projObj != null)
                 {
-                    GameObject proj = PoolObject.SharedInstance.Spawn(animator.transform.position, Quaternion.identity);
-                    Projectile projectileComponent;
-                    if (proj != null && proj.TryGetComponent<Projectile>(out projectileComponent)) {
+                    GameObject proj = PoolObject.SharedInstance.Spawn(projSpawnPoint.position, Quaternion.identity);
+                    if (proj != null && proj.TryGetComponent(out Projectile projectileComponent))
+                    {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
                         projectileComponent.Initialize(direction);
                     }
                 }
-                else {
+                else
+                {
                     Debug.Log("Projectile not set.");
                 }
             }
@@ -51,21 +55,16 @@ public class ShootingBehavior : StateMachineBehaviour
         }
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    /** 
+     * TODO new way of finding target not using colliders,
+     * should discuss which player to give shooting priority to,
+     * for now, we first piorize shooting in the player shooter.
+     * 
+     * Ryan: it doesn't actually matter which instance we choose, if they're both in the same lane.
+    */
+    private PlayerController FindShootingTarget()
+    {
+        return GunPlayerController.LaneIndex == shootingIndex ? GunPlayerController.Instance :
+            SwordPlayerController.LaneIndex == shootingIndex ? SwordPlayerController.Instance : null;
+    }
 }

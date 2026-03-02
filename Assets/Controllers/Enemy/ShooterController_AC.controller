@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8525be525a13646b3023b940626dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootingBehavior
-  lostPlayerTrigger: PlayerDisapearred
+  lostPlayerTrigger: PlayerDisappeared
   shootingRate: 1
   projObj: {fileID: 7001779660354109463, guid: 0a9e350f6d3ad4d4195dfc8b96015f94, type: 3}
 --- !u!91 &9100000
@@ -108,7 +108,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: PlayerDisapearred
+  - m_Name: PlayerDisappeared
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -164,7 +164,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: PlayerDisapearred
+    m_ConditionEvent: PlayerDisappeared
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4206688945008652195}
@@ -193,6 +193,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SearchingBehavior
   LaneTag: LaneCollider
-  laneDestinationName: LookTransform
   foundTriggerName: PlayerSeen
-  distanceTreshold: 2
+  distanceTreshold: 0.1

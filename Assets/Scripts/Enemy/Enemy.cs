@@ -32,7 +32,7 @@ public class Enemy : Poolable
     public override void TakeFromPool()
     {
         base.TakeFromPool();
-        OnTakeFromPool.Invoke();
+        OnTakeFromPool?.Invoke();
     }
 
     // returns true if enemy was killed by damage
