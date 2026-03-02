@@ -14,8 +14,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image superUI;
 
-    private PlayerStats playerStats;
-
     // temp
     float health = 1.0f;
 
@@ -29,10 +27,8 @@ public class UIManager : MonoBehaviour
     {
         gunPlayerController = GameObject.FindFirstObjectByType<GunPlayerController>();
         swordPlayerController = GameObject.FindFirstObjectByType<SwordPlayerController>();
-        playerStats = GameObject.FindFirstObjectByType<PlayerStats>();
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
-        Assert.IsNotNull(playerStats);
         Assert.IsNotNull(healthBarUI);
         Assert.IsNotNull(gunMultiplierUI);
         Assert.IsNotNull(swordMultiplierUI);
@@ -72,8 +68,8 @@ public class UIManager : MonoBehaviour
             // float gunMultiplier = gunPlayerController.GetMultiplier();
             float gunMultiplier = 0.8f; // temp        
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
-            float gunSuper = playerStats.GetGunSuperPercent();
-            float gunSuperSmoothed = Mathf.Lerp(gunSuper, playerStats.GetGunSuperPercent(), 0.1f);
+            float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
+            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), 0.1f);
             superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
 
         }
@@ -89,8 +85,8 @@ public class UIManager : MonoBehaviour
             // float swordMultiplier = swordPlayerController.GetMultiplier();
             float swordMultiplier = 0.2f; // temp
             swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
-            float swordSuper = playerStats.GetSwordSuperPercent();
-            float swordSuperSmoothed = Mathf.Lerp(swordSuper, playerStats.GetSwordSuperPercent(), 0.1f);
+            float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
+            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), 0.1f);
             superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
         }
         else
@@ -98,7 +94,7 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
         }
 
-        health = Mathf.Lerp(health, playerStats.GetHealthPercentage(), 0.1f);
+        health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), 0.1f);
         // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountID, health);       
     }
