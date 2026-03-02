@@ -177,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7520d2483b1c88e4d8e0034c7d65ee85, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -323,7 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_text
-      value: 4000
+      value: 12345
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_Pivot.x
@@ -387,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35
+      value: 33.9
       objectReference: {fileID: 0}
     - target: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -415,6 +419,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
   m_PrefabInstance: {fileID: 604913654}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &604913656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+  m_PrefabInstance: {fileID: 604913654}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &678395681
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +639,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1987066883688285533, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: score
+      value: 6969
+      objectReference: {fileID: 0}
+    - target: {fileID: 1987066883688285533, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 604913656}
     - target: {fileID: 2459126833240657986, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_Name
       value: GameCanvas
@@ -712,6 +735,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 604913656}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

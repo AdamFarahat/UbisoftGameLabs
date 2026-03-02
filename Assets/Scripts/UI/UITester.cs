@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class UITester : MonoBehaviour
 {
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Material healthMaterial;
     [SerializeField] private Material powerBarMaterial;
     [SerializeField] private Material gunCooldownMaterial;
@@ -17,7 +19,10 @@ public class UITester : MonoBehaviour
     [Tooltip("Percentage remaining of player health")]
     [Range(0f, 1f)]
     [SerializeField] private float healthPercent;
-    
+
+    [Tooltip("Current score to display on UI")]
+    [SerializeField] private int score;
+
     [Header("Gun Player UI")]
 
     [Tooltip("Current percentage of player gun power bar")]
@@ -49,6 +54,7 @@ public class UITester : MonoBehaviour
      void Awake()
     {
         Assert.IsNotNull(healthMaterial);
+        Assert.IsNotNull(scoreText);
         Assert.IsNotNull(powerBarMaterial);
         Assert.IsNotNull(gunCooldownMaterial);
         Assert.IsNotNull(gunMultiplierMaterial);
@@ -60,6 +66,8 @@ public class UITester : MonoBehaviour
     {
         if (healthMaterial != null)
             healthMaterial.SetFloat(amountID, healthPercent);
+        if (scoreText != null)
+            scoreText.text = score.ToString();
         if (powerBarMaterial != null)
         {
             powerBarMaterial.SetFloat(leftAmountID, gunPowerBarPercent);

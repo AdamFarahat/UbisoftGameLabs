@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
+using TMPro;
 public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Image healthBarUI;
     [SerializeField] private Image gunPlayerCooldownUI;
     [SerializeField] private Image gunPlayerPowerBarUI;
@@ -26,6 +28,7 @@ public class UIManager : MonoBehaviour
         gunPlayerController = GameObject.FindFirstObjectByType<GunPlayerController>();
         swordPlayerController = GameObject.FindFirstObjectByType<SwordPlayerController>();
         Assert.IsNotNull(healthBarUI);
+        Assert.IsNotNull(scoreText);
 
         Assert.IsNotNull(gunMultiplierUI);
         Assert.IsNotNull(gunPlayerCooldownUI);
@@ -104,7 +107,11 @@ public class UIManager : MonoBehaviour
 
         health -= 0.005f;// temp
         // float health = getHealth from playerController
-        healthBarUI.material.SetFloat(amountID, health);       
+        healthBarUI.material.SetFloat(amountID, health);   
+
+        int score = 12345; // temp
+        // int score = 0; get score from score script
+        scoreText.text = score.ToString();
     }
     float ConvertMultiplierToUIValue(float value)
     {
