@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public abstract class PlayerController : MonoBehaviour
 {
     public float score = 0;
-    public float deltaMultiplierGain = 1f;
+    public float multiplier = 1f;
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
@@ -52,5 +52,8 @@ public abstract class PlayerController : MonoBehaviour
 
     public float GetLaneIndex() {
         return laneBound.LaneIndex;
+    }
+    public virtual void UpdateScore(float multiplierGain, int scoreOfEnemy) { 
+        throw new NotImplementedException();
     }
 }

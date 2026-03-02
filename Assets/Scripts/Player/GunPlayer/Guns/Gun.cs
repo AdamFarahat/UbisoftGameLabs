@@ -62,7 +62,7 @@ public class Gun : MonoBehaviour
         return bullet;
     }
 
-    protected ShotgunBlast InstantiateShotgunBlast(GunPlayerController gunPlayerController)
+    protected ShotgunBlast InstantiateShotgunBlast()
     {
         GameObject go = Instantiate(bulletPrefab);
         ShotgunBlast blast = go.GetComponent<ShotgunBlast>();

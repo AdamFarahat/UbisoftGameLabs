@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using UnityEngine;
@@ -222,7 +223,7 @@ public class SwordPlayerController : PlayerController
         {
             state = SwordPlayerStates.Stunned;
             //reset of multiplier
-            deltaMultiplierGain = 1f;
+            multiplier = 1f;
             GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
             IEnumerator Routine()
             {
@@ -252,10 +253,7 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-                    // TODO score + multiplier gain, DONE
-                    deltaMultiplierGain +=  ScoreManager.PARRIED_MULTIPLER_FACTOR * ScoreManager.MULTIPLER_GAIN;
-                    score += deltaMultiplierGain * (ScoreManager.PARRIED_DEFAULT_SCORE);
-
+                    UpdateScore(ScoreManagerSO.Instance.PARRIED_MULTIPLER_FACTOR * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
                 }
                 if (state == SwordPlayerStates.Parrying)
                 {
@@ -267,10 +265,7 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-                    // TODO score + multiplier gain, DONE, might create function in future if we reuse this.
-                    deltaMultiplierGain += ScoreManager.BLOCKING_GAIN * ScoreManager.MULTIPLER_GAIN;
-                    score += deltaMultiplierGain * (ScoreManager.PARRIED_DEFAULT_SCORE);
-
+                    UpdateScore(ScoreManagerSO.Instance.BLOCKING_GAIN * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
                 }
                 StartCoroutine(BlockCooldown());
             }
@@ -288,6 +283,12 @@ public class SwordPlayerController : PlayerController
                 StartCoroutine(BlockCooldown());
             }
         }
+    }
+
+    public override void UpdateScore(float multiplierGain, int parryScore)
+    {
+        multiplier += multiplierGain;
+        score += multiplier * (parryScore);
     }
 
     private void ReflectBackBullet(Projectile projectile)

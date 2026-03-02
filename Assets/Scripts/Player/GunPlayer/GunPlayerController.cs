@@ -95,10 +95,9 @@ public class GunPlayerController : PlayerController
         return grenadeBelt.GetCooldownPercent();
     }
 
-    internal void UpdateScore(float multiplierGain, int scoreOfEnemy)
+    public override void UpdateScore(float multiplierGain, int scoreOfEnemy)
     {
-        deltaMultiplierGain += multiplierGain;
-        score = deltaMultiplierGain * scoreOfEnemy;
-
+        multiplier += multiplierGain;
+        score = multiplier * scoreOfEnemy;
     }
 }
