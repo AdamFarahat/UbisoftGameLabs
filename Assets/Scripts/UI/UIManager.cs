@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
+using System.Reflection;
 using TMPro;
 public class UIManager : MonoBehaviour
 {
@@ -15,12 +16,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image swordPlayerPowerBarUI;
     [SerializeField] private Image swordMultiplierUI;
 
+    [SerializeField] private Image superUI;
+
     // temp
     float health = 1.0f;
 
+    float lerpSpeed = 0.1f;
+
+
+
     private readonly int amountID = Shader.PropertyToID("_Amount");
-    private readonly int leftPowerID = Shader.PropertyToID("_LeftAmount");
-    private readonly int rightPowerID = Shader.PropertyToID("_RightAmount");
+
+    private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
+    private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
     
 
     void Awake()
@@ -46,6 +54,7 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(gunPlayerPowerBarUI.material);
 
         Assert.IsNotNull(swordMultiplierUI.material);
+        Assert.IsNotNull(superUI.material);
         Assert.IsNotNull(swordPlayerCooldownUI.material);
         Assert.IsNotNull(swordPlayerPowerBarUI.material);
     }
@@ -54,6 +63,10 @@ public class UIManager : MonoBehaviour
     {
         // Create new instances so as not to change the original mats
         healthBarUI.material = new Material(healthBarUI.material);
+
+
+        superUI.material.SetFloat(leftAmountID, 0f);
+        superUI.material.SetFloat(rightAmountID, 0f);
 
         gunMultiplierUI.material = new Material(gunMultiplierUI.material);
         gunPlayerCooldownUI.material = new Material(gunPlayerCooldownUI.material);
@@ -77,10 +90,13 @@ public class UIManager : MonoBehaviour
             // float gunMultiplier = gunPlayerController.GetMultiplier();
             float gunMultiplier = 0.75f; // temp        
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+            float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
+            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
+            superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
 
             // float getPowerBarPercent = gunPlayerController.GetPowerBarPercent();
             float getPowerBarPercent = 0.0f; // temp
-            gunPlayerPowerBarUI.material.SetFloat(leftPowerID, getPowerBarPercent);
+            gunPlayerPowerBarUI.material.SetFloat(leftAmountID, getPowerBarPercent);
         }
         else
         {
@@ -96,16 +112,18 @@ public class UIManager : MonoBehaviour
             float swordMultiplier = 0.25f; // temp
             swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
 
-            // float getSwordPowerBarPercent = swordPlayerController.GetPowerBarPercent();
+            float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
+            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), lerpSpeed);
+            superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
             float getSwordPowerBarPercent = 0.75f; // temp
-            swordPlayerPowerBarUI.material.SetFloat(rightPowerID, getSwordPowerBarPercent);
+            swordPlayerPowerBarUI.material.SetFloat(rightAmountID, getSwordPowerBarPercent);
         }
         else
         {
             Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
         }
 
-        health -= 0.005f;// temp
+        health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
         // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountID, health);   
 

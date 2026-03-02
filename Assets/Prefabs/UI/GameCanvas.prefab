@@ -426,6 +426,7 @@ MonoBehaviour:
   swordPlayerCooldownUI: {fileID: 6925459390677526918}
   swordPlayerPowerBarUI: {fileID: 161865433639030024}
   swordMultiplierUI: {fileID: 6539550765771174107}
+  superUI: {fileID: 161865433639030024}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0

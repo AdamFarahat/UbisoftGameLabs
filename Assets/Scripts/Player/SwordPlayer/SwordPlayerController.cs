@@ -253,6 +253,7 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
+                    playerStats.AddSwordSuper(5f);
                     UpdateScore(ScoreManagerSO.Instance.PARRIED_MULTIPLER_FACTOR * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
                 }
                 if (state == SwordPlayerStates.Parrying)
@@ -265,7 +266,12 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
+<<<<<<< HEAD
+                    // TODO score + multiplier gain
+                    playerStats.AddSwordSuper(2f);
+=======
                     UpdateScore(ScoreManagerSO.Instance.BLOCKING_GAIN * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
+>>>>>>> main
                 }
                 StartCoroutine(BlockCooldown());
             }
@@ -276,10 +282,12 @@ public class SwordPlayerController : PlayerController
             {
                 ReflectBackBullet(projectile);
                 parryTimer = 0f;
+                playerStats.AddSwordSuper(5f);
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 ReflectBackBullet(projectile);
+                playerStats.AddSwordSuper(2f);
                 StartCoroutine(BlockCooldown());
             }
         }
