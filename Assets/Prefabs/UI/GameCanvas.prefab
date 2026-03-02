@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 5089104412683302243}
   - component: {fileID: 7305919445823622487}
   - component: {fileID: 5369418078156620309}
+  - component: {fileID: 1987066883688285533}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -423,6 +424,31 @@ MonoBehaviour:
   healthBarUI: {fileID: 1644242477858575745}
   gunMultiplierUI: {fileID: 8468118156433846610}
   swordMultiplierUI: {fileID: 6539550765771174107}
+--- !u!114 &1987066883688285533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459126833240657986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67bd70a4000e6b4cbae6f6942777e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITester
+  healthMaterial: {fileID: 2100000, guid: 11701fab64a893d4d9596c7248b80e66, type: 2}
+  powerBarMaterial: {fileID: 2100000, guid: 911a292495983f64690f5b480c9218d8, type: 2}
+  gunCooldownMaterial: {fileID: 2100000, guid: ab13c7298ecfcef428c7631111889e71, type: 2}
+  gunMultiplierMaterial: {fileID: 2100000, guid: 1476d88dd282cf14ab8c2c82040c1009, type: 2}
+  swordCooldownMaterial: {fileID: 2100000, guid: 9b5aa1c5c5886e843b7054db2268556f, type: 2}
+  swordMultiplierMaterial: {fileID: 2100000, guid: 3100d512bf266554db82f4b0732112cf, type: 2}
+  healthPercent: 0.67
+  gunPowerBarPercent: 1
+  gunCooldownPercent: 0.68
+  gunMultiplierPercent: 0.67
+  swordPowerBarPercent: 0.55
+  swordCooldownPercent: 0
+  swordMultiplierPercent: 0.2
 --- !u!1 &4173331506949576580
 GameObject:
   m_ObjectHideFlags: 0

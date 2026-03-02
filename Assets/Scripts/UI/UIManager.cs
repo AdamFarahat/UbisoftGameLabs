@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     // temp
     float health = 1.0f;
 
-    private readonly int amountLeftID = Shader.PropertyToID("_AmountLeft");
+    private readonly int amountID = Shader.PropertyToID("_Amount");
     
 
     void Awake()
@@ -54,24 +54,32 @@ public class UIManager : MonoBehaviour
         if (gunPlayerController != null)
         {
             float grenadeCooldown = gunPlayerController.GetCooldownPercent();
-            gunPlayerCooldownUI.material.SetFloat(amountLeftID, grenadeCooldown);
+            gunPlayerCooldownUI.material.SetFloat(amountID, grenadeCooldown);
             // float gunMultiplier = gunPlayerController.GetMultiplier();
             float gunMultiplier = 0.8f; // temp        
-            gunMultiplierUI.material.SetFloat(amountLeftID, ConvertMultiplierToUIValue(gunMultiplier));
+            gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+        }
+        else
+        {
+            Debug.LogWarning("GunPlayerController not found. Gun cooldown and multiplier UI will not be updated.");
         }
 
         if (swordPlayerController != null)
         {   
             float swordCooldown = swordPlayerController.GetCooldownPercent();
-            swordPlayerCooldownUI.material.SetFloat(amountLeftID, swordCooldown);    
+            swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);    
             // float swordMultiplier = swordPlayerController.GetMultiplier();
             float swordMultiplier = 0.2f; // temp
-            swordMultiplierUI.material.SetFloat(amountLeftID, ConvertMultiplierToUIValue(swordMultiplier));
+            swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
+        }
+        else
+        {
+            Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
         }
 
         health -= 0.005f;// temp
         // float health = getHealth from playerController
-        healthBarUI.material.SetFloat(amountLeftID, health);       
+        healthBarUI.material.SetFloat(amountID, health);       
     }
     float ConvertMultiplierToUIValue(float value)
     {

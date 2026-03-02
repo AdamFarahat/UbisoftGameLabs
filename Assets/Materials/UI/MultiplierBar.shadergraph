@@ -1081,7 +1081,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6b077cd774e841f9ac7f1c74438f4b11",
     "m_Id": 0,
-    "m_DisplayName": "AmountLeft",
+    "m_DisplayName": "Amount",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1652,10 +1652,10 @@
     "m_Guid": {
         "m_GuidSerialized": "2246bef8-bb5a-4c75-b9cb-19788f225c64"
     },
-    "m_Name": "AmountLeft",
+    "m_Name": "Amount",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "AmountLeft",
-    "m_DefaultReferenceName": "_AmountLeft",
+    "m_RefNameGeneratedByDisplayName": "Amount",
+    "m_DefaultReferenceName": "_Amount",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
