@@ -46,8 +46,10 @@ public class Grenade : MonoBehaviour
             if (enemy != null && !hitEnemies.Contains(enemy))
             {
                 hitEnemies.Add(enemy);
-                if (enemy.TakeDamage(damage))
+                if (enemy.TakeDamage(damage)){
+                    PlayerStats.Instance.AddGunSuper(5f);
                     OnEnemyKill(enemy);
+                }
             }
         }
         else if (!other.GetComponentInParent<PlayerController>())

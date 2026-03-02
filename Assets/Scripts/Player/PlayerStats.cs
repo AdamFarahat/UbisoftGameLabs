@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    private static PlayerStats instance = null;
+    public static PlayerStats Instance => instance;
+    
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
     private float currentGunSuper;
@@ -10,6 +13,11 @@ public class PlayerStats : MonoBehaviour
     private float healthPercent;
     private float gunSuperPercent;
     private float swordSuperPercent;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
 
     
