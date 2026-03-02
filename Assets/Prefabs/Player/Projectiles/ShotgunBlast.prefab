@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4653168203951568029}
   - component: {fileID: 59578646894539134}
   - component: {fileID: 6336430380742909791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShotgunBlast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 8284389280072072331}
   - component: {fileID: 8000756034603286528}
   - component: {fileID: 254904772020529864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Pool;
 
-public class Spawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
 
-    [SerializeField] private Transform [] spawnPoints;
     [SerializeField] private float timeBetweenSpawns = 5;
     private float timeSinceLastSpawn;
 
@@ -18,7 +17,6 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         Assert.IsTrue(enemyPrefabs.Length > 0);
-        Assert.IsTrue(spawnPoints.Length > 0);
 
         enemyPool = new ObjectPool<GameObject>(
             CreateEnemy,
@@ -34,17 +32,6 @@ public class Spawner : MonoBehaviour
     private void OnTakeFromPool(GameObject enemy)
     {
         enemy.SetActive(true);
-
-        // spawn at random spawn point
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-        if (enemy.TryGetComponent(out LaneBound lane))
-        {
-            lane.LaneIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
-            lane.LaneDistance = 100f;
-        }
-
-        enemy.transform.rotation = spawnPoint.rotation;
         if (enemy.TryGetComponent(out Poolable poolable))
             poolable.TakeFromPool();
     }
@@ -65,19 +52,17 @@ public class Spawner : MonoBehaviour
         GameObject prefabToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
         GameObject enemy = Instantiate(prefabToSpawn);
 
-        Poolable poolable = enemy.GetComponent<Poolable>();
-        if (poolable != null)
+        if (enemy.TryGetComponent(out Poolable poolable))
             poolable.SetPool(enemyPool);
 
         return enemy;
     }
 
-
     void Update()
     {
         if (Time.time > timeSinceLastSpawn && currentEnemies < maxEnemies)
         {
-            GameObject enemy = enemyPool.Get();
+            enemyPool.Get();
             currentEnemies++;
             timeSinceLastSpawn = Time.time + timeBetweenSpawns;
         }
