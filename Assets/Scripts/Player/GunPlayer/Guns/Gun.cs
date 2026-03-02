@@ -26,12 +26,12 @@ public class Gun : MonoBehaviour
             cooldown -= Time.deltaTime;
     }
 
-    public virtual void StartFiring(GunPlayerController gunPlayerController)
+    public virtual void StartFiring()
     {
         throw new NotImplementedException();
     }
 
-    public virtual void KeepFiring(GunPlayerController gunPlayerController)
+    public virtual void KeepFiring()
     {
     }
 
@@ -49,13 +49,11 @@ public class Gun : MonoBehaviour
         return false;
     }
 
-    protected Bullet InstantiateBullet(GunPlayerController gunPlayerController)
+    protected Bullet InstantiateBullet()
     {
         GameObject go = Instantiate(bulletPrefab);
         Bullet bullet = go.GetComponent<Bullet>();
         Assert.IsNotNull(bullet);
-        //setting owner
-        bullet.owner = gunPlayerController;
         bullet.transform.position = firePosition.position;
         bullet.velocity = bulletVelocity;
         bullet.acceleration = bulletAcceleration;
@@ -69,7 +67,6 @@ public class Gun : MonoBehaviour
         GameObject go = Instantiate(bulletPrefab);
         ShotgunBlast blast = go.GetComponent<ShotgunBlast>();
         Assert.IsNotNull(blast);
-        blast.gunPlayerControllerOwner = gunPlayerController;
         blast.transform.position = firePosition.position;
         blast.range = bulletRange;
         blast.damage = bulletDamage;

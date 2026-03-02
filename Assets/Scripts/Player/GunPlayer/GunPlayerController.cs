@@ -49,12 +49,12 @@ public class GunPlayerController : PlayerController
         if (holdingGunInput == HoldingState.FirstFrame)
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
-            holster.KeepFiring(this);
+            holster.KeepFiring();
     }
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
-        holster.StartFiring(this);
+        holster.StartFiring();
         holdingGunInput = HoldingState.FirstFrame;
         grenadeBelt.CancelThrow();
     }
@@ -87,7 +87,7 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        grenadeBelt.Throw(this);
+        grenadeBelt.Throw();
     }
 
     public override float GetCooldownPercent()

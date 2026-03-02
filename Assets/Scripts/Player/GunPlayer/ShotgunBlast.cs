@@ -8,7 +8,6 @@ public class ShotgunBlast : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     private readonly HashSet<Enemy> enemiesHit = new();
 
-    public GunPlayerController gunPlayerControllerOwner;
     public float coneAngle = 45f;
     public float range = 100f;
     public int damage = 10;
@@ -67,6 +66,6 @@ public class ShotgunBlast : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        gunPlayerControllerOwner.UpdateScore(ScoreManager.SHOTGUN_BLAST_MULTIPLIER, enemy.Score);
+        GunPlayerController.Instance.UpdateScore(ScoreManager.SHOTGUN_BLAST_MULTIPLIER, enemy.Score);
     }
 }

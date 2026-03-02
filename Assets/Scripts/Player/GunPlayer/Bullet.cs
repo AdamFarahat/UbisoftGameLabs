@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public GunPlayerController owner;
     public float velocity = 100f;
     public float acceleration = 0f;
     public float range = 100f;
@@ -34,6 +33,6 @@ public class Bullet : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        owner.UpdateScore(ScoreManager.DEFAULT_BULLET_MULTIPLIER ,enemy.Score);
+        GunPlayerController.Instance.UpdateScore(ScoreManager.DEFAULT_BULLET_MULTIPLIER , enemy.Score);
     }
 }
