@@ -14,6 +14,8 @@ public class PlayerStats : MonoBehaviour
     private float gunSuperPercent;
     private float swordSuperPercent;
 
+    private float statDenominator = 100f;
+
     public void Awake()
     {
         instance = this;
@@ -28,8 +30,8 @@ public class PlayerStats : MonoBehaviour
         currentGunSuper = 0f;
         currentSwordSuper = 0f;
         healthPercent = currentHealth / maxHealth;
-        gunSuperPercent = currentGunSuper / 100f;
-        swordSuperPercent = currentSwordSuper / 100f;
+        gunSuperPercent = currentGunSuper / statDenominator;
+        swordSuperPercent = currentSwordSuper / statDenominator;
         Debug.Log("Player health initialized to: " + currentHealth);
     }
 
@@ -57,15 +59,15 @@ public class PlayerStats : MonoBehaviour
     public void AddGunSuper(float amount)
     {
         currentGunSuper += amount;
-        currentGunSuper = Mathf.Clamp(currentGunSuper, 0f, 100f);
-        gunSuperPercent = currentGunSuper / 100f;
+        currentGunSuper = Mathf.Clamp(currentGunSuper, 0f, statDenominator);
+        gunSuperPercent = currentGunSuper / statDenominator;
     }
 
     public void AddSwordSuper(float amount)
     {
         currentSwordSuper += amount;
-        currentSwordSuper = Mathf.Clamp(currentSwordSuper, 0f, 100f);
-        swordSuperPercent = currentSwordSuper / 100f;
+        currentSwordSuper = Mathf.Clamp(currentSwordSuper, 0f, statDenominator);
+        swordSuperPercent = currentSwordSuper / statDenominator;
     }
 
     // Update is called once per frame

@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     // temp
     float health = 1.0f;
 
+    float lerpSpeed = 0.1f;
+
+
+
     private readonly int amountID = Shader.PropertyToID("_Amount");
 
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
@@ -69,7 +73,7 @@ public class UIManager : MonoBehaviour
             float gunMultiplier = 0.8f; // temp        
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
             float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
-            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), 0.1f);
+            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
             superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
 
         }
@@ -86,7 +90,7 @@ public class UIManager : MonoBehaviour
             float swordMultiplier = 0.2f; // temp
             swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
             float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
-            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), 0.1f);
+            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), lerpSpeed);
             superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
         }
         else
@@ -94,7 +98,7 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
         }
 
-        health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), 0.1f);
+        health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
         // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountID, health);       
     }
