@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LaneConfigSO
   m_EditorClassIdentifier: Assembly-CSharp::LaneConfigSO
   lanePositions:
-  - {x: -20, y: 0, z: 0}
-  - {x: -10, y: 0, z: 0}
+  - {x: -24, y: 0, z: 0}
+  - {x: -12, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 10, y: 0, z: 0}
-  - {x: 20, y: 0, z: 0}
+  - {x: 12, y: 0, z: 0}
+  - {x: 24, y: 0, z: 0}
   laneDirection: {x: 0, y: 0, z: 1}

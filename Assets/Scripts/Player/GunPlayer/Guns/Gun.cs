@@ -62,4 +62,16 @@ public class Gun : MonoBehaviour
         bullet.damage = bulletDamage;
         return bullet;
     }
+
+    protected ShotgunBlast InstantiateShotgunBlast()
+    {
+        GameObject go = Instantiate(bulletPrefab);
+        ShotgunBlast blast = go.GetComponent<ShotgunBlast>();
+        Assert.IsNotNull(blast);
+
+        blast.transform.position = firePosition.position;
+        blast.range = bulletRange;
+        blast.damage = bulletDamage;
+        return blast;
+    }
 }

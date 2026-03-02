@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 3
   tags:
   - LaneCollider
+  - Ground
   - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - PlayerProjectile
+  - EnemyProjectile
   - 
   - 
   - 

@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
 {
+    private static SwordPlayerController instance = null;
+    public static SwordPlayerController Instance => instance;
+    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+
     private SwordHitBox swordHitBox;
     [Header("Stunning")]
     [SerializeField] private float stunCooldown = 1f;
@@ -43,6 +47,7 @@ public class SwordPlayerController : PlayerController
 
     protected override void Awake()
     {
+        instance = this;
         base.Awake();
         swordHitBox = FindFirstObjectByType<SwordHitBox>();
     }
@@ -229,7 +234,7 @@ public class SwordPlayerController : PlayerController
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("Enemy") || collider.GetComponent<Projectile>() != null)
+        if (collider.GetComponentInParent<Enemy>() || collider.GetComponent<Projectile>() != null)
         {
             Stun();
         }
@@ -237,12 +242,15 @@ public class SwordPlayerController : PlayerController
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
-        Projectile projectile;
-        if (collider.GetComponentInParent<Enemy>() != null)
+        Enemy enemy = collider.GetComponentInParent<Enemy>();
+        if (enemy != null)
         {
             if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
             {
-                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
+                if (enemy.OnParried())
+                {
+                    // TODO score + multiplier gain
+                }
                 if (state == SwordPlayerStates.Parrying)
                 {
                     parryTimer = 0f;
@@ -251,25 +259,31 @@ public class SwordPlayerController : PlayerController
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
-                collider.GetComponentInParent<Enemy>().TakeDamage(collider.GetComponentInParent<Enemy>().GetHealth());
+                if (enemy.OnParried())
+                {
+                    // TODO score + multiplier gain
+                }
                 StartCoroutine(BlockCooldown());
             }
         }
-        else if (collider.TryGetComponent<Projectile>(out projectile)) {
-            if (state == SwordPlayerStates.Parrying) {
-                reflectBackBullet(projectile);
+        else if (collider.TryGetComponent(out Projectile projectile))
+        {
+            if (state == SwordPlayerStates.Parrying)
+            {
+                ReflectBackBullet(projectile);
                 parryTimer = 0f;
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
-                reflectBackBullet(projectile);
+                ReflectBackBullet(projectile);
                 StartCoroutine(BlockCooldown());
             }
         }
     }
-    private void reflectBackBullet(Projectile projectile) {
-        Vector3 dir = (projectile.owner.transform.position - transform.position).normalized;
-        projectile.Initialize(dir);
+
+    private void ReflectBackBullet(Projectile projectile)
+    {
+        projectile.FlipDirection();
         projectile.speed *= parryBulletMultiplier;
     }
 }
