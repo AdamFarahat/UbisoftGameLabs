@@ -5,12 +5,13 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    public float score = 0;
+    public float multiplier = 1f;
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
     protected PlayerStats playerStats;
-
     protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -53,5 +54,8 @@ public abstract class PlayerController : MonoBehaviour
 
     public float GetLaneIndex() {
         return laneBound.LaneIndex;
+    }
+    public virtual void UpdateScore(float multiplierGain, int scoreOfEnemy) { 
+        throw new NotImplementedException();
     }
 }

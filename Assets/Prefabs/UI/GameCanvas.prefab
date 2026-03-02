@@ -419,10 +419,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66881cd23bba01449f5d499c77f7634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  gunPlayerCooldownUI: {fileID: 812875733327790943}
-  swordPlayerCooldownUI: {fileID: 6925459390677526918}
   healthBarUI: {fileID: 1644242477858575745}
+  gunPlayerCooldownUI: {fileID: 812875733327790943}
+  gunPlayerPowerBarUI: {fileID: 161865433639030024}
   gunMultiplierUI: {fileID: 8468118156433846610}
+  swordPlayerCooldownUI: {fileID: 6925459390677526918}
+  swordPlayerPowerBarUI: {fileID: 161865433639030024}
   swordMultiplierUI: {fileID: 6539550765771174107}
   superUI: {fileID: 161865433639030024}
 --- !u!114 &1987066883688285533

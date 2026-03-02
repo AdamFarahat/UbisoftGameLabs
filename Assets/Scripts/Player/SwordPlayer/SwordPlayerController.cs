@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -220,6 +222,8 @@ public class SwordPlayerController : PlayerController
         if(state != SwordPlayerStates.Stunned)
         {
             state = SwordPlayerStates.Stunned;
+            //reset of multiplier
+            multiplier = 1f;
             GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
             IEnumerator Routine()
             {
@@ -249,8 +253,8 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-                    // TODO score + multiplier gain
                     playerStats.AddSwordSuper(5f);
+                    UpdateScore(ScoreManagerSO.Instance.PARRIED_MULTIPLER_FACTOR * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
                 }
                 if (state == SwordPlayerStates.Parrying)
                 {
@@ -262,8 +266,12 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
+<<<<<<< HEAD
                     // TODO score + multiplier gain
                     playerStats.AddSwordSuper(2f);
+=======
+                    UpdateScore(ScoreManagerSO.Instance.BLOCKING_GAIN * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
+>>>>>>> main
                 }
                 StartCoroutine(BlockCooldown());
             }
@@ -283,6 +291,12 @@ public class SwordPlayerController : PlayerController
                 StartCoroutine(BlockCooldown());
             }
         }
+    }
+
+    public override void UpdateScore(float multiplierGain, int parryScore)
+    {
+        multiplier += multiplierGain;
+        score += multiplier * (parryScore);
     }
 
     private void ReflectBackBullet(Projectile projectile)
