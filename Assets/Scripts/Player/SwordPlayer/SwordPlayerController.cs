@@ -266,12 +266,9 @@ public class SwordPlayerController : PlayerController
             {
                 if (enemy.OnParried())
                 {
-<<<<<<< HEAD
                     // TODO score + multiplier gain
                     playerStats.AddSwordSuper(2f);
-=======
                     UpdateScore(ScoreManagerSO.Instance.BLOCKING_GAIN * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
->>>>>>> main
                 }
                 StartCoroutine(BlockCooldown());
             }
