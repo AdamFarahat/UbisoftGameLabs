@@ -250,6 +250,7 @@ public class SwordPlayerController : PlayerController
                 if (enemy.OnParried())
                 {
                     // TODO score + multiplier gain
+                    playerStats.AddSwordSuper(5f);
                 }
                 if (state == SwordPlayerStates.Parrying)
                 {
@@ -262,6 +263,7 @@ public class SwordPlayerController : PlayerController
                 if (enemy.OnParried())
                 {
                     // TODO score + multiplier gain
+                    playerStats.AddSwordSuper(2f);
                 }
                 StartCoroutine(BlockCooldown());
             }
@@ -272,10 +274,12 @@ public class SwordPlayerController : PlayerController
             {
                 ReflectBackBullet(projectile);
                 parryTimer = 0f;
+                playerStats.AddSwordSuper(5f);
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 ReflectBackBullet(projectile);
+                playerStats.AddSwordSuper(2f);
                 StartCoroutine(BlockCooldown());
             }
         }

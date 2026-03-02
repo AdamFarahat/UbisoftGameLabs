@@ -9,6 +9,7 @@ public abstract class PlayerController : MonoBehaviour
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
+    protected PlayerStats playerStats;
 
     protected virtual void Awake()
     {
@@ -20,6 +21,8 @@ public abstract class PlayerController : MonoBehaviour
         Assert.IsNotNull(rb);
         playerCollider = GetComponentInChildren<Collider>();
         Assert.IsNotNull(playerCollider);
+        playerStats = FindFirstObjectByType<PlayerStats>();
+        Assert.IsNotNull(playerStats);
         
     }
 

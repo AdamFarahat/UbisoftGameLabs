@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
+using System.Reflection;
 public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
@@ -11,12 +12,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image gunMultiplierUI;
     [SerializeField] private Image swordMultiplierUI;
 
+    [SerializeField] private Image superUI;
+
     private PlayerStats playerStats;
 
     // temp
     float health = 1.0f;
 
     private readonly int amountID = Shader.PropertyToID("_Amount");
+
+    private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
+    private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
     
 
     void Awake()
@@ -36,6 +42,7 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(healthBarUI.material);
         Assert.IsNotNull(gunMultiplierUI.material);
         Assert.IsNotNull(swordMultiplierUI.material);
+        Assert.IsNotNull(superUI.material);
     }
 
     void Start()
@@ -46,6 +53,9 @@ public class UIManager : MonoBehaviour
         healthBarUI.material = new Material(healthBarUI.material);
         gunMultiplierUI.material = new Material(gunMultiplierUI.material);
         swordMultiplierUI.material = new Material(swordMultiplierUI.material);
+
+        superUI.material.SetFloat(leftAmountID, 0f);
+        superUI.material.SetFloat(rightAmountID, 0f);
 
         
     }
@@ -62,6 +72,10 @@ public class UIManager : MonoBehaviour
             // float gunMultiplier = gunPlayerController.GetMultiplier();
             float gunMultiplier = 0.8f; // temp        
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+            float gunSuper = playerStats.GetGunSuperPercent();
+            float gunSuperSmoothed = Mathf.Lerp(gunSuper, playerStats.GetGunSuperPercent(), 0.1f);
+            superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
+
         }
         else
         {
@@ -75,6 +89,9 @@ public class UIManager : MonoBehaviour
             // float swordMultiplier = swordPlayerController.GetMultiplier();
             float swordMultiplier = 0.2f; // temp
             swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
+            float swordSuper = playerStats.GetSwordSuperPercent();
+            float swordSuperSmoothed = Mathf.Lerp(swordSuper, playerStats.GetSwordSuperPercent(), 0.1f);
+            superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
         }
         else
         {

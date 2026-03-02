@@ -424,6 +424,7 @@ MonoBehaviour:
   healthBarUI: {fileID: 1644242477858575745}
   gunMultiplierUI: {fileID: 8468118156433846610}
   swordMultiplierUI: {fileID: 6539550765771174107}
+  superUI: {fileID: 161865433639030024}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
