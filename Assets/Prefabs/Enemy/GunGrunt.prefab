@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1854281290051434547}
   - component: {fileID: 6414683663491004377}
   - component: {fileID: 3073832672728336411}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6679675405416162139
 GameObject:
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7360760649626617153}
   - component: {fileID: 1308856832007123742}
   - component: {fileID: 681042347012851451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GunGrunt
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a4ab8e86cafad48af98deb8fb75db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemyAI
+  spawnLaneDistance: 300
+  spawnArrivalDuration: 5
   minLaneDistance: 100
   maxLaneDistance: 150
   researchCooldown: 3
@@ -213,5 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHealth: 10
   health: 20
   score: 20

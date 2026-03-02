@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4036628962354280970}
   - component: {fileID: 5060978168996679739}
   - component: {fileID: 6473796267591999080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 50
-  owner: {fileID: 0}
 --- !u!54 &6473796267591999080
 Rigidbody:
   m_ObjectHideFlags: 0
