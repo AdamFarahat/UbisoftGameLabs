@@ -10,8 +10,6 @@ public class SwordPlayerController : PlayerController
     public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
 
     private SwordHitBox swordHitBox;
-    [Header("Stunning")]
-    [SerializeField] private float stunCooldown = 1f;
 
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
@@ -36,7 +34,6 @@ public class SwordPlayerController : PlayerController
     private enum SwordPlayerStates
     {
         Normal,
-        Stunned,
         Attacking,
         Parrying,
         Blocking
@@ -49,8 +46,6 @@ public class SwordPlayerController : PlayerController
     private Coroutine attackRoutine = null;
 
     private Coroutine parryRoutine = null;
-
-    private Coroutine stunRoutine = null;
 
     protected override void Awake()
     {
@@ -166,7 +161,7 @@ public class SwordPlayerController : PlayerController
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
         Debug.Log("Cancel Block");
-        if (state != SwordPlayerStates.Stunned)
+        if (!Stunned)
         {
             if (parryRoutine != null)
             {
@@ -215,30 +210,16 @@ public class SwordPlayerController : PlayerController
         canBlock = true;
     }
 
-    private IEnumerator StunCooldown()
+    protected override void OnStunStart()
     {
-        yield return new WaitForSeconds(stunCooldown);
-        state = SwordPlayerStates.Normal;
-        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+        base.OnStunStart();
+        swordHitBox.gameObject.SetActive(false);
     }
 
-    private void Stun()
+    protected override void OnStunEnd()
     {
-        if (state != SwordPlayerStates.Stunned)
-        {
-            state = SwordPlayerStates.Stunned;
-            // reset multiplier
-            SetContinuousMultiplier(1f);
-            GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
-            IEnumerator Routine()
-            {
-                yield return new WaitForSeconds(2f);
-                state = SwordPlayerStates.Normal;
-                GetComponentInChildren<MeshRenderer>().material.color = Color.white;
-            }
-            swordHitBox.gameObject.SetActive(false);
-            stunRoutine = StartCoroutine(Routine());
-        }
+        base.OnStunEnd();
+        state = SwordPlayerStates.Normal;
     }
 
     private void OnTriggerEnter(Collider collider)

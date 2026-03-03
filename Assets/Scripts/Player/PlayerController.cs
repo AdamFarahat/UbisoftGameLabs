@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,6 +8,11 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    [Header("Stunning")]
+    [SerializeField] private float stunCooldown = 1f;  // TODO should come from stun damage - enemy specific.
+    private Coroutine stunRoutine = null;
+    public bool Stunned => stunRoutine != null;
+
     private int score = 0;
     private float continuousMultiplier = 1f;
     private int discreteMultiplierIndex = 0;
@@ -57,14 +63,47 @@ public abstract class PlayerController : MonoBehaviour
             laneBound.MoveToLane(laneBound.LaneIndex + 1);
     }
 
+    public float GetLaneIndex()
+    {
+        return laneBound.LaneIndex;
+    }
+
     public virtual float GetCooldownPercent()
     {
         throw new NotImplementedException();
     }
 
-    public float GetLaneIndex()
+    public void Stun()
     {
-        return laneBound.LaneIndex;
+        if (Stunned)
+            return;
+
+        SetContinuousMultiplier(1f);
+
+        MeshRenderer debugMesh = GetComponentInChildren<MeshRenderer>(); // TODO remove once sprites are used for both players -> execute stun animation instead.
+        if (debugMesh != null)
+            debugMesh.material.color = Color.yellow;
+
+        IEnumerator Routine()
+        {
+            yield return new WaitForSeconds(stunCooldown);
+            if (debugMesh != null)
+                debugMesh.material.color = Color.white;
+
+            stunRoutine = null;
+            OnStunEnd();
+        }
+
+        OnStunStart();
+        stunRoutine = StartCoroutine(Routine());
+    }
+
+    protected virtual void OnStunStart()
+    {
+    }
+
+    protected virtual void OnStunEnd()
+    {
     }
 
     public void AddScore(int score)
