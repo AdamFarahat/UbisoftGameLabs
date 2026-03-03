@@ -455,7 +455,7 @@ MonoBehaviour:
   gunMultiplierPercent: 0.67
   swordPowerBarPercent: 0.55
   swordCooldownPercent: 0
-  swordMultiplierPercent: 0.2
+  swordMultiplierPercent: 1
 --- !u!1 &4046812139433040653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,7 +1357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: -8}
+  m_AnchoredPosition: {x: 39, y: -8}
   m_SizeDelta: {x: 78.0255, y: 125.280396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5050032811638915772
@@ -1678,6 +1678,22 @@ PrefabInstance:
       value: 8031
       objectReference: {fileID: 0}
     - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.15723258
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.15723258
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.15723258
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4280821800
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -1797,6 +1813,22 @@ PrefabInstance:
     - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_text
       value: 'Score:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.84276724
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.84276724
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.84276724
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4292335575
       objectReference: {fileID: 0}
     - target: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_Pivot.x

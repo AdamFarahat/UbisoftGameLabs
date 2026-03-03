@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
+    private ScoreManagerSO scoreManagerSO;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Image healthBarUI;
     [SerializeField] private Image gunPlayerCooldownUI;
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         gunPlayerController = GunPlayerController.Instance;
         swordPlayerController = SwordPlayerController.Instance;
+        scoreManagerSO = ScoreManagerSO.Instance;
         Assert.IsNotNull(healthBarUI);
         //Assert.IsNotNull(scoreText);  TODO uncomment
 
@@ -121,11 +123,20 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
         }
 
+        if (scoreManagerSO != null)
+        {
+            float score = ScoreManagerSO.CalculateOverallTeamScore();
+            scoreText.text = score.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("ScoreManagerSO not found. Score UI will not be updated.");
+        }
+
         health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
         // float health = getHealth from playerController
         healthBarUI.material.SetFloat(amountID, health);   
 
-        int score = 12345; // temp
         // int score = 0; get score from score script
         //scoreText.text = score.ToString();  TODO uncomment
     }
