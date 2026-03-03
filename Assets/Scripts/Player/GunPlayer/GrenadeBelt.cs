@@ -6,9 +6,11 @@ public class GrenadeBelt : MonoBehaviour
     [SerializeField] private GameObject grenadePrefab;
     [SerializeField] private Transform crosshairs;
     [SerializeField] private float maxChargeTime = 1f;
-    [SerializeField] private float minThrowVelocity = 50f;
-    [SerializeField] private float maxThrowVelocity = 100f;
+    [SerializeField] private float minThrowRange = 50f;
+    [SerializeField] private float maxThrowRange = 100f;
     [SerializeField] private float throwCooldown = 3f;
+    [SerializeField] private float grenadeGravity = 100f;
+    [SerializeField] private Vector3 grenadeInitialDirection = new(0f, 1f, 1f);
 
     private bool throwing = false;
     private float throwChargeTime = 0f;
@@ -17,6 +19,7 @@ public class GrenadeBelt : MonoBehaviour
     private void Awake()
     {
         Assert.IsNotNull(grenadePrefab);
+        grenadeInitialDirection.Normalize();
     }
 
     private void Start()
@@ -33,9 +36,11 @@ public class GrenadeBelt : MonoBehaviour
     private void Update()
     {
         if (throwing)
-            throwChargeTime = Mathf.Min(throwChargeTime + Time.deltaTime, maxChargeTime);
+            throwChargeTime += Time.deltaTime;
         else if (cooldown > 0f)
             cooldown -= Time.deltaTime;
+
+        SyncCrosshairsPosition();
     }
 
     public void ChargeThrow()
@@ -64,7 +69,24 @@ public class GrenadeBelt : MonoBehaviour
         Assert.IsNotNull(grenade);
 
         grenade.transform.position = transform.position;
-        grenade.velocity = Mathf.Lerp(minThrowVelocity, maxThrowVelocity, Mathf.Clamp01(throwChargeTime / maxChargeTime));
+        grenade.gravity = grenadeGravity;
+        grenade.initialDirection = grenadeInitialDirection;
+        grenade.range = CalcGrenadeRange();
+    }
+
+    private float CalcGrenadeRange()
+    {
+        float a = (throwChargeTime / maxChargeTime) % 2f;
+        if (a > 1f)
+            a = 2f - a;
+        return Mathf.Lerp(minThrowRange, maxThrowRange, Mathf.Clamp01(a));
+    }
+
+    private void SyncCrosshairsPosition()
+    {
+        Vector3 position = crosshairs.position;
+        position.z = CalcGrenadeRange();
+        crosshairs.position = position;
     }
 
     public float GetCooldownPercent()

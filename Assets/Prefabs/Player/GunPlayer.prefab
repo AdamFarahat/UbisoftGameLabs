@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4278737067366153830}
   - component: {fileID: 4483863961354680933}
   m_Layer: 0
-  m_Name: Crosshairs
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,11 +27,11 @@ Transform:
   m_GameObject: {fileID: 1767195860770411407}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 2.4453688, y: 1.0395584, z: -4.2355037}
+  m_LocalPosition: {x: 48.907375, y: 20.791166, z: -84.710075}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 6200452433833200671}
+  m_Father: {fileID: 4496502139177846877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4278737067366153830
 SpriteRenderer:
@@ -103,7 +103,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 0, y: 0, z: -5}
+  cameraOffset: {x: 0, y: 0, z: -100}
+--- !u!1 &4230984329135190683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4496502139177846877}
+  m_Layer: 0
+  m_Name: Crosshairs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4496502139177846877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230984329135190683}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3572197058494347263}
+  m_Father: {fileID: 6200452433833200671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4814459147427044228
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +409,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3572197058494347263}
+  - {fileID: 4496502139177846877}
   m_Father: {fileID: 5473658397883171689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2929365275725396528
@@ -393,11 +425,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeBelt
   grenadePrefab: {fileID: 2060265609765335002, guid: 4cc74f17f2165c74496d79666816829e, type: 3}
-  crosshairs: {fileID: 3572197058494347263}
+  crosshairs: {fileID: 4496502139177846877}
   maxChargeTime: 1
-  minThrowVelocity: 50
-  maxThrowVelocity: 100
+  minThrowRange: 50
+  maxThrowRange: 150
   throwCooldown: 3
+  grenadeGravity: 100
+  grenadeInitialDirection: {x: 0, y: 1, z: 1}
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
