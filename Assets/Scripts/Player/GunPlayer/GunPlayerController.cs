@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -27,6 +28,8 @@ public class GunPlayerController : PlayerController
 
     private HoldingState holdingGunInput = HoldingState.Released;
 
+    public Action OnGrenadeCooldownReady;
+
     protected override void Awake()
     {
         instance = this;
@@ -47,6 +50,8 @@ public class GunPlayerController : PlayerController
         playerInput.actions["DownEffect"].performed += ToggleGunDown;
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
+
+        grenadeBelt.OnCooldownReady += HandleGrenadeReady;
     }
 
     private void Update()
@@ -98,5 +103,17 @@ public class GunPlayerController : PlayerController
     public override float GetCooldownPercent()
     {
         return grenadeBelt.GetCooldownPercent();
+    }
+
+    private void OnDestroy()
+    {
+        if (grenadeBelt != null)
+            grenadeBelt.OnCooldownReady -= HandleGrenadeReady;
+    }
+
+    private void HandleGrenadeReady()
+    {
+        OnGrenadeCooldownReady?.Invoke();
+        Debug.Log("Cooldown ready");
     }
 }

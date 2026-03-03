@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     float lerpSpeed = 0.1f;
 
-
+    bool startPulse = false;
 
     private readonly int amountID = Shader.PropertyToID("_Amount");
 
@@ -76,7 +76,12 @@ public class UIManager : MonoBehaviour
 
         swordMultiplierUI.material = new Material(swordMultiplierUI.material);
         swordPlayerCooldownUI.material = new Material(swordPlayerCooldownUI.material);
-        swordPlayerPowerBarUI.material = new Material(swordPlayerPowerBarUI.material);   
+        swordPlayerPowerBarUI.material = new Material(swordPlayerPowerBarUI.material);  
+
+        if (gunPlayerController != null)
+    {
+        gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
+    } 
     }
 
     // Update is called once per frame
@@ -106,6 +111,7 @@ public class UIManager : MonoBehaviour
 
         if (swordPlayerController != null)
         {   
+            
             float swordCooldown = swordPlayerController.GetCooldownPercent();
             swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
 
@@ -157,6 +163,22 @@ public class UIManager : MonoBehaviour
                 break;
         }
         return fillAmount;
+    }
+
+    private void OnDestroy()
+    {
+        // Clean up the subscription if the UI is destroyed
+        if (gunPlayerController != null)
+        {
+            gunPlayerController.OnGrenadeCooldownReady -= TriggerGunCooldownPulse;
+        }
+    }
+
+    // This custom function runs ONLY when the action is invoked
+    private void TriggerGunCooldownPulse()
+    {
+        // Start the stopwatch for the Shader Graph pulse animation!
+        gunPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
     }
 }
 
