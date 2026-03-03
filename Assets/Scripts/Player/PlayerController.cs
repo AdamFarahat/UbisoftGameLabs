@@ -14,7 +14,7 @@ public abstract class PlayerController : MonoBehaviour
 
     private int score = 0;
     private float continuousMultiplier = 1f;
-    private int discreteMultiplierIndex = 0;
+    [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
     public int Score => score;
@@ -146,5 +146,12 @@ public abstract class PlayerController : MonoBehaviour
     public void AddContinuousMultiplier(float deltaMultiplier)
     {
         SetContinuousMultiplier(continuousMultiplier + deltaMultiplier);
+    }
+
+    [ContextMenu("Test Multiplier")]
+    public void TestMultiplier()
+    {
+        OnDiscreteMultiplierChange?.Invoke();
+
     }
 }

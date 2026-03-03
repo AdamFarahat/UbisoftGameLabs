@@ -1,21 +1,18 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections; 
 
 public class MultiplierText : MonoBehaviour
 {
     [Header("Animation Settings")]
     public float animationDuration = 0.5f;
-    private float displayTime = 3f; // temp
 
-    void OnEnable()
+    // We removed OnEnable() and created a dedicated public method
+    public void ShowText()
     {
+        Debug.Log("ShowText is called on " + gameObject.name);
         transform.DOKill();
         transform.localScale = Vector3.zero;
         transform.DOScale(1f, animationDuration).SetEase(Ease.OutBack);
-
-        // Start the temporary countdown the moment the text pops in
-        StartCoroutine(HideAfterDelay());
     }
 
     public void HideText()
@@ -29,15 +26,5 @@ public class MultiplierText : MonoBehaviour
     private void DisableObject()
     {
         gameObject.SetActive(false);
-    }
-
-    // Temporary Coroutine
-    private IEnumerator HideAfterDelay()
-    {
-        // Wait for exactly 3 seconds (or whatever you set displayTime to)
-        yield return new WaitForSeconds(displayTime);
-        
-        // Trigger the shrinking animation
-        HideText();
     }
 }
