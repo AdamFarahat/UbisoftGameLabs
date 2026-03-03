@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
@@ -17,6 +18,7 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
     public int Score => score;
+    public UnityEvent OnDiscreteMultiplierChange;
 
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
@@ -41,7 +43,6 @@ public abstract class PlayerController : MonoBehaviour
         discreteMultipliers.Sort();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         playerInput.actions.Enable();
@@ -133,7 +134,13 @@ public abstract class PlayerController : MonoBehaviour
         int index = discreteMultipliers.BinarySearch(continuousMultiplier);
         if (index < 0)
             index = ~index - 1;
-        discreteMultiplierIndex = Math.Max(index, 0);
+        if (index < 0)
+            index = 0;
+        if (index != discreteMultiplierIndex)
+        {
+            discreteMultiplierIndex = index;
+            OnDiscreteMultiplierChange?.Invoke();
+        }
     }
 
     public void AddContinuousMultiplier(float deltaMultiplier)
