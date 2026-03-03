@@ -33,10 +33,10 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-        gunPlayerController = GameObject.FindFirstObjectByType<GunPlayerController>();
-        swordPlayerController = GameObject.FindFirstObjectByType<SwordPlayerController>();
+        gunPlayerController = GunPlayerController.Instance;
+        swordPlayerController = SwordPlayerController.Instance;
         Assert.IsNotNull(healthBarUI);
-        Assert.IsNotNull(scoreText);
+        //Assert.IsNotNull(scoreText);  TODO uncomment
 
         Assert.IsNotNull(gunMultiplierUI);
         Assert.IsNotNull(gunPlayerCooldownUI);
@@ -87,8 +87,7 @@ public class UIManager : MonoBehaviour
             float grenadeCooldown = gunPlayerController.GetCooldownPercent();
             gunPlayerCooldownUI.material.SetFloat(amountID, grenadeCooldown);
 
-            // float gunMultiplier = gunPlayerController.GetMultiplier();
-            float gunMultiplier = 0.75f; // temp        
+            float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
             float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
             float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
@@ -108,8 +107,7 @@ public class UIManager : MonoBehaviour
             float swordCooldown = swordPlayerController.GetCooldownPercent();
             swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
 
-            // float swordMultiplier = swordPlayerController.GetMultiplier();
-            float swordMultiplier = 0.25f; // temp
+            float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
             swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
 
             float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
@@ -129,7 +127,7 @@ public class UIManager : MonoBehaviour
 
         int score = 12345; // temp
         // int score = 0; get score from score script
-        scoreText.text = score.ToString();
+        //scoreText.text = score.ToString();  TODO uncomment
     }
     float ConvertMultiplierToUIValue(float value)
     {
@@ -140,8 +138,8 @@ public class UIManager : MonoBehaviour
             case 0.0f: fillAmount = 0.0f; break; // x1
             case 0.25f: fillAmount = 0.2f; break;  // x2
             case 0.5f: fillAmount = 0.42f; break; // x4
-            case 0.75f: fillAmount = 0.67f; break; // x8
-            case 1: fillAmount = 1.00f; break; // x16
+            case 0.75f: fillAmount = 0.67f; break; // x6
+            case 1: fillAmount = 1.00f; break; // x8
             default: 
                 fillAmount = value; // Fallback: use the raw value if it's not one of the expected multipliers
                 Debug.LogWarning("Unexpected multiplier value: " + value + ". Using raw value for UI fill amount.");

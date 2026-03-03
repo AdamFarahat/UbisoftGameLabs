@@ -1,8 +1,5 @@
-using System;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class GunPlayerController : PlayerController
 {
@@ -93,11 +90,5 @@ public class GunPlayerController : PlayerController
     public override float GetCooldownPercent()
     {
         return grenadeBelt.GetCooldownPercent();
-    }
-
-    public override void UpdateScore(float multiplierGain, int scoreOfEnemy)
-    {
-        multiplier += multiplierGain;
-        score = multiplier * scoreOfEnemy;
     }
 }

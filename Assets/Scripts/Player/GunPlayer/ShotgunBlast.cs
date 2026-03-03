@@ -66,6 +66,8 @@ public class ShotgunBlast : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        GunPlayerController.Instance.UpdateScore(ScoreManagerSO.Instance.SHOTGUN_BLAST_MULTIPLIER, enemy.Score);
+        // TODO handle more complex gun player multiplier logic
+        GunPlayerController.Instance.AddContinuousMultiplier(ScoreManagerSO.Instance.GUN_KILL_MULTIPLIER_GAIN);
+        GunPlayerController.Instance.AddScore(enemy.Score);
     }
 }

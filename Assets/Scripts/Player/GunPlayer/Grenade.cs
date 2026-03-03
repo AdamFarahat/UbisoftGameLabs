@@ -76,6 +76,7 @@ public class Grenade : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-       GunPlayerController.Instance.UpdateScore(ScoreManagerSO.Instance.GRENADE_MULTIPLIER, enemy.Score);
+        GunPlayerController.Instance.AddContinuousMultiplier(ScoreManagerSO.Instance.GRENADE_MULTIPLIER_GAIN);
+        GunPlayerController.Instance.AddScore(enemy.Score);
     }
 }
