@@ -3,19 +3,16 @@ using DG.Tweening;
 
 public class MultiplierText : MonoBehaviour
 {
-    [Header("Animation Settings")]
-    public float animationDuration = 0.5f;
+    [SerializeField] private float animationDuration = 0.5f;
 
-    // We removed OnEnable() and created a dedicated public method
-    public void ShowText()
+    public void AnimateTextIn()
     {
-        Debug.Log("ShowText is called on " + gameObject.name);
         transform.DOKill();
         transform.localScale = Vector3.zero;
         transform.DOScale(1f, animationDuration).SetEase(Ease.OutBack);
     }
 
-    public void HideText()
+    public void AnimateTextOut()
     {
         transform.DOKill();
         transform.DOScale(0f, animationDuration)
