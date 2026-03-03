@@ -222,14 +222,6 @@ public class SwordPlayerController : PlayerController
         state = SwordPlayerStates.Normal;
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.GetComponentInParent<Enemy>() || collider.GetComponent<Projectile>() != null)
-        {
-            Stun();
-        }
-    }
-
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
         Enemy enemy = collider.GetComponentInParent<Enemy>();
@@ -268,7 +260,7 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out Projectile projectile))
+        else if (collider.TryGetComponent(out EnemyProjectile projectile))
         {
             if (state == SwordPlayerStates.Parrying)
             {
@@ -285,7 +277,7 @@ public class SwordPlayerController : PlayerController
         }
     }
 
-    private void ReflectBackBullet(Projectile projectile)
+    private void ReflectBackBullet(EnemyProjectile projectile)
     {
         projectile.FlipDirection();
         projectile.speed *= parryBulletMultiplier;

@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    [Header("Stunning")]
-    [SerializeField] private float stunCooldown = 1f;  // TODO should come from stun damage - enemy specific.
     private Coroutine stunRoutine = null;
     public bool Stunned => stunRoutine != null;
 
@@ -73,7 +71,7 @@ public abstract class PlayerController : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public void Stun()
+    public void Stun(float stunTime)
     {
         if (Stunned)
             return;
@@ -86,7 +84,7 @@ public abstract class PlayerController : MonoBehaviour
 
         IEnumerator Routine()
         {
-            yield return new WaitForSeconds(stunCooldown);
+            yield return new WaitForSeconds(stunTime);
             if (debugMesh != null)
                 debugMesh.material.color = Color.white;
 
