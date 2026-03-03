@@ -348,6 +348,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.02705395
       objectReference: {fileID: 0}
+    - target: {fileID: 2486785308087261937, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_Name
+      value: Collision
+      objectReference: {fileID: 0}
     - target: {fileID: 5473658397883171689, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12

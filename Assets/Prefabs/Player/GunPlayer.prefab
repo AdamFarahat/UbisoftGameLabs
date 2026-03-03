@@ -316,6 +316,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4347113915274337654, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12
@@ -456,12 +460,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 4}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4, y: 6, z: 4}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!4 &5473658397883171689 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
@@ -484,4 +488,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc212a1df3abd644b2f4f6d1c14f765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
-  switchLaneDuration: 0.1
+  stunCooldown: 1
+  discreteMultipliers:
+  - 1
+  - 2
+  - 4
+  - 6
+  - 8
+  gunKillMultiplierGain: 0.05
+  grenadeKillMultiplierGain: 0.5

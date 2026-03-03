@@ -38,7 +38,7 @@ public class ShootingBehavior : StateMachineBehaviour
                 if (projObj != null)
                 {
                     GameObject proj = PoolObject.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
-                    if (proj != null && proj.TryGetComponent(out Projectile projectileComponent))
+                    if (proj != null && proj.TryGetComponent(out EnemyProjectile projectileComponent))
                     {
                         Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
                         projectileComponent.Initialize(direction);
@@ -56,13 +56,6 @@ public class ShootingBehavior : StateMachineBehaviour
         }
     }
 
-    /** 
-     * TODO new way of finding target not using colliders,
-     * should discuss which player to give shooting priority to,
-     * for now, we first piorize shooting in the player shooter.
-     * 
-     * Ryan: it doesn't actually matter which instance we choose, if they're both in the same lane.
-    */
     private PlayerController FindShootingTarget()
     {
         return GunPlayerController.LaneIndex == shooterAI.shootingIndex ? GunPlayerController.Instance :

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54556d6e9eccb624596373164db22c61, type: 3}
   m_Name: ScoreManagerSO
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManagerSO
+  TEAM_MULTIPLIER_BASE: 20

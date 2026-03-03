@@ -27,6 +27,11 @@ public class Holster : MonoBehaviour
         guns[activeGunIndex].StopFiring();
     }
 
+    public void CancelFiring()
+    {
+        guns[activeGunIndex].CancelFiring();
+    }
+
     public void ToggleUp()
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;

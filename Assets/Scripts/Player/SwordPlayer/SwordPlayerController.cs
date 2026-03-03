@@ -10,8 +10,6 @@ public class SwordPlayerController : PlayerController
     public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
 
     private SwordHitBox swordHitBox;
-    [Header("Stunning")]
-    [SerializeField] private float stunCooldown = 1f;
 
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
@@ -37,7 +35,6 @@ public class SwordPlayerController : PlayerController
     private enum SwordPlayerStates
     {
         Normal,
-        Stunned,
         Attacking,
         Parrying,
         Blocking
@@ -50,8 +47,6 @@ public class SwordPlayerController : PlayerController
     private Coroutine attackRoutine = null;
 
     private Coroutine parryRoutine = null;
-
-    private Coroutine stunRoutine = null;
 
     protected override void Awake()
     {
@@ -77,60 +72,63 @@ public class SwordPlayerController : PlayerController
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (Stunned)
+            return;
+
+        if (jumpRoutine != null)
+            return;
+
+        void SetY(float y)
         {
-            if (jumpRoutine != null)
-                return;
-
-            void SetY(float y)
-            {
-                transform.position = new(transform.position.x, y, transform.position.z);
-            }
-
-            IEnumerator Routine()
-            {
-                float y = 0f;
-                SetY(y);
-                float velocity = jumpSpeed;
-
-                // Animate jump
-                while (velocity > 0f)
-                {
-                    y += velocity * Time.deltaTime;
-                    velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
-                    SetY(y);
-                    yield return null;
-                }
-
-                // Animate fall
-                while (y > 0f)
-                {
-                    y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
-                    velocity -= fallAcceleration * Time.deltaTime;
-                    SetY(y);
-                    yield return null;
-                }
-
-                y = 0f;
-                SetY(y);
-                jumpRoutine = null;
-            }
-
-            jumpRoutine = StartCoroutine(Routine());
+            transform.position = new(transform.position.x, y, transform.position.z);
         }
+
+        IEnumerator Routine()
+        {
+            float y = 0f;
+            SetY(y);
+            float velocity = jumpSpeed;
+
+            // Animate jump
+            while (velocity > 0f)
+            {
+                y += velocity * Time.deltaTime;
+                velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
+                SetY(y);
+                yield return null;
+            }
+
+            // Animate fall
+            while (y > 0f)
+            {
+                y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
+                velocity -= fallAcceleration * Time.deltaTime;
+                SetY(y);
+                yield return null;
+            }
+
+            y = 0f;
+            SetY(y);
+            jumpRoutine = null;
+        }
+
+        jumpRoutine = StartCoroutine(Routine());
     }
 
     private void Duck(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            Debug.Log("Duck");
-        }
+        if (Stunned)
+            return;
+
+        Debug.Log("Duck");
     }
 
     private void Attack(InputAction.CallbackContext ctx)
     {
-        if (state == SwordPlayerStates.Normal && ctx.performed)
+        if (Stunned)
+            return;
+
+        if (state == SwordPlayerStates.Normal)
         {
             //TODO trigger animation state change to Attacking
             gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
@@ -151,6 +149,9 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
         {
@@ -166,19 +167,19 @@ public class SwordPlayerController : PlayerController
 
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         Debug.Log("Cancel Block");
-        if (state != SwordPlayerStates.Stunned)
+        if (parryRoutine != null)
         {
-            if (parryRoutine != null)
-            {
-                StopCoroutine(parryRoutine);
-                parryRoutine = null;
-            }
-            state = SwordPlayerStates.Normal;
-            //Trigger animation state change to Normal
-            swordHitBox.gameObject.SetActive(false);
-            GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+            StopCoroutine(parryRoutine);
+            parryRoutine = null;
         }
+        state = SwordPlayerStates.Normal;
+        //Trigger animation state change to Normal
+        swordHitBox.gameObject.SetActive(false);
+        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
     }
 
     private IEnumerator ParryWindow()
@@ -217,38 +218,16 @@ public class SwordPlayerController : PlayerController
         OnBlockCooldownReady?.Invoke();
     }
 
-    private IEnumerator StunCooldown()
+    protected override void OnStunStart()
     {
-        yield return new WaitForSeconds(stunCooldown);
+        base.OnStunStart();
+        swordHitBox.gameObject.SetActive(false);
+    }
+
+    protected override void OnStunEnd()
+    {
+        base.OnStunEnd();
         state = SwordPlayerStates.Normal;
-        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
-    }
-
-    private void Stun()
-    {
-        if (state != SwordPlayerStates.Stunned)
-        {
-            state = SwordPlayerStates.Stunned;
-            // reset multiplier
-            SetContinuousMultiplier(1f);
-            GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
-            IEnumerator Routine()
-            {
-                yield return new WaitForSeconds(2f);
-                state = SwordPlayerStates.Normal;
-                GetComponentInChildren<MeshRenderer>().material.color = Color.white;
-            }
-            swordHitBox.gameObject.SetActive(false);
-            stunRoutine = StartCoroutine(Routine());
-        }
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.GetComponentInParent<Enemy>() || collider.GetComponent<Projectile>() != null)
-        {
-            Stun();
-        }
     }
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
@@ -289,7 +268,7 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out Projectile projectile))
+        else if (collider.TryGetComponent(out EnemyProjectile projectile))
         {
             if (state == SwordPlayerStates.Parrying)
             {
@@ -306,7 +285,7 @@ public class SwordPlayerController : PlayerController
         }
     }
 
-    private void ReflectBackBullet(Projectile projectile)
+    private void ReflectBackBullet(EnemyProjectile projectile)
     {
         projectile.FlipDirection();
         projectile.speed *= parryBulletMultiplier;
