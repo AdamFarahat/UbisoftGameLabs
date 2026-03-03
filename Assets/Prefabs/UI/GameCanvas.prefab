@@ -354,7 +354,7 @@ Canvas:
   m_GameObject: {fileID: 2459126833240657986}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   healthPercent: 0.67
   score: 8031
   gunPowerBarPercent: 1
-  gunCooldownPercent: 0.68
+  gunCooldownPercent: 0
   gunMultiplierPercent: 0.67
   swordPowerBarPercent: 0.55
   swordCooldownPercent: 0
