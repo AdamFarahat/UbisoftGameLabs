@@ -41,9 +41,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amount: 0.68
+    - _Amount: 0
     - _AmountLeft: 0
     - _ColorMask: 15
+    - _Emission: 5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -54,5 +55,6 @@ Material:
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _CooldownColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    - _Emission: {r: 2.9960785, g: 0.27289268, b: 0.06274504, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
