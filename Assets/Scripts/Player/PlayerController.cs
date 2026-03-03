@@ -51,12 +51,18 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         if (laneBound.LaneIndex > 0)
             laneBound.MoveToLane(laneBound.LaneIndex - 1);
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         if (laneBound.LaneIndex < LaneConfigSO.Instance.GetNumberOfLanes() - 1)
             laneBound.MoveToLane(laneBound.LaneIndex + 1);
     }

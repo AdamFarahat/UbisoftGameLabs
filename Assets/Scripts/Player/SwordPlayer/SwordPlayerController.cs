@@ -71,60 +71,63 @@ public class SwordPlayerController : PlayerController
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (Stunned)
+            return;
+
+        if (jumpRoutine != null)
+            return;
+
+        void SetY(float y)
         {
-            if (jumpRoutine != null)
-                return;
-
-            void SetY(float y)
-            {
-                transform.position = new(transform.position.x, y, transform.position.z);
-            }
-
-            IEnumerator Routine()
-            {
-                float y = 0f;
-                SetY(y);
-                float velocity = jumpSpeed;
-
-                // Animate jump
-                while (velocity > 0f)
-                {
-                    y += velocity * Time.deltaTime;
-                    velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
-                    SetY(y);
-                    yield return null;
-                }
-
-                // Animate fall
-                while (y > 0f)
-                {
-                    y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
-                    velocity -= fallAcceleration * Time.deltaTime;
-                    SetY(y);
-                    yield return null;
-                }
-
-                y = 0f;
-                SetY(y);
-                jumpRoutine = null;
-            }
-
-            jumpRoutine = StartCoroutine(Routine());
+            transform.position = new(transform.position.x, y, transform.position.z);
         }
+
+        IEnumerator Routine()
+        {
+            float y = 0f;
+            SetY(y);
+            float velocity = jumpSpeed;
+
+            // Animate jump
+            while (velocity > 0f)
+            {
+                y += velocity * Time.deltaTime;
+                velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
+                SetY(y);
+                yield return null;
+            }
+
+            // Animate fall
+            while (y > 0f)
+            {
+                y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
+                velocity -= fallAcceleration * Time.deltaTime;
+                SetY(y);
+                yield return null;
+            }
+
+            y = 0f;
+            SetY(y);
+            jumpRoutine = null;
+        }
+
+        jumpRoutine = StartCoroutine(Routine());
     }
 
     private void Duck(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            Debug.Log("Duck");
-        }
+        if (Stunned)
+            return;
+
+        Debug.Log("Duck");
     }
 
     private void Attack(InputAction.CallbackContext ctx)
     {
-        if (state == SwordPlayerStates.Normal && ctx.performed)
+        if (Stunned)
+            return;
+
+        if (state == SwordPlayerStates.Normal)
         {
             //TODO trigger animation state change to Attacking
             gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
@@ -145,6 +148,9 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
         {
@@ -160,19 +166,19 @@ public class SwordPlayerController : PlayerController
 
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         Debug.Log("Cancel Block");
-        if (!Stunned)
+        if (parryRoutine != null)
         {
-            if (parryRoutine != null)
-            {
-                StopCoroutine(parryRoutine);
-                parryRoutine = null;
-            }
-            state = SwordPlayerStates.Normal;
-            //Trigger animation state change to Normal
-            swordHitBox.gameObject.SetActive(false);
-            GetComponentInChildren<MeshRenderer>().material.color = Color.white;
+            StopCoroutine(parryRoutine);
+            parryRoutine = null;
         }
+        state = SwordPlayerStates.Normal;
+        //Trigger animation state change to Normal
+        swordHitBox.gameObject.SetActive(false);
+        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
     }
 
     private IEnumerator ParryWindow()

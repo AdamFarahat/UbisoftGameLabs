@@ -51,6 +51,9 @@ public class GunPlayerController : PlayerController
 
     private void Update()
     {
+        if (Stunned)
+            return;
+
         if (holdingGunInput == HoldingState.FirstFrame)
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
@@ -59,6 +62,9 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.StartFiring();
         holdingGunInput = HoldingState.FirstFrame;
         grenadeBelt.CancelThrow();
@@ -67,21 +73,33 @@ public class GunPlayerController : PlayerController
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
         holdingGunInput = HoldingState.Released;
-        holster.StopFiring();
+        if (Stunned)
+            holster.CancelFiring();
+        else
+            holster.StopFiring();
     }
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.ToggleUp();
     }
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.ToggleDown();
     }
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         grenadeBelt.ChargeThrow();
         if (holdingGunInput != HoldingState.Released)
         {
@@ -92,7 +110,17 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        grenadeBelt.Throw();
+        if (Stunned)
+            grenadeBelt.CancelThrow();
+        else
+            grenadeBelt.Throw();
+    }
+
+    protected override void OnStunStart()
+    {
+        base.OnStunStart();
+        holster.CancelFiring();
+        grenadeBelt.CancelThrow();
     }
 
     public override float GetCooldownPercent()
