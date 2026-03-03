@@ -1,18 +1,10 @@
-using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 [CreateAssetMenu(fileName = "ScoreManagerSO", menuName = "Scriptable Objects/ScoreManagerSO")]
 public class ScoreManagerSO : ScriptableObject
 {
-    public float MULTIPLER_GAIN = 2f;
-    public float BLOCKING_GAIN = 1f;
-    public int PARRIED_DEFAULT_SCORE = 10;
-    public float PARRIED_MULTIPLER_FACTOR = 3f;
-
-    public float GRENADE_MULTIPLIER = 2f;
-    public float DEFAULT_BULLET_MULTIPLIER = 4f;
-    public float SHOTGUN_BLAST_MULTIPLIER = 7f;
-    private float BASE = 20f;
+    public float TEAM_MULTIPLIER_BASE = 20f;
 
     private const int numberOfPlayers = 2;
 
@@ -37,10 +29,10 @@ public class ScoreManagerSO : ScriptableObject
     /// <returns>Final score that should be displayed</returns>
     public static float CalculateOverallTeamScore()
     {
-        float totalScore = GunPlayerController.Instance.score + SwordPlayerController.Instance.score;
+        float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
         float average = totalScore / (float)(numberOfPlayers);
-        float teamMultiplier = _instance.BASE / (Mathf.Abs(GunPlayerController.Instance.score - average)
-            + Mathf.Abs(SwordPlayerController.Instance.score - average));
+        float teamMultiplier = _instance.TEAM_MULTIPLIER_BASE / (Mathf.Abs(GunPlayerController.Instance.Score - average)
+            + Mathf.Abs(SwordPlayerController.Instance.Score - average));
         return teamMultiplier * totalScore;
     }
 }
