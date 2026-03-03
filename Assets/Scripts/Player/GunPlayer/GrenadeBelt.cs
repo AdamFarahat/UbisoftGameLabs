@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 public class GrenadeBelt : MonoBehaviour
 {
     [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private Transform crosshairs;
     [SerializeField] private float maxChargeTime = 1f;
     [SerializeField] private float minThrowVelocity = 50f;
     [SerializeField] private float maxThrowVelocity = 100f;
@@ -18,6 +19,17 @@ public class GrenadeBelt : MonoBehaviour
         Assert.IsNotNull(grenadePrefab);
     }
 
+    private void Start()
+    {
+        SetThrowing(false);
+    }
+
+    private void SetThrowing(bool throwing)
+    {
+        this.throwing = throwing;
+        crosshairs.gameObject.SetActive(throwing);
+    }
+
     private void Update()
     {
         if (throwing)
@@ -30,7 +42,7 @@ public class GrenadeBelt : MonoBehaviour
     {
         if (cooldown <= 0f && !throwing)
         {
-            throwing = true;
+            SetThrowing(true);
             throwChargeTime = 0f;
             cooldown = throwCooldown;
         }
@@ -38,7 +50,7 @@ public class GrenadeBelt : MonoBehaviour
 
     public void CancelThrow()
     {
-        throwing = false;
+        SetThrowing(false);
     }
 
     public void Throw()
@@ -46,7 +58,7 @@ public class GrenadeBelt : MonoBehaviour
         if (!throwing)
             return;
 
-        throwing = false;
+        SetThrowing(false);
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
