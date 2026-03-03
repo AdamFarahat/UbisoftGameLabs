@@ -49,7 +49,8 @@ Material:
     - _AmountLeft: 0.88
     - _ColorMask: 15
     - _Emission: 5
-    - _PulseSpeed: 3
+    - _OverEmissionMultiplier: 2
+    - _PulseSpeed: 1.5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

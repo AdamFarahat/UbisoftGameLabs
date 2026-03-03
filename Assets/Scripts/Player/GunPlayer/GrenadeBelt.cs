@@ -13,7 +13,7 @@ public class GrenadeBelt : MonoBehaviour
     public Action OnCooldownReady;
     private bool throwing = false;
     private float throwChargeTime = 0f;
-    [SerializeField] private float cooldown = 0f;
+    private float cooldown = 0f;
 
     private void Awake()
     {

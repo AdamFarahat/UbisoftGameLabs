@@ -79,9 +79,10 @@ public class UIManager : MonoBehaviour
         swordPlayerPowerBarUI.material = new Material(swordPlayerPowerBarUI.material);  
 
         if (gunPlayerController != null)
-    {
-        gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
-    } 
+            gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
+
+        if (swordPlayerController != null)
+            swordPlayerController.OnBlockCooldownReady += TriggerSwordCooldownPulse;
     }
 
     // Update is called once per frame
@@ -169,9 +170,10 @@ public class UIManager : MonoBehaviour
     {
         // Clean up the subscription if the UI is destroyed
         if (gunPlayerController != null)
-        {
             gunPlayerController.OnGrenadeCooldownReady -= TriggerGunCooldownPulse;
-        }
+
+        if (swordPlayerController != null)
+            swordPlayerController.OnBlockCooldownReady -= TriggerSwordCooldownPulse;
     }
 
     // This custom function runs ONLY when the action is invoked
@@ -179,6 +181,11 @@ public class UIManager : MonoBehaviour
     {
         // Start the stopwatch for the Shader Graph pulse animation!
         gunPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
+    }
+
+    private void TriggerSwordCooldownPulse()
+    {
+        swordPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
     }
 }
 

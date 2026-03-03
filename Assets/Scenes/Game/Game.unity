@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6147641583620319063, guid: 1df3597120779d34ca7a3502b23e8412, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 3aa53687845668f4fb3de069e956bf0a, type: 2}
     - target: {fileID: 7247287952464124669, guid: 1df3597120779d34ca7a3502b23e8412, type: 3}
       propertyPath: m_Name
       value: Global Volume
