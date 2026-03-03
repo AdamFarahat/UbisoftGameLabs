@@ -114,6 +114,5 @@ public class GunPlayerController : PlayerController
     private void HandleGrenadeReady()
     {
         OnGrenadeCooldownReady?.Invoke();
-        Debug.Log("Cooldown ready");
     }
 }

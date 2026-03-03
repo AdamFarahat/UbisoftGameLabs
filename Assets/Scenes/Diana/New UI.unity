@@ -246,6 +246,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2929365275725396528, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5473658397883171689, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12
@@ -543,7 +547,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1987066883688285533, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: gunCooldownPercent
-      value: 0.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1987066883688285533, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: swordCooldownPercent
