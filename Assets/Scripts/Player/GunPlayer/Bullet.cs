@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
     private void OnEnemyKill(Enemy enemy)
     {
         // TODO handle more complex gun player multiplier logic
-        GunPlayerController.Instance.AddContinuousMultiplier(ScoreManagerSO.Instance.GUN_KILL_MULTIPLIER_GAIN);
+        GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
         GunPlayerController.Instance.AddScore(enemy.Score);
     }
 }

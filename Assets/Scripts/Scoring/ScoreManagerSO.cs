@@ -4,12 +4,6 @@ using UnityEngine.Assertions;
 [CreateAssetMenu(fileName = "ScoreManagerSO", menuName = "Scriptable Objects/ScoreManagerSO")]
 public class ScoreManagerSO : ScriptableObject
 {
-    public float BLOCKING_MULTIPLIER_GAIN = 0.2f;
-    public float PARRIED_MULTIPLIER_GAIN = 0.8f;
-
-    public float GUN_KILL_MULTIPLIER_GAIN = 0.05f;
-    public float GRENADE_MULTIPLIER_GAIN = 0.5f;
-
     public float TEAM_MULTIPLIER_BASE = 20f;
 
     private const int numberOfPlayers = 2;

@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,13 @@ public class GunPlayerController : PlayerController
     private static GunPlayerController instance = null;
     public static GunPlayerController Instance => instance;
     public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+
+    [Header("Scoring")]
+    [SerializeField] private float gunKillMultiplierGain = 0.05f;
+    [SerializeField] private float grenadeKillMultiplierGain = 0.5f;
+
+    public float GunKillMultiplierGain => gunKillMultiplierGain;
+    public float GrenadeKillMultiplierGain => grenadeKillMultiplierGain;
 
     private Holster holster;
     private GrenadeBelt grenadeBelt;
