@@ -26,4 +26,10 @@ public class MachineGun : Gun
         if (holdingCooldown <= 0f)
             StartFiring();
     }
+
+    public override void CancelFiring()
+    {
+        base.CancelFiring();
+        holdingCooldown = firingCooldown;
+    }
 }
