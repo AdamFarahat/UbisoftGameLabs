@@ -1,17 +1,25 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    public float score = 0;
-    public float multiplier = 1f;
+    private int score = 0;
+    private float continuousMultiplier = 1f;
+    private int discreteMultiplierIndex = 0;
+    [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
+
+    public int Score => score;
+
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
     protected PlayerStats playerStats;
+
     protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -24,7 +32,9 @@ public abstract class PlayerController : MonoBehaviour
         Assert.IsNotNull(playerCollider);
         playerStats = FindFirstObjectByType<PlayerStats>();
         Assert.IsNotNull(playerStats);
-        
+
+        Assert.IsTrue(discreteMultipliers.Count > 1);
+        discreteMultipliers.Sort();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,10 +62,39 @@ public abstract class PlayerController : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public float GetLaneIndex() {
+    public float GetLaneIndex()
+    {
         return laneBound.LaneIndex;
     }
-    public virtual void UpdateScore(float multiplierGain, int scoreOfEnemy) { 
-        throw new NotImplementedException();
+
+    public void AddScore(int score)
+    {
+        this.score += Mathf.CeilToInt(score * GetDiscreteMultiplier());
+    }
+
+    public float GetDiscreteMultiplier()
+    {
+        return discreteMultipliers[discreteMultiplierIndex];
+    }
+
+    public float GetNormalizedMultiplier()
+    {
+        return discreteMultiplierIndex / ((float)discreteMultipliers.Count - 1);
+    }
+
+    public void SetContinuousMultiplier(float multiplier)
+    {
+        continuousMultiplier = Mathf.Clamp(multiplier, 1f, discreteMultipliers.Last());
+
+        // Find largest index for which the continuous multiplier is greater or equal to the discrete multiplier
+        int index = discreteMultipliers.BinarySearch(continuousMultiplier);
+        if (index < 0)
+            index = ~index - 1;
+        discreteMultiplierIndex = Math.Max(index, 0);
+    }
+
+    public void AddContinuousMultiplier(float deltaMultiplier)
+    {
+        SetContinuousMultiplier(continuousMultiplier + deltaMultiplier);
     }
 }

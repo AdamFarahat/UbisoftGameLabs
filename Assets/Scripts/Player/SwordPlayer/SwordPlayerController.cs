@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +12,7 @@ public class SwordPlayerController : PlayerController
     private SwordHitBox swordHitBox;
     [Header("Stunning")]
     [SerializeField] private float stunCooldown = 1f;
-    
+
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
@@ -28,6 +27,12 @@ public class SwordPlayerController : PlayerController
     [Header("Parrying")]
     [SerializeField] private float parryBulletMultiplier = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
+
+    [Header("Scoring")]
+    [SerializeField] private float blockingMultiplierGain = 0.2f;
+    [SerializeField] private float attackingMultiplierGain = 0.6f;
+    [SerializeField] private float parryingMultiplierGain = 0.8f;
+
     private enum SwordPlayerStates
     {
         Normal,
@@ -124,7 +129,7 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
-        if(state == SwordPlayerStates.Normal && ctx.performed)
+        if (state == SwordPlayerStates.Normal && ctx.performed)
         {
             //TODO trigger animation state change to Attacking
             gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
@@ -146,7 +151,7 @@ public class SwordPlayerController : PlayerController
     public void Block(InputAction.CallbackContext ctx)
     {
         Debug.Log("Block/Parry");
-        if(canBlock && state == SwordPlayerStates.Normal)
+        if (canBlock && state == SwordPlayerStates.Normal)
         {
             swordHitBox.gameObject.SetActive(true);
             parryRoutine = StartCoroutine(ParryWindow());
@@ -155,7 +160,7 @@ public class SwordPlayerController : PlayerController
         {
             Debug.Log("Block on cooldown");
         }
-        
+
     }
 
     public void CancelBlock(InputAction.CallbackContext ctx)
@@ -163,7 +168,7 @@ public class SwordPlayerController : PlayerController
         Debug.Log("Cancel Block");
         if (state != SwordPlayerStates.Stunned)
         {
-            if(parryRoutine != null)
+            if (parryRoutine != null)
             {
                 StopCoroutine(parryRoutine);
                 parryRoutine = null;
@@ -180,16 +185,16 @@ public class SwordPlayerController : PlayerController
         parryTimer = 0f;
         state = SwordPlayerStates.Parrying;
         GetComponentInChildren<MeshRenderer>().material.color = Color.green;
-        while(parryTimer < parryWindow)
+        while (parryTimer < parryWindow)
         {
-            if(state != SwordPlayerStates.Parrying)
+            if (state != SwordPlayerStates.Parrying)
             {
                 yield break;
             }
             parryTimer += Time.deltaTime;
             yield return null;
         }
-        if(state == SwordPlayerStates.Parrying)
+        if (state == SwordPlayerStates.Parrying)
         {
             state = SwordPlayerStates.Blocking;
             GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
@@ -219,11 +224,11 @@ public class SwordPlayerController : PlayerController
 
     private void Stun()
     {
-        if(state != SwordPlayerStates.Stunned)
+        if (state != SwordPlayerStates.Stunned)
         {
             state = SwordPlayerStates.Stunned;
-            //reset of multiplier
-            multiplier = 1f;
+            // reset multiplier
+            SetContinuousMultiplier(1f);
             GetComponentInChildren<MeshRenderer>().material.color = Color.yellow;
             IEnumerator Routine()
             {
@@ -249,28 +254,37 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (state == SwordPlayerStates.Attacking || state == SwordPlayerStates.Parrying)
+            switch (state)
             {
-                if (enemy.OnParried())
-                {
-                    playerStats.AddSwordSuper(5f);
-                    UpdateScore(ScoreManagerSO.Instance.PARRIED_MULTIPLER_FACTOR * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
-                }
-                if (state == SwordPlayerStates.Parrying)
-                {
+                case SwordPlayerStates.Attacking:
+                    if (enemy.OnParried())
+                    {
+                        playerStats.AddSwordSuper(4f);
+                        AddContinuousMultiplier(attackingMultiplierGain);
+                        AddScore(enemy.Score);
+                    }
+                    break;
+                case SwordPlayerStates.Parrying:
+                    if (enemy.OnParried())
+                    {
+                        playerStats.AddSwordSuper(5f);
+                        AddContinuousMultiplier(parryingMultiplierGain);
+                        AddScore(enemy.Score);
+                    }
                     parryTimer = 0f;
-                }
-
-            }
-            else if (state == SwordPlayerStates.Blocking && canBlock)
-            {
-                if (enemy.OnParried())
-                {
-                    // TODO score + multiplier gain
-                    playerStats.AddSwordSuper(2f);
-                    UpdateScore(ScoreManagerSO.Instance.BLOCKING_GAIN * ScoreManagerSO.Instance.MULTIPLER_GAIN, ScoreManagerSO.Instance.PARRIED_DEFAULT_SCORE);
-                }
-                StartCoroutine(BlockCooldown());
+                    break;
+                case SwordPlayerStates.Blocking:
+                    if (canBlock)
+                    {
+                        if (enemy.OnParried())
+                        {
+                            playerStats.AddSwordSuper(2f);
+                            AddContinuousMultiplier(blockingMultiplierGain);
+                            AddScore(enemy.Score);
+                        }
+                        StartCoroutine(BlockCooldown());
+                    }
+                    break;
             }
         }
         else if (collider.TryGetComponent(out Projectile projectile))
@@ -288,12 +302,6 @@ public class SwordPlayerController : PlayerController
                 StartCoroutine(BlockCooldown());
             }
         }
-    }
-
-    public override void UpdateScore(float multiplierGain, int parryScore)
-    {
-        multiplier += multiplierGain;
-        score += multiplier * (parryScore);
     }
 
     private void ReflectBackBullet(Projectile projectile)

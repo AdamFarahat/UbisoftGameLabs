@@ -6,11 +6,11 @@ public class Grenade : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float gravity = 100f;
-    public float velocity = 100f;
     [SerializeField] private Vector3 initialDirection = new(0f, 1f, 1f);
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
 
+    public float velocity = 100f;
     private float verticalVelocity = 0f;
     private float forwardVelocity = 0f;
     private bool exploding = false;
@@ -76,6 +76,7 @@ public class Grenade : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-       GunPlayerController.Instance.UpdateScore(ScoreManagerSO.Instance.GRENADE_MULTIPLIER, enemy.Score);
+        GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GrenadeKillMultiplierGain);
+        GunPlayerController.Instance.AddScore(enemy.Score);
     }
 }
