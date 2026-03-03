@@ -1,12 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections; // You need this to use IEnumerator/Coroutines
+using System.Collections; 
 
 public class MultiplierText : MonoBehaviour
 {
     [Header("Animation Settings")]
     public float animationDuration = 0.5f;
-    public float displayTime = 3f;
+    private float displayTime = 3f; // temp
 
     void OnEnable()
     {
