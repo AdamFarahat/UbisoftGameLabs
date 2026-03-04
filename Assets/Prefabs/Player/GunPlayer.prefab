@@ -222,6 +222,11 @@ MonoBehaviour:
   bulletDamage: 50
   firingCooldown: 1
   spreadAngle: 15
+  altShots:
+  - heightScale: 0.5
+    chargeTime: 0.6
+  - heightScale: 0.8
+    chargeTime: 1.2
 --- !u!114 &7431069072442950947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,12 +493,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc212a1df3abd644b2f4f6d1c14f765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
-  stunCooldown: 1
   discreteMultipliers:
   - 1
   - 2
   - 4
   - 6
   - 8
+  OnDiscreteMultiplierChange:
+    m_PersistentCalls:
+      m_Calls: []
   gunKillMultiplierGain: 0.05
   grenadeKillMultiplierGain: 0.5

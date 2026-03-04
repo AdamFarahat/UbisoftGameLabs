@@ -1,15 +1,28 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Shotgun : Gun
 {
     [Header("Shotgun")]
     [SerializeField] private float spreadAngle = 45f;
-    [SerializeField] private float regHeightScale = 0.2f;
-    [SerializeField] private float altHeightScale = 0.8f;
-    [SerializeField] private float altChargeTime = 1f;
+
+    [Serializable]
+    public class AltShot
+    {
+        public float heightScale;
+        public float chargeTime;
+    }
+
+    [SerializeField] private List<AltShot> altShots = new();
 
     private bool charging = false;
     private float chargeStartTime = 0f;
+
+    private void Start()
+    {
+        altShots.Sort((a, b) => a.chargeTime.CompareTo(b.chargeTime));
+    }
 
     public override void StartFiring()
     {
@@ -26,10 +39,14 @@ public class Shotgun : Gun
 
         ShotgunBlast blast = InstantiateShotgunBlast();
         blast.coneAngle = spreadAngle;
-        if (Time.time - chargeStartTime < altChargeTime)
-            blast.heightScale = regHeightScale;
-        else
-            blast.heightScale = altHeightScale;
+
+        float chargeTime = Time.time - chargeStartTime;
+        foreach (var altShot in altShots)
+        {
+            if (chargeTime < altShot.chargeTime)
+                break;
+            blast.heightScale = altShot.heightScale;
+        }
     }
 
     public override void CancelFiring()
