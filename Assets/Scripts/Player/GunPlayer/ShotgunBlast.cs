@@ -55,11 +55,8 @@ public class ShotgunBlast : MonoBehaviour
             displacement.y *= invVerticalScale;
             if (Vector3.Angle(displacement, forward) < coneAngle && Vector3.Dot(displacement, forward) <= interpRange) // enemy is within cone range
             {
-                if (hit.GetComponentInHierarchy<EnergyShield>())
-                    continue;
-
                 Enemy enemy = hit.GetComponentInParent<Enemy>();
-                if (enemy != null && !enemiesHit.Contains(enemy))
+                if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
                 {
                     enemiesHit.Add(enemy);
                     if (enemy.TakeDamage(damage))

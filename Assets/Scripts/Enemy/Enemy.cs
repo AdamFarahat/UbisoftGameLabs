@@ -17,11 +17,13 @@ public class Enemy : Poolable
     public bool Dead => dead;
 
     private LaneBound laneBound;
+    private EnergyShield energyShield;
 
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
+        energyShield = this.GetComponentInHierarchy<EnergyShield>();
     }
 
     private void Start()
@@ -86,5 +88,18 @@ public class Enemy : Poolable
             poolable.Death();
         else
             Destroy(gameObject);
+    }
+
+    public EnergyShield GetShield()
+    {
+        if (HasShield())
+            return energyShield;
+        else
+            return null;
+    }
+
+    public bool HasShield()
+    {
+        return energyShield != null && energyShield.isActiveAndEnabled;
     }
 }

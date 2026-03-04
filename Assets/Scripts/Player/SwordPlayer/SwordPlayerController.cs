@@ -236,7 +236,7 @@ public class SwordPlayerController : PlayerController
             switch (state)
             {
                 case SwordPlayerStates.Attacking:
-                    if (enemy.OnParried())
+                    if (!enemy.HasShield() && enemy.OnParried())
                     {
                         playerStats.AddSwordSuper(4f);
                         AddContinuousMultiplier(attackingMultiplierGain);
@@ -255,7 +255,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Blocking:
                     if (canBlock)
                     {
-                        if (enemy.OnParried())
+                        if (!enemy.HasShield() && enemy.OnParried())
                         {
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);

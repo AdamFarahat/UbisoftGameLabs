@@ -384,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MachineGun
   bulletPrefab: {fileID: 97644797981636705, guid: ac7ebac81e0fa6c4ca130ef05441315b, type: 3}
   firePosition: {fileID: 882516828035149282}
-  bulletVelocity: 300
+  bulletVelocity: 200
   bulletAcceleration: 10
   bulletRange: 300
   bulletDamage: 1
