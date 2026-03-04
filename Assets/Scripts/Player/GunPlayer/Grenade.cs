@@ -48,7 +48,16 @@ public class Grenade : MonoBehaviour
             if (enemy != null && !hitEnemies.Contains(enemy))
             {
                 hitEnemies.Add(enemy);
-                if (enemy.TakeDamage(damage)) // TODO don't take damage if behind shield relative to grenade explosion center
+                if (enemy.HasShield())
+                {
+                    Vector3 axis = LaneConfigSO.Instance.GetLaneDirection() * Vector3.forward;
+                    float myPosition = Vector3.Dot(transform.position, axis);
+                    float shieldPosition = Vector3.Dot(enemy.GetShield().transform.position, axis);
+                    if (myPosition <= shieldPosition)
+                        return;
+                }
+
+                if (enemy.TakeDamage(damage))
                 {
                     PlayerStats.Instance.AddGunSuper(5f);
                     OnEnemyKill(enemy);
