@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,6 +10,7 @@ public class GrenadeBelt : MonoBehaviour
     [SerializeField] private float maxThrowVelocity = 100f;
     [SerializeField] private float throwCooldown = 3f;
 
+    public Action OnCooldownReady;
     private bool throwing = false;
     private float throwChargeTime = 0f;
     private float cooldown = 0f;
@@ -23,7 +25,15 @@ public class GrenadeBelt : MonoBehaviour
         if (throwing)
             throwChargeTime = Mathf.Min(throwChargeTime + Time.deltaTime, maxChargeTime);
         else if (cooldown > 0f)
+        {
             cooldown -= Time.deltaTime;
+            // Trigger the action the exact frame the cooldown finishes
+            if (cooldown <= 0f)
+            {
+                cooldown = 0f; 
+                OnCooldownReady?.Invoke(); 
+            }
+        }
     }
 
     public void ChargeThrow()

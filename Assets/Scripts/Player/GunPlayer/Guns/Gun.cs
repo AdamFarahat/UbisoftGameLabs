@@ -39,6 +39,10 @@ public class Gun : MonoBehaviour
     {
     }
 
+    public virtual void CancelFiring()
+    {
+    }
+
     protected bool PreStartFiring()
     {
         if (cooldown <= 0.0f)

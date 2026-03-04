@@ -1,14 +1,20 @@
 using System;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class GunPlayerController : PlayerController
 {
     private static GunPlayerController instance = null;
     public static GunPlayerController Instance => instance;
     public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+
+    [Header("Scoring")]
+    [SerializeField] private float gunKillMultiplierGain = 0.05f;
+    [SerializeField] private float grenadeKillMultiplierGain = 0.5f;
+
+    public float GunKillMultiplierGain => gunKillMultiplierGain;
+    public float GrenadeKillMultiplierGain => grenadeKillMultiplierGain;
 
     private Holster holster;
     private GrenadeBelt grenadeBelt;
@@ -21,6 +27,8 @@ public class GunPlayerController : PlayerController
     }
 
     private HoldingState holdingGunInput = HoldingState.Released;
+
+    public Action OnGrenadeCooldownReady;
 
     protected override void Awake()
     {
@@ -42,10 +50,15 @@ public class GunPlayerController : PlayerController
         playerInput.actions["DownEffect"].performed += ToggleGunDown;
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
+
+        grenadeBelt.OnCooldownReady += HandleGrenadeReady;
     }
 
     private void Update()
     {
+        if (Stunned)
+            return;
+
         if (holdingGunInput == HoldingState.FirstFrame)
             holdingGunInput = HoldingState.Held;
         else if (holdingGunInput == HoldingState.Held)
@@ -54,6 +67,9 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.StartFiring();
         holdingGunInput = HoldingState.FirstFrame;
         grenadeBelt.CancelThrow();
@@ -62,21 +78,33 @@ public class GunPlayerController : PlayerController
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
         holdingGunInput = HoldingState.Released;
-        holster.StopFiring();
+        if (Stunned)
+            holster.CancelFiring();
+        else
+            holster.StopFiring();
     }
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.ToggleUp();
     }
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         holster.ToggleDown();
     }
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (Stunned)
+            return;
+
         grenadeBelt.ChargeThrow();
         if (holdingGunInput != HoldingState.Released)
         {
@@ -87,7 +115,17 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
-        grenadeBelt.Throw();
+        if (Stunned)
+            grenadeBelt.CancelThrow();
+        else
+            grenadeBelt.Throw();
+    }
+
+    protected override void OnStunStart()
+    {
+        base.OnStunStart();
+        holster.CancelFiring();
+        grenadeBelt.CancelThrow();
     }
 
     public override float GetCooldownPercent()
@@ -95,9 +133,14 @@ public class GunPlayerController : PlayerController
         return grenadeBelt.GetCooldownPercent();
     }
 
-    public override void UpdateScore(float multiplierGain, int scoreOfEnemy)
+    private void OnDestroy()
     {
-        multiplier += multiplierGain;
-        score = multiplier * scoreOfEnemy;
+        if (grenadeBelt != null)
+            grenadeBelt.OnCooldownReady -= HandleGrenadeReady;
+    }
+
+    private void HandleGrenadeReady()
+    {
+        OnGrenadeCooldownReady?.Invoke();
     }
 }
