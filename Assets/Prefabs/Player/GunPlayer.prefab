@@ -389,7 +389,7 @@ MonoBehaviour:
   bulletRange: 300
   bulletDamage: 1
   firingCooldown: 0.1
-  maxSpreadAngle: 1
+  maxSpreadAngle: 0.5
   spreadReduction: 2
 --- !u!1 &7286659177577392852
 GameObject:

@@ -3,7 +3,7 @@ using UnityEngine;
 public class MachineGun : Gun
 {
     [Header("Machine Gun")]
-    [SerializeField] private float maxSpreadAngle = 1f;
+    [SerializeField] private float maxSpreadAngle = 0.5f;
     [SerializeField] private float spreadReduction = 2f;
 
     private float holdingCooldown = 0f;

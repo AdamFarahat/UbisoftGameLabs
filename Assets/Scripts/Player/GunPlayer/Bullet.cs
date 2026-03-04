@@ -25,7 +25,13 @@ public class Bullet : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (enemy.TakeDamage(damage)){
+            EnergyShield shield = enemy.GetComponentInHierarchy<EnergyShield>();
+            if (shield != null)
+            {
+                // TODO do damage to shield if using machine gun
+            }
+            else if (enemy.TakeDamage(damage))
+            {
                 OnEnemyKill(enemy);
                 PlayerStats.Instance.AddGunSuper(2f);
             }

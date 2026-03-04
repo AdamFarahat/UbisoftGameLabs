@@ -48,7 +48,8 @@ public class Grenade : MonoBehaviour
             if (enemy != null && !hitEnemies.Contains(enemy))
             {
                 hitEnemies.Add(enemy);
-                if (enemy.TakeDamage(damage)){
+                if (enemy.TakeDamage(damage)) // TODO don't take damage if behind shield relative to grenade explosion center
+                {
                     PlayerStats.Instance.AddGunSuper(5f);
                     OnEnemyKill(enemy);
                 }
