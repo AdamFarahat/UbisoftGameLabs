@@ -70,8 +70,16 @@ public class Enemy : Poolable
         return TakeDamage(health);
     }
 
+    public void Kill()
+    {
+        TakeDamage(health);
+    }
+
     private void OnDeath()
     {
+        if (dead)
+            return;
+
         dead = true;
         // TODO Play Death Animation
         if (TryGetComponent(out Poolable poolable))

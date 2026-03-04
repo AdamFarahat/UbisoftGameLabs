@@ -7,6 +7,12 @@ public class KamikazeMovementAI : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private float laneStayPeriod = 1.5f;
 
+    [Header("Stunplosion")]
+    [SerializeField] private GameObject stunplosion;
+    [SerializeField] private float stunTime = 1f;
+    [SerializeField] private float stunRadius = 10f;
+    [SerializeField] private float stunDuration = 0.3f;
+
     private LaneBound laneBound;
 
     private float age = 0f;
@@ -14,6 +20,7 @@ public class KamikazeMovementAI : MonoBehaviour
 
     private void Awake()
     {
+        Assert.IsNotNull(stunplosion);
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
 
@@ -49,9 +56,18 @@ public class KamikazeMovementAI : MonoBehaviour
                 laneBound.MoveToLane(laneBound.LaneIndex + Random.Range(0, 2) * 2 - 1);
         }
 
-        if (laneBound.LaneDistance <= )
+        if (laneBound.LaneDistance <= PlayerController.PlayerLine)
         {
-            // TODO stun explosion
+            GetComponent<Enemy>().Kill();
+            
+            GameObject go = Instantiate(stunplosion);
+            Stunplosion sp = go.GetComponent<Stunplosion>();
+            Assert.IsNotNull(sp);
+
+            sp.transform.position = transform.position;
+            sp.stunTime = stunTime;
+            sp.radius = stunRadius;
+            sp.duration = stunDuration;
         }
     }
 }

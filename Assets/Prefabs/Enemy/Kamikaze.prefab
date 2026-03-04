@@ -157,6 +157,10 @@ MonoBehaviour:
   initialLaneDistance: 300
   speed: 36
   laneStayPeriod: 1.5
+  stunplosion: {fileID: 2348845177174173816, guid: dcd43499a51c07a45ac104ec70baf7ee, type: 3}
+  stunTime: 1
+  stunRadius: 16
+  stunDuration: 0.15
 --- !u!114 &1581637196576062325
 MonoBehaviour:
   m_ObjectHideFlags: 0
