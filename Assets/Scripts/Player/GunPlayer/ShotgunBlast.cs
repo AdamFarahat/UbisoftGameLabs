@@ -11,6 +11,7 @@ public class ShotgunBlast : MonoBehaviour
     public float coneAngle = 45f;
     public float range = 100f;
     public int damage = 10;
+    public float heightScale = 0.2f;
 
     private float invDuration = 0f;
     private float age = 0f;
@@ -25,6 +26,7 @@ public class ShotgunBlast : MonoBehaviour
     {
         var shape = particleSystem.shape;
         shape.angle = coneAngle;
+        shape.scale = new(shape.scale.x, heightScale, shape.scale.z);
         
         invDuration = 1f / particleSystem.main.duration;
         invVerticalScale = 1f / particleSystem.shape.scale.y;

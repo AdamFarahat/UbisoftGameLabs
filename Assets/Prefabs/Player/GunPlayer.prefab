@@ -335,9 +335,16 @@ MonoBehaviour:
   firePosition: {fileID: 882516828035149282}
   bulletVelocity: 100
   bulletAcceleration: 10
-  bulletRange: 150
+  bulletRange: 300
   bulletDamage: 10
   firingCooldown: 0.5
+  altShots:
+  - velocity: 250
+    damage: 20
+    chargeTime: 0.6
+  - velocity: 500
+    damage: 40
+    chargeTime: 1.2
 --- !u!114 &6029176937551800676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +365,11 @@ MonoBehaviour:
   bulletDamage: 50
   firingCooldown: 1
   spreadAngle: 15
+  altShots:
+  - heightScale: 0.5
+    chargeTime: 0.6
+  - heightScale: 0.8
+    chargeTime: 1.2
 --- !u!114 &7431069072442950947
 MonoBehaviour:
   m_ObjectHideFlags: 0
