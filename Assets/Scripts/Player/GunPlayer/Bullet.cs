@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public float acceleration = 0f;
     public float range = 100f;
     public int damage = 10;
+    public bool canPenetrateShield = false;
 
     private float distance = 0f;
 
@@ -23,14 +24,21 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy != null)
+        if (enemy == null)
+            return;
+
+        EnergyShield shield = enemy.GetShield();
+        if (shield != null)
         {
-            if (enemy.TakeDamage(damage)){
-                OnEnemyKill(enemy);
-                PlayerStats.Instance.AddGunSuper(2f);
-            }
-            Destroy(gameObject);
+            if (canPenetrateShield)
+                shield.TakeDamage(damage);
         }
+        else if (enemy.TakeDamage(damage))
+        {
+            OnEnemyKill(enemy);
+            PlayerStats.Instance.AddGunSuper(2f);
+        }
+        Destroy(gameObject);  // TODO sfx/animation
     }
 
     private void OnEnemyKill(Enemy enemy)

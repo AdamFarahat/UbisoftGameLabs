@@ -56,7 +56,7 @@ public class ShotgunBlast : MonoBehaviour
             if (Vector3.Angle(displacement, forward) < coneAngle && Vector3.Dot(displacement, forward) <= interpRange) // enemy is within cone range
             {
                 Enemy enemy = hit.GetComponentInParent<Enemy>();
-                if (enemy != null && !enemiesHit.Contains(enemy))
+                if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
                 {
                     enemiesHit.Add(enemy);
                     if (enemy.TakeDamage(damage))
