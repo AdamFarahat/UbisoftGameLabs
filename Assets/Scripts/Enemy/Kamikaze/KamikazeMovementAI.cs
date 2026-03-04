@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class MeleeMovementAI : MonoBehaviour
+public class KamikazeMovementAI : MonoBehaviour
 {
     [SerializeField] private float initialLaneDistance = 300f;
-    [SerializeField] private float damage = 10f;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float laneStayPeriod = 1.5f;
 
     private LaneBound laneBound;
 
@@ -30,9 +30,11 @@ public class MeleeMovementAI : MonoBehaviour
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
 
+        // TODO switch lanes randomly
+
         if(laneBound.LaneDistance <= 0f)
         {
-            playerStats.TakeDamage(damage);
+            // TODO stun explosion
         }
     }
 }
