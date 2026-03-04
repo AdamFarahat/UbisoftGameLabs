@@ -7,7 +7,6 @@ public class Pistol : Gun
         if (!PreStartFiring())
             return;
 
-        Debug.Log("StartFiring pistol!");
         InstantiateBullet();
     }
 }
