@@ -2,18 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : Gun
+public class Revolver : Gun
 {
-    [Header("Shotgun")]
-    [SerializeField] private float spreadAngle = 45f;
-
     [Serializable]
     public class AltShot
     {
-        public float heightScale;
+        public float velocity;
+        public int damage;
         public float chargeTime;
     }
 
+    [Header("Revolver")]
     [SerializeField] private List<AltShot> altShots = new();
 
     private bool charging = false;
@@ -37,15 +36,15 @@ public class Shotgun : Gun
             return;
         charging = false;
 
-        ShotgunBlast blast = InstantiateShotgunBlast();
-        blast.coneAngle = spreadAngle;
+        Bullet bullet = InstantiateBullet();
 
         float chargeTime = Time.time - chargeStartTime;
         foreach (var altShot in altShots)
         {
             if (chargeTime < altShot.chargeTime)
                 break;
-            blast.heightScale = altShot.heightScale;
+            bullet.velocity = altShot.velocity;
+            bullet.damage = altShot.damage;
         }
     }
 
