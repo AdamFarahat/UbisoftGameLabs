@@ -21,6 +21,7 @@ public class SwordPlayerController : PlayerController
     bool canBlock = true;
     [SerializeField] private float blockCooldown = 3f;
     private float blockCooldownPercent = 0f;
+    public Action OnBlockCooldownReady;
 
     [Header("Parrying")]
     [SerializeField] private float parryBulletMultiplier = 2.0f;
@@ -214,6 +215,7 @@ public class SwordPlayerController : PlayerController
         }
         blockCooldownPercent = 0f;
         canBlock = true;
+        OnBlockCooldownReady?.Invoke();
     }
 
     protected override void OnStunStart()

@@ -41,18 +41,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amount: 0.68
+    - _Amount: 0.08
     - _AmountLeft: 0
     - _ColorMask: 15
+    - _Emission: 5
+    - _OverEmissionMultiplier: 2
+    - _PulseSpeed: 1.5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
+    - _TimeHitZero: 0
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _CooldownColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    - _Emission: {r: 2.1185474, g: 0.24697353, b: 0.044367444, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

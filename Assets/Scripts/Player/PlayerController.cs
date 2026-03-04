@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
@@ -13,10 +14,11 @@ public abstract class PlayerController : MonoBehaviour
 
     private int score = 0;
     private float continuousMultiplier = 1f;
-    private int discreteMultiplierIndex = 0;
+    [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
     public int Score => score;
+    public UnityEvent OnDiscreteMultiplierChange;
 
     protected PlayerInput playerInput;
     protected LaneBound laneBound;
@@ -41,7 +43,6 @@ public abstract class PlayerController : MonoBehaviour
         discreteMultipliers.Sort();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
         playerInput.actions.Enable();
@@ -70,6 +71,24 @@ public abstract class PlayerController : MonoBehaviour
     public float GetLaneIndex()
     {
         return laneBound.LaneIndex;
+    }
+
+    public float GetLaneDistance()
+    {
+        return laneBound.LaneDistance;
+    }
+
+    public static float PlayerLine
+    {
+        get
+        {
+            float line = 0f;
+            if (GunPlayerController.Instance != null)
+                line += 0.5f * GunPlayerController.Instance.GetLaneDistance();
+            if (SwordPlayerController.Instance != null)
+                line += 0.5f * SwordPlayerController.Instance.GetLaneDistance();
+            return line;
+        }
     }
 
     public virtual float GetCooldownPercent()
@@ -133,11 +152,23 @@ public abstract class PlayerController : MonoBehaviour
         int index = discreteMultipliers.BinarySearch(continuousMultiplier);
         if (index < 0)
             index = ~index - 1;
-        discreteMultiplierIndex = Math.Max(index, 0);
+        if (index < 0)
+            index = 0;
+        if (index != discreteMultiplierIndex)
+        {
+            discreteMultiplierIndex = index;
+            OnDiscreteMultiplierChange?.Invoke();
+        }
     }
 
     public void AddContinuousMultiplier(float deltaMultiplier)
     {
         SetContinuousMultiplier(continuousMultiplier + deltaMultiplier);
+    }
+
+    [ContextMenu("Test Multiplier")]
+    public void TestMultiplier()
+    {
+        OnDiscreteMultiplierChange?.Invoke();
     }
 }

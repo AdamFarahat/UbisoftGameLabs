@@ -7,80 +7,87 @@ public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
+    private ScoreManagerSO scoreManagerSO;
+    private PlayerStats playerStats;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Image healthBarUI;
+    [SerializeField] private Image superUI;
     [SerializeField] private Image gunPlayerCooldownUI;
-    [SerializeField] private Image gunPlayerPowerBarUI;
     [SerializeField] private Image gunMultiplierUI;
     [SerializeField] private Image swordPlayerCooldownUI;
-    [SerializeField] private Image swordPlayerPowerBarUI;
     [SerializeField] private Image swordMultiplierUI;
 
-    [SerializeField] private Image superUI;
 
-    // temp
     float health = 1.0f;
-
     float lerpSpeed = 0.1f;
 
-
-
     private readonly int amountID = Shader.PropertyToID("_Amount");
-
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
     
 
     void Awake()
-    {
-        gunPlayerController = GunPlayerController.Instance;
-        swordPlayerController = SwordPlayerController.Instance;
+    {   
         Assert.IsNotNull(healthBarUI);
-        //Assert.IsNotNull(scoreText);  TODO uncomment
+        Assert.IsNotNull(superUI);
+        Assert.IsNotNull(scoreText);
 
         Assert.IsNotNull(gunMultiplierUI);
         Assert.IsNotNull(gunPlayerCooldownUI);
-        Assert.IsNotNull(gunPlayerPowerBarUI);
 
         Assert.IsNotNull(swordMultiplierUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
-        Assert.IsNotNull(swordPlayerPowerBarUI);
         
 
         Assert.IsNotNull(healthBarUI.material);
+        Assert.IsNotNull(superUI.material);
 
         Assert.IsNotNull(gunMultiplierUI.material);
         Assert.IsNotNull(gunPlayerCooldownUI.material);
-        Assert.IsNotNull(gunPlayerPowerBarUI.material);
 
         Assert.IsNotNull(swordMultiplierUI.material);
-        Assert.IsNotNull(superUI.material);
         Assert.IsNotNull(swordPlayerCooldownUI.material);
-        Assert.IsNotNull(swordPlayerPowerBarUI.material);
     }
 
     void Start()
     {
+        gunPlayerController = GunPlayerController.Instance;
+        swordPlayerController = SwordPlayerController.Instance;
+        scoreManagerSO = ScoreManagerSO.Instance;
+        playerStats = PlayerStats.Instance;
+
+        if (gunPlayerController == null)
+            Debug.LogWarning("GunPlayerController instance not found. UI will not be updated.");
+        if (swordPlayerController == null)
+            Debug.LogWarning("SwordPlayerController instance not found. UI will not be updated.");
+        if (scoreManagerSO == null)
+            Debug.LogWarning("ScoreManagerSO instance not found. Score UI will not be updated.");
+        if (playerStats == null)
+            Debug.LogWarning("PlayerStats instance not found. Health UI will not be updated.");
+
         // Create new instances so as not to change the original mats
         healthBarUI.material = new Material(healthBarUI.material);
-
 
         superUI.material.SetFloat(leftAmountID, 0f);
         superUI.material.SetFloat(rightAmountID, 0f);
 
         gunMultiplierUI.material = new Material(gunMultiplierUI.material);
         gunPlayerCooldownUI.material = new Material(gunPlayerCooldownUI.material);
-        gunPlayerPowerBarUI.material = new Material(gunPlayerPowerBarUI.material);
 
         swordMultiplierUI.material = new Material(swordMultiplierUI.material);
         swordPlayerCooldownUI.material = new Material(swordPlayerCooldownUI.material);
-        swordPlayerPowerBarUI.material = new Material(swordPlayerPowerBarUI.material);   
+
+        if (gunPlayerController != null)
+            gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
+
+        if (swordPlayerController != null)
+            swordPlayerController.OnBlockCooldownReady += TriggerSwordCooldownPulse;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Update the materials
+        // Update the materials. If the required instance doesnt exist, simply ignore
 
         if (gunPlayerController != null)
         {
@@ -89,21 +96,15 @@ public class UIManager : MonoBehaviour
 
             float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
             gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+
             float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
             float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
             superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
-
-            // float getPowerBarPercent = gunPlayerController.GetPowerBarPercent();
-            float getPowerBarPercent = 0.0f; // temp
-            gunPlayerPowerBarUI.material.SetFloat(leftAmountID, getPowerBarPercent);
-        }
-        else
-        {
-            Debug.LogWarning("GunPlayerController not found. Gun cooldown and multiplier UI will not be updated.");
         }
 
         if (swordPlayerController != null)
         {   
+            
             float swordCooldown = swordPlayerController.GetCooldownPercent();
             swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
 
@@ -113,21 +114,19 @@ public class UIManager : MonoBehaviour
             float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
             float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), lerpSpeed);
             superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
-            float getSwordPowerBarPercent = 0.75f; // temp
-            swordPlayerPowerBarUI.material.SetFloat(rightAmountID, getSwordPowerBarPercent);
         }
-        else
+
+        if (scoreManagerSO != null)
         {
-            Debug.LogWarning("SwordPlayerController not found. Sword cooldown and multiplier UI will not be updated.");
+            float score = ScoreManagerSO.CalculateOverallTeamScore();
+            scoreText.text = score.ToString();
         }
 
-        health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
-        // float health = getHealth from playerController
-        healthBarUI.material.SetFloat(amountID, health);   
-
-        int score = 12345; // temp
-        // int score = 0; get score from score script
-        //scoreText.text = score.ToString();  TODO uncomment
+        if (playerStats != null)
+        {
+            health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
+            healthBarUI.material.SetFloat(amountID, health);   
+        }   
     }
     float ConvertMultiplierToUIValue(float value)
     {
@@ -146,6 +145,28 @@ public class UIManager : MonoBehaviour
                 break;
         }
         return fillAmount;
+    }
+
+    private void OnDestroy()
+    {
+        // Clean up the subscription if the UI is destroyed
+        if (gunPlayerController != null)
+            gunPlayerController.OnGrenadeCooldownReady -= TriggerGunCooldownPulse;
+
+        if (swordPlayerController != null)
+            swordPlayerController.OnBlockCooldownReady -= TriggerSwordCooldownPulse;
+    }
+
+    private void TriggerGunCooldownPulse()
+    {
+        // Start the stopwatch for the Shader Graph pulse animation
+        gunPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
+    }
+
+    private void TriggerSwordCooldownPulse()
+    {
+        // Start the stopwatch for the Shader Graph pulse animation
+        swordPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
     }
 }
 

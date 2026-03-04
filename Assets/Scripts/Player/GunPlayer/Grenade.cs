@@ -5,12 +5,12 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
-    [SerializeField] private float gravity = 100f;
-    [SerializeField] private Vector3 initialDirection = new(0f, 1f, 1f);
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
 
-    public float velocity = 100f;
+    public float gravity = 100f;
+    public Vector3 initialDirection = new(0f, 1f, 1f);
+    public float range = 100f;
     private float verticalVelocity = 0f;
     private float forwardVelocity = 0f;
     private bool exploding = false;
@@ -20,6 +20,8 @@ public class Grenade : MonoBehaviour
     private void Start()
     {
         initialDirection.Normalize();
+
+        float velocity = Mathf.Sqrt((0.5f * range * gravity) / (initialDirection.y * initialDirection.z));
         verticalVelocity = velocity * initialDirection.y;
         forwardVelocity = velocity * initialDirection.z;
     }

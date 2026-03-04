@@ -56,7 +56,9 @@ Material:
     - _WaveFrequency: -13
     - _WaveSpeed: 2
     m_Colors:
+    - _Bottom_Color: {r: 0.91194963, g: 0, b: 0.66780573, a: 1}
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.5058824, b: 0.7568628, a: 1}
+    - _Top_color: {r: 1, g: 0.66352195, b: 0.82694954, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class MeleeMovementAI : MonoBehaviour
+public class MeleeGruntMovementAI : MonoBehaviour
 {
     [SerializeField] private float initialLaneDistance = 300f;
     [SerializeField] private float damage = 10f;
