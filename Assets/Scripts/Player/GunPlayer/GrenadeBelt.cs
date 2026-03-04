@@ -42,9 +42,8 @@ public class GrenadeBelt : MonoBehaviour
         else if (cooldown > 0f)
         {
             cooldown -= Time.deltaTime;
-
-            SyncCrosshairsPosition();
         }
+        SyncCrosshairsPosition();
     }
 
     public void ChargeThrow()
