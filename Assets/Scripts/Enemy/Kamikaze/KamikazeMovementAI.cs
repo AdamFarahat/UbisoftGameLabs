@@ -9,14 +9,13 @@ public class KamikazeMovementAI : MonoBehaviour
 
     private LaneBound laneBound;
 
-    private PlayerStats playerStats;
+    private float age = 0f;
+    private float nextLaneSwitchTime = 0f;
 
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
-        playerStats = FindFirstObjectByType<PlayerStats>();
-        Assert.IsNotNull(playerStats);
 
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
@@ -24,15 +23,33 @@ public class KamikazeMovementAI : MonoBehaviour
     private void ResetState()
     {
         laneBound.LaneDistance = initialLaneDistance;
+        age = 0f;
+        nextLaneSwitchTime = laneStayPeriod;
+    }
+
+    private void Start()
+    {
+        nextLaneSwitchTime = laneStayPeriod;
     }
 
     private void Update()
     {
+        age += Time.deltaTime;
         laneBound.LaneDistance -= speed * Time.deltaTime;
 
-        // TODO switch lanes randomly
+        if (age >= nextLaneSwitchTime)
+        {
+            nextLaneSwitchTime += laneStayPeriod;
 
-        if(laneBound.LaneDistance <= 0f)
+            if (laneBound.LaneIndex == 0)
+                laneBound.MoveToLane(laneBound.LaneIndex + 1);
+            else if (laneBound.LaneIndex == LaneConfigSO.Instance.GetNumberOfLanes() - 1)
+                laneBound.MoveToLane(laneBound.LaneIndex - 1);
+            else
+                laneBound.MoveToLane(laneBound.LaneIndex + Random.Range(0, 2) * 2 - 1);
+        }
+
+        if (laneBound.LaneDistance <= )
         {
             // TODO stun explosion
         }
