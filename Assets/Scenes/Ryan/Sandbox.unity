@@ -348,6 +348,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.02705395
       objectReference: {fileID: 0}
+    - target: {fileID: 1021790831313023200, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 12.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021790831313023200, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -30
+      objectReference: {fileID: 0}
     - target: {fileID: 2486785308087261937, guid: f28351d2296f19d44ba263d668a710b1, type: 3}
       propertyPath: m_Name
       value: Collision
