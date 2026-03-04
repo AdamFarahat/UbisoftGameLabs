@@ -73,6 +73,24 @@ public abstract class PlayerController : MonoBehaviour
         return laneBound.LaneIndex;
     }
 
+    public float GetLaneDistance()
+    {
+        return laneBound.LaneDistance;
+    }
+
+    public static float PlayerLine
+    {
+        get
+        {
+            float line = 0f;
+            if (GunPlayerController.Instance != null)
+                line += 0.5f * GunPlayerController.Instance.GetLaneDistance();
+            if (SwordPlayerController.Instance != null)
+                line += 0.5f * SwordPlayerController.Instance.GetLaneDistance();
+            return line;
+        }
+    }
+
     public virtual float GetCooldownPercent()
     {
         throw new NotImplementedException();
