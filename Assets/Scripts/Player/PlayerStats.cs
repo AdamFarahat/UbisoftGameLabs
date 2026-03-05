@@ -111,6 +111,11 @@ public class PlayerStats : MonoBehaviour
     {
         isSuperActive = true;
         superCoroutine = StartCoroutine(SuperDuration());
+        if(awaitingSuperCoroutine != null)
+        {
+            StopCoroutine(awaitingSuperCoroutine);
+            awaitingSuperCoroutine = null;
+        }
     }
 
     private IEnumerator AwaitingSuper()
@@ -144,6 +149,10 @@ public class PlayerStats : MonoBehaviour
             swordSuperPercent = currentSwordSuper / statDenominator;
             yield return null;
         }
+        isSuperActive = false;
+        gunSuperPrepared = false;
+        swordSuperPrepared = false;
+        superCoroutine = null;
     }
 
     // Update is called once per frame
