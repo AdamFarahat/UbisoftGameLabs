@@ -27,12 +27,12 @@ public class ScoreManagerSO : ScriptableObject
     /// For now, we do not store the score somewhere the calculation cannot be done outside of the level.
     /// </summary>
     /// <returns>Final score that should be displayed</returns>
-    public static float CalculateOverallTeamScore()
+    public static int CalculateOverallTeamScore()
     {
         float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
         float average = totalScore / (float)(numberOfPlayers);
-        float teamMultiplier = _instance.TEAM_MULTIPLIER_BASE / (Mathf.Abs(GunPlayerController.Instance.Score - average)
+        float teamMultiplier = average == 0 ? 0 : _instance.TEAM_MULTIPLIER_BASE / (Mathf.Abs(GunPlayerController.Instance.Score - average)
             + Mathf.Abs(SwordPlayerController.Instance.Score - average));
-        return teamMultiplier * totalScore;
+        return (int)(teamMultiplier * totalScore);
     }
 }
