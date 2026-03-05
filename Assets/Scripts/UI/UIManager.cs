@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
 
         if (scoreManagerSO != null)
         {
-            float score = ScoreManagerSO.CalculateOverallTeamScore();
+            int score = ScoreManagerSO.CalculateOverallTeamScore();
             scoreText.text = score.ToString();
         }
 
