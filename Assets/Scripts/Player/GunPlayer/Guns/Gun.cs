@@ -7,10 +7,7 @@ public class Gun : MonoBehaviour
     [Header("Base")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePosition;
-    [SerializeField] protected float bulletVelocity = 100f;
-    [SerializeField] protected float bulletAcceleration = 10f;
-    [SerializeField] protected float bulletRange = 100f;
-    [SerializeField] private int bulletDamage = 10;
+    [SerializeField] protected int bulletDamage = 10;
     [SerializeField] protected float firingCooldown = 0.5f;
 
     private float cooldown = 0.0f;
@@ -53,27 +50,12 @@ public class Gun : MonoBehaviour
         return false;
     }
 
-    protected Bullet InstantiateBullet()
+    protected T InstantiateShot<T>() where T : class
     {
         GameObject go = Instantiate(bulletPrefab);
-        Bullet bullet = go.GetComponent<Bullet>();
-        Assert.IsNotNull(bullet);
-        bullet.transform.position = firePosition.position;
-        bullet.velocity = bulletVelocity;
-        bullet.acceleration = bulletAcceleration;
-        bullet.range = bulletRange;
-        bullet.damage = bulletDamage;
-        return bullet;
-    }
-
-    protected ShotgunBlast InstantiateShotgunBlast()
-    {
-        GameObject go = Instantiate(bulletPrefab);
-        ShotgunBlast blast = go.GetComponent<ShotgunBlast>();
-        Assert.IsNotNull(blast);
-        blast.transform.position = firePosition.position;
-        blast.range = bulletRange;
-        blast.damage = bulletDamage;
-        return blast;
+        go.transform.position = firePosition.position;
+        T shot = go.GetComponent<T>();
+        Assert.IsNotNull(shot);
+        return shot;
     }
 }

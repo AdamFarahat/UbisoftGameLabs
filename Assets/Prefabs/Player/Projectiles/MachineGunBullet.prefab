@@ -47,10 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037fda52958f74b4b918de6ab5fe0eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  velocity: 1
-  acceleration: 0
-  range: 100
+  velocity: 200
+  acceleration: 10
+  range: 500
   damage: 10
+  canPenetrateShield: 1
 --- !u!54 &59578646894539134
 Rigidbody:
   m_ObjectHideFlags: 0

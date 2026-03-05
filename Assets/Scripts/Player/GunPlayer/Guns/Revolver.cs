@@ -36,7 +36,8 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        Bullet bullet = InstantiateBullet();
+        Bullet bullet = InstantiateShot<Bullet>();
+        bullet.damage = bulletDamage;
 
         float chargeTime = Time.time - chargeStartTime;
         foreach (var altShot in altShots)
