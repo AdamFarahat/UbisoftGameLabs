@@ -333,9 +333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pistol
   bulletPrefab: {fileID: 97644797981636705, guid: 941f49f747e8ae44d8e359a3d155c025, type: 3}
   firePosition: {fileID: 882516828035149282}
-  bulletVelocity: 100
-  bulletAcceleration: 10
-  bulletRange: 300
   bulletDamage: 10
   firingCooldown: 0.5
   altShots:
@@ -359,9 +356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shotgun
   bulletPrefab: {fileID: 97644797981636705, guid: b898fd445e8e07d40b5fc9a74df98c34, type: 3}
   firePosition: {fileID: 882516828035149282}
-  bulletVelocity: 200
-  bulletAcceleration: 200
-  bulletRange: 100
   bulletDamage: 50
   firingCooldown: 1
   spreadAngle: 15
@@ -384,13 +378,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MachineGun
   bulletPrefab: {fileID: 97644797981636705, guid: ac7ebac81e0fa6c4ca130ef05441315b, type: 3}
   firePosition: {fileID: 882516828035149282}
-  bulletVelocity: 200
-  bulletAcceleration: 10
-  bulletRange: 300
   bulletDamage: 1
   firingCooldown: 0.1
   maxSpreadAngle: 0.5
   spreadReduction: 2
+  overheatIncreaseRate: 0.2
+  overheatDecreaseRate: 0.4
+  overheatFailDuration: 2
 --- !u!1 &7286659177577392852
 GameObject:
   m_ObjectHideFlags: 0

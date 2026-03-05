@@ -12,12 +12,12 @@ public class Gun : MonoBehaviour
 
     private float cooldown = 0.0f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Assert.IsNotNull(bulletPrefab);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (cooldown > 0.0f)
             cooldown -= Time.deltaTime;
