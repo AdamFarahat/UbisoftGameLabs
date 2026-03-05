@@ -9,11 +9,16 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    [Header("Input")]
+    [SerializeField] private float switchLaneBufferDuration = 0.1f;
+    private Coroutine switchLaneBufferRoutine = null;
+
     private Coroutine stunRoutine = null;
     public bool Stunned => stunRoutine != null;
 
     private int score = 0;
     private float continuousMultiplier = 1f;
+    [Header("Score")]
     [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
@@ -52,20 +57,40 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
-        if (Stunned)
-            return;
-
-        if (laneBound.LaneIndex > 0)
-            laneBound.MoveToLane(laneBound.LaneIndex - 1);
+        MoveToLane((int index) => { return index - 1; });
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
+        MoveToLane((int index) => { return index + 1; });
+    }
+
+    private void MoveToLane(Func<int, int> laneFn)
+    {
         if (Stunned)
             return;
 
-        if (laneBound.LaneIndex < LaneConfigSO.Instance.GetNumberOfLanes() - 1)
-            laneBound.MoveToLane(laneBound.LaneIndex + 1);
+        float buffer = laneBound.SwitchLaneDurationLeft();
+        if (buffer == 0f)
+        {
+            int lane = laneFn(laneBound.LaneIndex);
+            if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+                laneBound.MoveToLane(lane);
+        }
+        else if (buffer < switchLaneBufferDuration && switchLaneBufferRoutine == null)
+        {
+            IEnumerator Routine()
+            {
+                yield return new WaitForSeconds(buffer);
+
+                int lane = laneFn(laneBound.LaneIndex);
+                if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+                    laneBound.MoveToLane(lane);
+                switchLaneBufferRoutine = null;
+            }
+
+            switchLaneBufferRoutine = StartCoroutine(Routine());
+        }
     }
 
     public float GetLaneIndex()
