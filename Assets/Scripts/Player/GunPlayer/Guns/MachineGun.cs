@@ -15,9 +15,9 @@ public class MachineGun : Gun
         
         float spread = Random.Range(-1f, 1f);
         spread = maxSpreadAngle * Mathf.Sign(spread) * (1f - Mathf.Pow(1f - Mathf.Abs(spread), spreadReduction));
-        Bullet bullet = InstantiateBullet();
+        Bullet bullet = InstantiateShot<Bullet>();
+        bullet.damage = bulletDamage;
         bullet.transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
-        bullet.canPenetrateShield = true;
         holdingCooldown = firingCooldown;
     }
 

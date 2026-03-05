@@ -3,10 +3,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float velocity = 100f;
-    public float acceleration = 0f;
-    public float range = 100f;
+    [SerializeField] private float acceleration = 0f;
+    [SerializeField] private float range = 400f;
+    [SerializeField] private bool canPenetrateShield = false;
     public int damage = 10;
-    public bool canPenetrateShield = false;
 
     private float distance = 0f;
 
