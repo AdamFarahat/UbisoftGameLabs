@@ -7,12 +7,16 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private float staggerDelay = 0.2f;
+    [SerializeField] private UIAnimation title;
     private ButtonUIAnimation[] buttons;
 
     void Awake()
     {
         Assert.IsNotNull(menuCanvas);
+        Assert.IsNotNull(title);
         buttons = menuCanvas.GetComponentsInChildren<ButtonUIAnimation>();
+
+        title.PlaceOffScreen();
 
         foreach (ButtonUIAnimation button in buttons)
         {
@@ -23,6 +27,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(AnimateInSequence());
+        title.AnimateIn();
     }
 
     public void AnimateButtonsOut()
