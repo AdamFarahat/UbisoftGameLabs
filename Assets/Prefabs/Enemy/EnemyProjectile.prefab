@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4640040823847027976}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.15293851, y: -0.23034635, z: 0.80242324, w: 0.5288359}
+  m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
   m_LocalPosition: {x: 0.9781475, y: 0.41582334, z: -1.6942015}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 0, y: 0, z: -2}
+  cameraOffset: {x: 0, y: 0, z: -1}
   rotation: 110
 --- !u!1 &7001779660354109463
 GameObject:

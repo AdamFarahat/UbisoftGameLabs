@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 0, y: 0, z: -1.5}
+  cameraOffset: {x: 0, y: 0, z: 0}
   rotation: 0
 --- !u!1 &6679675405416162139
 GameObject:
