@@ -48,7 +48,7 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
         isExiting = false;        
     }
 
-   public override void AnimateOffScreen()
+   public override void AnimateOut()
     {
         if (isExiting) return; 
         isExiting = true; 
@@ -57,15 +57,16 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
         if (isSelected)
         anticipationPositionPin.anchoredPosition += new Vector2(selectedBonusOffset, 0);
 
-        base.AnimateOffScreen();
+        base.AnimateOut();
     }
 
-    public override void AnimateOnScreen()
+    public override Sequence AnimateIn()
     {
-        if (isExiting) return; 
+        Sequence sequence = base.AnimateIn();
         isExiting = true; 
+        sequence.OnComplete(() => isExiting = false);
 
-        base.AnimateOnScreen();
+        return sequence;
     }
 
 }

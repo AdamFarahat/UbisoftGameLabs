@@ -11,14 +11,13 @@ public class UIAnimation : MonoBehaviour
     [SerializeField] protected RectTransform anticipationPositionPin;
     [SerializeField] private RectTransform overshootPositionPin;
     [SerializeField] private float anticipationDuration = 0.2f;
-    [SerializeField] private float actionDuration = 0.3f;
+    [SerializeField] private float actionOutDuration = 0.3f;
+    [SerializeField] private float actionInDuration = 0.6f;
     [SerializeField] private float overshootDuration = 0.2f;
 
-    void Start()
-    {
-        cachedStartingPos = rectTransform.anchoredPosition;
-        // StartCoroutine(waitSec());
-    }
+    public float ActionDuration { get => actionOutDuration; set => actionOutDuration = value; }
+
+
     // --- ANIMATION LOGIC --
 
     protected virtual void OnDisable()
@@ -28,7 +27,8 @@ public class UIAnimation : MonoBehaviour
         rectTransform.anchoredPosition = cachedStartingPos;
     }
 
-    public virtual void AnimateOffScreen()
+    // Animate UI with a slight anticipation 
+    public virtual void AnimateOut()
     {
         rectTransform.DOKill();
         Sequence offScreenSeq = DOTween.Sequence();
@@ -37,17 +37,26 @@ public class UIAnimation : MonoBehaviour
         offScreenSeq.Append(rectTransform.DOAnchorPos(anticipationPositionPin.anchoredPosition, anticipationDuration).SetEase(Ease.OutQuad));
 
         // EXIT: Move completely off screen.
-        offScreenSeq.Append(rectTransform.DOAnchorPos(offscreenPositionPin.anchoredPosition, actionDuration).SetEase(Ease.InQuad));
+        offScreenSeq.Append(rectTransform.DOAnchorPos(offscreenPositionPin.anchoredPosition, actionOutDuration).SetEase(Ease.InQuad));
     }
 
-    public virtual void AnimateOnScreen()
+    // Animate UI with a slight overshoot
+    public virtual Sequence AnimateIn()
     {
         rectTransform.DOKill();
         Sequence onScreenSeq = DOTween.Sequence();
 
         // OVERSHOOT: Move a little too forward
-        onScreenSeq.Append(rectTransform.DOAnchorPos(overshootPositionPin.anchoredPosition, actionDuration).SetEase(Ease.OutQuad));
+        onScreenSeq.Append(rectTransform.DOAnchorPos(overshootPositionPin.anchoredPosition, actionInDuration).SetEase(Ease.OutQuad));
         // ENTER: Move onto the screen
         onScreenSeq.Append(rectTransform.DOAnchorPos(cachedStartingPos, overshootDuration).SetEase(Ease.InQuad));
+        return onScreenSeq;
+    }
+
+    // Grabs the initial position and places the buttons off screen
+    public void PlaceOffScreen()
+    {
+        cachedStartingPos = rectTransform.anchoredPosition;
+        rectTransform.anchoredPosition = offscreenPositionPin.anchoredPosition;
     }
 }

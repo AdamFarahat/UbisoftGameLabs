@@ -13,21 +13,40 @@ public class MenuManager : MonoBehaviour
     {
         Assert.IsNotNull(menuCanvas);
         buttons = menuCanvas.GetComponentsInChildren<ButtonUIAnimation>();
+
+        foreach (ButtonUIAnimation button in buttons)
+        {
+            button.PlaceOffScreen();
+        }
+    }
+
+    void Start()
+    {
+        StartCoroutine(AnimateInSequence());
     }
 
     public void AnimateButtonsOut()
     {
-        StartCoroutine(AnimateSequence());
+        StartCoroutine(AnimateOutSequence());
     }
 
-    IEnumerator AnimateSequence()
+    IEnumerator AnimateOutSequence()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
             // If this is the button at index 0 (the selected one), give it the bonus!
             buttons[i].IsSelected = i == 0;
 
-            buttons[i].AnimateOffScreen();
+            buttons[i].AnimateOut();
+            yield return new WaitForSeconds(staggerDelay);
+        }
+    }
+
+    IEnumerator AnimateInSequence()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].AnimateIn();
             yield return new WaitForSeconds(staggerDelay);
         }
     }
@@ -38,10 +57,11 @@ public class MenuManager : MonoBehaviour
 
         for (int i = 0; i < buttons.Length; i++)
         {
+            // Find selected button
             if (button == buttons[i])
             {
                 index = i;
-                break; // We found it, stop looking
+                break;
             }
         }
 
