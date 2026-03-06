@@ -23,8 +23,8 @@ public class PoolObject : MonoBehaviour
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
-
     }
+
     public GameObject Spawn(Vector3 position, Quaternion rot)
     {
         GameObject tmp = null;
@@ -45,5 +45,4 @@ public class PoolObject : MonoBehaviour
         tmp.SetActive(true);
         return tmp;
     }
-
 }
