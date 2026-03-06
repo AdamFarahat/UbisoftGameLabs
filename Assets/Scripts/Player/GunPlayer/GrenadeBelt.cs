@@ -41,7 +41,14 @@ public class GrenadeBelt : MonoBehaviour
             throwChargeTime += Time.deltaTime;
         else if (cooldown > 0f)
         {
-            cooldown -= Time.deltaTime;
+            if (!PlayerStats.Instance.IsSuperActive())
+            {
+                cooldown -= Time.deltaTime; 
+            }
+            else
+            {
+                cooldown = 0f;
+            }
         }
         SyncCrosshairsPosition();
     }
@@ -52,7 +59,9 @@ public class GrenadeBelt : MonoBehaviour
         {
             SetThrowing(true);
             throwChargeTime = 0f;
-            cooldown = throwCooldown;
+            if(!PlayerStats.Instance.IsSuperActive()){
+                cooldown = throwCooldown;
+            }
         }
     }
 
