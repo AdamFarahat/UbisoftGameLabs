@@ -28,7 +28,7 @@ public class UIAnimation : MonoBehaviour
     }
 
     // Animate UI with a slight anticipation 
-    public virtual void AnimateOut()
+    public virtual Sequence AnimateOut()
     {
         rectTransform.DOKill();
         Sequence offScreenSeq = DOTween.Sequence();
@@ -38,6 +38,7 @@ public class UIAnimation : MonoBehaviour
 
         // EXIT: Move completely off screen.
         offScreenSeq.Append(rectTransform.DOAnchorPos(offscreenPositionPin.anchoredPosition, actionOutDuration).SetEase(Ease.InQuad));
+        return offScreenSeq;
     }
 
     // Animate UI with a slight overshoot

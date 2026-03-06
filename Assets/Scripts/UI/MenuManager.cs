@@ -42,14 +42,25 @@ public class MenuManager : MonoBehaviour
         // Clear selection when animating out so the player can't keep navigating
         EventSystem.current.SetSelectedGameObject(null);
 
+        Sequence lastAnimation = null;
+
+
         for (int i = 0; i < buttons.Length; i++)
         {
             // If this is the button at index 0 (the selected one), give it the bonus!
             buttons[i].IsSelected = i == 0;
 
-            buttons[i].AnimateOut();
+            lastAnimation = buttons[i].AnimateOut();
             yield return new WaitForSeconds(staggerDelay);
         }
+
+        // Wait until the last button's sequence is finished
+        if (lastAnimation != null)
+        {
+            yield return lastAnimation.WaitForCompletion();
+        }
+
+        title.AnimateOut();
     }
 
     // Animate the buttons in staggered fashion
@@ -103,8 +114,6 @@ public class MenuManager : MonoBehaviour
         if (firstButtonTarget != null)
         {
             EventSystem.current.SetSelectedGameObject(firstButtonTarget.gameObject);
-            // Force hover forward
-            buttons[0].HoverForward();
         }
     }
 

@@ -40,16 +40,16 @@ public class ButtonUIAnimation : UIAnimation
         isExiting = false;        
     }
 
-   public override void AnimateOut()
+   public override Sequence AnimateOut()
     {
-        if (isExiting) return; 
+        if (isExiting) return null; 
         isExiting = true; 
 
         // Add bonus if it is selected
         if (isSelected)
         anticipationPositionPin.anchoredPosition += new Vector2(selectedBonusOffset, 0);
 
-        base.AnimateOut();
+        return base.AnimateOut();
     }
 
     public override Sequence AnimateIn()
