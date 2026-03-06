@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
-using System.Reflection;
 using TMPro;
+
 public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
