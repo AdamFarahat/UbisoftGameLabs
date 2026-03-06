@@ -653,6 +653,10 @@ PrefabInstance:
       propertyPath: m_text
       value: OPTIONS
       objectReference: {fileID: 0}
+    - target: {fileID: 4461345580936701795, guid: eabf27c661437774a994de29fd0c48ef, type: 3}
+      propertyPath: selectedBonusOffset
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4648904664458131305, guid: eabf27c661437774a994de29fd0c48ef, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -1271,6 +1275,10 @@ PrefabInstance:
     - target: {fileID: 1297623510719362662, guid: eabf27c661437774a994de29fd0c48ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461345580936701795, guid: eabf27c661437774a994de29fd0c48ef, type: 3}
+      propertyPath: selectedBonusOffset
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4648904664458131305, guid: eabf27c661437774a994de29fd0c48ef, type: 3}
       propertyPath: m_TargetGraphic

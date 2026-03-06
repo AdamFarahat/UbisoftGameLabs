@@ -25,15 +25,14 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             // If this is the button at index 0 (the selected one), give it the bonus!
-            // Otherwise, give it 0 extra push.
-            float bonus = (i == 0) ? buttons[i].SelectedBonusOffset : 0f;
-            
+            buttons[i].IsSelected = i == 0;
+
             buttons[i].AnimateOffScreen();
             yield return new WaitForSeconds(staggerDelay);
         }
     }
 
-    public void ReorderButtons(UIButtonHoverEffect button)
+    public void ReorderButtons(ButtonUIAnimation button)
     {
         int index = 0;
 

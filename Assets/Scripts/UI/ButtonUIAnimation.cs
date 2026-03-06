@@ -9,10 +9,12 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
     [SerializeField] private float hoverOffset;
     [SerializeField] private float selectedBonusOffset; 
     private bool isExiting = false; 
+    private bool isSelected = false; 
 
     public float HoverOffset { get => hoverOffset; set => hoverOffset = value; }
     public float HoverDuration { get => hoverDuration; set => hoverDuration = value; }
     public float SelectedBonusOffset { get => selectedBonusOffset; set => selectedBonusOffset = value; }
+    public bool IsSelected { get => isSelected; set => isSelected = value; }
 
 
     // --- MOUSE HOVER ---
@@ -50,6 +52,10 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
     {
         if (isExiting) return; 
         isExiting = true; 
+
+        // Add bonus if it is selected
+        if (isSelected)
+        anticipationPositionPin.anchoredPosition += new Vector2(selectedBonusOffset, 0);
 
         base.AnimateOffScreen();
     }

@@ -293,7 +293,7 @@ MonoBehaviour:
   overshootDuration: 0.2
   hoverDuration: 0.2
   hoverOffset: 30
-  selectedBonusOffset: 60
+  selectedBonusOffset: 100
 --- !u!224 &7492157896032333245 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7319754868183021343, guid: d6e4938c798c0974b949ca81972f6518, type: 3}

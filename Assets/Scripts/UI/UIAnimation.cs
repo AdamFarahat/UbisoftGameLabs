@@ -8,7 +8,7 @@ public class UIAnimation : MonoBehaviour
     protected Vector2 cachedStartingPos;
     [SerializeField] protected RectTransform rectTransform;
     [SerializeField] private RectTransform offscreenPositionPin;
-    [SerializeField] private RectTransform anticipationPositionPin;
+    [SerializeField] protected RectTransform anticipationPositionPin;
     [SerializeField] private RectTransform overshootPositionPin;
     [SerializeField] private float anticipationDuration = 0.2f;
     [SerializeField] private float actionDuration = 0.3f;
@@ -45,7 +45,9 @@ public class UIAnimation : MonoBehaviour
         rectTransform.DOKill();
         Sequence onScreenSeq = DOTween.Sequence();
 
+        // OVERSHOOT: Move a little too forward
         onScreenSeq.Append(rectTransform.DOAnchorPos(overshootPositionPin.anchoredPosition, actionDuration).SetEase(Ease.OutQuad));
-        onScreenSeq.Append(rectTransform.DOAnchorPos(cachedStartingPos, anticipationDuration).SetEase(Ease.InQuad));
+        // ENTER: Move onto the screen
+        onScreenSeq.Append(rectTransform.DOAnchorPos(cachedStartingPos, overshootDuration).SetEase(Ease.InQuad));
     }
 }
