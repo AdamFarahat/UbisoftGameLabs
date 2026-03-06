@@ -8,8 +8,6 @@ public class ScoreManagerSO : ScriptableObject
     
     private const int numberOfPlayers = 2;
     [SerializeField]
-    private float MaxTeamBasedMultiplier = 900.0f;
-    [SerializeField]
     private float SumOfSTDDevTreshold = 0.001f;
     private static ScoreManagerSO _instance;
     public static ScoreManagerSO Instance
@@ -40,8 +38,8 @@ public class ScoreManagerSO : ScriptableObject
             + Mathf.Abs(SwordPlayerController.Instance.Score - average);
 
         float teamMultiplier = sumOfStdDev == 0 ? 0 
-            : sumOfStdDev <= _instance.SumOfSTDDevTreshold ? 
-                _instance.MaxTeamBasedMultiplier 
+            : sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
+                _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
               : _instance.TEAM_MULTIPLIER_BASE / (sumOfStdDev);
 
         return (int)(teamMultiplier * totalScore);
