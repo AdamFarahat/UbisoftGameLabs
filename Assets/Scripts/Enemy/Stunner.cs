@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Stunner : MonoBehaviour
 {
-    [SerializeField] private float stunTime = 1f;
+    public float stunTime = 1f;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolObject : MonoBehaviour
+public class ProjectilePool : MonoBehaviour
 {
-    public static PoolObject SharedInstance;
+    public static ProjectilePool SharedInstance;
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool = 20;
