@@ -60,5 +60,4 @@ public class ButtonUIAnimation : UIAnimation
 
         return sequence;
     }
-
 }
