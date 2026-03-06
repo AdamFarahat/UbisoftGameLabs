@@ -52,7 +52,6 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool attackButtonPressedSuper = false;
     private bool blockButtonPressedSuper = false;
-    private bool readyForSuper = false;
     private Coroutine resetAttackButtonPressedSuperCoroutine = null;
     private Coroutine resetBlockButtonPressedSuperCoroutine = null;
 
