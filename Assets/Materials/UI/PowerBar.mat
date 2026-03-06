@@ -43,7 +43,7 @@ Material:
     m_Floats:
     - _ColorMask: 15
     - _LeftAmount: 1
-    - _RightAmount: 0.55
+    - _RightAmount: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -53,7 +53,7 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _LeftColor: {r: 1, g: 0.69482493, b: 0.34905648, a: 1}
-    - _RightColor: {r: 0.64465404, g: 0.94923633, b: 1, a: 1}
+    - _LeftColor: {r: 0.5251572, g: 0.98338103, b: 1, a: 1}
+    - _RightColor: {r: 1, g: 0.5566066, b: 0.53144646, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
