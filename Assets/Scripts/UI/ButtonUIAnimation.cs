@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using System.Collections;
 
-public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+public class ButtonUIAnimation : UIAnimation
 {
     [SerializeField] private float hoverDuration = 0.2f;
     [SerializeField] private float hoverOffset;
@@ -17,16 +17,8 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
     public bool IsSelected { get => isSelected; set => isSelected = value; }
 
 
-    // --- MOUSE HOVER ---
-    public void OnPointerEnter(PointerEventData eventData) => HoverForward();
-    public void OnPointerExit(PointerEventData eventData) => HoverBack();
-
-    // --- CONTROLLER/KEYBOARD SELECT ---
-    public void OnSelect(BaseEventData eventData) => HoverForward();
-    public void OnDeselect(BaseEventData eventData) => HoverBack();
-
     // --- ANIMATION LOGIC ---
-    private void HoverForward()
+    public void HoverForward()
     {
         if (isExiting) return; 
 
@@ -34,7 +26,7 @@ public class ButtonUIAnimation : UIAnimation, IPointerEnterHandler, IPointerExit
         rectTransform.DOAnchorPos(cachedStartingPos + new Vector2(hoverOffset, 0.0f), hoverDuration).SetEase(Ease.OutQuad);
     }
 
-    private void HoverBack()
+    public void HoverBack()
     {
         if (isExiting) return; 
 
