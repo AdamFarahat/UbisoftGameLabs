@@ -70,7 +70,7 @@ public class MenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
 
         // Small delay before animating everything in
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         
         Sequence titleAnimation = title.AnimateIn();
 

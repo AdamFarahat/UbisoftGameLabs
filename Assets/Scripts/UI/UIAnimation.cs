@@ -47,9 +47,9 @@ public class UIAnimation : MonoBehaviour
         rectTransform.DOKill();
         Sequence onScreenSeq = DOTween.Sequence();
 
-        // OVERSHOOT: Move a little too forward
+        // ENTER/OVERSHOOT: Move a little too forward
         onScreenSeq.Append(rectTransform.DOAnchorPos(overshootPositionPin.anchoredPosition, actionInDuration).SetEase(Ease.OutQuad));
-        // ENTER: Move onto the screen
+        // COMPENSATE: Move back into place
         onScreenSeq.Append(rectTransform.DOAnchorPos(cachedStartingPos, overshootDuration).SetEase(Ease.InQuad));
         return onScreenSeq;
     }
