@@ -228,7 +228,10 @@ public class SwordPlayerController : PlayerController
             {
                 yield break;
             }
-            parryTimer += Time.deltaTime;
+            if(!PlayerStats.Instance.IsSuperActive())
+            {
+                parryTimer += Time.deltaTime;
+            }
             yield return null;
         }
         if (state == SwordPlayerStates.Parrying)
@@ -292,7 +295,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Blocking:
                     if (canBlock)
                     {
-                        if (!enemy.HasShield() && enemy.OnParried())
+                        if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);

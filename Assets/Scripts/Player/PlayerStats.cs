@@ -89,12 +89,21 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(IsSuperActive())
+        {
+            return;
+        }
+
         currentHealth -= damage;
         healthPercent = currentHealth / maxHealth;
     }
 
     public void AddGunSuper(float amount)
     {
+        if(IsSuperActive())
+        {
+            return;
+        }
         currentGunSuper += amount;
         currentGunSuper = Mathf.Clamp(currentGunSuper, 0f, statDenominator);
         gunSuperPercent = currentGunSuper / statDenominator;
@@ -102,6 +111,10 @@ public class PlayerStats : MonoBehaviour
 
     public void AddSwordSuper(float amount)
     {
+        if (IsSuperActive())
+        {
+            return;
+        }
         currentSwordSuper += amount;
         currentSwordSuper = Mathf.Clamp(currentSwordSuper, 0f, statDenominator);
         swordSuperPercent = currentSwordSuper / statDenominator;
