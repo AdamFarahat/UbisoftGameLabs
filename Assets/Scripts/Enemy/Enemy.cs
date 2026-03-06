@@ -28,7 +28,8 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        ResetState();
+        if (TryGetComponent(out Poolable _))
+            ResetState();
     }
 
     private void Update()
