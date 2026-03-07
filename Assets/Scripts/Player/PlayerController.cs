@@ -123,7 +123,7 @@ public abstract class PlayerController : MonoBehaviour
 
     public void Stun(float stunTime)
     {
-        if (Stunned)
+        if (Stunned || PlayerStats.Instance.IsSuperActive())
             return;
 
         SetContinuousMultiplier(1f);
