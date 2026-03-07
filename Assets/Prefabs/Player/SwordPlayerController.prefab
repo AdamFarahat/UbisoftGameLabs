@@ -134,11 +134,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebe73ad8e302ac45b1eb393fea98855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordPlayerController
-  switchLaneDuration: 0.1
-  stunCooldown: 1
+  switchLaneBufferDuration: 0.1
+  discreteMultiplierIndex: 0
+  discreteMultipliers:
+  - 1
+  - 2
+  - 4
+  - 6
+  - 8
+  OnDiscreteMultiplierChange:
+    m_PersistentCalls:
+      m_Calls: []
   jumpSpeed: 100
   fallAcceleration: 500
   attackDuration: 0.5
   blockCooldown: 3
   parryBulletMultiplier: 2
   parryWindow: 0.5
+  blockingMultiplierGain: 0.2
+  attackingMultiplierGain: 0.6
+  parryingMultiplierGain: 0.8
