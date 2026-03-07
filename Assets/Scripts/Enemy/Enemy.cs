@@ -28,7 +28,8 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        ResetState();
+        if (enemyPool != null)
+            ResetState();
     }
 
     private void Update()

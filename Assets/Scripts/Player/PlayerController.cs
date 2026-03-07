@@ -78,16 +78,32 @@ public abstract class PlayerController : MonoBehaviour
         return laneBound.LaneDistance;
     }
 
+    public static bool AnyPlayerInLane(int laneIndex)
+    {
+        if (GunPlayerController.Instance != null && GunPlayerController.LaneIndex == laneIndex)
+            return true;
+        if (SwordPlayerController.Instance != null && SwordPlayerController.LaneIndex == laneIndex)
+            return true;
+        return false;
+    }
+
     public static float PlayerLine
     {
         get
         {
             float line = 0f;
+            int numPlayers = 0;
             if (GunPlayerController.Instance != null)
-                line += 0.5f * GunPlayerController.Instance.GetLaneDistance();
+            {
+                line += GunPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
             if (SwordPlayerController.Instance != null)
-                line += 0.5f * SwordPlayerController.Instance.GetLaneDistance();
-            return line;
+            {
+                line += SwordPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
+            return numPlayers > 0 ? line / numPlayers : line;
         }
     }
 

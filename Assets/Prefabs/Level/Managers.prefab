@@ -95,6 +95,7 @@ MonoBehaviour:
   - {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
   - {fileID: 8980648615144976386, guid: 974ddce8f3e889e419444b920b29dc78, type: 3}
+  - {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
   timeBetweenSpawns: 1
   maxEnemies: 5
 --- !u!114 &4656029755349261906
@@ -120,11 +121,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1484032459531476390, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44
+      value: -23.80768
+      objectReference: {fileID: 0}
+    - target: {fileID: 1484032459531476390, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.7227
       objectReference: {fileID: 0}
     - target: {fileID: 2794783739497482859, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 24.19232
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794783739497482859, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.7227
       objectReference: {fileID: 0}
     - target: {fileID: 3312594731699726645, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: laneIndex
@@ -144,23 +153,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5491217858857650882, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: 12.19232
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491217858857650882, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.7227
       objectReference: {fileID: 0}
     - target: {fileID: 6082639816472979849, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32
+      value: -11.80768
+      objectReference: {fileID: 0}
+    - target: {fileID: 6082639816472979849, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.7227
       objectReference: {fileID: 0}
     - target: {fileID: 7657731248892449586, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.19232
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7657731248892449586, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7657731248892449586, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.7227
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7657731248892449586, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -193,6 +210,14 @@ PrefabInstance:
     - target: {fileID: 8454485203999718993, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: laneIndex
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9060129593792959168, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.19232
+      objectReference: {fileID: 0}
+    - target: {fileID: 9060129593792959168, guid: 51af5186a49523548a3674555512db5a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.7227
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
