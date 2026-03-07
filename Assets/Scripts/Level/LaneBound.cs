@@ -8,11 +8,12 @@ public class LaneBound : MonoBehaviour
     [SerializeField] private float switchLaneDuration = 0.1f;
 
     private Coroutine switchLaneRoutine = null;
+    private float switchLaneStartTime = 0f;
 
-    public float LaneIndex
+    public int LaneIndex
     {
-        get => laneIndex;
-        set { laneIndex = Mathf.Clamp(value, 0f, LaneConfigSO.Instance.GetNumberOfLanes() - 1); SyncLane(); }
+        get => (int)laneIndex;
+        set { SetLaneIndex(value); }
     }
 
     public float LaneDistance
@@ -35,6 +36,12 @@ public class LaneBound : MonoBehaviour
         }
     }
 
+    private void SetLaneIndex(float index)
+    {
+        laneIndex = Mathf.Clamp(index, 0f, LaneConfigSO.Instance.GetNumberOfLanes() - 1);
+        SyncLane();
+    }
+
     private void SyncLane()
     {
         Vector3 position = LaneConfigSO.Instance.GetLanePosition(laneIndex, laneDistance);
@@ -42,23 +49,32 @@ public class LaneBound : MonoBehaviour
         transform.position = position;
     }
 
-    public void MoveToLane(float toIndex)
+    public void MoveToLane(int toIndex)
     {
         if (switchLaneRoutine != null)
             StopCoroutine(switchLaneRoutine);
         switchLaneRoutine = StartCoroutine(SwitchLanesRoutine(toIndex));
+        switchLaneStartTime = Time.time;
     }
 
-    private IEnumerator SwitchLanesRoutine(float toIndex)
+    private IEnumerator SwitchLanesRoutine(int toIndex)
     {
-        float fromIndex = LaneIndex;
+        float fromIndex = laneIndex;
         for (float t = 0f; t < switchLaneDuration; t += Time.deltaTime)
         {
             float a = Mathf.Clamp01(t / switchLaneDuration);
-            LaneIndex = Mathf.Lerp(fromIndex, toIndex, a);
+            SetLaneIndex(Mathf.Lerp(fromIndex, toIndex, a));
             yield return null;
         }
-        LaneIndex = toIndex;
+        SetLaneIndex(toIndex);
         switchLaneRoutine = null;
+    }
+
+    public float SwitchLaneDurationLeft()
+    {
+        if (switchLaneRoutine == null)
+            return 0f;
+        else
+            return switchLaneDuration - (Time.time - switchLaneStartTime);
     }
 }

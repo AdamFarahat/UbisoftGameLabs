@@ -37,7 +37,8 @@ public class Shotgun : Gun
             return;
         charging = false;
 
-        ShotgunBlast blast = InstantiateShotgunBlast();
+        ShotgunBlast blast = InstantiateShot<ShotgunBlast>();
+        blast.damage = bulletDamage;
         blast.coneAngle = spreadAngle;
 
         float chargeTime = Time.time - chargeStartTime;
