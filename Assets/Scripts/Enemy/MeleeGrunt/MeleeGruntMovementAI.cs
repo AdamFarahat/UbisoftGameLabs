@@ -30,7 +30,7 @@ public class MeleeGruntMovementAI : MonoBehaviour
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
 
-        if(laneBound.LaneDistance <= 0f)
+        if (laneBound.LaneDistance <= 0f)
         {
             playerStats.TakeDamage(damage);
         }

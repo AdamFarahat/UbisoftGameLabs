@@ -37,7 +37,7 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
             {
                 if (projObj != null)
                 {
-                    GameObject proj = PoolObject.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
+                    GameObject proj = ProjectilePool.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
                     if (proj != null && proj.TryGetComponent(out EnemyProjectile projectileComponent))
                     {
                         Vector3 direction = shootingTarget.transform.position - animator.transform.position;
