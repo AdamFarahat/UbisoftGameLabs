@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
-using System.Reflection;
 using TMPro;
+
 public class UIManager : MonoBehaviour
 {
     private GunPlayerController gunPlayerController;
@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
 
         if (scoreManagerSO != null)
         {
-            float score = ScoreManagerSO.CalculateOverallTeamScore();
+            int score = ScoreManagerSO.CalculateOverallTeamScore();
             scoreText.text = score.ToString();
         }
 

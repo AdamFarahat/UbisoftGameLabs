@@ -48,6 +48,13 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
+    [Header ("Super")]
+    [SerializeField] private float activateSuperWaitTime = 0.1f;
+    private bool attackButtonPressedSuper = false;
+    private bool blockButtonPressedSuper = false;
+    private Coroutine resetAttackButtonPressedSuperCoroutine = null;
+    private Coroutine resetBlockButtonPressedSuperCoroutine = null;
+
     protected override void Awake()
     {
         instance = this;
@@ -127,6 +134,19 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
+        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        {
+            Debug.Log("Attack button pressed with super ready");
+            //Set attack button pressed super to true
+            attackButtonPressedSuper = true;
+            if (blockButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Sword Player Activating Super Attack!");
+                //PlayerStats.Instance.ActivateSuper();
+                return;
+            }
+            resetAttackButtonPressedSuperCoroutine = StartCoroutine(ResetAttackButtonPressedSuper());
+        }
 
         if (state == SwordPlayerStates.Normal)
         {
@@ -151,6 +171,20 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
+        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
+        {
+            //Set block button pressed super to true
+            Debug.Log("Block button pressed with super ready");
+            blockButtonPressedSuper = true;
+            if (attackButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Sword Player Activating Super Attack!");
+                PlayerStats.Instance.PrepareSwordSuperReady(true);
+                return;
+            }
+            resetBlockButtonPressedSuperCoroutine = StartCoroutine(ResetBlockButtonPressedSuper());
+            
+        }
 
         Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
@@ -193,7 +227,10 @@ public class SwordPlayerController : PlayerController
             {
                 yield break;
             }
-            parryTimer += Time.deltaTime;
+            if(!PlayerStats.Instance.IsSuperActive())
+            {
+                parryTimer += Time.deltaTime;
+            }
             yield return null;
         }
         if (state == SwordPlayerStates.Parrying)
@@ -257,7 +294,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Blocking:
                     if (canBlock)
                     {
-                        if (!enemy.HasShield() && enemy.OnParried())
+                        if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);
@@ -289,5 +326,19 @@ public class SwordPlayerController : PlayerController
     {
         projectile.FlipDirection();
         projectile.speed *= parryBulletMultiplier;
+    }
+
+    private IEnumerator ResetAttackButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        attackButtonPressedSuper = false;
+        resetAttackButtonPressedSuperCoroutine = null;
+    }
+
+    private IEnumerator ResetBlockButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        blockButtonPressedSuper = false;
+        resetBlockButtonPressedSuperCoroutine = null;
     }
 }

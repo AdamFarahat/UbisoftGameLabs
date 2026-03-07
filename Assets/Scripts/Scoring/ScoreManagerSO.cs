@@ -5,9 +5,10 @@ using UnityEngine.Assertions;
 public class ScoreManagerSO : ScriptableObject
 {
     public float TEAM_MULTIPLIER_BASE = 20f;
-
+    
     private const int numberOfPlayers = 2;
-
+    [SerializeField]
+    private float SumOfSTDDevTreshold = 0.001f;
     private static ScoreManagerSO _instance;
     public static ScoreManagerSO Instance
     {
@@ -27,12 +28,20 @@ public class ScoreManagerSO : ScriptableObject
     /// For now, we do not store the score somewhere the calculation cannot be done outside of the level.
     /// </summary>
     /// <returns>Final score that should be displayed</returns>
-    public static float CalculateOverallTeamScore()
+    public static int CalculateOverallTeamScore()
     {
         float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
+        
         float average = totalScore / (float)(numberOfPlayers);
-        float teamMultiplier = _instance.TEAM_MULTIPLIER_BASE / (Mathf.Abs(GunPlayerController.Instance.Score - average)
-            + Mathf.Abs(SwordPlayerController.Instance.Score - average));
-        return teamMultiplier * totalScore;
+        
+        float sumOfStdDev = Mathf.Abs(GunPlayerController.Instance.Score - average)
+            + Mathf.Abs(SwordPlayerController.Instance.Score - average);
+
+        float teamMultiplier = sumOfStdDev == 0 ? 0 
+            : sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
+                _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
+              : _instance.TEAM_MULTIPLIER_BASE / (sumOfStdDev);
+
+        return (int)(teamMultiplier * totalScore);
     }
 }
