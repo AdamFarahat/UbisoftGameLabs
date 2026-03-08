@@ -63,6 +63,7 @@ public class Gun : MonoBehaviour
         bullet.acceleration = bulletAcceleration;
         bullet.range = bulletRange;
         bullet.damage = bulletDamage;
+
         return bullet;
     }
 
@@ -74,6 +75,9 @@ public class Gun : MonoBehaviour
         blast.transform.position = firePosition.position;
         blast.range = bulletRange;
         blast.damage = bulletDamage;
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunShot, transform.position);
+
         return blast;
     }
 }

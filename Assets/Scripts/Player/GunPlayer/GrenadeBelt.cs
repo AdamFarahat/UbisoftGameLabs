@@ -30,8 +30,8 @@ public class GrenadeBelt : MonoBehaviour
             // Trigger the action the exact frame the cooldown finishes
             if (cooldown <= 0f)
             {
-                cooldown = 0f; 
-                OnCooldownReady?.Invoke(); 
+                cooldown = 0f;
+                OnCooldownReady?.Invoke();
             }
         }
     }
@@ -60,6 +60,8 @@ public class GrenadeBelt : MonoBehaviour
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeThrow, transform.position);
 
         grenade.transform.position = transform.position;
         grenade.velocity = Mathf.Lerp(minThrowVelocity, maxThrowVelocity, Mathf.Clamp01(throwChargeTime / maxChargeTime));

@@ -46,7 +46,8 @@ public class Grenade : MonoBehaviour
             if (enemy != null && !hitEnemies.Contains(enemy))
             {
                 hitEnemies.Add(enemy);
-                if (enemy.TakeDamage(damage)){
+                if (enemy.TakeDamage(damage))
+                {
                     PlayerStats.Instance.AddGunSuper(5f);
                     OnEnemyKill(enemy);
                 }
@@ -71,6 +72,9 @@ public class Grenade : MonoBehaviour
         }
 
         exploding = true;
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeExplode, transform.position);
+
         StartCoroutine(Explosion());
     }
 

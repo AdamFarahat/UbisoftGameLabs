@@ -111,6 +111,7 @@ public class GunPlayerController : PlayerController
             holdingGunInput = HoldingState.Released;
             holster.StopFiring();
         }
+
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)

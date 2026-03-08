@@ -25,7 +25,8 @@ public class Bullet : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (enemy.TakeDamage(damage)){
+            if (enemy.TakeDamage(damage))
+            {
                 OnEnemyKill(enemy);
                 PlayerStats.Instance.AddGunSuper(2f);
             }
