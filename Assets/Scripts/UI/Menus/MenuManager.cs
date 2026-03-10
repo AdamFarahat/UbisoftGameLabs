@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; 
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -31,13 +32,13 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(AnimateInSequence());
     }
 
-    public void AnimateButtonsOut()
+    public void AnimateButtonsOut(string nextScene)
     {
-        StartCoroutine(AnimateOutSequence());
+        StartCoroutine(AnimateOutSequence(nextScene));
     }
 
     // Animate the buttons in staggered fashion
-    IEnumerator AnimateOutSequence()
+    IEnumerator AnimateOutSequence(string nextScene)
     {
         // Clear selection when animating out so the player can't keep navigating
         EventSystem.current.SetSelectedGameObject(null);
@@ -60,7 +61,15 @@ public class MenuManager : MonoBehaviour
             yield return lastAnimation.WaitForCompletion();
         }
 
-        title.AnimateOut();
+        Sequence seq = title.AnimateOut();
+        
+        if (seq != null)
+        {
+            yield return seq.WaitForCompletion();
+        }
+
+        if (nextScene == "") yield break;
+        SceneManager.LoadScene(nextScene);
     }
 
     // Animate the buttons in staggered fashion

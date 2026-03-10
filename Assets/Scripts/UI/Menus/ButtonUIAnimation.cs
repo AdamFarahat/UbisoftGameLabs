@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ButtonUIAnimation : UIAnimation
 {
