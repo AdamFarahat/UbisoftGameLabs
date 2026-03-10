@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolObject : MonoBehaviour
+public class ProjectilePool : MonoBehaviour
 {
-    public static PoolObject SharedInstance;
+    public static ProjectilePool SharedInstance;
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool = 20;
@@ -23,8 +23,8 @@ public class PoolObject : MonoBehaviour
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
-
     }
+
     public GameObject Spawn(Vector3 position, Quaternion rot)
     {
         GameObject tmp = null;
@@ -45,5 +45,4 @@ public class PoolObject : MonoBehaviour
         tmp.SetActive(true);
         return tmp;
     }
-
 }

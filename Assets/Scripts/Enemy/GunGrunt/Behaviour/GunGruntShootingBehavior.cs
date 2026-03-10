@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ShootingBehavior : StateMachineBehaviour
+public class GunGruntShootingBehavior : StateMachineBehaviour
 {
     public string lostPlayerTrigger = "PlayerDisappeared";
     public float shootingRate = 1.0f;
     public GameObject projObj;
     private PlayerController shootingTarget;
 
-    private ShooterEnemyAI shooterAI;
+    private GunGruntEnemyAI shooterAI;
 
     private float time;
     private bool firstShoot;
@@ -15,7 +15,7 @@ public class ShootingBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        shooterAI = animator.GetComponent<ShooterEnemyAI>();
+        shooterAI = animator.GetComponent<GunGruntEnemyAI>();
         shootingTarget = FindShootingTarget();
         time = 0f;
         firstShoot = true;
@@ -37,11 +37,12 @@ public class ShootingBehavior : StateMachineBehaviour
             {
                 if (projObj != null)
                 {
-                    GameObject proj = PoolObject.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
+                    GameObject proj = ProjectilePool.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
                     if (proj != null && proj.TryGetComponent(out EnemyProjectile projectileComponent))
                     {
-                        Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
-                        projectileComponent.Initialize(direction);
+                        Vector3 direction = shootingTarget.transform.position - animator.transform.position;
+                        direction.y = 0f;
+                        projectileComponent.Initialize(direction.normalized);
                     }
                 }
                 else
