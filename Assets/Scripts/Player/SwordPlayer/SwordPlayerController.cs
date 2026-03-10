@@ -66,11 +66,26 @@ public class SwordPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;
         playerInput.actions["Block/Parry"].started += Block;
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        playerInput.actions["UpEffect"].performed -= Jump;
+        playerInput.actions["DownEffect"].performed -= Duck;
+        playerInput.actions["Attack"].performed -= Attack;
+        playerInput.actions["Block/Parry"].started -= Block;
+        playerInput.actions["Block/Parry"].canceled -= CancelBlock;
     }
 
     public override float GetCooldownPercent()

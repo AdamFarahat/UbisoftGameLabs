@@ -51,8 +51,22 @@ public abstract class PlayerController : MonoBehaviour
     protected virtual void Start()
     {
         playerInput.actions.Enable();
+    }
+
+    protected virtual void OnEnable()
+    {
+        if (playerInput != null)
+            playerInput.actions.Enable();
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
         playerInput.actions["MoveRight"].performed += OnMoveRight;
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (playerInput != null)
+            playerInput.actions.Disable();
+        playerInput.actions["MoveLeft"].performed -= OnMoveLeft;
+        playerInput.actions["MoveRight"].performed -= OnMoveRight;
     }
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
