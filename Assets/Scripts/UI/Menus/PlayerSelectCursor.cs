@@ -51,6 +51,9 @@ public class PlayerSelectCursor : MonoBehaviour
         // Block selection if the UI is still animating
         if (!manager.IsAcceptingInput) return;
 
+        // do not allow selection on middle slot
+        if (currentIndex == 1) return;
+
         // Only lock in if they aren't already locked
         if (context.performed && !isLockedIn)
         {
@@ -58,6 +61,7 @@ public class PlayerSelectCursor : MonoBehaviour
 
             manager.CharacterLockedIn(myPlayerID, currentIndex);
             
+            //TODO visual update
             // TEMP: slightly shrink the cursor to show it is locked
             cursorIcon.localScale = new Vector3(0.8f, 0.8f, 1f); 
         }
@@ -81,27 +85,27 @@ public class PlayerSelectCursor : MonoBehaviour
         cursorIcon.position = characterSlots[currentIndex].position;
     }
 
-    // Hook this up to a new "Cancel" action (Gamepad > Button East)
+
+    // Hooked up to the 'Cancel' action in the Player Input component
     public void OnCancel(InputAction.CallbackContext context)
     {
         if (!manager.IsAcceptingInput) return;
 
         if (context.performed)
         {
-            if (isLockedIn)
+            if (isLockedIn) // deselect
             {
-                // STATE 1: They are locked in, so 'B' just deselects them
                 isLockedIn = false; 
                 
                 // Tell the manager we backed out of our choice
                 manager.CharacterUnlocked(myPlayerID);
                 
-                // Visually return the cursor to normal size
+                // TODO visual update
+                // TEMP: Visually return the cursor to normal size
                 cursorIcon.localScale = Vector3.one; 
             }
-            else
+            else // return to menu 
             {
-                // STATE 2: They are NOT locked in, so 'B' tries to leave the screen
                 manager.AttemptReturnToMenu(myPlayerID);
             }
         }
