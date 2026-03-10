@@ -141,7 +141,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.5, z: 1}
+  m_Size: {x: 1, y: 2.5, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6497065193520992716
 GameObject:
@@ -273,6 +273,7 @@ MonoBehaviour:
   stunTime: 0.3
   shotCooldown: 0.65
   shotDistanceThreshold: 20
+  bulletSpeed: 80
 --- !u!114 &8525619152686538179
 MonoBehaviour:
   m_ObjectHideFlags: 0
