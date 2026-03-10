@@ -3,7 +3,6 @@ using UnityEngine;
 public class GunGruntShootingBehavior : StateMachineBehaviour
 {
     public string lostPlayerTrigger = "PlayerDisappeared";
-    public float shootingRate = 1.0f;
     public GameObject projObj;
     private PlayerController shootingTarget;
 
@@ -28,7 +27,7 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
             return;
 
         time += Time.deltaTime;
-        if (time >= shootingRate || firstShoot)
+        if (time >= shooterAI.ShootingCooldown || firstShoot)
         {
             shootingTarget = FindShootingTarget();
             firstShoot = false;
@@ -42,7 +41,7 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
                     {
                         Vector3 direction = shootingTarget.transform.position - animator.transform.position;
                         direction.y = 0f;
-                        projectileComponent.Initialize(direction.normalized);
+                        projectileComponent.Initialize(direction, shooterAI.BulletSpeed);
                     }
                 }
                 else

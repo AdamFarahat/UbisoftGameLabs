@@ -7,6 +7,7 @@ public class FlyerShooting : MonoBehaviour
     [SerializeField] private float stunTime = 0.3f;
     [SerializeField] private float shotCooldown = 0.65f;
     [SerializeField] private float shotDistanceThreshold = 20f;
+    [SerializeField] private float bulletSpeed = 80f;
 
     private LaneBound lane;
     private float lastShotTime = 0f;
@@ -19,7 +20,7 @@ public class FlyerShooting : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerController.AnyPlayerInLane((int)lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold)  // TODO no need to cast once lane PR is merged
+        if (PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold)
         {
             if (Time.time - lastShotTime > shotCooldown)
             {
@@ -36,7 +37,8 @@ public class FlyerShooting : MonoBehaviour
         
         EnemyProjectile projectile = go.GetComponent<EnemyProjectile>();
         Assert.IsNotNull(projectile);
-        projectile.Initialize(LaneConfigSO.Instance.GetLanePosition(lane.LaneIndex, PlayerController.PlayerLine) - spawnPoint.position);
+        Vector3 direction = LaneConfigSO.Instance.GetLanePosition(lane.LaneIndex, PlayerController.PlayerLine) - spawnPoint.position;
+        projectile.Initialize(direction, bulletSpeed);
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.stunTime = stunTime;

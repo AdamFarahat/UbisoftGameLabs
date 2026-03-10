@@ -24,7 +24,7 @@ public class SwordPlayerController : PlayerController
     public Action OnBlockCooldownReady;
 
     [Header("Parrying")]
-    [SerializeField] private float parryBulletMultiplier = 2.0f;
+    [SerializeField] private float parryBulletSpeedMult = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
 
     [Header("Scoring")]
@@ -324,8 +324,7 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(EnemyProjectile projectile)
     {
-        projectile.FlipDirection();
-        projectile.speed *= parryBulletMultiplier;
+        projectile.Parry(parryBulletSpeedMult);
     }
 
     private IEnumerator ResetAttackButtonPressedSuper()

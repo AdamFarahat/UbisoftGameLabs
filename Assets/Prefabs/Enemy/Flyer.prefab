@@ -273,6 +273,7 @@ MonoBehaviour:
   stunTime: 0.3
   shotCooldown: 0.65
   shotDistanceThreshold: 20
+  bulletSpeed: 80
 --- !u!114 &8525619152686538179
 MonoBehaviour:
   m_ObjectHideFlags: 0

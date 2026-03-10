@@ -3,19 +3,28 @@ using UnityEngine.Assertions;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public float speed = 10f;
-    private Vector3 direction;
+    [SerializeField] private Billboard sprite;
 
-    public void Initialize(Vector3 dir)
-    {
-        direction = dir.normalized;
-    }
+    private float normalSpriteRotation;
+    private Vector3 direction;
+    private float speed = 80f;
 
     private void Awake()
     {
+        sprite = GetComponentInChildren<Billboard>();
+        Assert.IsNotNull(sprite);
+        normalSpriteRotation = sprite.rotation;
+
         Stunner stunner = GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
+    }
+
+    public void Initialize(Vector3 direction, float speed)
+    {
+        sprite.rotation = normalSpriteRotation;
+        this.direction = direction.normalized;
+        this.speed = speed;
     }
 
     void Update()
@@ -28,8 +37,10 @@ public class EnemyProjectile : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void FlipDirection()
+    public void Parry(float speedMult)
     {
         direction *= -1;
+        speed *= speedMult;
+        sprite.rotation += 180;
     }
 }
