@@ -13,4 +13,17 @@ public static class ComponentExtensions
 
         return component.GetComponentInChildren<T>();
     }
+
+    public static bool TryGetComponentInHierarchy<T>(this Component component, out T result) where T : Component
+    {
+        if (component.TryGetComponent(out result))
+            return true;
+
+        result = component.GetComponentInParent<T>();
+        if (result != null)
+            return true;
+
+        result = component.GetComponentInChildren<T>();
+        return result != null;
+    }
 }
