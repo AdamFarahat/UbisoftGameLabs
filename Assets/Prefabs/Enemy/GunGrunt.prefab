@@ -213,6 +213,8 @@ MonoBehaviour:
   minLaneDistance: 100
   maxLaneDistance: 150
   researchCooldown: 3
+  shootingCooldown: 1
+  bulletSpeed: 80
   shootingIndex: 0
   projSpawnPoint: {fileID: 8791062963000604154}
 --- !u!114 &1308856832007123742
