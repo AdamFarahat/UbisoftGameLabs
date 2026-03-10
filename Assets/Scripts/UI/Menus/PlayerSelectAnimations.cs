@@ -6,10 +6,7 @@ using DG.Tweening;
 
 public class PlayerSelectAnimations : MonoBehaviour
 {
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private UIAnimation AButtonAnim;
-    [SerializeField] private UIAnimation BButtonAnim;
-    
+    [SerializeField] private GameObject canvas;    
     [SerializeField] private PlayerSelectManager playerManager; 
     
     private UIAnimation[] uiElements;
@@ -17,8 +14,6 @@ public class PlayerSelectAnimations : MonoBehaviour
     void Awake()
     {
         Assert.IsNotNull(canvas);
-        Assert.IsNotNull(AButtonAnim);
-        Assert.IsNotNull(BButtonAnim);
         Assert.IsNotNull(playerManager); 
     }
 
@@ -38,9 +33,7 @@ public class PlayerSelectAnimations : MonoBehaviour
         Sequence lastAnimation = null;
 
         foreach(UIAnimation elem in uiElements)
-        {
-            if (elem == AButtonAnim || elem == BButtonAnim) continue;
-            
+        {            
             // Store the sequence as it plays
             lastAnimation = elem.AnimateIn(); 
             yield return new WaitForSeconds(0.3f);

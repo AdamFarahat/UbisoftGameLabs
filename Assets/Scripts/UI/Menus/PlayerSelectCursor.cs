@@ -80,4 +80,32 @@ public class PlayerSelectCursor : MonoBehaviour
     {
         cursorIcon.position = characterSlots[currentIndex].position;
     }
+
+    // Hook this up to a new "Cancel" action (Gamepad > Button East)
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (!manager.IsAcceptingInput) return;
+
+        if (context.performed)
+        {
+            if (isLockedIn)
+            {
+                // STATE 1: They are locked in, so 'B' just deselects them
+                isLockedIn = false; 
+                
+                // Tell the manager we backed out of our choice
+                manager.CharacterUnlocked(myPlayerID);
+                
+                // Visually return the cursor to normal size
+                cursorIcon.localScale = Vector3.one; 
+            }
+            else
+            {
+                // STATE 2: They are NOT locked in, so 'B' tries to leave the screen
+                manager.AttemptReturnToMenu(myPlayerID);
+            }
+        }
+    }
+
+    
 }

@@ -48,4 +48,18 @@ public class PlayerSelectManager : MonoBehaviour
     {
         Debug.Log($"Player {playerID + 1} locked in character slot {slotIndex}!");
     }
+
+    // Called by the Cursor when a player presses 'B' while locked in
+    public void CharacterUnlocked(int playerID)
+    {
+        Debug.Log($"Player {playerID + 1} deselected their character.");
+        //TODO check if both are locked in
+    }
+
+    // Called by the Cursor when a player presses 'B' while ALREADY unlocked
+    public void AttemptReturnToMenu(int playerID)
+    {
+        Debug.Log($"Player {playerID + 1} is backing out to the Main Menu!");
+        // Todo inform menus manager to animate out player select (and animate in menu)
+    }
 }

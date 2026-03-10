@@ -108,6 +108,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: df46cbd1-5bf0-4bd6-a80d-31b189200d6b
     m_ActionName: 'PlayerSelect/Select[/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6639713672421231240}
+        m_TargetAssemblyTypeName: PlayerSelectCursor, Assembly-CSharp
+        m_MethodName: OnCancel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ef211be8-b0d0-408e-a0db-4d60148a8246
+    m_ActionName: 'PlayerSelect/Cancel[/XInputControllerWindows/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerSelect
