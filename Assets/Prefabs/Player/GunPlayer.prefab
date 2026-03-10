@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 1, y: 3, z: 1}
+  cameraOffset: {x: 1, y: 5, z: 1}
   rotation: 0
 --- !u!1 &6126231153073736137
 GameObject:
@@ -386,7 +386,7 @@ MonoBehaviour:
   spreadReduction: 2
   overheatIncreaseRate: 0.2
   overheatDecreaseRate: 0.4
-  overheatFailDuration: 2
+  overheatCooldown: 2
 --- !u!1 &7286659177577392852
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,3 +649,4 @@ MonoBehaviour:
       m_Calls: []
   gunKillMultiplierGain: 0.05
   grenadeKillMultiplierGain: 0.5
+  activateSuperWaitTime: 0.1
