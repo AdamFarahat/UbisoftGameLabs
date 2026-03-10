@@ -24,13 +24,14 @@ public class SwordPlayerController : PlayerController
     public Action OnBlockCooldownReady;
 
     [Header("Parrying")]
-    [SerializeField] private float parryBulletMultiplier = 2.0f;
+    [SerializeField] private float parryBulletSpeedMult = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
 
     [Header("Scoring")]
     [SerializeField] private float blockingMultiplierGain = 0.2f;
     [SerializeField] private float attackingMultiplierGain = 0.6f;
-    [SerializeField] private float parryingMultiplierGain = 0.8f;
+    [SerializeField] private float meleeParryMultiplierGain = 0.8f;
+    [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
     private enum SwordPlayerStates
     {
@@ -286,7 +287,7 @@ public class SwordPlayerController : PlayerController
                     if (enemy.OnParried())
                     {
                         playerStats.AddSwordSuper(5f);
-                        AddContinuousMultiplier(parryingMultiplierGain);
+                        AddContinuousMultiplier(meleeParryMultiplierGain);
                         AddScore(enemy.Score);
                     }
                     parryTimer = 0f;
@@ -324,8 +325,14 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(EnemyProjectile projectile)
     {
-        projectile.FlipDirection();
-        projectile.speed *= parryBulletMultiplier;
+        projectile.Parry(parryBulletSpeedMult);
+    }
+
+    public void OnBulletParryKill(int score)
+    {
+        playerStats.AddSwordSuper(5f);
+        AddContinuousMultiplier(bulletParryMultiplierGain);
+        AddScore(score);
     }
 
     private IEnumerator ResetAttackButtonPressedSuper()
