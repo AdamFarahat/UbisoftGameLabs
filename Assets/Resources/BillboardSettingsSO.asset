@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3765eadc879c5fb4495d996c7661dcbe, type: 3}
   m_Name: BillboardSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::BillboardSettingsSO
-  globalZOffset: -100
+  globalZOffset: -1
