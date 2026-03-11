@@ -41,6 +41,8 @@ public class ScoreManagerSO : ScriptableObject
     /// <returns>Final score that should be displayed</returns>
     public static int CalculateOverallFinalTeamScore()
     {
+        return 0; // TODO remove
+
         float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
 
         Debug.Log("TotalScore: " + totalScore);

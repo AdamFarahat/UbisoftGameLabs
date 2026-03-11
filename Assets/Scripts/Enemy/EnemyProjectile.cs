@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    [SerializeField] private Billboard sprite;
+    private Billboard sprite;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
 
     private float normalSpriteRotation;
@@ -19,6 +21,9 @@ public class EnemyProjectile : MonoBehaviour
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
         normalSpriteRotation = sprite.rotation;
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Assert.IsNotNull(spriteRenderer);
 
         sphereCollider = GetComponent<SphereCollider>();
         Assert.IsNotNull(sphereCollider);
@@ -36,6 +41,7 @@ public class EnemyProjectile : MonoBehaviour
         this.speed = speed;
         parried = false;
         sphereCollider.radius = normalColliderRadius;
+        enabled = true;
     }
 
     void Update()
@@ -63,7 +69,18 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Despawn()
     {
-        gameObject.SetActive(false); // TODO SFX / animation ?
+        enabled = false;
+
+        IEnumerator Routine()
+        {
+            Color color = spriteRenderer.color;
+            yield return FadeOutAnimation.Routine(spriteRenderer);
+            spriteRenderer.color = color;
+            gameObject.SetActive(false);
+        }
+
+        // TODO sfx ?
+        StartCoroutine(Routine());
     }
 
     public void Parry(float speedMult)

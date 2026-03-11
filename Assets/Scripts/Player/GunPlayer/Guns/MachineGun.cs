@@ -18,7 +18,6 @@ public class MachineGun : Gun
     protected override void Update()
     {
         base.Update();
-        Debug.Log($"Overheat level = {overheatLevel}");
 
         if (overheating)
             return;
