@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5306200152654242130}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 4.8907375, y: 2.0791168, z: -8.471007}
+  m_LocalPosition: {x: 4.5399985, y: 8.718239, z: -5.863509}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -224,6 +224,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: 3
       addedObject: {fileID: 5680664865622595728}
+    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3679303042094892920}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
 --- !u!4 &5473658397883171689 stripped
 Transform:
@@ -258,6 +261,7 @@ MonoBehaviour:
   OnDiscreteMultiplierChange:
     m_PersistentCalls:
       m_Calls: []
+  swordHitBox: {fileID: 0}
   jumpSpeed: 100
   fallAcceleration: 500
   attackDuration: 0.5
@@ -269,3 +273,35 @@ MonoBehaviour:
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
   activateSuperWaitTime: 0.1
+--- !u!114 &3679303042094892920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608802524239182053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ea2a8857f5c06458769dc4538d378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
+  spriteRenderer: {fileID: 6309583107328164610}
+  animations:
+  - name: Idle
+    frames:
+    - {fileID: 21300000, guid: 87996f192b34de743904205cb81b383a, type: 3}
+    duration: 0.1
+  - name: Jump
+    frames:
+    - {fileID: 21300000, guid: 98e553d1ef90f30499f2f65373e19823, type: 3}
+    duration: 0.1
+  - name: Attack
+    frames:
+    - {fileID: 21300000, guid: db29d4d2b16a0fb428e6fc95c1c7a36a, type: 3}
+    - {fileID: 21300000, guid: 8c54570c4330cd84db0fa0a18dd7e9ae, type: 3}
+    duration: 0.1
+  - name: Block
+    frames:
+    - {fileID: 21300000, guid: 4d13affc3089b77419da5c8d14cdc433, type: 3}
+    duration: 0.1
+  defaultName: Idle

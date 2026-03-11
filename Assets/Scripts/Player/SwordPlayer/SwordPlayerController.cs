@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
@@ -9,7 +10,7 @@ public class SwordPlayerController : PlayerController
     public static SwordPlayerController Instance => instance;
     public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
 
-    private SwordHitBox swordHitBox;
+    [SerializeField] private SwordHitBox swordHitBox;
 
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
@@ -33,6 +34,8 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
+    private SpriteAnimator animator;
+
     private enum SwordPlayerStates
     {
         Normal,
@@ -49,7 +52,7 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
-    [Header ("Super")]
+    [Header("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool attackButtonPressedSuper = false;
     private bool blockButtonPressedSuper = false;
@@ -60,7 +63,11 @@ public class SwordPlayerController : PlayerController
     {
         instance = this;
         base.Awake();
-        swordHitBox = FindFirstObjectByType<SwordHitBox>();
+
+        Assert.IsNotNull(swordHitBox);
+        animator = GetComponent<SpriteAnimator>();
+        Assert.IsNotNull(animator);
+        animator.SetAnimationDuration("Attack", attackDuration);
     }
 
     protected override void Start()
@@ -108,6 +115,9 @@ public class SwordPlayerController : PlayerController
 
         IEnumerator Routine()
         {
+            animator.defaultName = "Jump";
+            animator.PlayDefaultCycle();
+
             float y = 0f;
             SetY(y);
             float velocity = jumpSpeed;
@@ -133,6 +143,9 @@ public class SwordPlayerController : PlayerController
             y = 0f;
             SetY(y);
             jumpRoutine = null;
+
+            animator.defaultName = "Idle";
+            animator.PlayDefaultCycle();
         }
 
         jumpRoutine = StartCoroutine(Routine());
@@ -150,7 +163,7 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
-        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Attack button pressed with super ready");
             //Set attack button pressed super to true
@@ -166,19 +179,18 @@ public class SwordPlayerController : PlayerController
 
         if (state == SwordPlayerStates.Normal)
         {
-            //TODO trigger animation state change to Attacking
-            gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
             state = SwordPlayerStates.Attacking;
+            animator.PlayOneShot("Attack");
             swordHitBox.gameObject.SetActive(true);
+            
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(attackDuration);
-                //TODO trigger animation state change to Normal
-                gameObject.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
                 state = SwordPlayerStates.Normal;
                 attackRoutine = null;
                 swordHitBox.gameObject.SetActive(false);
             }
+            
             attackRoutine = StartCoroutine(Routine());
         }
     }
@@ -187,7 +199,7 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
-        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
+        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
         {
             //Set block button pressed super to true
             Debug.Log("Block button pressed with super ready");
@@ -199,7 +211,7 @@ public class SwordPlayerController : PlayerController
                 return;
             }
             resetBlockButtonPressedSuperCoroutine = StartCoroutine(ResetBlockButtonPressedSuper());
-            
+
         }
 
         Debug.Log("Block/Parry");
@@ -227,23 +239,22 @@ public class SwordPlayerController : PlayerController
             parryRoutine = null;
         }
         state = SwordPlayerStates.Normal;
-        //Trigger animation state change to Normal
+        animator.PlayDefaultCycle();
         swordHitBox.gameObject.SetActive(false);
-        GetComponentInChildren<MeshRenderer>().material.color = Color.white;
     }
 
     private IEnumerator ParryWindow()
     {
         parryTimer = 0f;
         state = SwordPlayerStates.Parrying;
-        GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+        animator.PlayCycle("Block");
         while (parryTimer < parryWindow)
         {
             if (state != SwordPlayerStates.Parrying)
             {
                 yield break;
             }
-            if(!PlayerStats.Instance.IsSuperActive())
+            if (!PlayerStats.Instance.IsSuperActive())
             {
                 parryTimer += Time.deltaTime;
             }
@@ -252,7 +263,6 @@ public class SwordPlayerController : PlayerController
         if (state == SwordPlayerStates.Parrying)
         {
             state = SwordPlayerStates.Blocking;
-            GetComponentInChildren<MeshRenderer>().material.color = Color.blue;
         }
     }
 
@@ -281,6 +291,7 @@ public class SwordPlayerController : PlayerController
     {
         base.OnStunEnd();
         state = SwordPlayerStates.Normal;
+        animator.PlayDefaultCycle();
     }
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)

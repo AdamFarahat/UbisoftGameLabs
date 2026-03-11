@@ -11,13 +11,12 @@ public class SpriteAnimator : MonoBehaviour
     {
         public string name;
         public Sprite[] frames;
-        public float frameLengthOverride = 0f;
+        public float duration;
     }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animation[] animations;
-    public string idleName;
-    public float frameLength = 0.1f;
+    public string defaultName = "Idle";
     private readonly Dictionary<string, Animation> animationMap = new();
 
     private Coroutine animationRoutine = null;
@@ -28,21 +27,45 @@ public class SpriteAnimator : MonoBehaviour
 
         foreach (Animation animation in animations)
         {
-            if (animation.frames.Length > 0)
-                animationMap[animation.name] = animation;
+            if (animation.frames.Length == 0)
+            {
+                Debug.LogError($"Animation {animation.name} has no frames");
+                continue;
+            }
+
+            if (animation.duration <= 0f)
+            {
+                Debug.LogError($"Animation {animation.name} has no duration");
+                continue;
+            }
+
+            animationMap[animation.name] = animation;
         }
     }
 
     private void Start()
     {
-        PlayCycle(idleName);
+        PlayDefaultCycle();
+    }
+
+    public void SetAnimationDuration(string name, float duration)
+    {
+        if (animationMap.TryGetValue(name, out Animation animation))
+        {
+            if (duration > 0f)
+                animation.duration = duration;
+            else
+                Debug.LogError($"Duration {duration} must be greater than 0");
+        }
+        else
+            Debug.LogError($"Animation {name} does not exist in animation map");
     }
 
     public void PlayOneShot(string name)
     {
         if (!animationMap.ContainsKey(name))
         {
-            Debug.LogError($"{name} does not exist in animation map");
+            Debug.LogError($"Animation {name} does not exist in animation map");
             return;
         }
 
@@ -53,17 +76,22 @@ public class SpriteAnimator : MonoBehaviour
         {
             yield return PlayAllFrames(animationMap[name]);
             animationRoutine = null;
-            PlayCycle(idleName);
+            PlayCycle(defaultName);
         }
 
         animationRoutine = StartCoroutine(Routine());
+    }
+
+    public void PlayDefaultCycle()
+    {
+        PlayCycle(defaultName);
     }
 
     public void PlayCycle(string name)
     {
         if (!animationMap.ContainsKey(name))
         {
-            Debug.LogError($"{name} does not exist in animation map");
+            Debug.LogError($"Animation {name} does not exist in animation map");
             return;
         }
 
@@ -81,7 +109,7 @@ public class SpriteAnimator : MonoBehaviour
 
     private IEnumerator PlayAllFrames(Animation animation)
     {
-        WaitForSeconds wait = new(animation.frameLengthOverride > 0f ? animation.frameLengthOverride : frameLength);
+        WaitForSeconds wait = new(animation.duration / animation.frames.Length);
         foreach (Sprite frame in animation.frames)
         {
             spriteRenderer.sprite = frame;

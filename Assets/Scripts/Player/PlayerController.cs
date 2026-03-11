@@ -158,16 +158,10 @@ public abstract class PlayerController : MonoBehaviour
 
         SetContinuousMultiplier(1f);
 
-        MeshRenderer debugMesh = GetComponentInChildren<MeshRenderer>(); // TODO remove once sprites are used for both players -> execute stun animation instead.
-        if (debugMesh != null)
-            debugMesh.material.color = Color.yellow;
-
+        // TODO stun animation / sfx
         IEnumerator Routine()
         {
             yield return new WaitForSeconds(stunTime);
-            if (debugMesh != null)
-                debugMesh.material.color = Color.white;
-
             stunRoutine = null;
             OnStunEnd();
         }
