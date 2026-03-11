@@ -6,6 +6,13 @@ public class Stunner : MonoBehaviour
     public float stunTime = 1f;
     public UnityAction OnStun;
 
+    public float StunTime => stunTime;
+
+    public void SetStunTime(float time)
+    {
+        stunTime = time;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerController player = other.GetComponentInParent<PlayerController>();
