@@ -80,6 +80,8 @@ public class GrenadeBelt : MonoBehaviour
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
 
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeThrow, transform.position);
+
         grenade.transform.position = transform.position;
         grenade.gravity = grenadeGravity;
         grenade.initialDirection = grenadeInitialDirection;

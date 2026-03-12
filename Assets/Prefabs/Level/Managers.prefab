@@ -96,8 +96,11 @@ MonoBehaviour:
   - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
   - {fileID: 8980648615144976386, guid: 974ddce8f3e889e419444b920b29dc78, type: 3}
   - {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-  timeBetweenSpawns: 1
   maxEnemies: 5
+  minSpawnTime: 0.5
+  maxSpawnTime: 4
+  sigmoidSteepness: 0.06
+  sigmoidMidpoint: 90
 --- !u!114 &4656029755349261906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHealth: 100
+  superDuration: 5
+  activateSuperWaitTime: 0.1
 --- !u!1001 &6042631474501440344
 PrefabInstance:
   m_ObjectHideFlags: 0

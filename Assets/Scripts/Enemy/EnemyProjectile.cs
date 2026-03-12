@@ -15,6 +15,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Awake()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
         normalSpriteRotation = sprite.rotation;
