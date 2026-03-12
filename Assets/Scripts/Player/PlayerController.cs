@@ -146,6 +146,8 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
+    public static float HeartLine => -200f;
+
     public virtual float GetCooldownPercent()
     {
         throw new NotImplementedException();
