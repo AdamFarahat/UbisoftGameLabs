@@ -5,6 +5,7 @@ public class PlayerStats : MonoBehaviour
 {
     private static PlayerStats instance = null;
     public static PlayerStats Instance => instance;
+    private UIManager uiManager;
     
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
@@ -28,6 +29,9 @@ public class PlayerStats : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        uiManager = FindFirstObjectByType<UIManager>();
+        if (uiManager == null)
+            Debug.LogWarning("UIManager instance not found. Player stats will not be shown.");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,6 +100,23 @@ public class PlayerStats : MonoBehaviour
 
         currentHealth -= damage;
         healthPercent = currentHealth / maxHealth;
+
+        if(currentHealth <= 0)
+        {
+            currentHealth = 0;
+            healthPercent = 0;
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        // Pause the game, disable the characters, show game over screen (UIManager.Instance.ShowGameOverScreen()).
+        Time.timeScale = 0f;
+        GameObject.Find("GunPlayer").SetActive(false);
+        GameObject.Find("SwordPlayer").SetActive(false);
+        uiManager.ShowGameOverScreen();
+        
     }
 
     public void AddGunSuper(float amount)
@@ -166,11 +187,5 @@ public class PlayerStats : MonoBehaviour
         gunSuperPrepared = false;
         swordSuperPrepared = false;
         superCoroutine = null;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
