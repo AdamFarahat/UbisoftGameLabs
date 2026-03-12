@@ -83,6 +83,9 @@ public class Grenade : MonoBehaviour
         }
 
         exploding = true;
+
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeExplode, transform.position);
+
         StartCoroutine(Explosion());
     }
 

@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5101291815256150370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7437284504199211392}
+  - component: {fileID: 4284722892464933513}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7437284504199211392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101291815256150370}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -320.92648, y: 0.5, z: -4460.9463}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3974237691823482190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4284722892464933513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101291815256150370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
+  <playerPistolShot>k__BackingField:
+    Guid:
+      Data1: -237387748
+      Data2: 1206679153
+      Data3: 546449038
+      Data4: 1156238603
+    Path: event:/PlayerPistolShot
+  <playerShotgunShot>k__BackingField:
+    Guid:
+      Data1: -17541028
+      Data2: 1276222511
+      Data3: -495441730
+      Data4: -1032015244
+    Path: event:/PlayerShotgunShot
+  <playerMachinegunShot>k__BackingField:
+    Guid:
+      Data1: -1595991602
+      Data2: 1138323884
+      Data3: -1387455846
+      Data4: 2112771498
+    Path: event:/PlayerMachinegunShot
+  <playerGrenadeThrow>k__BackingField:
+    Guid:
+      Data1: 1917402141
+      Data2: 1096397505
+      Data3: -869755234
+      Data4: 1800542975
+    Path: event:/PlayerGrenadeThrow
+  <playerGrenadeExplode>k__BackingField:
+    Guid:
+      Data1: 115624427
+      Data2: 1214022194
+      Data3: -2098313322
+      Data4: 1418859912
+    Path: event:/PlayerGrenadeExplode
+  <enemyWeaponShot>k__BackingField:
+    Guid:
+      Data1: -327730630
+      Data2: 1140212501
+      Data3: 127052165
+      Data4: 1706519949
+    Path: event:/EnemyWeaponShot
+--- !u!1 &6008748549651680452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3974237691823482190}
+  - component: {fileID: 2005904388119420731}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3974237691823482190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008748549651680452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 320.73416, y: 0, z: 4471.669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7437284504199211392}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005904388119420731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008748549651680452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09fcad8506f54bccbe596fbd33428fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager

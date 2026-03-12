@@ -56,6 +56,7 @@ public class Gun : MonoBehaviour
         go.transform.position = firePosition.position;
         T shot = go.GetComponent<T>();
         Assert.IsNotNull(shot);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunShot, transform.position);
         return shot;
     }
 }

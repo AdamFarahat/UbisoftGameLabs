@@ -58,6 +58,7 @@ public class MachineGun : Gun
         
         float spread = Random.Range(-1f, 1f);
         spread = maxSpreadAngle * Mathf.Sign(spread) * (1f - Mathf.Pow(1f - Mathf.Abs(spread), spreadReduction));
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunShot, transform.position);
 
         Bullet bullet = InstantiateShot<Bullet>();
         bullet.damage = bulletDamage;
