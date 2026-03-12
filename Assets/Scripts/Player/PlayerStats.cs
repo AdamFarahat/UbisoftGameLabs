@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -188,11 +187,5 @@ public class PlayerStats : MonoBehaviour
         gunSuperPrepared = false;
         swordSuperPrepared = false;
         superCoroutine = null;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
