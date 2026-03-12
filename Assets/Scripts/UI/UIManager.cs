@@ -5,6 +5,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
     private ScoreManagerSO scoreManagerSO;
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image gunMultiplierUI;
     [SerializeField] private Image swordPlayerCooldownUI;
     [SerializeField] private Image swordMultiplierUI;
+
+    private GameOver gameOverScreen;
 
 
     float health = 1.0f;
@@ -47,6 +50,8 @@ public class UIManager : MonoBehaviour
 
         Assert.IsNotNull(swordMultiplierUI.material);
         Assert.IsNotNull(swordPlayerCooldownUI.material);
+
+        gameOverScreen = GameObject.Find("GameOver").GetComponent<GameOver>();
     }
 
     void Start()
@@ -167,6 +172,18 @@ public class UIManager : MonoBehaviour
     {
         // Start the stopwatch for the Shader Graph pulse animation
         swordPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
+    }
+
+    public void ShowGameOverScreen()
+    {
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.ShowGameOverScreen();
+        }
+        else
+        {
+            Debug.LogWarning("GameOver screen reference is missing. Cannot show Game Over screen.");
+        }
     }
 }
 
