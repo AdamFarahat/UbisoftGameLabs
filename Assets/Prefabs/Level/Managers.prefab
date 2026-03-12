@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2757524240600712185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4561793260666560836}
-  - component: {fileID: 480542698878826422}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4561793260666560836
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2757524240600712185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8420282347879567900}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &480542698878826422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2757524240600712185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09fcad8506f54bccbe596fbd33428fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
 --- !u!1 &3424053709444617222
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,8 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4151761060608884842}
-  - {fileID: 4561793260666560836}
-  - {fileID: 765502271988261584}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5161543073891401410
@@ -142,8 +96,11 @@ MonoBehaviour:
   - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
   - {fileID: 8980648615144976386, guid: 974ddce8f3e889e419444b920b29dc78, type: 3}
   - {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-  timeBetweenSpawns: 1
   maxEnemies: 5
+  minSpawnTime: 0.5
+  maxSpawnTime: 4
+  sigmoidSteepness: 0.06
+  sigmoidMidpoint: 90
 --- !u!114 &4656029755349261906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,92 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHealth: 100
---- !u!1 &5278525388449492244
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 765502271988261584}
-  - component: {fileID: 8973390791899988332}
-  m_Layer: 0
-  m_Name: FMODEvents
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &765502271988261584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5278525388449492244}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8420282347879567900}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8973390791899988332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5278525388449492244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
-  <playerPistolShot>k__BackingField:
-    Guid:
-      Data1: -237387748
-      Data2: 1206679153
-      Data3: 546449038
-      Data4: 1156238603
-    Path: event:/PlayerPistolShot
-  <playerShotgunShot>k__BackingField:
-    Guid:
-      Data1: -17541028
-      Data2: 1276222511
-      Data3: -495441730
-      Data4: -1032015244
-    Path: event:/PlayerShotgunShot
-  <playerMachinegunShot>k__BackingField:
-    Guid:
-      Data1: -1595991602
-      Data2: 1138323884
-      Data3: -1387455846
-      Data4: 2112771498
-    Path: event:/PlayerMachinegunShot
-  <playerGrenadeThrow>k__BackingField:
-    Guid:
-      Data1: 1917402141
-      Data2: 1096397505
-      Data3: -869755234
-      Data4: 1800542975
-    Path: event:/PlayerGrenadeThrow
-  <playerGrenadeExplode>k__BackingField:
-    Guid:
-      Data1: 115624427
-      Data2: 1214022194
-      Data3: -2098313322
-      Data4: 1418859912
-    Path: event:/PlayerGrenadeExplode
-  <enemyWeaponShot>k__BackingField:
-    Guid:
-      Data1: -327730630
-      Data2: 1140212501
-      Data3: 127052165
-      Data4: 1706519949
-    Path: event:/EnemyWeaponShot
+  superDuration: 5
+  activateSuperWaitTime: 0.1
 --- !u!1001 &6042631474501440344
 PrefabInstance:
   m_ObjectHideFlags: 0
