@@ -73,11 +73,11 @@ public class PlayerSelectInput : MonoBehaviour
     {
         if (characterSlots == null || characterSlots.Length == 0) return;
 
-        currentIndex += direction;
+        currentIndex = Mathf.Clamp(currentIndex + direction, 0, characterSlots.Length - 1);
 
-        // Wrap around logic
-        if (currentIndex >= characterSlots.Length) currentIndex = 0;
-        else if (currentIndex < 0) currentIndex = characterSlots.Length - 1;
+        /*// Wrap around logic
+        if (currentIndex >= characterSlots.Length) currentIndex = characterSlots.Length - 1;
+        else if (currentIndex < 0) currentIndex = 0;*/
 
         UpdateCursorPosition();
     }
