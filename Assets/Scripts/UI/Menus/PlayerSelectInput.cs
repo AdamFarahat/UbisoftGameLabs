@@ -5,7 +5,7 @@ public class PlayerSelectInput : MonoBehaviour
 {
     [Header("UI References")]
     [Tooltip("The moving icon/cursor inside this prefab")]
-    public RectTransform cursorIcon; 
+    [SerializeField] private RectTransform cursorIcon; 
     private RectTransform[] characterSlots; 
     private PlayerSelectManager manager;
     private int currentIndex = 0;
@@ -98,10 +98,9 @@ public class PlayerSelectInput : MonoBehaviour
             {
                 isLockedIn = false; 
                 
-                // Tell the manager we backed out of our choice
-                manager.CharacterUnlocked(myPlayerID);
+                manager.CharacterUnlocked(myPlayerID, currentIndex);
                 
-                // TODO visual update
+                // TODO visual update 
                 // TEMP: Visually return the cursor to normal size
                 cursorIcon.localScale = Vector3.one; 
             }
