@@ -6,13 +6,30 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
 
-    [SerializeField] private float timeBetweenSpawns = 5;
+    [SerializeField] private int maxEnemies = 12;
+
+    [SerializeField] private float minSpawnTime = 0.5f;
+    [SerializeField] private float maxSpawnTime = 4f;
+
+    [SerializeField] private float sigmoidSteepness = 0.06f;
+    [SerializeField] private float sigmoidMidpoint = 90f;
+
     private float timeSinceLastSpawn;
 
     private IObjectPool<GameObject> enemyPool;
 
-    [SerializeField] private int maxEnemies = 3;
     private int currentEnemies = 0;
+
+    private float Sigmoid(float t)
+    {
+        return 1f / (1f + Mathf.Exp(-sigmoidSteepness * (t - sigmoidMidpoint)));
+    }
+
+    private float GetSpawnInterval()
+    {
+        float s = Sigmoid(Time.time);
+        return Mathf.Lerp(maxSpawnTime, minSpawnTime, s);
+    }
 
     private void Awake()
     {
@@ -64,7 +81,9 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyPool.Get();
             currentEnemies++;
-            timeSinceLastSpawn = Time.time + timeBetweenSpawns;
+
+            float spawnInterval = GetSpawnInterval();
+            timeSinceLastSpawn = Time.time + spawnInterval;
         }
     }
 }
