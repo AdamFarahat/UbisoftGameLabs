@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -17,12 +18,14 @@ public class Enemy : Poolable
     public bool Dead => dead;
 
     private LaneBound laneBound;
+    private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
 
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
+        spriteRenderer = this.GetComponentInHierarchy<SpriteRenderer>();
         energyShield = this.GetComponentInHierarchy<EnergyShield>();
     }
 
@@ -84,11 +87,29 @@ public class Enemy : Poolable
             return;
 
         dead = true;
-        // TODO Play Death Animation
+
+        IEnumerator DeathRoutine()
+        {
+            if (spriteRenderer != null)
+            {
+                Color color = spriteRenderer.color;
+                yield return FadeOutAnimation.Routine(spriteRenderer);
+                spriteRenderer.color = color;
+            }
+        }
+
         if (TryGetComponent(out Poolable poolable))
-            poolable.Death();
+            poolable.Death(DeathRoutine());
         else
-            Destroy(gameObject);
+        {
+            IEnumerator DestroyRoutine()
+            {
+                yield return DeathRoutine();
+                Destroy(gameObject);
+            }
+
+            StartCoroutine(DestroyRoutine());
+        }
     }
 
     public EnergyShield GetShield()
