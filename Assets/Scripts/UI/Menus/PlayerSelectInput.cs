@@ -20,7 +20,8 @@ public class PlayerSelectInput : MonoBehaviour
         manager = myManager;
         myPlayerID = playerID;
         
-        currentIndex = 0;
+        // Start in the center slot 
+        currentIndex = 1; 
         isLockedIn = false; // Ensure they start unlocked
         
         // Snap to the starting position
@@ -84,6 +85,7 @@ public class PlayerSelectInput : MonoBehaviour
     private void UpdateCursorPosition()
     {
         cursorIcon.position = characterSlots[currentIndex].position;
+        transform.SetParent(characterSlots[currentIndex].transform, true);
     }
 
 

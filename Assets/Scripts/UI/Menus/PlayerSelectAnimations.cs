@@ -44,7 +44,7 @@ public class PlayerSelectAnimations : MonoBehaviour
         foreach(UIAnimation elem in uiElements)
         {            
             lastAnimation = elem.AnimateIn(); 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         if (lastAnimation != null)

@@ -11,6 +11,8 @@ public class PlayerSelectManager : MonoBehaviour
     [SerializeField] private RectTransform[] allCharacterSlots;
     [SerializeField] private Image heartUIImage;
 
+    [SerializeField] private GameObject dummyCursor;
+
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
 
@@ -49,6 +51,11 @@ public class PlayerSelectManager : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        // Disable dummy 
+        if (dummyCursor != null)
+        {
+            dummyCursor.SetActive(false);
+        }
         PlayerSelectInput newCursor = playerInput.GetComponent<PlayerSelectInput>();
         
         if (newCursor != null)
