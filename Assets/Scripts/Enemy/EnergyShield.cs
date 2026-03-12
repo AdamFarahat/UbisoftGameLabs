@@ -16,7 +16,7 @@ public class EnergyShield : MonoBehaviour
     {
         enemy = GetComponentInParent<Enemy>();
         Assert.IsNotNull(enemy);
-        collider = GetComponent<Collider>();
+        collider = GetComponentInChildren<Collider>();
         Assert.IsNotNull(collider);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Assert.IsNotNull(spriteRenderer);
