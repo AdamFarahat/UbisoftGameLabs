@@ -50,8 +50,7 @@ public class ScoreManagerSO : ScriptableObject
         float sumOfStdDev = Mathf.Abs(GunPlayerController.Instance.Score - average)
             + Mathf.Abs(SwordPlayerController.Instance.Score - average);
 
-        float teamMultiplier = sumOfStdDev == 0 ? 0 
-            : sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
+        float teamMultiplier = sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
 _instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
               : _instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / (sumOfStdDev);
         Debug.Log("return value: " + (int)(teamMultiplier * totalScore));
