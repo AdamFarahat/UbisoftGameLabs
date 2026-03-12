@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -18,6 +19,15 @@ public class GunPlayerController : PlayerController
 
     private Holster holster;
     private GrenadeBelt grenadeBelt;
+
+    [Header ("Super")]
+    [SerializeField] private float activateSuperWaitTime = 0.1f;
+    private bool fireButtonPressedSuper = false;
+    private bool grenadeButtonPressedSuper = false;
+
+    Coroutine resetFireButtonPressedSuperCoroutine = null;
+    Coroutine resetThrowButtonPressedSuperCoroutine = null;
+    
 
     private enum HoldingState
     {
@@ -44,14 +54,29 @@ public class GunPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
         playerInput.actions["UpEffect"].performed += ToggleGunUp;
         playerInput.actions["DownEffect"].performed += ToggleGunDown;
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
-
         grenadeBelt.OnCooldownReady += HandleGrenadeReady;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        playerInput.actions["Fire"].performed -= PressFire;
+        playerInput.actions["Fire"].canceled -= ReleaseFire;
+        playerInput.actions["UpEffect"].performed -= ToggleGunUp;
+        playerInput.actions["DownEffect"].performed -= ToggleGunDown;
+        playerInput.actions["Throw"].performed -= PressThrow;
+        playerInput.actions["Throw"].canceled -= ReleaseThrow;
     }
 
     private void Update()
@@ -69,6 +94,20 @@ public class GunPlayerController : PlayerController
     {
         if (Stunned)
             return;
+
+        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        {
+            Debug.Log("Fire button pressed with super ready");
+            //Set fire button pressed super to true
+            fireButtonPressedSuper = true;
+            if (grenadeButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Gun Player Activating Super Fire!");
+                PlayerStats.Instance.PrepareGunSuperReady(true);
+                return;
+            }
+            resetFireButtonPressedSuperCoroutine = StartCoroutine(ResetFireButtonPressedSuper());
+        }
 
         holster.StartFiring();
         holdingGunInput = HoldingState.FirstFrame;
@@ -104,6 +143,20 @@ public class GunPlayerController : PlayerController
     {
         if (Stunned)
             return;
+
+        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        {
+            Debug.Log("Grenade button pressed with super ready");
+            //Set grenade button pressed super to true
+            grenadeButtonPressedSuper = true;
+            if (fireButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Gun Player Activating Super Grenade Throw!");
+                //PlayerStats.Instance.ActivateSuper();
+                return;
+            }
+            resetThrowButtonPressedSuperCoroutine = StartCoroutine(ResetThrowButtonPressedSuper());
+        }
 
         grenadeBelt.ChargeThrow();
         if (holdingGunInput != HoldingState.Released)
@@ -143,5 +196,19 @@ public class GunPlayerController : PlayerController
     private void HandleGrenadeReady()
     {
         OnGrenadeCooldownReady?.Invoke();
+    }
+
+    private IEnumerator ResetFireButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        fireButtonPressedSuper = false;
+        resetFireButtonPressedSuperCoroutine = null;
+    }
+
+    private IEnumerator ResetThrowButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        grenadeButtonPressedSuper = false;
+        resetThrowButtonPressedSuperCoroutine = null;
     }
 }

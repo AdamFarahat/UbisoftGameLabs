@@ -9,11 +9,16 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    [Header("Input")]
+    [SerializeField] private float switchLaneBufferDuration = 0.1f;
+    private Coroutine switchLaneBufferRoutine = null;
+
     private Coroutine stunRoutine = null;
     public bool Stunned => stunRoutine != null;
 
     private int score = 0;
     private float continuousMultiplier = 1f;
+    [Header("Score")]
     [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
@@ -46,31 +51,99 @@ public abstract class PlayerController : MonoBehaviour
     protected virtual void Start()
     {
         playerInput.actions.Enable();
+    }
+
+    protected virtual void OnEnable()
+    {
+        if (playerInput != null)
+            playerInput.actions.Enable();
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
         playerInput.actions["MoveRight"].performed += OnMoveRight;
     }
 
+    protected virtual void OnDisable()
+    {
+        if (playerInput != null)
+            playerInput.actions.Disable();
+        playerInput.actions["MoveLeft"].performed -= OnMoveLeft;
+        playerInput.actions["MoveRight"].performed -= OnMoveRight;
+    }
+
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
-        if (Stunned)
-            return;
-
-        if (laneBound.LaneIndex > 0)
-            laneBound.MoveToLane(laneBound.LaneIndex - 1);
+        MoveToLane((int index) => { return index - 1; });
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
+        MoveToLane((int index) => { return index + 1; });
+    }
+
+    private void MoveToLane(Func<int, int> laneFn)
+    {
         if (Stunned)
             return;
 
-        if (laneBound.LaneIndex < LaneConfigSO.Instance.GetNumberOfLanes() - 1)
-            laneBound.MoveToLane(laneBound.LaneIndex + 1);
+        float buffer = laneBound.SwitchLaneDurationLeft();
+        if (buffer == 0f)
+        {
+            int lane = laneFn(laneBound.LaneIndex);
+            if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+                laneBound.MoveToLane(lane);
+        }
+        else if (buffer < switchLaneBufferDuration && switchLaneBufferRoutine == null)
+        {
+            IEnumerator Routine()
+            {
+                yield return new WaitForSeconds(buffer);
+
+                int lane = laneFn(laneBound.LaneIndex);
+                if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+                    laneBound.MoveToLane(lane);
+                switchLaneBufferRoutine = null;
+            }
+
+            switchLaneBufferRoutine = StartCoroutine(Routine());
+        }
     }
 
     public float GetLaneIndex()
     {
         return laneBound.LaneIndex;
+    }
+
+    public float GetLaneDistance()
+    {
+        return laneBound.LaneDistance;
+    }
+
+    public static bool AnyPlayerInLane(int laneIndex)
+    {
+        if (GunPlayerController.Instance != null && GunPlayerController.LaneIndex == laneIndex)
+            return true;
+        if (SwordPlayerController.Instance != null && SwordPlayerController.LaneIndex == laneIndex)
+            return true;
+        return false;
+    }
+
+    public static float PlayerLine
+    {
+        get
+        {
+            float line = 0f;
+            int numPlayers = 0;
+            if (GunPlayerController.Instance != null)
+            {
+                line += GunPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
+            if (SwordPlayerController.Instance != null)
+            {
+                line += SwordPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
+            return numPlayers > 0 ? line / numPlayers : line;
+        }
     }
 
     public virtual float GetCooldownPercent()
@@ -80,7 +153,7 @@ public abstract class PlayerController : MonoBehaviour
 
     public void Stun(float stunTime)
     {
-        if (Stunned)
+        if (Stunned || PlayerStats.Instance.IsSuperActive())
             return;
 
         SetContinuousMultiplier(1f);

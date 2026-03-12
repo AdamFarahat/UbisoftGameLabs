@@ -12,7 +12,10 @@ public abstract class Poolable : MonoBehaviour
 
     public void Death()
     {
-        enemyPool.Release(gameObject);
+        if (enemyPool != null)
+            enemyPool.Release(gameObject);
+        else
+            Destroy(gameObject);
     }
     
     public virtual void TakeFromPool()

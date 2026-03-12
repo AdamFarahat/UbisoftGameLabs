@@ -11,6 +11,7 @@ public class ShotgunBlast : MonoBehaviour
     public float coneAngle = 45f;
     public float range = 100f;
     public int damage = 10;
+    public float heightScale = 0.2f;
 
     private float invDuration = 0f;
     private float age = 0f;
@@ -25,6 +26,7 @@ public class ShotgunBlast : MonoBehaviour
     {
         var shape = particleSystem.shape;
         shape.angle = coneAngle;
+        shape.scale = new(shape.scale.x, heightScale, shape.scale.z);
         
         invDuration = 1f / particleSystem.main.duration;
         invVerticalScale = 1f / particleSystem.shape.scale.y;
@@ -54,7 +56,7 @@ public class ShotgunBlast : MonoBehaviour
             if (Vector3.Angle(displacement, forward) < coneAngle && Vector3.Dot(displacement, forward) <= interpRange) // enemy is within cone range
             {
                 Enemy enemy = hit.GetComponentInParent<Enemy>();
-                if (enemy != null && !enemiesHit.Contains(enemy))
+                if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
                 {
                     enemiesHit.Add(enemy);
                     if (enemy.TakeDamage(damage))
@@ -66,7 +68,7 @@ public class ShotgunBlast : MonoBehaviour
 
     private void OnEnemyKill(Enemy enemy)
     {
-        // TODO handle more complex gun player multiplier logic
+        // TODO handle more complex gun player multiplier logic ?
         GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
         GunPlayerController.Instance.AddScore(enemy.Score);
     }

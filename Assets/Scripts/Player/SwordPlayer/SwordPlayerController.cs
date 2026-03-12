@@ -24,13 +24,14 @@ public class SwordPlayerController : PlayerController
     public Action OnBlockCooldownReady;
 
     [Header("Parrying")]
-    [SerializeField] private float parryBulletMultiplier = 2.0f;
+    [SerializeField] private float parryBulletSpeedMult = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
 
     [Header("Scoring")]
     [SerializeField] private float blockingMultiplierGain = 0.2f;
     [SerializeField] private float attackingMultiplierGain = 0.6f;
-    [SerializeField] private float parryingMultiplierGain = 0.8f;
+    [SerializeField] private float meleeParryMultiplierGain = 0.8f;
+    [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
     private enum SwordPlayerStates
     {
@@ -48,6 +49,13 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
+    [Header ("Super")]
+    [SerializeField] private float activateSuperWaitTime = 0.1f;
+    private bool attackButtonPressedSuper = false;
+    private bool blockButtonPressedSuper = false;
+    private Coroutine resetAttackButtonPressedSuperCoroutine = null;
+    private Coroutine resetBlockButtonPressedSuperCoroutine = null;
+
     protected override void Awake()
     {
         instance = this;
@@ -58,11 +66,26 @@ public class SwordPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;
         playerInput.actions["Block/Parry"].started += Block;
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        playerInput.actions["UpEffect"].performed -= Jump;
+        playerInput.actions["DownEffect"].performed -= Duck;
+        playerInput.actions["Attack"].performed -= Attack;
+        playerInput.actions["Block/Parry"].started -= Block;
+        playerInput.actions["Block/Parry"].canceled -= CancelBlock;
     }
 
     public override float GetCooldownPercent()
@@ -127,6 +150,19 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
+        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        {
+            Debug.Log("Attack button pressed with super ready");
+            //Set attack button pressed super to true
+            attackButtonPressedSuper = true;
+            if (blockButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Sword Player Activating Super Attack!");
+                //PlayerStats.Instance.ActivateSuper();
+                return;
+            }
+            resetAttackButtonPressedSuperCoroutine = StartCoroutine(ResetAttackButtonPressedSuper());
+        }
 
         if (state == SwordPlayerStates.Normal)
         {
@@ -151,6 +187,20 @@ public class SwordPlayerController : PlayerController
     {
         if (Stunned)
             return;
+        if(PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
+        {
+            //Set block button pressed super to true
+            Debug.Log("Block button pressed with super ready");
+            blockButtonPressedSuper = true;
+            if (attackButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
+            {
+                Debug.Log("Sword Player Activating Super Attack!");
+                PlayerStats.Instance.PrepareSwordSuperReady(true);
+                return;
+            }
+            resetBlockButtonPressedSuperCoroutine = StartCoroutine(ResetBlockButtonPressedSuper());
+            
+        }
 
         Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
@@ -193,7 +243,10 @@ public class SwordPlayerController : PlayerController
             {
                 yield break;
             }
-            parryTimer += Time.deltaTime;
+            if(!PlayerStats.Instance.IsSuperActive())
+            {
+                parryTimer += Time.deltaTime;
+            }
             yield return null;
         }
         if (state == SwordPlayerStates.Parrying)
@@ -238,7 +291,7 @@ public class SwordPlayerController : PlayerController
             switch (state)
             {
                 case SwordPlayerStates.Attacking:
-                    if (enemy.OnParried())
+                    if (!enemy.HasShield() && enemy.OnParried())
                     {
                         playerStats.AddSwordSuper(4f);
                         AddContinuousMultiplier(attackingMultiplierGain);
@@ -249,7 +302,7 @@ public class SwordPlayerController : PlayerController
                     if (enemy.OnParried())
                     {
                         playerStats.AddSwordSuper(5f);
-                        AddContinuousMultiplier(parryingMultiplierGain);
+                        AddContinuousMultiplier(meleeParryMultiplierGain);
                         AddScore(enemy.Score);
                     }
                     parryTimer = 0f;
@@ -257,7 +310,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Blocking:
                     if (canBlock)
                     {
-                        if (enemy.OnParried())
+                        if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);
@@ -287,7 +340,27 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(EnemyProjectile projectile)
     {
-        projectile.FlipDirection();
-        projectile.speed *= parryBulletMultiplier;
+        projectile.Parry(parryBulletSpeedMult);
+    }
+
+    public void OnBulletParryKill(int score)
+    {
+        playerStats.AddSwordSuper(5f);
+        AddContinuousMultiplier(bulletParryMultiplierGain);
+        AddScore(score);
+    }
+
+    private IEnumerator ResetAttackButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        attackButtonPressedSuper = false;
+        resetAttackButtonPressedSuperCoroutine = null;
+    }
+
+    private IEnumerator ResetBlockButtonPressedSuper()
+    {
+        yield return new WaitForSeconds(activateSuperWaitTime);
+        blockButtonPressedSuper = false;
+        resetBlockButtonPressedSuperCoroutine = null;
     }
 }

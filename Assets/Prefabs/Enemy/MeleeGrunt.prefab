@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4929285896587886086}
   - component: {fileID: 7835145020812413526}
   - component: {fileID: 6333191442434426491}
-  - component: {fileID: 6944135096981160755}
+  - component: {fileID: 143288811496620993}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Enemy
@@ -90,8 +90,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6944135096981160755
-SphereCollider:
+--- !u!65 &143288811496620993
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,8 +109,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7
-  m_Center: {x: 0, y: 0.2, z: 0}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8980648615144976386
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +146,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4929285896587886086}
+  - {fileID: 1919420992694233671}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2305194917688610957
@@ -176,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   initialLaneDistance: 300
+  damage: 10
   speed: 18
 --- !u!114 &1581637196576062325
 MonoBehaviour:
@@ -204,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db04de8818a74fb4b803c7ed79f691f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stunner
+  stunTime: 1
 --- !u!54 &7783204410356858617
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -231,3 +234,81 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &5663846591562425685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 65357303025461256}
+    m_Modifications:
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538640426395163653, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_Name
+      value: EnergyShield
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+--- !u!4 &1919420992694233671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+  m_PrefabInstance: {fileID: 5663846591562425685}
+  m_PrefabAsset: {fileID: 0}

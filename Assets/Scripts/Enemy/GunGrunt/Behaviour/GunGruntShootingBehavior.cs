@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class ShootingBehavior : StateMachineBehaviour
+public class GunGruntShootingBehavior : StateMachineBehaviour
 {
     public string lostPlayerTrigger = "PlayerDisappeared";
-    public float shootingRate = 1.0f;
     public GameObject projObj;
-    private PlayerController shootingTarget;
+    private bool shootingTarget = false;
 
-    private ShooterEnemyAI shooterAI;
+    private GunGruntEnemyAI shooterAI;
 
     private float time;
     private bool firstShoot;
@@ -15,8 +14,8 @@ public class ShootingBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        shooterAI = animator.GetComponent<ShooterEnemyAI>();
-        shootingTarget = FindShootingTarget();
+        shooterAI = animator.GetComponent<GunGruntEnemyAI>();
+        shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
         time = 0f;
         firstShoot = true;
     }
@@ -28,20 +27,21 @@ public class ShootingBehavior : StateMachineBehaviour
             return;
 
         time += Time.deltaTime;
-        if (time >= shootingRate || firstShoot)
+        if (time >= shooterAI.ShootingCooldown || firstShoot)
         {
-            shootingTarget = FindShootingTarget();
+            shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
             firstShoot = false;
             time = 0f;
-            if (shootingTarget != null)
+            if (shootingTarget)
             {
                 if (projObj != null)
                 {
-                    GameObject proj = PoolObject.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
+                    GameObject proj = ProjectilePool.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
                     if (proj != null && proj.TryGetComponent(out EnemyProjectile projectileComponent))
                     {
-                        Vector3 direction = (shootingTarget.transform.position - animator.transform.position).normalized;
-                        projectileComponent.Initialize(direction);
+                        Vector3 direction = LaneConfigSO.Instance.GetLanePosition(animator.GetComponent<LaneBound>().LaneIndex, PlayerController.PlayerLine) - animator.transform.position;
+                        direction.y = 0f;
+                        projectileComponent.Initialize(direction, shooterAI.BulletSpeed);
                     }
                 }
                 else
@@ -50,15 +50,8 @@ public class ShootingBehavior : StateMachineBehaviour
                 }
             }
         }
-        if (shootingTarget == null)
-        {
-            animator.SetTrigger(lostPlayerTrigger);
-        }
-    }
 
-    private PlayerController FindShootingTarget()
-    {
-        return GunPlayerController.LaneIndex == shooterAI.shootingIndex ? GunPlayerController.Instance :
-            SwordPlayerController.LaneIndex == shooterAI.shootingIndex ? SwordPlayerController.Instance : null;
+        if (!shootingTarget)
+            animator.SetTrigger(lostPlayerTrigger);
     }
 }

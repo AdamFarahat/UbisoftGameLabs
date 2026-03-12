@@ -1,38 +1,86 @@
+using System.Collections;
 using UnityEngine;
 
 public class MachineGun : Gun
 {
     [Header("Machine Gun")]
-    [SerializeField] private float maxSpreadAngle = 1f;
+    [SerializeField] private float maxSpreadAngle = 0.5f;
     [SerializeField] private float spreadReduction = 2f;
 
-    private float holdingCooldown = 0f;
+    [SerializeField] private float overheatIncreaseRate = 0.2f; // 1 / duration
+    [SerializeField] private float overheatDecreaseRate = 0.4f; // 1 / duration
+    [SerializeField] private float overheatCooldown = 2f;
+
+    private bool shooting = false;
+    private float overheatLevel = 0f;
+    private bool overheating = false;
+
+    protected override void Update()
+    {
+        base.Update();
+        Debug.Log($"Overheat level = {overheatLevel}");
+
+        if (overheating)
+            return;
+
+        if (shooting)
+            overheatLevel += Time.deltaTime * overheatIncreaseRate;
+        else
+            overheatLevel -= Time.deltaTime * overheatDecreaseRate;
+
+        if (overheatLevel < 0f)
+            overheatLevel = 0f;
+        else if (overheatLevel >= 1f)
+        {
+            overheatLevel = 1f;
+            StopFiring();
+            // TODO SFX
+
+            IEnumerator Overheat()
+            {
+                overheatLevel = 0f;
+                overheating = true;
+                yield return new WaitForSeconds(overheatCooldown);
+                overheating = false;
+            }
+
+            StartCoroutine(Overheat());
+        }
+    }
 
     public override void StartFiring()
     {
-        if (!PreStartFiring())
+        if (overheating)
             return;
 
-        Debug.Log("StartFiring machine gun!");
+        if (!PreStartFiring())
+            return;
+        
         float spread = Random.Range(-1f, 1f);
         spread = maxSpreadAngle * Mathf.Sign(spread) * (1f - Mathf.Pow(1f - Mathf.Abs(spread), spreadReduction));
-        InstantiateBullet().transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
-
         AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunShot, transform.position);
 
-        holdingCooldown = firingCooldown;
+        Bullet bullet = InstantiateShot<Bullet>();
+        bullet.damage = bulletDamage;
+        bullet.transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
+
+        shooting = true;
     }
 
     public override void KeepFiring()
     {
-        holdingCooldown -= Time.deltaTime;
-        if (holdingCooldown <= 0f)
-            StartFiring();
+        StartFiring();
+    }
+
+    public override void StopFiring()
+    {
+        base.StopFiring();
+        shooting = false;
     }
 
     public override void CancelFiring()
     {
         base.CancelFiring();
-        holdingCooldown = firingCooldown;
+        shooting = false;
     }
 }

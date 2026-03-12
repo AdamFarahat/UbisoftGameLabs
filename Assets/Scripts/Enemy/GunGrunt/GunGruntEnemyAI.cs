@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShooterEnemyAI : MonoBehaviour
+public class GunGruntEnemyAI : MonoBehaviour
 {
     [SerializeField] private float spawnLaneDistance = 300f;
     [SerializeField] private float spawnArrivalDuration = 3f;
@@ -9,6 +9,11 @@ public class ShooterEnemyAI : MonoBehaviour
     [SerializeField] private float minLaneDistance = 100f;
     [SerializeField] private float maxLaneDistance = 150f;
     [SerializeField] private float researchCooldown = 3f;
+
+    [SerializeField] private float shootingCooldown = 1f;
+    public float ShootingCooldown => shootingCooldown;
+    [SerializeField] private float bulletSpeed = 80f;
+    public float BulletSpeed => bulletSpeed;
 
     public int shootingIndex;
     public Transform projSpawnPoint;
