@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image swordPlayerCooldownUI;
     [SerializeField] private Image swordMultiplierUI;
 
-    private GameOver gameOverScreen;
+    [SerializeField] private GameOver gameOverScreen;
 
 
     float health = 1.0f;
@@ -50,8 +50,6 @@ public class UIManager : MonoBehaviour
 
         Assert.IsNotNull(swordMultiplierUI.material);
         Assert.IsNotNull(swordPlayerCooldownUI.material);
-
-        gameOverScreen = GameObject.Find("GameOver").GetComponent<GameOver>();
     }
 
     void Start()
@@ -178,6 +176,7 @@ public class UIManager : MonoBehaviour
     {
         if (gameOverScreen != null)
         {
+            gameOverScreen.gameObject.SetActive(true);
             gameOverScreen.ShowGameOverScreen();
         }
         else

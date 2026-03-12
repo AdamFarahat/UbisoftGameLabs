@@ -1,39 +1,34 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 public class GameOver : MonoBehaviour
 {
-    private ScoreManagerSO  scoreManagerSO;
-    private TextMeshProUGUI gunScore;
-    private TextMeshProUGUI swordScore;
-    private TextMeshProUGUI overallScoreText;
-    private Button restartButton;
+    [SerializeField] private ScoreManagerSO  scoreManagerSO;
+    [SerializeField] private TextMeshProUGUI gunScore;
+    [SerializeField] private TextMeshProUGUI swordScore;
+    [SerializeField] private TextMeshProUGUI overallScoreText;
+    [SerializeField] private Button restartButton;
 
     private void Awake()
     {
-        scoreManagerSO = ScoreManagerSO.Instance;
-        if (scoreManagerSO == null)
-            Debug.LogWarning("ScoreManagerSO instance not found. Score UI will not be updated.");
-        overallScoreText = GameObject.Find("Overall Score").GetComponent<TextMeshProUGUI>();
-        gunScore = GameObject.Find("GunScore").GetComponent<TextMeshProUGUI>();
-        swordScore = GameObject.Find("SwordScore").GetComponent<TextMeshProUGUI>();
-        restartButton = GameObject.Find("Restart").GetComponent<Button>();
+        Assert.IsNotNull(scoreManagerSO);
+        Assert.IsNotNull(gunScore);
+        Assert.IsNotNull(swordScore);
+        Assert.IsNotNull(overallScoreText);
+        Assert.IsNotNull(restartButton);
+
         restartButton.onClick.AddListener(Restart);
     }
 
     public void ShowGameOverScreen()
     {
-        if (gunScore != null)
-            gunScore.text = GunPlayerController.Instance.Score.ToString();
-        if (swordScore != null)
-            swordScore.text = SwordPlayerController.Instance.Score.ToString();
-        if (scoreManagerSO != null)
-        {
-            int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
-            overallScoreText.text = score.ToString();
-        }
-        gameObject.SetActive(true); 
+        gunScore.text = GunPlayerController.Instance.Score.ToString();
+        swordScore.text = SwordPlayerController.Instance.Score.ToString();
+    
+        int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
+        overallScoreText.text = score.ToString(); 
     }
 
     public void Restart(){
@@ -44,7 +39,6 @@ public class GameOver : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       gameObject.SetActive(false);
     }
 
     // Update is called once per frame
