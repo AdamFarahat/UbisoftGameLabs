@@ -1,17 +1,20 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems; 
 using UnityEngine.Assertions;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class MenuAnimations : MonoBehaviour
 {
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private float staggerDelay = 0.2f;
     [SerializeField] private UIAnimation title;
     private ButtonUIAnimation[] buttons;
+
+    // Fired when the menu finishes its outward animation
+    public event Action OnMenuAnimateOutComplete; 
 
     void Awake()
     {
@@ -32,23 +35,22 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(AnimateInSequence());
     }
 
-    public void AnimateButtonsOut(string nextScene)
+    public void AnimateButtonsOut()
     {
-        StartCoroutine(AnimateOutSequence(nextScene));
+        StartCoroutine(AnimateOutSequence());
     }
 
-    // Animate the buttons in staggered fashion
-    IEnumerator AnimateOutSequence(string nextScene)
+    // Animate the buttons out in staggered fashion
+    IEnumerator AnimateOutSequence()
     {
         // Clear selection when animating out so the player can't keep navigating
         EventSystem.current.SetSelectedGameObject(null);
 
         Sequence lastAnimation = null;
 
-
         for (int i = 0; i < buttons.Length; i++)
         {
-            // If this is the button at index 0 (the selected one), give it the bonus!
+            // If this is the button at index 0 (the selected one), give it the bonus
             buttons[i].IsSelected = i == 0;
 
             lastAnimation = buttons[i].AnimateOut();
@@ -68,18 +70,18 @@ public class MenuManager : MonoBehaviour
             yield return seq.WaitForCompletion();
         }
 
-        if (nextScene == "") yield break;
-        SceneManager.LoadScene(nextScene);
+        // Fire event 
+        OnMenuAnimateOutComplete?.Invoke();
     }
 
-    // Animate the buttons in staggered fashion
+    // Animate the buttons in in staggered fashion
     IEnumerator AnimateInSequence()
     {
         // Clear current selection so the controller does nothing during the intro
         EventSystem.current.SetSelectedGameObject(null);
 
         // Small delay before animating everything in
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         
         Sequence titleAnimation = title.AnimateIn();
 
@@ -126,6 +128,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // Internally bump the selected button to the front of the array 
     public void ReorderButtons(ButtonUIAnimation button)
     {
         int index = 0;

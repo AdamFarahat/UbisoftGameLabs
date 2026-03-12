@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerSelectCursor : MonoBehaviour
+public class PlayerSelectInput : MonoBehaviour
 {
     [Header("UI References")]
     [Tooltip("The moving icon/cursor inside this prefab")]
@@ -51,7 +51,7 @@ public class PlayerSelectCursor : MonoBehaviour
         // Block selection if the UI is still animating
         if (!manager.IsAcceptingInput) return;
 
-        // do not allow selection on middle slot
+        // Do not allow selection on middle slot
         if (currentIndex == 1) return;
 
         // Only lock in if they aren't already locked
@@ -67,6 +67,7 @@ public class PlayerSelectCursor : MonoBehaviour
         }
     }
 
+    // Move cursor between slots 
     private void MoveCursor(int direction)
     {
         if (characterSlots == null || characterSlots.Length == 0) return;
