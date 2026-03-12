@@ -337,13 +337,6 @@ MonoBehaviour:
   firePosition: {fileID: 882516828035149282}
   bulletDamage: 10
   firingCooldown: 0.5
-  playerPistolShot:
-    Guid:
-      Data1: -237387748
-      Data2: 1206679153
-      Data3: 546449038
-      Data4: 1156238603
-    Path: event:/PlayerPistolShot
   altShots:
   - velocity: 250
     damage: 20
