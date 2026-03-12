@@ -52,7 +52,7 @@ public class ScoreManagerSO : ScriptableObject
 
         float teamMultiplier = sumOfStdDev == 0 ? 0 
             : sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
-                _instance.MIN_MULTIPLIER / _instance.SumOfSTDDevTreshold
+_instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
               : _instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / (sumOfStdDev);
         Debug.Log("return value: " + (int)(teamMultiplier * totalScore));
         return (int)(teamMultiplier * totalScore);
