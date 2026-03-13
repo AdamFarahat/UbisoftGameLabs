@@ -20,6 +20,8 @@ public class SpriteAnimator : MonoBehaviour
     private readonly Dictionary<string, Animation> animationMap = new();
 
     private Coroutine animationRoutine = null;
+    private float lastAnimationStartTime = 0f;
+    public float LastAnimationStartTime => lastAnimationStartTime;
 
     private void Awake()
     {
@@ -48,6 +50,11 @@ public class SpriteAnimator : MonoBehaviour
         PlayDefaultCycle();
     }
 
+    public float GetAnimationDuration(string name)
+    {
+        return animationMap[name].duration;
+    }
+
     public void SetAnimationDuration(string name, float duration)
     {
         if (animationMap.TryGetValue(name, out Animation animation))
@@ -61,7 +68,7 @@ public class SpriteAnimator : MonoBehaviour
             Debug.LogError($"Animation {name} does not exist in animation map");
     }
 
-    public void PlayOneShot(string name)
+    public void PlayOneShot(string name, float skipTime = 0f)
     {
         if (!animationMap.ContainsKey(name))
         {
@@ -74,7 +81,7 @@ public class SpriteAnimator : MonoBehaviour
 
         IEnumerator Routine()
         {
-            yield return PlayAllFrames(animationMap[name]);
+            yield return PlayAllFrames(animationMap[name], skipTime);
             animationRoutine = null;
             PlayCycle(defaultName);
         }
@@ -82,12 +89,12 @@ public class SpriteAnimator : MonoBehaviour
         animationRoutine = StartCoroutine(Routine());
     }
 
-    public void PlayDefaultCycle()
+    public void PlayDefaultCycle(float skipTime = 0f)
     {
-        PlayCycle(defaultName);
+        PlayCycle(defaultName, skipTime);
     }
 
-    public void PlayCycle(string name)
+    public void PlayCycle(string name, float skipTime = 0f)
     {
         if (!animationMap.ContainsKey(name))
         {
@@ -101,19 +108,38 @@ public class SpriteAnimator : MonoBehaviour
         IEnumerator Routine()
         {
             while (true)
-                yield return PlayAllFrames(animationMap[name]);
+                yield return PlayAllFrames(animationMap[name], skipTime);
         }
 
         animationRoutine = StartCoroutine(Routine());
     }
 
-    private IEnumerator PlayAllFrames(Animation animation)
+    private IEnumerator PlayAllFrames(Animation animation, float skipTime)
     {
-        WaitForSeconds wait = new(animation.duration / animation.frames.Length);
+        lastAnimationStartTime = Time.time;
+        float frameLength = animation.duration / animation.frames.Length;
+        WaitForSeconds wait = new(frameLength);
         foreach (Sprite frame in animation.frames)
         {
-            spriteRenderer.sprite = frame;
-            yield return wait;
+            if (skipTime > 0f)
+            {
+                if (skipTime >= frameLength)
+                {
+                    skipTime -= frameLength;
+                    spriteRenderer.sprite = frame;
+                    continue;
+                }
+                else
+                {
+                    spriteRenderer.sprite = frame;
+                    yield return new WaitForSeconds(frameLength - skipTime);
+                }
+            }
+            else
+            {
+                spriteRenderer.sprite = frame;
+                yield return wait;
+            }
         }
     }
 }
