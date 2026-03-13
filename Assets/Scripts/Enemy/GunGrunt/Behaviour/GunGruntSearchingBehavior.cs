@@ -27,7 +27,7 @@ public class GunGruntSearchingBehavior : StateMachineBehaviour
         if (researchTime <= 0f)
         {
             researchTime = shooterAI.ResearchCooldown;
-            shooterAI.shootingIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
+            shooterAI.shootingIndex = Random.Range(0, LaneSet.LaneCount);
             laneBound.MoveToLane(shooterAI.shootingIndex);
         }
 

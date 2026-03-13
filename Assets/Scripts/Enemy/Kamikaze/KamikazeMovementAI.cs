@@ -50,7 +50,7 @@ public class KamikazeMovementAI : MonoBehaviour
 
             if (laneBound.LaneIndex == 0)
                 laneBound.MoveToLane(laneBound.LaneIndex + 1);
-            else if (laneBound.LaneIndex == LaneConfigSO.Instance.GetNumberOfLanes() - 1)
+            else if (laneBound.LaneIndex == LaneSet.LaneCount - 1)
                 laneBound.MoveToLane(laneBound.LaneIndex - 1);
             else
                 laneBound.MoveToLane(laneBound.LaneIndex + Random.Range(0, 2) * 2 - 1);

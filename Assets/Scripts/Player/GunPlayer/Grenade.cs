@@ -50,7 +50,7 @@ public class Grenade : MonoBehaviour
                 hitEnemies.Add(enemy);
                 if (enemy.HasShield())
                 {
-                    Vector3 axis = LaneConfigSO.Instance.GetLaneDirection() * Vector3.forward;
+                    Vector3 axis = LaneSet.Instance.GetLaneDirection() * Vector3.forward;
                     float myPosition = Vector3.Dot(transform.position, axis);
                     float shieldPosition = Vector3.Dot(enemy.GetShield().transform.position, axis);
                     if (myPosition <= shieldPosition)
