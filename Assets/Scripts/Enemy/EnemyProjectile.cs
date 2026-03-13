@@ -9,7 +9,6 @@ public class EnemyProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
 
-    private float normalSpriteRotation;
     private SphereCollider sphereCollider;
     private float normalColliderRadius;
     private Vector3 direction;
@@ -22,7 +21,6 @@ public class EnemyProjectile : MonoBehaviour
         AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
-        normalSpriteRotation = sprite.rotation;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Assert.IsNotNull(spriteRenderer);
@@ -39,7 +37,7 @@ public class EnemyProjectile : MonoBehaviour
     public void Initialize(Transform origin, Vector3 direction, float speed)
     {
         this.origin = origin;
-        sprite.rotation = normalSpriteRotation;
+        sprite.rotation = ScreenAngleOfVector(direction);
         this.direction = direction.normalized;
         this.speed = speed;
         parried = false;
@@ -95,8 +93,15 @@ public class EnemyProjectile : MonoBehaviour
 
         origin = newOrigin;
         speed *= speedMult;
-        sprite.rotation += 180;
+        sprite.rotation = ScreenAngleOfVector(direction);
         parried = true;
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
+    }
+
+    // TODO move to LaneSet once LaneSet is merged to main.
+    private static float ScreenAngleOfVector(Vector3 vector)
+    {
+        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
+        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }
