@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static UnityEngine.UI.Image;
 
 public class EnemyProjectile : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class EnemyProjectile : MonoBehaviour
     private Vector3 direction;
     private float speed = 80f;
     private bool parried = false;
+    private Transform origin;
 
     private void Awake()
     {
@@ -34,8 +36,9 @@ public class EnemyProjectile : MonoBehaviour
         stunner.OnStun += OnStun;
     }
 
-    public void Initialize(Vector3 direction, float speed)
+    public void Initialize(Transform origin, Vector3 direction, float speed)
     {
+        this.origin = origin;
         sprite.rotation = normalSpriteRotation;
         this.direction = direction.normalized;
         this.speed = speed;
@@ -83,9 +86,14 @@ public class EnemyProjectile : MonoBehaviour
         StartCoroutine(Routine());
     }
 
-    public void Parry(float speedMult)
+    public void Parry(Transform newOrigin, float speedMult)
     {
-        direction *= -1;
+        if (origin != null)
+            direction = (origin.position - transform.position).normalized;
+        else
+            direction *= -1;
+
+        origin = newOrigin;
         speed *= speedMult;
         sprite.rotation += 180;
         parried = true;
