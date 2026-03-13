@@ -116,7 +116,7 @@ public class SwordPlayerController : PlayerController
 
     private void OnDashEnd()
     {
-        PlayDefaultCycleAnimation(); // TODO fix animation conflict with dash and jump
+        PlayDefaultCycleAnimation();
     }
 
     private void PlayAnimation(string name, Action<string, float> animate)
