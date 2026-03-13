@@ -56,7 +56,7 @@ public class KamikazeMovementAI : MonoBehaviour
                 laneBound.MoveToLane(laneBound.LaneIndex + Random.Range(0, 2) * 2 - 1);
         }
 
-        if (laneBound.LaneDistance <= PlayerController.PlayerLine)
+        if (laneBound.LaneDistance <= LaneSet.PlayerLine)
         {
             GetComponent<Enemy>().Kill();
             

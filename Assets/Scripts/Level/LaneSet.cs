@@ -28,6 +28,30 @@ public class LaneSet : MonoBehaviour
         instance = this;
     }
 
+    public static float PlayerLine
+    {
+        get
+        {
+            float line = 0f;
+            int numPlayers = 0;
+            if (GunPlayerController.Instance != null)
+            {
+                line += GunPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
+            if (SwordPlayerController.Instance != null)
+            {
+                line += SwordPlayerController.Instance.GetLaneDistance();
+                numPlayers++;
+            }
+            return numPlayers > 0 ? line / numPlayers : line;
+        }
+    }
+
+    public static float HeartLine => -200f;
+
+    public static float VisibleEndLine => 110f;
+
     private Vector3 LaneStart(int laneIndex)
     {
         int offsetIndex = laneIndex - Mathf.FloorToInt(0.5f * LaneCount);

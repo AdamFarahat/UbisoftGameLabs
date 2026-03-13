@@ -25,7 +25,7 @@ public class FlyerMovement : MonoBehaviour
     {
         lane.LaneDistance -= forwardSpeed * Time.deltaTime;
         
-        if (lane.LaneDistance <= PlayerController.HeartLine)
+        if (lane.LaneDistance <= LaneSet.HeartLine)
             PlayerStats.Instance.TakeDamage(damage);
     }
 }
