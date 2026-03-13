@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class KamikazeMovementAI : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 300f;
+    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float laneStayPeriod = 1.5f;
 

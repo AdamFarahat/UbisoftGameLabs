@@ -48,7 +48,7 @@ public class LaneSet : MonoBehaviour
         }
     }
 
-    public static float HeartLine => -200f;
+    public static float HeartLine => -50f;
 
     public static float VisibleEndLine => 110f;
 
