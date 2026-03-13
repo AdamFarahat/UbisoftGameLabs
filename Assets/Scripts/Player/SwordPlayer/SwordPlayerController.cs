@@ -68,6 +68,11 @@ public class SwordPlayerController : PlayerController
         animator = GetComponent<SpriteAnimator>();
         Assert.IsNotNull(animator);
         animator.SetAnimationDuration("Attack", attackDuration);
+
+        LaneBound laneBound = GetComponent<LaneBound>();
+        Assert.IsNotNull(laneBound);
+        laneBound.DashStart += OnDashStart;
+        laneBound.DashEnd += OnDashEnd;
     }
 
     protected override void Start()
@@ -98,6 +103,19 @@ public class SwordPlayerController : PlayerController
     public override float GetCooldownPercent()
     {
         return blockCooldownPercent;
+    }
+
+    private void OnDashStart(float deltaLane)
+    {
+        if (deltaLane > 0f)
+            animator.PlayCycle("Dash Right");
+        else if (deltaLane < 0f)
+            animator.PlayCycle("Dash Left");
+    }
+
+    private void OnDashEnd()
+    {
+        animator.PlayDefaultCycle();
     }
 
     private void Jump(InputAction.CallbackContext ctx)

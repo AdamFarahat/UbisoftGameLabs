@@ -84,25 +84,24 @@ public abstract class PlayerController : MonoBehaviour
         if (Stunned)
             return;
 
-        float buffer = laneBound.SwitchLaneDurationLeft();
-        if (buffer == 0f)
+        void DoMove()
         {
             int lane = laneFn(laneBound.LaneIndex);
             if (lane >= 0 && lane < LaneSet.LaneCount)
                 laneBound.MoveToLane(lane);
         }
+
+        float buffer = laneBound.SwitchLaneDurationLeft();
+        if (buffer == 0f)
+            DoMove();
         else if (buffer < switchLaneBufferDuration && switchLaneBufferRoutine == null)
         {
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(buffer);
-
-                int lane = laneFn(laneBound.LaneIndex);
-                if (lane >= 0 && lane < LaneSet.LaneCount)
-                    laneBound.MoveToLane(lane);
+                DoMove();
                 switchLaneBufferRoutine = null;
             }
-
             switchLaneBufferRoutine = StartCoroutine(Routine());
         }
     }
