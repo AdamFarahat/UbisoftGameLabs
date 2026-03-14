@@ -351,7 +351,7 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(EnemyProjectile projectile)
     {
-        projectile.Parry(parryBulletSpeedMult);
+        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult);
     }
 
     public void OnBulletParryKill(int score)

@@ -38,7 +38,7 @@ public class FlyerShooting : MonoBehaviour
         EnemyProjectile projectile = go.GetComponent<EnemyProjectile>();
         Assert.IsNotNull(projectile);
         Vector3 direction = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine) - spawnPoint.position;
-        projectile.Initialize(direction, bulletSpeed);
+        projectile.Initialize(spawnPoint, direction, bulletSpeed);
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.stunTime = stunTime;

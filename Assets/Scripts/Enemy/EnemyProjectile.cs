@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static UnityEngine.UI.Image;
 
 public class EnemyProjectile : MonoBehaviour
 {
@@ -8,19 +9,18 @@ public class EnemyProjectile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
 
-    private float normalSpriteRotation;
     private SphereCollider sphereCollider;
     private float normalColliderRadius;
     private Vector3 direction;
     private float speed = 80f;
     private bool parried = false;
+    private Transform origin;
 
     private void Awake()
     {
         AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
-        normalSpriteRotation = sprite.rotation;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Assert.IsNotNull(spriteRenderer);
@@ -34,9 +34,10 @@ public class EnemyProjectile : MonoBehaviour
         stunner.OnStun += OnStun;
     }
 
-    public void Initialize(Vector3 direction, float speed)
+    public void Initialize(Transform origin, Vector3 direction, float speed)
     {
-        sprite.rotation = normalSpriteRotation;
+        this.origin = origin;
+        sprite.rotation = ScreenAngleOfVector(direction);
         this.direction = direction.normalized;
         this.speed = speed;
         parried = false;
@@ -83,12 +84,24 @@ public class EnemyProjectile : MonoBehaviour
         StartCoroutine(Routine());
     }
 
-    public void Parry(float speedMult)
+    public void Parry(Transform newOrigin, float speedMult)
     {
-        direction *= -1;
+        if (origin != null)
+            direction = (origin.position - transform.position).normalized;
+        else
+            direction *= -1;
+
+        origin = newOrigin;
         speed *= speedMult;
-        sprite.rotation += 180;
+        sprite.rotation = ScreenAngleOfVector(direction);
         parried = true;
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
+    }
+
+    // TODO move to LaneSet once LaneSet is merged to main.
+    private static float ScreenAngleOfVector(Vector3 vector)
+    {
+        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
+        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }
