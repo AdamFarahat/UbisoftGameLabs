@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1019dcb567e88742a0d8016e27f191e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
-  initialLaneDistance: 300
+  initialLaneDistance: 200
   forwardSpeed: 10
   damage: 12
 --- !u!114 &1211474539738667709
@@ -162,7 +162,6 @@ MonoBehaviour:
   stunTime: 0.3
   shotCooldown: 0.65
   shotDistanceThreshold: 20
-  shotRange: 250
   bulletSpeed: 80
 --- !u!114 &8525619152686538179
 MonoBehaviour:

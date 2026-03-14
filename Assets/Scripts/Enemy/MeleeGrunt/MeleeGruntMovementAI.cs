@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class MeleeGruntMovementAI : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 300f;
+    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float damage = 10f;
     [SerializeField] private float speed = 1f;
 
@@ -30,7 +30,7 @@ public class MeleeGruntMovementAI : MonoBehaviour
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
 
-        if (laneBound.LaneDistance <= 0f)
+        if (laneBound.LaneDistance <= LaneSet.HeartLine)
         {
             playerStats.TakeDamage(damage);
         }

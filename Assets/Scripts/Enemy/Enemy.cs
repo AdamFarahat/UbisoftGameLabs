@@ -53,7 +53,7 @@ public class Enemy : Poolable
         health = maxHealth;
         dead = health <= 0;
 
-        laneBound.LaneIndex = Random.Range(0, LaneConfigSO.Instance.GetNumberOfLanes());
+        laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
     }
 
     // returns true if enemy was killed by damage

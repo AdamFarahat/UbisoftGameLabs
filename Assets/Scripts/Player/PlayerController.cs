@@ -88,7 +88,7 @@ public abstract class PlayerController : MonoBehaviour
         if (buffer == 0f)
         {
             int lane = laneFn(laneBound.LaneIndex);
-            if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+            if (lane >= 0 && lane < LaneSet.LaneCount)
                 laneBound.MoveToLane(lane);
         }
         else if (buffer < switchLaneBufferDuration && switchLaneBufferRoutine == null)
@@ -98,7 +98,7 @@ public abstract class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(buffer);
 
                 int lane = laneFn(laneBound.LaneIndex);
-                if (lane >= 0 && lane < LaneConfigSO.Instance.GetNumberOfLanes())
+                if (lane >= 0 && lane < LaneSet.LaneCount)
                     laneBound.MoveToLane(lane);
                 switchLaneBufferRoutine = null;
             }
@@ -124,26 +124,6 @@ public abstract class PlayerController : MonoBehaviour
         if (SwordPlayerController.Instance != null && SwordPlayerController.LaneIndex == laneIndex)
             return true;
         return false;
-    }
-
-    public static float PlayerLine
-    {
-        get
-        {
-            float line = 0f;
-            int numPlayers = 0;
-            if (GunPlayerController.Instance != null)
-            {
-                line += GunPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            if (SwordPlayerController.Instance != null)
-            {
-                line += SwordPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            return numPlayers > 0 ? line / numPlayers : line;
-        }
     }
 
     public virtual float GetCooldownPercent()

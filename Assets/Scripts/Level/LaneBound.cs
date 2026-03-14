@@ -38,13 +38,13 @@ public class LaneBound : MonoBehaviour
 
     private void SetLaneIndex(float index)
     {
-        laneIndex = Mathf.Clamp(index, 0f, LaneConfigSO.Instance.GetNumberOfLanes() - 1);
+        laneIndex = Mathf.Clamp(index, 0f, LaneSet.LaneCount - 1);
         SyncLane();
     }
 
     private void SyncLane()
     {
-        Vector3 position = LaneConfigSO.Instance.GetLanePosition(laneIndex, laneDistance);
+        Vector3 position = LaneSet.Instance.GetLanePosition(laneIndex, laneDistance);
         position.y = transform.position.y;
         transform.position = position;
     }
