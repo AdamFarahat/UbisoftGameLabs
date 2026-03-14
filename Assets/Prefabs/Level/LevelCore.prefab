@@ -339,13 +339,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4149798499193065890}
     m_Modifications:
+    - target: {fileID: 469812263144272765, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
+    - target: {fileID: 469812263144272765, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
+    - target: {fileID: 469812263144272765, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8980648615144976386, guid: 974ddce8f3e889e419444b920b29dc78, type: 3}
     - target: {fileID: 3424053709444617222, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4115116371173642554, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4656029755349261906, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8420282347879567900, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -641,7 +657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5983877289790367744, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -52.44658
+      value: -52.446594
       objectReference: {fileID: 0}
     - target: {fileID: 6134151100931257252, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchorMax.y
