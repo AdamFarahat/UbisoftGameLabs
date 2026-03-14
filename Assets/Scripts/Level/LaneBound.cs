@@ -1,11 +1,15 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LaneBound : MonoBehaviour
 {
     [SerializeField] private float laneIndex = 0f;
     [SerializeField] private float laneDistance = 0f;
     [SerializeField] private float switchLaneDuration = 0.1f;
+
+    public UnityAction<float> DashStart;
+    public UnityAction DashEnd;
 
     private Coroutine switchLaneRoutine = null;
     private float switchLaneStartTime = 0f;
@@ -59,6 +63,8 @@ public class LaneBound : MonoBehaviour
 
     private IEnumerator SwitchLanesRoutine(int toIndex)
     {
+        DashStart?.Invoke(toIndex - laneIndex);
+
         float fromIndex = laneIndex;
         for (float t = 0f; t < switchLaneDuration; t += Time.deltaTime)
         {
@@ -68,6 +74,8 @@ public class LaneBound : MonoBehaviour
         }
         SetLaneIndex(toIndex);
         switchLaneRoutine = null;
+
+        DashEnd?.Invoke();
     }
 
     public float SwitchLaneDurationLeft()

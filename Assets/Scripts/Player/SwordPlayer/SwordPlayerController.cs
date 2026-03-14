@@ -35,6 +35,7 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
     private SpriteAnimator animator;
+    private Coroutine delayedAnimation = null;
 
     private enum SwordPlayerStates
     {
@@ -68,6 +69,11 @@ public class SwordPlayerController : PlayerController
         animator = GetComponent<SpriteAnimator>();
         Assert.IsNotNull(animator);
         animator.SetAnimationDuration("Attack", attackDuration);
+
+        LaneBound laneBound = GetComponent<LaneBound>();
+        Assert.IsNotNull(laneBound);
+        laneBound.DashStart += OnDashStart;
+        laneBound.DashEnd += OnDashEnd;
     }
 
     protected override void Start()
@@ -100,6 +106,59 @@ public class SwordPlayerController : PlayerController
         return blockCooldownPercent;
     }
 
+    private void OnDashStart(float deltaLane)
+    {
+        if (deltaLane > 0f)
+            PlayCycleAnimation("Dash Right");
+        else if (deltaLane < 0f)
+            PlayCycleAnimation("Dash Left");
+    }
+
+    private void OnDashEnd()
+    {
+        PlayDefaultCycleAnimation();
+    }
+
+    private void PlayAnimation(string name, Action<string, float> animate)
+    {
+        if (delayedAnimation != null)
+        {
+            StopCoroutine(delayedAnimation);
+            delayedAnimation = null;
+        }
+
+        if (name == "Attack" || state != SwordPlayerStates.Attacking)
+            animate(name, 0f);
+        else
+        {
+            float attackTimeLeft = Time.time - animator.LastAnimationStartTime;
+            IEnumerator DelayPlay()
+            {
+                yield return new WaitForSeconds(attackTimeLeft);
+                animate(name, attackTimeLeft);
+                delayedAnimation = null;
+            }
+
+            if (attackTimeLeft < animator.GetAnimationDuration(name))
+                delayedAnimation = StartCoroutine(DelayPlay());
+        }
+    }
+
+    private void PlayOneShotAnimation(string name)
+    {
+        PlayAnimation(name, (n, d) => animator.PlayOneShot(n, d));
+    }
+
+    private void PlayCycleAnimation(string name)
+    {
+        PlayAnimation(name, (n, d) => animator.PlayCycle(n, d));
+    }
+
+    private void PlayDefaultCycleAnimation()
+    {
+        PlayAnimation(animator.defaultName, (n, d) => animator.PlayDefaultCycle(d));
+    }
+
     private void Jump(InputAction.CallbackContext ctx)
     {
         if (Stunned)
@@ -116,7 +175,7 @@ public class SwordPlayerController : PlayerController
         IEnumerator Routine()
         {
             animator.defaultName = "Jump";
-            animator.PlayDefaultCycle();
+            PlayDefaultCycleAnimation();
 
             float y = 0f;
             SetY(y);
@@ -145,7 +204,7 @@ public class SwordPlayerController : PlayerController
             jumpRoutine = null;
 
             animator.defaultName = "Idle";
-            animator.PlayDefaultCycle();
+            PlayDefaultCycleAnimation();
         }
 
         jumpRoutine = StartCoroutine(Routine());
@@ -180,7 +239,7 @@ public class SwordPlayerController : PlayerController
         if (state == SwordPlayerStates.Normal)
         {
             state = SwordPlayerStates.Attacking;
-            animator.PlayOneShot("Attack");
+            PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);
             
             IEnumerator Routine()
@@ -239,7 +298,7 @@ public class SwordPlayerController : PlayerController
             parryRoutine = null;
         }
         state = SwordPlayerStates.Normal;
-        animator.PlayDefaultCycle();
+        PlayDefaultCycleAnimation();
         swordHitBox.gameObject.SetActive(false);
     }
 
@@ -247,7 +306,7 @@ public class SwordPlayerController : PlayerController
     {
         parryTimer = 0f;
         state = SwordPlayerStates.Parrying;
-        animator.PlayCycle("Block");
+        PlayCycleAnimation("Block");
         while (parryTimer < parryWindow)
         {
             if (state != SwordPlayerStates.Parrying)
@@ -291,7 +350,7 @@ public class SwordPlayerController : PlayerController
     {
         base.OnStunEnd();
         state = SwordPlayerStates.Normal;
-        animator.PlayDefaultCycle();
+        PlayDefaultCycleAnimation();
     }
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
