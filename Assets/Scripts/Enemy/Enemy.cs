@@ -37,7 +37,7 @@ public class Enemy : Poolable
 
     private void Update()
     {
-        if (laneBound.LaneDistance <= 0f)
+        if (laneBound.LaneDistance <= LaneSet.HeartLine)
             Death();
     }
 
