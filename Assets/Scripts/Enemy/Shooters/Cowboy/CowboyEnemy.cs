@@ -13,10 +13,10 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float CheckIfCanShootInterval = 2f;
     [SerializeField] private float CheckIfCanPunchInterval = 1f;
     [SerializeField] private float PunchDistance = 10f;
-    
-    
 
-    private enum CowBoyState {Walking, Charging, Dodging, Punching};
+
+
+    private enum CowBoyState { Walking, Charging, Dodging, Punching };
     private CowBoyState state;
     private float time = 0f;
     private float nextLaneSwitchTime = 0f;
@@ -106,7 +106,8 @@ public class CowboyEnemy : ShooterEnemy
         foreach (Bullet b in bulletDetector.bulletsNearby)
         {
             var projCollider = b.GetComponent<SphereCollider>();
-            if (projCollider && IsPredictedToHit(b, projCollider)) {
+            if (projCollider && IsPredictedToHit(b, projCollider))
+            {
                 return true;
             }
         }
@@ -116,7 +117,7 @@ public class CowboyEnemy : ShooterEnemy
     private bool IsPredictedToHit(Bullet b, SphereCollider projCollider)
     {
         return b.velocity <= ProjectileTresholdSpeed
-            && Vector3.Distance(b.transform.forward * b.velocity, transform.position) 
+            && Vector3.Distance(b.transform.forward * b.velocity, transform.position)
             <= projCollider.radius;
     }
 
@@ -142,7 +143,9 @@ public class CowboyEnemy : ShooterEnemy
     {
         laneBound.LaneDistance -= WalkingSpeed * Time.deltaTime;
     }
-    private bool IsInPunchingRange() {
+
+    private bool IsInPunchingRange()
+    {
         return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= PunchDistance
             && lane.LaneDistance <= LaneSet.VisibleEndLine;
     }
