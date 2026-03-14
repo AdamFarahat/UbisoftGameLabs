@@ -1,21 +1,48 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static UnityEngine.UI.Image;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public float speed = 10f;
-    private Vector3 direction;
+    private Billboard sprite;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private float parryColliderScaleUp = 1.5f;
 
-    public void Initialize(Vector3 dir)
-    {
-        direction = dir.normalized;
-    }
+    private SphereCollider sphereCollider;
+    private float normalColliderRadius;
+    private Vector3 direction;
+    private float speed = 80f;
+    private bool parried = false;
+    private Transform origin;
 
     private void Awake()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
+        sprite = GetComponentInChildren<Billboard>();
+        Assert.IsNotNull(sprite);
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Assert.IsNotNull(spriteRenderer);
+
+        sphereCollider = GetComponent<SphereCollider>();
+        Assert.IsNotNull(sphereCollider);
+        normalColliderRadius = sphereCollider.radius;
+
         Stunner stunner = GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
+    }
+
+    public void Initialize(Transform origin, Vector3 direction, float speed)
+    {
+        this.origin = origin;
+        sprite.rotation = ScreenAngleOfVector(direction);
+        this.direction = direction.normalized;
+        this.speed = speed;
+        parried = false;
+        sphereCollider.radius = normalColliderRadius;
+        enabled = true;
     }
 
     void Update()
@@ -23,13 +50,58 @@ public class EnemyProjectile : MonoBehaviour
         transform.position += speed * Time.deltaTime * direction;
     }
 
-    private void OnStun()
+    private void OnTriggerEnter(Collider other)
     {
-        gameObject.SetActive(false);
+        if (!parried)
+            return;
+
+        if (other.TryGetComponentInHierarchy(out Enemy enemy))
+        {
+            if (enemy.OnParried())
+                SwordPlayerController.Instance.OnBulletParryKill(enemy.Score);
+            Despawn();
+        }
     }
 
-    public void FlipDirection()
+    private void OnStun()
     {
-        direction *= -1;
+        Despawn();
+    }
+
+    private void Despawn()
+    {
+        enabled = false;
+
+        IEnumerator Routine()
+        {
+            Color color = spriteRenderer.color;
+            yield return FadeOutAnimation.Routine(spriteRenderer);
+            spriteRenderer.color = color;
+            gameObject.SetActive(false);
+        }
+
+        // TODO sfx ?
+        StartCoroutine(Routine());
+    }
+
+    public void Parry(Transform newOrigin, float speedMult)
+    {
+        if (origin != null)
+            direction = (origin.position - transform.position).normalized;
+        else
+            direction *= -1;
+
+        origin = newOrigin;
+        speed *= speedMult;
+        sprite.rotation = ScreenAngleOfVector(direction);
+        parried = true;
+        sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
+    }
+
+    // TODO move to LaneSet once LaneSet is merged to main.
+    private static float ScreenAngleOfVector(Vector3 vector)
+    {
+        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
+        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }

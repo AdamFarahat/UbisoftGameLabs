@@ -41,6 +41,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1595345483196602641}
     m_Modifications:
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[4].name
+      value: Dash Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[5].name
+      value: Dash Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[4].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[5].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[4].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: animations.Array.data[5].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: 'animations.Array.data[4].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 268d4e214c2b193419bcba875a80a77f, type: 3}
+    - target: {fileID: 3679303042094892920, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: 'animations.Array.data[5].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b17be01f4a09314fa7ef7b4420bd8c9, type: 3}
     - target: {fileID: 5473658397883171689, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_LocalPosition.x
       value: 148.59303
@@ -83,8 +119,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608802524239182053, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_Name
-      value: SwordPlayer
+      value: SwordPlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 5680664865622595728, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: swordHitBox
+      value: 
+      objectReference: {fileID: 2978410399742050359}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -156,6 +196,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 095067212b3f0ba4d813ae7188d6540a, type: 3}
+--- !u!114 &2978410399742050359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6902141690967284359, guid: 095067212b3f0ba4d813ae7188d6540a, type: 3}
+  m_PrefabInstance: {fileID: 8546747106976635568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbb3b5e8b351394e9c433f970b7ce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordHitBox
 --- !u!4 &7158922736198728699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1568870578497462603, guid: 095067212b3f0ba4d813ae7188d6540a, type: 3}

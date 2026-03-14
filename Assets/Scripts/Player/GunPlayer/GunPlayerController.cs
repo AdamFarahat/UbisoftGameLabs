@@ -54,14 +54,29 @@ public class GunPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
         playerInput.actions["UpEffect"].performed += ToggleGunUp;
         playerInput.actions["DownEffect"].performed += ToggleGunDown;
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
-
         grenadeBelt.OnCooldownReady += HandleGrenadeReady;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        playerInput.actions["Fire"].performed -= PressFire;
+        playerInput.actions["Fire"].canceled -= ReleaseFire;
+        playerInput.actions["UpEffect"].performed -= ToggleGunUp;
+        playerInput.actions["DownEffect"].performed -= ToggleGunDown;
+        playerInput.actions["Throw"].performed -= PressThrow;
+        playerInput.actions["Throw"].canceled -= ReleaseThrow;
     }
 
     private void Update()
@@ -149,6 +164,7 @@ public class GunPlayerController : PlayerController
             holdingGunInput = HoldingState.Released;
             holster.StopFiring();
         }
+
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)

@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class FlyerMovement : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 300f;
+    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private float damage = 12f;
 
@@ -25,7 +25,7 @@ public class FlyerMovement : MonoBehaviour
     {
         lane.LaneDistance -= forwardSpeed * Time.deltaTime;
         
-        if (lane.LaneDistance <= 0f)
+        if (lane.LaneDistance <= LaneSet.HeartLine)
             PlayerStats.Instance.TakeDamage(damage);
     }
 }

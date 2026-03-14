@@ -1,14 +1,19 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GunGruntEnemyAI : MonoBehaviour
 {
-    [SerializeField] private float spawnLaneDistance = 300f;
+    [SerializeField] private float spawnLaneDistance = 200f;
     [SerializeField] private float spawnArrivalDuration = 3f;
 
     [SerializeField] private float minLaneDistance = 100f;
-    [SerializeField] private float maxLaneDistance = 150f;
     [SerializeField] private float researchCooldown = 3f;
+
+    [SerializeField] private float shootingCooldown = 1f;
+    public float ShootingCooldown => shootingCooldown;
+    [SerializeField] private float bulletSpeed = 80f;
+    public float BulletSpeed => bulletSpeed;
 
     public int shootingIndex;
     public Transform projSpawnPoint;
@@ -19,6 +24,8 @@ public class GunGruntEnemyAI : MonoBehaviour
 
     private void Awake()
     {
+        Assert.IsTrue(minLaneDistance < LaneSet.VisibleEndLine);
+
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
 
@@ -32,7 +39,7 @@ public class GunGruntEnemyAI : MonoBehaviour
         if (arrivalRoutine != null)
             StopCoroutine(arrivalRoutine);
 
-        float targetDistance = Random.Range(minLaneDistance, maxLaneDistance);
+        float targetDistance = Random.Range(minLaneDistance, LaneSet.VisibleEndLine);
 
         IEnumerator ArrivalRoutine()
         {
