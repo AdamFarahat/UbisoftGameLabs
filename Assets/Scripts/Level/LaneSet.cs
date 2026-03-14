@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class LaneSet : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class LaneSet : MonoBehaviour
     public static int LaneCount => 5;
 
     [SerializeField] private float laneSeparation = 12f;
-    
+    [SerializeField] private Transform playerTargetHeight;
+
     private void OnValidate()
     {
         instance = this;
@@ -26,6 +28,8 @@ public class LaneSet : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        Assert.IsNotNull(playerTargetHeight);
     }
 
     public static float PlayerLine
@@ -51,6 +55,8 @@ public class LaneSet : MonoBehaviour
     public static float HeartLine => -50f;
 
     public static float VisibleEndLine => 110f;
+
+    public static float PlayerTargetHeight => Instance.playerTargetHeight.position.y;
 
     private Vector3 LaneStart(int laneIndex)
     {
