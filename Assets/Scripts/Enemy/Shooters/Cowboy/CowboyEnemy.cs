@@ -4,19 +4,15 @@ using System;
 using UnityEditor.Search;
 using UnityEngine;
 
-public class CowboyEnemy : MonoBehaviour
+public class CowboyEnemy : ShooterEnemy
 {
     [SerializeField] private float initialLaneDistance = 300f;
     [SerializeField] private float laneStayPeriod = 1.5f;
     [SerializeField] private float ProjectileTresholdSpeed = 10f;
-    [SerializeField] private float chargingTime = 2f;
     [SerializeField] private float WalkingSpeed = 2f;
-    [SerializeField] private float ShootingDistance = 300f;
     [SerializeField] private float CheckIfCanShootInterval = 2f;
     [SerializeField] private float CheckIfCanPunchInterval = 1f;
     [SerializeField] private float PunchDistance = 10f;
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float stunTime = 0.3f;
     
     
 
@@ -72,8 +68,8 @@ public class CowboyEnemy : MonoBehaviour
             }
             else if (time >= CheckIfCanShootInterval && (GunPlayerController.LaneIndex == laneIndex || SwordPlayerController.LaneIndex == laneIndex)
                 //should discuss if that should be done before charging or when we can shoot
-                && (Vector3.Distance(GunPlayerController.Instance.transform.position, transform.position) <= ShootingDistance ||
-                    Vector3.Distance(SwordPlayerController.Instance.transform.position, transform.position) <= ShootingDistance))
+                && (Vector3.Distance(GunPlayerController.Instance.transform.position, transform.position) <= shotDistanceThreshold ||
+                    Vector3.Distance(SwordPlayerController.Instance.transform.position, transform.position) <= shotDistanceThreshold))
 
             {
                 state = CowBoyState.Charging;
@@ -83,7 +79,7 @@ public class CowboyEnemy : MonoBehaviour
         }
         else if (state == CowBoyState.Charging)
         {
-            if (time >= chargingTime)
+            if (time >= shotCooldown)
             {
                 time = 0f;
                 Shoot();
@@ -130,7 +126,7 @@ public class CowboyEnemy : MonoBehaviour
         {
             laneIndex = laneBound.LaneIndex + 1;
         }
-        else if (laneBound.LaneIndex == LaneConfigSO.Instance.GetNumberOfLanes() - 1)
+        else if (laneBound.LaneIndex == LaneSet.LaneCount - 1)
         {
             laneIndex = laneBound.LaneIndex - 1;
         }
@@ -145,17 +141,5 @@ public class CowboyEnemy : MonoBehaviour
     private void WalkForward()
     {
         laneBound.LaneDistance -= WalkingSpeed * Time.deltaTime;
-    }
-    private void Shoot()
-    {
-        GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
-        Assert.IsNotNull(go);
-
-        EnemyProjectile projectile = go.GetComponent<EnemyProjectile>();
-        Assert.IsNotNull(projectile);
-        projectile.Initialize(LaneConfigSO.Instance.GetLanePosition(laneIndex, PlayerController.PlayerLine) - spawnPoint.position);
-        Stunner stunner = go.GetComponent<Stunner>();
-        Assert.IsNotNull(stunner);
-        stunner.stunTime = stunTime;
     }
 }

@@ -7,8 +7,8 @@ public class BulletDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.TryGetComponent<Bullet>(out Bullet b)) {
+        if (other.TryGetComponent<Bullet>(out Bullet b)) 
+        {
             bulletsNearby.Add(b);
         }
     }
