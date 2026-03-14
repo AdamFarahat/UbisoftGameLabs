@@ -23,6 +23,7 @@ public class CowboyEnemy : ShooterEnemy
     private LaneBound laneBound;
     private int laneIndex = 0;
     private BulletDetector bulletDetector;
+
     void Awake()
     {
         laneBound = GetComponent<LaneBound>();
@@ -32,12 +33,14 @@ public class CowboyEnemy : ShooterEnemy
 
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
+
     private void ResetState()
     {
         laneBound.LaneDistance = initialLaneDistance;
         time = 0f;
         nextLaneSwitchTime = laneStayPeriod;
     }
+
     private void Start()
     {
         nextLaneSwitchTime = laneStayPeriod;
@@ -46,65 +49,56 @@ public class CowboyEnemy : ShooterEnemy
 
     void Update()
     {
-
         time += Time.deltaTime;
-        if (state == CowBoyState.Walking)
+        switch (state)
         {
-            if (bulletComingInRange())
-            {
-                state = CowBoyState.Dodging;
-            }
-            else if (time >= CheckIfCanPunchInterval && (GunPlayerController.LaneIndex == laneIndex || SwordPlayerController.LaneIndex == laneIndex)
-                && (Vector3.Distance(GunPlayerController.Instance.transform.position, transform.position) <= PunchDistance ||
-                    Vector3.Distance(SwordPlayerController.Instance.transform.position, transform.position) <= PunchDistance))
-            {
-                state = CowBoyState.Punching;
-                time = 0f;
-            }
-            else if (time >= nextLaneSwitchTime)
-            {
-                changeLane();
-                time = 0f;
-            }
-            else if (time >= CheckIfCanShootInterval && (GunPlayerController.LaneIndex == laneIndex || SwordPlayerController.LaneIndex == laneIndex)
-                //should discuss if that should be done before charging or when we can shoot
-                && (Vector3.Distance(GunPlayerController.Instance.transform.position, transform.position) <= shotDistanceThreshold ||
-                    Vector3.Distance(SwordPlayerController.Instance.transform.position, transform.position) <= shotDistanceThreshold))
-
-            {
-                state = CowBoyState.Charging;
-                time = 0f;
-            }
-            WalkForward();
-        }
-        else if (state == CowBoyState.Charging)
-        {
-            if (time >= shotCooldown)
-            {
-                time = 0f;
-                Shoot();
+            case CowBoyState.Walking:
+                if (BulletComingInRange())
+                {
+                    state = CowBoyState.Dodging;
+                }
+                else if (time >= CheckIfCanPunchInterval && IsInPunchingRange())
+                {
+                    state = CowBoyState.Punching;
+                    time = 0f;
+                }
+                else if (time >= nextLaneSwitchTime)
+                {
+                    ChangeLane();
+                    time = 0f;
+                }
+                else if (time >= CheckIfCanShootInterval && isInShootingRange())
+                {
+                    state = CowBoyState.Charging;
+                    time = 0f;
+                }
+                WalkForward();
+                break;
+            case CowBoyState.Charging:
+                if (time >= shotCooldown)
+                {
+                    time = 0f;
+                    Shoot();
+                    state = CowBoyState.Walking;
+                }
+                break;
+            case CowBoyState.Dodging:
+                ChangeLane();
                 state = CowBoyState.Walking;
-            }
-        }
-        else if (state == CowBoyState.Dodging)
-        {
-            changeLane();
-            state = CowBoyState.Walking;
-            time = 0f;
-        }
-        else if (state == CowBoyState.Punching) {
-            punch();
+                time = 0f;
+                break;
+            case CowBoyState.Punching:
+                Punch();
+                break;
         }
     }
 
-    private void punch()
+    private void Punch()
     {
-        //TODO: when it gets in melee range it charges up a punch that can be parried (or you can just slash him)
-        // need more clarification.
-        throw new NotImplementedException();
+        Debug.LogWarning("punch not yet implemented");
     }
 
-    private bool bulletComingInRange()
+    private bool BulletComingInRange()
     {
         if (bulletDetector.bulletsNearby.Count == 0)
             return false;
@@ -112,15 +106,21 @@ public class CowboyEnemy : ShooterEnemy
         foreach (Bullet b in bulletDetector.bulletsNearby)
         {
             var projCollider = b.GetComponent<SphereCollider>();
-            if (projCollider && b.velocity <= ProjectileTresholdSpeed 
-                && Vector3.Distance(b.transform.forward * b.velocity, transform.position) <= projCollider.radius) {
+            if (projCollider && IsPredictedToHit(b, projCollider)) {
                 return true;
             }
         }
         return false;
     }
 
-    private void changeLane()
+    private bool IsPredictedToHit(Bullet b, SphereCollider projCollider)
+    {
+        return b.velocity <= ProjectileTresholdSpeed
+            && Vector3.Distance(b.transform.forward * b.velocity, transform.position) 
+            <= projCollider.radius;
+    }
+
+    private void ChangeLane()
     {
         if (laneBound.LaneIndex == 0)
         {
@@ -141,5 +141,9 @@ public class CowboyEnemy : ShooterEnemy
     private void WalkForward()
     {
         laneBound.LaneDistance -= WalkingSpeed * Time.deltaTime;
+    }
+    private bool IsInPunchingRange() {
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= PunchDistance
+            && lane.LaneDistance <= LaneSet.VisibleEndLine;
     }
 }

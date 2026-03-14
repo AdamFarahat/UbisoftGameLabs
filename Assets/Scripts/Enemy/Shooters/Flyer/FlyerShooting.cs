@@ -13,7 +13,7 @@ public class FlyerShooting : ShooterEnemy
 
     private void Update()
     {
-        if (PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold && lane.LaneDistance <= LaneSet.VisibleEndLine)
+        if (isInShootingRange())
         {
             if (Time.time - lastShotTime > shotCooldown)
             {

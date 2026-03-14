@@ -12,9 +12,9 @@ public class BulletDetector : MonoBehaviour
             bulletsNearby.Add(b);
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-
         if (other.TryGetComponent<Bullet>(out Bullet b))
         {
             bulletsNearby.Remove(b);

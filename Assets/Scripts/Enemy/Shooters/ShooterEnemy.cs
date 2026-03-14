@@ -5,12 +5,18 @@ public class ShooterEnemy : MonoBehaviour
 {
     [SerializeField] protected float stunTime = 0.3f;
     [SerializeField] protected float shotCooldown = 0.65f;
-    [SerializeField] protected float shotDistanceThreshold = 20f;
+    [SerializeField] protected float shotDistanceThreshold = 20f; //minimum distance to shoot
+    [SerializeField] protected float shootingRange = 10000f; //max distance to shoot
     [SerializeField] protected float bulletSpeed = 80f;
     [SerializeField] protected Transform spawnPoint;
 
     protected LaneBound lane;
 
+    protected bool isInShootingRange() {
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold 
+            && lane.LaneDistance >= shootingRange
+            && lane.LaneDistance <= LaneSet.VisibleEndLine;
+    }
     protected void Shoot()
     {
         GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
