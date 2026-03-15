@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -7,10 +8,12 @@ using UnityEngine.SceneManagement;
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private Transform tipsParent;
-    [SerializeField] private float tipDuration = 3f;
+    [SerializeField] private float tipDuration = 5f;
+    [SerializeField] private float tipAnimateDuration = 0.3f;
 
     private GameObject[] tips;
-    private int tipIndex = -1;
+    private Coroutine[] tipAnimations;
+    private int tipIndex = 0;
     private float tipAge = 0f;
 
     private void Awake()
@@ -25,7 +28,8 @@ public class TutorialManager : MonoBehaviour
         }
         tips = tipsList.ToArray();
         Assert.IsTrue(tips.Length > 0);
-        tipIndex = tips.Length - 1;
+
+        tipAnimations = new Coroutine[tips.Length];
     }
 
     private void Start()
@@ -36,7 +40,7 @@ public class TutorialManager : MonoBehaviour
         if (SwordPlayerController.Instance != null)
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
 
-        ShowNextTip();
+        FadeIn();
     }
 
     private void Update()
@@ -56,9 +60,58 @@ public class TutorialManager : MonoBehaviour
 
     private void ShowNextTip()
     {
-        // TODO animate
-        tips[tipIndex].SetActive(false);
+        FadeOut();
         tipIndex = (tipIndex + 1) % tips.Length;
-        tips[tipIndex].SetActive(true);
+        FadeIn();
+    }
+
+    private void FadeOut()
+    {
+        if (tipAnimations[tipIndex] != null)
+            StopCoroutine(tipAnimations[tipIndex]);
+
+        IEnumerator Routine(int index)
+        {
+            RectTransform rt = tips[index].GetComponent<RectTransform>();
+
+            for (float t = 0f; t < tipAnimateDuration; t += Time.deltaTime)
+            {
+                yield return null;
+
+                float y = Mathf.Clamp01(1f - t / tipAnimateDuration);
+                rt.localScale = new(1f, y, 1f);
+            }
+
+            tips[index].SetActive(false);
+            tipAnimations[index] = null;
+        }
+
+        tipAnimations[tipIndex] = StartCoroutine(Routine(tipIndex));
+    }
+
+    private void FadeIn()
+    {
+        if (tipAnimations[tipIndex] != null)
+            StopCoroutine(tipAnimations[tipIndex]);
+
+        IEnumerator Routine(int index)
+        {
+            tips[index].SetActive(true);
+            RectTransform rt = tips[index].GetComponent<RectTransform>();
+            rt.localScale = new(1f, 0f, 1f);
+
+            for (float t = 0f; t < tipAnimateDuration; t += Time.deltaTime)
+            {
+                yield return null;
+
+                float y = Mathf.Clamp01(t / tipAnimateDuration);
+                rt.localScale = new(1f, y, 1f);
+            }
+
+            rt.localScale = Vector3.one;
+            tipAnimations[index] = null;
+        }
+
+        tipAnimations[tipIndex] = StartCoroutine(Routine(tipIndex));
     }
 }
