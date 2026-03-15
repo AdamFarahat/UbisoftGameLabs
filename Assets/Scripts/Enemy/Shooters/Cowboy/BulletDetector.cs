@@ -34,5 +34,4 @@ public class BulletDetector : MonoBehaviour
             bulletsNearby.Remove(b);
         }
     }
-    
 }

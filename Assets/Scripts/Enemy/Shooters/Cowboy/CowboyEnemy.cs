@@ -4,7 +4,7 @@ public class CowboyEnemy : ShooterEnemy
 {
     [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float laneStayPeriod = 1.5f;
-    [SerializeField] private float projectileTresholdSpeed = 10f;
+    [SerializeField] private float projectileTresholdSpeed = 400f;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
     [SerializeField] private float checkIfCanPunchInterval = 1f;
@@ -96,13 +96,9 @@ public class CowboyEnemy : ShooterEnemy
     private bool BulletComingInRange()
     {
         foreach (Bullet b in bulletDetector.NearbyBullets)
-        {
-            var projCollider = b.GetComponent<SphereCollider>();
-            if (projCollider && IsPredictedToHit(b, projCollider))
-            {
+            if (b != null && IsPredictedToHit(b, b.GetComponent<SphereCollider>()))
                 return true;
-            }
-        }
+
         return false;
     }
 
