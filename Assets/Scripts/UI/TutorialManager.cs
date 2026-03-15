@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Transform tipsParent;
     [SerializeField] private float tipDuration = 5f;
     [SerializeField] private float tipAnimateDuration = 0.3f;
+    [SerializeField] private TextMeshProUGUI tipCounter;
 
     private GameObject[] tips;
     private Coroutine[] tipAnimations;
@@ -19,6 +20,7 @@ public class TutorialManager : MonoBehaviour
     private void Awake()
     {
         Assert.IsNotNull(tipsParent);
+        Assert.IsNotNull(tipCounter);
 
         List<GameObject> tipsList = new();
         foreach (Transform child in tipsParent)
@@ -41,6 +43,7 @@ public class TutorialManager : MonoBehaviour
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
 
         FadeIn();
+        SyncTipCounter();
     }
 
     private void Update()
@@ -58,10 +61,16 @@ public class TutorialManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    private void SyncTipCounter()
+    {
+        tipCounter.SetText($"{tipIndex + 1}/{tips.Length}");
+    }
+
     private void ShowNextTip()
     {
         FadeOut();
         tipIndex = (tipIndex + 1) % tips.Length;
+        SyncTipCounter();
         FadeIn();
     }
 
