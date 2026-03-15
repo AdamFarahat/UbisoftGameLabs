@@ -96,6 +96,7 @@ MonoBehaviour:
   - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
   - {fileID: 8980648615144976386, guid: 974ddce8f3e889e419444b920b29dc78, type: 3}
   - {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
+  - {fileID: 1364641449687990512, guid: 5824b9ad6436a024393ccc35d10c89a2, type: 3}
   maxEnemies: 5
   minSpawnTime: 0.5
   maxSpawnTime: 4

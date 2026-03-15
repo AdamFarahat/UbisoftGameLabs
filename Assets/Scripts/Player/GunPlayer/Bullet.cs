@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     private float distance = 0f;
     private bool dead = false;
 
+    public bool IsDead => dead;
+
     private void Update()
     {
         if (dead)
@@ -28,6 +30,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            return;
+
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
@@ -46,6 +51,7 @@ public class Bullet : MonoBehaviour
 
         foreach (Collider collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
+       
 
         dead = true;
         // TODO uncomment once bullet sprites are uploaded
@@ -57,7 +63,6 @@ public class Bullet : MonoBehaviour
         //StartCoroutine(Routine());
         Destroy(gameObject);  // TODO sfx ?
     }
-
     private void OnEnemyKill(Enemy enemy)
     {
         // TODO handle more complex gun player multiplier logic
