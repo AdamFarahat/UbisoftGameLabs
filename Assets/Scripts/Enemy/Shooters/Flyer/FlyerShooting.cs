@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Assertions;
 
 public class FlyerShooting : ShooterEnemy
 {
@@ -7,7 +6,7 @@ public class FlyerShooting : ShooterEnemy
 
     private void Update()
     {
-        if (isInShootingRange())
+        if (IsInShootingRange())
         {
             if (Time.time - lastShotTime > shotCooldown)
             {

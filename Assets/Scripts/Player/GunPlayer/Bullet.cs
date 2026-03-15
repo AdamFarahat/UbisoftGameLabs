@@ -30,7 +30,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other is SphereCollider && other.GetComponent<BulletDetector>() != null) { return; }
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            return;
+
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
