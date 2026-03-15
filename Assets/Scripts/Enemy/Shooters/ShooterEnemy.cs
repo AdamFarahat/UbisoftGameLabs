@@ -19,10 +19,6 @@ public class ShooterEnemy : MonoBehaviour
     }
 
     protected bool isInShootingRange() {
-        Debug.Log("IS PLAYER AT LINE: " + PlayerController.AnyPlayerInLane(lane.LaneIndex));
-        Debug.Log("IS FAR ENOUGH: " + (lane.LaneDistance >= shotDistanceThreshold));
-        Debug.Log("IS CLOSE ENOUGH: " + (lane.LaneDistance <= shootingRange));
-        Debug.Log("VisibleEndLine: " + (lane.LaneDistance <= shootingRange));
 
         return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold 
             && lane.LaneDistance <= shootingRange

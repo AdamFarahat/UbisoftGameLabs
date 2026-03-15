@@ -19,7 +19,7 @@ public class LaneBound : MonoBehaviour
         get => (int)laneIndex;
         set { SetLaneIndex(value); }
     }
-
+    public float SwitchLaneDuration => switchLaneDuration;
     public float LaneDistance
     {
         get => laneDistance;

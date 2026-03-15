@@ -22,8 +22,9 @@ public class CowboyEnemy : ShooterEnemy
     private float nextLaneSwitchTime = 0f;
     private int laneIndex = 0;
     private BulletDetector bulletDetector;
-
-    void Awake()
+    private int dodgedLaneIndex;
+    private Bullet dodgedBullet;
+    new void Awake()
     {
         base.Awake();
 
@@ -53,7 +54,10 @@ public class CowboyEnemy : ShooterEnemy
             case CowBoyState.Walking:
                 if (BulletComingInRange())
                 {
+                    dodgedLaneIndex = lane.LaneIndex;
+                    ChangeLane();
                     state = CowBoyState.Dodging;
+                    time = 0f;
                 }
                 else if (time >= CheckIfCanPunchInterval && IsInPunchingRange())
                 {
@@ -83,15 +87,23 @@ public class CowboyEnemy : ShooterEnemy
             case CowBoyState.Dodging:
                 //right now it goes back into walking but we could make it change the lane
                 //a second time back to where it was in order to continue shooting
-                ChangeLane();
-                state = CowBoyState.Walking;
-                time = 0f;
+                if (time >=  2 * lane.SwitchLaneDuration) {
+                    GetComponent<BoxCollider>().enabled = true;
+                    state = CowBoyState.Walking;
+                    time = 0f;
+                } else if (time >= lane.SwitchLaneDuration && !bulletDetector.NearbyBullets.Contains(dodgedBullet)) {
+                    dodgedBullet = null;
+                    GetComponent<BoxCollider>().enabled = false;
+                    ReturnToDodgedLane();
+                } 
                 break;
             case CowBoyState.Punching:
                 Punch();
                 break;
         }
     }
+
+    
 
     private void Punch()
     {
@@ -100,25 +112,39 @@ public class CowboyEnemy : ShooterEnemy
 
     private bool BulletComingInRange()
     {
-
+        
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
+            if (b.IsDead) {
+                continue;
+            }
             var projCollider = b.GetComponent<SphereCollider>();
-            if (projCollider && IsPredictedToHit(b, projCollider))
+            if (projCollider && IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
             {
+                dodgedBullet = b;
                 return true;
             }
         }
         return false;
     }
 
-    private bool IsPredictedToHit(Bullet b, SphereCollider projCollider)
+    private bool IsPredictedToHit(Bullet b)
     {
-        return b.velocity <= ProjectileTresholdSpeed
-            && Vector3.Distance(b.transform.forward * b.velocity, transform.position)
-            <= projCollider.radius;
+        RaycastHit hit;
+        if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
+        {
+            if (hit.collider == GetComponent<BoxCollider>())
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
-
+    private void ReturnToDodgedLane()
+    {
+        lane.MoveToLane(dodgedLaneIndex);
+    }
     private void ChangeLane()
     {
         if (lane.LaneIndex == 0)

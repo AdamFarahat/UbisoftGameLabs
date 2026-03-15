@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 3092075550952801820}
   - component: {fileID: 2357147940073859610}
   - component: {fileID: 8340228663757496069}
+  - component: {fileID: 7020806822356612858}
   m_Layer: 0
   m_Name: CowboyEnemy
   m_TagString: Untagged
@@ -146,7 +147,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 3079979570998515900}
   initialLaneDistance: 300
   laneStayPeriod: 1.5
-  ProjectileTresholdSpeed: 10
+  ProjectileTresholdSpeed: 900
   WalkingSpeed: 10
   CheckIfCanShootInterval: 0.5
   CheckIfCanPunchInterval: 1
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
   laneIndex: 2
   laneDistance: 100
-  switchLaneDuration: 0.3
+  switchLaneDuration: 0.05
 --- !u!114 &3092075550952801820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  maxHealth: 40
-  health: 10
-  score: 10
+  maxHealth: 30
+  health: 30
+  score: 50
 --- !u!135 &2357147940073859610
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -200,7 +201,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8340228663757496069
 MonoBehaviour:
@@ -214,3 +215,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9bafe19f5e99546908ecdada301f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletDetector
+--- !u!65 &7020806822356612858
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364641449687990512}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
