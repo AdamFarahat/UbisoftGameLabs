@@ -22,16 +22,12 @@ public class BulletDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Bullet b)) 
-        {
             bulletsNearby.Add(b);
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Bullet b))
-        {
             bulletsNearby.Remove(b);
-        }
     }
 }

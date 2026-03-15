@@ -1,27 +1,32 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CowboyEnemy : ShooterEnemy
 {
+    [SerializeField] private Collider healthCollider;
     [SerializeField] private float initialLaneDistance = 200f;
-    [SerializeField] private float laneStayPeriod = 1.5f;
+    [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float projectileTresholdSpeed = 400f;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
     [SerializeField] private float checkIfCanPunchInterval = 1f;
     [SerializeField] private float punchDistance = 10f;
 
-    private enum CowBoyState { Walking, Charging, Dodging, Punching };
+    private enum CowBoyState { Walking, Charging, Punching };
     private CowBoyState state;
     private float time = 0f;
     private float nextLaneSwitchTime = 0f;
-    private int laneIndex = 0;
     private BulletDetector bulletDetector;
 
     protected override void Awake()
     {
         base.Awake();
 
+        Assert.IsNotNull(healthCollider);
+
         bulletDetector = GetComponentInChildren<BulletDetector>();
+        Assert.IsNotNull(bulletDetector);
 
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
     }
@@ -41,13 +46,15 @@ public class CowboyEnemy : ShooterEnemy
 
     private void Update()
     {
+        // TODO cowboy can only dodge when walking. If shooting, change line to dodge then change back.
+
         time += Time.deltaTime;
         switch (state)
         {
             case CowBoyState.Walking:
                 if (BulletComingInRange())
                 {
-                    state = CowBoyState.Dodging;
+                    Dodge();
                 }
                 else if (time >= checkIfCanPunchInterval && IsInPunchingRange())
                 {
@@ -74,13 +81,6 @@ public class CowboyEnemy : ShooterEnemy
                     state = CowBoyState.Walking;
                 }
                 break;
-            case CowBoyState.Dodging:
-                // TODO? right now it goes back into walking but we could make it change the lane
-                // a second time back to where it was in order to continue shooting
-                ChangeLane();
-                state = CowBoyState.Walking;
-                time = 0f;
-                break;
             case CowBoyState.Punching:
                 Punch();
                 break;
@@ -96,21 +96,35 @@ public class CowboyEnemy : ShooterEnemy
     private bool BulletComingInRange()
     {
         foreach (Bullet b in bulletDetector.NearbyBullets)
-            if (b != null && IsPredictedToHit(b, b.GetComponent<SphereCollider>()))
+            if (b != null && b.velocity <= projectileTresholdSpeed)
                 return true;
 
         return false;
     }
 
-    private bool IsPredictedToHit(Bullet b, SphereCollider projCollider)
+    private void Dodge()
     {
-        return b.velocity <= projectileTresholdSpeed
-            && Vector3.Distance(b.transform.forward * b.velocity, transform.position)
-            <= projCollider.radius;
+        DodgeInvulnerability();
+        ChangeLane();
+        nextLaneSwitchTime = laneStayPeriod;
+        time = 0f;
+    }
+    
+    private void DodgeInvulnerability()
+    {
+        IEnumerator Routine()
+        {
+            healthCollider.enabled = false;
+            yield return new WaitForSeconds(lane.SwitchLaneDuration);
+            healthCollider.enabled = true;
+        }
+
+        StartCoroutine(Routine());
     }
 
     private void ChangeLane()
     {
+        int laneIndex;
         if (lane.LaneIndex == 0)
             laneIndex = lane.LaneIndex + 1;
         else if (lane.LaneIndex == LaneSet.LaneCount - 1)

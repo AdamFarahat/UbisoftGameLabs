@@ -197,8 +197,9 @@ MonoBehaviour:
   shootingRange: 10000
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
+  healthCollider: {fileID: 936547612651599108}
   initialLaneDistance: 200
-  laneStayPeriod: 1.5
+  laneStayPeriod: 2
   projectileTresholdSpeed: 400
   walkingSpeed: 10
   checkIfCanShootInterval: 0.5
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 40
-  health: 10
+  health: 40
   score: 10
 --- !u!1 &1786568229249719166
 GameObject:

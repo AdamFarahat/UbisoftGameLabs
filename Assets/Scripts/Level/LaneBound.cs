@@ -7,6 +7,7 @@ public class LaneBound : MonoBehaviour
     [SerializeField] private float laneIndex = 0f;
     [SerializeField] private float laneDistance = 0f;
     [SerializeField] private float switchLaneDuration = 0.1f;
+    public float SwitchLaneDuration => switchLaneDuration;
 
     public UnityAction<float> DashStart;
     public UnityAction DashEnd;
@@ -28,7 +29,8 @@ public class LaneBound : MonoBehaviour
 
     private void OnValidate()
     {
-        SyncLane();
+        if (LaneSet.Instance != null)
+            SyncLane();
     }
 
     private void OnDisable()
