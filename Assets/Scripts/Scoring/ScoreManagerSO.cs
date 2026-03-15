@@ -6,10 +6,8 @@ public class ScoreManagerSO : ScriptableObject
 {
     public float TEAM_MULTIPLIER_BASE = 20f;
 
-    private float MIN_MULTIPLIER = 1f;
+    private readonly float MIN_MULTIPLIER = 1f;
 
-    private float MAX_MulTIPLIER = 0.00001f;
-    
     private const int numberOfPlayers = 2;
     [SerializeField]
     private float SumOfSTDDevTreshold = 0.001f;

@@ -12,22 +12,19 @@ public class ShooterEnemy : MonoBehaviour
 
     protected LaneBound lane;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         lane = GetComponent<LaneBound>();
         Assert.IsNotNull(lane);
     }
 
-    protected bool isInShootingRange() {
-        Debug.Log("IS PLAYER AT LINE: " + PlayerController.AnyPlayerInLane(lane.LaneIndex));
-        Debug.Log("IS FAR ENOUGH: " + (lane.LaneDistance >= shotDistanceThreshold));
-        Debug.Log("IS CLOSE ENOUGH: " + (lane.LaneDistance <= shootingRange));
-        Debug.Log("VisibleEndLine: " + (lane.LaneDistance <= shootingRange));
-
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold 
+    protected bool IsInShootingRange()
+    {
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold
             && lane.LaneDistance <= shootingRange
             && lane.LaneDistance <= LaneSet.VisibleEndLine;
     }
+
     protected void Shoot()
     {
         GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);

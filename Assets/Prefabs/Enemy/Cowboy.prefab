@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3079979570998515900}
   m_Layer: 0
-  m_Name: shootPoint
+  m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2357147940073859610}
   - component: {fileID: 8340228663757496069}
   m_Layer: 0
-  m_Name: CowboyEnemy
+  m_Name: Cowboy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   shootingRange: 10000
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
-  initialLaneDistance: 300
+  initialLaneDistance: 200
   laneStayPeriod: 1.5
   ProjectileTresholdSpeed: 10
   WalkingSpeed: 10
