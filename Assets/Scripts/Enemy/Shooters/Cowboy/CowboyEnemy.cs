@@ -122,8 +122,6 @@ public class CowboyEnemy : ShooterEnemy
             {
                 continue;
             }
-            Debug.Log("slow enough: " + (b.velocity <= ProjectileTresholdSpeed));
-            Debug.Log("is going to hit me: " + IsPredictedToHit(b));
 
             if (IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
             {
@@ -140,7 +138,6 @@ public class CowboyEnemy : ShooterEnemy
         RaycastHit hit;
         if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
         {
-            Debug.Log(hit.collider);
             if (hit.collider == healthCollider)
             {
                 return true;
