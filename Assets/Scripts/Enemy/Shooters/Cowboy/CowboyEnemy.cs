@@ -49,7 +49,6 @@ public class CowboyEnemy : ShooterEnemy
     private void Update()
     {
         // TODO cowboy can only dodge when walking. If shooting, change line to dodge then change back.
-
         time += Time.deltaTime;
         switch (state)
         {
@@ -58,6 +57,7 @@ public class CowboyEnemy : ShooterEnemy
                 {
                     dodgedLaneIndex = lane.LaneIndex;
                     ChangeLane();
+                    healthCollider.enabled = false;
                     state = CowBoyState.Dodging;
                     time = 0f;
                 }
@@ -91,14 +91,13 @@ public class CowboyEnemy : ShooterEnemy
                 //a second time back to where it was in order to continue shooting
                 if (time >= 2 * lane.SwitchLaneDuration)
                 {
-                    GetComponent<BoxCollider>().enabled = true;
+                    healthCollider.enabled = true;
                     state = CowBoyState.Walking;
                     time = 0f;
                 }
                 else if (time >= lane.SwitchLaneDuration && !bulletDetector.NearbyBullets.Contains(dodgedBullet))
                 {
                     dodgedBullet = null;
-                    GetComponent<BoxCollider>().enabled = false;
                     ReturnToDodgedLane();
                 }
                 break;
@@ -123,8 +122,10 @@ public class CowboyEnemy : ShooterEnemy
             {
                 continue;
             }
-            var projCollider = b.GetComponent<SphereCollider>();
-            if (projCollider && IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
+            Debug.Log("slow enough: " + (b.velocity <= ProjectileTresholdSpeed));
+            Debug.Log("is going to hit me: " + IsPredictedToHit(b));
+
+            if (IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
             {
                 dodgedBullet = b;
                 return true;
@@ -139,7 +140,8 @@ public class CowboyEnemy : ShooterEnemy
         RaycastHit hit;
         if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
         {
-            if (hit.collider == GetComponent<BoxCollider>())
+            Debug.Log(hit.collider);
+            if (hit.collider == healthCollider)
             {
                 return true;
             }
