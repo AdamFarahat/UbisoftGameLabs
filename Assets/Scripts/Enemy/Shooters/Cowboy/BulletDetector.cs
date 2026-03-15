@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class BulletDetector : MonoBehaviour
 {
-    public List<Bullet> bulletsNearby = new List<Bullet>();
+    private List<Bullet> bulletsNearby = new List<Bullet>();
 
+    public List<Bullet> NearbyBullets => bulletsNearby;
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Bullet>(out Bullet b)) 
@@ -20,4 +21,5 @@ public class BulletDetector : MonoBehaviour
             bulletsNearby.Remove(b);
         }
     }
+    
 }
