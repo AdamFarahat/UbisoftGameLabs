@@ -38,6 +38,8 @@ public abstract class PlayerController : MonoBehaviour
     protected Collider playerCollider;
     protected PlayerStats playerStats;
 
+    public UnityAction StartButtonPressed;
+
     protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -68,18 +70,23 @@ public abstract class PlayerController : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        if (playerInput != null)
-            playerInput.actions.Enable();
+        playerInput.actions.Enable();
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
         playerInput.actions["MoveRight"].performed += OnMoveRight;
+        playerInput.actions["Start"].performed += OnStartButtonPressed;
     }
 
     protected virtual void OnDisable()
     {
-        if (playerInput != null)
-            playerInput.actions.Disable();
+        playerInput.actions.Disable();
         playerInput.actions["MoveLeft"].performed -= OnMoveLeft;
         playerInput.actions["MoveRight"].performed -= OnMoveRight;
+        playerInput.actions["Start"].performed -= OnStartButtonPressed;
+    }
+
+    private void OnStartButtonPressed(InputAction.CallbackContext ctx)
+    {
+        StartButtonPressed?.Invoke();
     }
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
