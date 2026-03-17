@@ -20,6 +20,7 @@ public class TutorialManager : MonoBehaviour
         {
             GunPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
             GunPlayerController.Instance.moveEnabled = false;
+            GunPlayerController.Instance.shootEnabled = false;
             GunPlayerController.Instance.toggleGunEnabled = false;
         }
 
@@ -27,6 +28,7 @@ public class TutorialManager : MonoBehaviour
         {
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
             SwordPlayerController.Instance.moveEnabled = false;
+            SwordPlayerController.Instance.slashEnabled = false;
             SwordPlayerController.Instance.jumpEnabled = false;
         }
 

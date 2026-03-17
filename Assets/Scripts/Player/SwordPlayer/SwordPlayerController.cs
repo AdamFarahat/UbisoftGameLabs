@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class SwordPlayerController : PlayerController
@@ -15,11 +16,14 @@ public class SwordPlayerController : PlayerController
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
-    [SerializeField] private float attackDuration = 0.5f;
+
+    [Header("Attcking")]
+    [SerializeField] private float attackDuration = 0.2f;
 
     private float parryTimer = 0f;
 
     bool canBlock = true;
+    [Header("Blocking")]
     [SerializeField] private float blockCooldown = 3f;
     private float blockCooldownPercent = 0f;
     public Action OnBlockCooldownReady;
@@ -38,7 +42,10 @@ public class SwordPlayerController : PlayerController
     private Coroutine delayedAnimation = null;
 
     // Begin tutorial settings
+    public bool slashEnabled = true;
     public bool jumpEnabled = true;
+
+    public UnityAction PressedSlash;
     // End tutorial settings
 
     private enum SwordPlayerStates
@@ -227,8 +234,13 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
+        if (!slashEnabled)
+            return;
+        PressedSlash?.Invoke();
+
         if (Stunned)
             return;
+
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Attack button pressed with super ready");

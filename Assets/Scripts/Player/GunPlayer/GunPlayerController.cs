@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GunPlayerController : PlayerController
@@ -41,7 +42,10 @@ public class GunPlayerController : PlayerController
     public Action OnGrenadeCooldownReady;
 
     // Begin tutorial settings
+    public bool shootEnabled = true;
     public bool toggleGunEnabled = true;
+
+    public UnityAction PressedShoot;
     // End tutorial settings
 
     protected override void Awake()
@@ -96,6 +100,10 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (!shootEnabled)
+            return;
+        PressedShoot?.Invoke();
+
         if (Stunned)
             return;
 
@@ -120,6 +128,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
+        if (!shootEnabled)
+            return;
+
         holdingGunInput = HoldingState.Released;
         if (Stunned)
             holster.CancelFiring();

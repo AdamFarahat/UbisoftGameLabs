@@ -267,10 +267,11 @@ MonoBehaviour:
   OnDiscreteMultiplierChange:
     m_PersistentCalls:
       m_Calls: []
+  moveEnabled: 1
   swordHitBox: {fileID: 0}
   jumpSpeed: 100
   fallAcceleration: 500
-  attackDuration: 0.5
+  attackDuration: 0.1
   blockCooldown: 3
   parryBulletSpeedMult: 2
   parryWindow: 0.5
@@ -278,6 +279,8 @@ MonoBehaviour:
   attackingMultiplierGain: 0.6
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
+  slashEnabled: 1
+  jumpEnabled: 1
   activateSuperWaitTime: 0.1
 --- !u!114 &3679303042094892920
 MonoBehaviour:
