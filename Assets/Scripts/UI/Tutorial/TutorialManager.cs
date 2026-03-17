@@ -17,10 +17,16 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         if (GunPlayerController.Instance != null)
+        {
             GunPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
+            GunPlayerController.Instance.moveEnabled = false;
+        }
 
         if (SwordPlayerController.Instance != null)
+        {
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
+            SwordPlayerController.Instance.moveEnabled = false;
+        }
 
         NextTutorial();
     }
@@ -35,5 +41,9 @@ public class TutorialManager : MonoBehaviour
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
             tutorials[tutorialIndex].DoTutorial();
+        else
+        {
+            // TODO end tutorial
+        }
     }
 }

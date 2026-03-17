@@ -40,6 +40,10 @@ public abstract class PlayerController : MonoBehaviour
 
     public UnityAction StartButtonPressed;
 
+    // Begin tutorial settings
+    public bool moveEnabled = true;
+    // End tutorial settings
+
     protected virtual void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -91,12 +95,14 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
-        MoveToLane((int index) => { return index - 1; });
+        if (moveEnabled)
+            MoveToLane((int index) => { return index - 1; });
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
-        MoveToLane((int index) => { return index + 1; });
+        if (moveEnabled)
+            MoveToLane((int index) => { return index + 1; });
     }
 
     private void MoveToLane(Func<int, int> laneFn)

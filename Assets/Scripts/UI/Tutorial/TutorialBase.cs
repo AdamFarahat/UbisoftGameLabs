@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 public abstract class TutorialBase : MonoBehaviour
 {
     [SerializeField] private float transitionDuration = 0.3f;
+    [SerializeField] private float paddingDuration = 0.5f;
 
     private TutorialManager manager;
 
@@ -31,6 +32,7 @@ public abstract class TutorialBase : MonoBehaviour
             }
 
             rt.localScale = Vector3.one;
+            yield return new WaitForSeconds(paddingDuration);
             StartTutorial();
         }
 
@@ -48,6 +50,7 @@ public abstract class TutorialBase : MonoBehaviour
 
         IEnumerator Routine()
         {
+            yield return new WaitForSeconds(paddingDuration);
             RectTransform rt = GetComponent<RectTransform>();
 
             for (float t = 0f; t < transitionDuration; t += Time.deltaTime)
