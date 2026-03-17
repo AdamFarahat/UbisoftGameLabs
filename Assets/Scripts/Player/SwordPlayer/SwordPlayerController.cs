@@ -37,6 +37,10 @@ public class SwordPlayerController : PlayerController
     private SpriteAnimator animator;
     private Coroutine delayedAnimation = null;
 
+    // Begin tutorial settings
+    public bool jumpEnabled = true;
+    // End tutorial settings
+
     private enum SwordPlayerStates
     {
         Normal,
@@ -161,6 +165,9 @@ public class SwordPlayerController : PlayerController
 
     private void Jump(InputAction.CallbackContext ctx)
     {
+        if (!jumpEnabled)
+            return;
+
         if (Stunned)
             return;
 

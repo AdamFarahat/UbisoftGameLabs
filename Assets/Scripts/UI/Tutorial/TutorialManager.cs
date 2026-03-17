@@ -27,6 +27,7 @@ public class TutorialManager : MonoBehaviour
         {
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
             SwordPlayerController.Instance.moveEnabled = false;
+            SwordPlayerController.Instance.jumpEnabled = false;
         }
 
         NextTutorial();

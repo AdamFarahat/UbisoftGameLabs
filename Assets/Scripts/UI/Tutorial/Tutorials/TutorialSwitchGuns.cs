@@ -10,27 +10,29 @@ public class TutorialSwitchGuns : TutorialBase
 
     protected override void StartTutorial()
     {
-        GunPlayerController gunner = GunPlayerController.Instance;
+        GunPlayerController gunPlayer = GunPlayerController.Instance;
 
-        if (gunner == null)
+        if (gunPlayer == null)
         {
             EndTutorial();
             return;
         }
 
-        for (int i = 0; i < gunner.Holster.NumberOfGuns; i++)
+        for (int i = 0; i < gunPlayer.Holster.NumberOfGuns; i++)
         {
-            if (i != gunner.Holster.ActiveGunIndex)
+            if (i != gunPlayer.Holster.ActiveGunIndex)
                 gunsNotSeen.Add(i);
         }
 
-        gunner.toggleGunEnabled = true;
+        gunPlayer.toggleGunEnabled = true;
 
         IEnumerator Routine()
         {
+            // TODO spawn enemies slowly so player can test the different guns
+
             while (gunsNotSeen.Count > 0)
             {
-                gunsNotSeen.Remove(gunner.Holster.ActiveGunIndex);
+                gunsNotSeen.Remove(gunPlayer.Holster.ActiveGunIndex);
                 yield return null;
             }
 
