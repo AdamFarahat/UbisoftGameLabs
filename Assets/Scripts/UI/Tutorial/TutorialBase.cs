@@ -19,7 +19,6 @@ public abstract class TutorialBase : MonoBehaviour
     {
         IEnumerator Routine()
         {
-            gameObject.SetActive(true);
             RectTransform rt = GetComponent<RectTransform>();
             rt.localScale = new(1f, 0f, 1f);
 
@@ -35,6 +34,7 @@ public abstract class TutorialBase : MonoBehaviour
             StartTutorial();
         }
 
+        gameObject.SetActive(true);
         StartCoroutine(Routine());
     }
 
