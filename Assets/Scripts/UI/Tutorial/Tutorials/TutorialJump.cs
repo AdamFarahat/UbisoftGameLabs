@@ -49,10 +49,13 @@ public class TutorialJump : TutorialBase
             while (!pressedJump)
                 yield return null;
 
+            if (Time.time - startTime < minDuration)
+                yield return new WaitForSeconds(minDuration - (Time.time - startTime));
+
             foreach (TutorialGunGrunt gunGrunt in gunGrunts)
                 gunGrunt.Despawn();
 
-            yield return new WaitForSeconds(Mathf.Max(paddingAfterJump, minDuration - (Time.time - startTime)));
+            yield return new WaitForSeconds(paddingAfterJump);
             EndTutorial();
         }
 

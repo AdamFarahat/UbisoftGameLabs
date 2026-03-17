@@ -6,11 +6,13 @@ using UnityEngine.Assertions;
 public class TutorialSecondaryAction : TutorialBase
 {
     [SerializeField] private GameObject grenadeEntitiesRoot;
+    [SerializeField] private GameObject parryEntitiesRoot;
     [SerializeField] private float spawnLaneDistance = 200f;
     [SerializeField] private float spawnDuration = 2f;
     [SerializeField] private float cooldownLength = 1.5f;
 
-    private MeleeGruntMovementAI[] meleeGrunts;
+    private LaneBound[] meleeGrunts;
+    private LaneBound[] flyerGrunts;
 
     private bool pressedThrow = true;
     private bool pressedBlock = true;
@@ -19,15 +21,21 @@ public class TutorialSecondaryAction : TutorialBase
     {
         base.Awake();
         Assert.IsNotNull(grenadeEntitiesRoot);
+        Assert.IsNotNull(parryEntitiesRoot);
 
-        meleeGrunts = grenadeEntitiesRoot.GetComponentsInChildren<MeleeGruntMovementAI>();
-        Assert.IsTrue(meleeGrunts.Length == LaneSet.LaneCount);
+        meleeGrunts = grenadeEntitiesRoot.GetComponentsInChildren<LaneBound>();
+        flyerGrunts = parryEntitiesRoot.GetComponentsInChildren<LaneBound>();
     }
 
     private void OnDisable()
     {
-        foreach (MeleeGruntMovementAI meleeGrunt in meleeGrunts)
-            meleeGrunt.gameObject.SetActive(false);
+        foreach (LaneBound meleeGrunt in meleeGrunts)
+            if (meleeGrunt != null)
+                meleeGrunt.gameObject.SetActive(false);
+
+        foreach (LaneBound flyerGrunt in flyerGrunts)
+            if (flyerGrunt != null)
+                flyerGrunt.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
@@ -41,6 +49,9 @@ public class TutorialSecondaryAction : TutorialBase
             gunPlayer.PressedThrow += () => { pressedThrow = true; };
 
             manager.GunPlayerCooldownUI.SetActive(true);
+
+            foreach (LaneBound meleeGrunt in meleeGrunts)
+                SpawnGrunt(meleeGrunt);
         }
 
         SwordPlayerController swordPlayer = SwordPlayerController.Instance;
@@ -52,16 +63,16 @@ public class TutorialSecondaryAction : TutorialBase
             swordPlayer.PressedBlock += () => { pressedBlock = true; };
 
             manager.SwordPlayerCooldownUI.SetActive(true);
+
+            foreach (LaneBound flyerGrunt in flyerGrunts)
+                SpawnGrunt(flyerGrunt);
         }
 
         IEnumerator Routine()
         {
-            // TODO spawn enemies. Count enemies killed by the gun player, and projectiles parried by the sword player (use stationary flyer enemy).
-
-            foreach (MeleeGruntMovementAI meleeGrunt in meleeGrunts)
-                SpawnMeleeGrunt(meleeGrunt);
-
-            while (!pressedThrow || !pressedBlock || meleeGrunts.Any(g => g != null))
+            while (!pressedThrow || !pressedBlock
+                    || meleeGrunts.Any(g => g != null && g.isActiveAndEnabled)
+                    || flyerGrunts.Any(g => g != null && g.isActiveAndEnabled))
                 yield return null;
 
             EndTutorial();
@@ -70,22 +81,20 @@ public class TutorialSecondaryAction : TutorialBase
         StartCoroutine(Routine());
     }
 
-    private void SpawnMeleeGrunt(MeleeGruntMovementAI grunt)
+    private void SpawnGrunt(LaneBound grunt)
     {
         grunt.gameObject.SetActive(true);
-        LaneBound lane = grunt.GetComponent<LaneBound>();
-        Assert.IsNotNull(lane);
 
         IEnumerator ArrivalRoutine()
         {
-            float arrivalDistance = lane.LaneDistance;
-            lane.LaneDistance = spawnLaneDistance;
+            float arrivalDistance = grunt.LaneDistance;
+            grunt.LaneDistance = spawnLaneDistance;
             for (float t = 0f; t < spawnDuration; t += Time.deltaTime)
             {
-                lane.LaneDistance = Mathf.Lerp(spawnLaneDistance, arrivalDistance, Mathf.Clamp01(t / spawnDuration));
+                grunt.LaneDistance = Mathf.Lerp(spawnLaneDistance, arrivalDistance, Mathf.Clamp01(t / spawnDuration));
                 yield return null;
             }
-            lane.LaneDistance = arrivalDistance;
+            grunt.LaneDistance = arrivalDistance;
         }
 
         StartCoroutine(ArrivalRoutine());
