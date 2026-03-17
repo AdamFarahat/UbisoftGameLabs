@@ -46,6 +46,7 @@ public class SwordPlayerController : PlayerController
     public bool jumpEnabled = true;
 
     public UnityAction PressedSlash;
+    public UnityAction PressedJump;
     // End tutorial settings
 
     private enum SwordPlayerStates
@@ -174,6 +175,7 @@ public class SwordPlayerController : PlayerController
     {
         if (!jumpEnabled)
             return;
+        PressedJump?.Invoke();
 
         if (Stunned)
             return;

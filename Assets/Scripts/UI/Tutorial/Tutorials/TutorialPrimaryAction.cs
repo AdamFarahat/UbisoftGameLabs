@@ -25,6 +25,8 @@ public class TutorialPrimaryAction : TutorialBase
 
         IEnumerator Routine()
         {
+            // TODO spawn enemies. Count enemies killed per player.
+
             while (!pressedShoot || !pressedSlash)
                 yield return null;
 
