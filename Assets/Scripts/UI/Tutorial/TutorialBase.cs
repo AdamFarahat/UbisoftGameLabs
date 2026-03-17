@@ -10,7 +10,7 @@ public abstract class TutorialBase : MonoBehaviour
 
     protected TutorialManager manager;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         manager = GetComponentInParent<TutorialManager>();
         Assert.IsNotNull(manager);

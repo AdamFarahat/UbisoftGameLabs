@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
     private bool swordSuperPrepared = false;
 
     // Begin tutorial settings
+    public bool damageEnabled = true;
     public bool superEnabled = true;
     public UnityAction SuperEnded;
     // End tutorial settings
@@ -99,6 +100,9 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (!damageEnabled)
+            return;
+
         if (IsSuperActive())
         {
             return;
@@ -224,6 +228,6 @@ public class PlayerStats : MonoBehaviour
         swordSuperPrepared = false;
         superCoroutine = null;
 
-        superEnded?.Invoke();
+        SuperEnded?.Invoke();
     }
 }

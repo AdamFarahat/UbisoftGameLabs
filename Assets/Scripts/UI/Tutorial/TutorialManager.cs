@@ -58,6 +58,7 @@ public class TutorialManager : MonoBehaviour
         PlayerStats.Instance.superEnabled = false;
         PlayerStats.Instance.ResetGunSuper();
         PlayerStats.Instance.ResetSwordSuper();
+        PlayerStats.Instance.damageEnabled = false;
 
         gunPlayerCooldownUI.SetActive(false);
         swordPlayerCooldownUI.SetActive(false);
