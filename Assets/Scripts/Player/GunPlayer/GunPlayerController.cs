@@ -18,6 +18,7 @@ public class GunPlayerController : PlayerController
     public float GrenadeKillMultiplierGain => grenadeKillMultiplierGain;
 
     private Holster holster;
+    public Holster Holster => holster;
     private GrenadeBelt grenadeBelt;
 
     [Header ("Super")]
@@ -38,6 +39,10 @@ public class GunPlayerController : PlayerController
     private HoldingState holdingGunInput = HoldingState.Released;
 
     public Action OnGrenadeCooldownReady;
+
+    // Begin tutorial settings
+    public bool toggleGunEnabled = true;
+    // End tutorial settings
 
     protected override void Awake()
     {
@@ -124,6 +129,9 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
+        if (!toggleGunEnabled)
+            return;
+
         if (Stunned)
             return;
 
@@ -132,6 +140,9 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
+        if (!toggleGunEnabled)
+            return;
+
         if (Stunned)
             return;
 
