@@ -1,17 +1,9 @@
-using UnityEngine;
-
-// TODO hide super bar UI and show it here
-public class TutorialSuper : MonoBehaviour
+// TODO hide super bar UI and show it here, at full capacity
+public class TutorialSuper : TutorialBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void StartTutorial()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // TODO
+        EndTutorial();
     }
 }
