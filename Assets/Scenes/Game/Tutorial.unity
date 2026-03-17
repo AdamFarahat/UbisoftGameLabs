@@ -430,7 +430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4512bca65ca957d49b73059935c0bac2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36e1ed03c4787624f9a754e2c40f5a2f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2897,6 +2897,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582793496}
   m_CullTransparentMesh: 1
+--- !u!1 &1606620847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606620848}
+  - component: {fileID: 1606620850}
+  - component: {fileID: 1606620849}
+  m_Layer: 0
+  m_Name: Controller (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1606620848
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606620847}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2076460338}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 210, y: 0}
+  m_SizeDelta: {x: 150, y: 75}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1606620849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606620847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d3516438d7310434bb805da6d662b7c4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1606620850
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606620847}
+  m_CullTransparentMesh: 1
 --- !u!1 &1651926209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,7 +3352,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <b>Left</b>/<b>Right</b> to <b>switch lanes</b>!
+  m_text: Press <b>B</b> to <b>throw a grenade</b> or <b>block attacks</b>, but beware
+    your cooldown meter! Time your blocks right to <b>parry</b>, and hold your throw
+    to <b>aim</b>!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
   m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
@@ -3304,8 +3381,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3623,7 +3700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2076460338}
   - component: {fileID: 2076460340}
-  - component: {fileID: 2076460339}
+  - component: {fileID: 2076460341}
   m_Layer: 0
   m_Name: Secondary Action
   m_TagString: Untagged
@@ -3644,6 +3721,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 61369838}
+  - {fileID: 1606620848}
   - {fileID: 28965884}
   m_Father: {fileID: 1851449806}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3652,20 +3730,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2076460339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2076460337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4898aa5f4f136049a7cb7e2a027b15d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TutorialSwitchLanes
-  transitionDuration: 0.3
-  paddingDuration: 0.5
 --- !u!222 &2076460340
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3674,6 +3738,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076460337}
   m_CullTransparentMesh: 1
+--- !u!114 &2076460341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076460337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d3d540766b6ab4da031723cef43a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialSecondaryAction
+  transitionDuration: 0.3
+  paddingDuration: 0.5
 --- !u!1 &2084150498
 GameObject:
   m_ObjectHideFlags: 0

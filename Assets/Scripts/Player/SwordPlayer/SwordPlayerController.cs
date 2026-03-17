@@ -43,9 +43,11 @@ public class SwordPlayerController : PlayerController
 
     // Begin tutorial settings
     public bool slashEnabled = true;
+    public bool blockEnabled = true;
     public bool jumpEnabled = true;
 
     public UnityAction PressedSlash;
+    public UnityAction PressedBlock;
     public UnityAction PressedJump;
     // End tutorial settings
 
@@ -277,8 +279,13 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (!blockEnabled)
+            return;
+        PressedBlock?.Invoke();
+
         if (Stunned)
             return;
+
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
         {
             //Set block button pressed super to true
@@ -309,6 +316,9 @@ public class SwordPlayerController : PlayerController
 
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
+        if (!blockEnabled)
+            return;
+
         if (Stunned)
             return;
 

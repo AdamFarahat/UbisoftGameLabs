@@ -43,9 +43,11 @@ public class GunPlayerController : PlayerController
 
     // Begin tutorial settings
     public bool shootEnabled = true;
+    public bool throwEnabled = true;
     public bool toggleGunEnabled = true;
 
     public UnityAction PressedShoot;
+    public UnityAction PressedThrow;
     // End tutorial settings
 
     protected override void Awake()
@@ -162,6 +164,10 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (!throwEnabled)
+            return;
+        PressedThrow?.Invoke();
+
         if (Stunned)
             return;
 
@@ -190,6 +196,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
+        if (!throwEnabled)
+            return;
+
         if (Stunned)
             grenadeBelt.CancelThrow();
         else
