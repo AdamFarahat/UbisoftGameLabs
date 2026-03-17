@@ -24,7 +24,7 @@ public class SwordPlayerController : PlayerController
 
     bool canBlock = true;
     [Header("Blocking")]
-    [SerializeField] private float blockCooldown = 3f;
+    public float blockCooldown = 3f;
     private float blockCooldownPercent = 0f;
     public Action OnBlockCooldownReady;
 

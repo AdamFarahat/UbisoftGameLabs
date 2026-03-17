@@ -20,7 +20,9 @@ public class GunPlayerController : PlayerController
 
     private Holster holster;
     public Holster Holster => holster;
+
     private GrenadeBelt grenadeBelt;
+    public GrenadeBelt GrenadeBelt => grenadeBelt;
 
     [Header ("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
