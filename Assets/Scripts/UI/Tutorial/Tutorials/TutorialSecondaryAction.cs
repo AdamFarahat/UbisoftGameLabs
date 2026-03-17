@@ -5,7 +5,6 @@ public class TutorialSecondaryAction : TutorialBase
     private bool pressedThrow = true;
     private bool pressedBlock = true;
 
-    // TODO combine all controller sprites so there's only one per tutorial - that will give the description more room.
     protected override void StartTutorial()
     {
         GunPlayerController gunPlayer = GunPlayerController.Instance;

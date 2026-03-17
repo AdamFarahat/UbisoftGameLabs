@@ -208,6 +208,11 @@ public abstract class PlayerController : MonoBehaviour
     {
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+    }
+
     public void AddScore(int score)
     {
         this.score += Mathf.CeilToInt(score * GetDiscreteMultiplier());

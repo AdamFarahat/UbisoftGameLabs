@@ -54,7 +54,7 @@ public class UITester : MonoBehaviour
      void Awake()
     {
         Assert.IsNotNull(healthMaterial);
-        //Assert.IsNotNull(scoreText);  TODO uncomment
+        Assert.IsNotNull(scoreText);
         Assert.IsNotNull(powerBarMaterial);
         Assert.IsNotNull(gunCooldownMaterial);
         Assert.IsNotNull(gunMultiplierMaterial);
