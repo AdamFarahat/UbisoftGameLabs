@@ -1,4 +1,4 @@
-public class TutorialAction2 : TutorialBase
+public class TutorialPrimaryAction : TutorialBase
 {
     protected override void StartTutorial()
     {
