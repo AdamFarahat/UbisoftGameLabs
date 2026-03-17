@@ -8,7 +8,7 @@ public abstract class TutorialBase : MonoBehaviour
     [SerializeField] private float transitionDuration = 0.3f;
     [SerializeField] private float paddingDuration = 0.5f;
 
-    private TutorialManager manager;
+    protected TutorialManager manager;
 
     private void Awake()
     {

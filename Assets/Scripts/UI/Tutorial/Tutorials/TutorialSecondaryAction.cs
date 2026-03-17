@@ -5,24 +5,27 @@ public class TutorialSecondaryAction : TutorialBase
     private bool pressedThrow = true;
     private bool pressedBlock = true;
 
-    // TODO hide cooldown UI and show it here.
     // TODO combine all controller sprites so there's only one per tutorial - that will give the description more room.
     protected override void StartTutorial()
     {
         GunPlayerController gunPlayer = GunPlayerController.Instance;
         if (gunPlayer != null)
         {
-            gunPlayer.shootEnabled = true;
+            gunPlayer.throwEnabled = true;
             pressedThrow = false;
             gunPlayer.PressedThrow += () => { pressedThrow = true; };
+
+            manager.GunPlayerCooldownUI.SetActive(true);
         }
 
         SwordPlayerController swordPlayer = SwordPlayerController.Instance;
         if (swordPlayer != null)
         {
-            swordPlayer.slashEnabled = true;
+            swordPlayer.blockEnabled = true;
             pressedBlock = false;
             swordPlayer.PressedBlock += () => { pressedBlock = true; };
+
+            manager.SwordPlayerCooldownUI.SetActive(true);
         }
 
         IEnumerator Routine()

@@ -448,6 +448,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed098b3cdb86e54a903d9da9f252ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
+  gunPlayerCooldownUI: {fileID: 1632895591}
+  swordPlayerCooldownUI: {fileID: 2096562390}
+  scoreUI: {fileID: 1141389509}
+  gunPlayerMultiplierUI: {fileID: 1147496394}
+  swordPlayerMultiplierUI: {fileID: 1180164310}
 --- !u!1 &61369837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,6 +2013,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031987281}
   m_CullTransparentMesh: 1
+--- !u!1 &1141389509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 642107351415899044, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1147496394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6782685970780823156, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1180164310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6527810249017486485, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1227614093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2859,6 +2879,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606620847}
   m_CullTransparentMesh: 1
+--- !u!1 &1632895591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5856279847807633151, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1651926209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3958,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialScore
   transitionDuration: 0.3
   paddingDuration: 0.5
+--- !u!1 &2096562390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3299107843836136778, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &2100979860 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5728316616653936719, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}

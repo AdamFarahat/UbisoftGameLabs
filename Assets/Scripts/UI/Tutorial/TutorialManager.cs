@@ -1,14 +1,35 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
-    private TutorialBase[] tutorials;
+    [SerializeField] private GameObject gunPlayerCooldownUI;
+    public GameObject GunPlayerCooldownUI => gunPlayerCooldownUI;
 
+    [SerializeField] private GameObject swordPlayerCooldownUI;
+    public GameObject SwordPlayerCooldownUI => swordPlayerCooldownUI;
+
+    [SerializeField] private GameObject scoreUI;
+    public GameObject ScoreUI => scoreUI;
+
+    [SerializeField] private GameObject gunPlayerMultiplierUI;
+    public GameObject GunPlayerMultiplierUI => gunPlayerMultiplierUI;
+
+    [SerializeField] private GameObject swordPlayerMultiplierUI;
+    public GameObject SwordPlayerMultiplierUI => swordPlayerMultiplierUI;
+
+    private TutorialBase[] tutorials;
     private int tutorialIndex = -1;
 
     private void Awake()
     {
+        Assert.IsNotNull(gunPlayerCooldownUI);
+        Assert.IsNotNull(swordPlayerCooldownUI);
+        Assert.IsNotNull(scoreUI);
+        Assert.IsNotNull(gunPlayerMultiplierUI);
+        Assert.IsNotNull(swordPlayerMultiplierUI);
+
         tutorials = GetComponentsInChildren<TutorialBase>();
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);
@@ -33,6 +54,12 @@ public class TutorialManager : MonoBehaviour
             SwordPlayerController.Instance.blockEnabled = false;
             SwordPlayerController.Instance.jumpEnabled = false;
         }
+
+        gunPlayerCooldownUI.SetActive(false);
+        swordPlayerCooldownUI.SetActive(false);
+        scoreUI.SetActive(false);
+        gunPlayerMultiplierUI.SetActive(false);
+        swordPlayerMultiplierUI.SetActive(false);
 
         NextTutorial();
     }
