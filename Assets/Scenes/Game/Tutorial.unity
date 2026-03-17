@@ -2971,10 +2971,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1878411684599127928, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2743872348207576581, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_Name
       value: LevelCore
@@ -4673,6 +4669,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialScore
   transitionDuration: 0.3
   paddingDuration: 0.5
+  duration: 6
+  multiplierGainPerSecond: 2
 --- !u!1 &2096562390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3299107843836136778, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}

@@ -1,5 +1,11 @@
+using System.Collections;
+using UnityEngine;
+
 public class TutorialScore : TutorialBase
 {
+    [SerializeField] private float duration = 5f;
+    [SerializeField] private float multiplierGainPerSecond = 2f;
+
     protected override void StartTutorial()
     {
         GunPlayerController gunPlayer = GunPlayerController.Instance;
@@ -20,7 +26,28 @@ public class TutorialScore : TutorialBase
 
         manager.ScoreUI.SetActive(true);
 
-        // TODO wait for score/multiplier to build from both the gun player and the sword player. Could increase multiplier by full bars here.
-        EndTutorial();
+        IEnumerator Routine()
+        {
+            for (float t = 0f; t < duration; t += Time.deltaTime)
+            {
+                if (gunPlayer != null)
+                {
+                    gunPlayer.AddContinuousMultiplier(multiplierGainPerSecond * Time.deltaTime);
+                    gunPlayer.AddScore(1);
+                }
+
+                if (swordPlayer != null)
+                {
+                    swordPlayer.AddContinuousMultiplier(multiplierGainPerSecond * Time.deltaTime);
+                    swordPlayer.AddScore(1);
+                }
+
+                yield return null;
+            }
+
+            EndTutorial();
+        }
+
+        StartCoroutine(Routine());
     }
 }

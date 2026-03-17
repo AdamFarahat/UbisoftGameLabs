@@ -28,7 +28,7 @@ public class TutorialSwitchGuns : TutorialBase
 
         IEnumerator Routine()
         {
-            // TODO spawn enemies slowly so player can test the different guns
+            // TODO spawn enemies slowly so player can test the different guns, including shield enemy.
 
             while (gunsNotSeen.Count > 0)
             {

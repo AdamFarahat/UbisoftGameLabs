@@ -19,6 +19,8 @@ public class TutorialSuper : TutorialBase
 
         IEnumerator Routine()
         {
+            // TODO spawn a million enemies until super ends -> have them all explode at that point instead of dealing with a bunch of leftovers
+
             while (!superEnded)
                 yield return null;
 
