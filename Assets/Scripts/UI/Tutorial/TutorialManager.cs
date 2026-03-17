@@ -39,7 +39,7 @@ public class TutorialManager : MonoBehaviour
 
     private void OnStartButtonPressed()
     {
-        SceneManager.LoadScene("Menu");
+        ExitTutorial();
     }
 
     public void NextTutorial()
@@ -47,9 +47,10 @@ public class TutorialManager : MonoBehaviour
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
             tutorials[tutorialIndex].DoTutorial();
-        else
-        {
-            // TODO end tutorial
-        }
+    }
+
+    public void ExitTutorial()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
