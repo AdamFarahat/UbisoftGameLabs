@@ -55,6 +55,10 @@ public class TutorialManager : MonoBehaviour
             SwordPlayerController.Instance.jumpEnabled = false;
         }
 
+        PlayerStats.Instance.superEnabled = false;
+        PlayerStats.Instance.ResetGunSuper();
+        PlayerStats.Instance.ResetSwordSuper();
+
         gunPlayerCooldownUI.SetActive(false);
         swordPlayerCooldownUI.SetActive(false);
         scoreUI.SetActive(false);
