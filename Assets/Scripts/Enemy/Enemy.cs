@@ -17,6 +17,8 @@ public class Enemy : Poolable
     private bool dead = false;
     public bool Dead => dead;
 
+    public float deathAnimationDuration = 0.1f;
+
     private LaneBound laneBound;
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
@@ -93,7 +95,7 @@ public class Enemy : Poolable
             if (spriteRenderer != null)
             {
                 Color color = spriteRenderer.color;
-                yield return FadeOutAnimation.Routine(spriteRenderer);
+                yield return FadeOutAnimation.Routine(spriteRenderer, deathAnimationDuration);
                 spriteRenderer.color = color;
             }
         }

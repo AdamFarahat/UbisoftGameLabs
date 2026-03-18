@@ -4,6 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
+    [Header("Special Tutorials")]
+    [SerializeField] private TutorialSwitchLanes tutorialSwitchLanes;
+    [SerializeField] private TutorialPrimaryAction tutorialPrimaryAction;
+    [SerializeField] private TutorialSecondaryAction tutorialSecondaryAction;
+    [SerializeField] private TutorialSwitchGuns tutorialSwitchGuns;
+    [SerializeField] private TutorialJump tutorialJump;
+
+    [Header("UI Elements")]
     [SerializeField] private GameObject gunPlayerCooldownUI;
     public GameObject GunPlayerCooldownUI => gunPlayerCooldownUI;
 
@@ -24,6 +32,12 @@ public class TutorialManager : MonoBehaviour
 
     private void Awake()
     {
+        Assert.IsNotNull(tutorialSwitchLanes);
+        Assert.IsNotNull(tutorialPrimaryAction);
+        Assert.IsNotNull(tutorialSecondaryAction);
+        Assert.IsNotNull(tutorialSwitchGuns);
+        Assert.IsNotNull(tutorialJump);
+
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
         Assert.IsNotNull(scoreUI);
@@ -31,8 +45,6 @@ public class TutorialManager : MonoBehaviour
         Assert.IsNotNull(swordPlayerMultiplierUI);
 
         tutorials = GetComponentsInChildren<TutorialBase>();
-        foreach (TutorialBase tutorial in tutorials)
-            tutorial.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -40,19 +52,19 @@ public class TutorialManager : MonoBehaviour
         if (GunPlayerController.Instance != null)
         {
             GunPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
-            GunPlayerController.Instance.moveEnabled = false;
-            GunPlayerController.Instance.shootEnabled = false;
-            GunPlayerController.Instance.throwEnabled = false;
-            GunPlayerController.Instance.toggleGunEnabled = false;
+            GunPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
+            GunPlayerController.Instance.shootEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
+            GunPlayerController.Instance.throwEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
+            GunPlayerController.Instance.toggleGunEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
         }
 
         if (SwordPlayerController.Instance != null)
         {
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
-            SwordPlayerController.Instance.moveEnabled = false;
-            SwordPlayerController.Instance.slashEnabled = false;
-            SwordPlayerController.Instance.blockEnabled = false;
-            SwordPlayerController.Instance.jumpEnabled = false;
+            SwordPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
+            SwordPlayerController.Instance.slashEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
+            SwordPlayerController.Instance.blockEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
+            SwordPlayerController.Instance.jumpEnabled = !tutorialJump.isActiveAndEnabled;
         }
 
         PlayerStats.Instance.superEnabled = false;
@@ -65,6 +77,9 @@ public class TutorialManager : MonoBehaviour
         scoreUI.SetActive(false);
         gunPlayerMultiplierUI.SetActive(false);
         swordPlayerMultiplierUI.SetActive(false);
+
+        foreach (TutorialBase tutorial in tutorials)
+            tutorial.gameObject.SetActive(false);
 
         NextTutorial();
     }

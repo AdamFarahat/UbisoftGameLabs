@@ -29,8 +29,7 @@ public abstract class Poolable : MonoBehaviour
             deathRoutine = null;
         }
 
-        if (deathRoutine == null)
-            deathRoutine = StartCoroutine(Routine());
+        deathRoutine ??= StartCoroutine(Routine());
     }
     
     public virtual void TakeFromPool()

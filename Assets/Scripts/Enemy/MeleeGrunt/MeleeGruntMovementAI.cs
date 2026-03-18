@@ -5,7 +5,7 @@ public class MeleeGruntMovementAI : MonoBehaviour
 {
     [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float damage = 10f;
-    [SerializeField] private float speed = 1f;
+    public float speed = 1f;
 
     private LaneBound laneBound;
 

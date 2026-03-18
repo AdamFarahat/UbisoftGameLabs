@@ -30,6 +30,7 @@ public class PlayerStats : MonoBehaviour
     // Begin tutorial settings
     public bool damageEnabled = true;
     public bool superEnabled = true;
+    public UnityAction SuperStarted;
     public UnityAction SuperEnded;
     // End tutorial settings
 
@@ -185,6 +186,7 @@ public class PlayerStats : MonoBehaviour
     {
         isSuperActive = true;
         superCoroutine = StartCoroutine(SuperDuration());
+        SuperStarted?.Invoke();
         if (awaitingSuperCoroutine != null)
         {
             StopCoroutine(awaitingSuperCoroutine);
