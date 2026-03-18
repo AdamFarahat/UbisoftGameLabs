@@ -68,6 +68,14 @@ public class PlayerSelectInput : MonoBehaviour
         // Only lock in if they aren't already locked
         if (context.performed && !isLockedIn)
         {
+
+            // Stop two players from selecting the same character
+            if (manager.IsSlotTaken(currentIndex))
+            {
+                Debug.Log("Slot is already taken by the other player!");
+                return;
+            }
+
             isLockedIn = true; 
 
             manager.CharacterLockedIn(myPlayerID, currentIndex);

@@ -14,6 +14,7 @@ public class PlayerSelectManager : MonoBehaviour
     [SerializeField] private float cursorOverlapOffset = 20f;
     private readonly List<PlayerSelectInput> activePlayers = new();
     private readonly int[] cursorSlots = new int[2] { 1, 1 }; // default middle 
+    private bool[] playerReadyStates = new bool[2];
 
     [SerializeField] private Image heartUIImage;
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
@@ -21,6 +22,7 @@ public class PlayerSelectManager : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onReturnToMenuRequested;
+    public UnityEvent onAllPlayersReady;
 
     private PlayerInputManager inputManager;
     
@@ -78,31 +80,48 @@ public class PlayerSelectManager : MonoBehaviour
     public void CharacterLockedIn(int playerID, int slotIndex)
     {
         Debug.Log($"Player {playerID + 1} locked in character slot {slotIndex}!");
-        // Set float based on which they locked in 
-        if (slotIndex == 0)
-        {
-            heartUIImage.material.SetFloat(leftAmountID, 1.0f);
-        }
-        else if (slotIndex == 2)
-        {
-            heartUIImage.material.SetFloat(rightAmountID, 1.0f);
-        }
+        
+        if (slotIndex == 0) heartUIImage.material.SetFloat(leftAmountID, 1.0f);
+        else if (slotIndex == 2) heartUIImage.material.SetFloat(rightAmountID, 1.0f);
 
+        // ready player # 
+        playerReadyStates[playerID] = true;
+        CheckIfAllPlayersReady();
+    }
 
+    // Checks if another player has already locked into this specific slot
+    public bool IsSlotTaken(int slotIndex)
+    {
+        // Return true if either player is locked in at this slot
+        if (playerReadyStates[0] && cursorSlots[0] == slotIndex) return true;
+        if (playerReadyStates[1] && cursorSlots[1] == slotIndex) return true;
+
+        return false;
     }
 
     public void CharacterUnlocked(int playerID, int slotIndex)
     {
         Debug.Log($"Player {playerID + 1} deselected their character in slot {slotIndex}.");
         
-        // Reset the float based on which slot they unlocked
-        if (slotIndex == 0)
-        {
-            heartUIImage.material.SetFloat(leftAmountID, 0.0f);
-        }
-        else if (slotIndex == 2)
-        {
-            heartUIImage.material.SetFloat(rightAmountID, 0.0f);
+        if (slotIndex == 0) heartUIImage.material.SetFloat(leftAmountID, 0.0f);
+        else if (slotIndex == 2) heartUIImage.material.SetFloat(rightAmountID, 0.0f);
+
+        // ADD THIS LINE: Unmark this player so the game can't start
+        playerReadyStates[playerID] = false;
+    }
+
+    private void CheckIfAllPlayersReady()
+    {
+        // Ensure both players have actually joined the game first
+        if (activePlayers.Count < 2) return;
+
+        // Check our boolean array to see if both are true
+        if (playerReadyStates[0] && playerReadyStates[1])
+        {            
+            // Lock inputs during animations 
+            IsAcceptingInput = false; 
+
+            onAllPlayersReady?.Invoke();
         }
     }
 
@@ -147,6 +166,7 @@ public class PlayerSelectManager : MonoBehaviour
             cursorSlots[playerID] = slotIndex;
         }
     }
+
 
     
 }
