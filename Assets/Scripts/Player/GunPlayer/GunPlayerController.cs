@@ -50,6 +50,7 @@ public class GunPlayerController : PlayerController
 
     public UnityAction PressedShoot;
     public UnityAction PressedThrow;
+    public UnityAction PressedToggle;
     // End tutorial settings
 
     protected override void Awake()
@@ -146,6 +147,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+        PressedToggle?.Invoke();
 
         if (Stunned)
             return;
@@ -157,6 +159,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+        PressedToggle?.Invoke();
 
         if (Stunned)
             return;

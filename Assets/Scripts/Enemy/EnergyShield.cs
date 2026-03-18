@@ -27,7 +27,10 @@ public class EnergyShield : MonoBehaviour
     private void Start()
     {
         if (!enemy.TryGetComponent(out Poolable poolable) || !poolable.HasPool)
+        {
             gameObject.SetActive(Random.value < probabilityToSpawn);
+            shieldHealth = shieldMaxHealth;
+        }
     }
 
     private void TakeFromPool()

@@ -26,6 +26,7 @@ public class TutorialSuper : TutorialBase
     private readonly List<Enemy> spawnedGrunts = new();
 
     private bool superEnded = false;
+    private bool transitionsSwitched = false;
 
     protected override void Awake()
     {
@@ -130,6 +131,10 @@ public class TutorialSuper : TutorialBase
 
     private void ShowSecondDescription()
     {
+        if (transitionsSwitched)
+            return;
+        transitionsSwitched = true;
+
         IEnumerator Transition()
         {
             yield return FadeOutRoutine(firstDescription.gameObject);

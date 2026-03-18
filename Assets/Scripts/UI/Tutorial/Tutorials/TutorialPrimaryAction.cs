@@ -7,9 +7,9 @@ public class TutorialPrimaryAction : TutorialBase
     [SerializeField] private GameObject meleeGruntPrefab;
     [SerializeField] private float spawnDistance = 200f;
     [SerializeField] private float spawnDelay = 1.5f;
-    [SerializeField] private float meleeGruntSpeed = 24f;
+    [SerializeField] private float meleeGruntSpeed = 30f;
     [SerializeField] private int spawnCount = 3;
-    [SerializeField] private float postSpawnPadding = 6f;
+    [SerializeField] private float postSpawnPadding = 3f;
 
     private bool pressedShoot = true;
     private bool pressedSlash = true;

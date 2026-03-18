@@ -24,7 +24,8 @@ public class TutorialJump : TutorialBase
     private void OnDisable()
     {
         foreach (TutorialGunGrunt gunGrunt in gunGrunts)
-            gunGrunt.gameObject.SetActive(false);
+            if (gunGrunt != null)
+                gunGrunt.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
