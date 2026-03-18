@@ -338,26 +338,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 671806830}
         m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
-        m_MethodName: TransitionToScene
-        m_Mode: 5
+        m_MethodName: LoadPendingScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Menu
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 671806830}
-        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
-        m_MethodName: TransitionToScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!4 &354454794
@@ -1978,6 +1966,18 @@ MonoBehaviour:
   onReturnToMenuRequested:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 671806830}
+        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+        m_MethodName: PrepareSceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 354454793}
         m_TargetAssemblyTypeName: PlayerSelectAnimations, Assembly-CSharp
         m_MethodName: TriggerAnimateOut
@@ -1993,6 +1993,18 @@ MonoBehaviour:
   onAllPlayersReady:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 671806830}
+        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
+        m_MethodName: PrepareSceneLoad
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SampleScene
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 354454793}
         m_TargetAssemblyTypeName: PlayerSelectAnimations, Assembly-CSharp
         m_MethodName: TriggerAnimateOut

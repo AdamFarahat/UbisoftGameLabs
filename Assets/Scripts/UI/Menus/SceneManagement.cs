@@ -20,7 +20,8 @@ public class SceneManagement : MonoBehaviour
             menuAnimations.OnMenuAnimateOutComplete -= LoadPendingScene;
     }
 
-    // Hook up to Buttons in inspector 
+    // Hooked up to Buttons in inspector 
+    // todo refactor
     public void TransitionToScene(string sceneName)
     {
         sceneToLoad = sceneName;
@@ -33,11 +34,16 @@ public class SceneManagement : MonoBehaviour
         }
     }
 
-    private void LoadPendingScene()
+    public void LoadPendingScene()
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
             SceneManager.LoadScene(sceneToLoad);
         }
+    }
+
+    public void PrepareSceneLoad(string sceneName)
+    {
+        sceneToLoad = sceneName;
     }
 }
