@@ -3,28 +3,38 @@ using UnityEngine.InputSystem;
 
 public class PlayerSelectInput : MonoBehaviour
 {
-    [Header("UI References")]
-    [Tooltip("The moving icon/cursor inside this prefab")]
-    [SerializeField] private RectTransform cursorIcon; 
+    private RectTransform cursorIcon; 
     private RectTransform[] characterSlots; 
     private PlayerSelectManager manager;
     private int currentIndex = 0;
     private int myPlayerID;
     private bool isLockedIn = false;
 
-    public void SetupCursor(RectTransform[] slots, Transform canvasTransform, PlayerSelectManager myManager, int playerID)
+    public int CurrentIndex => currentIndex;
+
+    // 
+    public void SetupCursor(RectTransform[] slots, Transform canvasTransform, PlayerSelectManager myManager, int playerID, GameObject dummyCursor)
     {
+        // Attach this transform to the canvas 
         transform.SetParent(canvasTransform, false);
 
         characterSlots = slots;
         manager = myManager;
         myPlayerID = playerID;
-        
-        // Start in the center slot 
-        currentIndex = 1; 
-        isLockedIn = false; // Ensure they start unlocked
-        
-        // Snap to the starting position
+        currentIndex = 1; // cursors start in the middle 
+        isLockedIn = false; 
+
+        // Assign the new cursor to the dummy cursor on screen
+        if (dummyCursor != null)
+        {
+            // Make dummy a child of this invisible controller and center it
+            dummyCursor.transform.SetParent(this.transform, false);
+            dummyCursor.transform.localPosition = Vector3.zero;
+            
+            // Set the dummy cursor transform to this player's cursor transform 
+            cursorIcon = dummyCursor.GetComponent<RectTransform>();
+        }
+
         if (characterSlots != null && characterSlots.Length > 0 && cursorIcon != null)
         {
             UpdateCursorPosition();
@@ -58,6 +68,14 @@ public class PlayerSelectInput : MonoBehaviour
         // Only lock in if they aren't already locked
         if (context.performed && !isLockedIn)
         {
+
+            // Stop two players from selecting the same character
+            if (manager.IsSlotTaken(currentIndex))
+            {
+                Debug.Log("Slot is already taken by the other player!");
+                return;
+            }
+
             isLockedIn = true; 
 
             manager.CharacterLockedIn(myPlayerID, currentIndex);
@@ -75,17 +93,19 @@ public class PlayerSelectInput : MonoBehaviour
 
         currentIndex = Mathf.Clamp(currentIndex + direction, 0, characterSlots.Length - 1);
 
-        /*// Wrap around logic
-        if (currentIndex >= characterSlots.Length) currentIndex = characterSlots.Length - 1;
-        else if (currentIndex < 0) currentIndex = 0;*/
-
         UpdateCursorPosition();
     }
 
+    // Move the transform component of this object to the new slot
     private void UpdateCursorPosition()
     {
-        cursorIcon.position = characterSlots[currentIndex].position;
-        transform.SetParent(characterSlots[currentIndex].transform, true);
+        // Attach this transform to the new slot and center it
+        transform.SetParent(characterSlots[currentIndex].transform, false);
+        transform.localPosition = Vector3.zero; 
+
+        // Notify manager and shift icons 
+        manager.UpdateCursorSlot(myPlayerID, currentIndex);
+        manager.RefreshCursorOffsets();
     }
 
 
@@ -112,6 +132,4 @@ public class PlayerSelectInput : MonoBehaviour
             }
         }
     }
-
-    
 }

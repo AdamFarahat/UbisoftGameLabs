@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HeartThingy
-  m_Shader: {fileID: -6465566751694194690, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a240b438ecc557c45aeaeffcacf20fed, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -44,6 +44,9 @@ Material:
     - _ColorMask: 15
     - _LeftAmount: 0
     - _RightAmount: 0
+    - _ShakeDistance: 10
+    - _ShakeSpeed: 50
+    - _ShakeStrength: 1
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -53,7 +56,7 @@ Material:
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _LeftColor: {r: 0.5251572, g: 0.98338103, b: 1, a: 1}
-    - _RightColor: {r: 1, g: 0.5566066, b: 0.53144646, a: 1}
+    - _LeftColor: {r: 0.5254902, g: 0.98431367, b: 1, a: 1}
+    - _RightColor: {r: 1, g: 0.5568628, b: 0.5333334, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
