@@ -39,6 +39,7 @@ public class PlayerSelectManager : MonoBehaviour
     {
         inputManager = GetComponent<PlayerInputManager>();
         heartUIImage.material = new Material(heartUIImage.material);
+        heartUIImage.material.SetFloat("_ShakeStrength", 0f);
         
         // Lock inputs immediately on start so players can't join during the animation
         if (inputManager != null)
@@ -51,17 +52,7 @@ public class PlayerSelectManager : MonoBehaviour
         IsAcceptingInput = true;
         
         if (inputManager != null)
-            inputManager.EnableJoining();
-
-        // Grab the material instance from your UI Image
-        Material heartMat = heartUIImage.material;
-
-        // Set the shake strength to 1 instantly
-        heartMat.SetFloat("_ShakeStrength", 1f);
-
-        // Tween it smoothly back down to 0 over 1 second
-        heartMat.DOFloat(0f, "_ShakeStrength", 1f).SetEase(Ease.OutQuad);
-        
+            inputManager.EnableJoining();        
     }
 
     // When a player joins, assign a new cursor to it from the scene
@@ -91,8 +82,16 @@ public class PlayerSelectManager : MonoBehaviour
     {
         Debug.Log($"Player {playerID + 1} locked in character slot {slotIndex}!");
         
-        if (slotIndex == 0) heartUIImage.material.SetFloat(leftAmountID, 1.0f);
-        else if (slotIndex == 2) heartUIImage.material.SetFloat(rightAmountID, 1.0f);
+        // todo i will put this material crap elsewhere 
+        // Smooth increase over a quarter second
+        if (slotIndex == 0) heartUIImage.material.DOFloat(1f, leftAmountID, 0.25f).SetEase(Ease.OutQuad);
+        else if (slotIndex == 2) heartUIImage.material.DOFloat(1f, rightAmountID, 0.25f).SetEase(Ease.OutQuad);
+
+        // Start shake
+        heartUIImage.material.SetFloat("_ShakeStrength", 1f);
+
+        // Smooth shake to 0 over a quarter second
+        heartUIImage.material.DOFloat(0f, "_ShakeStrength", 0.25f).SetEase(Ease.OutQuad);
 
         // ready player # 
         playerReadyStates[playerID] = true;
@@ -113,19 +112,19 @@ public class PlayerSelectManager : MonoBehaviour
     {
         Debug.Log($"Player {playerID + 1} deselected their character in slot {slotIndex}.");
         
-        if (slotIndex == 0) heartUIImage.material.SetFloat(leftAmountID, 0.0f);
-        else if (slotIndex == 2) heartUIImage.material.SetFloat(rightAmountID, 0.0f);
+        // todo i will put this material crap elsewhere 
+        if (slotIndex == 0) heartUIImage.material.DOFloat(0f, leftAmountID, 0.25f).SetEase(Ease.OutQuad);
+        else if (slotIndex == 2) heartUIImage.material.DOFloat(0f, rightAmountID, 0.25f).SetEase(Ease.OutQuad);
 
-        // ADD THIS LINE: Unmark this player so the game can't start
+
         playerReadyStates[playerID] = false;
     }
 
     private void CheckIfAllPlayersReady()
     {
-        // Ensure both players have actually joined the game first
         if (activePlayers.Count < 2) return;
 
-        // Check our boolean array to see if both are true
+        // Check if both ready
         if (playerReadyStates[0] && playerReadyStates[1])
         {            
             // Lock inputs during animations 
