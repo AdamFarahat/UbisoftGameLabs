@@ -22,6 +22,10 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
+    [Header("Stun")]
+    [SerializeField] private ParticleSystem stunParticleSystem;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     public int Score => score;
     public UnityEvent OnDiscreteMultiplierChange;
 
@@ -46,11 +50,16 @@ public abstract class PlayerController : MonoBehaviour
 
         Assert.IsTrue(discreteMultipliers.Count > 1);
         discreteMultipliers.Sort();
+
+        Assert.IsNotNull(stunParticleSystem);
+        Assert.IsNotNull(spriteRenderer);
     }
 
     protected virtual void Start()
     {
         playerInput.actions.Enable();
+        stunParticleSystem.Pause();
+        stunParticleSystem.gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable()
@@ -137,10 +146,16 @@ public abstract class PlayerController : MonoBehaviour
 
         SetContinuousMultiplier(1f);
 
-        // TODO stun animation / sfx
+        // TODO stun sfx
         IEnumerator Routine()
         {
+            spriteRenderer.color = Color.black;
+            stunParticleSystem.gameObject.SetActive(true);
+            stunParticleSystem.Play();
             yield return new WaitForSeconds(stunTime);
+            stunParticleSystem.Pause();
+            stunParticleSystem.gameObject.SetActive(false);
+            spriteRenderer.color = Color.white;
             stunRoutine = null;
             OnStunEnd();
         }
