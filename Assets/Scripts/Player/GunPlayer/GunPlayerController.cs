@@ -27,7 +27,6 @@ public class GunPlayerController : PlayerController
 
     Coroutine resetFireButtonPressedSuperCoroutine = null;
     Coroutine resetThrowButtonPressedSuperCoroutine = null;
-    
 
     private enum HoldingState
     {
