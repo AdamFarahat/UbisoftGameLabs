@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneIndex
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneDistance
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.y
@@ -618,7 +618,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3187850139889102365, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: laneIndex
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3187850139889102365, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: laneDistance
@@ -626,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1486,7 +1486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187850139889102365, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: laneIndex
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3187850139889102365, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: laneDistance
@@ -1494,7 +1494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2547,12 +2547,16 @@ PrefabInstance:
       value: TutorialFlyer
       objectReference: {fileID: 0}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+      propertyPath: laneIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneDistance
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3077,7 +3081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneDistance
@@ -3085,7 +3089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8060417833062847699, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4493,7 +4497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1528172489669856350, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: laneIndex
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1528172489669856350, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: laneDistance
@@ -4509,7 +4513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5028,7 +5032,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1528172489669856350, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: laneIndex
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1528172489669856350, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: laneDistance
@@ -5044,7 +5048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.y
