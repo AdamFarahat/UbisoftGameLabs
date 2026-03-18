@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3004282078810202236}
   - component: {fileID: 7779360012964385895}
   - component: {fileID: 2242863451065911921}
+  - component: {fileID: 77384089512317370}
   m_Layer: 6
   m_Name: TutorialGunGrunt
   m_TagString: Enemy
@@ -67,6 +68,22 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 8574577222801914677}
   projectileSpeed: 80
   projectileSpawnDelay: 1
+--- !u!114 &77384089512317370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106214315365850937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHealth: 1
+  health: 1
+  score: 10
+  deathAnimationDuration: 0.1
 --- !u!1 &3123804467826811019
 GameObject:
   m_ObjectHideFlags: 0

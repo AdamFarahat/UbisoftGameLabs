@@ -3097,12 +3097,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialSuper
   transitionDuration: 0.3
   paddingDuration: 0.5
+  deathAnimationDuration: 0.5
+  spawnDistance: 200
   firstDescription: {fileID: 1227614095}
   secondDescription: {fileID: 684966718}
   meleeGruntPrefab: {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-  spawnDistance: 200
-  spawnDelay: 1
+  meleeGruntSpawnDelay: 1
   meleeGruntSpeed: 24
+  gunGruntPrefab: {fileID: 106214315365850937, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
 --- !u!222 &1279461963
 CanvasRenderer:
   m_ObjectHideFlags: 0

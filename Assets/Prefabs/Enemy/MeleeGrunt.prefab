@@ -242,6 +242,7 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   score: 10
+  deathAnimationDuration: 0.1
 --- !u!114 &1373232332848855569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,10 +318,6 @@ PrefabInstance:
     - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1627209171110247540, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: probabilityToSpawn
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_LocalPosition.x

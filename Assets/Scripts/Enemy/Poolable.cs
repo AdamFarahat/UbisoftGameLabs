@@ -12,6 +12,8 @@ public abstract class Poolable : MonoBehaviour
         enemyPool = pool;
     }
 
+    public bool HasPool => enemyPool != null;
+
     public void Death(IEnumerator animation = null)
     {
         IEnumerator Routine()
@@ -21,7 +23,7 @@ public abstract class Poolable : MonoBehaviour
             if (animation != null)
                 yield return animation;
 
-            if (enemyPool != null)
+            if (HasPool)
                 enemyPool.Release(gameObject);
             else
                 Destroy(gameObject);

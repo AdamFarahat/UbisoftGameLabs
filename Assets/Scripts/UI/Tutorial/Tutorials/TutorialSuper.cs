@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO spawn TutorialGunGrunts as well
 public class TutorialSuper : TutorialBase
 {
     [Header("General")]
     [SerializeField] private float deathAnimationDuration = 0.5f;
+    [SerializeField] private float spawnDistance = 200f;
 
     [Header("Descriptions")]
     [SerializeField] private TextMeshProUGUI firstDescription;
@@ -16,10 +16,14 @@ public class TutorialSuper : TutorialBase
 
     [Header("Melee Grunts")]
     [SerializeField] private GameObject meleeGruntPrefab;
-    [SerializeField] private float spawnDistance = 200f;
-    [SerializeField] private float spawnDelay = 1f;
+    [SerializeField] private float meleeGruntSpawnDelay = 1f;
     [SerializeField] private float meleeGruntSpeed = 24f;
-    private readonly List<Enemy> spawnedMeleeGrunts = new();
+
+    [Header("Gun Grunts")]
+    [SerializeField] private GameObject gunGruntPrefab;
+    private readonly TutorialGunGrunt[] laneToGunGrunts = new TutorialGunGrunt[LaneSet.LaneCount];
+
+    private readonly List<Enemy> spawnedGrunts = new();
 
     private bool superEnded = false;
 
@@ -53,18 +57,20 @@ public class TutorialSuper : TutorialBase
             while (!superEnded)
             {
                 age += Time.deltaTime;
-                if (age >= spawnDelay)
+                if (age >= meleeGruntSpawnDelay)
                 {
-                    age %= spawnDelay;
+                    age %= meleeGruntSpawnDelay;
                     SpawnMeleeWave();
                 }
+
+                SpawnMissingGunGrunts();
 
                 yield return null;
             }
 
-            foreach (Enemy enemy in spawnedMeleeGrunts)
-                if (enemy != null)
-                    enemy.OnParried();
+            foreach (Enemy grunt in spawnedGrunts)
+                if (grunt != null)
+                    grunt.OnParried();
 
             EndTutorial();
         }
@@ -93,7 +99,33 @@ public class TutorialSuper : TutorialBase
         Enemy enemy = go.GetComponent<Enemy>();
         Assert.IsNotNull(enemy);
         enemy.deathAnimationDuration = deathAnimationDuration;
-        spawnedMeleeGrunts.Add(enemy);
+        spawnedGrunts.Add(enemy);
+    }
+
+    private void SpawnMissingGunGrunts()
+    {
+        for (int i = 0; i < LaneSet.LaneCount; i++)
+            if (laneToGunGrunts[i] == null)
+                SpawnGunGrunt(i);
+    }
+
+    private void SpawnGunGrunt(int laneIndex)
+    {
+        GameObject go = Instantiate(gunGruntPrefab);
+
+        LaneBound lane = go.GetComponent<LaneBound>();
+        lane.LaneIndex = laneIndex;
+        lane.LaneDistance = spawnDistance;
+
+        Enemy enemy = go.GetComponent<Enemy>();
+        Assert.IsNotNull(enemy);
+        enemy.deathAnimationDuration = deathAnimationDuration;
+        spawnedGrunts.Add(enemy);
+
+        TutorialGunGrunt gunGrunt = go.GetComponent<TutorialGunGrunt>();
+        Assert.IsNotNull(gunGrunt);
+        gunGrunt.Spawn();
+        laneToGunGrunts[laneIndex] = gunGrunt;
     }
 
     private void ShowSecondDescription()

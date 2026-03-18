@@ -24,6 +24,12 @@ public class EnergyShield : MonoBehaviour
         enemy.OnTakeFromPool += TakeFromPool;
     }
 
+    private void Start()
+    {
+        if (!enemy.TryGetComponent(out Poolable poolable) || !poolable.HasPool)
+            gameObject.SetActive(Random.value < probabilityToSpawn);
+    }
+
     private void TakeFromPool()
     {
         gameObject.SetActive(Random.value < probabilityToSpawn);
