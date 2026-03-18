@@ -358,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &48410741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -402,6 +402,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialPrimaryAction
   transitionDuration: 0.3
   paddingDuration: 0.5
+  meleeGruntPrefab: {fileID: 3700064226584495951, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
+  spawnDistance: 200
+  spawnDelay: 1.5
+  meleeGruntSpeed: 30
+  spawnCount: 3
+  postSpawnPadding: 8
 --- !u!1 &52160955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,7 +3525,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press <b>Up</b>/<b>Down</b> to <b>switch guns</b>! Try charging them up...
+  m_text: Press <b>Up</b>/<b>Down</b> to <b>switch guns</b>! Try charging them up
+    by holding <b>A</b>...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
   m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}

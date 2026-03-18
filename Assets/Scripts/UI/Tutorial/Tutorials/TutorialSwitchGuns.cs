@@ -28,7 +28,7 @@ public class TutorialSwitchGuns : TutorialBase
 
         IEnumerator Routine()
         {
-            // TODO spawn enemies slowly so player can test the different guns, including shield enemy.
+            // TODO spawn enemies slowly so player can test the different guns, including shield enemy. switch descriptions after toggling for the first time to give more details on the shotgun and machine gun.
 
             while (gunsNotSeen.Count > 0)
             {
