@@ -261,6 +261,9 @@ MonoBehaviour:
   - 8
   stunParticleSystem: {fileID: 168562939054540549}
   spriteRenderer: {fileID: 6309583107328164610}
+  spriteBillboard: {fileID: 3977109562757355069}
+  shakeOffset: 0.2
+  shakeInterval: 0.02
   OnDiscreteMultiplierChange:
     m_PersistentCalls:
       m_Calls: []
