@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4640040823847027976}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 0.9781475, y: 0.41582334, z: -1.6942015}
+  m_LocalPosition: {x: 5.3798113, y: 2.2870283, z: -9.318108}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
   cameraOffset: {x: 0, y: 0, z: -1}
-  rotation: 110
+  rotation: 0
 --- !u!1 &7001779660354109463
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a474ffa36e9bd847ad1e5cea754a3d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 50
+  parryColliderScaleUp: 1.5
 --- !u!54 &6473796267591999080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &-1962428823259544596
 MonoBehaviour:
   m_ObjectHideFlags: 0

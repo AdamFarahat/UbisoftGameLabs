@@ -3,7 +3,7 @@ using UnityEngine.Assertions;
 
 public class KamikazeMovementAI : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 300f;
+    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float laneStayPeriod = 1.5f;
 
@@ -50,13 +50,13 @@ public class KamikazeMovementAI : MonoBehaviour
 
             if (laneBound.LaneIndex == 0)
                 laneBound.MoveToLane(laneBound.LaneIndex + 1);
-            else if (laneBound.LaneIndex == LaneConfigSO.Instance.GetNumberOfLanes() - 1)
+            else if (laneBound.LaneIndex == LaneSet.LaneCount - 1)
                 laneBound.MoveToLane(laneBound.LaneIndex - 1);
             else
                 laneBound.MoveToLane(laneBound.LaneIndex + Random.Range(0, 2) * 2 - 1);
         }
 
-        if (laneBound.LaneDistance <= PlayerController.PlayerLine)
+        if (laneBound.LaneDistance <= LaneSet.PlayerLine)
         {
             GetComponent<Enemy>().Kill();
             

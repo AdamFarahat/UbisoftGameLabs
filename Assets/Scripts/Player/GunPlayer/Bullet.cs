@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,9 +10,15 @@ public class Bullet : MonoBehaviour
     public int damage = 10;
 
     private float distance = 0f;
+    private bool dead = false;
+
+    public bool IsDead => dead;
 
     private void Update()
     {
+        if (dead)
+            return;
+
         float deltaDistance = velocity * Time.deltaTime;
         distance += deltaDistance;
         if (distance > range)
@@ -23,6 +30,9 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            return;
+
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
@@ -38,9 +48,21 @@ public class Bullet : MonoBehaviour
             OnEnemyKill(enemy);
             PlayerStats.Instance.AddGunSuper(2f);
         }
-        Destroy(gameObject);  // TODO sfx/animation
-    }
 
+        foreach (Collider collider in GetComponentsInChildren<Collider>())
+            collider.enabled = false;
+       
+
+        dead = true;
+        // TODO uncomment once bullet sprites are uploaded
+        //IEnumerator Routine()
+        //{
+            //yield return FadeOutAnimation.Routine(GetComponentInChildren<SpriteRenderer>());
+            //Destroy(gameObject);  // TODO sfx ?
+        //}
+        //StartCoroutine(Routine());
+        Destroy(gameObject);  // TODO sfx ?
+    }
     private void OnEnemyKill(Enemy enemy)
     {
         // TODO handle more complex gun player multiplier logic

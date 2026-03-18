@@ -6,10 +6,8 @@ public class ScoreManagerSO : ScriptableObject
 {
     public float TEAM_MULTIPLIER_BASE = 20f;
 
-    private float MIN_MULTIPLIER = 1f;
+    private readonly float MIN_MULTIPLIER = 1f;
 
-    private float MAX_MulTIPLIER = 0.00001f;
-    
     private const int numberOfPlayers = 2;
     [SerializeField]
     private float SumOfSTDDevTreshold = 0.001f;
@@ -30,9 +28,12 @@ public class ScoreManagerSO : ScriptableObject
 
     public static int CalculateOverallTeamScore()
     {
-        float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
-
-        return (int)totalScore;
+        int totalScore = 0;
+        if (GunPlayerController.Instance != null)
+            totalScore += GunPlayerController.Instance.Score;
+        if (SwordPlayerController.Instance != null)
+            totalScore += SwordPlayerController.Instance.Score;
+        return totalScore;
     }
     /// <summary>
     /// calculates the total score based on how close both players are to the average in order to reward them for team play.
@@ -41,7 +42,7 @@ public class ScoreManagerSO : ScriptableObject
     /// <returns>Final score that should be displayed</returns>
     public static int CalculateOverallFinalTeamScore()
     {
-        float totalScore = GunPlayerController.Instance.Score + SwordPlayerController.Instance.Score;
+        float totalScore = CalculateOverallTeamScore();
 
         Debug.Log("TotalScore: " + totalScore);
         

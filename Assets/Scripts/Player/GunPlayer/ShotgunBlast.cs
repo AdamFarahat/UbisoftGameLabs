@@ -6,6 +6,7 @@ public class ShotgunBlast : MonoBehaviour
 {
     [SerializeField] private new ParticleSystem particleSystem;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Collider[] ignoreColliders;
     private readonly HashSet<Enemy> enemiesHit = new();
 
     public float coneAngle = 45f;
@@ -20,6 +21,9 @@ public class ShotgunBlast : MonoBehaviour
     private void Awake()
     {
         Assert.IsNotNull(particleSystem);
+
+        foreach (Collider collider in ignoreColliders)
+            collider.enabled = false;
     }
 
     private void Start()
@@ -28,7 +32,7 @@ public class ShotgunBlast : MonoBehaviour
         shape.angle = coneAngle;
         shape.scale = new(shape.scale.x, heightScale, shape.scale.z);
         
-        invDuration = 1f / particleSystem.main.duration;
+        invDuration = 1f / particleSystem.main.startLifetime.constant;
         invVerticalScale = 1f / particleSystem.shape.scale.y;
 
         particleSystem.Play();
@@ -54,15 +58,18 @@ public class ShotgunBlast : MonoBehaviour
             Vector3 displacement = hit.transform.position - transform.position;
             displacement.y *= invVerticalScale;
             if (Vector3.Angle(displacement, forward) < coneAngle && Vector3.Dot(displacement, forward) <= interpRange) // enemy is within cone range
-            {
-                Enemy enemy = hit.GetComponentInParent<Enemy>();
-                if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
-                {
-                    enemiesHit.Add(enemy);
-                    if (enemy.TakeDamage(damage))
-                        OnEnemyKill(enemy);
-                }
-            }
+                OnTriggerEnter(hit);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
+        {
+            enemiesHit.Add(enemy);
+            if (enemy.TakeDamage(damage))
+                OnEnemyKill(enemy);
         }
     }
 
