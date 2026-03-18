@@ -60,4 +60,15 @@ public class UIAnimation : MonoBehaviour
         cachedStartingPos = rectTransform.anchoredPosition;
         rectTransform.anchoredPosition = offscreenPositionPin.anchoredPosition;
     }
+
+        // Wrapper so accessible in onClick in inspector
+    public void TriggerAnimateIn() 
+    {
+        AnimateIn();
+    }
+
+    public void TriggerAnimateOut() 
+    {
+        AnimateOut();
+    }
 }
