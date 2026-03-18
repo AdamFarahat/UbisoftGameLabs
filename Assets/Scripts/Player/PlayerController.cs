@@ -22,6 +22,13 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField] private int discreteMultiplierIndex = 0;
     [SerializeField] private List<float> discreteMultipliers = new() { 1f, 2f, 4f, 6f, 8f };
 
+    [Header("Stun")]
+    [SerializeField] private ParticleSystem stunParticleSystem;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Billboard spriteBillboard;
+    [SerializeField] private float shakeOffset = 0.1f;
+    [SerializeField] private float shakeInterval = 0.02f;
+
     public int Score => score;
     public UnityEvent OnDiscreteMultiplierChange;
 
@@ -46,11 +53,17 @@ public abstract class PlayerController : MonoBehaviour
 
         Assert.IsTrue(discreteMultipliers.Count > 1);
         discreteMultipliers.Sort();
+
+        Assert.IsNotNull(stunParticleSystem);
+        Assert.IsNotNull(spriteRenderer);
+        Assert.IsNotNull(spriteBillboard);
     }
 
     protected virtual void Start()
     {
         playerInput.actions.Enable();
+        stunParticleSystem.Pause();
+        stunParticleSystem.gameObject.SetActive(false);
     }
 
     protected virtual void OnEnable()
@@ -137,10 +150,35 @@ public abstract class PlayerController : MonoBehaviour
 
         SetContinuousMultiplier(1f);
 
-        // TODO stun animation / sfx
+        // TODO stun sfx
         IEnumerator Routine()
         {
-            yield return new WaitForSeconds(stunTime);
+            spriteRenderer.color = Color.black;
+            stunParticleSystem.gameObject.SetActive(true);
+            stunParticleSystem.Play();
+
+            Vector3 initialCameraOffset = spriteBillboard.cameraOffset;
+            int shakeCounter = 0;
+            for (float t = 0f; t < stunTime; t += Time.deltaTime)
+            {
+                if (t > shakeCounter * shakeInterval)
+                {
+                    shakeCounter = Mathf.CeilToInt(t / shakeInterval);
+                    Vector3 cameraOffset = initialCameraOffset;
+                    Vector2 shake = UnityEngine.Random.insideUnitCircle * shakeOffset;
+                    cameraOffset.x += shake.x;
+                    cameraOffset.y += shake.y;
+                    spriteBillboard.cameraOffset = cameraOffset;
+                }
+
+                yield return null;
+            }
+            spriteBillboard.cameraOffset = initialCameraOffset;
+
+            stunParticleSystem.Pause();
+            stunParticleSystem.gameObject.SetActive(false);
+            spriteRenderer.color = Color.white;
+
             stunRoutine = null;
             OnStunEnd();
         }
