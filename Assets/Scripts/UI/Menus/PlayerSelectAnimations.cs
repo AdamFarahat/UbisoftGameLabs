@@ -15,6 +15,8 @@ public class PlayerSelectAnimations : MonoBehaviour
 
     private UIAnimation[] uiElements;
 
+    
+
     void Awake()
     {
         Assert.IsNotNull(canvas);

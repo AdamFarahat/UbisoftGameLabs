@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using NUnit.Framework;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class PlayerSelectManager : MonoBehaviour
 {
@@ -51,6 +52,15 @@ public class PlayerSelectManager : MonoBehaviour
         
         if (inputManager != null)
             inputManager.EnableJoining();
+
+        // Grab the material instance from your UI Image
+        Material heartMat = heartUIImage.material;
+
+        // Set the shake strength to 1 instantly
+        heartMat.SetFloat("_ShakeStrength", 1f);
+
+        // Tween it smoothly back down to 0 over 1 second
+        heartMat.DOFloat(0f, "_ShakeStrength", 1f).SetEase(Ease.OutQuad);
         
     }
 
