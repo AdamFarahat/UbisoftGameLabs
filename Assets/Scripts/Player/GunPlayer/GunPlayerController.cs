@@ -24,7 +24,7 @@ public class GunPlayerController : PlayerController
     private GrenadeBelt grenadeBelt;
     public GrenadeBelt GrenadeBelt => grenadeBelt;
 
-    [Header ("Super")]
+    [Header("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool fireButtonPressedSuper = false;
     private bool grenadeButtonPressedSuper = false;

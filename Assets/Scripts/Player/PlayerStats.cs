@@ -101,9 +101,6 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!damageEnabled)
-            return;
-
         if (IsSuperActive())
         {
             return;
@@ -144,9 +141,6 @@ public class PlayerStats : MonoBehaviour
 
     public void AddGunSuper(float amount)
     {
-        if (!superEnabled)
-            return;
-
         if (IsSuperActive())
         {
             return;

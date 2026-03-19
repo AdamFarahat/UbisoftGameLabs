@@ -435,7 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeBelt
   grenadePrefab: {fileID: 2060265609765335002, guid: 4cc74f17f2165c74496d79666816829e, type: 3}
   crosshairs: {fileID: 4496502139177846877}
-  maxChargeTime: 1
+  maxChargeTime: 0.5
   minThrowRange: 50
   maxThrowRange: 150
   throwCooldown: 3

@@ -44,7 +44,7 @@ public class TutorialSecondaryAction : TutorialBase
         if (gunPlayer != null)
         {
             gunPlayer.throwEnabled = true;
-            gunPlayer.GrenadeBelt.throwCooldown = cooldownLength;
+            gunPlayer.GrenadeBelt.SetThrowCooldown(cooldownLength);
             pressedThrow = false;
             gunPlayer.PressedThrow += () => { pressedThrow = true; };
 
