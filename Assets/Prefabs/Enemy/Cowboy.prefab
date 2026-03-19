@@ -170,7 +170,7 @@ Transform:
   m_GameObject: {fileID: 1364641449687990512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -198,7 +198,6 @@ MonoBehaviour:
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
   healthCollider: {fileID: 936547612651599108}
-  initialLaneDistance: 200
   laneStayPeriod: 2
   ProjectileTresholdSpeed: 400
   walkingSpeed: 10

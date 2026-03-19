@@ -33,6 +33,12 @@ public class LaneSet : MonoBehaviour
     [SerializeField] private Transform spawnLine;
     public static float SpawnLine => Instance.spawnLine.position.z;
 
+    [SerializeField] private Transform enemyMoveBufferLine;
+    public static float EnemyMoveBufferLine => Instance.enemyMoveBufferLine.position.z;
+    
+    [SerializeField] private Transform enemyShootBufferLine;
+    public static float EnemyShootBufferLine => Instance.enemyShootBufferLine.position.z;
+
     [Header("Highlights")]
     [SerializeField] private SpriteRenderer[] highlights;
     [SerializeField] private Sprite gunHighlight;
@@ -165,5 +171,11 @@ public class LaneSet : MonoBehaviour
     public Quaternion GetLaneDirection()
     {
         return Quaternion.LookRotation(transform.forward);
+    }
+
+    public static float ScreenAngleOfVector(Vector3 vector)
+    {
+        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
+        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }
