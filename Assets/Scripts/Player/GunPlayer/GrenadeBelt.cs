@@ -9,7 +9,7 @@ public class GrenadeBelt : MonoBehaviour
     [SerializeField] private float maxChargeTime = 1f;
     [SerializeField] private float minThrowRange = 50f;
     [SerializeField] private float maxThrowRange = 100f;
-    [SerializeField] private float throwCooldown = 3f;
+    public float throwCooldown = 3f;
     [SerializeField] private float grenadeGravity = 100f;
     [SerializeField] private Vector3 grenadeInitialDirection = new(0f, 1f, 1f);
 
