@@ -1707,6 +1707,7 @@ MonoBehaviour:
   gunMultiplierUI: {fileID: 8468118156433846610}
   swordPlayerCooldownUI: {fileID: 6925459390677526918}
   swordMultiplierUI: {fileID: 6539550765771174107}
+  gameOverScreen: {fileID: 9089175420580484333}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,6 +2161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203fce23f21d86b49b596cb9c7264a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOver
+  scoreManagerSO: {fileID: 0}
+  gunScore: {fileID: 0}
+  swordScore: {fileID: 0}
+  overallScoreText: {fileID: 0}
+  restartButton: {fileID: 0}
 --- !u!1 &3307714422475474773
 GameObject:
   m_ObjectHideFlags: 0
