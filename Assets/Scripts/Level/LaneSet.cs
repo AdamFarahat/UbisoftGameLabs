@@ -17,8 +17,21 @@ public class LaneSet : MonoBehaviour
 
     public static int LaneCount => 5;
 
+    [Header("Layout")]
     [SerializeField] private float laneSeparation = 12f;
+
+    [SerializeField] private Transform heartLine;
+    public static float HeartLine => Instance.heartLine.position.z;
+
+    [SerializeField] private Transform visibleEndLine;
+    public static float VisibleEndLine => Instance.visibleEndLine.position.z;
+
     [SerializeField] private Transform playerTargetHeight;
+    public static float PlayerTargetHeight => Instance.playerTargetHeight.position.y;
+
+    // TODO add PlayerLine and SpawnDistance
+
+    [Header("Highlights")]
     [SerializeField] private SpriteRenderer[] highlights;
     [SerializeField] private Sprite gunHighlight;
     [SerializeField] private Sprite swordHighlight;
@@ -37,6 +50,8 @@ public class LaneSet : MonoBehaviour
     {
         instance = this;
 
+        Assert.IsNotNull(heartLine);
+        Assert.IsNotNull(visibleEndLine);
         Assert.IsNotNull(playerTargetHeight);
 
         Assert.IsTrue(highlights.Length == LaneCount);
@@ -144,12 +159,6 @@ public class LaneSet : MonoBehaviour
             return numPlayers > 0 ? line / numPlayers : line;
         }
     }
-
-    public static float HeartLine => -50f;
-
-    public static float VisibleEndLine => 110f;
-
-    public static float PlayerTargetHeight => Instance.playerTargetHeight.position.y;
 
     private Vector3 LaneStart(int laneIndex)
     {
