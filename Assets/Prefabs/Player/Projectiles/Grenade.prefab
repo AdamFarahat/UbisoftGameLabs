@@ -49,7 +49,7 @@ MonoBehaviour:
   damage: 10
   aoeRadiusScale: 50
   explosionDuration: 0.5
-  gravity: 100
+  gravity: 400
   initialDirection: {x: 0, y: 1, z: 1}
   range: 100
 --- !u!54 &176808792632220056

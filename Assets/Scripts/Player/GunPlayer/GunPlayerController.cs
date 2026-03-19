@@ -20,7 +20,7 @@ public class GunPlayerController : PlayerController
     private Holster holster;
     private GrenadeBelt grenadeBelt;
 
-    [Header ("Super")]
+    [Header("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool fireButtonPressedSuper = false;
     private bool grenadeButtonPressedSuper = false;
@@ -94,7 +94,7 @@ public class GunPlayerController : PlayerController
         if (Stunned)
             return;
 
-        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Fire button pressed with super ready");
             //Set fire button pressed super to true
@@ -143,7 +143,7 @@ public class GunPlayerController : PlayerController
         if (Stunned)
             return;
 
-        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Grenade button pressed with super ready");
             //Set grenade button pressed super to true

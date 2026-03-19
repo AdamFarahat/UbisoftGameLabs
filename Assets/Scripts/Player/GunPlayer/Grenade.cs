@@ -7,8 +7,8 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
+    [SerializeField] private float gravity = 300f;
 
-    public float gravity = 100f;
     public Vector3 initialDirection = new(0f, 1f, 1f);
     public float range = 100f;
     private float verticalVelocity = 0f;

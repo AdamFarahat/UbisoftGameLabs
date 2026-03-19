@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
     private static PlayerStats instance = null;
     public static PlayerStats Instance => instance;
     private UIManager uiManager;
-    
+
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
@@ -75,7 +75,7 @@ public class PlayerStats : MonoBehaviour
     {
         gunSuperPrepared = isReady;
         Debug.Log("Gun Super Prepared: " + gunSuperPrepared);
-        if(awaitingSuperCoroutine == null)
+        if (awaitingSuperCoroutine == null)
         {
             awaitingSuperCoroutine = StartCoroutine(AwaitingSuper());
         }
@@ -93,7 +93,7 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(IsSuperActive())
+        if (IsSuperActive())
         {
             return;
         }
@@ -101,7 +101,7 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         healthPercent = currentHealth / maxHealth;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
             healthPercent = 0;
@@ -116,12 +116,12 @@ public class PlayerStats : MonoBehaviour
         GameObject.Find("GunPlayer").SetActive(false);
         GameObject.Find("SwordPlayer").SetActive(false);
         uiManager.ShowGameOverScreen();
-        
+
     }
 
     public void AddGunSuper(float amount)
     {
-        if(IsSuperActive())
+        if (IsSuperActive())
         {
             return;
         }
@@ -145,7 +145,7 @@ public class PlayerStats : MonoBehaviour
     {
         isSuperActive = true;
         superCoroutine = StartCoroutine(SuperDuration());
-        if(awaitingSuperCoroutine != null)
+        if (awaitingSuperCoroutine != null)
         {
             StopCoroutine(awaitingSuperCoroutine);
             awaitingSuperCoroutine = null;
@@ -156,11 +156,11 @@ public class PlayerStats : MonoBehaviour
     {
         float timer = 0;
         Debug.Log("Started Awaiting Super Coroutine!");
-        while(timer < activateSuperWaitTime)
+        while (timer < activateSuperWaitTime)
         {
             timer += Time.deltaTime;
-            Debug.Log("gunSuperPrepared: "+gunSuperPrepared+", swordSuperPrepared: "+swordSuperPrepared+", !IsSuperActive: +!"+!IsSuperActive());
-            if(gunSuperPrepared && swordSuperPrepared && !isSuperActive)
+            Debug.Log("gunSuperPrepared: " + gunSuperPrepared + ", swordSuperPrepared: " + swordSuperPrepared + ", !IsSuperActive: +!" + !IsSuperActive());
+            if (gunSuperPrepared && swordSuperPrepared && !isSuperActive)
             {
                 Debug.Log("Activating Super from Awaiting Coroutine!");
                 ActivateSuper();
@@ -173,7 +173,7 @@ public class PlayerStats : MonoBehaviour
     private IEnumerator SuperDuration()
     {
         float timer = superDuration;
-        while(timer >= 0)
+        while (timer >= 0)
         {
             timer -= Time.deltaTime;
             //Show the bars going down over time
