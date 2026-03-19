@@ -26,10 +26,12 @@ public class LaneSet : MonoBehaviour
     [SerializeField] private Transform visibleEndLine;
     public static float VisibleEndLine => Instance.visibleEndLine.position.z;
 
-    [SerializeField] private Transform playerTargetHeight;
-    public static float PlayerTargetHeight => Instance.playerTargetHeight.position.y;
+    [SerializeField] private Transform playerTarget;
+    public static float PlayerTargetHeight => Instance.playerTarget.position.y;
+    public static float PlayerLine => Instance.playerTarget.position.z;
 
-    // TODO add PlayerLine and SpawnDistance
+    [SerializeField] private Transform spawnLine;
+    public static float SpawnLine => Instance.spawnLine.position.z;
 
     [Header("Highlights")]
     [SerializeField] private SpriteRenderer[] highlights;
@@ -52,7 +54,8 @@ public class LaneSet : MonoBehaviour
 
         Assert.IsNotNull(heartLine);
         Assert.IsNotNull(visibleEndLine);
-        Assert.IsNotNull(playerTargetHeight);
+        Assert.IsNotNull(playerTarget);
+        Assert.IsNotNull(spawnLine);
 
         Assert.IsTrue(highlights.Length == LaneCount);
         Assert.IsNotNull(gunHighlight);
@@ -138,26 +141,6 @@ public class LaneSet : MonoBehaviour
             highlight.sprite = null;
         else if (highlight.sprite == sharedHighlight)
             highlight.sprite = gunHighlight;
-    }
-
-    public static float PlayerLine
-    {
-        get
-        {
-            float line = 0f;
-            int numPlayers = 0;
-            if (GunPlayerController.Instance != null)
-            {
-                line += GunPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            if (SwordPlayerController.Instance != null)
-            {
-                line += SwordPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            return numPlayers > 0 ? line / numPlayers : line;
-        }
     }
 
     private Vector3 LaneStart(int laneIndex)
