@@ -15,17 +15,22 @@ public class GrenadeBelt : MonoBehaviour
     [SerializeField] private Transform crosshairs;
     [SerializeField] private float crosshairsStart = 0.5f;
     [SerializeField] private float crosshairsVelocity = -1f;
+    [SerializeField] private float crosshairsRotationVelocity = 90f;
 
     public Action OnCooldownReady;
     private bool throwing = false;
     private float throwChargeTime = 0f;
     private float cooldown = 0f;
+    private Billboard crosshairsBillboard;
 
     private void Awake()
     {
         Assert.IsNotNull(grenadePrefab);
         Assert.IsNotNull(crosshairs);
         grenadeInitialDirection.Normalize();
+
+        crosshairsBillboard = crosshairs.GetComponentInChildren<Billboard>();
+        Assert.IsNotNull(crosshairsBillboard);
     }
 
     private void Start()
@@ -50,7 +55,9 @@ public class GrenadeBelt : MonoBehaviour
             else
                 cooldown = 0f;
         }
+
         SyncCrosshairsPosition();
+        crosshairsBillboard.rotation += crosshairsRotationVelocity * Time.deltaTime;
     }
 
     public void ChargeThrow()
