@@ -42,6 +42,9 @@ public class Grenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetComponentInParent<GrenadeImmune>())
+            return;
+
         if (exploding)
         {
             Enemy enemy = other.GetComponentInParent<Enemy>();

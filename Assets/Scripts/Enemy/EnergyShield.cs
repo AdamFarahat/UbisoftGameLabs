@@ -24,6 +24,15 @@ public class EnergyShield : MonoBehaviour
         enemy.OnTakeFromPool += TakeFromPool;
     }
 
+    private void Start()
+    {
+        if (!enemy.TryGetComponent(out Poolable poolable) || !poolable.HasPool)
+        {
+            gameObject.SetActive(Random.value < probabilityToSpawn);
+            shieldHealth = shieldMaxHealth;
+        }
+    }
+
     private void TakeFromPool()
     {
         gameObject.SetActive(Random.value < probabilityToSpawn);
@@ -41,7 +50,7 @@ public class EnergyShield : MonoBehaviour
             IEnumerator Routine()
             {
                 collider.enabled = false;
-                yield return FadeOutAnimation.Routine(spriteRenderer);
+                yield return FadeOutAnimation.Routine(spriteRenderer);  // TODO trigger this when attached enemy dies. Add UnityAction to enemy death
                 collider.enabled = true;
                 gameObject.SetActive(false);
             }

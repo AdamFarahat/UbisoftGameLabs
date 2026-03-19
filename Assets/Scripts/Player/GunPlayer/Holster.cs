@@ -4,7 +4,10 @@ using UnityEngine.Assertions;
 public class Holster : MonoBehaviour
 {
     private Gun[] guns;
+    public int NumberOfGuns => guns.Length;
+
     private int activeGunIndex = 0;
+    public int ActiveGunIndex => activeGunIndex;
 
     private void Awake()
     {

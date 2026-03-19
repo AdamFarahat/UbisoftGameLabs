@@ -46,15 +46,15 @@ public class UITester : MonoBehaviour
     [Tooltip("Percentage left on sword player's cooldown")]
     [Range(0f, 1f)]
     [SerializeField] private float swordCooldownPercent;
-    
+
     [Tooltip("Converted multiplier UI value for sword player (x1: 0.0 => 0.0, x2: 0.25 => 0.2, x4: 0.5 => 0.42, x8: 0.75 => 0.67, x16: 1.0 => 1.0)")]
     [Range(0f, 1f)]
     [SerializeField] private float swordMultiplierPercent;
 
-     void Awake()
+    void Awake()
     {
         Assert.IsNotNull(healthMaterial);
-        //Assert.IsNotNull(scoreText);  TODO uncomment
+        Assert.IsNotNull(scoreText);
         Assert.IsNotNull(powerBarMaterial);
         Assert.IsNotNull(gunCooldownMaterial);
         Assert.IsNotNull(gunMultiplierMaterial);
@@ -81,7 +81,5 @@ public class UITester : MonoBehaviour
             swordCooldownMaterial.SetFloat(amountID, swordCooldownPercent);
         if (swordMultiplierMaterial != null)
             swordMultiplierMaterial.SetFloat(amountID, swordMultiplierPercent);
-
-        
     }
 }

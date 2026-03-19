@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -20,11 +21,18 @@ public class PlayerStats : MonoBehaviour
     private float swordSuperPercent;
     private bool isSuperActive = false;
     Coroutine superCoroutine = null;
-    [SerializeField] private float superDuration = 5f;
+    public float superDuration = 5f;
     private Coroutine awaitingSuperCoroutine = null;
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool gunSuperPrepared = false;
     private bool swordSuperPrepared = false;
+
+    // Begin tutorial settings
+    public bool damageEnabled = true;
+    public bool superEnabled = true;
+    public UnityAction SuperStarted;
+    public UnityAction SuperEnded;
+    // End tutorial settings
 
     public void Awake()
     {
@@ -119,6 +127,18 @@ public class PlayerStats : MonoBehaviour
 
     }
 
+    public void ResetGunSuper()
+    {
+        currentGunSuper = 0f;
+        gunSuperPercent = 0f;
+    }
+
+    public void FillGunSuper()
+    {
+        currentGunSuper = statDenominator;
+        gunSuperPercent = 1f;
+    }
+
     public void AddGunSuper(float amount)
     {
         if (IsSuperActive())
@@ -130,8 +150,23 @@ public class PlayerStats : MonoBehaviour
         gunSuperPercent = currentGunSuper / statDenominator;
     }
 
+    public void ResetSwordSuper()
+    {
+        currentSwordSuper = 0f;
+        swordSuperPercent = 0f;
+    }
+
+    public void FillSwordSuper()
+    {
+        currentSwordSuper = statDenominator;
+        swordSuperPercent = 1f;
+    }
+
     public void AddSwordSuper(float amount)
     {
+        if (!superEnabled)
+            return;
+
         if (IsSuperActive())
         {
             return;
@@ -145,6 +180,7 @@ public class PlayerStats : MonoBehaviour
     {
         isSuperActive = true;
         superCoroutine = StartCoroutine(SuperDuration());
+        SuperStarted?.Invoke();
         if (awaitingSuperCoroutine != null)
         {
             StopCoroutine(awaitingSuperCoroutine);
@@ -187,5 +223,7 @@ public class PlayerStats : MonoBehaviour
         gunSuperPrepared = false;
         swordSuperPrepared = false;
         superCoroutine = null;
+
+        SuperEnded?.Invoke();
     }
 }

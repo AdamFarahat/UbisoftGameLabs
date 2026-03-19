@@ -23,6 +23,13 @@ public class GrenadeBelt : MonoBehaviour
     private float cooldown = 0f;
     private Billboard crosshairsBillboard;
 
+    public float ThrowCooldown => throwCooldown;
+
+    public void SetThrowCooldown(float cooldown)
+    {
+        throwCooldown = cooldown;
+    }
+
     private void Awake()
     {
         Assert.IsNotNull(grenadePrefab);
