@@ -255,7 +255,7 @@ MonoBehaviour:
   swordHitBox: {fileID: 0}
   jumpSpeed: 100
   fallAcceleration: 500
-  attackDuration: 0.1
+  attackDuration: 0.2
   blockCooldown: 3
   parryBulletSpeedMult: 2
   parryWindow: 0.5
@@ -264,6 +264,7 @@ MonoBehaviour:
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
   slashEnabled: 1
+  blockEnabled: 1
   jumpEnabled: 1
   activateSuperWaitTime: 0.1
 --- !u!114 &3679303042094892920
