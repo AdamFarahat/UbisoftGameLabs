@@ -1,26 +1,20 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Revolver : Gun
 {
-    [Serializable]
-    public class AltShot
-    {
-        public float velocity;
-        public int damage;
-        public float chargeTime;
-    }
-
     [Header("Revolver")]
-    [SerializeField] private List<AltShot> altShots = new();
+    [SerializeField] private LaserShot laserShot;
+    [SerializeField] private float laserChargeTime = 0.6f;
 
     private bool charging = false;
     private float chargeStartTime = 0f;
 
-    private void Start()
+    protected override void Awake()
     {
-        altShots.Sort((a, b) => a.chargeTime.CompareTo(b.chargeTime));
+        base.Awake();
+
+        Assert.IsNotNull(laserShot);
     }
 
     public override void StartFiring()
@@ -36,17 +30,10 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        Bullet bullet = InstantiateShot<Bullet>();
-        bullet.damage = bulletDamage;
-
-        float chargeTime = Time.time - chargeStartTime;
-        foreach (var altShot in altShots)
-        {
-            if (chargeTime < altShot.chargeTime)
-                break;
-            bullet.velocity = altShot.velocity;
-            bullet.damage = altShot.damage;
-        }
+        if (Time.time - chargeStartTime < laserChargeTime)
+            InstantiateShot<Bullet>().damage = bulletDamage;
+        else
+            laserShot.Fire();
     }
 
     public override void CancelFiring()
