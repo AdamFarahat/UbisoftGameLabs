@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 4929285896587886086}
   - component: {fileID: 143288811496620993}
   m_Layer: 6
-  m_Name: Sphere
+  m_Name: Mesh
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 8, z: 4}
+  m_Size: {x: 9, y: 8, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8980648615144976386
 GameObject:
@@ -189,7 +189,7 @@ Transform:
   m_GameObject: {fileID: 8980648615144976386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 0, z: 200}
+  m_LocalPosition: {x: 0, y: 0, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
-  laneIndex: 1
+  laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 0.1
 --- !u!114 &3450926691260433750
@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5496b40511f3ea84da6630399f6ddc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
-  initialLaneDistance: 200
   damage: 10
   speed: 18
 --- !u!114 &1581637196576062325
@@ -242,7 +241,6 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   score: 10
-  deathAnimationDuration: 0.1
 --- !u!114 &1373232332848855569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,34 +289,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 65357303025461256}
     m_Modifications:
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.8907375
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.0791168
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -8.471007
-      objectReference: {fileID: 0}
-    - target: {fileID: 478445956054317860, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -358,18 +328,6 @@ PrefabInstance:
     - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7477584624430023216, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7477584624430023216, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7477584624430023216, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7538640426395163653, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_Name

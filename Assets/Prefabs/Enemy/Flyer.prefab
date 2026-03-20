@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 6679675405416162139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 3, z: 200}
+  m_LocalPosition: {x: 0, y: 3, z: 200}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
-  laneIndex: 0
+  laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 1
 --- !u!114 &681042347012851451
@@ -131,6 +131,8 @@ MonoBehaviour:
   maxHealth: 10
   health: 20
   score: 20
+  invulnerable: 0
+  deathAnimationDuration: 0.1
 --- !u!114 &5761438509364155010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1019dcb567e88742a0d8016e27f191e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
-  initialLaneDistance: 200
   forwardSpeed: 10
   damage: 12
 --- !u!114 &1211474539738667709
@@ -158,11 +159,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389c98dea31f0a241a71995032bed487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerShooting
-  spawnPoint: {fileID: 4117253480536495139}
   stunTime: 0.3
   shotCooldown: 0.65
   shotDistanceThreshold: 20
+  shootingRange: 10000
   bulletSpeed: 80
+  spawnPoint: {fileID: 4117253480536495139}
 --- !u!114 &8525619152686538179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 7645352309593978900}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 5.193846, y: 2.0791168, z: -8.296007}
+  m_LocalPosition: {x: 0.3031089, y: -0.0000000013038516, z: 0.17499998}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -310,7 +312,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3826671818913854118}
@@ -426,5 +428,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.25, z: 1.5}
+  m_Size: {x: 1.5, y: 1.25, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}

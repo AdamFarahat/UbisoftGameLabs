@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
-using static UnityEngine.UI.Image;
 
 public class EnemyProjectile : MonoBehaviour
 {
@@ -37,7 +36,7 @@ public class EnemyProjectile : MonoBehaviour
     public void Initialize(Transform origin, Vector3 direction, float speed)
     {
         this.origin = origin;
-        sprite.rotation = ScreenAngleOfVector(direction);
+        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         this.direction = direction.normalized;
         this.speed = speed;
         parried = false;
@@ -93,15 +92,8 @@ public class EnemyProjectile : MonoBehaviour
 
         origin = newOrigin;
         speed *= speedMult;
-        sprite.rotation = ScreenAngleOfVector(direction);
+        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         parried = true;
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
-    }
-
-    // TODO move to LaneSet once LaneSet is merged to main.
-    private static float ScreenAngleOfVector(Vector3 vector)
-    {
-        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
-        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }

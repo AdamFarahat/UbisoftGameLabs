@@ -3,7 +3,6 @@ using UnityEngine.Assertions;
 
 public class KamikazeMovementAI : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float laneStayPeriod = 1.5f;
 
@@ -29,7 +28,7 @@ public class KamikazeMovementAI : MonoBehaviour
 
     private void ResetState()
     {
-        laneBound.LaneDistance = initialLaneDistance;
+        laneBound.LaneDistance = LaneSet.SpawnLine;
         age = 0f;
         nextLaneSwitchTime = laneStayPeriod;
     }
@@ -44,7 +43,7 @@ public class KamikazeMovementAI : MonoBehaviour
         age += Time.deltaTime;
         laneBound.LaneDistance -= speed * Time.deltaTime;
 
-        if (age >= nextLaneSwitchTime)
+        if (age >= nextLaneSwitchTime && laneBound.LaneDistance >= LaneSet.EnemyMoveBufferLine)
         {
             nextLaneSwitchTime += laneStayPeriod;
 

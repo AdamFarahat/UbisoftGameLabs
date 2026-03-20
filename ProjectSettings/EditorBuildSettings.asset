@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Ryan/Sandbox.unity
     guid: 17c3f479157133c439d7fd0cb85bbd7b
   - enabled: 1
-    path: Assets/Scenes/Diana/PlayerSelect.unity
+    path: Assets/Scenes/Game/PlayerSelect.unity
     guid: 7861f83a46ff99d4d9eee0b4d31d67cd
   - enabled: 1
-    path: Assets/Scenes/Diana/Menu.unity
+    path: Assets/Scenes/Game/Menu.unity
     guid: 784081c36dfcd0040873d97360ded935
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

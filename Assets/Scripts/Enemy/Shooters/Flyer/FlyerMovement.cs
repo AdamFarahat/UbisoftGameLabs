@@ -3,7 +3,6 @@ using UnityEngine.Assertions;
 
 public class FlyerMovement : MonoBehaviour
 {
-    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private float damage = 12f;
 
@@ -18,7 +17,7 @@ public class FlyerMovement : MonoBehaviour
 
     private void ResetState()
     {
-        lane.LaneDistance = initialLaneDistance;
+        lane.LaneDistance = LaneSet.SpawnLine;
     }
 
     private void Update()

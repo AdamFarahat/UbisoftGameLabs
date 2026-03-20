@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 5306200152654242130}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 4.5399985, y: 8.718239, z: -5.863509}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 4.5607076, y: 10.9679785, z: -5.2993784}
+  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5534051885997723182}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 1, y: 7, z: 1}
+  cameraOffset: {x: 1.3, y: 9.3, z: 1}
   rotation: 0
 --- !u!1001 &771891864670845371
 PrefabInstance:
@@ -120,7 +120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -171,14 +171,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
       value: 14a6a163-a0b1-4c68-a84e-2f3fdd03340c
       objectReference: {fileID: 0}
@@ -191,10 +183,6 @@ PrefabInstance:
       value: 65fc550b-ce7a-4916-ba87-ecd09f11d9f2
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
-      value: 382ec127-fa37-468c-b1b6-b50bb110b581
-      objectReference: {fileID: 0}
-    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
       objectReference: {fileID: 0}
@@ -205,10 +193,6 @@ PrefabInstance:
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionName
       value: 'Player/Attack[/Keyboard/q]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
-      value: 'Player/Block/Parry[/Keyboard/e]'
       objectReference: {fileID: 0}
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -271,7 +255,7 @@ MonoBehaviour:
   swordHitBox: {fileID: 0}
   jumpSpeed: 100
   fallAcceleration: 500
-  attackDuration: 0.1
+  attackDuration: 0.2
   blockCooldown: 3
   parryBulletSpeedMult: 2
   parryWindow: 0.5
@@ -280,6 +264,7 @@ MonoBehaviour:
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
   slashEnabled: 1
+  blockEnabled: 1
   jumpEnabled: 1
   activateSuperWaitTime: 0.1
 --- !u!114 &3679303042094892920

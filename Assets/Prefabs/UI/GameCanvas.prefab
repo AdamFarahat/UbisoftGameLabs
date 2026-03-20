@@ -1707,6 +1707,7 @@ MonoBehaviour:
   gunMultiplierUI: {fileID: 8468118156433846610}
   swordPlayerCooldownUI: {fileID: 6925459390677526918}
   swordMultiplierUI: {fileID: 6539550765771174107}
+  gameOverScreen: {fileID: 9089175420580484333}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1721,7 +1722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UITester
   scoreText: {fileID: 5384073636444206587}
   healthMaterial: {fileID: 2100000, guid: 11701fab64a893d4d9596c7248b80e66, type: 2}
-  powerBarMaterial: {fileID: 2100000, guid: 911a292495983f64690f5b480c9218d8, type: 2}
+  powerBarMaterial: {fileID: -876546973899608171, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
   gunCooldownMaterial: {fileID: 2100000, guid: ab13c7298ecfcef428c7631111889e71, type: 2}
   gunMultiplierMaterial: {fileID: 2100000, guid: 1476d88dd282cf14ab8c2c82040c1009, type: 2}
   swordCooldownMaterial: {fileID: 2100000, guid: 9b5aa1c5c5886e843b7054db2268556f, type: 2}
@@ -2160,6 +2161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203fce23f21d86b49b596cb9c7264a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOver
+  scoreManagerSO: {fileID: 0}
+  gunScore: {fileID: 0}
+  swordScore: {fileID: 0}
+  overallScoreText: {fileID: 0}
+  restartButton: {fileID: 0}
 --- !u!1 &3307714422475474773
 GameObject:
   m_ObjectHideFlags: 0

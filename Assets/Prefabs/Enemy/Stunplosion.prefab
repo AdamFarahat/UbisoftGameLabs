@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Stunplosion
   aoe: {fileID: 4225036750660736540}
   stunTime: 1
-  radius: 10
+  radius: 30
   duration: 0.3
 --- !u!54 &7523159892113597871
 Rigidbody:
