@@ -1,12 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 class LaserShot : MonoBehaviour
 {
     [SerializeField] private float duration = 0.4f;
-    [SerializeField] private int closestDamage = 50;
-    [SerializeField] private float damageRange = 200f;
-    [SerializeField] private float damageFalloffExp = 3f;  // if this is high, farther enemies take more damage
+    [SerializeField] private int fullDamage = 50;
+    [SerializeField] private int penetrationDamageLoss = 6;
+
+    private readonly HashSet<Enemy> enemiesHitThisFrame = new();
 
     private void Start()
     {
@@ -28,23 +31,32 @@ class LaserShot : MonoBehaviour
         StartCoroutine(Routine());
     }
 
+    private void LateUpdate()
+    {
+        if (enemiesHitThisFrame.Count == 0)
+            return;
+
+        int enemiesHit = 0;
+        foreach (Enemy enemy in enemiesHitThisFrame.OrderBy(c => c.transform.position.z))
+        {
+            int damage = fullDamage - (enemiesHit++) * penetrationDamageLoss;
+            if (damage <= 0)
+                break;
+
+            if (enemy.TakeDamage(damage))
+            {
+                GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
+                GunPlayerController.Instance.AddScore(enemy.Score);
+            }
+        }
+
+        enemiesHitThisFrame.Clear();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy == null)
-            return;
-
-        float damage = 0f;
-        float z = enemy.transform.position.z;
-        if (z < LaneSet.PlayerLine)
-            damage = closestDamage;
-        else if (z < damageRange)
-            damage = closestDamage * (1f - Mathf.Pow(z / damageRange, damageFalloffExp));
-
-        if (enemy.TakeDamage(Mathf.FloorToInt(damage)))
-        {
-            GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
-            GunPlayerController.Instance.AddScore(enemy.Score);
-        }
+        if (enemy != null)
+            enemiesHitThisFrame.Add(enemy);
     }
 }
