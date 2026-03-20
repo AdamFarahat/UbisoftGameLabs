@@ -340,7 +340,8 @@ MonoBehaviour:
   bulletDamage: 10
   firingCooldown: 0.5
   laserShot: {fileID: 1215856783423360292}
-  laserChargeTime: 0.6
+  laserChargeTime: 0.4
+  laserCooldownTime: 0.6
 --- !u!114 &6029176937551800676
 MonoBehaviour:
   m_ObjectHideFlags: 0

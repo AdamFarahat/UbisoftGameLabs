@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -5,10 +6,12 @@ public class Revolver : Gun
 {
     [Header("Revolver")]
     [SerializeField] private LaserShot laserShot;
-    [SerializeField] private float laserChargeTime = 0.6f;
+    [SerializeField] private float laserChargeTime = 0.4f;
+    [SerializeField] private float laserCooldownTime = 0.6f;
 
     private bool charging = false;
     private float chargeStartTime = 0f;
+    private bool onCooldown = false;
 
     protected override void Awake()
     {
@@ -19,6 +22,9 @@ public class Revolver : Gun
 
     public override void StartFiring()
     {
+        if (onCooldown)
+            return;  // TODO denied sfx (here and in other guns)
+
         charging = PreStartFiring();
         chargeStartTime = Time.time;
         // TODO start charge sfx + animation
@@ -33,7 +39,18 @@ public class Revolver : Gun
         if (Time.time - chargeStartTime < laserChargeTime)
             InstantiateShot<Bullet>().damage = bulletDamage;
         else
+        {
             laserShot.Fire();
+            onCooldown = true;
+
+            IEnumerator Cooldown()
+            {
+                yield return new WaitForSeconds(laserCooldownTime);
+                onCooldown = false;
+            }
+
+            StartCoroutine(Cooldown());
+        }
     }
 
     public override void CancelFiring()
