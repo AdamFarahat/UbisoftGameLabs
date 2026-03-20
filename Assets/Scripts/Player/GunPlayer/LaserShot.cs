@@ -9,26 +9,23 @@ class LaserShot : MonoBehaviour
     [SerializeField] private int fullDamage = 50;
     [SerializeField] private int penetrationDamageLoss = 6;
 
+    public Transform fakeParent;
     private readonly HashSet<Enemy> enemiesHitThisFrame = new();
 
     private void Start()
     {
-        gameObject.SetActive(false);
-    }
-
-    public void Fire()
-    {
-        if (gameObject.activeSelf)
-            return;
-
         IEnumerator Routine()
         {
             yield return new WaitForSeconds(duration);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
-        gameObject.SetActive(true);
         StartCoroutine(Routine());
+    }
+
+    private void Update()
+    {
+        transform.position = fakeParent.position;
     }
 
     private void LateUpdate()

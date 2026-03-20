@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 public class Revolver : Gun
 {
     [Header("Revolver")]
-    [SerializeField] private LaserShot laserShot;
+    [SerializeField] private GameObject laserShotPrefab;
     [SerializeField] private float laserChargeTime = 0.4f;
     [SerializeField] private float laserCooldownTime = 0.6f;
 
@@ -17,7 +17,7 @@ public class Revolver : Gun
     {
         base.Awake();
 
-        Assert.IsNotNull(laserShot);
+        Assert.IsNotNull(laserShotPrefab);
     }
 
     public override void StartFiring()
@@ -40,7 +40,7 @@ public class Revolver : Gun
             InstantiateShot<Bullet>().damage = bulletDamage;
         else
         {
-            laserShot.Fire();
+            InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
             onCooldown = true;
 
             IEnumerator Cooldown()
