@@ -13,12 +13,9 @@ public class MachineGun : Gun
         if (!PreStartFiring())
             return;
 
-        Debug.Log("StartFiring machine gun!");
         float spread = Random.Range(-1f, 1f);
         spread = maxSpreadAngle * Mathf.Sign(spread) * (1f - Mathf.Pow(1f - Mathf.Abs(spread), spreadReduction));
-        InstantiateBullet().transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
-
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunShot, transform.position);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRifleShot, transform.position);
 
         holdingCooldown = firingCooldown;
     }

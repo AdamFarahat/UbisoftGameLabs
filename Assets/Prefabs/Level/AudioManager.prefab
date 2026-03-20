@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5101291815256150370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7437284504199211392}
+  - component: {fileID: 4284722892464933513}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7437284504199211392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101291815256150370}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -320.92648, y: 0.5, z: -4460.9463}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3974237691823482190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4284722892464933513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101291815256150370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
+  <playerGrenadeExplode>k__BackingField:
+    Guid:
+      Data1: 115624427
+      Data2: 1214022194
+      Data3: -2098313322
+      Data4: 1418859912
+    Path: event:/PlayerWeapons/PlayerGrenadeExplode
+  <playerGrenadeThrow>k__BackingField:
+    Guid:
+      Data1: 1917402141
+      Data2: 1096397505
+      Data3: -869755234
+      Data4: 1800542975
+    Path: event:/PlayerWeapons/PlayerGrenadeThrow
+  <playerRevolverBulletImpact>k__BackingField:
+    Guid:
+      Data1: 90658782
+      Data2: 1078374022
+      Data3: 1989879686
+      Data4: -820542591
+    Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
+  <playerRevolverNotReady>k__BackingField:
+    Guid:
+      Data1: 1969619031
+      Data2: 1173442005
+      Data3: -1119069253
+      Data4: -895948633
+    Path: event:/PlayerWeapons/PlayerRevolverNotReady
+  <playerRevolverReady>k__BackingField:
+    Guid:
+      Data1: 333364370
+      Data2: 1151266135
+      Data3: -671696979
+      Data4: 541666678
+    Path: event:/PlayerWeapons/PlayerRevolverReady
+  <playerRevolverReload>k__BackingField:
+    Guid:
+      Data1: 1340388826
+      Data2: 1104044353
+      Data3: -1919371844
+      Data4: -174987592
+    Path: event:/PlayerWeapons/PlayerRevolverReload
+  <playerRevolverSelect>k__BackingField:
+    Guid:
+      Data1: 1076003823
+      Data2: 1279739258
+      Data3: -1885382211
+      Data4: -668057458
+    Path: event:/PlayerWeapons/PlayerRevolverSelect
+  <playerRevolverShot>k__BackingField:
+    Guid:
+      Data1: -237387748
+      Data2: 1206679153
+      Data3: 546449038
+      Data4: 1156238603
+    Path: event:/PlayerWeapons/PlayerRevolverShot
+  <playerRifleOverheat>k__BackingField:
+    Guid:
+      Data1: 167299772
+      Data2: 1152193592
+      Data3: 500736156
+      Data4: -177089594
+    Path: event:/PlayerWeapons/PlayerRifleOverheat
+  <playerRifleSelect>k__BackingField:
+    Guid:
+      Data1: -2082601145
+      Data2: 1340393529
+      Data3: 2141118087
+      Data4: -412552335
+    Path: event:/PlayerWeapons/PlayerRifleSelect
+  <playerRifleShot>k__BackingField:
+    Guid:
+      Data1: -1595991602
+      Data2: 1138323884
+      Data3: -1387455846
+      Data4: 2112771498
+    Path: event:/PlayerWeapons/PlayerRifleShot
+  <playerShotgunShot>k__BackingField:
+    Guid:
+      Data1: -17541028
+      Data2: 1276222511
+      Data3: -495441730
+      Data4: -1032015244
+    Path: event:/PlayerWeapons/PlayerShotgunShot
+  <playerShotgunNotReady>k__BackingField:
+    Guid:
+      Data1: -623148014
+      Data2: 1320674076
+      Data3: -298948187
+      Data4: 1499947942
+    Path: event:/PlayerWeapons/PlayerShotgunNotReady
+  <playerShotgunReload>k__BackingField:
+    Guid:
+      Data1: 1776497916
+      Data2: 1197840606
+      Data3: 1042301075
+      Data4: 719927603
+    Path: event:/PlayerWeapons/PlayerShotgunReload
+  <playerShotgunSelect>k__BackingField:
+    Guid:
+      Data1: 988885455
+      Data2: 1273136077
+      Data3: 1725795461
+      Data4: 1236247330
+    Path: event:/PlayerWeapons/PlayerShotgunSelect
+  <playerSwordHit>k__BackingField:
+    Guid:
+      Data1: -1317212057
+      Data2: 1214736076
+      Data3: 1164651163
+      Data4: 1957029962
+    Path: event:/PlayerWeapons/PlayerSwordHit
+  <playerSwordParry>k__BackingField:
+    Guid:
+      Data1: 242281762
+      Data2: 1277387645
+      Data3: 292240524
+      Data4: 2139597516
+    Path: event:/PlayerWeapons/PlayerSwordParry
+  <playerSwordSlash>k__BackingField:
+    Guid:
+      Data1: 693652536
+      Data2: 1288883743
+      Data3: -1662414182
+      Data4: 13236103
+    Path: event:/PlayerWeapons/PlayerSwordSlash
+  <enemyWeaponShot>k__BackingField:
+    Guid:
+      Data1: -327730630
+      Data2: 1140212501
+      Data3: 127052165
+      Data4: 1706519949
+    Path: event:/EnemyWeaponShot
+--- !u!1 &6008748549651680452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3974237691823482190}
+  - component: {fileID: 2005904388119420731}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3974237691823482190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008748549651680452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 320.73416, y: 0, z: 4471.669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7437284504199211392}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005904388119420731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008748549651680452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09fcad8506f54bccbe596fbd33428fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
