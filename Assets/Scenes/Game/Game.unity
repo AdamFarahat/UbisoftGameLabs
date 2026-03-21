@@ -131,22 +131,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelCore
       objectReference: {fileID: 0}
-    - target: {fileID: 3121955262672674292, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: powerBarMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
-    - target: {fileID: 3121955262672674292, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: gunPowerBarPercent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3121955262672674292, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: swordPowerBarPercent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3674687474297394593, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
     - target: {fileID: 4149798499193065890, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

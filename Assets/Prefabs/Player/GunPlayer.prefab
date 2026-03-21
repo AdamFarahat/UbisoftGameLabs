@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 5030326791453086350}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 4.8309927, y: 8.424794, z: -5.7675257}
+  m_LocalPosition: {x: -0.059744716, y: 6.3456774, z: 2.7034812}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -434,13 +434,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeBelt
   grenadePrefab: {fileID: 2060265609765335002, guid: 4cc74f17f2165c74496d79666816829e, type: 3}
-  crosshairs: {fileID: 4496502139177846877}
-  maxChargeTime: 0.5
   minThrowRange: 50
   maxThrowRange: 150
   throwCooldown: 3
-  grenadeGravity: 100
   grenadeInitialDirection: {x: 0, y: 1, z: 1}
+  crosshairs: {fileID: 4496502139177846877}
+  crosshairsStart: 0.5
+  crosshairsVelocity: -1
+  crosshairsRotationVelocity: 90
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605,9 +606,13 @@ MonoBehaviour:
   OnDiscreteMultiplierChange:
     m_PersistentCalls:
       m_Calls: []
+  moveEnabled: 1
   gunKillMultiplierGain: 0.05
   grenadeKillMultiplierGain: 0.5
   activateSuperWaitTime: 0.1
+  shootEnabled: 1
+  throwEnabled: 1
+  toggleGunEnabled: 1
 --- !u!1001 &5480008095318088104
 PrefabInstance:
   m_ObjectHideFlags: 0
