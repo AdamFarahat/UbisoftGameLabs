@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1767195860770411407}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 53.79811, y: 22.870283, z: -93.18108}
+  m_LocalPosition: {x: 48.907375, y: 20.791166, z: -84.710075}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -512,7 +512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
@@ -531,6 +531,14 @@ PrefabInstance:
       value: 9f2f13a0-8d69-48e5-a18a-456aedeadfaa
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: a23649a8-e9b6-4f86-89dc-4b5c67dec159
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: d4f17a07-b5ef-4069-a0b3-405294774061
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
       objectReference: {fileID: 0}
@@ -545,6 +553,14 @@ PrefabInstance:
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[15].m_ActionName
       value: 'Player/Throw[/Keyboard/j]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: 'Player/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
       objectReference: {fileID: 0}
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -567,6 +583,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6340666026545822551}
+    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5377950481972986741}
+    - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4953229897372354713}
   m_SourcePrefab: {fileID: 100100000, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
 --- !u!4 &5473658397883171689 stripped
 Transform:
@@ -613,6 +635,90 @@ MonoBehaviour:
   shootEnabled: 1
   throwEnabled: 1
   toggleGunEnabled: 1
+--- !u!114 &5377950481972986741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608802524239182053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8efb6bcbedb0de4ba361b3ca1560e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunAnimationManager
+  gunNames:
+  - Revolver
+  - Shotgun
+  - Machine Gun
+  gunIndex: 0
+--- !u!114 &4953229897372354713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608802524239182053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ea2a8857f5c06458769dc4538d378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
+  spriteRenderer: {fileID: 5775181914988928178}
+  animations:
+  - name: Revolver Idle
+    frames:
+    - {fileID: 21300000, guid: 8e9d4bd490bfca34c8b6fb83d2f4c644, type: 3}
+    duration: 0.1
+  - name: Revolver Shoot
+    frames:
+    - {fileID: 21300000, guid: d0cd3af394be5524d86a80b969bdbf68, type: 3}
+    - {fileID: 21300000, guid: c856ac6be3b041049b8712a66e6509e0, type: 3}
+    duration: 0.1
+  - name: Revolver Dash Right
+    frames:
+    - {fileID: 21300000, guid: d72b38012285a704bb025bd39a91ff04, type: 3}
+    duration: 0.1
+  - name: Machine Gun Idle
+    frames:
+    - {fileID: 21300000, guid: b5e155cff76bcde4fa6728b454130165, type: 3}
+    duration: 0.1
+  - name: Machine Gun Shoot
+    frames:
+    - {fileID: 21300000, guid: 6e7e2b49d5277cd4c8aeb74fb8dc69a4, type: 3}
+    - {fileID: 21300000, guid: 3444f5202f2bb5f4a8f5d045a117b953, type: 3}
+    duration: 0.1
+  - name: Machine Gun Dash Right
+    frames:
+    - {fileID: 21300000, guid: d00bfa633bfa1d440a33947d5dba9620, type: 3}
+    duration: 0.1
+  - name: Shotgun Idle
+    frames:
+    - {fileID: 21300000, guid: 2768a061c1f655e4dbb8ff50803c60f5, type: 3}
+    duration: 0.1
+  - name: Shotgun Shoot
+    frames:
+    - {fileID: 21300000, guid: b4e25e3e4a51f7e42878dceeb97ecec8, type: 3}
+    - {fileID: 21300000, guid: b01416eaacdb0624d815f2553a1ea2bf, type: 3}
+    duration: 0.1
+  - name: Shotgun Dash Right
+    frames:
+    - {fileID: 21300000, guid: f23e41b04a0a0a04890bb058dab5b8de, type: 3}
+    duration: 0.1
+  - name: Dash Left
+    frames:
+    - {fileID: 21300000, guid: 7aa80fb48cba8a048bf7e30d7457c2e9, type: 3}
+    duration: 0.1
+  - name: Grenade Aim
+    frames:
+    - {fileID: 21300000, guid: 442b756b79020b54088cc8f6fcd6f214, type: 3}
+    duration: 0.1
+  - name: Grenade Throw
+    frames:
+    - {fileID: 21300000, guid: 5dad0416edbba6b4ea2b319c0e443d81, type: 3}
+    - {fileID: 21300000, guid: 9afd95a3403a5ca448962c1291ca20f1, type: 3}
+    duration: 0.1
+  defaultName: Revolver Idle
 --- !u!1001 &5480008095318088104
 PrefabInstance:
   m_ObjectHideFlags: 0

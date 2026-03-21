@@ -117,6 +117,8 @@ MonoBehaviour:
   maxHealth: 100
   superDuration: 5
   activateSuperWaitTime: 0.1
+  damageEnabled: 1
+  superEnabled: 1
 --- !u!1001 &6042631474501440344
 PrefabInstance:
   m_ObjectHideFlags: 0
