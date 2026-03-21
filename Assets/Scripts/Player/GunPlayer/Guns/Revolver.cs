@@ -27,7 +27,8 @@ public class Revolver : Gun
 
         charging = PreStartFiring();
         chargeStartTime = Time.time;
-        // TODO start charge sfx + animation
+        // TODO start charge up animation
+        // TODO start charge up sfx
     }
 
     public override void StopFiring()

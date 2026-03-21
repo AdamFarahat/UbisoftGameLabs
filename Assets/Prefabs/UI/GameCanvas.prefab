@@ -1729,10 +1729,10 @@ MonoBehaviour:
   swordMultiplierMaterial: {fileID: 2100000, guid: 3100d512bf266554db82f4b0732112cf, type: 2}
   healthPercent: 0.67
   score: 8031
-  gunPowerBarPercent: 1
+  gunPowerBarPercent: 0
   gunCooldownPercent: 0.08
   gunMultiplierPercent: 0.67
-  swordPowerBarPercent: 0.55
+  swordPowerBarPercent: 0
   swordCooldownPercent: 0
   swordMultiplierPercent: 1
 --- !u!1 &2654541014656830730
@@ -3188,7 +3188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: 911a292495983f64690f5b480c9218d8, type: 2}
+  m_Material: {fileID: -876546973899608171, guid: bfffbf511619dd64fa28e2a687a9a947, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
