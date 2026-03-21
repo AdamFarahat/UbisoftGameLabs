@@ -28,7 +28,8 @@ public class Shotgun : Gun
     {
         charging = PreStartFiring();
         chargeStartTime = Time.time;
-        // TODO start charge sfx + animation
+        // TODO play charge up animation
+        // TODO play charge up sfx
     }
 
     public override void StopFiring()

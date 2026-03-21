@@ -4,7 +4,15 @@ using UnityEngine.Assertions;
 public class GunAnimationManager : MonoBehaviour
 {
     [SerializeField] private string[] gunNames;
-    public int gunIndex = 0;
+    
+    private int gunIndex = 0;
+    public int GunIndex {
+        get => gunIndex;
+        set {
+            gunIndex = value;
+            PlayIdle();
+        }
+    }
 
     private SpriteAnimator animator;
 

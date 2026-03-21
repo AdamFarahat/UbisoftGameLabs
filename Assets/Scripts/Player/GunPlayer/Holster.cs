@@ -9,10 +9,15 @@ public class Holster : MonoBehaviour
     private int activeGunIndex = 0;
     public int ActiveGunIndex => activeGunIndex;
 
+    private GunAnimationManager animator;
+
     private void Awake()
     {
         guns = GetComponents<Gun>();
         Assert.IsTrue(guns.Length > 0);
+
+        animator = GetComponentInParent<GunAnimationManager>();
+        Assert.IsNotNull(animator);
     }
 
     public void StartFiring()
@@ -38,12 +43,12 @@ public class Holster : MonoBehaviour
     public void ToggleUp()
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;
-        Debug.Log("Switch to " + guns[activeGunIndex]);
+        animator.GunIndex = activeGunIndex;
     }
 
     public void ToggleDown()
     {
         activeGunIndex = (activeGunIndex - 1 + guns.Length) % guns.Length;
-        Debug.Log("Switch to " + guns[activeGunIndex]);
+        animator.GunIndex = activeGunIndex;
     }
 }

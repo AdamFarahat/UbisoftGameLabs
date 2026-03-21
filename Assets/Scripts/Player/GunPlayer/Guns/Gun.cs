@@ -10,11 +10,15 @@ public class Gun : MonoBehaviour
     [SerializeField] protected int bulletDamage = 10;
     [SerializeField] protected float firingCooldown = 0.5f;
 
+    private GunAnimationManager animator;
     private float cooldown = 0.0f;
 
     protected virtual void Awake()
     {
         Assert.IsNotNull(bulletPrefab);
+
+        animator = GetComponentInParent<GunAnimationManager>();
+        Assert.IsNotNull(animator);
     }
 
     protected virtual void Update()
@@ -56,7 +60,10 @@ public class Gun : MonoBehaviour
         go.transform.position = firePosition.position;
         T shot = go.GetComponent<T>();
         Assert.IsNotNull(shot);
+
         AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunShot, transform.position);
+        animator.PlayShoot();
+
         return shot;
     }
 }
