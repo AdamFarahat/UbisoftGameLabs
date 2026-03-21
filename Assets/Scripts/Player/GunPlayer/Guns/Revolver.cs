@@ -1,30 +1,30 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Revolver : Gun
 {
-    [Serializable]
-    public class AltShot
-    {
-        public float velocity;
-        public int damage;
-        public float chargeTime;
-    }
-
     [Header("Revolver")]
-    [SerializeField] private List<AltShot> altShots = new();
+    [SerializeField] private GameObject laserShotPrefab;
+    [SerializeField] private float laserChargeTime = 0.4f;
+    [SerializeField] private float laserCooldownTime = 0.6f;
 
     private bool charging = false;
     private float chargeStartTime = 0f;
+    private bool onCooldown = false;
 
-    private void Start()
+    protected override void Awake()
     {
-        altShots.Sort((a, b) => a.chargeTime.CompareTo(b.chargeTime));
+        base.Awake();
+
+        Assert.IsNotNull(laserShotPrefab);
     }
 
     public override void StartFiring()
     {
+        if (onCooldown)
+            return;  // TODO denied sfx (here and in other guns)
+
         charging = PreStartFiring();
         chargeStartTime = Time.time;
         // TODO start charge up animation
@@ -37,16 +37,20 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        Bullet bullet = InstantiateShot<Bullet>();
-        bullet.damage = bulletDamage;
-
-        float chargeTime = Time.time - chargeStartTime;
-        foreach (var altShot in altShots)
+        if (Time.time - chargeStartTime < laserChargeTime)
+            InstantiateShot<Bullet>().damage = bulletDamage;
+        else
         {
-            if (chargeTime < altShot.chargeTime)
-                break;
-            bullet.velocity = altShot.velocity;
-            bullet.damage = altShot.damage;
+            InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
+            onCooldown = true;
+
+            IEnumerator Cooldown()
+            {
+                yield return new WaitForSeconds(laserCooldownTime);
+                onCooldown = false;
+            }
+
+            StartCoroutine(Cooldown());
         }
     }
 

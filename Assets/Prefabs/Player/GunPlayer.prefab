@@ -296,13 +296,9 @@ MonoBehaviour:
   firePosition: {fileID: 882516828035149282}
   bulletDamage: 10
   firingCooldown: 0.5
-  altShots:
-  - velocity: 250
-    damage: 20
-    chargeTime: 0.6
-  - velocity: 500
-    damage: 40
-    chargeTime: 1.2
+  laserShotPrefab: {fileID: 7091126548147773133, guid: 90cbf247c7b605c4eae21c29cb744fe4, type: 3}
+  laserChargeTime: 0.4
+  laserCooldownTime: 0.6
 --- !u!114 &6029176937551800676
 MonoBehaviour:
   m_ObjectHideFlags: 0

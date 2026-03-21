@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour
     private GunAnimationManager animator;
     private float cooldown = 0.0f;
 
+    protected Transform FirePosition => firePosition;
+
     protected virtual void Awake()
     {
         Assert.IsNotNull(bulletPrefab);
@@ -54,9 +56,9 @@ public class Gun : MonoBehaviour
         return false;
     }
 
-    protected T InstantiateShot<T>() where T : class
+    protected T InstantiateShot<T>(GameObject prefabOverride = null) where T : class
     {
-        GameObject go = Instantiate(bulletPrefab);
+        GameObject go = Instantiate(prefabOverride != null ? prefabOverride : bulletPrefab);
         go.transform.position = firePosition.position;
         T shot = go.GetComponent<T>();
         Assert.IsNotNull(shot);
