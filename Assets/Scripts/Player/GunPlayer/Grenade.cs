@@ -21,7 +21,9 @@ public class Grenade : MonoBehaviour
     {
         initialDirection.Normalize();
 
-        float velocity = Mathf.Sqrt((0.5f * range * gravity) / (initialDirection.y * initialDirection.z));
+        float denominator = 2f * (range * initialDirection.y * initialDirection.z + transform.position.y * initialDirection.z * initialDirection.z);
+        float velocity = range * Mathf.Sqrt(gravity / denominator);
+
         verticalVelocity = velocity * initialDirection.y;
         forwardVelocity = velocity * initialDirection.z;
     }

@@ -346,6 +346,37 @@ MonoBehaviour:
   overheatIncreaseRate: 0.2
   overheatDecreaseRate: 0.4
   overheatCooldown: 2
+--- !u!1 &6218317005578964624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437187683036832482}
+  m_Layer: 0
+  m_Name: ThrowPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &437187683036832482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218317005578964624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.76, z: 6.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6200452433833200671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7286659177577392852
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 437187683036832482}
   - {fileID: 4496502139177846877}
   m_Father: {fileID: 5473658397883171689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -396,6 +428,7 @@ MonoBehaviour:
   maxThrowRange: 150
   throwCooldown: 3
   grenadeInitialDirection: {x: 0, y: 1, z: 1}
+  throwPoint: {fileID: 437187683036832482}
   crosshairs: {fileID: 4496502139177846877}
   crosshairsStart: 0.5
   crosshairsVelocity: -1
@@ -755,7 +788,7 @@ PrefabInstance:
     - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b5e155cff76bcde4fa6728b454130165, type: 3}
+      objectReference: {fileID: 21300000, guid: 9afd95a3403a5ca448962c1291ca20f1, type: 3}
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

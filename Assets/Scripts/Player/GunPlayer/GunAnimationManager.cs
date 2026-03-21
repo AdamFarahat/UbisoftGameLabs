@@ -14,6 +14,9 @@ public class GunAnimationManager : MonoBehaviour
         }
     }
 
+    private string gunIdle = "";
+    private bool aimingGrenade = false;
+
     private SpriteAnimator animator;
 
     private void Awake()
@@ -27,6 +30,11 @@ public class GunAnimationManager : MonoBehaviour
         Assert.IsNotNull(laneBound);
         laneBound.DashStart += OnDashStart;
         laneBound.DashEnd += OnDashEnd;
+    }
+
+    private void Start()
+    {
+        PlayIdle();
     }
 
     private void OnDashStart(float deltaLane)
@@ -44,7 +52,8 @@ public class GunAnimationManager : MonoBehaviour
 
     public void PlayIdle()
     {
-        animator.defaultName = $"{gunNames[gunIndex]} Idle";
+        gunIdle = $"{gunNames[gunIndex]} Idle";
+        animator.defaultName = gunIdle;
         animator.PlayDefaultCycle();
     }
 
@@ -55,11 +64,15 @@ public class GunAnimationManager : MonoBehaviour
 
     public void StartGrenadeAim()
     {
-        animator.PlayCycle("Grenade Aim");
+        aimingGrenade = true;
+        animator.defaultName = "Grenade Aim";
+        animator.PlayDefaultCycle();
     }
 
     public void StopGrenadeAim()
     {
+        aimingGrenade = false;
+        animator.defaultName = gunIdle;
         animator.PlayDefaultCycle();
     }
 
