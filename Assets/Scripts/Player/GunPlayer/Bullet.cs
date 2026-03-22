@@ -13,6 +13,18 @@ public class Bullet : MonoBehaviour
 
     public bool IsDead => dead;
 
+    public enum BulletType
+    {
+        Revolver,
+        MachineGun
+    }
+    private BulletType bulletType;
+
+    public void SetBulletType(BulletType bulletTypeSet)
+    {
+        bulletType = bulletTypeSet;
+    }
+
     private void Update()
     {
         if (dead)
@@ -35,6 +47,16 @@ public class Bullet : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
+
+        switch (bulletType)
+        {
+            case BulletType.Revolver:
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverImpact, transform.position);
+                break;
+            case BulletType.MachineGun:
+                // TODO machinegun impact sfx
+                break;
+        }
 
         EnergyShield shield = enemy.GetShield();
         if (shield != null)

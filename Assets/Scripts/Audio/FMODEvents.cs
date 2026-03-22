@@ -5,9 +5,15 @@ public class FMODEvents : MonoBehaviour
 {
     #region GUNPLAYER
     [field: Header("GUNPLAYER")]
-    [field: SerializeField] public EventReference playerPistolShot { get; private set; }
+    [field: SerializeField] public EventReference playerRevolverShot { get; private set; }
+    [field: SerializeField] public EventReference playerRevolverImpact { get; private set; }
+    [field: SerializeField] public EventReference playerRevolverNotReady { get; private set; }
+    [field: SerializeField] public EventReference playerRevolverSelect { get; private set; }
     [field: SerializeField] public EventReference playerShotgunShot { get; private set; }
+    [field: SerializeField] public EventReference playerShotgunSelect { get; private set; }
     [field: SerializeField] public EventReference playerMachinegunShot { get; private set; }
+    [field: SerializeField] public EventReference playerMachinegunOverheat { get; private set; }
+    [field: SerializeField] public EventReference playerMachinegunSelect { get; private set; }
     [field: SerializeField] public EventReference playerGrenadeThrow { get; private set; }
     [field: SerializeField] public EventReference playerGrenadeExplode { get; private set; }
     

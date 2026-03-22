@@ -39,6 +39,7 @@ public class MachineGun : Gun
             {
                 overheatLevel = 0f;
                 overheating = true;
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunOverheat, transform.position);
                 yield return new WaitForSeconds(overheatCooldown);
                 overheating = false;
             }

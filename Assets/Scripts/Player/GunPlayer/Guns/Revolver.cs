@@ -22,8 +22,11 @@ public class Revolver : Gun
 
     public override void StartFiring()
     {
-        if (onCooldown)
+        if (onCooldown){
+            
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverNotReady, transform.position);
             return;  // TODO denied sfx (here and in other guns)
+        }
 
         charging = PreStartFiring();
         chargeStartTime = Time.time;
@@ -37,8 +40,10 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        if (Time.time - chargeStartTime < laserChargeTime)
+        if (Time.time - chargeStartTime < laserChargeTime){
             InstantiateShot<Bullet>().damage = bulletDamage;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverShot, transform.position);
+        }
         else
         {
             InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;

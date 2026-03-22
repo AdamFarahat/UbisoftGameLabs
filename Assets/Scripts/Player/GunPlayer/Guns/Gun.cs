@@ -59,11 +59,15 @@ public class Gun : MonoBehaviour
     protected T InstantiateShot<T>(GameObject prefabOverride = null) where T : class
     {
         GameObject go = Instantiate(prefabOverride != null ? prefabOverride : bulletPrefab);
+        if(go.GetComponent<Bullet>() != null)
+        {
+            go.GetComponent<Bullet>().SetBulletType((Bullet.BulletType)Enum.Parse(typeof(Bullet.BulletType), GetType().Name));
+        }
         go.transform.position = firePosition.position;
         T shot = go.GetComponent<T>();
         Assert.IsNotNull(shot);
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunShot, transform.position);
+        
         animator.PlayShoot();
 
         return shot;

@@ -68,8 +68,10 @@ public class ShotgunBlast : MonoBehaviour
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
             enemiesHit.Add(enemy);
-            if (enemy.TakeDamage(damage))
+            if (enemy.TakeDamage(damage)){
                 OnEnemyKill(enemy);
+                //Do Shotgun Impact SFX here
+            }
         }
     }
 

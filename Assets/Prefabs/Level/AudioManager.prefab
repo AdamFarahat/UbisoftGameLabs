@@ -44,13 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
-  <playerPistolShot>k__BackingField:
+  <playerRevolverShot>k__BackingField:
     Guid:
       Data1: -237387748
       Data2: 1206679153
       Data3: 546449038
       Data4: 1156238603
     Path: event:/PlayerWeapons/PlayerRevolverShot
+  <playerRevolverImpact>k__BackingField:
+    Guid:
+      Data1: 90658782
+      Data2: 1078374022
+      Data3: 1989879686
+      Data4: -820542591
+    Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
+  <playerRevolverNotReady>k__BackingField:
+    Guid:
+      Data1: 1969619031
+      Data2: 1173442005
+      Data3: -1119069253
+      Data4: -895948633
+    Path: event:/PlayerWeapons/PlayerRevolverNotReady
+  <playerRevolverSelect>k__BackingField:
+    Guid:
+      Data1: 1076003823
+      Data2: 1279739258
+      Data3: -1885382211
+      Data4: -668057458
+    Path: event:/PlayerWeapons/PlayerRevolverSelect
   <playerShotgunShot>k__BackingField:
     Guid:
       Data1: -17541028
@@ -58,6 +79,13 @@ MonoBehaviour:
       Data3: -495441730
       Data4: -1032015244
     Path: event:/PlayerWeapons/PlayerShotgunShot
+  <playerShotgunSelect>k__BackingField:
+    Guid:
+      Data1: 988885455
+      Data2: 1273136077
+      Data3: 1725795461
+      Data4: 1236247330
+    Path: event:/PlayerWeapons/PlayerShotgunSelect
   <playerMachinegunShot>k__BackingField:
     Guid:
       Data1: -1595991602
@@ -65,6 +93,20 @@ MonoBehaviour:
       Data3: -1387455846
       Data4: 2112771498
     Path: event:/PlayerWeapons/PlayerRifleShot
+  <playerMachinegunOverheat>k__BackingField:
+    Guid:
+      Data1: 167299772
+      Data2: 1152193592
+      Data3: 500736156
+      Data4: -177089594
+    Path: event:/PlayerWeapons/PlayerRifleOverheat
+  <playerMachinegunSelect>k__BackingField:
+    Guid:
+      Data1: -2082601145
+      Data2: 1340393529
+      Data3: 2141118087
+      Data4: -412552335
+    Path: event:/PlayerWeapons/PlayerRifleSelect
   <playerGrenadeThrow>k__BackingField:
     Guid:
       Data1: 1917402141
