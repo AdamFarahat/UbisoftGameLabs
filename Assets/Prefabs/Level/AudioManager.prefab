@@ -51,6 +51,13 @@ MonoBehaviour:
       Data3: 546449038
       Data4: 1156238603
     Path: event:/PlayerWeapons/PlayerRevolverShot
+  <playerRevolverAltShot>k__BackingField:
+    Guid:
+      Data1: 167299772
+      Data2: 1152193592
+      Data3: 500736156
+      Data4: -177089594
+    Path: event:/PlayerWeapons/PlayerRifleOverheat
   <playerRevolverImpact>k__BackingField:
     Guid:
       Data1: 90658782

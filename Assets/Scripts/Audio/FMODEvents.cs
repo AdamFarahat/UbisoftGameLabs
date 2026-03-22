@@ -6,6 +6,7 @@ public class FMODEvents : MonoBehaviour
     #region GUNPLAYER
     [field: Header("GUNPLAYER")]
     [field: SerializeField] public EventReference playerRevolverShot { get; private set; }
+    [field: SerializeField] public EventReference playerRevolverAltShot { get; private set; }
     [field: SerializeField] public EventReference playerRevolverImpact { get; private set; }
     [field: SerializeField] public EventReference playerRevolverNotReady { get; private set; }
     [field: SerializeField] public EventReference playerRevolverSelect { get; private set; }

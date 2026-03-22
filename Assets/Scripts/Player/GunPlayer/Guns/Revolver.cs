@@ -48,7 +48,7 @@ public class Revolver : Gun
         {
             InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
             onCooldown = true;
-
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverAltShot, transform.position);
             IEnumerator Cooldown()
             {
                 yield return new WaitForSeconds(laserCooldownTime);
