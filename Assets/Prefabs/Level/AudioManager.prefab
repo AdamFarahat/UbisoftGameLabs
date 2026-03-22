@@ -50,35 +50,56 @@ MonoBehaviour:
       Data2: 1206679153
       Data3: 546449038
       Data4: 1156238603
-    Path: event:/PlayerPistolShot
+    Path: event:/PlayerWeapons/PlayerRevolverShot
   <playerShotgunShot>k__BackingField:
     Guid:
       Data1: -17541028
       Data2: 1276222511
       Data3: -495441730
       Data4: -1032015244
-    Path: event:/PlayerShotgunShot
+    Path: event:/PlayerWeapons/PlayerShotgunShot
   <playerMachinegunShot>k__BackingField:
     Guid:
       Data1: -1595991602
       Data2: 1138323884
       Data3: -1387455846
       Data4: 2112771498
-    Path: event:/PlayerMachinegunShot
+    Path: event:/PlayerWeapons/PlayerRifleShot
   <playerGrenadeThrow>k__BackingField:
     Guid:
       Data1: 1917402141
       Data2: 1096397505
       Data3: -869755234
       Data4: 1800542975
-    Path: event:/PlayerGrenadeThrow
+    Path: event:/PlayerWeapons/PlayerGrenadeThrow
   <playerGrenadeExplode>k__BackingField:
     Guid:
       Data1: 115624427
       Data2: 1214022194
       Data3: -2098313322
       Data4: 1418859912
-    Path: event:/PlayerGrenadeExplode
+    Path: event:/PlayerWeapons/PlayerGrenadeExplode
+  <playerSwordSlash>k__BackingField:
+    Guid:
+      Data1: 693652536
+      Data2: 1288883743
+      Data3: -1662414182
+      Data4: 13236103
+    Path: event:/PlayerWeapons/PlayerSwordSlash
+  <playerSwordHit>k__BackingField:
+    Guid:
+      Data1: -1317212057
+      Data2: 1214736076
+      Data3: 1164651163
+      Data4: 1957029962
+    Path: event:/PlayerWeapons/PlayerSwordHit
+  <playerSwordParry>k__BackingField:
+    Guid:
+      Data1: 242281762
+      Data2: 1277387645
+      Data3: 292240524
+      Data4: 2139597516
+    Path: event:/PlayerWeapons/PlayerSwordParry
   <enemyWeaponShot>k__BackingField:
     Guid:
       Data1: -327730630

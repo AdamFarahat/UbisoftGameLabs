@@ -245,6 +245,8 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerSwordSlash, transform.position);
+
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Attack button pressed with super ready");
@@ -394,6 +396,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Attacking:
                     if (!enemy.HasShield() && enemy.OnParried())
                     {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerSwordHit, transform.position);
                         playerStats.AddSwordSuper(4f);
                         AddContinuousMultiplier(attackingMultiplierGain);
                         AddScore(enemy.Score);
@@ -402,6 +405,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Parrying:
                     if (enemy.OnParried())
                     {
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerSwordParry, transform.position);
                         playerStats.AddSwordSuper(5f);
                         AddContinuousMultiplier(meleeParryMultiplierGain);
                         AddScore(enemy.Score);
@@ -413,6 +417,7 @@ public class SwordPlayerController : PlayerController
                     {
                         if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
+                            
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);
                             AddScore(enemy.Score);

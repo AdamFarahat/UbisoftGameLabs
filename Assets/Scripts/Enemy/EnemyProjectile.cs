@@ -85,6 +85,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public void Parry(Transform newOrigin, float speedMult)
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
         else
