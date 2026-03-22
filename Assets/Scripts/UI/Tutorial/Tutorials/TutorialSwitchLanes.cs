@@ -16,14 +16,14 @@ public class TutorialSwitchLanes : TutorialBase
     {
         if (GunPlayerController.Instance != null)
         {
-            gunStartingIndex = Mathf.FloorToInt(GunPlayerController.LaneIndex);
+            gunStartingIndex = GunPlayerController.LaneIndex;
             GunPlayerController.Instance.moveEnabled = true;
             gunPlayerMoved = false;
         }
 
         if (SwordPlayerController.Instance != null)
         {
-            swordStartingIndex = Mathf.FloorToInt(SwordPlayerController.LaneIndex);
+            swordStartingIndex = SwordPlayerController.LaneIndex;
             SwordPlayerController.Instance.moveEnabled = true;
             swordPlayerMoved = false;
         }
@@ -33,10 +33,10 @@ public class TutorialSwitchLanes : TutorialBase
             while (true)
             {
                 if (GunPlayerController.Instance != null)
-                    gunPlayerMoved |= gunStartingIndex != Mathf.FloorToInt(GunPlayerController.LaneIndex);
+                    gunPlayerMoved |= gunStartingIndex != GunPlayerController.LaneIndex;
 
                 if (SwordPlayerController.Instance != null)
-                    swordPlayerMoved |= swordStartingIndex != Mathf.FloorToInt(SwordPlayerController.LaneIndex);
+                    swordPlayerMoved |= swordStartingIndex != SwordPlayerController.LaneIndex;
 
                 if (gunPlayerMoved && swordPlayerMoved)
                     break;
