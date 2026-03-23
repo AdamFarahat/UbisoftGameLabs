@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b2d83c2ae724c74b8765f4df35075cb, type: 2}
+  - {fileID: 2100000, guid: 93384451ad63d3b44b2eec38672bd97d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,11 +142,11 @@ MonoBehaviour:
   lane: {fileID: 1308856832007123742}
   underlaySprite: {fileID: 8795876933440874284}
   materials:
-  - {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
-  - {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
-  - {fileID: 2100000, guid: 3b2d83c2ae724c74b8765f4df35075cb, type: 2}
-  - {fileID: 2100000, guid: 7689b3f5534b3da4fb14e894f39f7b27, type: 2}
-  - {fileID: 2100000, guid: 0251554c735c9d04d901fc674ef0d005, type: 2}
+  - {fileID: 2100000, guid: 5c24e951aeff8224ca722279b57a2d74, type: 2}
+  - {fileID: 2100000, guid: 029ddc910e5b18d4a99fbe8e6fe1efda, type: 2}
+  - {fileID: 2100000, guid: 93384451ad63d3b44b2eec38672bd97d, type: 2}
+  - {fileID: 2100000, guid: 1db15e91ab83f6745bd7b2c6f984259a, type: 2}
+  - {fileID: 2100000, guid: c5fc7760a9581a94f94634bceffddfb4, type: 2}
 --- !u!1 &5975266398723641439
 GameObject:
   m_ObjectHideFlags: 0
