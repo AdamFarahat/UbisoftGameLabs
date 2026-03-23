@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[ExecuteAlways]
 public class UnderlayHighlighter : MonoBehaviour
 {
     [SerializeField] private LaneBound lane;
