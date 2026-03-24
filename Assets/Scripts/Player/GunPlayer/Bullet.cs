@@ -18,12 +18,7 @@ public class Bullet : MonoBehaviour
         Revolver,
         MachineGun
     }
-    private BulletType bulletType;
-
-    public void SetBulletType(BulletType bulletTypeSet)
-    {
-        bulletType = bulletTypeSet;
-    }
+    public BulletType bulletType;
 
     private void Update()
     {
@@ -51,7 +46,7 @@ public class Bullet : MonoBehaviour
         switch (bulletType)
         {
             case BulletType.Revolver:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverImpact, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverImpact, transform.position);
                 break;
             case BulletType.MachineGun:
                 // TODO machinegun impact sfx
@@ -72,14 +67,14 @@ public class Bullet : MonoBehaviour
 
         foreach (Collider collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
-       
+
 
         dead = true;
         // TODO uncomment once bullet sprites are uploaded
         //IEnumerator Routine()
         //{
-            //yield return FadeOutAnimation.Routine(GetComponentInChildren<SpriteRenderer>());
-            //Destroy(gameObject);  // TODO sfx ?
+        //yield return FadeOutAnimation.Routine(GetComponentInChildren<SpriteRenderer>());
+        //Destroy(gameObject);  // TODO sfx ?
         //}
         //StartCoroutine(Routine());
         Destroy(gameObject);  // TODO sfx ?

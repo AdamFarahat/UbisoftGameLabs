@@ -47,13 +47,13 @@ public class Holster : MonoBehaviour
         switch (activeGunIndex)
         {
             case 0:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
                 break;
             case 1:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
                 break;
             case 2:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
                 break;
         }
     }
@@ -65,13 +65,13 @@ public class Holster : MonoBehaviour
         switch (activeGunIndex)
         {
             case 0:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
                 break;
             case 1:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
                 break;
             case 2:
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.playerMachinegunSelect, transform.position);
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
                 break;
         }
     }

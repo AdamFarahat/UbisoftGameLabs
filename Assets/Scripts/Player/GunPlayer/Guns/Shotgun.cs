@@ -39,7 +39,7 @@ public class Shotgun : Gun
         charging = false;
 
         ShotgunBlast blast = InstantiateShot<ShotgunBlast>();
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerShotgunShot, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunShot, transform.position);
         blast.damage = bulletDamage;
         blast.coneAngle = spreadAngle;
 

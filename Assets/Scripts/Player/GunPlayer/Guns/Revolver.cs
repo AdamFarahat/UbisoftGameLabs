@@ -24,8 +24,8 @@ public class Revolver : Gun
     {
         if (onCooldown){
             
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverNotReady, transform.position);
-            return;  // TODO denied sfx (here and in other guns)
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverNotReady, transform.position);
+            return;
         }
 
         charging = PreStartFiring();
@@ -42,13 +42,13 @@ public class Revolver : Gun
 
         if (Time.time - chargeStartTime < laserChargeTime){
             InstantiateShot<Bullet>().damage = bulletDamage;
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverShot, transform.position);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
         }
         else
         {
             InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
             onCooldown = true;
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.playerRevolverAltShot, transform.position);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverAltShot, transform.position);
             IEnumerator Cooldown()
             {
                 yield return new WaitForSeconds(laserCooldownTime);

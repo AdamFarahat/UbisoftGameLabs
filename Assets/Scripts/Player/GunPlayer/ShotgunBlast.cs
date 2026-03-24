@@ -31,7 +31,7 @@ public class ShotgunBlast : MonoBehaviour
         var shape = particleSystem.shape;
         shape.angle = coneAngle;
         shape.scale = new(shape.scale.x, heightScale, shape.scale.z);
-        
+
         invDuration = 1f / particleSystem.main.startLifetime.constant;
         invVerticalScale = 1f / particleSystem.shape.scale.y;
 
@@ -68,7 +68,8 @@ public class ShotgunBlast : MonoBehaviour
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
             enemiesHit.Add(enemy);
-            if (enemy.TakeDamage(damage)){
+            if (enemy.TakeDamage(damage))
+            {
                 OnEnemyKill(enemy);
                 //Do Shotgun Impact SFX here
             }

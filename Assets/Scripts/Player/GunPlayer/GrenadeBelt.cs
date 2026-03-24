@@ -102,13 +102,12 @@ public class GrenadeBelt : MonoBehaviour
         SetThrowing(false);
         animator.StopGrenadeAim();
         animator.PlayGrenadeThrow();
-        // TODO sfx
 
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeThrow, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeThrow, transform.position);
 
         grenade.transform.position = throwPoint.position;
         grenade.initialDirection = grenadeInitialDirection;
