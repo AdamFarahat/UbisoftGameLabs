@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class SwordPlayerController : PlayerController
 {
@@ -74,6 +75,16 @@ public class SwordPlayerController : PlayerController
         Assert.IsNotNull(laneBound);
         laneBound.DashStart += OnDashStart;
         laneBound.DashEnd += OnDashEnd;
+
+        if (PlayerSelect.swordPlayerDevice != null)
+        {
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(PlayerSelect.swordPlayerDevice, playerInput.user);
+        }
+        else
+        {
+            Debug.LogWarning("Sword player device was not assigned in PlayerSelect.");
+        }
     }
 
     protected override void Start()
