@@ -44,15 +44,15 @@ public class Holster : MonoBehaviour
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;
         animator.GunIndex = activeGunIndex;
-        switch (activeGunIndex)
+        switch (guns[activeGunIndex])
         {
-            case 0:
+            case Revolver:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
                 break;
-            case 1:
+            case Shotgun:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
                 break;
-            case 2:
+            case MachineGun:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
                 break;
         }
@@ -62,15 +62,15 @@ public class Holster : MonoBehaviour
     {
         activeGunIndex = (activeGunIndex - 1 + guns.Length) % guns.Length;
         animator.GunIndex = activeGunIndex;
-        switch (activeGunIndex)
+        switch (guns[activeGunIndex])
         {
-            case 0:
+            case Revolver:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
                 break;
-            case 1:
+            case Shotgun:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
                 break;
-            case 2:
+            case MachineGun:
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
                 break;
         }

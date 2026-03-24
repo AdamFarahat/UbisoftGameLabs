@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class Bullet : MonoBehaviour
 {
@@ -13,12 +14,7 @@ public class Bullet : MonoBehaviour
 
     public bool IsDead => dead;
 
-    public enum BulletType
-    {
-        Revolver,
-        MachineGun
-    }
-    public BulletType bulletType;
+    public EventReference impactEvent;
 
     private void Update()
     {
@@ -43,15 +39,7 @@ public class Bullet : MonoBehaviour
         if (enemy == null)
             return;
 
-        switch (bulletType)
-        {
-            case BulletType.Revolver:
-                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverImpact, transform.position);
-                break;
-            case BulletType.MachineGun:
-                // TODO machinegun impact sfx
-                break;
-        }
+        AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
 
         EnergyShield shield = enemy.GetShield();
         if (shield != null)

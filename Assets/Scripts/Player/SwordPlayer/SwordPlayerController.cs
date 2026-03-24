@@ -417,7 +417,7 @@ public class SwordPlayerController : PlayerController
                     {
                         if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
-
+                            //TODO Different SFX for blocking hit vs parry hit?
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);
                             AddScore(enemy.Score);

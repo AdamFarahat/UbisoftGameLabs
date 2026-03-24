@@ -71,7 +71,7 @@ public class ShotgunBlast : MonoBehaviour
             if (enemy.TakeDamage(damage))
             {
                 OnEnemyKill(enemy);
-                //Do Shotgun Impact SFX here
+                //TODO Do Shotgun Impact SFX here
             }
         }
     }
