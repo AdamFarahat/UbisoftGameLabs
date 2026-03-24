@@ -22,8 +22,8 @@ public class Revolver : Gun
 
     public override void StartFiring()
     {
-        if (onCooldown){
-            
+        if (onCooldown)
+        {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverNotReady, transform.position);
             return;
         }
@@ -40,7 +40,8 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        if (Time.time - chargeStartTime < laserChargeTime){
+        if (Time.time - chargeStartTime < laserChargeTime)
+        {
             InstantiateShot<Bullet>().damage = bulletDamage;
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
         }
