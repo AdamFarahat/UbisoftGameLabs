@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class Bullet : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Bullet : MonoBehaviour
     private bool dead = false;
 
     public bool IsDead => dead;
+
+    public EventReference impactEvent;
 
     private void Update()
     {
@@ -36,6 +39,8 @@ public class Bullet : MonoBehaviour
         if (enemy == null)
             return;
 
+        AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
+
         EnergyShield shield = enemy.GetShield();
         if (shield != null)
         {
@@ -50,14 +55,14 @@ public class Bullet : MonoBehaviour
 
         foreach (Collider collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
-       
+
 
         dead = true;
         // TODO uncomment once bullet sprites are uploaded
         //IEnumerator Routine()
         //{
-            //yield return FadeOutAnimation.Routine(GetComponentInChildren<SpriteRenderer>());
-            //Destroy(gameObject);  // TODO sfx ?
+        //yield return FadeOutAnimation.Routine(GetComponentInChildren<SpriteRenderer>());
+        //Destroy(gameObject);  // TODO sfx ?
         //}
         //StartCoroutine(Routine());
         Destroy(gameObject);  // TODO sfx ?

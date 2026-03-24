@@ -17,7 +17,7 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Awake()
     {
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
 
@@ -85,6 +85,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public void Parry(Transform newOrigin, float speedMult)
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
         else
