@@ -138,6 +138,8 @@ public class PlayerSelectManager : MonoBehaviour
     {
         Debug.Log($"Player {playerID + 1} is backing out to the Main Menu!");
 
+        PlayerSelect.OnGameEnd(); // reset player select state
+
         onReturnToMenuRequested?.Invoke(); 
     }
 
@@ -174,8 +176,5 @@ public class PlayerSelectManager : MonoBehaviour
         {
             cursorSlots[playerID] = slotIndex;
         }
-    }
-
-
-    
+    }    
 }

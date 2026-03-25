@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 public class GunPlayerController : PlayerController
 {
@@ -62,6 +63,10 @@ public class GunPlayerController : PlayerController
         Assert.IsNotNull(holster);
         grenadeBelt = GetComponentInChildren<GrenadeBelt>();
         Assert.IsNotNull(grenadeBelt);
+        Assert.IsNotNull(PlayerSelect.gunPlayerDevice);
+        playerInput.user.UnpairDevices();
+        InputUser.PerformPairingWithDevice(PlayerSelect.gunPlayerDevice, playerInput.user);
+       
     }
 
     protected override void Start()

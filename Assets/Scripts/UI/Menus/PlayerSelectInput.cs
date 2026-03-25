@@ -79,6 +79,16 @@ public class PlayerSelectInput : MonoBehaviour
             isLockedIn = true; 
 
             manager.CharacterLockedIn(myPlayerID, currentIndex);
+
+            //Check which slot the other player is in. Then set the device for the character based on that
+            if (currentIndex == 0)
+            {
+                OnSwordPlayerSelect(context);
+            }
+            else if (currentIndex == 2)
+            {
+                OnGunPlayerSelect(context);
+            }
             
             //TODO visual update
             // TEMP: slightly shrink the cursor to show it is locked
@@ -124,12 +134,48 @@ public class PlayerSelectInput : MonoBehaviour
                 
                 // TODO visual update 
                 // TEMP: Visually return the cursor to normal size
-                cursorIcon.localScale = Vector3.one; 
+                cursorIcon.localScale = Vector3.one;
+
+                //Check which slot the player is in. Then unset the device for that character based on that
+                if (currentIndex == 0)
+                {
+                    OnSwordPlayerDeselect(context);
+                }
+                else if (currentIndex == 2)
+                {
+                    OnGunPlayerDeselect(context);
+                } 
             }
             else // return to menu 
             {
                 manager.AttemptReturnToMenu(myPlayerID);
             }
+        }
+    }
+
+    public void OnGunPlayerSelect(InputAction.CallbackContext ctx)
+    {
+        PlayerSelect.gunPlayerDevice = ctx.control.device;
+    }
+
+    public void OnSwordPlayerSelect(InputAction.CallbackContext ctx)
+    {
+        PlayerSelect.swordPlayerDevice = ctx.control.device;
+    }
+
+    public void OnGunPlayerDeselect(InputAction.CallbackContext ctx)
+    {
+        if (PlayerSelect.gunPlayerDevice == ctx.control.device)
+        {
+            PlayerSelect.gunPlayerDevice = null;
+        }
+    }
+
+    public void OnSwordPlayerDeselect(InputAction.CallbackContext ctx)
+    {
+        if (PlayerSelect.swordPlayerDevice == ctx.control.device)
+        {
+            PlayerSelect.swordPlayerDevice = null;
         }
     }
 }
