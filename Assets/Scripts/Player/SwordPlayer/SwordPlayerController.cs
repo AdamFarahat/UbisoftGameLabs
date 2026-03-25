@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -91,9 +90,15 @@ public class SwordPlayerController : PlayerController
         laneBound.DashStart += OnDashStart;
         laneBound.DashEnd += OnDashEnd;
 
-        Assert.IsNotNull(PlayerSelect.swordPlayerDevice);
-        playerInput.user.UnpairDevices();
-        InputUser.PerformPairingWithDevice(PlayerSelect.swordPlayerDevice, playerInput.user);
+        if (PlayerSelect.swordPlayerDevice != null)
+        {
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(PlayerSelect.swordPlayerDevice, playerInput.user);
+        }
+        else
+        {
+            Debug.LogError("Sword player device is null");
+        }
     }
 
     protected override void Start()
