@@ -63,16 +63,10 @@ public class GunPlayerController : PlayerController
         Assert.IsNotNull(holster);
         grenadeBelt = GetComponentInChildren<GrenadeBelt>();
         Assert.IsNotNull(grenadeBelt);
-
-        if (PlayerSelect.gunPlayerDevice != null)
-        {
-            playerInput.user.UnpairDevices();
-            InputUser.PerformPairingWithDevice(PlayerSelect.gunPlayerDevice, playerInput.user);
-        }
-        else
-        {
-            Debug.LogWarning("Gun player device was not assigned in PlayerSelect.");
-        }
+        Assert.IsNotNull(PlayerSelect.gunPlayerDevice);
+        playerInput.user.UnpairDevices();
+        InputUser.PerformPairingWithDevice(PlayerSelect.gunPlayerDevice, playerInput.user);
+       
     }
 
     protected override void Start()
