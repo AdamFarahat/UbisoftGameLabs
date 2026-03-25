@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 
@@ -16,12 +17,15 @@ public class SwordPlayerController : PlayerController
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
     [SerializeField] private float fallAcceleration = 500f;
-    [SerializeField] private float attackDuration = 0.5f;
+
+    [Header("Attcking")]
+    [SerializeField] private float attackDuration = 0.2f;
 
     private float parryTimer = 0f;
 
     bool canBlock = true;
-    [SerializeField] private float blockCooldown = 3f;
+    [Header("Blocking")]
+    public float blockCooldown = 3f;
     private float blockCooldownPercent = 0f;
     public Action OnBlockCooldownReady;
 
@@ -37,6 +41,16 @@ public class SwordPlayerController : PlayerController
 
     private SpriteAnimator animator;
     private Coroutine delayedAnimation = null;
+
+    // Begin tutorial settings
+    public bool slashEnabled = true;
+    public bool blockEnabled = true;
+    public bool jumpEnabled = true;
+
+    public UnityAction PressedSlash;
+    public UnityAction PressedBlock;
+    public UnityAction PressedJump;
+    // End tutorial settings
 
     private enum SwordPlayerStates
     {
@@ -172,6 +186,10 @@ public class SwordPlayerController : PlayerController
 
     private void Jump(InputAction.CallbackContext ctx)
     {
+        if (!jumpEnabled)
+            return;
+        PressedJump?.Invoke();
+
         if (Stunned)
             return;
 
@@ -231,8 +249,15 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
+        if (!slashEnabled)
+            return;
+        PressedSlash?.Invoke();
+
         if (Stunned)
             return;
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
+
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Attack button pressed with super ready");
@@ -252,7 +277,7 @@ public class SwordPlayerController : PlayerController
             state = SwordPlayerStates.Attacking;
             PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);
-            
+
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(attackDuration);
@@ -260,15 +285,20 @@ public class SwordPlayerController : PlayerController
                 attackRoutine = null;
                 swordHitBox.gameObject.SetActive(false);
             }
-            
+
             attackRoutine = StartCoroutine(Routine());
         }
     }
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (!blockEnabled)
+            return;
+        PressedBlock?.Invoke();
+
         if (Stunned)
             return;
+
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
         {
             //Set block button pressed super to true
@@ -299,6 +329,9 @@ public class SwordPlayerController : PlayerController
 
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
+        if (!blockEnabled)
+            return;
+
         if (Stunned)
             return;
 
@@ -374,6 +407,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Attacking:
                     if (!enemy.HasShield() && enemy.OnParried())
                     {
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
                         playerStats.AddSwordSuper(4f);
                         AddContinuousMultiplier(attackingMultiplierGain);
                         AddScore(enemy.Score);
@@ -382,6 +416,7 @@ public class SwordPlayerController : PlayerController
                 case SwordPlayerStates.Parrying:
                     if (enemy.OnParried())
                     {
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
                         playerStats.AddSwordSuper(5f);
                         AddContinuousMultiplier(meleeParryMultiplierGain);
                         AddScore(enemy.Score);
@@ -393,6 +428,7 @@ public class SwordPlayerController : PlayerController
                     {
                         if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
                         {
+                            //TODO Different SFX for blocking hit vs parry hit?
                             playerStats.AddSwordSuper(2f);
                             AddContinuousMultiplier(blockingMultiplierGain);
                             AddScore(enemy.Score);

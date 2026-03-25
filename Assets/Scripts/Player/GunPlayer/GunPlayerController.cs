@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 
@@ -19,16 +20,18 @@ public class GunPlayerController : PlayerController
     public float GrenadeKillMultiplierGain => grenadeKillMultiplierGain;
 
     private Holster holster;
-    private GrenadeBelt grenadeBelt;
+    public Holster Holster => holster;
 
-    [Header ("Super")]
+    private GrenadeBelt grenadeBelt;
+    public GrenadeBelt GrenadeBelt => grenadeBelt;
+
+    [Header("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool fireButtonPressedSuper = false;
     private bool grenadeButtonPressedSuper = false;
 
     Coroutine resetFireButtonPressedSuperCoroutine = null;
     Coroutine resetThrowButtonPressedSuperCoroutine = null;
-    
 
     private enum HoldingState
     {
@@ -40,6 +43,16 @@ public class GunPlayerController : PlayerController
     private HoldingState holdingGunInput = HoldingState.Released;
 
     public Action OnGrenadeCooldownReady;
+
+    // Begin tutorial settings
+    public bool shootEnabled = true;
+    public bool throwEnabled = true;
+    public bool toggleGunEnabled = true;
+
+    public UnityAction PressedShoot;
+    public UnityAction PressedThrow;
+    public UnityAction PressedToggle;
+    // End tutorial settings
 
     protected override void Awake()
     {
@@ -103,10 +116,14 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (!shootEnabled)
+            return;
+        PressedShoot?.Invoke();
+
         if (Stunned)
             return;
 
-        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Fire button pressed with super ready");
             //Set fire button pressed super to true
@@ -127,6 +144,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
+        if (!shootEnabled)
+            return;
+
         holdingGunInput = HoldingState.Released;
         if (Stunned)
             holster.CancelFiring();
@@ -136,6 +156,10 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
+        if (!toggleGunEnabled)
+            return;
+        PressedToggle?.Invoke();
+
         if (Stunned)
             return;
 
@@ -144,6 +168,10 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
+        if (!toggleGunEnabled)
+            return;
+        PressedToggle?.Invoke();
+
         if (Stunned)
             return;
 
@@ -152,10 +180,14 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (!throwEnabled)
+            return;
+        PressedThrow?.Invoke();
+
         if (Stunned)
             return;
 
-        if(PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
+        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
             Debug.Log("Grenade button pressed with super ready");
             //Set grenade button pressed super to true
@@ -180,6 +212,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
+        if (!throwEnabled)
+            return;
+
         if (Stunned)
             grenadeBelt.CancelThrow();
         else

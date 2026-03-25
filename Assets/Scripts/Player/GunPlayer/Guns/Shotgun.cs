@@ -28,7 +28,8 @@ public class Shotgun : Gun
     {
         charging = PreStartFiring();
         chargeStartTime = Time.time;
-        // TODO start charge sfx + animation
+        // TODO play charge up animation
+        // TODO play charge up sfx
     }
 
     public override void StopFiring()
@@ -38,6 +39,7 @@ public class Shotgun : Gun
         charging = false;
 
         ShotgunBlast blast = InstantiateShot<ShotgunBlast>();
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunShot, transform.position);
         blast.damage = bulletDamage;
         blast.coneAngle = spreadAngle;
 

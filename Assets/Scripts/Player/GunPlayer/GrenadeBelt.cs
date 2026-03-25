@@ -4,24 +4,46 @@ using UnityEngine.Assertions;
 
 public class GrenadeBelt : MonoBehaviour
 {
+    [Header("Grenade")]
     [SerializeField] private GameObject grenadePrefab;
-    [SerializeField] private Transform crosshairs;
-    [SerializeField] private float maxChargeTime = 1f;
     [SerializeField] private float minThrowRange = 50f;
     [SerializeField] private float maxThrowRange = 100f;
     [SerializeField] private float throwCooldown = 3f;
-    [SerializeField] private float grenadeGravity = 100f;
     [SerializeField] private Vector3 grenadeInitialDirection = new(0f, 1f, 1f);
+    [SerializeField] private Transform throwPoint;
+
+    [Header("Crosshairs")]
+    [SerializeField] private Transform crosshairs;
+    [SerializeField] private float crosshairsStart = 0.5f;
+    [SerializeField] private float crosshairsVelocity = -1f;
+    [SerializeField] private float crosshairsRotationVelocity = 90f;
 
     public Action OnCooldownReady;
     private bool throwing = false;
     private float throwChargeTime = 0f;
     private float cooldown = 0f;
+    private Billboard crosshairsBillboard;
+    private GunAnimationManager animator;
+
+    public float ThrowCooldown => throwCooldown;
+
+    public void SetThrowCooldown(float cooldown)
+    {
+        throwCooldown = cooldown;
+    }
 
     private void Awake()
     {
         Assert.IsNotNull(grenadePrefab);
+        Assert.IsNotNull(throwPoint);
+        Assert.IsNotNull(crosshairs);
         grenadeInitialDirection.Normalize();
+
+        crosshairsBillboard = crosshairs.GetComponentInChildren<Billboard>();
+        Assert.IsNotNull(crosshairsBillboard);
+
+        animator = GetComponentInParent<GunAnimationManager>();
+        Assert.IsNotNull(animator);
     }
 
     private void Start()
@@ -42,15 +64,13 @@ public class GrenadeBelt : MonoBehaviour
         else if (cooldown > 0f)
         {
             if (!PlayerStats.Instance.IsSuperActive())
-            {
-                cooldown -= Time.deltaTime; 
-            }
+                cooldown -= Time.deltaTime;
             else
-            {
                 cooldown = 0f;
-            }
         }
+
         SyncCrosshairsPosition();
+        crosshairsBillboard.rotation += crosshairsRotationVelocity * Time.deltaTime;
     }
 
     public void ChargeThrow()
@@ -59,15 +79,19 @@ public class GrenadeBelt : MonoBehaviour
         {
             SetThrowing(true);
             throwChargeTime = 0f;
-            if(!PlayerStats.Instance.IsSuperActive()){
+            if (!PlayerStats.Instance.IsSuperActive())
                 cooldown = throwCooldown;
-            }
+
+            animator.StartGrenadeAim();
+            // TODO sfx ?
         }
     }
 
     public void CancelThrow()
     {
         SetThrowing(false);
+        animator.StopGrenadeAim();
+        // TODO sfx ?
     }
 
     public void Throw()
@@ -76,24 +100,25 @@ public class GrenadeBelt : MonoBehaviour
             return;
 
         SetThrowing(false);
+        animator.StopGrenadeAim();
+        animator.PlayGrenadeThrow();
+
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeThrow, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeThrow, transform.position);
 
-        grenade.transform.position = transform.position;
-        grenade.gravity = grenadeGravity;
+        grenade.transform.position = throwPoint.position;
         grenade.initialDirection = grenadeInitialDirection;
         grenade.range = CalcGrenadeRange();
     }
 
     private float CalcGrenadeRange()
     {
-        float a = (throwChargeTime / maxChargeTime) % 2f;
-        if (a > 1f)
-            a = 2f - a;
-        return Mathf.Lerp(minThrowRange, maxThrowRange, Mathf.Clamp01(a));
+        float t = 2f * crosshairsVelocity * throwChargeTime + crosshairsStart;
+        float cos = Mathf.Cos(Mathf.PI * t);
+        return 0.5f * (minThrowRange - maxThrowRange) * cos + 0.5f * (minThrowRange + maxThrowRange);
     }
 
     private void SyncCrosshairsPosition()

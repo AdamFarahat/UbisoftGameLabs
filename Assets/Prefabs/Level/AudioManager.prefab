@@ -44,42 +44,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
-  <playerPistolShot>k__BackingField:
+  <PlayerRevolverShot>k__BackingField:
     Guid:
       Data1: -237387748
       Data2: 1206679153
       Data3: 546449038
       Data4: 1156238603
-    Path: event:/PlayerPistolShot
-  <playerShotgunShot>k__BackingField:
+    Path: event:/PlayerWeapons/PlayerRevolverShot
+  <PlayerRevolverAltShot>k__BackingField:
+    Guid:
+      Data1: 167299772
+      Data2: 1152193592
+      Data3: 500736156
+      Data4: -177089594
+    Path: event:/PlayerWeapons/PlayerRifleOverheat
+  <PlayerRevolverImpact>k__BackingField:
+    Guid:
+      Data1: 90658782
+      Data2: 1078374022
+      Data3: 1989879686
+      Data4: -820542591
+    Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
+  <PlayerRevolverNotReady>k__BackingField:
+    Guid:
+      Data1: 1969619031
+      Data2: 1173442005
+      Data3: -1119069253
+      Data4: -895948633
+    Path: event:/PlayerWeapons/PlayerRevolverNotReady
+  <PlayerRevolverSelect>k__BackingField:
+    Guid:
+      Data1: 1076003823
+      Data2: 1279739258
+      Data3: -1885382211
+      Data4: -668057458
+    Path: event:/PlayerWeapons/PlayerRevolverSelect
+  <PlayerShotgunShot>k__BackingField:
     Guid:
       Data1: -17541028
       Data2: 1276222511
       Data3: -495441730
       Data4: -1032015244
-    Path: event:/PlayerShotgunShot
-  <playerMachinegunShot>k__BackingField:
+    Path: event:/PlayerWeapons/PlayerShotgunShot
+  <PlayerShotgunSelect>k__BackingField:
+    Guid:
+      Data1: 988885455
+      Data2: 1273136077
+      Data3: 1725795461
+      Data4: 1236247330
+    Path: event:/PlayerWeapons/PlayerShotgunSelect
+  <PlayerMachinegunShot>k__BackingField:
     Guid:
       Data1: -1595991602
       Data2: 1138323884
       Data3: -1387455846
       Data4: 2112771498
-    Path: event:/PlayerMachinegunShot
-  <playerGrenadeThrow>k__BackingField:
+    Path: event:/PlayerWeapons/PlayerRifleShot
+  <PlayerMachinegunOverheat>k__BackingField:
+    Guid:
+      Data1: 167299772
+      Data2: 1152193592
+      Data3: 500736156
+      Data4: -177089594
+    Path: event:/PlayerWeapons/PlayerRifleOverheat
+  <PlayerMachinegunSelect>k__BackingField:
+    Guid:
+      Data1: -2082601145
+      Data2: 1340393529
+      Data3: 2141118087
+      Data4: -412552335
+    Path: event:/PlayerWeapons/PlayerRifleSelect
+  <PlayerGrenadeThrow>k__BackingField:
     Guid:
       Data1: 1917402141
       Data2: 1096397505
       Data3: -869755234
       Data4: 1800542975
-    Path: event:/PlayerGrenadeThrow
-  <playerGrenadeExplode>k__BackingField:
+    Path: event:/PlayerWeapons/PlayerGrenadeThrow
+  <PlayerGrenadeExplode>k__BackingField:
     Guid:
       Data1: 115624427
       Data2: 1214022194
       Data3: -2098313322
       Data4: 1418859912
-    Path: event:/PlayerGrenadeExplode
-  <enemyWeaponShot>k__BackingField:
+    Path: event:/PlayerWeapons/PlayerGrenadeExplode
+  <PlayerSwordSlash>k__BackingField:
+    Guid:
+      Data1: 693652536
+      Data2: 1288883743
+      Data3: -1662414182
+      Data4: 13236103
+    Path: event:/PlayerWeapons/PlayerSwordSlash
+  <PlayerSwordHit>k__BackingField:
+    Guid:
+      Data1: -1317212057
+      Data2: 1214736076
+      Data3: 1164651163
+      Data4: 1957029962
+    Path: event:/PlayerWeapons/PlayerSwordHit
+  <PlayerSwordParry>k__BackingField:
+    Guid:
+      Data1: 242281762
+      Data2: 1277387645
+      Data3: 292240524
+      Data4: 2139597516
+    Path: event:/PlayerWeapons/PlayerSwordParry
+  <EnemyWeaponShot>k__BackingField:
     Guid:
       Data1: -327730630
       Data2: 1140212501

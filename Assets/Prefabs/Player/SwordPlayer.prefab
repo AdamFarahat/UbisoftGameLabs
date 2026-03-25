@@ -79,7 +79,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3b17be01f4a09314fa7ef7b4420bd8c9, type: 3}
     - target: {fileID: 5473658397883171689, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 148.59303
+      value: 150.59303
       objectReference: {fileID: 0}
     - target: {fileID: 5473658397883171689, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_LocalPosition.y
@@ -125,6 +125,26 @@ PrefabInstance:
       propertyPath: swordHitBox
       value: 
       objectReference: {fileID: 2978410399742050359}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 739cfae3-e0cb-401c-a9b3-3b69a4d98f2e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: 540d4f07-2428-4916-89a5-4f30ba88ed31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: 'Player/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

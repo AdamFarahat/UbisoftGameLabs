@@ -17,8 +17,29 @@ public class LaneSet : MonoBehaviour
 
     public static int LaneCount => 5;
 
+    [Header("Layout")]
     [SerializeField] private float laneSeparation = 12f;
-    [SerializeField] private Transform playerTargetHeight;
+
+    [SerializeField] private Transform heartLine;
+    public static float HeartLine => Instance.heartLine.position.z;
+
+    [SerializeField] private Transform visibleEndLine;
+    public static float VisibleEndLine => Instance.visibleEndLine.position.z;
+
+    [SerializeField] private Transform playerTarget;
+    public static float PlayerTargetHeight => Instance.playerTarget.position.y;
+    public static float PlayerLine => Instance.playerTarget.position.z;
+
+    [SerializeField] private Transform spawnLine;
+    public static float SpawnLine => Instance.spawnLine.position.z;
+
+    [SerializeField] private Transform enemyMoveBufferLine;
+    public static float EnemyMoveBufferLine => Instance.enemyMoveBufferLine.position.z;
+    
+    [SerializeField] private Transform enemyShootBufferLine;
+    public static float EnemyShootBufferLine => Instance.enemyShootBufferLine.position.z;
+
+    [Header("Highlights")]
     [SerializeField] private SpriteRenderer[] highlights;
     [SerializeField] private Sprite gunHighlight;
     [SerializeField] private Sprite swordHighlight;
@@ -37,7 +58,10 @@ public class LaneSet : MonoBehaviour
     {
         instance = this;
 
-        Assert.IsNotNull(playerTargetHeight);
+        Assert.IsNotNull(heartLine);
+        Assert.IsNotNull(visibleEndLine);
+        Assert.IsNotNull(playerTarget);
+        Assert.IsNotNull(spawnLine);
 
         Assert.IsTrue(highlights.Length == LaneCount);
         Assert.IsNotNull(gunHighlight);
@@ -125,32 +149,6 @@ public class LaneSet : MonoBehaviour
             highlight.sprite = gunHighlight;
     }
 
-    public static float PlayerLine
-    {
-        get
-        {
-            float line = 0f;
-            int numPlayers = 0;
-            if (GunPlayerController.Instance != null)
-            {
-                line += GunPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            if (SwordPlayerController.Instance != null)
-            {
-                line += SwordPlayerController.Instance.GetLaneDistance();
-                numPlayers++;
-            }
-            return numPlayers > 0 ? line / numPlayers : line;
-        }
-    }
-
-    public static float HeartLine => -50f;
-
-    public static float VisibleEndLine => 110f;
-
-    public static float PlayerTargetHeight => Instance.playerTargetHeight.position.y;
-
     private Vector3 LaneStart(int laneIndex)
     {
         int offsetIndex = laneIndex - Mathf.FloorToInt(0.5f * LaneCount);
@@ -173,5 +171,11 @@ public class LaneSet : MonoBehaviour
     public Quaternion GetLaneDirection()
     {
         return Quaternion.LookRotation(transform.forward);
+    }
+
+    public static float ScreenAngleOfVector(Vector3 vector)
+    {
+        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
+        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }

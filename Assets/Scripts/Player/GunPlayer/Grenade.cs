@@ -7,8 +7,8 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
+    [SerializeField] private float gravity = 300f;
 
-    public float gravity = 100f;
     public Vector3 initialDirection = new(0f, 1f, 1f);
     public float range = 100f;
     private float verticalVelocity = 0f;
@@ -21,7 +21,9 @@ public class Grenade : MonoBehaviour
     {
         initialDirection.Normalize();
 
-        float velocity = Mathf.Sqrt((0.5f * range * gravity) / (initialDirection.y * initialDirection.z));
+        float denominator = 2f * (range * initialDirection.y * initialDirection.z + transform.position.y * initialDirection.z * initialDirection.z);
+        float velocity = range * Mathf.Sqrt(gravity / denominator);
+
         verticalVelocity = velocity * initialDirection.y;
         forwardVelocity = velocity * initialDirection.z;
     }
@@ -42,6 +44,9 @@ public class Grenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetComponentInParent<GrenadeImmune>())
+            return;
+
         if (exploding)
         {
             Enemy enemy = other.GetComponentInParent<Enemy>();
@@ -84,7 +89,7 @@ public class Grenade : MonoBehaviour
 
         exploding = true;
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeExplode, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 
         StartCoroutine(Explosion());
     }

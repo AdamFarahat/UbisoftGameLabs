@@ -4,12 +4,20 @@ using UnityEngine.Assertions;
 public class Holster : MonoBehaviour
 {
     private Gun[] guns;
+    public int NumberOfGuns => guns.Length;
+
     private int activeGunIndex = 0;
+    public int ActiveGunIndex => activeGunIndex;
+
+    private GunAnimationManager animator;
 
     private void Awake()
     {
         guns = GetComponents<Gun>();
         Assert.IsTrue(guns.Length > 0);
+
+        animator = GetComponentInParent<GunAnimationManager>();
+        Assert.IsNotNull(animator);
     }
 
     public void StartFiring()
@@ -35,12 +43,36 @@ public class Holster : MonoBehaviour
     public void ToggleUp()
     {
         activeGunIndex = (activeGunIndex + 1) % guns.Length;
-        Debug.Log("Switch to " + guns[activeGunIndex]);
+        animator.GunIndex = activeGunIndex;
+        switch (guns[activeGunIndex])
+        {
+            case Revolver:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
+                break;
+            case Shotgun:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
+                break;
+            case MachineGun:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
+                break;
+        }
     }
 
     public void ToggleDown()
     {
         activeGunIndex = (activeGunIndex - 1 + guns.Length) % guns.Length;
-        Debug.Log("Switch to " + guns[activeGunIndex]);
+        animator.GunIndex = activeGunIndex;
+        switch (guns[activeGunIndex])
+        {
+            case Revolver:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverSelect, transform.position);
+                break;
+            case Shotgun:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunSelect, transform.position);
+                break;
+            case MachineGun:
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunSelect, transform.position);
+                break;
+        }
     }
 }

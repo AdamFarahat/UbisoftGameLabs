@@ -26,6 +26,11 @@ public class LaneBound : MonoBehaviour
         set { laneDistance = value; SyncLane(); }
     }
 
+    private void Start()
+    {
+        SyncLane();
+    }
+
     private void OnValidate()
     {
         if (LaneSet.Instance != null)
