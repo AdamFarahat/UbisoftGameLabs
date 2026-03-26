@@ -194,6 +194,7 @@ MonoBehaviour:
   shootingRange: 10000
   bulletSpeed: 80
   spawnPoint: {fileID: 5688092269469166186}
+  projectileStun: 1
 --- !u!114 &2601678676552096607
 MonoBehaviour:
   m_ObjectHideFlags: 0

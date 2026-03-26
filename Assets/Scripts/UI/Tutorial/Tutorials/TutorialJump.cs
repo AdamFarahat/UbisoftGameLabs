@@ -5,8 +5,8 @@ using UnityEngine.Assertions;
 public class TutorialJump : TutorialBase
 {
     [SerializeField] private GameObject gunGruntsRoot;
-    [SerializeField] private float minDuration = 6f;
-    [SerializeField] private float paddingAfterJump = 2f;
+    [SerializeField] private float shootingDuration = 6f;
+    [SerializeField] private float endingPadding = 2f;
 
     private TutorialGunGrunt[] gunGrunts;
 
@@ -44,19 +44,17 @@ public class TutorialJump : TutorialBase
         float startTime = Time.time;
         IEnumerator Routine()
         {
-            foreach (TutorialGunGrunt gunGrunt in gunGrunts)
-                gunGrunt.Spawn();
-
             while (!pressedJump)
                 yield return null;
 
-            if (Time.time - startTime < minDuration)
-                yield return new WaitForSeconds(minDuration - (Time.time - startTime));
+            foreach (TutorialGunGrunt gunGrunt in gunGrunts)
+                gunGrunt.Spawn();
+            yield return new WaitForSeconds(shootingDuration);
 
             foreach (TutorialGunGrunt gunGrunt in gunGrunts)
                 gunGrunt.Despawn();
+            yield return new WaitForSeconds(endingPadding);
 
-            yield return new WaitForSeconds(paddingAfterJump);
             EndTutorial();
         }
 

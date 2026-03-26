@@ -15,6 +15,9 @@ public class Stunner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!enabled)
+            return;
+
         PlayerController player = other.GetComponentInParent<PlayerController>();
         if (player != null)
         {

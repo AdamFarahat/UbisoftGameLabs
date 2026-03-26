@@ -59,12 +59,12 @@ public class Bullet : MonoBehaviour
 
         dead = true;
         // TODO uncomment once bullet sprites are uploaded
-        //IEnumerator FadeOutRoutine()
-        //{
-        //yield return FadeAnimation.FadeOutRoutine(GetComponentInChildren<SpriteRenderer>());
-        //Destroy(gameObject);  // TODO sfx ?
-        //}
-        //StartCoroutine(FadeOutRoutine());
+        // IEnumerator FadeOutRoutine()
+        // {
+        //     yield return FadeAnimation.FadeOutRoutine(GetComponentInChildren<SpriteRenderer>());
+        //     Destroy(gameObject);  // TODO sfx ?
+        // }
+        // StartCoroutine(FadeOutRoutine());
         Destroy(gameObject);  // TODO sfx ?
     }
     private void OnEnemyKill(Enemy enemy)

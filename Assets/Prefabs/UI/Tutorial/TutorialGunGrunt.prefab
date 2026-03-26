@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2370a5a8195ed194ba3b68d625f0c2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialGunGrunt
-  spawnLaneDistance: 200
+  spawnLaneDistance: 300
   spawnDuration: 2
   projectileSpawnPoint: {fileID: 8574577222801914677}
   projectileSpeed: 80

@@ -22,11 +22,22 @@ public class TutorialEnemyLife : MonoBehaviour
         this.GetComponentInHierarchy<Enemy>().Die += () => { dead = true; Die?.Invoke(); };
     }
 
+    private void Start()
+    {
+        Spawn();
+    }
+
     private void OnEnable()
+    {
+        Spawn();
+    }
+
+    private void Spawn()
     {
         if (fadeRoutine != null)
             StopCoroutine(fadeRoutine);
 
+        spriteRenderer.color = Color.white;
         fadeRoutine = StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer));
         // TODO sfx
     }
