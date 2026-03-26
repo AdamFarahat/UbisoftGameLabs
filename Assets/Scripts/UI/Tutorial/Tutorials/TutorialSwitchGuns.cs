@@ -46,9 +46,11 @@ public class TutorialSwitchGuns : TutorialBase
             return;
         }
 
+        gunPlayer.PressedShoot += PressedShoot;
+
         for (int i = 0; i < gunPlayer.Holster.NumberOfGuns; i++)
         {
-            if (i != gunPlayer.Holster.ActiveGunIndex)
+            if (i != gunPlayer.Holster.ActiveGunIndex)  // player already used revolver, no need to check for it here
                 gunsNotSeen.Add(i);
         }
 
@@ -58,14 +60,11 @@ public class TutorialSwitchGuns : TutorialBase
         float age = Time.time;
         IEnumerator Routine()
         {
+            while (gunsNotSeen.Count > 0)
+                yield return null;
+
             foreach (MeleeGruntMovementAI meleeGrunt in meleeGrunts)
                 meleeGrunt.gameObject.SetActive(true);
-
-            while (gunsNotSeen.Count > 0)
-            {
-                gunsNotSeen.Remove(gunPlayer.Holster.ActiveGunIndex);
-                yield return null;
-            }
 
             float duration = Time.time - age;
             if (duration < minDuration)
@@ -90,5 +89,10 @@ public class TutorialSwitchGuns : TutorialBase
         }
 
         StartCoroutine(Transition());
+    }
+
+    private void PressedShoot()
+    {
+        gunsNotSeen.Remove(GunPlayerController.Instance.Holster.ActiveGunIndex);
     }
 }

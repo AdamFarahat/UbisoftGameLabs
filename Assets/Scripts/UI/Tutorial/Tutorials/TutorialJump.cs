@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 public class TutorialJump : TutorialBase
 {
     [SerializeField] private GameObject gunGruntsRoot;
+    [SerializeField] private float spawnDelay = 0.3f;
     [SerializeField] private float shootingDuration = 6f;
     [SerializeField] private float endingPadding = 2f;
 
@@ -48,7 +49,10 @@ public class TutorialJump : TutorialBase
                 yield return null;
 
             foreach (TutorialGunGrunt gunGrunt in gunGrunts)
+            {
                 gunGrunt.Spawn();
+                yield return new WaitForSeconds(spawnDelay);
+            }
             yield return new WaitForSeconds(shootingDuration);
 
             foreach (TutorialGunGrunt gunGrunt in gunGrunts)
