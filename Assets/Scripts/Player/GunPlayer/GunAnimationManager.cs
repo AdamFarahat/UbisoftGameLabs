@@ -15,7 +15,6 @@ public class GunAnimationManager : MonoBehaviour
     }
 
     private string gunIdle = "";
-    private bool aimingGrenade = false;
 
     private SpriteAnimator animator;
 
@@ -64,14 +63,12 @@ public class GunAnimationManager : MonoBehaviour
 
     public void StartGrenadeAim()
     {
-        aimingGrenade = true;
         animator.defaultName = "Grenade Aim";
         animator.PlayDefaultCycle();
     }
 
     public void StopGrenadeAim()
     {
-        aimingGrenade = false;
         animator.defaultName = gunIdle;
         animator.PlayDefaultCycle();
     }

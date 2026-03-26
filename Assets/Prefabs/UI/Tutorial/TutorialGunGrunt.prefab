@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 106214315365850937}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24, y: 0, z: 110}
+  m_LocalPosition: {x: -28, y: 0, z: 110}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -83,6 +83,7 @@ MonoBehaviour:
   maxHealth: 1
   health: 1
   score: 10
+  invulnerable: 0
   deathAnimationDuration: 0.1
 --- !u!1 &3123804467826811019
 GameObject:
