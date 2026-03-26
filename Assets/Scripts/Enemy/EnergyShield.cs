@@ -50,7 +50,7 @@ public class EnergyShield : MonoBehaviour
             IEnumerator Routine()
             {
                 collider.enabled = false;
-                yield return FadeOutAnimation.Routine(spriteRenderer);  // TODO trigger this when attached enemy dies. Add UnityAction to enemy death
+                yield return FadeAnimation.FadeOutRoutine(spriteRenderer);  // TODO trigger this when attached enemy dies. Add UnityAction to enemy death
                 collider.enabled = true;
                 gameObject.SetActive(false);
             }

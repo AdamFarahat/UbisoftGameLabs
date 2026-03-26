@@ -74,7 +74,7 @@ public class EnemyProjectile : MonoBehaviour
         IEnumerator Routine()
         {
             Color color = spriteRenderer.color;
-            yield return FadeOutAnimation.Routine(spriteRenderer);
+            yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
             spriteRenderer.color = color;
             gameObject.SetActive(false);
         }
