@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -7,14 +8,14 @@ using UnityEngine.Assertions;
 public class TutorialSwitchGuns : TutorialBase
 {
     [Header("General")]
-    [SerializeField] private float minDuration = 8f;
     [SerializeField] private GameObject meleeGruntsRoot;
 
     [Header("Descriptions")]
     [SerializeField] private TextMeshProUGUI firstDescription;
+    [SerializeField] private float secondDescriptionWait = 1f;
     [SerializeField] private TextMeshProUGUI secondDescription;
 
-    private MeleeGruntMovementAI[] meleeGrunts;
+    private TutorialEnemyLife[] meleeGrunts;
 
     private readonly HashSet<int> gunsNotSeen = new();
     private bool transitionsSwitched = false;
@@ -24,16 +25,15 @@ public class TutorialSwitchGuns : TutorialBase
         base.Awake();
         
         Assert.IsNotNull(meleeGruntsRoot);
-        meleeGrunts = meleeGruntsRoot.GetComponentsInChildren<MeleeGruntMovementAI>();
+        meleeGrunts = meleeGruntsRoot.GetComponentsInChildren<TutorialEnemyLife>();
 
         Assert.IsNotNull(firstDescription);
         Assert.IsNotNull(secondDescription);
 
         secondDescription.GetComponent<RectTransform>().localScale = new(1f, 0f, 1f);
 
-        foreach (MeleeGruntMovementAI meleeGrunt in meleeGrunts)
-            if (meleeGrunt != null)
-                meleeGrunt.gameObject.SetActive(false);
+        foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
+            meleeGrunt.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
@@ -63,12 +63,10 @@ public class TutorialSwitchGuns : TutorialBase
             while (gunsNotSeen.Count > 0)
                 yield return null;
 
-            foreach (MeleeGruntMovementAI meleeGrunt in meleeGrunts)
+            foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
                 meleeGrunt.gameObject.SetActive(true);
 
-            float duration = Time.time - age;
-            if (duration < minDuration)
-                yield return new WaitForSeconds(minDuration - duration);
+            yield return new WaitUntil(() => meleeGrunts.All(g => g == null || g.Dead));
 
             EndTutorial();
         }
@@ -84,6 +82,7 @@ public class TutorialSwitchGuns : TutorialBase
 
         IEnumerator Transition()
         {
+            yield return new WaitForSeconds(secondDescriptionWait);
             yield return FadeOutRoutine(firstDescription.gameObject);
             yield return FadeInRoutine(secondDescription.gameObject);
         }

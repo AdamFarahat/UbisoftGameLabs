@@ -370,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &48410741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1283,7 +1283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &225388187
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1379,7 +1379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &319319578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1722,7 +1722,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2143,6 +2143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1 &684966716
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,7 +3399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1096856123
 Transform:
   m_ObjectHideFlags: 0
@@ -4035,7 +4036,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4080,6 +4081,10 @@ PrefabInstance:
     - target: {fileID: 1581637196576062325, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: maxHealth
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305194917688610957, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: laneIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2305194917688610957, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: laneDistance
@@ -4143,6 +4148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1332198090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4371,6 +4377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1 &1517801735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4501,9 +4508,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialSwitchGuns
   transitionDuration: 0.3
   paddingDuration: 0.5
-  minDuration: 12
   meleeGruntsRoot: {fileID: 1575349512}
   firstDescription: {fileID: 1651926211}
+  secondDescriptionWait: 1
   secondDescription: {fileID: 1584045559}
 --- !u!222 &1556591198
 CanvasRenderer:
@@ -5016,6 +5023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1659321220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5111,6 +5119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1713567979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5223,7 +5232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5392,6 +5401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1757516002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5527,6 +5537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1817248992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5651,7 +5662,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5696,6 +5707,10 @@ PrefabInstance:
     - target: {fileID: 1581637196576062325, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: maxHealth
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305194917688610957, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: laneIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2305194917688610957, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: laneDistance
@@ -5754,6 +5769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1 &1851449805
 GameObject:
   m_ObjectHideFlags: 0
@@ -5818,7 +5834,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5925,6 +5941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1001 &1882615006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5951,7 +5968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -24
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 5499226226536183485, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6028,7 +6045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1886666465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6231,7 +6248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1934945737
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6565,6 +6582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  fadeInDuration: 0.1
 --- !u!1 &2072840287
 GameObject:
   m_ObjectHideFlags: 0
@@ -6704,8 +6722,7 @@ MonoBehaviour:
   paddingDuration: 0.5
   grenadeEntitiesRoot: {fileID: 225527618}
   parryEntitiesRoot: {fileID: 863545336}
-  spawnLaneDistance: 200
-  spawnDuration: 2
+  fadeInDuration: 1
   cooldownLength: 0
 --- !u!1 &2084150498
 GameObject:

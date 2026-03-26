@@ -7,12 +7,11 @@ public class TutorialSecondaryAction : TutorialBase
 {
     [SerializeField] private GameObject grenadeEntitiesRoot;
     [SerializeField] private GameObject parryEntitiesRoot;
-    [SerializeField] private float spawnLaneDistance = 200f;
-    [SerializeField] private float spawnDuration = 2f;
+    [SerializeField] private float fadeInDuration = 1f;
     [SerializeField] private float cooldownLength = 1.5f;
 
-    private LaneBound[] meleeGrunts;
-    private LaneBound[] flyerGrunts;
+    private TutorialEnemyLife[] meleeGrunts;
+    private TutorialEnemyLife[] flyerGrunts;
 
     private bool pressedThrow = true;
     private bool pressedBlock = true;
@@ -23,17 +22,17 @@ public class TutorialSecondaryAction : TutorialBase
         Assert.IsNotNull(grenadeEntitiesRoot);
         Assert.IsNotNull(parryEntitiesRoot);
 
-        meleeGrunts = grenadeEntitiesRoot.GetComponentsInChildren<LaneBound>();
-        flyerGrunts = parryEntitiesRoot.GetComponentsInChildren<LaneBound>();
+        meleeGrunts = grenadeEntitiesRoot.GetComponentsInChildren<TutorialEnemyLife>();
+        flyerGrunts = parryEntitiesRoot.GetComponentsInChildren<TutorialEnemyLife>();
     }
 
     private void OnDisable()
     {
-        foreach (LaneBound meleeGrunt in meleeGrunts)
+        foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
             if (meleeGrunt != null)
                 meleeGrunt.gameObject.SetActive(false);
 
-        foreach (LaneBound flyerGrunt in flyerGrunts)
+        foreach (TutorialEnemyLife flyerGrunt in flyerGrunts)
             if (flyerGrunt != null)
                 flyerGrunt.gameObject.SetActive(false);
     }
@@ -69,14 +68,20 @@ public class TutorialSecondaryAction : TutorialBase
 
             if (gunPlayer != null)
             {
-                foreach (LaneBound meleeGrunt in meleeGrunts)
-                    SpawnGrunt(meleeGrunt);
+                foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
+                {
+                    meleeGrunt.fadeInDuration = fadeInDuration;
+                    meleeGrunt.gameObject.SetActive(true);
+                }
             }
 
             if (swordPlayer != null)
             {
-                foreach (LaneBound flyerGrunt in flyerGrunts)
-                    SpawnGrunt(flyerGrunt);
+                foreach (TutorialEnemyLife flyerGrunt in flyerGrunts)
+                {
+                    flyerGrunt.fadeInDuration = fadeInDuration;
+                    flyerGrunt.gameObject.SetActive(true);
+                }
             }
 
             while (meleeGrunts.Any(g => g != null && g.isActiveAndEnabled) || flyerGrunts.Any(g => g != null && g.isActiveAndEnabled))
@@ -86,24 +91,5 @@ public class TutorialSecondaryAction : TutorialBase
         }
 
         StartCoroutine(Routine());
-    }
-
-    private void SpawnGrunt(LaneBound grunt)
-    {
-        grunt.gameObject.SetActive(true);
-
-        IEnumerator ArrivalRoutine()
-        {
-            float arrivalDistance = grunt.LaneDistance;
-            grunt.LaneDistance = spawnLaneDistance;
-            for (float t = 0f; t < spawnDuration; t += Time.deltaTime)
-            {
-                grunt.LaneDistance = Mathf.Lerp(spawnLaneDistance, arrivalDistance, Mathf.Clamp01(t / spawnDuration));
-                yield return null;
-            }
-            grunt.LaneDistance = arrivalDistance;
-        }
-
-        StartCoroutine(ArrivalRoutine());
     }
 }

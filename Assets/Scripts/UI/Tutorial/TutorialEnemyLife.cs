@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class TutorialEnemyLife : MonoBehaviour
 {
+    public float fadeInDuration = 0.1f;
     public UnityAction Die;
     private LaneBound lane;
     private bool dead = false;
+    public bool Dead => dead;
 
     private SpriteRenderer[] spriteRenderers;
     private Coroutine[] fadeRoutines;
@@ -43,7 +45,7 @@ public class TutorialEnemyLife : MonoBehaviour
                 StopCoroutine(fadeRoutines[i]);
 
             spriteRenderer.color = Color.white;
-            fadeRoutines[i] = StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer));
+            fadeRoutines[i] = StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, fadeInDuration));
             i++;
         }
 
