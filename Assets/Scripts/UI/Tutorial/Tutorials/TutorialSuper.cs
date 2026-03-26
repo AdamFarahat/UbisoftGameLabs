@@ -25,8 +25,8 @@ public class TutorialSuper : TutorialBase
 
     private readonly List<Enemy> spawnedGrunts = new();
 
+    private bool superPressed = false;
     private bool superEnded = false;
-    private bool transitionsSwitched = false;
 
     protected override void Awake()
     {
@@ -54,6 +54,11 @@ public class TutorialSuper : TutorialBase
 
         IEnumerator Routine()
         {
+            while (!superPressed)
+                yield return null;
+
+            // TODO there's barely any time to see the super ability in action - increase super ability length, particularly for tutorial
+
             float age = 0f;
             while (!superEnded)
             {
@@ -131,9 +136,9 @@ public class TutorialSuper : TutorialBase
 
     private void ShowSecondDescription()
     {
-        if (transitionsSwitched)
+        if (superPressed)
             return;
-        transitionsSwitched = true;
+        superPressed = true;
 
         IEnumerator Transition()
         {
