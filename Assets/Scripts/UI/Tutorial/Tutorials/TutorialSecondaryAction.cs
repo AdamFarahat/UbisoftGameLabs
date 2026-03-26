@@ -49,9 +49,6 @@ public class TutorialSecondaryAction : TutorialBase
             gunPlayer.PressedThrow += () => { pressedThrow = true; };
 
             manager.GunPlayerCooldownUI.SetActive(true);
-
-            foreach (LaneBound meleeGrunt in meleeGrunts)
-                SpawnGrunt(meleeGrunt);
         }
 
         SwordPlayerController swordPlayer = SwordPlayerController.Instance;
@@ -63,16 +60,26 @@ public class TutorialSecondaryAction : TutorialBase
             swordPlayer.PressedBlock += () => { pressedBlock = true; };
 
             manager.SwordPlayerCooldownUI.SetActive(true);
-
-            foreach (LaneBound flyerGrunt in flyerGrunts)
-                SpawnGrunt(flyerGrunt);
         }
 
         IEnumerator Routine()
         {
-            while (!pressedThrow || !pressedBlock
-                    || meleeGrunts.Any(g => g != null && g.isActiveAndEnabled)
-                    || flyerGrunts.Any(g => g != null && g.isActiveAndEnabled))
+            while (!pressedThrow || !pressedBlock)
+                yield return null;
+
+            if (gunPlayer != null)
+            {
+                foreach (LaneBound meleeGrunt in meleeGrunts)
+                    SpawnGrunt(meleeGrunt);
+            }
+
+            if (swordPlayer != null)
+            {
+                foreach (LaneBound flyerGrunt in flyerGrunts)
+                    SpawnGrunt(flyerGrunt);
+            }
+
+            while (meleeGrunts.Any(g => g != null && g.isActiveAndEnabled) || flyerGrunts.Any(g => g != null && g.isActiveAndEnabled))
                 yield return null;
 
             EndTutorial();

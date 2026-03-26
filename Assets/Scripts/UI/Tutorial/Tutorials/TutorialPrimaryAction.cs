@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,7 +14,8 @@ public class TutorialPrimaryAction : TutorialBase
 
     private bool pressedShoot = true;
     private bool pressedSlash = true;
-    private int enemyDeathsLeft = 0;
+
+    private readonly HashSet<TutorialEnemyLife> grunts = new();
 
     protected override void Awake()
     {
@@ -29,7 +32,6 @@ public class TutorialPrimaryAction : TutorialBase
             gunPlayer.shootEnabled = true;
             pressedShoot = false;
             gunPlayer.PressedShoot += () => { pressedShoot = true; };
-            enemyDeathsLeft += spawnCount;
         }
 
         SwordPlayerController swordPlayer = SwordPlayerController.Instance;
@@ -38,7 +40,6 @@ public class TutorialPrimaryAction : TutorialBase
             swordPlayer.slashEnabled = true;
             pressedSlash = false;
             swordPlayer.PressedSlash += () => { pressedSlash = true; };
-            enemyDeathsLeft += spawnCount;
         }
 
         IEnumerator Routine()
@@ -60,7 +61,7 @@ public class TutorialPrimaryAction : TutorialBase
                 yield return null;
             }
 
-            while (enemyDeathsLeft > 0)
+            while (grunts.Any(g => g != null && g.isActiveAndEnabled))
                 yield return null;
 
             EndTutorial();
@@ -94,6 +95,7 @@ public class TutorialPrimaryAction : TutorialBase
         movement.speed = meleeGruntSpeed;
 
         TutorialEnemyLife tutorialEnemy = go.GetComponent<TutorialEnemyLife>();
-        tutorialEnemy.Die += () => { enemyDeathsLeft--; };
+        grunts.Add(tutorialEnemy);
+        tutorialEnemy.Die += () => { grunts.Remove(tutorialEnemy); };
     }
 }
