@@ -26,8 +26,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private GameObject swordPlayerMultiplierUI;
     public GameObject SwordPlayerMultiplierUI => swordPlayerMultiplierUI;
-    [SerializeField] private LaneBound[] disabledLanes;
-    public LaneBound[] DisabledLanes => disabledLanes;
+    [SerializeField] private SpriteRenderer[] disabledLanes;
+    public SpriteRenderer[] DisabledLanes => disabledLanes;
 
     private TutorialBase[] tutorials;
     private int tutorialIndex = -1;
@@ -80,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         gunPlayerMultiplierUI.SetActive(false);
         swordPlayerMultiplierUI.SetActive(false);
 
-        foreach (LaneBound lane in disabledLanes)
+        foreach (SpriteRenderer lane in disabledLanes)
             lane.gameObject.SetActive(false);
 
         foreach (TutorialBase tutorial in tutorials)

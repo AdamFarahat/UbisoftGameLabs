@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class TutorialSwitchLanes : TutorialBase
 {
+    [Header("Animation")]
+    [SerializeField] private float laneFadeInDuration = 0.5f;
+
     private int gunStartingIndex = -1;
     private int swordStartingIndex = -1;
 
@@ -25,8 +28,11 @@ public class TutorialSwitchLanes : TutorialBase
             swordPlayerMoved = false;
         }
 
-        foreach (LaneBound lane in manager.DisabledLanes)
+        foreach (SpriteRenderer lane in manager.DisabledLanes)
+        {
+            StartCoroutine(FadeAnimation.FadeInRoutine(lane, laneFadeInDuration));
             lane.gameObject.SetActive(true);
+        }
 
         IEnumerator Routine()
         {

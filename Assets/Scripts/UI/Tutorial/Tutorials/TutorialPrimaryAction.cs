@@ -9,10 +9,10 @@ public class TutorialPrimaryAction : TutorialBase
     [SerializeField] private float spawnDelay = 1.5f;
     [SerializeField] private float meleeGruntSpeed = 30f;
     [SerializeField] private int spawnCount = 3;
-    [SerializeField] private float postSpawnPadding = 3f;
 
     private bool pressedShoot = true;
     private bool pressedSlash = true;
+    private int enemyDeathsLeft = 0;
 
     protected override void Awake()
     {
@@ -29,6 +29,7 @@ public class TutorialPrimaryAction : TutorialBase
             gunPlayer.shootEnabled = true;
             pressedShoot = false;
             gunPlayer.PressedShoot += () => { pressedShoot = true; };
+            enemyDeathsLeft += spawnCount;
         }
 
         SwordPlayerController swordPlayer = SwordPlayerController.Instance;
@@ -37,6 +38,7 @@ public class TutorialPrimaryAction : TutorialBase
             swordPlayer.slashEnabled = true;
             pressedSlash = false;
             swordPlayer.PressedSlash += () => { pressedSlash = true; };
+            enemyDeathsLeft += spawnCount;
         }
 
         IEnumerator Routine()
@@ -58,7 +60,9 @@ public class TutorialPrimaryAction : TutorialBase
                 yield return null;
             }
 
-            yield return new WaitForSeconds(postSpawnPadding);  // let last enemy wave go
+            while (enemyDeathsLeft > 0)
+                yield return null;
+
             EndTutorial();
         }
 
@@ -88,5 +92,8 @@ public class TutorialPrimaryAction : TutorialBase
         MeleeGruntMovementAI movement = go.GetComponent<MeleeGruntMovementAI>();
         Assert.IsNotNull(movement);
         movement.speed = meleeGruntSpeed;
+
+        TutorialEnemyLife tutorialEnemy = go.GetComponent<TutorialEnemyLife>();
+        tutorialEnemy.Die += () => { enemyDeathsLeft--; };
     }
 }

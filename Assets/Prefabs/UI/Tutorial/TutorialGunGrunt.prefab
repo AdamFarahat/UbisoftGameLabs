@@ -99,9 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
   spriteRenderer: {fileID: 4305162058477117905}
-  Die:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3123804467826811019
 GameObject:
   m_ObjectHideFlags: 0
