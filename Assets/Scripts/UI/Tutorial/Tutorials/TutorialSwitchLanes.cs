@@ -25,6 +25,9 @@ public class TutorialSwitchLanes : TutorialBase
             swordPlayerMoved = false;
         }
 
+        foreach (LaneBound lane in manager.DisabledLanes)
+            lane.gameObject.SetActive(true);
+
         IEnumerator Routine()
         {
             while (true)

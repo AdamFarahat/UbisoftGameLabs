@@ -545,6 +545,10 @@ MonoBehaviour:
   scoreUI: {fileID: 1141389509}
   gunPlayerMultiplierUI: {fileID: 1147496394}
   swordPlayerMultiplierUI: {fileID: 1180164310}
+  disabledLanes:
+  - {fileID: 664118763}
+  - {fileID: 248081116}
+  - {fileID: 367290764}
 --- !u!1001 &63417074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1324,6 +1328,17 @@ Transform:
   - {fileID: 1713567980}
   m_Father: {fileID: 553620751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &248081116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7090590235639942810, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaneBound
 --- !u!1 &319319577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1502,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   m_PrefabInstance: {fileID: 323597106}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &367290764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4112855856900314673, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaneBound
 --- !u!1 &410872306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2102,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584247242}
   m_CullTransparentMesh: 1
+--- !u!114 &664118763 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 811362840360337916, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaneBound
 --- !u!1 &684966716
 GameObject:
   m_ObjectHideFlags: 0
