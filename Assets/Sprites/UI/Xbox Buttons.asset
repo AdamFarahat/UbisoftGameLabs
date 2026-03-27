@@ -41,42 +41,42 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: wA
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 1
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gA
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: oA
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 3
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: bA
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: wB
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 5
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gB
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: oB
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 7
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: bB
   - m_ElementType: 2
     m_Unicode: 65534
@@ -101,47 +101,47 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 12
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: wLeft
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 13
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gLeft
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 14
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: wRight
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 15
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gRight
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 16
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: oUp
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 17
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: bUp
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 18
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gUp
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 19
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: oDown
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 20
-    m_Scale: 2
+    m_Scale: 1.5
     m_Name: gDown
   m_GlyphTable:
   - m_Index: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
@@ -181,7 +181,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 256
@@ -197,7 +197,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 384
@@ -213,7 +213,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
@@ -245,7 +245,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 256
@@ -261,7 +261,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 384
@@ -341,7 +341,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
@@ -373,7 +373,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 256
@@ -389,7 +389,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 384
@@ -405,7 +405,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128
@@ -437,7 +437,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 256
@@ -453,7 +453,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -469,7 +469,7 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 80
+      m_HorizontalBearingY: 92
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 128

@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+// TODO show second description only after pressing the throw/block
 public class TutorialSecondaryAction : TutorialBase
 {
     [SerializeField] private GameObject grenadeEntitiesRoot;

@@ -11,8 +11,8 @@ public class TextButtonIconAnimator : MonoBehaviour
     {
         public string[] names;
         public float frameLength = 0.5f;
-        public int index = 0;
 
+        private int index = 0;
         private float frameAge = 0f;
 
         public void Update()
