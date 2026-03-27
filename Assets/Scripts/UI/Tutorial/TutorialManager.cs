@@ -97,6 +97,8 @@ public class TutorialManager : MonoBehaviour
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
             tutorials[tutorialIndex].DoTutorial();
+        else
+            StartGame();
     }
 
     public void ExitTutorial()
@@ -107,5 +109,10 @@ public class TutorialManager : MonoBehaviour
     private void OnStartButtonPressed()
     {
         tutorials[tutorialIndex].OnStartPressed();
+    }
+
+    private void StartGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

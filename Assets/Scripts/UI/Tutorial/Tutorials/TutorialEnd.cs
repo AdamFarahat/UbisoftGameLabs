@@ -4,4 +4,9 @@ public class TutorialEnd : TutorialBase
     {
         // do nothing
     }
+
+    public override void OnStartPressed()
+    {
+        EndTutorial();
+    }
 }
