@@ -1342,7 +1342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &225527619
 Transform:
   m_ObjectHideFlags: 0
@@ -1828,6 +1828,7 @@ GameObject:
   - component: {fileID: 474212562}
   - component: {fileID: 474212564}
   - component: {fileID: 474212563}
+  - component: {fileID: 474212565}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1874,8 +1875,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to the tutorial! Press <sprite name="wStart"> to quit the tutorial
-    at any time. Press <sprite name="wSelect"> to continue...
+  m_text: Welcome to the tutorial! Press <sprite name="wSelect"> to quit the tutorial
+    at any time. Press <sprite name="wStart"> to continue...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
   m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
@@ -1954,6 +1955,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474212561}
   m_CullTransparentMesh: 1
+--- !u!114 &474212565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474212561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a170e9a1d0b8a45a415d87ab17bf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextButtonIconAnimator
+  animations:
+  - names:
+    - wSelect
+    - gSelect
+    frameLength: 0.5
+    index: 0
+  - names:
+    - wStart
+    - gStart
+    frameLength: 0.5
+    index: 0
 --- !u!1 &553620750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &863545337
 Transform:
   m_ObjectHideFlags: 0
@@ -3399,7 +3423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1096856123
 Transform:
   m_ObjectHideFlags: 0
@@ -4535,7 +4559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1575349513
 Transform:
   m_ObjectHideFlags: 0
