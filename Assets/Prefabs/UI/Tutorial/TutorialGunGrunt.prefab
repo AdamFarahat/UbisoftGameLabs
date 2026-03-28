@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2242863451065911921}
   - component: {fileID: 77384089512317370}
   - component: {fileID: 4331470094340991282}
+  - component: {fileID: 170945655306248919}
   m_Layer: 6
   m_Name: TutorialGunGrunt
   m_TagString: Enemy
@@ -81,8 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  maxHealth: 1
-  health: 1
+  maxHealth: 1000000
+  health: 1000000
   score: 10
   invulnerable: 0
   deathAnimationDuration: 0.1
@@ -98,7 +99,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
-  spriteRenderer: {fileID: 4305162058477117905}
+  fadeInDuration: 0.1
+--- !u!65 &170945655306248919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106214315365850937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 3, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3123804467826811019
 GameObject:
   m_ObjectHideFlags: 0
