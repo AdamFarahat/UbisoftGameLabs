@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 public class SpriteAnimator : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class SpriteAnimator : MonoBehaviour
     }
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Image image;
     [SerializeField] private Animation[] animations;
     public string defaultName = "Idle";
     private readonly Dictionary<string, Animation> animationMap = new();
@@ -23,9 +25,14 @@ public class SpriteAnimator : MonoBehaviour
     private float lastAnimationStartTime = 0f;
     public float LastAnimationStartTime => lastAnimationStartTime;
 
+    private string currentAnimationName;
+    private bool isLooping;
+    private float pausedTime;
+
     private void Awake()
     {
-        Assert.IsNotNull(spriteRenderer);
+        if (spriteRenderer == null)
+            Assert.IsNotNull(image);
 
         foreach (Animation animation in animations)
         {
@@ -48,6 +55,39 @@ public class SpriteAnimator : MonoBehaviour
     private void Start()
     {
         PlayDefaultCycle();
+    }
+
+    private void OnDisable()
+    {
+        if (animationRoutine == null)
+            return;
+
+        StopCoroutine(animationRoutine);
+        animationRoutine = null;
+
+        if (!string.IsNullOrEmpty(currentAnimationName))
+            pausedTime = Mathf.Repeat(Time.time - lastAnimationStartTime, GetAnimationDuration(currentAnimationName));
+    }
+
+    private void OnEnable()
+    {
+        if (!string.IsNullOrEmpty(currentAnimationName))
+        {
+            if (isLooping)
+                PlayCycle(currentAnimationName, pausedTime);
+            else
+                PlayOneShot(currentAnimationName, pausedTime);
+        }
+        else
+            PlayDefaultCycle();
+    }
+
+    private void SetSprite(Sprite sprite)
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.sprite = sprite;
+        if (image != null)
+            image.sprite = sprite;
     }
 
     public float GetAnimationDuration(string name)
@@ -76,6 +116,9 @@ public class SpriteAnimator : MonoBehaviour
             return;
         }
 
+        currentAnimationName = name;
+        isLooping = false;
+
         if (animationRoutine != null)
             StopCoroutine(animationRoutine);
 
@@ -83,7 +126,7 @@ public class SpriteAnimator : MonoBehaviour
         {
             yield return PlayAllFrames(animationMap[name], skipTime);
             animationRoutine = null;
-            PlayCycle(defaultName);
+            PlayDefaultCycle();
         }
 
         animationRoutine = StartCoroutine(Routine());
@@ -101,6 +144,9 @@ public class SpriteAnimator : MonoBehaviour
             Debug.LogError($"Animation {name} does not exist in animation map");
             return;
         }
+
+        currentAnimationName = name;
+        isLooping = true;
 
         if (animationRoutine != null)
             StopCoroutine(animationRoutine);
@@ -126,18 +172,18 @@ public class SpriteAnimator : MonoBehaviour
                 if (skipTime >= frameLength)
                 {
                     skipTime -= frameLength;
-                    spriteRenderer.sprite = frame;
+                    SetSprite(frame);
                     continue;
                 }
                 else
                 {
-                    spriteRenderer.sprite = frame;
+                    SetSprite(frame);
                     yield return new WaitForSeconds(frameLength - skipTime);
                 }
             }
             else
             {
-                spriteRenderer.sprite = frame;
+                SetSprite(frame);
                 yield return wait;
             }
         }

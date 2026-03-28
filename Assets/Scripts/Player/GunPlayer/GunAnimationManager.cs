@@ -15,7 +15,6 @@ public class GunAnimationManager : MonoBehaviour
     }
 
     private string gunIdle = "";
-    private bool aimingGrenade = false;
 
     private SpriteAnimator animator;
 
@@ -42,7 +41,7 @@ public class GunAnimationManager : MonoBehaviour
         if (deltaLane > 0f)
             animator.PlayCycle($"{gunNames[gunIndex]} Dash Right");
         else if (deltaLane < 0f)
-            animator.PlayCycle("Dash Left");
+            animator.PlayCycle($"Dash Left");
     }
 
     private void OnDashEnd()
@@ -64,14 +63,12 @@ public class GunAnimationManager : MonoBehaviour
 
     public void StartGrenadeAim()
     {
-        aimingGrenade = true;
         animator.defaultName = "Grenade Aim";
         animator.PlayDefaultCycle();
     }
 
     public void StopGrenadeAim()
     {
-        aimingGrenade = false;
         animator.defaultName = gunIdle;
         animator.PlayDefaultCycle();
     }

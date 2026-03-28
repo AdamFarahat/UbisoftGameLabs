@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].name
@@ -77,6 +77,14 @@ PrefabInstance:
       value: Block
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[4].name
+      value: Dash Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[5].name
+      value: Dash Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].duration
       value: 0.1
       objectReference: {fileID: 0}
@@ -93,6 +101,14 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[4].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[5].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].frames.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -106,6 +122,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[3].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[4].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[5].frames.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
@@ -128,6 +152,14 @@ PrefabInstance:
       propertyPath: 'animations.Array.data[3].frames.Array.data[0]'
       value: 
       objectReference: {fileID: 21300000, guid: 4d13affc3089b77419da5c8d14cdc433, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[4].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 268d4e214c2b193419bcba875a80a77f, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[5].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b17be01f4a09314fa7ef7b4420bd8c9, type: 3}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Actions
       value: 

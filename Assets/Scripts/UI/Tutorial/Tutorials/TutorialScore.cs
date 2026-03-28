@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TutorialScore : TutorialBase
 {
-    [SerializeField] private float duration = 5f;
+    [SerializeField] private float scoreGainDuration = 6f;
     [SerializeField] private float multiplierGainPerSecond = 2f;
 
     protected override void StartTutorial()
@@ -28,7 +28,7 @@ public class TutorialScore : TutorialBase
 
         IEnumerator Routine()
         {
-            for (float t = 0f; t < duration; t += Time.deltaTime)
+            for (float t = 0f; t < scoreGainDuration; t += Time.deltaTime)
             {
                 if (gunPlayer != null)
                 {
@@ -44,10 +44,13 @@ public class TutorialScore : TutorialBase
 
                 yield return null;
             }
-
-            EndTutorial();
         }
 
         StartCoroutine(Routine());
+    }
+
+    public override void OnStartPressed()
+    {
+        EndTutorial();
     }
 }

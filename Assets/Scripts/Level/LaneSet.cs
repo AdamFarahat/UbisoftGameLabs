@@ -39,6 +39,9 @@ public class LaneSet : MonoBehaviour
     [SerializeField] private Transform enemyShootBufferLine;
     public static float EnemyShootBufferLine => Instance.enemyShootBufferLine.position.z;
 
+    [SerializeField] private Transform tutorialEnemyDespawnLine;
+    public static float TutorialEnemyDespawnLine => Instance.tutorialEnemyDespawnLine.position.z;
+
     [Header("Highlights")]
     [SerializeField] private SpriteRenderer[] highlights;
     [SerializeField] private Sprite gunHighlight;
@@ -62,6 +65,9 @@ public class LaneSet : MonoBehaviour
         Assert.IsNotNull(visibleEndLine);
         Assert.IsNotNull(playerTarget);
         Assert.IsNotNull(spawnLine);
+        Assert.IsNotNull(enemyMoveBufferLine);
+        Assert.IsNotNull(enemyShootBufferLine);
+        Assert.IsNotNull(tutorialEnemyDespawnLine);
 
         Assert.IsTrue(highlights.Length == LaneCount);
         Assert.IsNotNull(gunHighlight);

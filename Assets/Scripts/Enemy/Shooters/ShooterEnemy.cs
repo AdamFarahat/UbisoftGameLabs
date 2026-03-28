@@ -9,6 +9,7 @@ public class ShooterEnemy : MonoBehaviour
     [SerializeField] protected float shootingRange = 10000f;  // max distance to shoot
     [SerializeField] protected float bulletSpeed = 80f;
     [SerializeField] protected Transform spawnPoint;
+    public bool projectileStun = true;
 
     protected LaneBound lane;
 
@@ -36,7 +37,7 @@ public class ShooterEnemy : MonoBehaviour
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);
         playerPosition.y = LaneSet.PlayerTargetHeight;
         Vector3 direction = playerPosition - spawnPoint.position;
-        projectile.Initialize(spawnPoint, direction, bulletSpeed);
+        projectile.Initialize(spawnPoint, direction, bulletSpeed, projectileStun);
 
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
