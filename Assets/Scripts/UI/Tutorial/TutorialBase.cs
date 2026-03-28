@@ -21,6 +21,7 @@ public abstract class TutorialBase : MonoBehaviour
     {
         IEnumerator Routine()
         {
+            PreTutorial();
             yield return FadeInRoutine(gameObject);
             yield return new WaitForSeconds(paddingDuration);
             StartTutorial();
@@ -33,6 +34,11 @@ public abstract class TutorialBase : MonoBehaviour
     protected IEnumerator FadeInRoutine(GameObject go)
     {
         yield return FadeRoutine(go, 0f, 1f);
+    }
+
+    protected virtual void PreTutorial()
+    {
+        // do nothing
     }
 
     protected virtual void StartTutorial()
