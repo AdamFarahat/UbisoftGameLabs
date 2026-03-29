@@ -81,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 2574227017500021613}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 4.8907375, y: 2.0791168, z: -8.471007}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2825794152309334026}
   - component: {fileID: 7820836869831928129}
   - component: {fileID: 5680084601112107385}
+  - component: {fileID: 1508150310262428899}
   m_Layer: 6
   m_Name: TutorialMeleeGrunt
   m_TagString: Enemy
@@ -268,3 +269,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1508150310262428899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700064226584495951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  spriteRenderer: {fileID: 1714348447996537211}

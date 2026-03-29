@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private GameObject swordPlayerMultiplierUI;
     public GameObject SwordPlayerMultiplierUI => swordPlayerMultiplierUI;
+    [SerializeField] private SpriteRenderer[] disabledLanes;
+    public SpriteRenderer[] DisabledLanes => disabledLanes;
 
     private TutorialBase[] tutorials;
     private int tutorialIndex = -1;
@@ -52,6 +55,7 @@ public class TutorialManager : MonoBehaviour
         if (GunPlayerController.Instance != null)
         {
             GunPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
+            GunPlayerController.Instance.SelectButtonPressed += ExitTutorial;
             GunPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
             GunPlayerController.Instance.shootEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
             GunPlayerController.Instance.throwEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
@@ -61,6 +65,7 @@ public class TutorialManager : MonoBehaviour
         if (SwordPlayerController.Instance != null)
         {
             SwordPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
+            SwordPlayerController.Instance.SelectButtonPressed += ExitTutorial;
             SwordPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
             SwordPlayerController.Instance.slashEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
             SwordPlayerController.Instance.blockEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
@@ -78,15 +83,13 @@ public class TutorialManager : MonoBehaviour
         gunPlayerMultiplierUI.SetActive(false);
         swordPlayerMultiplierUI.SetActive(false);
 
+        foreach (SpriteRenderer lane in disabledLanes)
+            lane.gameObject.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);
 
         NextTutorial();
-    }
-
-    private void OnStartButtonPressed()
-    {
-        ExitTutorial();
     }
 
     public void NextTutorial()
@@ -94,10 +97,22 @@ public class TutorialManager : MonoBehaviour
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
             tutorials[tutorialIndex].DoTutorial();
+        else
+            StartGame();
     }
 
     public void ExitTutorial()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    private void OnStartButtonPressed()
+    {
+        tutorials[tutorialIndex].OnStartPressed();
+    }
+
+    private void StartGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

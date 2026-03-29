@@ -73,4 +73,9 @@ public abstract class TutorialBase : MonoBehaviour
 
         rt.localScale = new(1f, fy, 1f);
     }
+
+    public virtual void OnStartPressed()
+    {
+        // NOP
+    }
 }
