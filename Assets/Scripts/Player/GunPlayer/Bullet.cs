@@ -73,4 +73,7 @@ public class Bullet : MonoBehaviour
         GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
         GunPlayerController.Instance.AddScore(enemy.Score);
     }
+    public void ReverseSpeed() {
+        this.velocity *= -1;
+    }
 }
