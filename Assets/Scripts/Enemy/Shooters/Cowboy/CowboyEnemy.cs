@@ -8,8 +8,6 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
-    [SerializeField] private float checkIfCanPunchInterval = 1f;
-    [SerializeField] private float punchDistance = 10f;
 
     private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state;
@@ -102,12 +100,12 @@ public class CowboyEnemy : ShooterEnemy
 
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (b.IsDead)
+            if (!b.enabled || b.Parried)
             {
                 continue;
             }
 
-            if (IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
+            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
             {
                 dodgedBullet = b;
                 return true;

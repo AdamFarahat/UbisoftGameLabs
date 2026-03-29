@@ -37,7 +37,7 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
                 if (projObj != null)
                 {
                     GameObject proj = ProjectilePool.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
-                    if (proj != null && proj.TryGetComponent(out EnemyProjectile projectileComponent))
+                    if (proj != null && proj.TryGetComponent(out ProjectileBase projectileComponent))
                     {
                         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, shooterAI.transform.position);
                         Vector3 direction = LaneSet.Instance.GetLanePosition(animator.GetComponent<LaneBound>().LaneIndex, LaneSet.PlayerLine) - shooterAI.projSpawnPoint.position;

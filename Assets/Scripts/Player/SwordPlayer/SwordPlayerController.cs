@@ -438,7 +438,7 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out EnemyProjectile projectile))
+        else if (collider.TryGetComponent(out ProjectileBase projectile))
         {
             if (state == SwordPlayerStates.Parrying)
             {
@@ -455,7 +455,7 @@ public class SwordPlayerController : PlayerController
         }
     }
 
-    private void ReflectBackBullet(EnemyProjectile projectile)
+    private void ReflectBackBullet(ProjectileBase projectile)
     {
         projectile.Parry(swordHitBox.transform, parryBulletSpeedMult);
     }

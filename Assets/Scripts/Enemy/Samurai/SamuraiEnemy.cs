@@ -12,26 +12,28 @@ public class SamuraiEnemy : MonoBehaviour
     [SerializeField] private float WalkingSpeed = 10f;
     [SerializeField] private float CheckIfCanSlashInterval = 1f;
     [SerializeField] private float SlashInterval = 1.5f;
+    [SerializeField] private float StunTime = 1f;
     [SerializeField] private int NumberOfSlashes = 2;
     [SerializeField] private float SlashDistance = 10f;
-    [SerializeField] private float SlashDamage = 10f;
-    [SerializeField] private SwordHitBox swordHitBox;
+    [SerializeField] private EnemySwordHitbox swordHitBox;
+
 
     private enum SamuraiState { Walking, Slashing, Parrying};
     private SamuraiState state;
     private float time = 0f;
     private BulletDetector bulletDetector;
-    private int dodgedLaneIndex;
     private Bullet parriedBullet;
     private int numberOfSlashesDone;
     private PlayerStats playerStats;
     private bool canSlash = true;
     protected LaneBound lane;
-
+    private float IndentityMultiplier = 1f;
     protected void Awake()
     {
         lane = GetComponent<LaneBound>();
         playerStats = FindFirstObjectByType<PlayerStats>();
+        bulletDetector = GetComponentInChildren<BulletDetector>();
+        Assert.IsNotNull(bulletDetector);
         Assert.IsNotNull(playerStats);
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
@@ -63,7 +65,7 @@ public class SamuraiEnemy : MonoBehaviour
                     state = SamuraiState.Parrying;
                     time = 0f;
                 }
-                else if (time >= CheckIfCanSlashInterval && IsInSlashingRangeRange())
+                else if (time >= CheckIfCanSlashInterval && IsInSlashingRangeRange() && !(numberOfSlashesDone > NumberOfSlashes))
                 {
                     state = SamuraiState.Slashing;
                     time = 0f;
@@ -72,9 +74,12 @@ public class SamuraiEnemy : MonoBehaviour
                 break;
             case SamuraiState.Parrying:
                 if (parriedBullet) {
-                    parriedBullet.ReverseSpeed();
+                    parriedBullet.Parry(null, IndentityMultiplier);
+                    parriedBullet = null;
                 }
-                //SlashingAnimation
+                //TODO: SlashingAnimation
+               
+
                 HealthCollider.enabled = true;
                 state = SamuraiState.Walking;
                 break;
@@ -82,17 +87,17 @@ public class SamuraiEnemy : MonoBehaviour
                 if (canSlash) {
                     canSlash = false;
                     swordHitBox.gameObject.SetActive(true);
-                    //Play Slashing Animation
+                    //TODO: Play Slashing Animation
                     if (++numberOfSlashesDone > NumberOfSlashes)
                     {
-                        numberOfSlashesDone = 0;
+
+                        time = 0f;
                         state = SamuraiState.Walking;
                         swordHitBox.gameObject.SetActive(false);
                         canSlash = true;
                     }
                     
-                }
-                if (time > SlashInterval) {
+                } if (time > SlashInterval) {
                     time = 0;
                     canSlash = true;
                     swordHitBox.gameObject.SetActive(false);  
@@ -103,15 +108,14 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool BulletComingInRange()
     {
-
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (b.IsDead)
+            if (!b.enabled || b.Parried)
             {
                 continue;
             }
 
-            if (IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
+            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
             {
                 parriedBullet = b;
                 return true;
@@ -150,12 +154,11 @@ public class SamuraiEnemy : MonoBehaviour
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
-        PlayerController player = (collider.GetComponentInParent<SwordPlayerController>() != null) ?
-            collider.GetComponentInParent<SwordPlayerController>() : 
-            collider.GetComponentInParent<GunPlayerController>();
+        PlayerController player = collider.GetComponent<PlayerController>();
         
         if (player) {
-            playerStats.TakeDamage(SlashDamage);
+            //TODO: Stun or take damage
+            player.Stun(StunTime);
         } 
     }
 }

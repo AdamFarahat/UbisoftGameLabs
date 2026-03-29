@@ -6,7 +6,7 @@ public class EnemySwordHitbox : MonoBehaviour
 
     private void Awake()
     {
-        samuraiEnemy = GetComponent<SamuraiEnemy>();
+        //samuraiEnemy = GetComponent<SamuraiEnemy>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
