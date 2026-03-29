@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using TMPro;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameOver gameOverScreen;
 
-
     float health = 1.0f;
     float lerpSpeed = 0.1f;
 
@@ -29,6 +29,11 @@ public class UIManager : MonoBehaviour
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
     private readonly int isSuperID = Shader.PropertyToID("_IsSuper");
     
+    // Tween References to prevent animations from overlapping
+    private Tween gunFillTween;
+    private Tween swordFillTween;
+    private Tween gunColorTween;
+    private Tween swordColorTween;
 
     void Awake()
     {   
@@ -42,7 +47,6 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(swordMultiplierUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
         
-
         Assert.IsNotNull(healthBarUI.material);
         Assert.IsNotNull(superUI.material);
 
@@ -82,38 +86,34 @@ public class UIManager : MonoBehaviour
         swordPlayerCooldownUI.material = new Material(swordPlayerCooldownUI.material);
 
         if (gunPlayerController != null)
+        {
             gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
+            gunPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateGunMultiplierUI);
+        }
 
         if (swordPlayerController != null)
+        {
             swordPlayerController.OnBlockCooldownReady += TriggerSwordCooldownPulse;
+            swordPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateSwordMultiplierUI);
+        }
+
+        if (playerStats != null)
+        {
+            playerStats.SuperStarted += OnSuperStarted;
+            playerStats.SuperEnded += OnSuperEnded;
+        }
+
+        // Set initial fill amounts
+        UpdateGunMultiplierUI();
+        UpdateSwordMultiplierUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Update the materials. If the required instance doesnt exist, simply ignore
-
-        bool isSuperActive = playerStats != null && playerStats.IsSuperActive();
-        float isSuperFloat = isSuperActive ? 1f : 0f;
-
         if (gunPlayerController != null)
         {
             float grenadeCooldown = gunPlayerController.GetCooldownPercent();
             gunPlayerCooldownUI.material.SetFloat(amountID, grenadeCooldown);
-
-            // Set the Super toggle for the Shader Graph
-            gunMultiplierUI.material.SetFloat(isSuperID, isSuperFloat);
-
-            if (isSuperActive) 
-            {
-                // Max out the bar during super
-                gunMultiplierUI.material.SetFloat(amountID, 1f);
-            } 
-            else 
-            {
-                float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
-                gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
-            }
 
             float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
             float gunSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(leftAmountID), gunSuper, lerpSpeed);
@@ -124,21 +124,6 @@ public class UIManager : MonoBehaviour
         {   
             float swordCooldown = swordPlayerController.GetCooldownPercent();
             swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
-
-            // Set the Super toggle for the Shader Graph
-            swordMultiplierUI.material.SetFloat(isSuperID, isSuperFloat);
-
-            if (isSuperActive)
-            {
-                // Max out the bar during super
-                swordMultiplierUI.material.SetFloat(amountID, 1f);
-            }
-            else
-            {
-                // Note: Uncommented the dynamic multiplier line from your original code
-                float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
-                swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
-            }
 
             float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
             float swordSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(rightAmountID), swordSuper, lerpSpeed);
@@ -157,6 +142,57 @@ public class UIManager : MonoBehaviour
             healthBarUI.material.SetFloat(amountID, health);   
         }   
     }
+
+    private void UpdateGunMultiplierUI()
+    {
+        if (playerStats != null && playerStats.IsSuperActive()) return;
+
+        float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
+        float targetValue = ConvertMultiplierToUIValue(gunMultiplier);
+        
+        gunFillTween?.Kill(); 
+        gunFillTween = gunMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    private void UpdateSwordMultiplierUI()
+    {
+        if (playerStats != null && playerStats.IsSuperActive()) return;
+
+        float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
+        float targetValue = ConvertMultiplierToUIValue(swordMultiplier);
+        
+        swordFillTween?.Kill();
+        swordFillTween = swordMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    private void OnSuperStarted()
+    {
+        // Lerp Color to 1
+        gunColorTween?.Kill();
+        swordColorTween?.Kill();
+        gunColorTween = gunMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
+        swordColorTween = swordMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
+
+        // Lerp Fill Amount to 1
+        gunFillTween?.Kill();
+        swordFillTween?.Kill();
+        gunFillTween = gunMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
+        swordFillTween = swordMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
+    }
+
+    private void OnSuperEnded()
+    {
+        // Lerp Color back to 0
+        gunColorTween?.Kill();
+        swordColorTween?.Kill();
+        gunColorTween = gunMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
+        swordColorTween = swordMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
+
+        // Send the bars back to their normal values
+        UpdateGunMultiplierUI();
+        UpdateSwordMultiplierUI();
+    }
+
     float ConvertMultiplierToUIValue(float value)
     {
         float fillAmount = 0.0f;
@@ -169,7 +205,7 @@ public class UIManager : MonoBehaviour
             case 0.75f: fillAmount = 0.67f; break; // x6
             case 1: fillAmount = 1.00f; break; // x8
             default: 
-                fillAmount = value; // Fallback: use the raw value if it's not one of the expected multipliers
+                fillAmount = value; // Fallback to using the raw value for fill amount if it's an unexpected value
                 Debug.LogWarning("Unexpected multiplier value: " + value + ". Using raw value for UI fill amount.");
                 break;
         }
@@ -178,23 +214,39 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Clean up the subscription if the UI is destroyed
+        // Clean up subscriptions
         if (gunPlayerController != null)
+        {
             gunPlayerController.OnGrenadeCooldownReady -= TriggerGunCooldownPulse;
+            gunPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateGunMultiplierUI);
+        }
 
         if (swordPlayerController != null)
+        {
             swordPlayerController.OnBlockCooldownReady -= TriggerSwordCooldownPulse;
+            swordPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateSwordMultiplierUI);
+        }
+
+        if (playerStats != null)
+        {
+            playerStats.SuperStarted -= OnSuperStarted;
+            playerStats.SuperEnded -= OnSuperEnded;
+        }
+
+        // Kill tweens so they don't cause errors after the scene unloads
+        gunFillTween?.Kill();
+        swordFillTween?.Kill();
+        gunColorTween?.Kill();
+        swordColorTween?.Kill();
     }
 
     private void TriggerGunCooldownPulse()
     {
-        // Start the stopwatch for the Shader Graph pulse animation
         gunPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
     }
 
     private void TriggerSwordCooldownPulse()
     {
-        // Start the stopwatch for the Shader Graph pulse animation
         swordPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
     }
 
@@ -211,4 +263,3 @@ public class UIManager : MonoBehaviour
         }
     }
 }
-

@@ -278,16 +278,13 @@ public abstract class PlayerController : MonoBehaviour
         OnDiscreteMultiplierChange?.Invoke();
     }
 
-    // This runs whenever you change a value in the Inspector
+    // For testing purposes only, allows manually setting the discrete multiplier index in the inspector and firing the change event
     private void OnValidate()
     {
-        // We only want to fire the update event if the game is actually running
         if (Application.isPlaying && discreteMultipliers != null && discreteMultipliers.Count > 0)
         {
-            // Keep the index safely within the bounds of your list
             discreteMultiplierIndex = Mathf.Clamp(discreteMultiplierIndex, 0, discreteMultipliers.Count - 1);
             
-            // Fire the event so the UI Text Manager knows to animate the new multiplier
             OnDiscreteMultiplierChange?.Invoke();
         }
     }
