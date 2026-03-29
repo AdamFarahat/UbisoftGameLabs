@@ -226,9 +226,23 @@ public abstract class PlayerController : MonoBehaviour
         this.score += Mathf.CeilToInt(score * GetDiscreteMultiplier());
     }
 
-    public float GetDiscreteMultiplier()
+    public float GetBaseDiscreteMultiplier()
     {
         return discreteMultipliers[discreteMultiplierIndex];
+    }
+
+    // If super is active, discrete multiplier is the sum of the player's base discrete multiplier and the other player's base discrete multiplier
+    public float GetDiscreteMultiplier()
+    {
+        if (PlayerStats.Instance != null && PlayerStats.Instance.IsSuperActive())
+        {
+            float gunMult = GunPlayerController.Instance != null ? GunPlayerController.Instance.GetBaseDiscreteMultiplier() : 1f;
+            float swordMult = SwordPlayerController.Instance != null ? SwordPlayerController.Instance.GetBaseDiscreteMultiplier() : 1f;
+            
+            return gunMult + swordMult; 
+        }
+
+        return GetBaseDiscreteMultiplier();
     }
 
     public float GetNormalizedMultiplier()
@@ -262,5 +276,19 @@ public abstract class PlayerController : MonoBehaviour
     public void TestMultiplier()
     {
         OnDiscreteMultiplierChange?.Invoke();
+    }
+
+    // This runs whenever you change a value in the Inspector
+    private void OnValidate()
+    {
+        // We only want to fire the update event if the game is actually running
+        if (Application.isPlaying && discreteMultipliers != null && discreteMultipliers.Count > 0)
+        {
+            // Keep the index safely within the bounds of your list
+            discreteMultiplierIndex = Mathf.Clamp(discreteMultiplierIndex, 0, discreteMultipliers.Count - 1);
+            
+            // Fire the event so the UI Text Manager knows to animate the new multiplier
+            OnDiscreteMultiplierChange?.Invoke();
+        }
     }
 }

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     private readonly int amountID = Shader.PropertyToID("_Amount");
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
+    private readonly int isSuperID = Shader.PropertyToID("_IsSuper");
     
 
     void Awake()
@@ -92,30 +93,55 @@ public class UIManager : MonoBehaviour
     {
         // Update the materials. If the required instance doesnt exist, simply ignore
 
+        bool isSuperActive = playerStats != null && playerStats.IsSuperActive();
+        float isSuperFloat = isSuperActive ? 1f : 0f;
+
         if (gunPlayerController != null)
         {
             float grenadeCooldown = gunPlayerController.GetCooldownPercent();
             gunPlayerCooldownUI.material.SetFloat(amountID, grenadeCooldown);
 
-            float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
-            gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+            // Set the Super toggle for the Shader Graph
+            gunMultiplierUI.material.SetFloat(isSuperID, isSuperFloat);
+
+            if (isSuperActive) 
+            {
+                // Max out the bar during super
+                gunMultiplierUI.material.SetFloat(amountID, 1f);
+            } 
+            else 
+            {
+                float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
+                gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
+            }
 
             float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
-            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
+            float gunSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(leftAmountID), gunSuper, lerpSpeed);
             superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
         }
 
         if (swordPlayerController != null)
         {   
-            
             float swordCooldown = swordPlayerController.GetCooldownPercent();
             swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
 
-            float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
-            swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
+            // Set the Super toggle for the Shader Graph
+            swordMultiplierUI.material.SetFloat(isSuperID, isSuperFloat);
+
+            if (isSuperActive)
+            {
+                // Max out the bar during super
+                swordMultiplierUI.material.SetFloat(amountID, 1f);
+            }
+            else
+            {
+                // Note: Uncommented the dynamic multiplier line from your original code
+                float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
+                swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
+            }
 
             float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
-            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), lerpSpeed);
+            float swordSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(rightAmountID), swordSuper, lerpSpeed);
             superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
         }
 
