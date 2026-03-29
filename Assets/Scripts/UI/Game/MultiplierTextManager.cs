@@ -70,20 +70,25 @@ public class MultiplierTextManager : MonoBehaviour
         float combinedMult = currentPlayerController.GetDiscreteMultiplier();
         superTextTMP.text = "x" + combinedMult.ToString();
         
-        superText.gameObject.SetActive(true);
-        superText.AnimateTextIn();
-
+        // Double the font size
         superTextTMP.fontSize = originalFontSize * 2;
         
         superText.gameObject.SetActive(true);
-        superText.AnimateTextIn();
+                
+        // Begin pulsing animation
+        superText.transform.DOKill(true);
+        superText.transform.localScale = Vector3.zero;
 
-        // Pulse Animation
-        superText.transform.DOKill(); 
-        superText.transform.localScale = Vector3.one;
-        superText.transform.DOScale(pulseScale, pulseDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo); // Looping pulse
+        // Wait until the text has fully animated in before starting the pulse
+        superText.transform.DOScale(pulseScale, 0.4f).SetEase(Ease.OutQuad).OnComplete(() => 
+            {
+                // Start pulsing
+                if (superText != null && superText.gameObject.activeSelf)
+                {
+                    superText.transform.DOScale(1f, pulseDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                }
+            });
     }
-
     void AnimateText()
     {
         // Entering Super: Hide normal multiplier texts and show super text with combined multiplier
@@ -101,9 +106,6 @@ public class MultiplierTextManager : MonoBehaviour
         {
             // Kill the looping pulse tween so it doesn't run in the background
             superText.transform.DOKill();
-            
-            // Reset the font size
-            superTextTMP.fontSize = originalFontSize;
             
             // Animate out
             superText.AnimateTextOut();
