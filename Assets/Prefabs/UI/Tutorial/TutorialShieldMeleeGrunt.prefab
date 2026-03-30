@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6843507327698051992}
   - component: {fileID: 3882764840141352619}
   - component: {fileID: 8485515423568085778}
+  - component: {fileID: 6958048011332251392}
   m_Layer: 6
   m_Name: TutorialShieldMeleeGrunt
   m_TagString: Enemy
@@ -110,6 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6958048011332251392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280235852196756382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
 --- !u!1 &5562109684951909052
 GameObject:
   m_ObjectHideFlags: 0

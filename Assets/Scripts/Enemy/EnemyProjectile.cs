@@ -14,6 +14,7 @@ public class EnemyProjectile : MonoBehaviour
     private float speed = 80f;
     private bool parried = false;
     private Transform origin;
+    private Stunner stunner;
 
     private void Awake()
     {
@@ -27,12 +28,12 @@ public class EnemyProjectile : MonoBehaviour
         Assert.IsNotNull(sphereCollider);
         normalColliderRadius = sphereCollider.radius;
 
-        Stunner stunner = GetComponent<Stunner>();
+        stunner = GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
     }
 
-    public void Initialize(Transform origin, Vector3 direction, float speed)
+    public void Initialize(Transform origin, Vector3 direction, float speed, bool stun = true)
     {
         this.origin = origin;
         sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
@@ -41,6 +42,7 @@ public class EnemyProjectile : MonoBehaviour
         parried = false;
         sphereCollider.radius = normalColliderRadius;
         enabled = true;
+        stunner.enabled = stun;
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
@@ -74,7 +76,7 @@ public class EnemyProjectile : MonoBehaviour
         IEnumerator Routine()
         {
             Color color = spriteRenderer.color;
-            yield return FadeOutAnimation.Routine(spriteRenderer);
+            yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
             spriteRenderer.color = color;
             gameObject.SetActive(false);
         }

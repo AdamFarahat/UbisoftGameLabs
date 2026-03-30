@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 8642337636174325207}
   - component: {fileID: 2601678676552096607}
   - component: {fileID: 8526617770775972719}
+  - component: {fileID: 3186364677535379323}
   m_Layer: 6
   m_Name: TutorialFlyer
   m_TagString: Enemy
@@ -193,6 +194,7 @@ MonoBehaviour:
   shootingRange: 10000
   bulletSpeed: 80
   spawnPoint: {fileID: 5688092269469166186}
+  projectileStun: 1
 --- !u!114 &2601678676552096607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +222,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a311ddf032a6065498df8d1b3d1c16c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrenadeImmune
+--- !u!114 &3186364677535379323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336121344236462935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f11d9db4dff9b48b6f977aacde3eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
+  spriteRenderer: {fileID: 5240223996301799400}
 --- !u!1 &5623649534063920930
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public abstract class PlayerController : MonoBehaviour
     protected PlayerStats playerStats;
 
     public UnityAction StartButtonPressed;
+    public UnityAction SelectButtonPressed;
 
     // Begin tutorial settings
     public bool moveEnabled = true;
@@ -78,6 +79,7 @@ public abstract class PlayerController : MonoBehaviour
         playerInput.actions["MoveLeft"].performed += OnMoveLeft;
         playerInput.actions["MoveRight"].performed += OnMoveRight;
         playerInput.actions["Start"].performed += OnStartButtonPressed;
+        playerInput.actions["Select"].performed += OnSelectButtonPressed;
     }
 
     protected virtual void OnDisable()
@@ -86,11 +88,17 @@ public abstract class PlayerController : MonoBehaviour
         playerInput.actions["MoveLeft"].performed -= OnMoveLeft;
         playerInput.actions["MoveRight"].performed -= OnMoveRight;
         playerInput.actions["Start"].performed -= OnStartButtonPressed;
+        playerInput.actions["Select"].performed -= OnSelectButtonPressed;
     }
 
     private void OnStartButtonPressed(InputAction.CallbackContext ctx)
     {
         StartButtonPressed?.Invoke();
+    }
+
+    private void OnSelectButtonPressed(InputAction.CallbackContext ctx)
+    {
+        SelectButtonPressed?.Invoke();
     }
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
