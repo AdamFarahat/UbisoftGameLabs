@@ -53,7 +53,7 @@ class LaserShot : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy != null)
+        if (enemy != null && !enemy.HasShield())
             enemiesHitThisFrame.Add(enemy);
     }
 }

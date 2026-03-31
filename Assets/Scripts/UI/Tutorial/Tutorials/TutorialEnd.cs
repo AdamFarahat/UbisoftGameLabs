@@ -2,7 +2,7 @@ public class TutorialEnd : TutorialBase
 {
     protected override void StartTutorial()
     {
-        // do nothing
+        // NOP
     }
 
     public override void OnStartPressed()

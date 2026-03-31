@@ -133,18 +133,34 @@ public class PlayerStats : MonoBehaviour
         gunSuperPercent = 0f;
     }
 
-    public void FillGunSuper()
+    public void FillGunSuper(float duration)
     {
-        currentGunSuper = statDenominator;
-        gunSuperPercent = 1f;
+        IEnumerator Routine()
+        {
+            currentGunSuper = 0f;
+            gunSuperPercent = 0f;
+            for (float t = 0f; t < duration; t += Time.deltaTime)
+            {
+                gunSuperPercent = Mathf.Clamp01(t / duration);
+                currentGunSuper = gunSuperPercent * statDenominator;
+
+                yield return null;
+            }
+            currentGunSuper = statDenominator;
+            gunSuperPercent = 1f;
+        }
+
+        StartCoroutine(Routine());
     }
 
     public void AddGunSuper(float amount)
     {
-        if (IsSuperActive())
-        {
+        if (!superEnabled)
             return;
-        }
+
+        if (IsSuperActive())
+            return;
+
         currentGunSuper += amount;
         currentGunSuper = Mathf.Clamp(currentGunSuper, 0f, statDenominator);
         gunSuperPercent = currentGunSuper / statDenominator;
@@ -156,10 +172,24 @@ public class PlayerStats : MonoBehaviour
         swordSuperPercent = 0f;
     }
 
-    public void FillSwordSuper()
+    public void FillSwordSuper(float duration)
     {
-        currentSwordSuper = statDenominator;
-        swordSuperPercent = 1f;
+        IEnumerator Routine()
+        {
+            currentSwordSuper = 0f;
+            swordSuperPercent = 0f;
+            for (float t = 0f; t < duration; t += Time.deltaTime)
+            {
+                swordSuperPercent = Mathf.Clamp01(t / duration);
+                currentSwordSuper = swordSuperPercent * statDenominator;
+
+                yield return null;
+            }
+            currentSwordSuper = statDenominator;
+            swordSuperPercent = 1f;
+        }
+
+        StartCoroutine(Routine());
     }
 
     public void AddSwordSuper(float amount)
@@ -168,9 +198,8 @@ public class PlayerStats : MonoBehaviour
             return;
 
         if (IsSuperActive())
-        {
             return;
-        }
+
         currentSwordSuper += amount;
         currentSwordSuper = Mathf.Clamp(currentSwordSuper, 0f, statDenominator);
         swordSuperPercent = currentSwordSuper / statDenominator;
