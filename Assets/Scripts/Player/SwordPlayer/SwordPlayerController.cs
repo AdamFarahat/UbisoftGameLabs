@@ -256,7 +256,6 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
 
         if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
         {
@@ -274,6 +273,7 @@ public class SwordPlayerController : PlayerController
 
         if (state == SwordPlayerStates.Normal)
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
             state = SwordPlayerStates.Attacking;
             PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);

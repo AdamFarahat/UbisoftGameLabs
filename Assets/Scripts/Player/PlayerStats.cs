@@ -220,19 +220,25 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator AwaitingSuper()
     {
-        float timer = 0;
+        float timer = 0.0f;
         Debug.Log("Started Awaiting Super Coroutine!");
+        Debug.Log("timer: " + timer + ", activateSuperWaitTime: " + activateSuperWaitTime);
         while (timer < activateSuperWaitTime)
         {
             timer += Time.deltaTime;
-            Debug.Log("gunSuperPrepared: " + gunSuperPrepared + ", swordSuperPrepared: " + swordSuperPrepared + ", !IsSuperActive: +!" + !IsSuperActive());
+            Debug.Log("gunSuperPrepared: " + gunSuperPrepared + ", swordSuperPrepared: " + swordSuperPrepared + ", !IsSuperActive: " + !IsSuperActive());
             if (gunSuperPrepared && swordSuperPrepared && !isSuperActive)
             {
                 Debug.Log("Activating Super from Awaiting Coroutine!");
                 ActivateSuper();
                 yield break;
             }
+
+            yield return null;
         }
+        Debug.Log("Finished Awaiting Super Coroutine without activating super.");
+        swordSuperPrepared = false;
+        gunSuperPrepared = false;
         awaitingSuperCoroutine = null;
     }
 
