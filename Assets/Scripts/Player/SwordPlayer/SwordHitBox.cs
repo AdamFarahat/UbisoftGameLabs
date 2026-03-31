@@ -4,6 +4,8 @@ public class SwordHitBox : MonoBehaviour
 {
     private SwordPlayerController swordPlayerController;
 
+    [SerializeField] private GameObject swordWavePrefab; // Assign this in the inspector with the prefab for the sword wave projectile
+
     private void Awake()
     {
         swordPlayerController = FindFirstObjectByType<SwordPlayerController>();
@@ -26,5 +28,12 @@ public class SwordHitBox : MonoBehaviour
     {
         Debug.Log("SwordHitBox triggered by " + collider.name);
         swordPlayerController.OnSwordHitBoxTriggerEnter(collider);
+    }
+
+    public void ShootSwordWave()
+    {
+        // Implement logic to shoot a sword wave projectile that can hit multiple enemies in the same lane
+        Debug.Log("Shooting sword wave!");
+        GameObject swordWave = Instantiate(swordWavePrefab, transform.position, transform.rotation);
     }
 }

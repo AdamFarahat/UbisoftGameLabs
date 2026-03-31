@@ -277,7 +277,11 @@ public class SwordPlayerController : PlayerController
             state = SwordPlayerStates.Attacking;
             PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);
-
+            if(PlayerStats.Instance.IsSuperActive())
+            {
+                //Shoot a sword wave projectile that does not trigger hitbox but can hit multiple enemies in the same lane
+                swordHitBox.ShootSwordWave();
+            }
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(attackDuration);
