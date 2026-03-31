@@ -195,7 +195,7 @@ public class GunPlayerController : PlayerController
             if (fireButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
             {
                 Debug.Log("Gun Player Activating Super Grenade Throw!");
-                //PlayerStats.Instance.ActivateSuper();
+                PlayerStats.Instance.PrepareGunSuperReady(true);
                 return;
             }
             resetThrowButtonPressedSuperCoroutine = StartCoroutine(ResetThrowButtonPressedSuper());

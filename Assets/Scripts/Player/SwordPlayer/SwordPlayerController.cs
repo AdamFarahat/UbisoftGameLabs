@@ -266,7 +266,7 @@ public class SwordPlayerController : PlayerController
             if (blockButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
             {
                 Debug.Log("Sword Player Activating Super Attack!");
-                //PlayerStats.Instance.ActivateSuper();
+                PlayerStats.Instance.PrepareSwordSuperReady(true);
                 return;
             }
             resetAttackButtonPressedSuperCoroutine = StartCoroutine(ResetAttackButtonPressedSuper());
