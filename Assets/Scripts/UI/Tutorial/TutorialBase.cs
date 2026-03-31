@@ -50,12 +50,12 @@ public abstract class TutorialBase : MonoBehaviour
     {
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
             yield return new WaitForSeconds(paddingDuration);
             yield return FadeOutRoutine(gameObject);
             gameObject.SetActive(false);
             manager.NextTutorial();
         }
-
         StartCoroutine(Routine());
     }
 

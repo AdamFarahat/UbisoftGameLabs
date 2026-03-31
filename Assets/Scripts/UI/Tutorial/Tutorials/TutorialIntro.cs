@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class TutorialIntro : TutorialBase
 {
     protected override void StartTutorial()
@@ -7,6 +9,7 @@ public class TutorialIntro : TutorialBase
 
     public override void OnStartPressed()
     {
+        
         EndTutorial();
     }
 }

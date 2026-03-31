@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class TutorialQuit : TutorialBase
 {
     protected override void StartTutorial()
@@ -7,6 +9,7 @@ public class TutorialQuit : TutorialBase
 
     public override void OnStartPressed()
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
         EndTutorial();
     }
 }

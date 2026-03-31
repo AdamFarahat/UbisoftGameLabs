@@ -92,7 +92,8 @@ public class PlayerSelectInput : MonoBehaviour
             
             //TODO visual update
             // TEMP: slightly shrink the cursor to show it is locked
-            cursorIcon.localScale = new Vector3(0.8f, 0.8f, 1f); 
+            cursorIcon.localScale = new Vector3(0.8f, 0.8f, 1f);
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero); 
         }
     }
 
@@ -116,6 +117,8 @@ public class PlayerSelectInput : MonoBehaviour
         // Notify manager and shift icons 
         manager.UpdateCursorSlot(myPlayerID, currentIndex);
         manager.RefreshCursorOffsets();
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIHover, Vector3.zero);
     }
 
 
@@ -135,7 +138,7 @@ public class PlayerSelectInput : MonoBehaviour
                 // TODO visual update 
                 // TEMP: Visually return the cursor to normal size
                 cursorIcon.localScale = Vector3.one;
-
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UICancel, Vector3.zero);
                 //Check which slot the player is in. Then unset the device for that character based on that
                 if (currentIndex == 0)
                 {
@@ -148,6 +151,7 @@ public class PlayerSelectInput : MonoBehaviour
             }
             else // return to menu 
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UICancel, Vector3.zero);
                 manager.AttemptReturnToMenu(myPlayerID);
             }
         }

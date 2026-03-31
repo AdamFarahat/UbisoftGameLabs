@@ -18,7 +18,6 @@ public class EnemyProjectile : MonoBehaviour
 
     private void Awake()
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
 
@@ -44,6 +43,7 @@ public class EnemyProjectile : MonoBehaviour
         sphereCollider.radius = normalColliderRadius;
         enabled = true;
         stunner.enabled = stun;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
     void Update()
