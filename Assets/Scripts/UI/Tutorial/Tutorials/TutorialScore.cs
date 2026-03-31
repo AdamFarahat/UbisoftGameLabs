@@ -51,7 +51,6 @@ public class TutorialScore : TutorialBase
 
     public override void OnStartPressed()
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
         EndTutorial();
     }
 }
