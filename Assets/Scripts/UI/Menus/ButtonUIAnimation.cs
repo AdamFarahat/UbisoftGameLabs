@@ -25,7 +25,7 @@ public class ButtonUIAnimation : UIAnimation
 
         rectTransform.DOKill(); 
         rectTransform.DOAnchorPos(cachedStartingPos + new Vector2(hoverOffset, 0.0f), hoverDuration).SetEase(Ease.OutQuad);
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIHover,this.transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIHover,Vector3.zero);
     }
 
     public void HoverBack()
@@ -65,6 +65,6 @@ public class ButtonUIAnimation : UIAnimation
 
     public void OnButtonPressed()
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress,this.transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress,Vector3.zero);
     }
 }

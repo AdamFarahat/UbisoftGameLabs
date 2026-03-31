@@ -156,6 +156,27 @@ MonoBehaviour:
       Data3: 127052165
       Data4: 1706519949
     Path: event:/EnemyWeaponShot
+  <UIHover>k__BackingField:
+    Guid:
+      Data1: 316438731
+      Data2: 1306179582
+      Data3: -1186140537
+      Data4: 1316163060
+    Path: event:/UI/UIButtonHover
+  <UIPress>k__BackingField:
+    Guid:
+      Data1: 1272919601
+      Data2: 1224351025
+      Data3: 957510574
+      Data4: 885021235
+    Path: event:/UI/UIButtonPress
+  <UICancel>k__BackingField:
+    Guid:
+      Data1: -135863303
+      Data2: 1279313623
+      Data3: -1825921614
+      Data4: 1370417989
+    Path: event:/UI/UIButtonCancel
 --- !u!1 &6008748549651680452
 GameObject:
   m_ObjectHideFlags: 0
