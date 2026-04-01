@@ -28,12 +28,6 @@ public class TutorialSwitchLanes : TutorialBase
             swordPlayerMoved = false;
         }
 
-        foreach (SpriteRenderer lane in manager.DisabledLanes)
-        {
-            StartCoroutine(FadeAnimation.FadeInRoutine(lane, laneFadeInDuration));
-            lane.gameObject.SetActive(true);
-        }
-
         IEnumerator Routine()
         {
             while (true)
@@ -54,5 +48,14 @@ public class TutorialSwitchLanes : TutorialBase
         }
 
         StartCoroutine(Routine());
+    }
+
+    protected override void PreTutorial()
+    {
+        foreach (SpriteRenderer lane in manager.DisabledLanes)
+        {
+            StartCoroutine(FadeAnimation.FadeInRoutine(lane, laneFadeInDuration));
+            lane.gameObject.SetActive(true);
+        }
     }
 }

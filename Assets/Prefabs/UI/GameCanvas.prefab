@@ -1702,12 +1702,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   scoreText: {fileID: 5384073636444206587}
   healthBarUI: {fileID: 1644242477858575745}
+  vignetteUI: {fileID: 0}
   superUI: {fileID: 161865433639030024}
-  gunPlayerCooldownUI: {fileID: 812875733327790943}
-  gunMultiplierUI: {fileID: 8468118156433846610}
-  swordPlayerCooldownUI: {fileID: 6925459390677526918}
-  swordMultiplierUI: {fileID: 6539550765771174107}
   gameOverScreen: {fileID: 9089175420580484333}
+  gunPlayerHUD: {fileID: 0}
+  swordPlayerHUD: {fileID: 0}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,10 +1730,10 @@ MonoBehaviour:
   score: 8031
   gunPowerBarPercent: 0
   gunCooldownPercent: 0.08
-  gunMultiplierPercent: 0.67
+  gunMultiplierPercent: 0
   swordPowerBarPercent: 0
   swordCooldownPercent: 0
-  swordMultiplierPercent: 1
+  swordMultiplierPercent: 0
 --- !u!1 &2654541014656830730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,6 +3130,10 @@ MonoBehaviour:
   - {fileID: 7184075698540853015}
   - {fileID: 2830178457321411043}
   - {fileID: 962691645809995295}
+  superText: {fileID: 0}
+  superTextTMP: {fileID: 0}
+  pulseScale: 1.2
+  pulseDuration: 0.5
 --- !u!1 &4850002475124951960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,6 +3958,10 @@ MonoBehaviour:
   - {fileID: 3712691215689656836}
   - {fileID: 566853827936624017}
   - {fileID: 71194313875534590}
+  superText: {fileID: 0}
+  superTextTMP: {fileID: 0}
+  pulseScale: 1.2
+  pulseDuration: 0.5
 --- !u!1 &6104122553809406443
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,6 +5430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1552536688944446907}
+  - component: {fileID: 4868340195412220918}
   m_Layer: 5
   m_Name: GunPlayerUI
   m_TagString: Untagged
@@ -5451,6 +5459,20 @@ RectTransform:
   m_AnchoredPosition: {x: 75, y: 75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4868340195412220918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442249318472091249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7db495f9d98174b99f5f5ad1f27a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
+  multiplierUI: {fileID: 8468118156433846610}
+  cooldownUI: {fileID: 812875733327790943}
 --- !u!1 &8795838605493187568
 GameObject:
   m_ObjectHideFlags: 0
@@ -5984,24 +6006,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+    - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
       propertyPath: m_fontColor.b
-      value: 1
+      value: 0.29803923
       objectReference: {fileID: 0}
     - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
       propertyPath: m_fontColor.g
-      value: 1
+      value: 0.7647059
       objectReference: {fileID: 0}
     - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
       propertyPath: m_fontColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+    - target: {fileID: 8790722104129093486, guid: 14de2450f52ee1941b38b217cf473ec1, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 4283220991
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
