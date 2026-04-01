@@ -120,6 +120,7 @@ public abstract class PlayerController : MonoBehaviour
 
         void DoMove()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, transform.position);
             int lane = laneFn(laneBound.LaneIndex);
             if (lane >= 0 && lane < LaneSet.LaneCount)
                 laneBound.MoveToLane(lane);
@@ -174,6 +175,7 @@ public abstract class PlayerController : MonoBehaviour
         // TODO stun sfx
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
             spriteRenderer.color = Color.black;
             stunParticleSystem.gameObject.SetActive(true);
             stunParticleSystem.Play();

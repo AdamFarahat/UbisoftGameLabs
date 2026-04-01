@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class FMODEvents : MonoBehaviour
 {
+    #region PLAYER
+    [field: Header("PLAYER")]
+    [field: SerializeField] public EventReference PlayerStunned { get; private set; }
+
+    [field: SerializeField] public EventReference PlayerDash { get; private set; }
+
+    #endregion
+    
     #region GUNPLAYER
     [field: Header("GUNPLAYER")]
     [field: SerializeField] public EventReference PlayerRevolverShot { get; private set; }
@@ -30,11 +38,17 @@ public class FMODEvents : MonoBehaviour
 
     [field: SerializeField] public EventReference PlayerSwordParry { get; private set; }
 
+    [field: SerializeField] public EventReference PlayerJump { get; private set; }
+
     #endregion
 
     #region ENEMIES
     [field: Header("ENEMIES")]
     [field: SerializeField] public EventReference EnemyWeaponShot { get; private set; }
+
+    [field: SerializeField] public EventReference EnemyHurt { get; private set; }
+    [field: SerializeField] public EventReference EnemySpawn { get; private set; }
+
 
     #endregion
 
