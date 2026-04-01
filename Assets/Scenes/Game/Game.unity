@@ -638,7 +638,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 16219430430760138, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: discreteMultiplierIndex
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -715,6 +715,14 @@ PrefabInstance:
     - target: {fileID: 3062227724045604388, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121955262672674292, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: gunMultiplierPercent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3121955262672674292, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: swordMultiplierPercent
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3141058253321381838, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_fontAsset
@@ -922,7 +930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8567448586144742873, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: discreteMultiplierIndex
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8810186853916138172, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: vignetteUI
