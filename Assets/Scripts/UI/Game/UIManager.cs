@@ -2,14 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using TMPro;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
     
-    private GunPlayerController gunPlayerController;
-    private SwordPlayerController swordPlayerController;
-    private ScoreManagerSO scoreManagerSO;
-    private PlayerStats playerStats;
+    [SerializeField] private GunPlayerController gunPlayerController;
+    [SerializeField] private SwordPlayerController swordPlayerController;
+    [SerializeField] private ScoreManagerSO scoreManagerSO;
+    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Image healthBarUI;
     [SerializeField] private Image superUI;
@@ -17,7 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image gunMultiplierUI;
     [SerializeField] private Image swordPlayerCooldownUI;
     [SerializeField] private Image swordMultiplierUI;
-
+    [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
 
 
@@ -50,6 +51,23 @@ public class UIManager : MonoBehaviour
 
         Assert.IsNotNull(swordMultiplierUI.material);
         Assert.IsNotNull(swordPlayerCooldownUI.material);
+
+        Assert.IsNotNull(pauseMenuScreen);
+        Assert.IsNotNull(gameOverScreen);
+
+        Assert.IsNotNull(gunPlayerController);
+        Assert.IsNotNull(swordPlayerController);
+        Assert.IsNotNull(scoreManagerSO);
+        Assert.IsNotNull(playerStats);
+
+        gunPlayerController.StartButtonPressed += TogglePauseMenu;
+        swordPlayerController.StartButtonPressed += TogglePauseMenu;
+    }
+
+    public void TogglePauseMenu()
+    {
+        Debug.Log("Start button pressed. Toggling pause menu.");
+        pauseMenuScreen.ShowPauseMenu();
     }
 
     void Start()
