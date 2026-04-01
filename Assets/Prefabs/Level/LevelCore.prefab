@@ -523,10 +523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3165994353810697349, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3488731436393349710, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_Camera
       value: 
@@ -667,6 +663,10 @@ PrefabInstance:
       propertyPath: swordScore
       value: 
       objectReference: {fileID: 7121497403253817212}
+    - target: {fileID: 9089175420580484333, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 7528878339980686641}
     - target: {fileID: 9089175420580484333, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: restartButton
       value: 
