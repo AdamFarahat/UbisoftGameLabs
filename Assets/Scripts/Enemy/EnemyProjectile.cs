@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
-using static UnityEngine.UI.Image;
 
 public class EnemyProjectile : MonoBehaviour
 {
@@ -15,10 +14,10 @@ public class EnemyProjectile : MonoBehaviour
     private float speed = 80f;
     private bool parried = false;
     private Transform origin;
+    private Stunner stunner;
 
     private void Awake()
     {
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
 
@@ -29,20 +28,22 @@ public class EnemyProjectile : MonoBehaviour
         Assert.IsNotNull(sphereCollider);
         normalColliderRadius = sphereCollider.radius;
 
-        Stunner stunner = GetComponent<Stunner>();
+        stunner = GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
     }
 
-    public void Initialize(Transform origin, Vector3 direction, float speed)
+    public void Initialize(Transform origin, Vector3 direction, float speed, bool stun = true)
     {
         this.origin = origin;
-        sprite.rotation = ScreenAngleOfVector(direction);
+        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         this.direction = direction.normalized;
         this.speed = speed;
         parried = false;
         sphereCollider.radius = normalColliderRadius;
         enabled = true;
+        stunner.enabled = stun;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
     void Update()
@@ -75,7 +76,7 @@ public class EnemyProjectile : MonoBehaviour
         IEnumerator Routine()
         {
             Color color = spriteRenderer.color;
-            yield return FadeOutAnimation.Routine(spriteRenderer);
+            yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
             spriteRenderer.color = color;
             gameObject.SetActive(false);
         }
@@ -86,6 +87,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public void Parry(Transform newOrigin, float speedMult)
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
         else
@@ -93,15 +95,8 @@ public class EnemyProjectile : MonoBehaviour
 
         origin = newOrigin;
         speed *= speedMult;
-        sprite.rotation = ScreenAngleOfVector(direction);
+        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         parried = true;
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
-    }
-
-    // TODO move to LaneSet once LaneSet is merged to main.
-    private static float ScreenAngleOfVector(Vector3 vector)
-    {
-        Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);
-        return Mathf.Rad2Deg * Mathf.Atan2(cam.y, cam.x);
     }
 }

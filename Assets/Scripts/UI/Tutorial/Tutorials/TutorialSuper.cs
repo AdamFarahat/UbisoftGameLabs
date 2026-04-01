@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 public class TutorialSuper : TutorialBase
 {
     [Header("General")]
+    [SerializeField] private float fillSuperDuration = 0.5f;
     [SerializeField] private float deathAnimationDuration = 0.5f;
     [SerializeField] private float spawnDistance = 200f;
 
@@ -25,8 +26,8 @@ public class TutorialSuper : TutorialBase
 
     private readonly List<Enemy> spawnedGrunts = new();
 
+    private bool superActivated = false;
     private bool superEnded = false;
-    private bool transitionsSwitched = false;
 
     protected override void Awake()
     {
@@ -47,13 +48,16 @@ public class TutorialSuper : TutorialBase
         }
 
         PlayerStats.Instance.superEnabled = true;
-        PlayerStats.Instance.FillGunSuper();
-        PlayerStats.Instance.FillSwordSuper();
         PlayerStats.Instance.SuperStarted += ShowSecondDescription;
         PlayerStats.Instance.SuperEnded += () => { superEnded = true; };
 
         IEnumerator Routine()
         {
+            while (!superActivated)
+                yield return null;
+
+            // TODO there's barely any time to see the super ability in action - increase super ability length, particularly for tutorial
+
             float age = 0f;
             while (!superEnded)
             {
@@ -77,6 +81,12 @@ public class TutorialSuper : TutorialBase
         }
 
         StartCoroutine(Routine());
+    }
+
+    protected override void PreTutorial()
+    {
+        PlayerStats.Instance.FillGunSuper(fillSuperDuration);
+        PlayerStats.Instance.FillSwordSuper(fillSuperDuration);
     }
 
     private void SpawnMeleeWave()
@@ -131,9 +141,9 @@ public class TutorialSuper : TutorialBase
 
     private void ShowSecondDescription()
     {
-        if (transitionsSwitched)
+        if (superActivated)
             return;
-        transitionsSwitched = true;
+        superActivated = true;
 
         IEnumerator Transition()
         {

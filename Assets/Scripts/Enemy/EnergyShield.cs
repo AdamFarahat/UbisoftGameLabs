@@ -22,6 +22,7 @@ public class EnergyShield : MonoBehaviour
         Assert.IsNotNull(spriteRenderer);
 
         enemy.OnTakeFromPool += TakeFromPool;
+        enemy.Die += Die;
     }
 
     private void Start()
@@ -46,17 +47,21 @@ public class EnergyShield : MonoBehaviour
 
         shieldHealth -= damage;
         if (shieldHealth <= 0)
-        {
-            IEnumerator Routine()
-            {
-                collider.enabled = false;
-                yield return FadeOutAnimation.Routine(spriteRenderer);  // TODO trigger this when attached enemy dies. Add UnityAction to enemy death
-                collider.enabled = true;
-                gameObject.SetActive(false);
-            }
+            Die();
+    }
 
-            // TODO sfx ?
-            StartCoroutine(Routine());
+    private void Die()
+    {
+        IEnumerator Routine()
+        {
+            collider.enabled = false;
+            yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
+            collider.enabled = true;
+            gameObject.SetActive(false);
         }
+
+        // TODO sfx ?
+        if (gameObject.activeSelf)
+            StartCoroutine(Routine());
     }
 }

@@ -1,11 +1,9 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 public class CowboyEnemy : ShooterEnemy
 {
     [SerializeField] private Collider healthCollider;
-    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
@@ -34,7 +32,7 @@ public class CowboyEnemy : ShooterEnemy
 
     private void ResetState()
     {
-        lane.LaneDistance = initialLaneDistance;
+        lane.LaneDistance = LaneSet.SpawnLine;
         time = 0f;
         nextLaneSwitchTime = laneStayPeriod;
     }

@@ -5,18 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Ryan/Sandbox.unity
-    guid: 17c3f479157133c439d7fd0cb85bbd7b
+    path: Assets/Scenes/Game/Menu.unity
+    guid: 784081c36dfcd0040873d97360ded935
   - enabled: 1
     path: Assets/Scenes/Game/PlayerSelect.unity
     guid: 7861f83a46ff99d4d9eee0b4d31d67cd
   - enabled: 1
-    path: Assets/Scenes/Game/Menu.unity
-    guid: 784081c36dfcd0040873d97360ded935
+    path: Assets/Scenes/Game/Tutorial.unity
+    guid: ed77f2979adb7834faab91e1bca8dd3d
+  - enabled: 1
+    path: Assets/Scenes/Game/Game.unity
+    guid: d6e479acc6d634f42bab3e8c24657b53
+  - enabled: 1
+    path: Assets/Scenes/Game/PlayerSelectTutorial.unity
+    guid: a02ba7da2ee797249885dbe9d9469535
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

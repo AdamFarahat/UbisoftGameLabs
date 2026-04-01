@@ -21,6 +21,7 @@ public abstract class TutorialBase : MonoBehaviour
     {
         IEnumerator Routine()
         {
+            PreTutorial();
             yield return FadeInRoutine(gameObject);
             yield return new WaitForSeconds(paddingDuration);
             StartTutorial();
@@ -35,6 +36,11 @@ public abstract class TutorialBase : MonoBehaviour
         yield return FadeRoutine(go, 0f, 1f);
     }
 
+    protected virtual void PreTutorial()
+    {
+        // do nothing
+    }
+
     protected virtual void StartTutorial()
     {
         throw new NotImplementedException();
@@ -44,12 +50,12 @@ public abstract class TutorialBase : MonoBehaviour
     {
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
             yield return new WaitForSeconds(paddingDuration);
             yield return FadeOutRoutine(gameObject);
             gameObject.SetActive(false);
             manager.NextTutorial();
         }
-
         StartCoroutine(Routine());
     }
 
@@ -72,5 +78,10 @@ public abstract class TutorialBase : MonoBehaviour
         }
 
         rt.localScale = new(1f, fy, 1f);
+    }
+
+    public virtual void OnStartPressed()
+    {
+        // NOP
     }
 }

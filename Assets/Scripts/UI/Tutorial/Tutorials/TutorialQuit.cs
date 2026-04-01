@@ -1,18 +1,15 @@
-using System.Collections;
 using UnityEngine;
 
 public class TutorialQuit : TutorialBase
 {
-    [SerializeField] private float duration = 3f;
-
     protected override void StartTutorial()
     {
-        IEnumerator Routine()
-        {
-            yield return new WaitForSeconds(duration);
-            EndTutorial();
-        }
+        // NOP
+    }
 
-        StartCoroutine(Routine());
+    public override void OnStartPressed()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
+        EndTutorial();
     }
 }

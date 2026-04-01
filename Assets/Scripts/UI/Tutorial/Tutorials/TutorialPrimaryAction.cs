@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,10 +11,11 @@ public class TutorialPrimaryAction : TutorialBase
     [SerializeField] private float spawnDelay = 1.5f;
     [SerializeField] private float meleeGruntSpeed = 30f;
     [SerializeField] private int spawnCount = 3;
-    [SerializeField] private float postSpawnPadding = 3f;
 
     private bool pressedShoot = true;
     private bool pressedSlash = true;
+
+    private readonly HashSet<TutorialEnemyLife> grunts = new();
 
     protected override void Awake()
     {
@@ -58,7 +61,9 @@ public class TutorialPrimaryAction : TutorialBase
                 yield return null;
             }
 
-            yield return new WaitForSeconds(postSpawnPadding);  // let last enemy wave go
+            while (grunts.Any(g => g != null && g.isActiveAndEnabled))
+                yield return null;
+
             EndTutorial();
         }
 
@@ -88,5 +93,9 @@ public class TutorialPrimaryAction : TutorialBase
         MeleeGruntMovementAI movement = go.GetComponent<MeleeGruntMovementAI>();
         Assert.IsNotNull(movement);
         movement.speed = meleeGruntSpeed;
+
+        TutorialEnemyLife tutorialEnemy = go.GetComponent<TutorialEnemyLife>();
+        grunts.Add(tutorialEnemy);
+        tutorialEnemy.Die += () => { grunts.Remove(tutorialEnemy); };
     }
 }

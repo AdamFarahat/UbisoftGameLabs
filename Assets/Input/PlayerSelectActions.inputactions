@@ -169,11 +169,11 @@
                 },
                 {
                     "name": "",
-                    "id": "b247ee43-afb4-4318-83ef-7c025f69809a",
-                    "path": "<Mouse>/leftButton",
+                    "id": "355aeaac-26f4-4e08-901b-9013c4d7d544",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -191,8 +191,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c60bb9b6-0b58-4c72-9637-e5d4e34c0ffe",
-                    "path": "<Mouse>/rightButton",
+                    "id": "e682b721-252b-48c4-a861-b96174d6c7ec",
+                    "path": "<Keyboard>/backspace",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -205,27 +205,22 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard&Mouse",
-            "bindingGroup": "Keyboard&Mouse",
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
             "devices": [
                 {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
             ]
         },
         {
-            "name": "Gamepad",
-            "bindingGroup": "Gamepad",
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
             "devices": [
                 {
-                    "devicePath": "<Gamepad>",
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

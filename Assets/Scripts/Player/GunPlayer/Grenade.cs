@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
+    [SerializeField] private Transform colliderRoot;
+    [SerializeField] private GameObject vfx;
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
     [SerializeField] private float gravity = 300f;
@@ -17,11 +20,21 @@ public class Grenade : MonoBehaviour
 
     private readonly HashSet<Enemy> hitEnemies = new();
 
+    private void Awake()
+    {
+        Assert.IsNotNull(colliderRoot);
+        Assert.IsNotNull(vfx);
+
+        vfx.SetActive(false);
+    }
+
     private void Start()
     {
         initialDirection.Normalize();
 
-        float velocity = Mathf.Sqrt((0.5f * range * gravity) / (initialDirection.y * initialDirection.z));
+        float denominator = 2f * (range * initialDirection.y * initialDirection.z + transform.position.y * initialDirection.z * initialDirection.z);
+        float velocity = range * Mathf.Sqrt(gravity / denominator);
+
         verticalVelocity = velocity * initialDirection.y;
         forwardVelocity = velocity * initialDirection.z;
     }
@@ -75,10 +88,12 @@ public class Grenade : MonoBehaviour
     {
         IEnumerator Explosion()
         {
+            vfx.SetActive(true);
+
             for (float t = 0f; t < explosionDuration; t += Time.deltaTime)
             {
                 float scale = Mathf.Lerp(1f, aoeRadiusScale, Mathf.Clamp01(t / explosionDuration));
-                transform.localScale = new(scale, scale, scale);
+                colliderRoot.localScale = new(scale, scale, scale);
                 yield return null;
             }
 
@@ -87,7 +102,7 @@ public class Grenade : MonoBehaviour
 
         exploding = true;
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeExplode, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 
         StartCoroutine(Explosion());
     }

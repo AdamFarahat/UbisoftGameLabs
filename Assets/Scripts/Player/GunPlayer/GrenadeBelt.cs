@@ -10,6 +10,7 @@ public class GrenadeBelt : MonoBehaviour
     [SerializeField] private float maxThrowRange = 100f;
     [SerializeField] private float throwCooldown = 3f;
     [SerializeField] private Vector3 grenadeInitialDirection = new(0f, 1f, 1f);
+    [SerializeField] private Transform throwPoint;
 
     [Header("Crosshairs")]
     [SerializeField] private Transform crosshairs;
@@ -22,6 +23,7 @@ public class GrenadeBelt : MonoBehaviour
     private float throwChargeTime = 0f;
     private float cooldown = 0f;
     private Billboard crosshairsBillboard;
+    private GunAnimationManager animator;
 
     public float ThrowCooldown => throwCooldown;
 
@@ -33,11 +35,15 @@ public class GrenadeBelt : MonoBehaviour
     private void Awake()
     {
         Assert.IsNotNull(grenadePrefab);
+        Assert.IsNotNull(throwPoint);
         Assert.IsNotNull(crosshairs);
         grenadeInitialDirection.Normalize();
 
         crosshairsBillboard = crosshairs.GetComponentInChildren<Billboard>();
         Assert.IsNotNull(crosshairsBillboard);
+
+        animator = GetComponentInParent<GunAnimationManager>();
+        Assert.IsNotNull(animator);
     }
 
     private void Start()
@@ -75,12 +81,17 @@ public class GrenadeBelt : MonoBehaviour
             throwChargeTime = 0f;
             if (!PlayerStats.Instance.IsSuperActive())
                 cooldown = throwCooldown;
+
+            animator.StartGrenadeAim();
+            // TODO sfx ?
         }
     }
 
     public void CancelThrow()
     {
         SetThrowing(false);
+        animator.StopGrenadeAim();
+        // TODO sfx ?
     }
 
     public void Throw()
@@ -89,13 +100,16 @@ public class GrenadeBelt : MonoBehaviour
             return;
 
         SetThrowing(false);
+        animator.StopGrenadeAim();
+        animator.PlayGrenadeThrow();
+
         GameObject go = Instantiate(grenadePrefab);
         Grenade grenade = go.GetComponent<Grenade>();
         Assert.IsNotNull(grenade);
 
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.playerGrenadeThrow, transform.position);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeThrow, transform.position);
 
-        grenade.transform.position = transform.position;
+        grenade.transform.position = throwPoint.position;
         grenade.initialDirection = grenadeInitialDirection;
         grenade.range = CalcGrenadeRange();
     }

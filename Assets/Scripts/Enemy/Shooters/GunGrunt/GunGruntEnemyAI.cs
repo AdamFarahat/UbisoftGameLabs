@@ -4,7 +4,6 @@ using UnityEngine.Assertions;
 
 public class GunGruntEnemyAI : MonoBehaviour
 {
-    [SerializeField] private float spawnLaneDistance = 200f;
     [SerializeField] private float spawnArrivalDuration = 3f;
 
     [SerializeField] private float minLaneDistance = 100f;
@@ -44,11 +43,11 @@ public class GunGruntEnemyAI : MonoBehaviour
         IEnumerator ArrivalRoutine()
         {
             LaneBound laneBound = GetComponent<LaneBound>();
-            laneBound.LaneDistance = spawnLaneDistance;
+            laneBound.LaneDistance = LaneSet.SpawnLine;
             for (float t = 0f; t < spawnArrivalDuration; t += Time.deltaTime)
             {
                 yield return null;
-                laneBound.LaneDistance = Mathf.Lerp(spawnLaneDistance, targetDistance, Mathf.Clamp01(t / spawnArrivalDuration));
+                laneBound.LaneDistance = Mathf.Lerp(LaneSet.SpawnLine, targetDistance, Mathf.Clamp01(t / spawnArrivalDuration));
             }
             laneBound.LaneDistance = targetDistance;
             arrivalRoutine = null;

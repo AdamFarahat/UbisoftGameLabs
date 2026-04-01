@@ -16,6 +16,7 @@ public class Enemy : Poolable
 
     private bool dead = false;
     public bool Dead => dead;
+    public UnityAction Die;
 
     public bool invulnerable = false;
     public float deathAnimationDuration = 0.1f;
@@ -95,7 +96,7 @@ public class Enemy : Poolable
             if (spriteRenderer != null)
             {
                 Color color = spriteRenderer.color;
-                yield return FadeOutAnimation.Routine(spriteRenderer, deathAnimationDuration);
+                yield return FadeAnimation.FadeOutRoutine(spriteRenderer, deathAnimationDuration);
                 spriteRenderer.color = color;
             }
         }
@@ -112,6 +113,8 @@ public class Enemy : Poolable
 
             StartCoroutine(DestroyRoutine());
         }
+
+        Die?.Invoke();
     }
 
     public EnergyShield GetShield()

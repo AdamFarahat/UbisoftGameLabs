@@ -18,7 +18,7 @@ public class FlyerMovement : MonoBehaviour, ISpeedRefreshable
 
     private void ResetState()
     {
-        lane.LaneDistance = initialLaneDistance;
+        lane.LaneDistance = LaneSet.SpawnLine;
     }
 
     private void Update()

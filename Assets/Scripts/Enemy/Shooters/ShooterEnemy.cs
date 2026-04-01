@@ -5,10 +5,11 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] protected float stunTime = 0.3f;
     [SerializeField] protected float shotCooldown = 0.65f;
-    [SerializeField] protected float shotDistanceThreshold = 20f; //minimum distance to shoot
-    [SerializeField] protected float shootingRange = 10000f; //max distance to shoot
+    [SerializeField] protected float shotDistanceThreshold = 20f;  // minimum distance to shoot
+    [SerializeField] protected float shootingRange = 10000f;  // max distance to shoot
     [SerializeField] protected float bulletSpeed = 80f;
     [SerializeField] protected Transform spawnPoint;
+    public bool projectileStun = true;
     [SerializeField] protected float speed = 5f;
 
     protected LaneBound lane;
@@ -21,9 +22,9 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
 
     protected bool IsInShootingRange()
     {
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance >= shotDistanceThreshold
-            && lane.LaneDistance <= shootingRange
-            && lane.LaneDistance <= LaneSet.VisibleEndLine;
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex)
+            && lane.LaneDistance >= Mathf.Max(shotDistanceThreshold, LaneSet.EnemyShootBufferLine)
+            && lane.LaneDistance <= Mathf.Min(shootingRange, LaneSet.VisibleEndLine);
     }
 
     protected void Shoot()
@@ -37,7 +38,7 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);
         playerPosition.y = LaneSet.PlayerTargetHeight;
         Vector3 direction = playerPosition - spawnPoint.position;
-        projectile.Initialize(spawnPoint, direction, bulletSpeed);
+        projectile.Initialize(spawnPoint, direction, bulletSpeed, projectileStun);
 
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);

@@ -3,7 +3,6 @@ using UnityEngine.Assertions;
 
 public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
 {
-    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float damage = 10f;
     public float speed = 1f;
     public float Speed => speed;
@@ -24,7 +23,7 @@ public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
 
     private void ResetState()
     {
-        laneBound.LaneDistance = initialLaneDistance;
+        laneBound.LaneDistance = LaneSet.SpawnLine;
     }
 
     private void Update()

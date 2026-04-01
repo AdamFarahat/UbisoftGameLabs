@@ -1,33 +1,37 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Revolver : Gun
 {
-    [Serializable]
-    public class AltShot
-    {
-        public float velocity;
-        public int damage;
-        public float chargeTime;
-    }
-
     [Header("Revolver")]
-    [SerializeField] private List<AltShot> altShots = new();
+    [SerializeField] private GameObject laserShotPrefab;
+    [SerializeField] private float laserChargeTime = 0.4f;
+    [SerializeField] private float laserCooldownTime = 0.6f;
 
     private bool charging = false;
     private float chargeStartTime = 0f;
+    private bool onCooldown = false;
 
-    private void Start()
+    protected override void Awake()
     {
-        altShots.Sort((a, b) => a.chargeTime.CompareTo(b.chargeTime));
+        base.Awake();
+
+        Assert.IsNotNull(laserShotPrefab);
     }
 
     public override void StartFiring()
     {
+        if (onCooldown)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverNotReady, transform.position);
+            return;
+        }
+
         charging = PreStartFiring();
         chargeStartTime = Time.time;
-        // TODO start charge sfx + animation
+        // TODO start charge up animation
+        // TODO start charge up sfx
     }
 
     public override void StopFiring()
@@ -36,16 +40,23 @@ public class Revolver : Gun
             return;
         charging = false;
 
-        Bullet bullet = InstantiateShot<Bullet>();
-        bullet.damage = bulletDamage;
-
-        float chargeTime = Time.time - chargeStartTime;
-        foreach (var altShot in altShots)
+        if (Time.time - chargeStartTime < laserChargeTime)
         {
-            if (chargeTime < altShot.chargeTime)
-                break;
-            bullet.velocity = altShot.velocity;
-            bullet.damage = altShot.damage;
+            InstantiateShot<Bullet>().damage = bulletDamage;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
+        }
+        else
+        {
+            InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
+            onCooldown = true;
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverAltShot, transform.position);
+            IEnumerator Cooldown()
+            {
+                yield return new WaitForSeconds(laserCooldownTime);
+                onCooldown = false;
+            }
+
+            StartCoroutine(Cooldown());
         }
     }
 

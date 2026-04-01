@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5975266398723641439}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0.5, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 6401016874694379148}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 0.73361063, y: 0.3118675, z: -1.2706511}
+  m_LocalPosition: {x: 4.8387594, y: 2.5681906, z: -8.380979}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d9a444f245ffd4eac98ed5934f4c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
-  cameraOffset: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 0.5, z: 0}
   rotation: 0
 --- !u!1 &6679675405416162139
 GameObject:
@@ -167,7 +167,7 @@ Transform:
   m_GameObject: {fileID: 6679675405416162139}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 3, z: 200}
+  m_LocalPosition: {x: 0, y: 0, z: 200}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -209,7 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a4ab8e86cafad48af98deb8fb75db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemyAI
-  spawnLaneDistance: 200
   spawnArrivalDuration: 5
   minLaneDistance: 100
   researchCooldown: 3
@@ -229,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneBound
-  laneIndex: 0
+  laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 1
 --- !u!114 &681042347012851451
@@ -268,7 +267,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
+  m_Size: {x: 2, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2590929679270273919
 MonoBehaviour:
