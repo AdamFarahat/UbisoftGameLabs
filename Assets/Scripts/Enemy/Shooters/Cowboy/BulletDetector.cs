@@ -7,6 +7,11 @@ public class BulletDetector : MonoBehaviour
 
     public List<Bullet> NearbyBullets => bulletsNearby;
 
+    private void Awake()
+    {
+        this.GetComponentInHierarchy<Enemy>().OnTakeFromPool += () => { bulletsNearby.Clear(); };
+    }
+
     private void Update()
     {
         List<int> oldBullets = new();

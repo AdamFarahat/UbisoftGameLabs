@@ -35,7 +35,7 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool != null)
+        if (enemyPool == null)
             ResetState();
     }
 
@@ -48,6 +48,7 @@ public class Enemy : Poolable
     public override void TakeFromPool()
     {
         base.TakeFromPool();
+        ResetState();
         OnTakeFromPool?.Invoke();
     }
 

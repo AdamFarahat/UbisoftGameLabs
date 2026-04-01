@@ -35,6 +35,8 @@ public class CowboyEnemy : ShooterEnemy
         lane.LaneDistance = LaneSet.SpawnLine;
         time = 0f;
         nextLaneSwitchTime = laneStayPeriod;
+        state = CowBoyState.Walking;
+        dodgedBullet = null;
     }
 
     private void Start()

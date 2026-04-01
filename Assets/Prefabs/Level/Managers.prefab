@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5161543073891401410}
   - component: {fileID: 469812263144272765}
   - component: {fileID: 4656029755349261906}
+  - component: {fileID: 8049746163911720896}
+  - component: {fileID: 6314761081725675962}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -91,7 +93,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70402bb0c190a6b4b822221a5fbc0981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  waveJson: {fileID: 4900000, guid: 5a54803adc46ad749b3c4a96c31768bf, type: 3}
   enemyPrefabs:
   - {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   - {fileID: 6679675405416162139, guid: a2678e12d22af0042bc97f0e2783d367, type: 3}
@@ -99,10 +100,6 @@ MonoBehaviour:
   - {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
   - {fileID: 1364641449687990512, guid: 5824b9ad6436a024393ccc35d10c89a2, type: 3}
   maxEnemies: 5
-  minSpawnTime: 0.5
-  maxSpawnTime: 4
-  sigmoidSteepness: 0.06
-  sigmoidMidpoint: 90
 --- !u!114 &4656029755349261906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +117,39 @@ MonoBehaviour:
   activateSuperWaitTime: 0.1
   damageEnabled: 1
   superEnabled: 1
+--- !u!114 &8049746163911720896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424053709444617222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae16da203ed5d645a67de478ef9fda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  spawner: {fileID: 469812263144272765}
+  waveFile: {fileID: 4900000, guid: 5a54803adc46ad749b3c4a96c31768bf, type: 3}
+  minSpawnTime: 0.5
+  maxSpawnTime: 4
+  sigmoidSteepness: 0.06
+  sigmoidMidpoint: 10
+  difficultySelectionRange: 0.15
+--- !u!114 &6314761081725675962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424053709444617222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d6a4f268c947e49bb75d2b9effbe9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
+  sigmoidMidpointWave: 10
+  sigmoidSteepness: 0.4
 --- !u!1001 &6042631474501440344
 PrefabInstance:
   m_ObjectHideFlags: 0
