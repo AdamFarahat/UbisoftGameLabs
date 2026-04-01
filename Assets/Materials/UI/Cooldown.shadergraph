@@ -23,12 +23,6 @@
         },
         {
             "m_Id": "545684a918b0412197e6e2c668be5122"
-        },
-        {
-            "m_Id": "e6f36964523b469b9b1cfcc93effaaab"
-        },
-        {
-            "m_Id": "acbdafb2ef8940108d1048a0a075cb03"
         }
     ],
     "m_Keywords": [],
@@ -789,7 +783,7 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 3176.666748046875,
+            "x": 3296.0,
             "y": -498.6666564941406
         },
         "m_Blocks": [
@@ -4257,10 +4251,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1537.3333740234375,
-            "y": -849.333251953125,
-            "width": 162.0,
-            "height": 36.0
+            "x": 1390.666748046875,
+            "y": 1024.0,
+            "width": 161.9998779296875,
+            "height": 36.0001220703125
         }
     },
     "m_Slots": [
@@ -4433,38 +4427,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "acbdafb2ef8940108d1048a0a075cb03",
-    "m_Guid": {
-        "m_GuidSerialized": "732bc28e-9b92-4371-b1bd-48ee8c581b39"
-    },
-    "m_Name": "SuperColor",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "SuperColor",
-    "m_DefaultReferenceName": "_SuperColor",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
-    "m_Value": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0,
-        "a": 1.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 0
 }
 
 {
@@ -5236,46 +5198,6 @@
 }
 
 {
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "e6f36964523b469b9b1cfcc93effaaab",
-    "m_Guid": {
-        "m_GuidSerialized": "2e6cb88b-1d73-4a7b-aa38-1481bf3c73c9"
-    },
-    "m_Name": "IsSuper",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "IsSuper",
-    "m_DefaultReferenceName": "_IsSuper",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
-    "m_Value": 0.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "ea5276e5fe324978b266cf62e84cb267",
@@ -5301,12 +5223,6 @@
         },
         {
             "m_Id": "545684a918b0412197e6e2c668be5122"
-        },
-        {
-            "m_Id": "e6f36964523b469b9b1cfcc93effaaab"
-        },
-        {
-            "m_Id": "acbdafb2ef8940108d1048a0a075cb03"
         }
     ]
 }
