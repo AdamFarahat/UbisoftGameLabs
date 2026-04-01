@@ -30,10 +30,13 @@ public class UIManager : MonoBehaviour
     private readonly int isSuperID = Shader.PropertyToID("_IsSuper");
     
     // Tween References to prevent animations from overlapping
-    private Tween gunFillTween;
-    private Tween swordFillTween;
-    private Tween gunColorTween;
-    private Tween swordColorTween;
+    private Tween gunMultiplierFillTween;
+    private Tween swordMultiplierFillTween;
+    private Tween gunMultiplierColorTween;
+    private Tween swordMultiplierColorTween;
+    private Tween healthColorTween;
+    // private Tween gunCooldownColorTween;
+    // private Tween swordCooldownColorTween;
 
     void Awake()
     {   
@@ -150,8 +153,8 @@ public class UIManager : MonoBehaviour
         float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
         float targetValue = ConvertMultiplierToUIValue(gunMultiplier);
         
-        gunFillTween?.Kill(); 
-        gunFillTween = gunMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
+        gunMultiplierFillTween?.Kill(); 
+        gunMultiplierFillTween = gunMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
     }
 
     private void UpdateSwordMultiplierUI()
@@ -161,32 +164,42 @@ public class UIManager : MonoBehaviour
         float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
         float targetValue = ConvertMultiplierToUIValue(swordMultiplier);
         
-        swordFillTween?.Kill();
-        swordFillTween = swordMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
+        swordMultiplierFillTween?.Kill();
+        swordMultiplierFillTween = swordMultiplierUI.material.DOFloat(targetValue, amountID, 0.5f).SetEase(Ease.OutBack);
     }
 
     private void OnSuperStarted()
     {
         // Lerp Color to 1
-        gunColorTween?.Kill();
-        swordColorTween?.Kill();
-        gunColorTween = gunMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
-        swordColorTween = swordMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
+        gunMultiplierColorTween?.Kill();
+        swordMultiplierColorTween?.Kill();
+        healthColorTween?.Kill();
+
+        gunMultiplierColorTween = gunMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
+        swordMultiplierColorTween = swordMultiplierUI.material.DOFloat(1f, isSuperID, 0.5f);
+        healthColorTween = healthBarUI.material.DOFloat(1f, isSuperID, 0.5f);
+        // gunCooldownColorTween = gunPlayerCooldownUI.material.DOFloat(1f, isSuperID, 0.5f);
+        // swordCooldownColorTween = swordPlayerCooldownUI.material.DOFloat(1f, isSuperID, 0.5f);
 
         // Lerp Fill Amount to 1
-        gunFillTween?.Kill();
-        swordFillTween?.Kill();
-        gunFillTween = gunMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
-        swordFillTween = swordMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
+        gunMultiplierFillTween?.Kill();
+        swordMultiplierFillTween?.Kill();
+        gunMultiplierFillTween = gunMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
+        swordMultiplierFillTween = swordMultiplierUI.material.DOFloat(1f, amountID, 0.5f).SetEase(Ease.Linear);
     }
 
     private void OnSuperEnded()
     {
         // Lerp Color back to 0
-        gunColorTween?.Kill();
-        swordColorTween?.Kill();
-        gunColorTween = gunMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
-        swordColorTween = swordMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
+        gunMultiplierColorTween?.Kill();
+        swordMultiplierColorTween?.Kill();
+        healthColorTween?.Kill();
+
+        gunMultiplierColorTween = gunMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
+        swordMultiplierColorTween = swordMultiplierUI.material.DOFloat(0f, isSuperID, 0.3f);
+        healthColorTween = healthBarUI.material.DOFloat(0f, isSuperID, 0.3f);
+        // gunCooldownColorTween = gunPlayerCooldownUI.material.DOFloat(0f, isSuperID, 0.3f);
+        // swordCooldownColorTween = swordPlayerCooldownUI.material.DOFloat(0f, isSuperID, 0.3f);
 
         // Send the bars back to their normal values
         UpdateGunMultiplierUI();
@@ -234,10 +247,11 @@ public class UIManager : MonoBehaviour
         }
 
         // Kill tweens so they don't cause errors after the scene unloads
-        gunFillTween?.Kill();
-        swordFillTween?.Kill();
-        gunColorTween?.Kill();
-        swordColorTween?.Kill();
+        gunMultiplierFillTween?.Kill();
+        swordMultiplierFillTween?.Kill();
+        // gunCooldownColorTween?.Kill();
+        // swordCooldownColorTween?.Kill();
+        healthColorTween?.Kill();
     }
 
     private void TriggerGunCooldownPulse()
