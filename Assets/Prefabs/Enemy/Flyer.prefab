@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: 5761438509364155010}
   - component: {fileID: 1211474539738667709}
   - component: {fileID: 8525619152686538179}
+  - component: {fileID: -158540157863857904}
   m_Layer: 6
   m_Name: Flyer
   m_TagString: Enemy
@@ -131,6 +132,8 @@ MonoBehaviour:
   maxHealth: 10
   health: 20
   score: 20
+  invulnerable: 0
+  deathAnimationDuration: 0.1
 --- !u!114 &5761438509364155010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
   initialLaneDistance: 200
-  forwardSpeed: 10
+  speed: 10
   damage: 12
 --- !u!114 &1211474539738667709
 MonoBehaviour:
@@ -158,11 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389c98dea31f0a241a71995032bed487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerShooting
-  spawnPoint: {fileID: 4117253480536495139}
   stunTime: 0.3
   shotCooldown: 0.65
   shotDistanceThreshold: 20
+  shootingRange: 10000
   bulletSpeed: 80
+  spawnPoint: {fileID: 4117253480536495139}
+  speed: 5
 --- !u!114 &8525619152686538179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +183,20 @@ MonoBehaviour:
   bobAmplitude: 0.2
   bobSpeed: 3
   bobber: {fileID: 7902552682628887067}
+--- !u!114 &-158540157863857904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679675405416162139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
+  minSpeed: 10
+  maxSpeed: 24
 --- !u!1 &7645352309593978900
 GameObject:
   m_ObjectHideFlags: 0

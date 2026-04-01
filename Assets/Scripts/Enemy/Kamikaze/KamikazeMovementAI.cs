@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class KamikazeMovementAI : MonoBehaviour
+public class KamikazeMovementAI : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float speed = 2f;
@@ -34,6 +34,12 @@ public class KamikazeMovementAI : MonoBehaviour
         nextLaneSwitchTime = laneStayPeriod;
     }
 
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
+    }
+
     private void Start()
     {
         nextLaneSwitchTime = laneStayPeriod;
@@ -43,6 +49,7 @@ public class KamikazeMovementAI : MonoBehaviour
     {
         age += Time.deltaTime;
         laneBound.LaneDistance -= speed * Time.deltaTime;
+        // laneBound.LaneDistance -= GetComponent<Enemy>().CurrentSpeed * Time.deltaTime;
 
         if (age >= nextLaneSwitchTime)
         {

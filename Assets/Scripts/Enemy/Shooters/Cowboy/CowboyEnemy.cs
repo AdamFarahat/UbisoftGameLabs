@@ -8,7 +8,6 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
-    [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
     [SerializeField] private float checkIfCanPunchInterval = 1f;
     [SerializeField] private float punchDistance = 10f;
@@ -167,7 +166,7 @@ public class CowboyEnemy : ShooterEnemy
 
     private void WalkForward()
     {
-        lane.LaneDistance -= walkingSpeed * Time.deltaTime;
+        lane.LaneDistance -= speed * Time.deltaTime;
     }
 
     private bool IsInPunchingRange()

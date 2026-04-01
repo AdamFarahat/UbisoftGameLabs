@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class FlyerMovement : MonoBehaviour
+public class FlyerMovement : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] private float initialLaneDistance = 200f;
-    [SerializeField] private float forwardSpeed = 10f;
+    [SerializeField] private float speed = 10f;
     [SerializeField] private float damage = 12f;
 
     private LaneBound lane;
@@ -23,9 +23,16 @@ public class FlyerMovement : MonoBehaviour
 
     private void Update()
     {
-        lane.LaneDistance -= forwardSpeed * Time.deltaTime;
+        lane.LaneDistance -= speed * Time.deltaTime;
         
         if (lane.LaneDistance <= LaneSet.HeartLine)
             PlayerStats.Instance.TakeDamage(damage);
     }
+    
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
+    }
+
 }

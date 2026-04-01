@@ -49,6 +49,9 @@ public class EnemySpawner : MonoBehaviour
         enemy.SetActive(true);
         if (enemy.TryGetComponent(out Poolable poolable))
             poolable.TakeFromPool();
+
+        if (enemy.TryGetComponent(out ISpeedRefreshable speedRefreshable))
+            speedRefreshable.RefreshSpeed();
     }
 
     private void OnReturnToPool(GameObject enemy)

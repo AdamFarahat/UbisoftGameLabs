@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class MeleeGruntMovementAI : MonoBehaviour
+public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float damage = 10f;
     public float speed = 1f;
+    public float Speed => speed;
 
     private LaneBound laneBound;
 
@@ -29,10 +30,18 @@ public class MeleeGruntMovementAI : MonoBehaviour
     private void Update()
     {
         laneBound.LaneDistance -= speed * Time.deltaTime;
+        // laneBound.LaneDistance -= enemy.CurrentSpeed * Time.deltaTime;
 
         if (laneBound.LaneDistance <= LaneSet.HeartLine)
         {
             playerStats.TakeDamage(damage);
         }
     }
+
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
+    }
+
 }

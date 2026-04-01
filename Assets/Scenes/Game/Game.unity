@@ -152,7 +152,22 @@ MonoBehaviour:
   minSpawnTime: 0.5
   maxSpawnTime: 4
   sigmoidSteepness: 0.06
-  sigmoidMidpoint: 90
+  sigmoidMidpoint: 10
+  difficultySelectionRange: 0.15
+--- !u!114 &990753345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990753336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d6a4f268c947e49bb75d2b9effbe9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
+  sigmoidMidpointWave: 10
+  sigmoidSteepness: 0.4
 --- !u!1001 &1792512711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -232,6 +247,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 164879126226630899, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 990753341}
+    - targetCorrespondingSourceObject: {fileID: 164879126226630899, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 990753345}
   m_SourcePrefab: {fileID: 100100000, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
