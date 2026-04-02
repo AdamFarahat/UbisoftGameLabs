@@ -39,18 +39,12 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
+    [Header("Super")]
+    [SerializeField] private Transform swordWaveSpawnPos;
+    public Transform SwordWaveSpawnPos => swordWaveSpawnPos;
+
     private SpriteAnimator animator;
     private Coroutine delayedAnimation = null;
-
-    // Begin tutorial settings
-    public bool slashEnabled = true;
-    public bool blockEnabled = true;
-    public bool jumpEnabled = true;
-
-    public UnityAction PressedSlash;
-    public UnityAction PressedBlock;
-    public UnityAction PressedJump;
-    // End tutorial settings
 
     private enum SwordPlayerStates
     {
@@ -68,12 +62,21 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
-    [Header("Super")]
     [SerializeField] private float activateSuperWaitTime = 0.1f;
     private bool attackButtonPressedSuper = false;
     private bool blockButtonPressedSuper = false;
     private Coroutine resetAttackButtonPressedSuperCoroutine = null;
     private Coroutine resetBlockButtonPressedSuperCoroutine = null;
+
+    // Begin tutorial settings
+    public bool slashEnabled = true;
+    public bool blockEnabled = true;
+    public bool jumpEnabled = true;
+
+    public UnityAction PressedSlash;
+    public UnityAction PressedBlock;
+    public UnityAction PressedJump;
+    // End tutorial settings
 
     protected override void Awake()
     {
@@ -89,6 +92,8 @@ public class SwordPlayerController : PlayerController
         Assert.IsNotNull(laneBound);
         laneBound.DashStart += OnDashStart;
         laneBound.DashEnd += OnDashEnd;
+
+        Assert.IsNotNull(swordWaveSpawnPos);
 
         if (PlayerSelect.swordPlayerDevice != null)
         {

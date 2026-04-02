@@ -115,6 +115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHealth: 100
+  healthPercent: 1
+  statDenominator: 100
+  gunSuperPercent: 0
+  swordSuperPercent: 0
   superDuration: 10
   activateSuperWaitTime: 0.5
   damageEnabled: 1

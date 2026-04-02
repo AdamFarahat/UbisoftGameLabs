@@ -26,14 +26,11 @@ public class SwordHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("SwordHitBox triggered by " + collider.name);
         swordPlayerController.OnSwordHitBoxTriggerEnter(collider);
     }
 
     public void ShootSwordWave()
     {
-        // Implement logic to shoot a sword wave projectile that can hit multiple enemies in the same lane
-        Debug.Log("Shooting sword wave!");
-        GameObject swordWave = Instantiate(swordWavePrefab, transform.position, transform.rotation);
+        Instantiate(swordWavePrefab, swordPlayerController.SwordWaveSpawnPos.transform.position, swordPlayerController.SwordWaveSpawnPos.transform.rotation);
     }
 }

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3041341548953377204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6997613030992412885}
+  m_Layer: 0
+  m_Name: SwordWaveSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6997613030992412885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041341548953377204}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 9.39, z: 8.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5473658397883171689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
@@ -193,6 +224,14 @@ PrefabInstance:
       value: 540d4f07-2428-4916-89a5-4f30ba88ed31
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 8b39a7a8-2ff3-49d7-8129-16b708fd8ffc
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: c4cd6bbc-557e-4892-88f6-422138fec86c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
       objectReference: {fileID: 0}
@@ -211,6 +250,14 @@ PrefabInstance:
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_ActionName
       value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
       objectReference: {fileID: 0}
     - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Sprite
@@ -231,7 +278,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 0}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6997613030992412885}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: 3
@@ -251,6 +301,11 @@ MonoBehaviour:
 --- !u!198 &4075400663890406914 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3618911406435080121, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+  m_PrefabInstance: {fileID: 771891864670845371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5473658397883171689 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
   m_PrefabInstance: {fileID: 771891864670845371}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5608802524239182053 stripped
@@ -298,6 +353,7 @@ MonoBehaviour:
   attackingMultiplierGain: 0.6
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
+  swordWaveSpawnPos: {fileID: 6997613030992412885}
   slashEnabled: 1
   blockEnabled: 1
   jumpEnabled: 1

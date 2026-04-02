@@ -26,6 +26,6 @@ public class SwordWave : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
-        enemy.TakeDamage(enemy.Health); // Instantly kill the enemy hit by the sword wave
+        enemy.OnParried(); // Instantly kill the enemy hit by the sword wave
     }
 }

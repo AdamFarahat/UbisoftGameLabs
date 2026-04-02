@@ -10,15 +10,15 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
-    private float currentGunSuper;
-    private float currentSwordSuper;
-    private float healthPercent;
-    private float statDenominator = 100f;
+    private float currentHealth = 100f;
+    [SerializeField] private float healthPercent = 1f;
 
     [Header("Super")]
-    private float gunSuperPercent;
-    private float swordSuperPercent;
+    private float currentGunSuper = 0f;
+    private float currentSwordSuper = 0f;
+    [SerializeField] private float statDenominator = 100f;
+    [SerializeField] private float gunSuperPercent = 0f;
+    [SerializeField] private float swordSuperPercent = 0f;
     private bool isSuperActive = false;
     Coroutine superCoroutine = null;
     public float superDuration = 5f;
@@ -45,18 +45,9 @@ public class PlayerStats : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHealth = maxHealth;
-        currentGunSuper = 0f;
-        currentSwordSuper = 0f;
-        healthPercent = currentHealth / maxHealth;
-        gunSuperPercent = currentGunSuper / statDenominator;
-        swordSuperPercent = currentSwordSuper / statDenominator;
-        Debug.Log("Player health initialized to: " + currentHealth);
-
-        currentGunSuper = 100f;
-        gunSuperPercent = currentGunSuper / statDenominator;
-        currentSwordSuper = 100f;
-        swordSuperPercent = currentSwordSuper / statDenominator;
+        currentHealth = healthPercent * maxHealth;
+        currentGunSuper = gunSuperPercent * statDenominator;
+        currentSwordSuper = swordSuperPercent * statDenominator;
     }
 
     public float GetHealthPercentage()
