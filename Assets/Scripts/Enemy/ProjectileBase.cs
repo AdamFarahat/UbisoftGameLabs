@@ -27,7 +27,6 @@ public class ProjectileBase : MonoBehaviour
     public float Speed => speed;
     private void Awake()
     {
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
         sprite = GetComponentInChildren<Billboard>();
         Assert.IsNotNull(sprite);
 
@@ -53,6 +52,7 @@ public class ProjectileBase : MonoBehaviour
         sphereCollider.radius = normalColliderRadius;
         enabled = true;
         stunner.enabled = stun;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
     private void Update()

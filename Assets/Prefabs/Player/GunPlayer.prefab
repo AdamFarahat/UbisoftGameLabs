@@ -367,7 +367,7 @@ Transform:
   m_GameObject: {fileID: 6218317005578964624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.4925373, z: 2.7537313}
+  m_LocalPosition: {x: 0, y: 7.96, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,7 +426,7 @@ MonoBehaviour:
   grenadeInitialDirection: {x: 0, y: 1, z: 1}
   throwPoint: {fileID: 437187683036832482}
   crosshairs: {fileID: 4496502139177846877}
-  crosshairsStart: 0.5
+  crosshairsStart: 1
   crosshairsVelocity: -1
   crosshairsRotationVelocity: 90
 --- !u!1001 &771891864670845371
@@ -747,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
@@ -774,6 +774,14 @@ PrefabInstance:
       value: d4f17a07-b5ef-4069-a0b3-405294774061
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 7273f464-5176-4285-bbbc-a46dfb2084d3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: 12b7616d-17a7-4a47-bd67-a13335bdf90e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
       objectReference: {fileID: 0}
@@ -796,6 +804,14 @@ PrefabInstance:
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_ActionName
       value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
       objectReference: {fileID: 0}
     - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Sprite

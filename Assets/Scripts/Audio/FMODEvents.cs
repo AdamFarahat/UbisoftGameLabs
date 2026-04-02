@@ -33,9 +33,16 @@ public class FMODEvents : MonoBehaviour
     #endregion
 
     #region ENEMIES
-
     [field: Header("ENEMIES")]
     [field: SerializeField] public EventReference EnemyWeaponShot { get; private set; }
+
+    #endregion
+
+    #region UI
+    [field: Header("UI")]
+    [field: SerializeField] public EventReference UIHover { get; private set; }
+    [field: SerializeField] public EventReference UIPress { get; private set; }
+    [field: SerializeField] public EventReference UICancel { get; private set; }
 
     #endregion
 

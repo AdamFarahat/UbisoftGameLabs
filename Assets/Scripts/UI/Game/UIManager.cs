@@ -2,174 +2,193 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using TMPro;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
-    
+    [Header("Global UI Elements")]
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private Image healthBarUI;
+    [SerializeField] private Image vignetteUI;
+    [SerializeField] private Image superUI;
+    [SerializeField] private GameOver gameOverScreen;
+
+    [Header("Player Specific HUDs")]
+    [SerializeField] private PlayerHUD gunPlayerHUD;
+    [SerializeField] private PlayerHUD swordPlayerHUD;
+
+    // Cached References
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
     private ScoreManagerSO scoreManagerSO;
     private PlayerStats playerStats;
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private Image healthBarUI;
-    [SerializeField] private Image superUI;
-    [SerializeField] private Image gunPlayerCooldownUI;
-    [SerializeField] private Image gunMultiplierUI;
-    [SerializeField] private Image swordPlayerCooldownUI;
-    [SerializeField] private Image swordMultiplierUI;
 
-    [SerializeField] private GameOver gameOverScreen;
+    // State Variables
+    private float currentHealthVisual = 1.0f;
+    private const float LERP_SPEED = 0.1f;
 
-
-    float health = 1.0f;
-    float lerpSpeed = 0.1f;
-
+    // Shader Property IDs
     private readonly int amountID = Shader.PropertyToID("_Amount");
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
-    
+    private readonly int isSuperID = Shader.PropertyToID("_IsSuper");
+
+    // Tweens
+    private Tween healthColorTween;
+    private Tween vignetteTween;
 
     void Awake()
-    {   
-        Assert.IsNotNull(healthBarUI);
-        Assert.IsNotNull(superUI);
-        Assert.IsNotNull(scoreText);
-
-        Assert.IsNotNull(gunMultiplierUI);
-        Assert.IsNotNull(gunPlayerCooldownUI);
-
-        Assert.IsNotNull(swordMultiplierUI);
-        Assert.IsNotNull(swordPlayerCooldownUI);
-        
-
-        Assert.IsNotNull(healthBarUI.material);
-        Assert.IsNotNull(superUI.material);
-
-        Assert.IsNotNull(gunMultiplierUI.material);
-        Assert.IsNotNull(gunPlayerCooldownUI.material);
-
-        Assert.IsNotNull(swordMultiplierUI.material);
-        Assert.IsNotNull(swordPlayerCooldownUI.material);
+    {
+        Assert.IsNotNull(healthBarUI, "Health Bar UI is missing!");
+        Assert.IsNotNull(superUI, "Super UI is missing!");
+        Assert.IsNotNull(scoreText, "Score Text is missing!");
+        Assert.IsNotNull(gunPlayerHUD, "Gun Player HUD is missing!");
+        Assert.IsNotNull(swordPlayerHUD, "Sword Player HUD is missing!");
     }
 
     void Start()
+    {
+        CacheSystemReferences();
+        InitializeMaterials();
+        SubscribeToEvents();
+
+        // Set initial fill amounts
+        UpdateGunMultiplierUI();
+        UpdateSwordMultiplierUI();
+    }
+
+    private void CacheSystemReferences()
     {
         gunPlayerController = GunPlayerController.Instance;
         swordPlayerController = SwordPlayerController.Instance;
         scoreManagerSO = ScoreManagerSO.Instance;
         playerStats = PlayerStats.Instance;
+    }
 
-        if (gunPlayerController == null)
-            Debug.LogWarning("GunPlayerController instance not found. UI will not be updated.");
-        if (swordPlayerController == null)
-            Debug.LogWarning("SwordPlayerController instance not found. UI will not be updated.");
-        if (scoreManagerSO == null)
-            Debug.LogWarning("ScoreManagerSO instance not found. Score UI will not be updated.");
-        if (playerStats == null)
-            Debug.LogWarning("PlayerStats instance not found. Health UI will not be updated.");
-
-        // Create new instances so as not to change the original mats
+    private void InitializeMaterials()
+    {
         healthBarUI.material = new Material(healthBarUI.material);
-
+        
+        superUI.material = new Material(superUI.material);
         superUI.material.SetFloat(leftAmountID, 0f);
         superUI.material.SetFloat(rightAmountID, 0f);
 
-        gunMultiplierUI.material = new Material(gunMultiplierUI.material);
-        gunPlayerCooldownUI.material = new Material(gunPlayerCooldownUI.material);
-
-        swordMultiplierUI.material = new Material(swordMultiplierUI.material);
-        swordPlayerCooldownUI.material = new Material(swordPlayerCooldownUI.material);
-
-        if (gunPlayerController != null)
-            gunPlayerController.OnGrenadeCooldownReady += TriggerGunCooldownPulse;
-
-        if (swordPlayerController != null)
-            swordPlayerController.OnBlockCooldownReady += TriggerSwordCooldownPulse;
+        gunPlayerHUD.Initialize();
+        swordPlayerHUD.Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SubscribeToEvents()
     {
-        // Update the materials. If the required instance doesnt exist, simply ignore
-
         if (gunPlayerController != null)
         {
-            float grenadeCooldown = gunPlayerController.GetCooldownPercent();
-            gunPlayerCooldownUI.material.SetFloat(amountID, grenadeCooldown);
-
-            float gunMultiplier = gunPlayerController.GetNormalizedMultiplier();
-            gunMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(gunMultiplier));
-
-            float gunSuper = PlayerStats.Instance.GetGunSuperPercent();
-            float gunSuperSmoothed = Mathf.Lerp(gunSuper, PlayerStats.Instance.GetGunSuperPercent(), lerpSpeed);
-            superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
+            gunPlayerController.OnGrenadeCooldownReady += gunPlayerHUD.TriggerCooldownPulse;
+            gunPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateGunMultiplierUI);
         }
 
         if (swordPlayerController != null)
-        {   
-            
-            float swordCooldown = swordPlayerController.GetCooldownPercent();
-            swordPlayerCooldownUI.material.SetFloat(amountID, swordCooldown);  
-
-            float swordMultiplier = swordPlayerController.GetNormalizedMultiplier();
-            swordMultiplierUI.material.SetFloat(amountID, ConvertMultiplierToUIValue(swordMultiplier));
-
-            float swordSuper = PlayerStats.Instance.GetSwordSuperPercent();
-            float swordSuperSmoothed = Mathf.Lerp(swordSuper, PlayerStats.Instance.GetSwordSuperPercent(), lerpSpeed);
-            superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
-        }
-
-        if (scoreManagerSO != null)
         {
-            int score = ScoreManagerSO.CalculateOverallTeamScore();
-            scoreText.text = score.ToString();
+            swordPlayerController.OnBlockCooldownReady += swordPlayerHUD.TriggerCooldownPulse;
+            swordPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateSwordMultiplierUI);
         }
 
         if (playerStats != null)
         {
-            health = Mathf.Lerp(health, PlayerStats.Instance.GetHealthPercentage(), lerpSpeed);
-            healthBarUI.material.SetFloat(amountID, health);   
-        }   
-    }
-    float ConvertMultiplierToUIValue(float value)
-    {
-        float fillAmount = 0.0f;
-
-        switch (value)
-        {
-            case 0.0f: fillAmount = 0.0f; break; // x1
-            case 0.25f: fillAmount = 0.2f; break;  // x2
-            case 0.5f: fillAmount = 0.42f; break; // x4
-            case 0.75f: fillAmount = 0.67f; break; // x6
-            case 1: fillAmount = 1.00f; break; // x8
-            default: 
-                fillAmount = value; // Fallback: use the raw value if it's not one of the expected multipliers
-                Debug.LogWarning("Unexpected multiplier value: " + value + ". Using raw value for UI fill amount.");
-                break;
+            playerStats.SuperStarted += OnSuperStarted;
+            playerStats.SuperEnded += OnSuperEnded;
         }
-        return fillAmount;
     }
 
-    private void OnDestroy()
+    void Update()
     {
-        // Clean up the subscription if the UI is destroyed
+        UpdateCooldowns();
+        UpdateSuperMeter();
+        UpdateScore();
+        UpdateHealth();
+    }
+
+    // UPDATE UI'S
+    private void UpdateCooldowns()
+    {
         if (gunPlayerController != null)
-            gunPlayerController.OnGrenadeCooldownReady -= TriggerGunCooldownPulse;
+            gunPlayerHUD.UpdateCooldown(gunPlayerController.GetCooldownPercent());
 
         if (swordPlayerController != null)
-            swordPlayerController.OnBlockCooldownReady -= TriggerSwordCooldownPulse;
+            swordPlayerHUD.UpdateCooldown(swordPlayerController.GetCooldownPercent());
     }
 
-    private void TriggerGunCooldownPulse()
+    private void UpdateSuperMeter()
     {
-        // Start the stopwatch for the Shader Graph pulse animation
-        gunPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
+        if (playerStats == null) return;
+
+        float gunSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(leftAmountID), playerStats.GetGunSuperPercent(), LERP_SPEED);
+        superUI.material.SetFloat(leftAmountID, gunSuperSmoothed);
+
+        float swordSuperSmoothed = Mathf.Lerp(superUI.material.GetFloat(rightAmountID), playerStats.GetSwordSuperPercent(), LERP_SPEED);
+        superUI.material.SetFloat(rightAmountID, swordSuperSmoothed);
     }
 
-    private void TriggerSwordCooldownPulse()
+    private void UpdateScore()
     {
-        // Start the stopwatch for the Shader Graph pulse animation
-        swordPlayerCooldownUI.material.SetFloat("_TimeHitZero", Time.time);
+        if (scoreManagerSO != null)
+        {
+            scoreText.text = ScoreManagerSO.CalculateOverallTeamScore().ToString();
+        }
+    }
+
+    private void UpdateHealth()
+    {
+        if (playerStats != null)
+        {
+            currentHealthVisual = Mathf.Lerp(currentHealthVisual, playerStats.GetHealthPercentage(), LERP_SPEED);
+            healthBarUI.material.SetFloat(amountID, currentHealthVisual);
+        }
+    }
+
+    // EVENT HANDLERS 
+
+    private void UpdateGunMultiplierUI()
+    {
+        if (playerStats == null || gunPlayerController == null) return;
+        gunPlayerHUD.UpdateMultiplier(gunPlayerController.GetNormalizedMultiplier(), playerStats.IsSuperActive());
+    }
+
+    private void UpdateSwordMultiplierUI()
+    {
+        if (playerStats == null || swordPlayerController == null) return;
+        swordPlayerHUD.UpdateMultiplier(swordPlayerController.GetNormalizedMultiplier(), playerStats.IsSuperActive());
+    }
+
+    private void OnSuperStarted()
+    {
+        // Health Heart Glow
+        healthColorTween?.Kill();
+        healthColorTween = healthBarUI.material.DOFloat(1f, isSuperID, 0.75f).OnUpdate(() => healthBarUI.SetMaterialDirty());
+
+        // Activate Vignette
+        vignetteTween?.Kill();
+        vignetteTween = vignetteUI.material.DOFloat(1f, isSuperID, 0.75f).OnUpdate(() => vignetteUI.SetMaterialDirty());
+
+        // Player HUD Animations
+        gunPlayerHUD.PlaySuperStartAnimation();
+        swordPlayerHUD.PlaySuperStartAnimation();
+    }
+
+    private void OnSuperEnded()
+    {
+        // Health Heart Glow Removal
+        healthColorTween?.Kill();
+        healthColorTween = healthBarUI.material.DOFloat(0f, isSuperID, 0.3f).OnUpdate(() => healthBarUI.SetMaterialDirty());
+
+        // Deactivate Vignette
+        vignetteTween?.Kill();
+        vignetteTween = vignetteUI.material.DOFloat(0f, isSuperID, 0.3f).OnUpdate(() => vignetteUI.SetMaterialDirty());
+
+        // Player HUD Animations
+        float gunNorm = gunPlayerController != null ? gunPlayerController.GetNormalizedMultiplier() : 0f;
+        gunPlayerHUD.PlaySuperEndAnimation(gunNorm);
+
+        float swordNorm = swordPlayerController != null ? swordPlayerController.GetNormalizedMultiplier() : 0f;
+        swordPlayerHUD.PlaySuperEndAnimation(swordNorm);
     }
 
     public void ShowGameOverScreen()
@@ -179,10 +198,29 @@ public class UIManager : MonoBehaviour
             gameOverScreen.gameObject.SetActive(true);
             gameOverScreen.ShowGameOverScreen();
         }
-        else
+    }
+
+    private void OnDestroy()
+    {
+        if (gunPlayerController != null)
         {
-            Debug.LogWarning("GameOver screen reference is missing. Cannot show Game Over screen.");
+            gunPlayerController.OnGrenadeCooldownReady -= gunPlayerHUD.TriggerCooldownPulse;
+            gunPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateGunMultiplierUI);
         }
+
+        if (swordPlayerController != null)
+        {
+            swordPlayerController.OnBlockCooldownReady -= swordPlayerHUD.TriggerCooldownPulse;
+            swordPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateSwordMultiplierUI);
+        }
+
+        if (playerStats != null)
+        {
+            playerStats.SuperStarted -= OnSuperStarted;
+            playerStats.SuperEnded -= OnSuperEnded;
+        }
+
+        healthColorTween?.Kill();
+        vignetteTween?.Kill();
     }
 }
-

@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 public class TutorialSuper : TutorialBase
 {
     [Header("General")]
+    [SerializeField] private float fillSuperDuration = 0.5f;
     [SerializeField] private float deathAnimationDuration = 0.5f;
     [SerializeField] private float spawnDistance = 200f;
 
@@ -47,8 +48,6 @@ public class TutorialSuper : TutorialBase
         }
 
         PlayerStats.Instance.superEnabled = true;
-        PlayerStats.Instance.FillGunSuper();
-        PlayerStats.Instance.FillSwordSuper();
         PlayerStats.Instance.SuperStarted += ShowSecondDescription;
         PlayerStats.Instance.SuperEnded += () => { superEnded = true; };
 
@@ -82,6 +81,12 @@ public class TutorialSuper : TutorialBase
         }
 
         StartCoroutine(Routine());
+    }
+
+    protected override void PreTutorial()
+    {
+        PlayerStats.Instance.FillGunSuper(fillSuperDuration);
+        PlayerStats.Instance.FillSwordSuper(fillSuperDuration);
     }
 
     private void SpawnMeleeWave()
