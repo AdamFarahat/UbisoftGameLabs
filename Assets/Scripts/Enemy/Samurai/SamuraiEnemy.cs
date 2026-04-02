@@ -43,6 +43,10 @@ public class SamuraiEnemy : MonoBehaviour
 
     private void ResetState()
     {
+        state = SamuraiState.Walking;
+        canSlash = true;
+        numberOfSlashesDone = 0;
+        parriedBullet = null;
         lane.LaneDistance = LaneSet.SpawnLine;
         time = 0f;
     }
@@ -74,7 +78,8 @@ public class SamuraiEnemy : MonoBehaviour
                 break;
             case SamuraiState.Parrying:
                 if (parriedBullet) {
-                    parriedBullet.Parry(null, IndentityMultiplier);
+                    
+                    parriedBullet.Parry(null, IndentityMultiplier, false); //3rd argument isBySwordPlayer
                     parriedBullet = null;
                 }
                 //TODO: SlashingAnimation
@@ -110,7 +115,7 @@ public class SamuraiEnemy : MonoBehaviour
     {
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (!b.enabled || b.Parried)
+            if (!b.enabled || (!b.ParriedBySwordPlayer && b.Parried))
             {
                 continue;
             }

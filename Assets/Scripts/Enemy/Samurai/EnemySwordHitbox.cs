@@ -4,11 +4,6 @@ public class EnemySwordHitbox : MonoBehaviour
 {
     public SamuraiEnemy samuraiEnemy;
 
-    private void Awake()
-    {
-        //samuraiEnemy = GetComponent<SamuraiEnemy>();
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,11 +14,11 @@ public class EnemySwordHitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = samuraiEnemy.transform.position + samuraiEnemy.transform.forward * 2.5f + samuraiEnemy.transform.up * 2.5f;    }
+        gameObject.transform.position = samuraiEnemy.transform.position + samuraiEnemy.transform.forward * 2.5f + samuraiEnemy.transform.up * 2.5f;
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("SwordHitBox triggered by " + collider.name);
         samuraiEnemy.OnSwordHitBoxTriggerEnter(collider);
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -13,10 +15,13 @@ public class ProjectileBase : MonoBehaviour
     private Vector3 direction = Vector3.forward;
     
     private bool parried = false;
+    private bool parriedBySwordPlayer = false;
     public bool Parried => parried;
+    public bool ParriedBySwordPlayer => parriedBySwordPlayer;
     private Transform origin;
     protected bool createdFromPool = true;
     protected Stunner stunner;
+
 
 
     public float Speed => speed;
@@ -98,8 +103,9 @@ public class ProjectileBase : MonoBehaviour
         StartCoroutine(Routine());
     }
 
-    public void Parry(Transform newOrigin, float speedMult)
+    public void Parry(Transform newOrigin, float speedMult, bool isBySwordPlayer)
     {
+        parriedBySwordPlayer = isBySwordPlayer;
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
@@ -109,14 +115,10 @@ public class ProjectileBase : MonoBehaviour
         origin = newOrigin;
         speed *= speedMult;
         sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
-        parried = !parried;
-        if (parried)
-        {
-            sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
-        }
-        else {
-            sphereCollider.radius = normalColliderRadius;
-        }
+        parried = true;
+        
+        sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
+        
         stunner.enabled = !stunner.enabled;
     }
 }
