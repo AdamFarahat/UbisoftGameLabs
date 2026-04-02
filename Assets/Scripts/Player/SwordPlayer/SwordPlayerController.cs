@@ -10,7 +10,7 @@ public class SwordPlayerController : PlayerController
 {
     private static SwordPlayerController instance = null;
     public static SwordPlayerController Instance => instance;
-    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+    public static int LaneIndex => instance ? instance.GetLaneIndex() : -1;
 
     [SerializeField] private SwordHitBox swordHitBox;
 

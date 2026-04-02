@@ -140,7 +140,7 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    public float GetLaneIndex()
+    public int GetLaneIndex()
     {
         return laneBound.LaneIndex;
     }

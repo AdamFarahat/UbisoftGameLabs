@@ -10,7 +10,7 @@ public class GunPlayerController : PlayerController
 {
     private static GunPlayerController instance = null;
     public static GunPlayerController Instance => instance;
-    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+    public static int LaneIndex => instance ? instance.GetLaneIndex() : -1;
 
     [Header("Scoring")]
     [SerializeField] private float gunKillMultiplierGain = 0.05f;
