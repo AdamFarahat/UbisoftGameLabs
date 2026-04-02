@@ -16,7 +16,7 @@ public class SamuraiEnemy : MonoBehaviour
     [SerializeField] private int NumberOfSlashes = 2;
     [SerializeField] private float SlashDistance = 10f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
-
+    [SerializeField] private float ParryMultipliyer = 1.1f;
 
     private enum SamuraiState { Walking, Slashing, Parrying};
     private SamuraiState state;
@@ -27,7 +27,7 @@ public class SamuraiEnemy : MonoBehaviour
     private PlayerStats playerStats;
     private bool canSlash = true;
     protected LaneBound lane;
-    private float IndentityMultiplier = 1f;
+    
     protected void Awake()
     {
         lane = GetComponent<LaneBound>();
@@ -79,7 +79,7 @@ public class SamuraiEnemy : MonoBehaviour
             case SamuraiState.Parrying:
                 if (parriedBullet) {
                     
-                    parriedBullet.Parry(null, IndentityMultiplier, false); //3rd argument isBySwordPlayer
+                    parriedBullet.Parry(null, ParryMultipliyer, isBySwordPlayer: false);                    
                     parriedBullet = null;
                 }
                 //TODO: SlashingAnimation
@@ -115,7 +115,7 @@ public class SamuraiEnemy : MonoBehaviour
     {
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (!b.enabled || (!b.ParriedBySwordPlayer && b.Parried))
+            if (!b.enabled || b.ParriedBySwordPlayer || b.Parried)
             {
                 continue;
             }

@@ -457,7 +457,7 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(ProjectileBase projectile)
     {
-        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult, true); // 3rd argument isBySwordPlayer
+        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult,isBySwordPlayer: true); 
     }
 
     public void OnBulletParryKill(int score)
