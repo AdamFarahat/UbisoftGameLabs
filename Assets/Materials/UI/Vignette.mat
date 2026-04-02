@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GranadeCooldown
-  m_Shader: {fileID: -6465566751694194690, guid: ecedebec3f199664a8cc1d02e76548bd, type: 3}
+  m_Name: Vignette
+  m_Shader: {fileID: -6465566751694194690, guid: b592c2d9b7b7e7948b70e01bd4778626, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -41,25 +41,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amount: 0.08
-    - _AmountLeft: 0
+    - _BorderThickness: 0.2
     - _ColorMask: 15
-    - _Emission: 5
+    - _CrackleSpeed: 0.5
+    - _CrackleStrength: 25.06
+    - _DistortionSpeed: 0.25
+    - _DistortionStrength: 0.03
     - _IsSuper: 0
-    - _OverEmissionMultiplier: 2
-    - _PulseSpeed: 1.5
+    - _PulseSpeed: 0
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _TimeHitZero: 0
+    - _StrikeRate: 0
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _CooldownColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    - _Emission: {r: 2.1185474, g: 0.24697353, b: 0.044367444, a: 1}
-    - _SuperColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 23.968626, g: 14.848487, b: 23.968626, a: 0.19607843}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

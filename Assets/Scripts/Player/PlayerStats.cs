@@ -205,6 +205,7 @@ public class PlayerStats : MonoBehaviour
         swordSuperPercent = currentSwordSuper / statDenominator;
     }
 
+    [ContextMenu("Test Activate Super")]
     public void ActivateSuper()
     {
         isSuperActive = true;
