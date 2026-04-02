@@ -1,21 +1,30 @@
+using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class EnemyProjectile : MonoBehaviour
+public class ProjectileBase : MonoBehaviour
 {
     private Billboard sprite;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
-
+    [SerializeField] private float speed = 80f;
     private SphereCollider sphereCollider;
     private float normalColliderRadius;
-    private Vector3 direction;
-    private float speed = 80f;
+    private Vector3 direction = Vector3.forward;
+    
     private bool parried = false;
+    private bool parriedBySwordPlayer = false;
+    public bool Parried => parried;
+    public bool ParriedBySwordPlayer => parriedBySwordPlayer;
     private Transform origin;
-    private Stunner stunner;
+    protected bool createdFromPool = true;
+    protected Stunner stunner;
 
+
+
+    public float Speed => speed;
     private void Awake()
     {
         sprite = GetComponentInChildren<Billboard>();
@@ -46,20 +55,23 @@ public class EnemyProjectile : MonoBehaviour
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
-    void Update()
+    private void Update()
     {
         transform.position += speed * Time.deltaTime * direction;
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+    virtual protected void OnTriggerEnter(Collider other)
     {
         if (!parried)
             return;
 
         if (other.TryGetComponentInHierarchy(out Enemy enemy))
         {
-            if (enemy.OnParried())
+            if (enemy.OnParried()) { 
+                //TODO: Impact Sound effect
                 SwordPlayerController.Instance.OnBulletParryKill(enemy.Score);
+                }
             Despawn();
         }
     }
@@ -69,7 +81,7 @@ public class EnemyProjectile : MonoBehaviour
         Despawn();
     }
 
-    private void Despawn()
+    protected void Despawn()
     {
         enabled = false;
 
@@ -78,15 +90,22 @@ public class EnemyProjectile : MonoBehaviour
             Color color = spriteRenderer.color;
             yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
             spriteRenderer.color = color;
-            gameObject.SetActive(false);
+            if (createdFromPool)
+            {
+                gameObject.SetActive(false);
+            }
+            else { 
+                Destroy(gameObject);
+            }
         }
 
         // TODO sfx ?
         StartCoroutine(Routine());
     }
 
-    public void Parry(Transform newOrigin, float speedMult)
+    public void Parry(Transform newOrigin, float speedMult, bool isBySwordPlayer)
     {
+        parriedBySwordPlayer = isBySwordPlayer;
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
@@ -97,6 +116,9 @@ public class EnemyProjectile : MonoBehaviour
         speed *= speedMult;
         sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         parried = true;
+        
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
+        
+        stunner.enabled = !stunner.enabled;
     }
 }

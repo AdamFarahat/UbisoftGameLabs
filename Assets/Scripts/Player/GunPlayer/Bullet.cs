@@ -1,37 +1,31 @@
 using UnityEngine;
 using FMODUnity;
 
-public class Bullet : MonoBehaviour
+public class Bullet : ProjectileBase
 {
-    public float velocity = 100f;
-    [SerializeField] private float acceleration = 0f;
-    [SerializeField] private float range = 400f;
     [SerializeField] private bool canPenetrateShield = false;
     public int damage = 10;
 
-    private float distance = 0f;
-    private bool dead = false;
-
-    public bool IsDead => dead;
+  
 
     public EventReference impactEvent;
-
-    private void Update()
+    
+    private void Start()
     {
-        if (dead)
-            return;
 
-        float deltaDistance = velocity * Time.deltaTime;
-        distance += deltaDistance;
-        if (distance > range)
-            Destroy(gameObject);
-
-        transform.position += deltaDistance * transform.forward;
-        velocity += acceleration * Time.deltaTime;
+        stunner.enabled = false;
+        createdFromPool = false;
     }
-
-    void OnTriggerEnter(Collider other)
+    
+    
+    override protected void OnTriggerEnter(Collider other)
     {
+        if (Parried)
+        {
+            base.OnTriggerEnter(other);
+            return;
+        }
+
         if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             return;
 
@@ -52,20 +46,12 @@ public class Bullet : MonoBehaviour
             OnEnemyKill(enemy);
             PlayerStats.Instance.AddGunSuper(2f);
         }
-
+         
         foreach (Collider collider in GetComponentsInChildren<Collider>())
             collider.enabled = false;
 
 
-        dead = true;
-        // TODO uncomment once bullet sprites are uploaded
-        // IEnumerator FadeOutRoutine()
-        // {
-        //     yield return FadeAnimation.FadeOutRoutine(GetComponentInChildren<SpriteRenderer>());
-        //     Destroy(gameObject);  // TODO sfx ?
-        // }
-        // StartCoroutine(FadeOutRoutine());
-        Destroy(gameObject);  // TODO sfx ?
+        Despawn();
     }
     private void OnEnemyKill(Enemy enemy)
     {

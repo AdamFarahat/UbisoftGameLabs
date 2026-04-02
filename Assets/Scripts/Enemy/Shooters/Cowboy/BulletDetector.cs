@@ -4,7 +4,7 @@ using UnityEngine;
 public class BulletDetector : MonoBehaviour
 {
     private readonly List<Bullet> bulletsNearby = new();
-
+    private readonly List<ShotgunBlast> shotgunBlast = new();
     public List<Bullet> NearbyBullets => bulletsNearby;
 
     private void Update()
@@ -21,7 +21,7 @@ public class BulletDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Bullet b)) 
+        if (other.TryGetComponent(out Bullet b))
             bulletsNearby.Add(b);
     }
 
