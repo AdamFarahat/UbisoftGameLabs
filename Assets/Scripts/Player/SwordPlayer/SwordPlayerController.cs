@@ -108,27 +108,29 @@ public class SwordPlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        playerInput.actions["Attack"].performed += SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed += SuperInitiatedB;
+
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;
         playerInput.actions["Block/Parry"].started += Block;
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
-
-        playerInput.actions["Attack"].performed += SuperInitiatedA;
-        playerInput.actions["Block/Parry"].performed += SuperInitiatedB;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
+
+        playerInput.actions["Attack"].performed -= SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed -= SuperInitiatedB;
+
         playerInput.actions["UpEffect"].performed -= Jump;
         playerInput.actions["DownEffect"].performed -= Duck;
         playerInput.actions["Attack"].performed -= Attack;
         playerInput.actions["Block/Parry"].started -= Block;
         playerInput.actions["Block/Parry"].canceled -= CancelBlock;
-
-        playerInput.actions["Attack"].performed -= SuperInitiatedA;
-        playerInput.actions["Block/Parry"].performed -= SuperInitiatedB;
     }
 
     public override float GetCooldownPercent()
@@ -254,8 +256,12 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!slashEnabled)
             return;
+
         PressedSlash?.Invoke();
 
         if (Stunned)
@@ -286,24 +292,22 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!blockEnabled)
             return;
+
         PressedBlock?.Invoke();
 
         if (Stunned)
             return;
 
-        Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
         {
             swordHitBox.gameObject.SetActive(true);
             parryRoutine = StartCoroutine(ParryWindow());
         }
-        else
-        {
-            Debug.Log("Block on cooldown");
-        }
-
     }
 
     public void CancelBlock(InputAction.CallbackContext ctx)
@@ -314,7 +318,6 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-        Debug.Log("Cancel Block");
         if (parryRoutine != null)
         {
             StopCoroutine(parryRoutine);

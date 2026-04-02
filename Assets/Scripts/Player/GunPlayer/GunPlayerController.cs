@@ -70,12 +70,16 @@ public class GunPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+        PlayerStats.Instance.SuperStarted += CancelMainInput;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        
+
+        playerInput.actions["Fire"].performed += SuperInitiatedA;
+        playerInput.actions["Throw"].performed += SuperInitiatedB;
+
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
         playerInput.actions["UpEffect"].performed += ToggleGunUp;
@@ -83,14 +87,14 @@ public class GunPlayerController : PlayerController
         playerInput.actions["Throw"].performed += PressThrow;
         playerInput.actions["Throw"].canceled += ReleaseThrow;
         grenadeBelt.OnCooldownReady += HandleGrenadeReady;
-        
-        playerInput.actions["Fire"].performed += SuperInitiatedA;
-        playerInput.actions["Throw"].performed += SuperInitiatedB;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
+
+        playerInput.actions["Fire"].performed -= SuperInitiatedA;
+        playerInput.actions["Throw"].performed -= SuperInitiatedB;
 
         playerInput.actions["Fire"].performed -= PressFire;
         playerInput.actions["Fire"].canceled -= ReleaseFire;
@@ -98,13 +102,12 @@ public class GunPlayerController : PlayerController
         playerInput.actions["DownEffect"].performed -= ToggleGunDown;
         playerInput.actions["Throw"].performed -= PressThrow;
         playerInput.actions["Throw"].canceled -= ReleaseThrow;
-
-        playerInput.actions["Fire"].performed -= SuperInitiatedA;
-        playerInput.actions["Throw"].performed -= SuperInitiatedB;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (Stunned)
             return;
 
@@ -116,8 +119,12 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!shootEnabled)
             return;
+
         PressedShoot?.Invoke();
 
         if (Stunned)
@@ -144,6 +151,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+
         PressedToggle?.Invoke();
 
         if (Stunned)
@@ -156,6 +164,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+
         PressedToggle?.Invoke();
 
         if (Stunned)
@@ -166,8 +175,12 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!throwEnabled)
             return;
+
         PressedThrow?.Invoke();
 
         if (Stunned)
@@ -214,5 +227,11 @@ public class GunPlayerController : PlayerController
     private void HandleGrenadeReady()
     {
         OnGrenadeCooldownReady?.Invoke();
+    }
+
+    private void CancelMainInput()
+    {
+        holster.CancelFiring();
+        grenadeBelt.CancelThrow();
     }
 }

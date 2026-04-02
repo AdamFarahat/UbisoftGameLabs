@@ -45,6 +45,8 @@ public abstract class PlayerController : MonoBehaviour
     public float TimePressedA => timePressedA;
     private float timePressedB = -100f;
     public float TimePressedB => timePressedB;
+    private bool inputBlockedBySuper = false;
+    protected bool InputBlockedBySuper => inputBlockedBySuper;
 
     // Begin tutorial settings
     public bool moveEnabled = true;
@@ -76,6 +78,12 @@ public abstract class PlayerController : MonoBehaviour
         playerInput.actions.Enable();
         stunParticleSystem.Pause();
         stunParticleSystem.gameObject.SetActive(false);
+    }
+
+    protected virtual void Update()
+    {
+        if (inputBlockedBySuper)
+            inputBlockedBySuper = false;
     }
 
     protected virtual void OnEnable()
@@ -283,7 +291,8 @@ public abstract class PlayerController : MonoBehaviour
             return;
 
         timePressedA = Time.time;
-        PlayerStats.Instance.TryActivatingSuper();
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
     }
 
     protected void SuperInitiatedB(InputAction.CallbackContext _)
@@ -292,7 +301,8 @@ public abstract class PlayerController : MonoBehaviour
             return;
 
         timePressedB = Time.time;
-        PlayerStats.Instance.TryActivatingSuper();
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
     }
 
     [ContextMenu("Test Multiplier")]

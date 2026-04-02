@@ -178,7 +178,7 @@ public class PlayerStats : MonoBehaviour
     }
 
     [ContextMenu("Test Activate Super")]
-    public void TryActivatingSuper()
+    public bool TryActivatingSuper()
     {
         List<float> buttonPressTimes = new();
         bool supersFilled = true;
@@ -201,7 +201,10 @@ public class PlayerStats : MonoBehaviour
         {
             superCoroutine = StartCoroutine(SuperDuration());
             SuperStarted?.Invoke();
+            return true;
         }
+        else
+            return false;
     }
 
     private IEnumerator SuperDuration()
