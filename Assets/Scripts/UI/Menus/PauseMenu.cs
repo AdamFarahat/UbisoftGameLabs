@@ -75,11 +75,13 @@ public class PauseMenu : MonoBehaviour
 
     public void OnRestartButtonClicked()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnMainMenuButtonClicked()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
 }
