@@ -62,12 +62,6 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
-    [SerializeField] private float activateSuperWaitTime = 0.1f;
-    private bool attackButtonPressedSuper = false;
-    private bool blockButtonPressedSuper = false;
-    private Coroutine resetAttackButtonPressedSuperCoroutine = null;
-    private Coroutine resetBlockButtonPressedSuperCoroutine = null;
-
     // Begin tutorial settings
     public bool slashEnabled = true;
     public bool blockEnabled = true;
@@ -119,6 +113,9 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["Attack"].performed += Attack;
         playerInput.actions["Block/Parry"].started += Block;
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
+
+        playerInput.actions["Attack"].performed += SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed += SuperInitiatedB;
     }
 
     protected override void OnDisable()
@@ -129,6 +126,9 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["Attack"].performed -= Attack;
         playerInput.actions["Block/Parry"].started -= Block;
         playerInput.actions["Block/Parry"].canceled -= CancelBlock;
+
+        playerInput.actions["Attack"].performed -= SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed -= SuperInitiatedB;
     }
 
     public override float GetCooldownPercent()
@@ -261,28 +261,13 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-
-        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
-        {
-            Debug.Log("Attack button pressed with super ready");
-            //Set attack button pressed super to true
-            attackButtonPressedSuper = true;
-            if (blockButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Sword Player Activating Super Attack!");
-                PlayerStats.Instance.PrepareSwordSuperReady(true);
-                return;
-            }
-            resetAttackButtonPressedSuperCoroutine = StartCoroutine(ResetAttackButtonPressedSuper());
-        }
-
         if (state == SwordPlayerStates.Normal)
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
             state = SwordPlayerStates.Attacking;
             PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);
-            if(PlayerStats.Instance.IsSuperActive())
+            if (PlayerStats.Instance.IsSuperActive())
             {
                 //Shoot a sword wave projectile that does not trigger hitbox but can hit multiple enemies in the same lane
                 swordHitBox.ShootSwordWave();
@@ -307,21 +292,6 @@ public class SwordPlayerController : PlayerController
 
         if (Stunned)
             return;
-
-        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
-        {
-            //Set block button pressed super to true
-            Debug.Log("Block button pressed with super ready");
-            blockButtonPressedSuper = true;
-            if (attackButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Sword Player Activating Super Attack!");
-                PlayerStats.Instance.PrepareSwordSuperReady(true);
-                return;
-            }
-            resetBlockButtonPressedSuperCoroutine = StartCoroutine(ResetBlockButtonPressedSuper());
-
-        }
 
         Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
@@ -474,19 +444,5 @@ public class SwordPlayerController : PlayerController
         playerStats.AddSwordSuper(5f);
         AddContinuousMultiplier(bulletParryMultiplierGain);
         AddScore(score);
-    }
-
-    private IEnumerator ResetAttackButtonPressedSuper()
-    {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        attackButtonPressedSuper = false;
-        resetAttackButtonPressedSuperCoroutine = null;
-    }
-
-    private IEnumerator ResetBlockButtonPressedSuper()
-    {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        blockButtonPressedSuper = false;
-        resetBlockButtonPressedSuperCoroutine = null;
     }
 }
