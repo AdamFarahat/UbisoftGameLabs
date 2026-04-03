@@ -25,14 +25,6 @@ public class GunPlayerController : PlayerController
     private GrenadeBelt grenadeBelt;
     public GrenadeBelt GrenadeBelt => grenadeBelt;
 
-    [Header("Super")]
-    [SerializeField] private float activateSuperWaitTime = 0.1f;
-    private bool fireButtonPressedSuper = false;
-    private bool grenadeButtonPressedSuper = false;
-
-    Coroutine resetFireButtonPressedSuperCoroutine = null;
-    Coroutine resetThrowButtonPressedSuperCoroutine = null;
-
     private enum HoldingState
     {
         Released,
@@ -78,11 +70,16 @@ public class GunPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+        PlayerStats.Instance.SuperStarted += CancelMainInput;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        playerInput.actions["Fire"].performed += SuperInitiatedA;
+        playerInput.actions["Throw"].performed += SuperInitiatedB;
+
         playerInput.actions["Fire"].performed += PressFire;
         playerInput.actions["Fire"].canceled += ReleaseFire;
         playerInput.actions["UpEffect"].performed += ToggleGunUp;
@@ -95,6 +92,10 @@ public class GunPlayerController : PlayerController
     protected override void OnDisable()
     {
         base.OnDisable();
+
+        playerInput.actions["Fire"].performed -= SuperInitiatedA;
+        playerInput.actions["Throw"].performed -= SuperInitiatedB;
+
         playerInput.actions["Fire"].performed -= PressFire;
         playerInput.actions["Fire"].canceled -= ReleaseFire;
         playerInput.actions["UpEffect"].performed -= ToggleGunUp;
@@ -103,8 +104,10 @@ public class GunPlayerController : PlayerController
         playerInput.actions["Throw"].canceled -= ReleaseThrow;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (Stunned)
             return;
 
@@ -116,26 +119,16 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!shootEnabled)
             return;
+
         PressedShoot?.Invoke();
 
         if (Stunned)
             return;
-
-        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
-        {
-            Debug.Log("Fire button pressed with super ready");
-            //Set fire button pressed super to true
-            fireButtonPressedSuper = true;
-            if (grenadeButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Gun Player Activating Super Fire!");
-                PlayerStats.Instance.PrepareGunSuperReady(true);
-                return;
-            }
-            resetFireButtonPressedSuperCoroutine = StartCoroutine(ResetFireButtonPressedSuper());
-        }
 
         holster.StartFiring();
         holdingGunInput = HoldingState.FirstFrame;
@@ -158,6 +151,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+
         PressedToggle?.Invoke();
 
         if (Stunned)
@@ -170,6 +164,7 @@ public class GunPlayerController : PlayerController
     {
         if (!toggleGunEnabled)
             return;
+
         PressedToggle?.Invoke();
 
         if (Stunned)
@@ -180,26 +175,16 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!throwEnabled)
             return;
+
         PressedThrow?.Invoke();
 
         if (Stunned)
             return;
-
-        if (PlayerStats.Instance.GetGunSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
-        {
-            Debug.Log("Grenade button pressed with super ready");
-            //Set grenade button pressed super to true
-            grenadeButtonPressedSuper = true;
-            if (fireButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Gun Player Activating Super Grenade Throw!");
-                //PlayerStats.Instance.ActivateSuper();
-                return;
-            }
-            resetThrowButtonPressedSuperCoroutine = StartCoroutine(ResetThrowButtonPressedSuper());
-        }
 
         grenadeBelt.ChargeThrow();
         if (holdingGunInput != HoldingState.Released)
@@ -244,17 +229,9 @@ public class GunPlayerController : PlayerController
         OnGrenadeCooldownReady?.Invoke();
     }
 
-    private IEnumerator ResetFireButtonPressedSuper()
+    private void CancelMainInput()
     {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        fireButtonPressedSuper = false;
-        resetFireButtonPressedSuperCoroutine = null;
-    }
-
-    private IEnumerator ResetThrowButtonPressedSuper()
-    {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        grenadeButtonPressedSuper = false;
-        resetThrowButtonPressedSuperCoroutine = null;
+        holster.CancelFiring();
+        grenadeBelt.CancelThrow();
     }
 }

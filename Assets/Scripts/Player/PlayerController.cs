@@ -41,6 +41,13 @@ public abstract class PlayerController : MonoBehaviour
     public UnityAction StartButtonPressed;
     public UnityAction SelectButtonPressed;
 
+    private float timePressedA = -100f;
+    public float TimePressedA => timePressedA;
+    private float timePressedB = -100f;
+    public float TimePressedB => timePressedB;
+    private bool inputBlockedBySuper = false;
+    protected bool InputBlockedBySuper => inputBlockedBySuper;
+
     // Begin tutorial settings
     public bool moveEnabled = true;
     // End tutorial settings
@@ -71,6 +78,12 @@ public abstract class PlayerController : MonoBehaviour
         playerInput.actions.Enable();
         stunParticleSystem.Pause();
         stunParticleSystem.gameObject.SetActive(false);
+    }
+
+    protected virtual void Update()
+    {
+        if (inputBlockedBySuper)
+            inputBlockedBySuper = false;
     }
 
     protected virtual void OnEnable()
@@ -270,6 +283,26 @@ public abstract class PlayerController : MonoBehaviour
     public void AddContinuousMultiplier(float deltaMultiplier)
     {
         SetContinuousMultiplier(continuousMultiplier + deltaMultiplier);
+    }
+
+    protected void SuperInitiatedA(InputAction.CallbackContext _)
+    {
+        if (Stunned)
+            return;
+
+        timePressedA = Time.time;
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
+    }
+
+    protected void SuperInitiatedB(InputAction.CallbackContext _)
+    {
+        if (Stunned)
+            return;
+
+        timePressedB = Time.time;
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
     }
 
     [ContextMenu("Test Multiplier")]

@@ -1,4 +1,7 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,22 +13,20 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
-    private float currentGunSuper;
-    private float currentSwordSuper;
-    private float healthPercent;
-    private float statDenominator = 100f;
+    private float currentHealth = 100f;
+    [SerializeField] private float healthPercent = 1f;
 
     [Header("Super")]
-    private float gunSuperPercent;
-    private float swordSuperPercent;
-    private bool isSuperActive = false;
+    private float currentGunSuper = 0f;
+    private float currentSwordSuper = 0f;
+    [SerializeField] private float statDenominator = 100f;
+    [SerializeField] private float gunSuperPercent = 0f;
+    [SerializeField] private float swordSuperPercent = 0f;
+
+    [SerializeField] private float activateSuperTimingWindow = 0.1f;
+
     Coroutine superCoroutine = null;
     public float superDuration = 5f;
-    private Coroutine awaitingSuperCoroutine = null;
-    [SerializeField] private float activateSuperWaitTime = 0.1f;
-    private bool gunSuperPrepared = false;
-    private bool swordSuperPrepared = false;
 
     // Begin tutorial settings
     public bool damageEnabled = true;
@@ -45,18 +46,9 @@ public class PlayerStats : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHealth = maxHealth;
-        currentGunSuper = 0f;
-        currentSwordSuper = 0f;
-        healthPercent = currentHealth / maxHealth;
-        gunSuperPercent = currentGunSuper / statDenominator;
-        swordSuperPercent = currentSwordSuper / statDenominator;
-        Debug.Log("Player health initialized to: " + currentHealth);
-
-        currentGunSuper = 100f;
-        gunSuperPercent = currentGunSuper / statDenominator;
-        currentSwordSuper = 100f;
-        swordSuperPercent = currentSwordSuper / statDenominator;
+        currentHealth = healthPercent * maxHealth;
+        currentGunSuper = gunSuperPercent * statDenominator;
+        currentSwordSuper = swordSuperPercent * statDenominator;
     }
 
     public float GetHealthPercentage()
@@ -76,27 +68,7 @@ public class PlayerStats : MonoBehaviour
 
     public bool IsSuperActive()
     {
-        return isSuperActive;
-    }
-
-    public void PrepareGunSuperReady(bool isReady)
-    {
-        gunSuperPrepared = isReady;
-        Debug.Log("Gun Super Prepared: " + gunSuperPrepared);
-        if (awaitingSuperCoroutine == null)
-        {
-            awaitingSuperCoroutine = StartCoroutine(AwaitingSuper());
-        }
-    }
-
-    public void PrepareSwordSuperReady(bool isReady)
-    {
-        swordSuperPrepared = isReady;
-        Debug.Log("Sword Super Prepared: " + swordSuperPrepared);
-        if (awaitingSuperCoroutine == null)
-        {
-            awaitingSuperCoroutine = StartCoroutine(AwaitingSuper());
-        }
+        return superCoroutine != null;
     }
 
     public void TakeDamage(float damage)
@@ -206,34 +178,33 @@ public class PlayerStats : MonoBehaviour
     }
 
     [ContextMenu("Test Activate Super")]
-    public void ActivateSuper()
+    public bool TryActivatingSuper()
     {
-        isSuperActive = true;
-        superCoroutine = StartCoroutine(SuperDuration());
-        SuperStarted?.Invoke();
-        if (awaitingSuperCoroutine != null)
-        {
-            StopCoroutine(awaitingSuperCoroutine);
-            awaitingSuperCoroutine = null;
-        }
-    }
+        List<float> buttonPressTimes = new();
+        bool supersFilled = true;
 
-    private IEnumerator AwaitingSuper()
-    {
-        float timer = 0;
-        Debug.Log("Started Awaiting Super Coroutine!");
-        while (timer < activateSuperWaitTime)
+        if (GunPlayerController.Instance != null)
         {
-            timer += Time.deltaTime;
-            Debug.Log("gunSuperPrepared: " + gunSuperPrepared + ", swordSuperPrepared: " + swordSuperPrepared + ", !IsSuperActive: +!" + !IsSuperActive());
-            if (gunSuperPrepared && swordSuperPrepared && !isSuperActive)
-            {
-                Debug.Log("Activating Super from Awaiting Coroutine!");
-                ActivateSuper();
-                yield break;
-            }
+            buttonPressTimes.Add(GunPlayerController.Instance.TimePressedA);
+            buttonPressTimes.Add(GunPlayerController.Instance.TimePressedB);
+            supersFilled &= gunSuperPercent == 1f;
         }
-        awaitingSuperCoroutine = null;
+
+        if (SwordPlayerController.Instance != null)
+        {
+            buttonPressTimes.Add(SwordPlayerController.Instance.TimePressedA);
+            buttonPressTimes.Add(SwordPlayerController.Instance.TimePressedB);
+            supersFilled &= swordSuperPercent == 1f;
+        }
+
+        if (!IsSuperActive() && supersFilled && Mathf.Abs(buttonPressTimes.Max() - buttonPressTimes.Min()) < activateSuperTimingWindow)
+        {
+            superCoroutine = StartCoroutine(SuperDuration());
+            SuperStarted?.Invoke();
+            return true;
+        }
+        else
+            return false;
     }
 
     private IEnumerator SuperDuration()
@@ -242,18 +213,14 @@ public class PlayerStats : MonoBehaviour
         while (timer >= 0)
         {
             timer -= Time.deltaTime;
-            //Show the bars going down over time
+            // Show the bars going down over time
             currentGunSuper -= (statDenominator / superDuration) * Time.deltaTime;
             currentSwordSuper -= (statDenominator / superDuration) * Time.deltaTime;
             gunSuperPercent = currentGunSuper / statDenominator;
             swordSuperPercent = currentSwordSuper / statDenominator;
             yield return null;
         }
-        isSuperActive = false;
-        gunSuperPrepared = false;
-        swordSuperPrepared = false;
         superCoroutine = null;
-
         SuperEnded?.Invoke();
     }
 }
