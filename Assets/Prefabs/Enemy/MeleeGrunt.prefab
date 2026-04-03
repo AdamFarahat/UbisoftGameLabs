@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 749386765219378213}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 2348815166759920774}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:
@@ -342,6 +344,7 @@ GameObject:
   - component: {fileID: 1581637196576062325}
   - component: {fileID: 1373232332848855569}
   - component: {fileID: 7783204410356858617}
+  - component: {fileID: 7197262228546860711}
   m_Layer: 6
   m_Name: MeleeGrunt
   m_TagString: Enemy
@@ -452,6 +455,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7197262228546860711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980648615144976386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
+  minSpeed: 30
+  maxSpeed: 60
 --- !u!1001 &5663846591562425685
 PrefabInstance:
   m_ObjectHideFlags: 0
