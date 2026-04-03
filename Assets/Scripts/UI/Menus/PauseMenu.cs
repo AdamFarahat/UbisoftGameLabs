@@ -65,6 +65,8 @@ public class PauseMenu : MonoBehaviour
         mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
 
         eventSystem.SetSelectedGameObject(null);
+
+        FindFirstObjectByType<UIManager>().OnResume();
     }
 
     public void OnOptionsButtonClicked()

@@ -59,17 +59,26 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(scoreManagerSO);
         Assert.IsNotNull(playerStats);
 
-        gunPlayerController.StartButtonPressed += TogglePauseMenu;
-        swordPlayerController.StartButtonPressed += TogglePauseMenu;
+        gunPlayerController.StartButtonPressed += OnPause;
+        swordPlayerController.StartButtonPressed += OnPause;
         // Set initial fill amounts
         UpdateGunMultiplierUI();
         UpdateSwordMultiplierUI();
     }
 
-    public void TogglePauseMenu()
+    public void OnPause()
     {
         Debug.Log("Start button pressed. Toggling pause menu.");
+        gunPlayerController.PlayerInput.enabled = false;
+        swordPlayerController.PlayerInput.enabled = false;
         pauseMenuScreen.ShowPauseMenu();
+    }
+
+    public void OnResume()
+    {
+        Debug.Log("Resuming game from pause menu.");
+        gunPlayerController.PlayerInput.enabled = true;
+        swordPlayerController.PlayerInput.enabled = true;
     }
     private void CacheSystemReferences()
     {
