@@ -39,7 +39,7 @@ public class WaveManager : MonoBehaviour
     {
         waveList = JsonUtility.FromJson<WaveList>(waveFile.text);
         prefixQueue = new Queue<Wave>(waveList.prefixWaves ?? new Wave[0]);
-        StartNextWave();
+        StartCoroutine(DelayedNextWave());
     }
 
     void Update()
@@ -66,7 +66,7 @@ public class WaveManager : MonoBehaviour
                 waitingForClear = true;
         }
     }
-    
+
     IEnumerator DelayedNextWave()
     {
         yield return new WaitForSeconds(waveStartDelay);
