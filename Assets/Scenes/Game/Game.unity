@@ -286,6 +286,7 @@ MonoBehaviour:
   fadeInImage: {fileID: 1567556696}
   fadeInDuration: 2
   fadeInExponent: 2
+  fadeInDelayFactor: 0.5
   countdownImage: {fileID: 1597604705}
   countdown3: {fileID: 21300000, guid: 15f34f6d67f56a54cb25ce27c7e4fd06, type: 3}
   countdown2: {fileID: 21300000, guid: efcb622ef0dcd11489f02afaecb545ea, type: 3}
@@ -872,7 +873,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597604705
 MonoBehaviour:
