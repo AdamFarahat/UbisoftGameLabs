@@ -1936,6 +1936,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 9089175420580484333}
   gunPlayerHUD: {fileID: 4868340195412220918}
   swordPlayerHUD: {fileID: 2977168203496582162}
+  scoreIncreaseSpeed: 30
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
