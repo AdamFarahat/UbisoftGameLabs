@@ -210,6 +210,7 @@ public class SwordPlayerController : PlayerController
 
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerJump, transform.position);
             animator.defaultName = "Jump";
             PlayDefaultCycleAnimation();
 
