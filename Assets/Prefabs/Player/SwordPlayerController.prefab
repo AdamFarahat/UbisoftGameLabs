@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordPlayerController
   switchLaneBufferDuration: 0.1
-  discreteMultiplierIndex: 0
+  discreteMultiplierIndex: 2
   discreteMultipliers:
   - 1
   - 2

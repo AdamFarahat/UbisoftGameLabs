@@ -475,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunPlayerController
   switchLaneBufferDuration: 0.1
-  discreteMultiplierIndex: 0
+  discreteMultiplierIndex: 2
   discreteMultipliers:
   - 1
   - 2
