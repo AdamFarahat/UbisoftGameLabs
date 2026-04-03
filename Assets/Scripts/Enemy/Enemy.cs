@@ -35,7 +35,7 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool != null)
+        if (enemyPool == null)
             ResetState();
     }
 

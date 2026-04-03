@@ -6,7 +6,6 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
-    [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
 
     private enum CowBoyState { Walking, Charging, Dodging };
@@ -34,6 +33,8 @@ public class CowboyEnemy : ShooterEnemy
         lane.LaneDistance = LaneSet.SpawnLine;
         time = 0f;
         nextLaneSwitchTime = laneStayPeriod;
+        state = CowBoyState.Walking;
+        dodgedBullet = null;
     }
 
     private void Start()
@@ -149,7 +150,7 @@ public class CowboyEnemy : ShooterEnemy
 
     private void WalkForward()
     {
-        lane.LaneDistance -= walkingSpeed * Time.deltaTime;
+        lane.LaneDistance -= speed * Time.deltaTime;
     }
 
     
