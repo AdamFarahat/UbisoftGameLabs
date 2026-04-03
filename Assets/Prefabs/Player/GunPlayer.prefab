@@ -890,13 +890,9 @@ MonoBehaviour:
   spriteBillboard: {fileID: 285721901106026720}
   shakeOffset: 0.2
   shakeInterval: 0.02
-  OnDiscreteMultiplierChange:
-    m_PersistentCalls:
-      m_Calls: []
   moveEnabled: 1
   gunKillMultiplierGain: 0.05
   grenadeKillMultiplierGain: 0.5
-  activateSuperWaitTime: 0.1
   shootEnabled: 1
   throwEnabled: 1
   toggleGunEnabled: 1

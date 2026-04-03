@@ -41,7 +41,7 @@ public class MultiplierTextManager : MonoBehaviour
         }
 
         // Subscribe to regular multiplier changes
-        currentPlayerController.OnDiscreteMultiplierChange.AddListener(AnimateText);
+        currentPlayerController.OnDiscreteMultiplierChange += AnimateText;
         
         // Subscribe to Super events
         if (PlayerStats.Instance != null)
