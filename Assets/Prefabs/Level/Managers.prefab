@@ -137,6 +137,7 @@ MonoBehaviour:
   finalMaxSpawnTime: 3
   sigmoidSteepness: 0.06
   sigmoidMidpoint: 10
+  waveStartDelay: 3
   difficultySelectionRange: 0.15
 --- !u!114 &6314761081725675962
 MonoBehaviour:

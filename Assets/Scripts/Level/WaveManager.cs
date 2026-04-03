@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -17,6 +18,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float finalMaxSpawnTime = 3f;
     [SerializeField] private float sigmoidSteepness = 0.06f;
     [SerializeField] private float sigmoidMidpoint = 90f;
+    [SerializeField] private float waveStartDelay = 3f;
+    private bool delayStarted = false;
 
     [Header("Wave Difficulty Selection")]
     [Tooltip("Waves are drawn from [globalDifficulty - range, globalDifficulty + range].")]
@@ -45,8 +48,11 @@ public class WaveManager : MonoBehaviour
 
         if (waitingForClear)
         {
-            if (spawner.CurrentEnemies <= 0)
-                StartNextWave();
+            if (waitingForClear && spawner.CurrentEnemies <= 0 && !delayStarted)
+            {
+                delayStarted = true;
+                StartCoroutine(DelayedNextWave());
+            }
             return;
         }
 
@@ -59,6 +65,13 @@ public class WaveManager : MonoBehaviour
             if (enemiesSpawned >= currentWave.enemyCount)
                 waitingForClear = true;
         }
+    }
+    
+    IEnumerator DelayedNextWave()
+    {
+        yield return new WaitForSeconds(waveStartDelay);
+        delayStarted = false;
+        StartNextWave();
     }
 
     void SpawnFromWave()
