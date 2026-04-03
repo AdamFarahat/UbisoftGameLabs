@@ -1,0 +1,11 @@
+{
+  "prefixWaves": [
+    { "label": "Warmup1", "difficulty": 0.05, "enemyCount": 3, "enemyTypes": [0] },
+    { "label": "Warmup2",   "difficulty": 0.10, "enemyCount": 5, "enemyTypes": [0, 1] }
+  ],
+  "waves": [
+    { "label": "Easy",   "difficulty": 0.15, "enemyCount": 5,  "enemyTypes": [0, 1] },
+    { "label": "Medium", "difficulty": 0.50, "enemyCount": 10, "enemyTypes": [2] },
+    { "label": "Hard",   "difficulty": 1.00, "enemyCount": 10, "enemyTypes": [4] }
+  ]
+}
