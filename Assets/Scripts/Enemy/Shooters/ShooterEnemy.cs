@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class ShooterEnemy : MonoBehaviour
+public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] protected float stunTime = 0.3f;
     [SerializeField] protected float shotCooldown = 0.65f;
@@ -9,7 +9,7 @@ public class ShooterEnemy : MonoBehaviour
     [SerializeField] protected float shootingRange = 10000f;  // max distance to shoot
     [SerializeField] protected float bulletSpeed = 80f;
     [SerializeField] protected Transform spawnPoint;
-    public bool projectileStun = true;
+    [SerializeField] protected float speed = 5f;
 
     protected LaneBound lane;
 
@@ -31,16 +31,22 @@ public class ShooterEnemy : MonoBehaviour
         GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
         Assert.IsNotNull(go);
 
-        EnemyProjectile projectile = go.GetComponent<EnemyProjectile>();
+        Bullet projectile = go.GetComponent<Bullet>();
         Assert.IsNotNull(projectile);
 
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);
         playerPosition.y = LaneSet.PlayerTargetHeight;
         Vector3 direction = playerPosition - spawnPoint.position;
-        projectile.Initialize(spawnPoint, direction, bulletSpeed, projectileStun);
+        projectile.Initialize(spawnPoint, direction, bulletSpeed, Bullet.ProjectileState.ShotByEnemy);
 
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
         stunner.stunTime = stunTime;
+    }
+
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
     }
 }

@@ -4,6 +4,8 @@ public class SwordHitBox : MonoBehaviour
 {
     private SwordPlayerController swordPlayerController;
 
+    [SerializeField] private GameObject swordWavePrefab; // Assign this in the inspector with the prefab for the sword wave projectile
+
     private void Awake()
     {
         swordPlayerController = FindFirstObjectByType<SwordPlayerController>();
@@ -24,7 +26,11 @@ public class SwordHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("SwordHitBox triggered by " + collider.name);
         swordPlayerController.OnSwordHitBoxTriggerEnter(collider);
+    }
+
+    public void ShootSwordWave()
+    {
+        Instantiate(swordWavePrefab, swordPlayerController.SwordWaveSpawnPos.transform.position, swordPlayerController.SwordWaveSpawnPos.transform.rotation);
     }
 }

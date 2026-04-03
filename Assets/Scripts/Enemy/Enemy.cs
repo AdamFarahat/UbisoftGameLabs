@@ -35,7 +35,7 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool != null)
+        if (enemyPool == null)
             ResetState();
     }
 
@@ -58,6 +58,7 @@ public class Enemy : Poolable
         dead = health <= 0;
 
         laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
     // returns true if enemy was killed by damage
@@ -65,6 +66,7 @@ public class Enemy : Poolable
     {
         if (Dead || invulnerable) return false;
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyHurt, transform.position);
         health = System.Math.Max(health - damage, 0);
         if (health == 0)
         {
