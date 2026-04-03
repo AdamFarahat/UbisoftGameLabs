@@ -95,6 +95,7 @@ public class TutorialPrimaryAction : TutorialBase
         movement.speed = meleeGruntSpeed;
 
         TutorialEnemyLife tutorialEnemy = go.GetComponent<TutorialEnemyLife>();
+        Assert.IsNotNull(tutorialEnemy);
         grunts.Add(tutorialEnemy);
         tutorialEnemy.Die += () => { grunts.Remove(tutorialEnemy); };
     }
