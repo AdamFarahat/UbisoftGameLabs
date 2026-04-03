@@ -105,13 +105,13 @@ public class UIManager : MonoBehaviour
         if (gunPlayerController != null)
         {
             gunPlayerController.OnGrenadeCooldownReady += gunPlayerHUD.TriggerCooldownPulse;
-            gunPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateGunMultiplierUI);
+            gunPlayerController.OnDiscreteMultiplierChange += UpdateGunMultiplierUI;
         }
 
         if (swordPlayerController != null)
         {
             swordPlayerController.OnBlockCooldownReady += swordPlayerHUD.TriggerCooldownPulse;
-            swordPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateSwordMultiplierUI);
+            swordPlayerController.OnDiscreteMultiplierChange += UpdateSwordMultiplierUI;
         }
 
         if (playerStats != null)
@@ -228,13 +228,13 @@ public class UIManager : MonoBehaviour
         if (gunPlayerController != null)
         {
             gunPlayerController.OnGrenadeCooldownReady -= gunPlayerHUD.TriggerCooldownPulse;
-            gunPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateGunMultiplierUI);
+            gunPlayerController.OnDiscreteMultiplierChange -= UpdateGunMultiplierUI;
         }
 
         if (swordPlayerController != null)
         {
             swordPlayerController.OnBlockCooldownReady -= swordPlayerHUD.TriggerCooldownPulse;
-            swordPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateSwordMultiplierUI);
+            swordPlayerController.OnDiscreteMultiplierChange -= UpdateSwordMultiplierUI;
         }
 
         if (playerStats != null)
