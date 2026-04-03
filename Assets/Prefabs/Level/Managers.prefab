@@ -131,8 +131,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   spawner: {fileID: 469812263144272765}
   waveFile: {fileID: 4900000, guid: 5a54803adc46ad749b3c4a96c31768bf, type: 3}
-  minSpawnTime: 0.5
-  maxSpawnTime: 4
+  initialMinSpawnTime: 3
+  finalMinSpawnTime: 0.5
+  initialMaxSpawnTime: 8
+  finalMaxSpawnTime: 3
   sigmoidSteepness: 0.06
   sigmoidMidpoint: 10
   difficultySelectionRange: 0.15
