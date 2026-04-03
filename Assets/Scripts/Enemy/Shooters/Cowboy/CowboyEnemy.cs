@@ -100,7 +100,7 @@ public class CowboyEnemy : ShooterEnemy
 
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (!b.enabled || b.Parried)
+            if (!b.isActiveAndEnabled || b.State != Bullet.ProjectileState.ShotByPlayer)
             {
                 continue;
             }

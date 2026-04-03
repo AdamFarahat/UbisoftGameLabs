@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4640040823847027976}
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
-  m_LocalPosition: {x: 5.3798113, y: 2.2870283, z: -9.318108}
+  m_LocalPosition: {x: 0.48907375, y: 0.20791167, z: -0.84710073}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -150,10 +150,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7001779660354109463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a474ffa36e9bd847ad1e5cea754a3d4, type: 3}
+  m_Script: {fileID: 11500000, guid: c66f296b87516d04f950cb4bf2450e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  canPenetrateShield: 0
+  damage: 10
+  impactEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   parryColliderScaleUp: 1.5
+  speed: 190
 --- !u!54 &6473796267591999080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,7 +217,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

@@ -1,11 +1,19 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class ProjectileBase : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
+    [SerializeField] private bool canPenetrateShield = false;
+    public int damage = 10;
+
+
+
+    public EventReference impactEvent;
+
     private Billboard sprite;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
@@ -13,11 +21,15 @@ public class ProjectileBase : MonoBehaviour
     private SphereCollider sphereCollider;
     private float normalColliderRadius;
     private Vector3 direction = Vector3.forward;
-    
-    private bool parried = false;
-    private bool parriedBySwordPlayer = false;
-    public bool Parried => parried;
-    public bool ParriedBySwordPlayer => parriedBySwordPlayer;
+    public Vector3 Direction => direction;
+    public enum ProjectileState {
+        ShotByPlayer,
+        ShotByEnemy,
+        ParriedByPlayer,
+        ParriedByEnemy
+    };
+    protected ProjectileState state;
+    public ProjectileState State => state;
     private Transform origin;
     protected bool createdFromPool = true;
     protected Stunner stunner;
@@ -41,17 +53,19 @@ public class ProjectileBase : MonoBehaviour
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
     }
+   
 
-    public void Initialize(Transform origin, Vector3 direction, float speed, bool stun = true)
+    public void Initialize(Transform origin, Vector3 direction, float speed, ProjectileState initialState)
     {
         this.origin = origin;
         sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
         this.direction = direction.normalized;
         this.speed = speed;
-        parried = false;
+        state = initialState;
         sphereCollider.radius = normalColliderRadius;
         enabled = true;
-        stunner.enabled = stun;
+        createdFromPool = (state == ProjectileState.ShotByEnemy);
+        stunner.enabled = (state == ProjectileState.ShotByEnemy || state == ProjectileState.ParriedByEnemy);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
@@ -60,21 +74,42 @@ public class ProjectileBase : MonoBehaviour
         transform.position += speed * Time.deltaTime * direction;
     }
 
-    
-    virtual protected void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
-        if (!parried)
+        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             return;
 
-        if (other.TryGetComponentInHierarchy(out Enemy enemy))
+        if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
         {
-            if (enemy.OnParried()) { 
-                //TODO: Impact Sound effect
-                SwordPlayerController.Instance.OnBulletParryKill(enemy.Score);
-                }
-            Despawn();
+            return;
         }
+        
+
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy == null)
+            return;
+
+        AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
+
+        EnergyShield shield = enemy.GetShield();
+        if (shield != null)
+        {
+            if (canPenetrateShield)
+                shield.TakeDamage(damage);
+        }
+        else if (enemy.TakeDamage(damage))
+        {
+            OnEnemyKill(enemy);
+            PlayerStats.Instance.AddGunSuper(2f);
+        }
+
+        foreach (Collider collider in GetComponentsInChildren<Collider>())
+            collider.enabled = false;
+
+
+        Despawn();
     }
+
 
     private void OnStun()
     {
@@ -95,7 +130,7 @@ public class ProjectileBase : MonoBehaviour
                 gameObject.SetActive(false);
             }
             else { 
-                Destroy(gameObject);
+            Destroy(gameObject);
             }
         }
 
@@ -103,9 +138,11 @@ public class ProjectileBase : MonoBehaviour
         StartCoroutine(Routine());
     }
 
-    public void Parry(Transform newOrigin, float speedMult, bool isBySwordPlayer)
+    public void Parry(Transform newOrigin, float speedMult, ProjectileState projectileState)
     {
-        parriedBySwordPlayer = isBySwordPlayer;
+
+        state = projectileState;
+
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
         if (origin != null)
             direction = (origin.position - transform.position).normalized;
@@ -115,10 +152,18 @@ public class ProjectileBase : MonoBehaviour
         origin = newOrigin;
         speed *= speedMult;
         sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
-        parried = true;
         
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
         
         stunner.enabled = !stunner.enabled;
+    }
+
+
+    
+    private void OnEnemyKill(Enemy enemy)
+    {
+        // TODO handle more complex gun player multiplier logic
+        GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
+        GunPlayerController.Instance.AddScore(enemy.Score);
     }
 }
