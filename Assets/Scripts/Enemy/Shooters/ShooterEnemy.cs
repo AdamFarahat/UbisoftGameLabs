@@ -9,7 +9,6 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
     [SerializeField] protected float shootingRange = 10000f;  // max distance to shoot
     [SerializeField] protected float bulletSpeed = 80f;
     [SerializeField] protected Transform spawnPoint;
-    public bool projectileStun = true;
     [SerializeField] protected float speed = 5f;
 
     protected LaneBound lane;
@@ -32,13 +31,13 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
         GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
         Assert.IsNotNull(go);
 
-        ProjectileBase projectile = go.GetComponent<ProjectileBase>();
+        Bullet projectile = go.GetComponent<Bullet>();
         Assert.IsNotNull(projectile);
 
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);
         playerPosition.y = LaneSet.PlayerTargetHeight;
         Vector3 direction = playerPosition - spawnPoint.position;
-        projectile.Initialize(spawnPoint, direction, bulletSpeed, projectileStun);
+        projectile.Initialize(spawnPoint, direction, bulletSpeed, Bullet.ProjectileState.ShotByEnemy);
 
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);

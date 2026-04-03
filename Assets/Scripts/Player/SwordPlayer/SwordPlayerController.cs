@@ -421,8 +421,9 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out ProjectileBase projectile))
+        else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
         {
+            
             if (state == SwordPlayerStates.Parrying)
             {
                 ReflectBackBullet(projectile);
@@ -438,9 +439,9 @@ public class SwordPlayerController : PlayerController
         }
     }
 
-    private void ReflectBackBullet(ProjectileBase projectile)
+    private void ReflectBackBullet(Bullet projectile)
     {
-        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult,isBySwordPlayer: true); 
+        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult, Bullet.ProjectileState.ParriedByPlayer); 
     }
 
     public void OnBulletParryKill(int score)

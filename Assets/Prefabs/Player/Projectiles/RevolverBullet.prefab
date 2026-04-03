@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2333919595105212640}
-  - component: {fileID: 8669400281511473210}
   - component: {fileID: 59578646894539134}
   - component: {fileID: 4598031745880811820}
   - component: {fileID: 1749574175037552329}
+  - component: {fileID: -4948080044167889324}
   m_Layer: 7
   m_Name: RevolverBullet
   m_TagString: Untagged
@@ -36,29 +36,6 @@ Transform:
   - {fileID: 4129806111540317034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8669400281511473210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97644797981636705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037fda52958f74b4b918de6ab5fe0eb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  parryColliderScaleUp: 1.5
-  speed: 170
-  canPenetrateShield: 0
-  damage: 10
-  impactEvent:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
 --- !u!54 &59578646894539134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,7 +76,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -120,6 +97,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stunner
   stunTime: 1
+--- !u!114 &-4948080044167889324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97644797981636705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c66f296b87516d04f950cb4bf2450e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  canPenetrateShield: 0
+  damage: 10
+  impactEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  parryColliderScaleUp: 1.5
+  speed: 170
 --- !u!1 &4612050635336467891
 GameObject:
   m_ObjectHideFlags: 0

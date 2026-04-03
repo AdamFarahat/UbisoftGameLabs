@@ -4,7 +4,6 @@ using UnityEngine;
 public class BulletDetector : MonoBehaviour
 {
     private readonly List<Bullet> bulletsNearby = new();
-    private readonly List<ShotgunBlast> shotgunBlast = new();
     public List<Bullet> NearbyBullets => bulletsNearby;
 
     private void Awake()

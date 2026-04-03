@@ -77,8 +77,8 @@ public class TutorialGunGrunt : MonoBehaviour
     private void Shoot()
     {
         GameObject go = ProjectilePool.SharedInstance.Spawn(projectileSpawnPoint.position, Quaternion.identity);
-        ProjectileBase proj = go.GetComponent<ProjectileBase>();
+        Bullet proj = go.GetComponent<Bullet>();
         Assert.IsNotNull(proj);
-        proj.Initialize(null, -LaneSet.Instance.transform.forward, projectileSpeed);
+        proj.Initialize(null, -LaneSet.Instance.transform.forward, projectileSpeed, Bullet.ProjectileState.ShotByEnemy);
     }
 }

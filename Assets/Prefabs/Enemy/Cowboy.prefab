@@ -203,8 +203,6 @@ MonoBehaviour:
   laneStayPeriod: 2
   ProjectileTresholdSpeed: 400
   checkIfCanShootInterval: 0.5
-  checkIfCanPunchInterval: 1
-  punchDistance: 10
 --- !u!114 &8805516181835096967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +260,7 @@ GameObject:
   - component: {fileID: 6153503223591455044}
   - component: {fileID: 102986475743016703}
   - component: {fileID: 4124908073915332896}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: BulletDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +309,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

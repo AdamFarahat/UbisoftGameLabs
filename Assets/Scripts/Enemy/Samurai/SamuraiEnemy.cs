@@ -79,7 +79,7 @@ public class SamuraiEnemy : MonoBehaviour
             case SamuraiState.Parrying:
                 if (parriedBullet) {
                     
-                    parriedBullet.Parry(null, ParryMultipliyer, isBySwordPlayer: false);                    
+                    parriedBullet.Parry(null, ParryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);                    
                     parriedBullet = null;
                 }
                 //TODO: SlashingAnimation
@@ -115,7 +115,7 @@ public class SamuraiEnemy : MonoBehaviour
     {
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (!b.enabled || b.ParriedBySwordPlayer || b.Parried)
+            if (!b.enabled || b.State != Bullet.ProjectileState.ShotByPlayer)
             {
                 continue;
             }
