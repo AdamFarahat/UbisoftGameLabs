@@ -7,8 +7,14 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TextAsset waveFile;
 
     [Header("Spawn Interval")]
-    [SerializeField] private float minSpawnTime = 0.5f;
-    [SerializeField] private float maxSpawnTime = 4f;
+
+    private float minSpawnTime;
+    private float maxSpawnTime;
+
+    [SerializeField] private float initialMinSpawnTime = 3f;
+    [SerializeField] private float finalMinSpawnTime = 0.5f;
+    [SerializeField] private float initialMaxSpawnTime = 8f;
+    [SerializeField] private float finalMaxSpawnTime = 3f;
     [SerializeField] private float sigmoidSteepness = 0.06f;
     [SerializeField] private float sigmoidMidpoint = 90f;
 
@@ -70,6 +76,10 @@ public class WaveManager : MonoBehaviour
             currentWave = null;
             return;
         }
+
+        float d = DifficultyManager.Instance.Difficulty;
+        minSpawnTime = Mathf.Lerp(initialMinSpawnTime, finalMinSpawnTime, d);
+        maxSpawnTime = Mathf.Lerp(initialMaxSpawnTime, finalMaxSpawnTime, d);
 
         waveNumber++;
         DifficultyManager.Instance?.OnWaveStarted(waveNumber);
