@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image superUI;
     [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
+    [SerializeField] private float scoreIncreaseSpeed = 20f;
 
     [Header("Player Specific HUDs")]
     [SerializeField] private PlayerHUD gunPlayerHUD;
@@ -28,6 +29,8 @@ public class UIManager : MonoBehaviour
     // State Variables
     private float currentHealthVisual = 1.0f;
     private const float LERP_SPEED = 0.1f;
+    private int targetScore = 0;
+    private float currentScore = 0f;
 
     // Shader Property IDs
     private readonly int amountID = Shader.PropertyToID("_Amount");
@@ -154,7 +157,10 @@ public class UIManager : MonoBehaviour
     {
         if (scoreManagerSO != null)
         {
-            scoreText.text = ScoreManagerSO.CalculateOverallTeamScore().ToString();
+            targetScore = ScoreManagerSO.CalculateOverallTeamScore();
+            currentScore += Time.deltaTime * scoreIncreaseSpeed;
+            currentScore = Mathf.Min(currentScore, targetScore);
+            scoreText.text = Mathf.RoundToInt(currentScore).ToString();
         }
     }
 
