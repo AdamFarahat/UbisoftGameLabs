@@ -44,6 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0c2f2ad1ee849078296bc8b8226af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FMODEvents
+  <PlayerStunned>k__BackingField:
+    Guid:
+      Data1: 34780270
+      Data2: 1181862997
+      Data3: -824476249
+      Data4: 1147259068
+    Path: event:/Players/PlayerGeneralHurt
+  <PlayerDash>k__BackingField:
+    Guid:
+      Data1: 1457382070
+      Data2: 1249065136
+      Data3: 118152635
+      Data4: -1433705990
+    Path: event:/Players/PlayerGeneralDash
   <PlayerRevolverShot>k__BackingField:
     Guid:
       Data1: -237387748
@@ -149,13 +163,34 @@ MonoBehaviour:
       Data3: 292240524
       Data4: 2139597516
     Path: event:/PlayerWeapons/PlayerSwordParry
+  <PlayerJump>k__BackingField:
+    Guid:
+      Data1: 1095529407
+      Data2: 1174220026
+      Data3: -505668221
+      Data4: 1221349409
+    Path: event:/Players/PlayerGeneralJump
   <EnemyWeaponShot>k__BackingField:
     Guid:
       Data1: -327730630
       Data2: 1140212501
       Data3: 127052165
       Data4: 1706519949
-    Path: event:/EnemyWeaponShot
+    Path: event:/Enemies/EnemyGeneralShoot
+  <EnemyHurt>k__BackingField:
+    Guid:
+      Data1: 1599863940
+      Data2: 1224990851
+      Data3: -1832026188
+      Data4: -1712828106
+    Path: event:/Enemies/EnemyGeneralHurt
+  <EnemySpawn>k__BackingField:
+    Guid:
+      Data1: 1666709823
+      Data2: 1305560115
+      Data3: -713791870
+      Data4: 655864701
+    Path: event:/Enemies/EnemyGeneralSpawn
   <UIHover>k__BackingField:
     Guid:
       Data1: 316438731

@@ -32,7 +32,7 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
         GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
         Assert.IsNotNull(go);
 
-        EnemyProjectile projectile = go.GetComponent<EnemyProjectile>();
+        ProjectileBase projectile = go.GetComponent<ProjectileBase>();
         Assert.IsNotNull(projectile);
 
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);

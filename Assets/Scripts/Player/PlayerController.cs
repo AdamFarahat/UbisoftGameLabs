@@ -41,6 +41,13 @@ public abstract class PlayerController : MonoBehaviour
     public UnityAction StartButtonPressed;
     public UnityAction SelectButtonPressed;
 
+    private float timePressedA = -100f;
+    public float TimePressedA => timePressedA;
+    private float timePressedB = -100f;
+    public float TimePressedB => timePressedB;
+    private bool inputBlockedBySuper = false;
+    protected bool InputBlockedBySuper => inputBlockedBySuper;
+
     // Begin tutorial settings
     public bool moveEnabled = true;
     // End tutorial settings
@@ -71,6 +78,12 @@ public abstract class PlayerController : MonoBehaviour
         playerInput.actions.Enable();
         stunParticleSystem.Pause();
         stunParticleSystem.gameObject.SetActive(false);
+    }
+
+    protected virtual void Update()
+    {
+        if (inputBlockedBySuper)
+            inputBlockedBySuper = false;
     }
 
     protected virtual void OnEnable()
@@ -120,6 +133,7 @@ public abstract class PlayerController : MonoBehaviour
 
         void DoMove()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDash, transform.position);
             int lane = laneFn(laneBound.LaneIndex);
             if (lane >= 0 && lane < LaneSet.LaneCount)
                 laneBound.MoveToLane(lane);
@@ -140,7 +154,7 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    public float GetLaneIndex()
+    public int GetLaneIndex()
     {
         return laneBound.LaneIndex;
     }
@@ -174,6 +188,7 @@ public abstract class PlayerController : MonoBehaviour
         // TODO stun sfx
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
             spriteRenderer.color = Color.black;
             stunParticleSystem.gameObject.SetActive(true);
             stunParticleSystem.Play();
@@ -226,9 +241,23 @@ public abstract class PlayerController : MonoBehaviour
         this.score += Mathf.CeilToInt(score * GetDiscreteMultiplier());
     }
 
-    public float GetDiscreteMultiplier()
+    public float GetBaseDiscreteMultiplier()
     {
         return discreteMultipliers[discreteMultiplierIndex];
+    }
+
+    // If super is active, discrete multiplier is the sum of the player's base discrete multiplier and the other player's base discrete multiplier
+    public float GetDiscreteMultiplier()
+    {
+        if (PlayerStats.Instance != null && PlayerStats.Instance.IsSuperActive())
+        {
+            float gunMult = GunPlayerController.Instance != null ? GunPlayerController.Instance.GetBaseDiscreteMultiplier() : 1f;
+            float swordMult = SwordPlayerController.Instance != null ? SwordPlayerController.Instance.GetBaseDiscreteMultiplier() : 1f;
+            
+            return gunMult + swordMult; 
+        }
+
+        return GetBaseDiscreteMultiplier();
     }
 
     public float GetNormalizedMultiplier()
@@ -258,9 +287,40 @@ public abstract class PlayerController : MonoBehaviour
         SetContinuousMultiplier(continuousMultiplier + deltaMultiplier);
     }
 
+    protected void SuperInitiatedA(InputAction.CallbackContext _)
+    {
+        if (Stunned)
+            return;
+
+        timePressedA = Time.time;
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
+    }
+
+    protected void SuperInitiatedB(InputAction.CallbackContext _)
+    {
+        if (Stunned)
+            return;
+
+        timePressedB = Time.time;
+        if (PlayerStats.Instance.TryActivatingSuper())
+            inputBlockedBySuper = true;
+    }
+
     [ContextMenu("Test Multiplier")]
     public void TestMultiplier()
     {
         OnDiscreteMultiplierChange?.Invoke();
+    }
+
+    // For testing purposes only, allows manually setting the discrete multiplier index in the inspector and firing the change event
+    private void OnValidate()
+    {
+        if (Application.isPlaying && discreteMultipliers != null && discreteMultipliers.Count > 0)
+        {
+            discreteMultiplierIndex = Mathf.Clamp(discreteMultiplierIndex, 0, discreteMultipliers.Count - 1);
+            
+            OnDiscreteMultiplierChange?.Invoke();
+        }
     }
 }

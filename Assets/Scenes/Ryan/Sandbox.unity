@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -157.33972
+      objectReference: {fileID: 0}
     - target: {fileID: 2743872348207576581, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_Name
       value: LevelCore
@@ -170,6 +174,14 @@ PrefabInstance:
     - target: {fileID: 4149798499193065890, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877042454580343463, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: gunSuperPercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877042454580343463, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: swordSuperPercent
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

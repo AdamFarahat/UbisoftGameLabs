@@ -73,10 +73,10 @@ public class TutorialPrimaryAction : TutorialBase
     private void SpawnMeleeGruntWave()
     {
         if (GunPlayerController.Instance != null)
-            SpawnMeleeGrunt(Mathf.RoundToInt(GunPlayerController.LaneIndex));
+            SpawnMeleeGrunt(GunPlayerController.LaneIndex);
 
         if (SwordPlayerController.Instance != null)
-            SpawnMeleeGrunt(Mathf.RoundToInt(SwordPlayerController.LaneIndex));
+            SpawnMeleeGrunt(SwordPlayerController.LaneIndex);
 
         spawnCount--;
     }

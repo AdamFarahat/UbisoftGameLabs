@@ -45,6 +45,7 @@ Material:
     - _AmountLeft: 0
     - _ColorMask: 15
     - _Emission: 5
+    - _IsSuper: 0
     - _OverEmissionMultiplier: 2
     - _PulseSpeed: 1.5
     - _Stencil: 0
@@ -59,5 +60,6 @@ Material:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _CooldownColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     - _Emission: {r: 2.1185474, g: 0.24697353, b: 0.044367444, a: 1}
+    - _SuperColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

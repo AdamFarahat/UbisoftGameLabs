@@ -7,10 +7,8 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
     [SerializeField] private float checkIfCanShootInterval = 0.5f;
-    [SerializeField] private float checkIfCanPunchInterval = 1f;
-    [SerializeField] private float punchDistance = 10f;
 
-    private enum CowBoyState { Walking, Charging, Punching, Dodging };
+    private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state;
     private float time = 0f;
     private float nextLaneSwitchTime = 0f;
@@ -60,11 +58,6 @@ public class CowboyEnemy : ShooterEnemy
                     state = CowBoyState.Dodging;
                     time = 0f;
                 }
-                else if (time >= checkIfCanPunchInterval && IsInPunchingRange())
-                {
-                    state = CowBoyState.Punching;
-                    time = 0f;
-                }
                 else if (time >= nextLaneSwitchTime)
                 {
                     ChangeLane();
@@ -100,16 +93,7 @@ public class CowboyEnemy : ShooterEnemy
                     ReturnToDodgedLane();
                 }
                 break;
-            case CowBoyState.Punching:
-                Punch();
-                break;
         }
-    }
-
-    private void Punch()
-    {
-        Debug.LogWarning("punch not yet implemented");
-        // TODO
     }
 
     private bool BulletComingInRange()
@@ -117,12 +101,12 @@ public class CowboyEnemy : ShooterEnemy
 
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (b.IsDead)
+            if (!b.enabled || b.Parried)
             {
                 continue;
             }
 
-            if (IsPredictedToHit(b) && b.velocity <= ProjectileTresholdSpeed)
+            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
             {
                 dodgedBullet = b;
                 return true;
@@ -169,9 +153,5 @@ public class CowboyEnemy : ShooterEnemy
         lane.LaneDistance -= speed * Time.deltaTime;
     }
 
-    private bool IsInPunchingRange()
-    {
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= punchDistance
-            && lane.LaneDistance <= LaneSet.VisibleEndLine;
-    }
+    
 }
