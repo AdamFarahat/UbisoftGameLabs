@@ -54,11 +54,11 @@ public class CountdownManager : MonoBehaviour
         yield return new WaitForSeconds(fadeInDuration * fadeInDelayFactor);
 
         countdownImage.gameObject.SetActive(true);
-        countdownImage.sprite = countdown3;
+        countdownImage.sprite = countdown3;  // TODO countdown sfx
         yield return new WaitForSeconds(countdownIndividualDuration);
-        countdownImage.sprite = countdown2;
+        countdownImage.sprite = countdown2;  // TODO countdown sfx
         yield return new WaitForSeconds(countdownIndividualDuration);
-        countdownImage.sprite = countdown1;
+        countdownImage.sprite = countdown1;  // TODO countdown sfx
         yield return new WaitForSeconds(countdownIndividualDuration);
         countdownImage.gameObject.SetActive(false);
 
