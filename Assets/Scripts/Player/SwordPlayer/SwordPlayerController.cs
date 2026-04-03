@@ -421,8 +421,9 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out Bullet projectile))
+        else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
         {
+            
             if (state == SwordPlayerStates.Parrying)
             {
                 ReflectBackBullet(projectile);
