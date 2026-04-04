@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4149798499193065890}
+  - component: {fileID: 4521628411096027030}
   m_Layer: 0
   m_Name: LevelCore
   m_TagString: Untagged
@@ -42,6 +43,18 @@ Transform:
   - {fileID: 8188549765879087915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4521628411096027030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743872348207576581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556e7a2e20f6ccaa498203b2e413b250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelInstantiator
 --- !u!1 &7359249237826747535
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +940,26 @@ PrefabInstance:
     - target: {fileID: 3974237691823482190, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Path
+      value: event:/Music/GameTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data1
+      value: 1282672608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data2
+      value: 1220114297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data3
+      value: -1172368235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data4
+      value: -1672902217
       objectReference: {fileID: 0}
     - target: {fileID: 6008748549651680452, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_Name
