@@ -12,6 +12,9 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float surpassingAcceleration = 50f;
     private bool playersSurpassed = false;
 
+    [SerializeField] private bool stayOutOfShotgunRange = false;
+    [SerializeField] private float shotgunRange = 75f;
+
     private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state = CowBoyState.Walking;
     private BulletDetector bulletDetector;
@@ -170,6 +173,7 @@ public class CowboyEnemy : ShooterEnemy
 
     private void WalkForward()
     {
-        lane.LaneDistance -= speed * Time.deltaTime;
+        if (!stayOutOfShotgunRange || lane.LaneDistance > shotgunRange)
+           lane.LaneDistance -= speed * Time.deltaTime;
     }
 }
