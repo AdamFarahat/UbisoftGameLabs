@@ -46,11 +46,14 @@ public class Grenade : MonoBehaviour
         if (exploding) return;
 
         if (transform.position.y <= 0f)
+        {
             Explode();
+            return;
+        }
 
         Vector3 position = transform.position;
         position.z += forwardVelocity * Time.deltaTime;
-        position.y += verticalVelocity * Time.deltaTime;
+        position.y = Mathf.Max(position.y + verticalVelocity * Time.deltaTime, 0f);
         transform.position = position;
         verticalVelocity -= gravity * Time.deltaTime;
     }
@@ -104,6 +107,7 @@ public class Grenade : MonoBehaviour
         }
 
         exploding = true;
+        transform.position = new(transform.position.x, 0f, transform.position.z);
 
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 

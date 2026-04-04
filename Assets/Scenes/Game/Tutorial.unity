@@ -5381,7 +5381,7 @@ MonoBehaviour:
   grenadeEntitiesRoot: {fileID: 225527618}
   parryEntitiesRoot: {fileID: 863545336}
   fadeInDuration: 1
-  cooldownLength: 0
+  cooldownLength: 1.5
 --- !u!1 &2087887742
 GameObject:
   m_ObjectHideFlags: 0

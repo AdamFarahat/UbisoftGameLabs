@@ -21,6 +21,10 @@ public class Bullet : MonoBehaviour
     private Vector3 direction = Vector3.forward;
     public Vector3 Direction => direction;
 
+    [SerializeField] private Vector2 boundsX = new(-100f, 100f);
+    [SerializeField] private Vector2 boundsY = new(-50f, 50f);
+    [SerializeField] private Vector2 boundsZ = new(-200f, 500f);
+
     public enum ProjectileState
     {
         ShotByPlayer,
@@ -87,6 +91,11 @@ public class Bullet : MonoBehaviour
         transform.position = pos;
 
         lane.LaneDistance += speed * Time.deltaTime * direction.z;
+
+        if (transform.position.x < boundsX.x || transform.position.x > boundsX.y
+                || transform.position.y < boundsY.x || transform.position.y > boundsY.y
+                || transform.position.z < boundsZ.x || transform.position.z > boundsZ.y)
+            Despawn();
     }
 
     private void OnTriggerEnter(Collider other)
