@@ -17,8 +17,10 @@ public class SamuraiEnemy : MonoBehaviour
     [SerializeField] private float SlashDistance = 10f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float ParryMultipliyer = 1.1f;
-
-    private enum SamuraiState { Walking, Slashing, Parrying};
+    [SerializeField] private float stunTime;
+    [SerializeField] private float shakeInterval = 0.1f;
+    [SerializeField] private float shakeOffset = 0.025f;
+    private enum SamuraiState { Walking, Slashing, Parrying, Stunned};
     private SamuraiState state;
     private float time = 0f;
     private BulletDetector bulletDetector;
@@ -27,7 +29,9 @@ public class SamuraiEnemy : MonoBehaviour
     private PlayerStats playerStats;
     private bool canSlash = true;
     protected LaneBound lane;
-    
+    private Coroutine stunRoutine;
+    private Billboard spriteBillboard;
+
     protected void Awake()
     {
         lane = GetComponent<LaneBound>();
@@ -159,11 +163,55 @@ public class SamuraiEnemy : MonoBehaviour
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
-        PlayerController player = collider.GetComponent<PlayerController>();
-        
-        if (player) {
+        if (collider.TryGetComponent(out GunPlayerController gunPlayer)) {
             //TODO: Stun or take damage
-            player.Stun(StunTime);
-        } 
+            gunPlayer.Stun(StunTime);
+        }
+
+        if (collider.TryGetComponent(out SwordPlayerController swordPlayer))
+        {
+            if (swordPlayer.TryBlock())
+            {
+
+                // TODO stun sfx
+                IEnumerator Routine()
+                {
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
+                    
+                    //TODO: animation 
+
+                    //Vector3 initialCameraOffset = spriteBillboard.cameraOffset;
+                    int shakeCounter = 0;
+                    for (float t = 0f; t < stunTime; t += Time.deltaTime)
+                    {
+                        Debug.Log("Routine of stun:" + t);
+                        /*if (t > shakeCounter * shakeInterval)
+                        {
+                            shakeCounter = Mathf.CeilToInt(t / shakeInterval);
+                            Vector3 cameraOffset = initialCameraOffset;
+                            Vector2 shake = UnityEngine.Random.insideUnitCircle * shakeOffset;
+                            cameraOffset.x += shake.x;
+                            cameraOffset.y += shake.y;
+                            //spriteBillboard.cameraOffset = cameraOffset;
+                        }*/
+
+                        yield return null;
+                    }
+                    //spriteBillboard.cameraOffset = initialCameraOffset;
+
+                    // TODO: animation for coming back
+
+                    stunRoutine = null;
+                    state = SamuraiState.Walking;
+                }
+
+                state = SamuraiState.Stunned;
+                stunRoutine = StartCoroutine(Routine());
+            }
+            else { 
+                swordPlayer.Stun(StunTime);
+            } 
+        }
+        
     }
 }
