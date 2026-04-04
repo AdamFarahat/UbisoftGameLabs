@@ -385,40 +385,12 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            switch (state)
+            if (state == SwordPlayerStates.Attacking && !enemy.HasShield() && enemy.OnParried())
             {
-                case SwordPlayerStates.Attacking:
-                    if (!enemy.HasShield() && enemy.OnParried())
-                    {
-                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
-                        playerStats.AddSwordSuper(4f);
-                        AddContinuousMultiplier(attackingMultiplierGain);
-                        AddScore(enemy.Score);
-                    }
-                    break;
-                case SwordPlayerStates.Parrying:
-                    if (enemy.OnParried())
-                    {
-                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
-                        playerStats.AddSwordSuper(5f);
-                        AddContinuousMultiplier(meleeParryMultiplierGain);
-                        AddScore(enemy.Score);
-                    }
-                    parryTimer = 0f;
-                    break;
-                case SwordPlayerStates.Blocking:
-                    if (canBlock)
-                    {
-                        if (!enemy.HasShield() && enemy.OnParried() && !PlayerStats.Instance.IsSuperActive())
-                        {
-                            //TODO Different SFX for blocking hit vs parry hit?
-                            playerStats.AddSwordSuper(2f);
-                            AddContinuousMultiplier(blockingMultiplierGain);
-                            AddScore(enemy.Score);
-                        }
-                        StartCoroutine(BlockCooldown());
-                    }
-                    break;
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
+                playerStats.AddSwordSuper(4f);
+                AddContinuousMultiplier(attackingMultiplierGain);
+                AddScore(enemy.Score);
             }
         }
         else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
@@ -427,16 +399,35 @@ public class SwordPlayerController : PlayerController
             if (state == SwordPlayerStates.Parrying)
             {
                 ReflectBackBullet(projectile);
-                parryTimer = 0f;
-                playerStats.AddSwordSuper(5f);
+                DoParryActivity();
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 ReflectBackBullet(projectile);
-                playerStats.AddSwordSuper(2f);
-                StartCoroutine(BlockCooldown());
+                DoBlockActivity();
             }
         }
+    }
+
+    private void DoParryActivity()
+    {
+        parryTimer = 0f;
+        playerStats.AddSwordSuper(5f);
+    }
+
+    private void DoBlockActivity() {
+        playerStats.AddSwordSuper(2f);
+        StartCoroutine(BlockCooldown());
+    }
+    public bool TryBlock() {
+        if (state == SwordPlayerStates.Parrying) {
+            DoParryActivity();
+            return true;
+        } else if (state == SwordPlayerStates.Blocking && canBlock) {
+            DoBlockActivity();
+            return true;
+        }
+        return false;
     }
 
     private void ReflectBackBullet(Bullet projectile)
