@@ -1,11 +1,11 @@
 {
   "prefixWaves": [
     { "label": "Warmup1", "difficulty": 0.05, "spawnEntries": [
-      {"enemyType": 0, "lane": 0},
-      {"enemyType": 0, "lane": 4},
-      {"enemyType": 0, "lane": 2},
-      {"enemyType": 0, "lane": 3},
-      {"enemyType": 0, "lane": 1},
+      {"enemyType": 5, "lane": 0},
+      {"enemyType": 5, "lane": 4},
+      {"enemyType": 5, "lane": 2},
+      {"enemyType": 5, "lane": 3},
+      {"enemyType": 5, "lane": 1},
       {"enemyType": 1, "lane": 0},
       {"enemyType": 1, "lane": 1},
       {"enemyType": 1, "lane": 4},
