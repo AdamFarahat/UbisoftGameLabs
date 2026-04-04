@@ -372,15 +372,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SamuraiEnemy
   healthCollider: {fileID: 3182745716975533089}
   walkingSpeed: 10
-  slashCooldown: 1
-  stunTime: 0
-  numberOfSlashes: 2
-  slashDistance: 5
+  stunTime: 1
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
   shakeInterval: 0.1
   shakeOffset: 0.025
   stunnedDuration: 0.5
+  numberOfSlashes: 2
+  slashCooldown: 1
+  slashDistance: 5
   slashDuration: 0.5
 --- !u!114 &6079410394069299028
 MonoBehaviour:
@@ -677,12 +677,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 6}
-  m_Center: {x: 0, y: 3, z: -3}
+  m_Size: {x: 10, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &8229327653007482502
 GameObject:
   m_ObjectHideFlags: 0

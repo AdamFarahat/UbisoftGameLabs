@@ -29,6 +29,9 @@ public class SpriteAnimator : MonoBehaviour
     private bool isLooping;
     private float pausedTime;
 
+    private int localFrame;
+    public int LocalFrame => localFrame;
+
     private void Awake()
     {
         if (spriteRenderer == null)
@@ -108,6 +111,11 @@ public class SpriteAnimator : MonoBehaviour
             Debug.LogError($"Animation {name} does not exist in animation map");
     }
 
+    public int GetAnimationFrameCount(string name)
+    {
+        return animationMap[name].frames.Length;
+    }
+
     public void PlayOneShot(string name, float skipTime = 0f)
     {
         if (!animationMap.ContainsKey(name))
@@ -166,25 +174,28 @@ public class SpriteAnimator : MonoBehaviour
         lastAnimationStartTime = Time.time;
         float frameLength = animation.duration / animation.frames.Length;
         WaitForSeconds wait = new(frameLength);
-        foreach (Sprite frame in animation.frames)
+        for (int i = 0; i < animation.frames.Length; i++)
         {
             if (skipTime > 0f)
             {
                 if (skipTime >= frameLength)
                 {
                     skipTime -= frameLength;
-                    SetSprite(frame);
+                    SetSprite(animation.frames[i]);
+                    localFrame = i;
                     continue;
                 }
                 else
                 {
-                    SetSprite(frame);
+                    SetSprite(animation.frames[i]);
+                    localFrame = i;
                     yield return new WaitForSeconds(frameLength - skipTime);
                 }
             }
             else
             {
-                SetSprite(frame);
+                SetSprite(animation.frames[i]);
+                localFrame = i;
                 yield return wait;
             }
         }

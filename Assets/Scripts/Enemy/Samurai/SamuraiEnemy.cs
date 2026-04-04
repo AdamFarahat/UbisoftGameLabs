@@ -2,20 +2,27 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO don't take damage from sword player melee attack
+// TODO don't take damage from sword player melee attack unless stunned
+// TODO split attack animation into windup and slash for individual speed adjustment
+// TODO parried bullet from player shouldn't kill samurai, just stun it
+// TODO stunned samurai can be killed by either player
 public class SamuraiEnemy : MonoBehaviour
 {
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float walkingSpeed = 10f;
-    [SerializeField] private float slashCooldown = 1f;
     [SerializeField] private float stunTime = 1f;
-    [SerializeField] private int numberOfSlashes = 2;
-    [SerializeField] private float slashDistance = 5f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float parrySpeedMultipliyer = 1.1f;
+
+    [Header("Stunned")]
     [SerializeField] private float shakeInterval = 0.1f;
     [SerializeField] private float shakeOffset = 0.025f;
     [SerializeField] private float stunnedDuration = 0.5f;
+
+    [Header("Slashing")]
+    [SerializeField] private int numberOfSlashes = 2;
+    [SerializeField] private float slashCooldown = 1f;
+    [SerializeField] private float slashDistance = 5f;
     [SerializeField] private float slashDuration = 0.5f;
 
     private enum SamuraiState { Walking, Slashing, Stunned, Leaving };
@@ -139,6 +146,7 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool DestroyIncomingBullets()
     {
+        // TODO this is not working
         return HandleIncomingBullets(b => b.Despawn());
     }
 
@@ -178,19 +186,20 @@ public class SamuraiEnemy : MonoBehaviour
             && lane.LaneDistance >= LaneSet.PlayerLine;
     }
 
-    public void OnSwordHitBoxTriggerEnter(Collider collider)
+    public void OnSwordHitBoxTriggerStay(Collider collider)
     {
-        if (collider.TryGetComponent(out GunPlayerController gunPlayer))
+        if (animators[0].LocalFrame < animators[0].GetAnimationFrameCount("Slash") - 1)
+            return;
+
+        if (collider.TryGetComponentInHierarchy(out GunPlayerController gunPlayer))
         {
             gunPlayer.Stun(stunTime);
         }
-        else if (collider.TryGetComponent(out SwordPlayerController swordPlayer))
+        else if (collider.TryGetComponentInHierarchy(out SwordPlayerController swordPlayer))
         {
-            // TODO time the parry window with the animation
-
             if (swordPlayer.TryBlock())
             {
-                // TOOD add meleeParryMultiplierGain
+                swordPlayer.AddContinuousMultiplier(swordPlayer.MeleeParryMultiplierGain);
 
                 IEnumerator Routine(Billboard spriteBillboard)
                 {
@@ -200,7 +209,6 @@ public class SamuraiEnemy : MonoBehaviour
                     int shakeCounter = 0;
                     for (float t = 0f; t < stunnedDuration; t += Time.deltaTime)
                     {
-                        Debug.Log("Routine of stun:" + t);
                         if (t > shakeCounter * shakeInterval)
                         {
                             shakeCounter = Mathf.CeilToInt(t / shakeInterval);
@@ -215,7 +223,7 @@ public class SamuraiEnemy : MonoBehaviour
                     }
                     spriteBillboard.cameraOffset = initialCameraOffset;
 
-                    state = SamuraiState.Walking;
+                    state = SamuraiState.Slashing;
                 }
 
                 state = SamuraiState.Stunned;

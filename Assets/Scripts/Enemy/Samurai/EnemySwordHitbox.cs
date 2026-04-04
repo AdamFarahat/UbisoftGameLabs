@@ -15,8 +15,8 @@ public class EnemySwordHitbox : MonoBehaviour
         gameObject.SetActive(false); // Start with the hitbox disabled
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerStay(Collider collider)
     {
-        samuraiEnemy.OnSwordHitBoxTriggerEnter(collider);
+        samuraiEnemy.OnSwordHitBoxTriggerStay(collider);
     }
 }
