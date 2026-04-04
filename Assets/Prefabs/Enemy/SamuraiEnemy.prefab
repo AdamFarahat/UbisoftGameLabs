@@ -372,12 +372,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SamuraiEnemy
   healthCollider: {fileID: 3182745716975533089}
   walkingSpeed: 10
-  stunTime: 1
+  stunTime: 0.85
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
-  stunnedDuration: 0.9
+  stunnedDuration: 1
   numberOfSlashes: 2
-  slashCooldown: 1.1
+  slashCooldown: 1.15
   slashDistance: 15
   slashDuration: 0.5
 --- !u!114 &6079410394069299028

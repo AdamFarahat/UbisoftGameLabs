@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO don't take damage from sword player melee attack unless stunned
 // TODO split attack animation into windup and slash for individual speed adjustment
 // TODO parried bullet from player shouldn't kill samurai, just stun it
 public class SamuraiEnemy : MonoBehaviour
@@ -55,6 +54,7 @@ public class SamuraiEnemy : MonoBehaviour
         Assert.IsNotNull(enemy);
         enemy.OnTakeFromPool += ResetState;
         enemy.immuneToBullet = IsImmuneToBullet;
+        enemy.immuneToSword = CheckImmuneToSword;
 
         billboards = GetComponentsInChildren<Billboard>();
         Assert.IsTrue(billboards.Length > 0);
@@ -74,7 +74,7 @@ public class SamuraiEnemy : MonoBehaviour
         laserImmunity = GetComponent<LaserImmune>();
         Assert.IsNotNull(laserImmunity);
 
-        Assert.IsTrue(slashCooldown >= stunTime + 0.2f);
+        Assert.IsTrue(slashCooldown >= stunTime + 0.25f);
     }
 
     private void ResetState()
@@ -156,7 +156,7 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool DestroyIncomingBullets()
     {
-        // TODO this is not working
+        // TODO this is not always working
         return HandleIncomingBullets(b => b.Despawn());
     }
 
@@ -189,6 +189,17 @@ public class SamuraiEnemy : MonoBehaviour
     {
         return state != SamuraiState.Stunned
             && (b.State != Bullet.ProjectileState.ParriedByPlayer || c != healthCollider);
+    }
+
+    private bool CheckImmuneToSword()
+    {
+        if (state != SamuraiState.Stunned)
+        {
+            // TODO sfx
+            // TODO flash vfx
+            return true;
+        }
+        return false;
     }
 
     private void WalkForward()

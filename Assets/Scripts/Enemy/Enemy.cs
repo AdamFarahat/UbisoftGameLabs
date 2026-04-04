@@ -26,6 +26,7 @@ public class Enemy : Poolable
     private EnergyShield energyShield;
 
     public System.Func<Bullet, Collider, bool> immuneToBullet;
+    public System.Func<bool> immuneToSword;
 
     private void Awake()
     {

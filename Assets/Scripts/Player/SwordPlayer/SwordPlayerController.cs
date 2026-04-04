@@ -388,7 +388,8 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (state == SwordPlayerStates.Attacking && !enemy.HasShield() && enemy.OnParried())
+            if (state == SwordPlayerStates.Attacking && enemy.immuneToSword?.Invoke() == false
+                && !enemy.HasShield() && enemy.OnParried())
             {
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
                 playerStats.AddSwordSuper(4f);
