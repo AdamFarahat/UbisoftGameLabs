@@ -176,11 +176,6 @@ public class SamuraiEnemy : MonoBehaviour
                 callback(b);
                 handled = true;
             }
-            else
-            {
-                if (Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit))
-                    Debug.Log(hit.collider.name);
-            }
         }
 
         return handled;
