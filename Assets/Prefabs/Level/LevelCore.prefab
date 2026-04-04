@@ -941,26 +941,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Path
-      value: event:/Music/GameTheme
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data1
-      value: 1282672608
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data2
-      value: 1220114297
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data3
-      value: -1172368235
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data4
-      value: -1672902217
-      objectReference: {fileID: 0}
     - target: {fileID: 6008748549651680452, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_Name
       value: AudioManager
