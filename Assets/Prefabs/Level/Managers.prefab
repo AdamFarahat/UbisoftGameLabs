@@ -166,72 +166,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 8420282347879567900}
     m_Modifications:
     - target: {fileID: 1484032459531476390, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1484032459531476390, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1484032459531476390, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2794783739497482859, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2794783739497482859, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28
       objectReference: {fileID: 0}
-    - target: {fileID: 2794783739497482859, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2977175324060262764, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: laneSeparation
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3312594731699726645, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: laneIndex
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3686978978125027468, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_Name
       value: LaneSet
       objectReference: {fileID: 0}
-    - target: {fileID: 3865753658888276606, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: laneIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5117527166078036380, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: laneIndex
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5491217858857650882, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5491217858857650882, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 5491217858857650882, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6082639816472979849, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6082639816472979849, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6082639816472979849, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7657731248892449586, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -273,24 +225,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7692264466891915874, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8454485203999718993, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: laneIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9060129593792959168, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 9060129593792959168, guid: 51af5186a49523548a3674555512db5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9060129593792959168, guid: 51af5186a49523548a3674555512db5a, type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
