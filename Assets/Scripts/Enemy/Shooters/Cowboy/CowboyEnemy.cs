@@ -16,7 +16,10 @@ public class CowboyEnemy : ShooterEnemy
     private float nextLaneSwitchTime = 0f;
     private BulletDetector bulletDetector;
     private List<Bullet> ignoredBullets = new();
-    
+    private SpriteAnimator[] animators;
+
+    private float dodgeDuration;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +32,12 @@ public class CowboyEnemy : ShooterEnemy
         Enemy enemy = GetComponent<Enemy>();
         enemy.OnTakeFromPool += ResetState;
         enemy.AvoidsBullet.Add(b => ignoredBullets.Contains(b));
+
+        animators = GetComponentsInChildren<SpriteAnimator>();
+        Assert.IsTrue(animators.Length > 0);
+        dodgeDuration = animators[0].GetAnimationDuration("Dodge");
+        foreach (var animator in animators)
+            animator.SetAnimationDuration("Charge", shotCooldown);
     }
 
     private void ResetState()
@@ -54,8 +63,7 @@ public class CowboyEnemy : ShooterEnemy
                 if (AnyBulletsComingInRange())
                 {
                     state = CowBoyState.Dodging;
-                    Debug.Log("Dodge!");
-                    // TODO play one-shot dodge animation
+                    AnimateDodge();
                     time = 0f;
                     break;
                 }
@@ -67,6 +75,7 @@ public class CowboyEnemy : ShooterEnemy
                 else if (time >= checkIfCanShootInterval && IsInShootingRange())
                 {
                     state = CowBoyState.Charging;
+                    AnimateCharge();
                     time = 0f;
                 }
                 WalkForward();
@@ -81,7 +90,7 @@ public class CowboyEnemy : ShooterEnemy
                 break;
             case CowBoyState.Dodging:
                 AnyBulletsComingInRange(); // keep ignoring incoming bullets
-                if (time >= 0.5f) // TODO use animation duration
+                if (time >= dodgeDuration)
                 {
                     state = CowBoyState.Walking;
                     time = 0f;
@@ -90,6 +99,18 @@ public class CowboyEnemy : ShooterEnemy
         }
 
         ignoredBullets = ignoredBullets.Where(b => b != null && bulletDetector.NearbyBullets.Contains(b)).ToList();
+    }
+
+    private void AnimateDodge()
+    {
+        foreach (var animator in animators)
+            animator.PlayOneShot("Dodge");
+    }
+
+    private void AnimateCharge()
+    {
+        foreach (var animator in animators)
+            animator.PlayOneShot("Charge");
     }
 
     private bool AnyBulletsComingInRange()

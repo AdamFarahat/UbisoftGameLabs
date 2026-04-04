@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CowboyEnemy
   stunTime: 0.4
-  shotCooldown: 0.4
+  shotCooldown: 0.3
   shotDistanceThreshold: 20
   shootingRange: 10000
   bulletSpeed: 80
@@ -218,7 +218,7 @@ MonoBehaviour:
   healthCollider: {fileID: 936547612651599108}
   laneStayPeriod: 2
   ProjectileTresholdSpeed: 400
-  checkIfCanShootInterval: 0.5
+  checkIfCanShootInterval: 1
 --- !u!114 &8805516181835096967
 MonoBehaviour:
   m_ObjectHideFlags: 0
