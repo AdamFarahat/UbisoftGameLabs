@@ -100,9 +100,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
-            return;
-
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
             return;
 

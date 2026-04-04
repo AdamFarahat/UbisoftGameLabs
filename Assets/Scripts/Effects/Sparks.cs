@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 public class Sparks : MonoBehaviour
 {
     [SerializeField] private float maxAngleOffset = 10f;
+    [SerializeField] private float maxLinearOffset = 0.3f;
 
     private SpriteAnimator animator;
     private Billboard billboard;
@@ -21,6 +22,7 @@ public class Sparks : MonoBehaviour
     private void Start()
     {
         billboard.rotation += Random.Range(-maxAngleOffset, maxAngleOffset);
+        billboard.cameraOffset = Random.insideUnitCircle * maxLinearOffset;
 
         float duration = animator.GetAnimationDuration("Idle");
 
