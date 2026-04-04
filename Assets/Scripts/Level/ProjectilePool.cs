@@ -25,7 +25,7 @@ public class ProjectilePool : MonoBehaviour
         }
     }
 
-    public GameObject Spawn(Vector3 position, Quaternion rot)
+    public GameObject Spawn()
     {
         GameObject tmp = null;
         for (int i = 0; i < amountToPool; i++)
@@ -40,8 +40,6 @@ public class ProjectilePool : MonoBehaviour
             pooledObjects.Add(tmp);
             amountToPool++;
         }
-        tmp.transform.position = position;
-        tmp.transform.rotation = rot;
         tmp.SetActive(true);
         return tmp;
     }

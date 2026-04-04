@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 59578646894539134}
   - component: {fileID: 3299822719682597909}
   - component: {fileID: 7067142168504465389}
+  - component: {fileID: 1377784157389690367}
   m_Layer: 7
   m_Name: MachineGunBullet
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 97644797981636705}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.09}
+  m_LocalPosition: {x: -28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120,6 +121,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stunner
   stunTime: 1
+--- !u!114 &1377784157389690367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97644797981636705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ba14f211eda59409253f220dd9b83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaneBound
+  laneIndex: 0
+  laneDistance: 0
+  switchLaneDuration: 0.1
+  perpendicularOffset: 0
 --- !u!1 &3528590576753679064
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +148,9 @@ GameObject:
   - component: {fileID: 604798565724847915}
   - component: {fileID: 2786308667751550383}
   - component: {fileID: 3048167637279092373}
-  m_Layer: 8
+  - component: {fileID: 3366624607037253038}
+  - component: {fileID: 4409508039974834457}
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,8 +167,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
   m_LocalPosition: {x: 0.48907375, y: 0.20791167, z: -0.84710073}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2333919595105212640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -178,7 +197,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 7a4e165f50cbd7c41b947d501520179e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,12 +219,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5775d7fc1a159a544b2e602ed1d71d06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb6915fbecddfff43a918d43936ad1c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 10.8, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -225,3 +244,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Billboard
   cameraOffset: {x: 0, y: 0, z: -1}
   rotation: 0
+--- !u!114 &3366624607037253038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528590576753679064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3367f4196739496418289c3412159e55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnderlayHighlighter
+  lane: {fileID: 1377784157389690367}
+  underlaySprite: {fileID: 2786308667751550383}
+  materials:
+  - {fileID: 2100000, guid: 7a4e165f50cbd7c41b947d501520179e, type: 2}
+  - {fileID: 2100000, guid: bfc2fe527dc6a4645ab549f23f4fbfdf, type: 2}
+  - {fileID: 2100000, guid: 3496f57c3a0c1854f9f2b096fef931df, type: 2}
+  - {fileID: 2100000, guid: 45dba1de1fc1089478222cb553ed34b5, type: 2}
+  - {fileID: 2100000, guid: d4fe3ec335bbb2c4fa7e0198851839f2, type: 2}
+--- !u!114 &4409508039974834457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3528590576753679064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ea2a8857f5c06458769dc4538d378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
+  spriteRenderer: {fileID: 2786308667751550383}
+  image: {fileID: 0}
+  animations:
+  - name: Idle
+    frames:
+    - {fileID: 21300000, guid: fb6915fbecddfff43a918d43936ad1c5, type: 3}
+    - {fileID: 21300000, guid: 398a803cea835dd4f92a6b31eb02ab3e, type: 3}
+    duration: 0.2
+  defaultName: Idle
