@@ -343,6 +343,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4656029755349261906, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: gunSuperPercent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656029755349261906, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: swordSuperPercent
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5135206279396265726, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28
@@ -559,18 +567,6 @@ PrefabInstance:
       propertyPath: m_fontColor.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2928796497085985384, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: superText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2928796497085985384, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: superTextTMP
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165994353810697349, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3488731436393349710, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_Camera
       value: 
@@ -704,10 +700,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: vignetteUI
-      value: 
-      objectReference: {fileID: 6004722108467995161}
-    - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: scoreManagerSO
       value: 
       objectReference: {fileID: 11400000, guid: 1f1029d06d4379d4a8a058c8ee057ff3, type: 2}
@@ -718,11 +710,11 @@ PrefabInstance:
     - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: gunPlayerController
       value: 
-      objectReference: {fileID: 16219430430760138}
+      objectReference: {fileID: 0}
     - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: swordPlayerController
       value: 
-      objectReference: {fileID: 8567448586144742873}
+      objectReference: {fileID: 0}
     - target: {fileID: 5384073636444206587, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -774,11 +766,11 @@ PrefabInstance:
     - target: {fileID: 8757407519693575541, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: superText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2111916387786690089}
     - target: {fileID: 8757407519693575541, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: superTextTMP
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 127651720838573279}
     - target: {fileID: 9089175420580484333, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: gunScore
       value: 
