@@ -266,6 +266,7 @@ MonoBehaviour:
   laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 1
+  perpendicularOffset: 0
 --- !u!114 &681042347012851451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
   speed: 10
   damage: 12
+  surpassingAcceleration: 50
 --- !u!114 &1211474539738667709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,8 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 10
-  maxSpeed: 24
+  minSpeed: 25
+  maxSpeed: 80
 --- !u!114 &2974193712685510071
 MonoBehaviour:
   m_ObjectHideFlags: 0

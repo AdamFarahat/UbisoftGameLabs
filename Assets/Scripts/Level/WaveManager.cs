@@ -82,7 +82,24 @@ public class WaveManager : MonoBehaviour
     {
         SpawnEntry entry = currentWave.spawnEntries[enemiesSpawned % currentWave.spawnEntries.Length];
         int lane = entry.lane == -1 ? Random.Range(0, LaneSet.LaneCount) : entry.lane;
-        spawner.GetEnemy(entry.enemyType, lane);
+        int type = entry.enemyType;
+        if (type == -1)
+        {
+            int randomInt = Random.Range(0, 101); 
+            if (randomInt <= 25)
+                type = 0;
+            else if (randomInt <=50) 
+                type = 1;
+            else if (randomInt <=70) 
+                type = 2;
+            else if (randomInt <=85) 
+                type = 3;
+            else if (randomInt <=100) 
+                type = 4; 
+            else 
+                type = 5;  //will update for samurai enemy                
+        }
+        spawner.GetEnemy(type, lane);
     }
 
     void StartNextWave()
