@@ -71,6 +71,7 @@ public class SamuraiEnemy : MonoBehaviour
 
         shotgunImmunity = GetComponent<ShotgunImmune>();
         Assert.IsNotNull(shotgunImmunity);
+        shotgunImmunity.HitByShotgun += OnHitByShotgun;
 
         laserImmunity = GetComponent<LaserImmune>();
         Assert.IsNotNull(laserImmunity);
@@ -162,7 +163,6 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool DestroyIncomingBullets()
     {
-        // TODO this is not always working
         return HandleIncomingBullets(b => b.Despawn());
     }
 
@@ -227,6 +227,11 @@ public class SamuraiEnemy : MonoBehaviour
         StartCoroutine(Routine());
 
         return true;
+    }
+
+    private void OnHitByShotgun()
+    {
+        // TODO flash vfx
     }
 
     private void WalkForward()
