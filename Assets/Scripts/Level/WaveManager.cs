@@ -75,6 +75,7 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waveStartDelay);
         delayStarted = false;
+        StartNextWave();
     }
 
     void SpawnFromWave()
