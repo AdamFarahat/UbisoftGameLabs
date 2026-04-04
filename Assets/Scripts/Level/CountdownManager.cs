@@ -67,6 +67,6 @@ public class CountdownManager : MonoBehaviour
     private void StartGame()
     {
         // TODO level start sfx
-        // TODO start wave spawner
+        FindFirstObjectByType<WaveManager>().StartWaves();
     }
 }
