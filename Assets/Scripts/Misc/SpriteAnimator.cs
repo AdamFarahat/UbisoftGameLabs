@@ -153,8 +153,9 @@ public class SpriteAnimator : MonoBehaviour
 
         IEnumerator Routine()
         {
+            yield return PlayAllFrames(animationMap[name], skipTime);
             while (true)
-                yield return PlayAllFrames(animationMap[name], skipTime);
+                yield return PlayAllFrames(animationMap[name], 0f);
         }
 
         animationRoutine = StartCoroutine(Routine());
