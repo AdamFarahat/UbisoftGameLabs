@@ -2,13 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class SamuraiEnemy : MonoBehaviour
+public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float stunTime = 1f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float parrySpeedMultipliyer = 1.1f;
+    [SerializeField] private float surpassingAcceleration = 50f;
 
     [Header("Stunned")]
     [SerializeField] private float stunnedDuration = 0.5f;
@@ -154,6 +155,7 @@ public class SamuraiEnemy : MonoBehaviour
                     // TODO sfx
                 }
 
+                walkingSpeed += surpassingAcceleration * Time.deltaTime;
                 WalkForward();
                 break;
         }
@@ -310,5 +312,11 @@ public class SamuraiEnemy : MonoBehaviour
         }
 
         StartCoroutine(Routine());
+    }
+
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            walkingSpeed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
     }
 }
