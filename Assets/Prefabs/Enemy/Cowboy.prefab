@@ -161,7 +161,7 @@ MonoBehaviour:
   healthCollider: {fileID: 936547612651599108}
   laneStayPeriod: 2
   ProjectileTresholdSpeed: 400
-  checkIfCanShootInterval: 1
+  chargeupTime: 0.5
 --- !u!114 &8805516181835096967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,8 +438,8 @@ MonoBehaviour:
   animations:
   - name: Walk
     frames:
-    - {fileID: 21300000, guid: 527154fb1acd6c34c9852cfeead81e50, type: 3}
     - {fileID: 21300000, guid: d71971cb72ddb2d4697e15e60410c557, type: 3}
+    - {fileID: 21300000, guid: 527154fb1acd6c34c9852cfeead81e50, type: 3}
     duration: 0.5
   - name: Dodge
     frames:
