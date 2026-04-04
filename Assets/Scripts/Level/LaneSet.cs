@@ -179,6 +179,11 @@ public class LaneSet : MonoBehaviour
         return Quaternion.LookRotation(transform.forward);
     }
 
+    public int GetLaneIndex(float worldX)
+    {
+        return Mathf.RoundToInt(worldX / laneSeparation) + Mathf.FloorToInt(0.5f * LaneCount);
+    }
+
     public static float ScreenAngleOfVector(Vector3 vector)
     {
         Vector3 cam = FindFirstObjectByType<Camera>().transform.InverseTransformDirection(vector);

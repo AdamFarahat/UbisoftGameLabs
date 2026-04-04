@@ -1,7 +1,5 @@
 using FMODUnity;
-using System;
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,19 +8,21 @@ public class Bullet : MonoBehaviour
     [SerializeField] private bool canPenetrateShield = false;
     public int damage = 10;
 
-
+    private LaneBound lane;
 
     public EventReference impactEvent;
 
-    private Billboard sprite;
-    private SpriteRenderer spriteRenderer;
+    private Billboard[] sprites;
+    private SpriteRenderer[] spriteRenderers;
     [SerializeField] private float parryColliderScaleUp = 1.5f;
     [SerializeField] private float speed = 80f;
     private SphereCollider sphereCollider;
     private float normalColliderRadius;
     private Vector3 direction = Vector3.forward;
     public Vector3 Direction => direction;
-    public enum ProjectileState {
+
+    public enum ProjectileState
+    {
         ShotByPlayer,
         ShotByEnemy,
         ParriedByPlayer,
@@ -30,20 +30,23 @@ public class Bullet : MonoBehaviour
     };
     protected ProjectileState state;
     public ProjectileState State => state;
+    
     private Transform origin;
     protected bool createdFromPool = true;
     protected Stunner stunner;
 
-
-
     public float Speed => speed;
+
     private void Awake()
     {
-        sprite = GetComponentInChildren<Billboard>();
-        Assert.IsNotNull(sprite);
+        lane = GetComponent<LaneBound>();
+        Assert.IsNotNull(lane);
 
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        Assert.IsNotNull(spriteRenderer);
+        sprites = GetComponentsInChildren<Billboard>();
+        Assert.IsTrue(sprites.Length > 0);
+
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        Assert.IsTrue(spriteRenderers.Length > 0);
 
         sphereCollider = GetComponent<SphereCollider>();
         Assert.IsNotNull(sphereCollider);
@@ -53,16 +56,23 @@ public class Bullet : MonoBehaviour
         Assert.IsNotNull(stunner);
         stunner.OnStun += OnStun;
     }
-   
 
-    public void Initialize(Transform origin, Vector3 direction, float speed, ProjectileState initialState)
+    public void Initialize(Transform origin, Vector3 position, Vector3 direction, float speed, ProjectileState initialState)
     {
         this.origin = origin;
-        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
+        transform.position = position;
+        lane.LaneIndex = LaneSet.Instance.GetLaneIndex(position.x);
+        lane.LaneDistance = position.z;
+        lane.PerpendicularOffset = position.x - transform.position.x;
+
+        foreach (var sprite in sprites)
+            sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
+
         this.direction = direction.normalized;
         this.speed = speed;
         state = initialState;
         sphereCollider.radius = normalColliderRadius;
+        sphereCollider.enabled = true;
         enabled = true;
         createdFromPool = (state == ProjectileState.ShotByEnemy);
         stunner.enabled = (state == ProjectileState.ShotByEnemy || state == ProjectileState.ParriedByEnemy);
@@ -71,7 +81,11 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += speed * Time.deltaTime * direction;
+        Vector3 pos = transform.position;
+        pos.y += speed * Time.deltaTime * direction.y;
+        transform.position = pos;
+
+        lane.LaneDistance += speed * Time.deltaTime * direction.z;
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -80,10 +94,7 @@ public class Bullet : MonoBehaviour
             return;
 
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
-        {
             return;
-        }
-        
 
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
@@ -103,10 +114,6 @@ public class Bullet : MonoBehaviour
             PlayerStats.Instance.AddGunSuper(2f);
         }
 
-        foreach (Collider collider in GetComponentsInChildren<Collider>())
-            collider.enabled = false;
-
-
         Despawn();
     }
 
@@ -119,8 +126,9 @@ public class Bullet : MonoBehaviour
     protected void Despawn()
     {
         enabled = false;
+        sphereCollider.enabled = false;
 
-        IEnumerator Routine()
+        IEnumerator Routine(SpriteRenderer spriteRenderer)
         {
             Color color = spriteRenderer.color;
             yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
@@ -129,13 +137,15 @@ public class Bullet : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
-            else { 
-            Destroy(gameObject);
+            else
+            {
+                Destroy(gameObject);
             }
         }
 
         // TODO sfx ?
-        StartCoroutine(Routine());
+        foreach (var spriteRenderer in spriteRenderers)
+            StartCoroutine(Routine(spriteRenderer));
     }
 
     public void Parry(Transform newOrigin, float speedMult, ProjectileState projectileState)
@@ -151,15 +161,17 @@ public class Bullet : MonoBehaviour
 
         origin = newOrigin;
         speed *= speedMult;
-        sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
-        
+
+        foreach (var sprite in sprites)
+            sprite.rotation = LaneSet.ScreenAngleOfVector(direction);
+
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
-        
+
         stunner.enabled = !stunner.enabled;
     }
 
 
-    
+
     private void OnEnemyKill(Enemy enemy)
     {
         // TODO handle more complex gun player multiplier logic

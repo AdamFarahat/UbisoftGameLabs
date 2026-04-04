@@ -16,6 +16,11 @@ public class UnderlayHighlighter : MonoBehaviour
         Assert.IsTrue(materials.Count == LaneSet.LaneCount);
     }
 
+    private void Start()
+    {
+        underlaySprite.material = materials[lane.LaneIndex];
+    }
+
     private void Update()
     {
         underlaySprite.material = materials[lane.LaneIndex];
