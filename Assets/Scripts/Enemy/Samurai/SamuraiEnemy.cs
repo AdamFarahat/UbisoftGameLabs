@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+// TODO don't take damage from sword player melee attack
 public class SamuraiEnemy : MonoBehaviour
 {
     [SerializeField] private Collider healthCollider;
@@ -9,7 +10,7 @@ public class SamuraiEnemy : MonoBehaviour
     [SerializeField] private float slashCooldown = 1f;
     [SerializeField] private float stunTime = 1f;
     [SerializeField] private int numberOfSlashes = 2;
-    [SerializeField] private float slashDistance = 10f;
+    [SerializeField] private float slashDistance = 5f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float parrySpeedMultipliyer = 1.1f;
     [SerializeField] private float shakeInterval = 0.1f;
@@ -38,11 +39,12 @@ public class SamuraiEnemy : MonoBehaviour
         Assert.IsNotNull(playerStats);
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
+        Assert.IsNotNull(healthCollider);
 
         Enemy enemy = GetComponent<Enemy>();
         Assert.IsNotNull(enemy);
         enemy.OnTakeFromPool += ResetState;
-        enemy.immuneToBullet = b => b.State != Bullet.ProjectileState.ParriedByPlayer;
+        enemy.immuneToBullet = (b, c) => b.State != Bullet.ProjectileState.ParriedByPlayer || c != healthCollider;
 
         billboards = GetComponentsInChildren<Billboard>();
         Assert.IsTrue(billboards.Length > 0);
@@ -83,7 +85,8 @@ public class SamuraiEnemy : MonoBehaviour
                 if (ParryIncomingBullets())
                 {
                     // TODO sfx
-                    // TODO parry animation
+                    foreach (SpriteAnimator animator in animators)
+                        animator.PlayOneShot("Parry");
                 }
 
                 if (IsInSlashingRange())
@@ -110,6 +113,8 @@ public class SamuraiEnemy : MonoBehaviour
 
                         if (++numberOfSlashesDone >= numberOfSlashes)
                             state = SamuraiState.Leaving;
+                        else
+                            yield return new WaitForSeconds(slashCooldown);
                         slashRoutine = null;
                     }
 
@@ -146,6 +151,11 @@ public class SamuraiEnemy : MonoBehaviour
             {
                 callback(b);
                 handled = true;
+            }
+            else
+            {
+                if (Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit))
+                    Debug.Log(hit.collider.name);
             }
         }
 

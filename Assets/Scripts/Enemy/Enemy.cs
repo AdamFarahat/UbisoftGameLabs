@@ -25,7 +25,7 @@ public class Enemy : Poolable
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
 
-    public System.Func<Bullet, bool> immuneToBullet;
+    public System.Func<Bullet, Collider, bool> immuneToBullet;
 
     private void Awake()
     {

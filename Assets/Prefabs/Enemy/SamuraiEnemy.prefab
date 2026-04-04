@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5856313698783848416}
   - component: {fileID: 6935690907956556870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3883203930047066963}
   - component: {fileID: 3182745716975533089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,9 +156,9 @@ GameObject:
   - component: {fileID: 8302764578604641799}
   - component: {fileID: 6271497702652586531}
   - component: {fileID: 8181546520286356950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Overlay
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,9 +328,10 @@ GameObject:
   - component: {fileID: 4909035887747534261}
   - component: {fileID: 7389374849341678290}
   - component: {fileID: 1565715468963483970}
-  m_Layer: 0
+  - component: {fileID: 7781234345631339751}
+  m_Layer: 6
   m_Name: SamuraiEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,12 +370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2664129d298c83541a218b1b51dfea7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SamuraiEnemy
-  healthCollider: {fileID: 0}
+  healthCollider: {fileID: 3182745716975533089}
   walkingSpeed: 10
   slashCooldown: 1
   stunTime: 0
   numberOfSlashes: 2
-  slashDistance: 10
+  slashDistance: 5
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
   shakeInterval: 0.1
@@ -438,6 +439,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b55b0fa3e2eb714da1256e2fca0ee08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserImmune
+--- !u!54 &7781234345631339751
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157729187534825596}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &4336789449968177408
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,9 +478,9 @@ GameObject:
   - component: {fileID: 893212201674064222}
   - component: {fileID: 5234766987971493427}
   - component: {fileID: 537603015291108108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -598,9 +626,10 @@ GameObject:
   m_Component:
   - component: {fileID: 825239248089045447}
   - component: {fileID: 477437890740594109}
-  m_Layer: 0
+  - component: {fileID: 1950228409956189598}
+  m_Layer: 6
   m_Name: SwordHitBox
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +643,7 @@ Transform:
   m_GameObject: {fileID: 5878146236764500082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -633,6 +662,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySwordHitbox
   samuraiEnemy: {fileID: 7973500647695261623}
+--- !u!65 &1950228409956189598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878146236764500082}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 6, z: 6}
+  m_Center: {x: 0, y: 3, z: -3}
 --- !u!1 &8229327653007482502
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,9 +694,9 @@ GameObject:
   - component: {fileID: 5652445721612327761}
   - component: {fileID: 5011366648960233011}
   - component: {fileID: 3790631696097650976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletDetector
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -712,9 +762,9 @@ GameObject:
   - component: {fileID: 4880171095706439865}
   - component: {fileID: 3373227388221192917}
   - component: {fileID: 2396491321638658393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Underlay
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -98,7 +98,7 @@ public class Bullet : MonoBehaviour
             return;
 
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy == null || enemy.immuneToBullet?.Invoke(this) == true)
+        if (enemy == null || enemy.immuneToBullet?.Invoke(this, other) == true)
             return;
 
         AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
