@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CountdownManager : MonoBehaviour
 {
-    // TODO fade out of tutorial
     [Header("Fade In")]
     [SerializeField] private RawImage fadeInImage;
     [SerializeField] private float fadeInDuration = 2f;
@@ -68,6 +67,6 @@ public class CountdownManager : MonoBehaviour
     private void StartGame()
     {
         // TODO level start sfx
-        // TODO start wave spawner
+        FindFirstObjectByType<WaveManager>().StartWaves();
     }
 }
