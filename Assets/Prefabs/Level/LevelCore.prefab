@@ -235,6 +235,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 8b39a7a8-2ff3-49d7-8129-16b708fd8ffc
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: c4cd6bbc-557e-4892-88f6-422138fec86c
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808800396723600905, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.59303
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178535141561378288, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: discreteMultiplierIndex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

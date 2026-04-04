@@ -117,8 +117,8 @@ MonoBehaviour:
   statDenominator: 100
   gunSuperPercent: 0
   swordSuperPercent: 0
+  activateSuperTimingWindow: 0.1
   superDuration: 10
-  activateSuperWaitTime: 0.5
   damageEnabled: 1
   superEnabled: 1
 --- !u!114 &8049746163911720896

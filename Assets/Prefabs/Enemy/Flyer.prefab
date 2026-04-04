@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 1006035411277156065}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:
@@ -225,6 +226,7 @@ GameObject:
   - component: {fileID: 1211474539738667709}
   - component: {fileID: 8525619152686538179}
   - component: {fileID: -158540157863857904}
+  - component: {fileID: 2974193712685510071}
   m_Layer: 6
   m_Name: Flyer
   m_TagString: Enemy
@@ -293,7 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1019dcb567e88742a0d8016e27f191e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
-  initialLaneDistance: 200
   speed: 10
   damage: 12
 --- !u!114 &1211474539738667709
@@ -344,6 +345,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
   minSpeed: 10
   maxSpeed: 24
+--- !u!114 &2974193712685510071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679675405416162139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b55b0fa3e2eb714da1256e2fca0ee08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserImmune
 --- !u!1 &7645352309593978900
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 2180857954067916511}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:

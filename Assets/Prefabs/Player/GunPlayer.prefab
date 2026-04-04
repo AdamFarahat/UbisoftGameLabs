@@ -299,6 +299,7 @@ MonoBehaviour:
   laserShotPrefab: {fileID: 7091126548147773133, guid: 90cbf247c7b605c4eae21c29cb744fe4, type: 3}
   laserChargeTime: 0.4
   laserCooldownTime: 0.6
+  speed: 170
 --- !u!114 &6029176937551800676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +343,7 @@ MonoBehaviour:
   overheatIncreaseRate: 0.2
   overheatDecreaseRate: 0.4
   overheatCooldown: 2
+  speed: 200
 --- !u!1 &6218317005578964624
 GameObject:
   m_ObjectHideFlags: 0
