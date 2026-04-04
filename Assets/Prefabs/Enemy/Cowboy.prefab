@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9106916952061967544}
   - component: {fileID: 936547612651599108}
-  - component: {fileID: 1179252565960531119}
   m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
@@ -54,18 +53,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &1179252565960531119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18428891239973683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f377bfba1ea264e9c6595ce35531ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShotgunImmune
 --- !u!1 &1316036567848865185
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +98,9 @@ GameObject:
   - component: {fileID: 3092075550952801820}
   - component: {fileID: 3771198681682225122}
   - component: {fileID: 8981878535914287841}
+  - component: {fileID: 4201468847540797610}
+  - component: {fileID: 4662726939961968079}
+  - component: {fileID: 1959101180621008228}
   m_Layer: 6
   m_Name: Cowboy
   m_TagString: Untagged
@@ -222,6 +212,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stunner
   stunTime: 1
+--- !u!54 &4201468847540797610
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364641449687990512}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!114 &4662726939961968079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364641449687990512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7242f77ba90934591d814bb7316c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletImmune
+--- !u!114 &1959101180621008228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364641449687990512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f377bfba1ea264e9c6595ce35531ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunImmune
 --- !u!1 &1786568229249719166
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,8 +274,6 @@ GameObject:
   - component: {fileID: 6153503223591455044}
   - component: {fileID: 102986475743016703}
   - component: {fileID: 4124908073915332896}
-  - component: {fileID: 2380808449723796575}
-  - component: {fileID: 4747587879443670200}
   m_Layer: 0
   m_Name: BulletDetector
   m_TagString: Untagged
@@ -290,30 +329,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 10, z: 14}
   m_Center: {x: 0, y: 2, z: -6}
---- !u!114 &2380808449723796575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786568229249719166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7242f77ba90934591d814bb7316c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletImmune
---- !u!114 &4747587879443670200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786568229249719166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f377bfba1ea264e9c6595ce35531ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShotgunImmune
 --- !u!1 &6324913219847214623
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +569,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d70454c496e596344a48b5e6ad6303e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8341ace7f775b2642b6642a482f12641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

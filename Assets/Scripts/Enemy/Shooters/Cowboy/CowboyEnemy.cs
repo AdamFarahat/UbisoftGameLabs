@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,13 +7,11 @@ public class CowboyEnemy : ShooterEnemy
 {
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float laneStayPeriod = 2f;
-    [SerializeField] private float ProjectileTresholdSpeed = 400f;
     [SerializeField] private float chargeupTime = 0.5f;
 
     private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state;
     private BulletDetector bulletDetector;
-    private List<Bullet> ignoredBullets = new();
     private SpriteAnimator[] animators;
 
     private float laneStayTimeLeft = 0f;
@@ -34,7 +31,6 @@ public class CowboyEnemy : ShooterEnemy
 
         Enemy enemy = GetComponent<Enemy>();
         enemy.OnTakeFromPool += ResetState;
-        enemy.AvoidsBullet.Add(b => ignoredBullets.Contains(b));
 
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);
@@ -63,7 +59,7 @@ public class CowboyEnemy : ShooterEnemy
         switch (state)
         {
             case CowBoyState.Walking:
-                if (AnyBulletsComingInRange())
+                if (AnyProjectilesComingInRange())
                 {
                     state = CowBoyState.Dodging;
                     AnimateDodge();
@@ -105,7 +101,6 @@ public class CowboyEnemy : ShooterEnemy
                 }
                 break;
             case CowBoyState.Dodging:
-                AnyBulletsComingInRange(); // keep ignoring incoming bullets
                 if (dodgeRoutine == null)
                 {
                     IEnumerator Routine()
@@ -119,8 +114,6 @@ public class CowboyEnemy : ShooterEnemy
                 }
                 break;
         }
-
-        ignoredBullets = ignoredBullets.Where(b => b != null && bulletDetector.NearbyBullets.Contains(b)).ToList();
     }
 
     private void AnimateDodge()
@@ -135,31 +128,22 @@ public class CowboyEnemy : ShooterEnemy
             animator.PlayOneShot("Charge");
     }
 
-    private bool AnyBulletsComingInRange()
+    private bool AnyProjectilesComingInRange()
     {
-        bool bulletsInRange = false;
-        foreach (Bullet b in bulletDetector.NearbyBullets)
-        {
-            if (!b.isActiveAndEnabled || b.State != Bullet.ProjectileState.ShotByPlayer)
-                continue;
-
-            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
-            {
-                if (!ignoredBullets.Contains(b))
-                {
-                    ignoredBullets.Add(b);
-                    bulletsInRange = true;
-                }
-            }
-        }
-
-        return bulletsInRange;
+        return bulletDetector.NearbyShotgunBlasts.Any(b => IsPredictedToHit(b))
+            || bulletDetector.NearbyBullets.Any(b => IsPredictedToHit(b));
     }
 
     private bool IsPredictedToHit(Bullet b)
     {
-        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit)
+        return b.isActiveAndEnabled && b.IsComingFromPlayer()
+            && Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit)
             && hit.collider == healthCollider;
+    }
+
+    private bool IsPredictedToHit(ShotgunBlast b)
+    {
+        return b.isActiveAndEnabled;
     }
 
     private void ChangeLane()

@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     };
     protected ProjectileState state;
     public ProjectileState State => state;
-    
+
     private Transform origin;
     protected bool createdFromPool = true;
     protected Stunner stunner;
@@ -97,7 +97,7 @@ public class Bullet : MonoBehaviour
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
             return;
 
-        if (other.GetComponent<BulletImmune>() != null)
+        if (other.GetComponentInParent<BulletImmune>() != null)
             return;
 
         Enemy enemy = other.GetComponentInParent<Enemy>();
@@ -111,16 +111,11 @@ public class Bullet : MonoBehaviour
         {
             if (canPenetrateShield)
                 shield.TakeDamage(damage);
-
-            Despawn();
         }
-        else if (!enemy.Avoids(this))
-        {
-            if (enemy.TakeDamage(damage))
-                OnEnemyKill(enemy);
+        else if (enemy.TakeDamage(damage))
+            OnEnemyKill(enemy);
 
-            Despawn();
-        }
+        Despawn();
     }
 
     private void OnStun()
@@ -178,11 +173,17 @@ public class Bullet : MonoBehaviour
             GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
             GunPlayerController.Instance.AddScore(enemy.Score);
             PlayerStats.Instance.AddGunSuper(2f);
-        } else if (state == ProjectileState.ParriedByPlayer)
+        }
+        else if (state == ProjectileState.ParriedByPlayer)
         {
             SwordPlayerController.Instance.AddContinuousMultiplier(SwordPlayerController.Instance.BulletParryMultiplierGain);
             SwordPlayerController.Instance.AddScore(enemy.Score);
             PlayerStats.Instance.AddSwordSuper(2f);
         }
+    }
+
+    public bool IsComingFromPlayer()
+    {
+        return state == ProjectileState.ShotByPlayer || state == ProjectileState.ParriedByPlayer;
     }
 }
