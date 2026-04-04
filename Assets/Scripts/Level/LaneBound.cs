@@ -17,7 +17,7 @@ public class LaneBound : MonoBehaviour
 
     public int LaneIndex
     {
-        get => (int)laneIndex;
+        get => Mathf.RoundToInt(laneIndex);
         set { SetLaneIndex(value); }
     }
     public float LaneDistance

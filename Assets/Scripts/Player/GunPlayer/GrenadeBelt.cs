@@ -79,8 +79,6 @@ public class GrenadeBelt : MonoBehaviour
         {
             SetThrowing(true);
             throwChargeTime = 0f;
-            if (!PlayerStats.Instance.IsSuperActive())
-                cooldown = throwCooldown;
 
             animator.StartGrenadeAim();
             // TODO sfx ?
@@ -98,6 +96,9 @@ public class GrenadeBelt : MonoBehaviour
     {
         if (!throwing)
             return;
+
+        if (!PlayerStats.Instance.IsSuperActive())
+            cooldown = throwCooldown;
 
         SetThrowing(false);
         animator.StopGrenadeAim();

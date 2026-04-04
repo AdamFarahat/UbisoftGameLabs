@@ -1934,7 +1934,7 @@ MonoBehaviour:
   superUI: {fileID: 161865433639030024}
   pauseMenuScreen: {fileID: 0}
   gameOverScreen: {fileID: 9089175420580484333}
-  gunPlayerHUD: {fileID: 0}
+  gunPlayerHUD: {fileID: 4868340195412220918}
   swordPlayerHUD: {fileID: 2977168203496582162}
 --- !u!114 &1987066883688285533
 MonoBehaviour:

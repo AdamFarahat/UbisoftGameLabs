@@ -10,7 +10,7 @@ public class SwordPlayerController : PlayerController
 {
     private static SwordPlayerController instance = null;
     public static SwordPlayerController Instance => instance;
-    public static float LaneIndex => instance ? instance.GetLaneIndex() : -1f;
+    public static int LaneIndex => instance ? instance.GetLaneIndex() : -1;
 
     [SerializeField] private SwordHitBox swordHitBox;
 
@@ -39,18 +39,12 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
 
+    [Header("Super")]
+    [SerializeField] private Transform swordWaveSpawnPos;
+    public Transform SwordWaveSpawnPos => swordWaveSpawnPos;
+
     private SpriteAnimator animator;
     private Coroutine delayedAnimation = null;
-
-    // Begin tutorial settings
-    public bool slashEnabled = true;
-    public bool blockEnabled = true;
-    public bool jumpEnabled = true;
-
-    public UnityAction PressedSlash;
-    public UnityAction PressedBlock;
-    public UnityAction PressedJump;
-    // End tutorial settings
 
     private enum SwordPlayerStates
     {
@@ -68,12 +62,15 @@ public class SwordPlayerController : PlayerController
 
     private Coroutine parryRoutine = null;
 
-    [Header("Super")]
-    [SerializeField] private float activateSuperWaitTime = 0.1f;
-    private bool attackButtonPressedSuper = false;
-    private bool blockButtonPressedSuper = false;
-    private Coroutine resetAttackButtonPressedSuperCoroutine = null;
-    private Coroutine resetBlockButtonPressedSuperCoroutine = null;
+    // Begin tutorial settings
+    public bool slashEnabled = true;
+    public bool blockEnabled = true;
+    public bool jumpEnabled = true;
+
+    public UnityAction PressedSlash;
+    public UnityAction PressedBlock;
+    public UnityAction PressedJump;
+    // End tutorial settings
 
     protected override void Awake()
     {
@@ -89,6 +86,8 @@ public class SwordPlayerController : PlayerController
         Assert.IsNotNull(laneBound);
         laneBound.DashStart += OnDashStart;
         laneBound.DashEnd += OnDashEnd;
+
+        Assert.IsNotNull(swordWaveSpawnPos);
 
         if (PlayerSelect.swordPlayerDevice != null)
         {
@@ -109,6 +108,10 @@ public class SwordPlayerController : PlayerController
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        playerInput.actions["Attack"].performed += SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed += SuperInitiatedB;
+
         playerInput.actions["UpEffect"].performed += Jump;
         playerInput.actions["DownEffect"].performed += Duck;
         playerInput.actions["Attack"].performed += Attack;
@@ -119,6 +122,10 @@ public class SwordPlayerController : PlayerController
     protected override void OnDisable()
     {
         base.OnDisable();
+
+        playerInput.actions["Attack"].performed -= SuperInitiatedA;
+        playerInput.actions["Block/Parry"].performed -= SuperInitiatedB;
+
         playerInput.actions["UpEffect"].performed -= Jump;
         playerInput.actions["DownEffect"].performed -= Duck;
         playerInput.actions["Attack"].performed -= Attack;
@@ -203,6 +210,7 @@ public class SwordPlayerController : PlayerController
 
         IEnumerator Routine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerJump, transform.position);
             animator.defaultName = "Jump";
             PlayDefaultCycleAnimation();
 
@@ -249,35 +257,28 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!slashEnabled)
             return;
+
         PressedSlash?.Invoke();
 
         if (Stunned)
             return;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
-
-        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f && !PlayerStats.Instance.IsSuperActive())
-        {
-            Debug.Log("Attack button pressed with super ready");
-            //Set attack button pressed super to true
-            attackButtonPressedSuper = true;
-            if (blockButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Sword Player Activating Super Attack!");
-                //PlayerStats.Instance.ActivateSuper();
-                return;
-            }
-            resetAttackButtonPressedSuperCoroutine = StartCoroutine(ResetAttackButtonPressedSuper());
-        }
-
         if (state == SwordPlayerStates.Normal)
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordSlash, transform.position);
             state = SwordPlayerStates.Attacking;
             PlayOneShotAnimation("Attack");
             swordHitBox.gameObject.SetActive(true);
-
+            if (PlayerStats.Instance.IsSuperActive())
+            {
+                //Shoot a sword wave projectile that does not trigger hitbox but can hit multiple enemies in the same lane
+                swordHitBox.ShootSwordWave();
+            }
             IEnumerator Routine()
             {
                 yield return new WaitForSeconds(attackDuration);
@@ -292,39 +293,22 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (InputBlockedBySuper)
+            return;
+
         if (!blockEnabled)
             return;
+
         PressedBlock?.Invoke();
 
         if (Stunned)
             return;
 
-        if (PlayerStats.Instance.GetSwordSuperPercent() >= 1f)
-        {
-            //Set block button pressed super to true
-            Debug.Log("Block button pressed with super ready");
-            blockButtonPressedSuper = true;
-            if (attackButtonPressedSuper && !PlayerStats.Instance.IsSuperActive())
-            {
-                Debug.Log("Sword Player Activating Super Attack!");
-                PlayerStats.Instance.PrepareSwordSuperReady(true);
-                return;
-            }
-            resetBlockButtonPressedSuperCoroutine = StartCoroutine(ResetBlockButtonPressedSuper());
-
-        }
-
-        Debug.Log("Block/Parry");
         if (canBlock && state == SwordPlayerStates.Normal)
         {
             swordHitBox.gameObject.SetActive(true);
             parryRoutine = StartCoroutine(ParryWindow());
         }
-        else
-        {
-            Debug.Log("Block on cooldown");
-        }
-
     }
 
     public void CancelBlock(InputAction.CallbackContext ctx)
@@ -335,7 +319,6 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-        Debug.Log("Cancel Block");
         if (parryRoutine != null)
         {
             StopCoroutine(parryRoutine);
@@ -438,8 +421,9 @@ public class SwordPlayerController : PlayerController
                     break;
             }
         }
-        else if (collider.TryGetComponent(out EnemyProjectile projectile))
+        else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
         {
+            
             if (state == SwordPlayerStates.Parrying)
             {
                 ReflectBackBullet(projectile);
@@ -455,9 +439,9 @@ public class SwordPlayerController : PlayerController
         }
     }
 
-    private void ReflectBackBullet(EnemyProjectile projectile)
+    private void ReflectBackBullet(Bullet projectile)
     {
-        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult);
+        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult, Bullet.ProjectileState.ParriedByPlayer); 
     }
 
     public void OnBulletParryKill(int score)
@@ -465,19 +449,5 @@ public class SwordPlayerController : PlayerController
         playerStats.AddSwordSuper(5f);
         AddContinuousMultiplier(bulletParryMultiplierGain);
         AddScore(score);
-    }
-
-    private IEnumerator ResetAttackButtonPressedSuper()
-    {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        attackButtonPressedSuper = false;
-        resetAttackButtonPressedSuperCoroutine = null;
-    }
-
-    private IEnumerator ResetBlockButtonPressedSuper()
-    {
-        yield return new WaitForSeconds(activateSuperWaitTime);
-        blockButtonPressedSuper = false;
-        resetBlockButtonPressedSuperCoroutine = null;
     }
 }
