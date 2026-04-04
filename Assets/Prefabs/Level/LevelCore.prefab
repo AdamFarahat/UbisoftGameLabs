@@ -341,6 +341,34 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6314761081725675962, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidMidpointWave
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: waveStartDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidMidpoint
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: finalMaxSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: finalMinSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: initialMaxSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: initialMinSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8420282347879567900, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1

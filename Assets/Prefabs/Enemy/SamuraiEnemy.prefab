@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
   minSpeed: 25
-  maxSpeed: 80
+  maxSpeed: 50
 --- !u!1 &4336789449968177408
 GameObject:
   m_ObjectHideFlags: 0
