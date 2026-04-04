@@ -96,6 +96,9 @@ public class Bullet : MonoBehaviour
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
             return;
 
+        if (other.GetComponent<BulletImmune>() != null)
+            return;
+
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy == null)
             return;
@@ -107,16 +110,17 @@ public class Bullet : MonoBehaviour
         {
             if (canPenetrateShield)
                 shield.TakeDamage(damage);
+
+            Despawn();
         }
-        else if (enemy.TakeDamage(damage))
+        else if (!enemy.Avoids(this))
         {
-            OnEnemyKill(enemy);
-            PlayerStats.Instance.AddGunSuper(2f);
+            if (enemy.TakeDamage(damage))
+                OnEnemyKill(enemy);
+
+            Despawn();
         }
-
-        Despawn();
     }
-
 
     private void OnStun()
     {
@@ -134,13 +138,9 @@ public class Bullet : MonoBehaviour
             yield return FadeAnimation.FadeOutRoutine(spriteRenderer);
             spriteRenderer.color = color;
             if (createdFromPool)
-            {
                 gameObject.SetActive(false);
-            }
             else
-            {
                 Destroy(gameObject);
-            }
         }
 
         // TODO sfx ?
@@ -170,12 +170,18 @@ public class Bullet : MonoBehaviour
         stunner.enabled = !stunner.enabled;
     }
 
-
-
     private void OnEnemyKill(Enemy enemy)
     {
-        // TODO handle more complex gun player multiplier logic
-        GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
-        GunPlayerController.Instance.AddScore(enemy.Score);
+        if (state == ProjectileState.ShotByPlayer)
+        {
+            GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
+            GunPlayerController.Instance.AddScore(enemy.Score);
+            PlayerStats.Instance.AddGunSuper(2f);
+        } else if (state == ProjectileState.ParriedByPlayer)
+        {
+            SwordPlayerController.Instance.AddContinuousMultiplier(SwordPlayerController.Instance.BulletParryMultiplierGain);
+            SwordPlayerController.Instance.AddScore(enemy.Score);
+            PlayerStats.Instance.AddSwordSuper(2f);
+        }
     }
 }

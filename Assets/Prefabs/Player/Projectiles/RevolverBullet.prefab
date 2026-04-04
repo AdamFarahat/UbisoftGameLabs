@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 6273222806868345960}
   - component: {fileID: 5875811697500651675}
   - component: {fileID: 8288192050196122744}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
   m_LocalPosition: {x: 0.048907377, y: 0.020791167, z: -0.08471008}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2333919595105212640}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 7975261800557679748}
   - component: {fileID: 6995543539752908354}
   - component: {fileID: 2100354798235333799}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Underlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.10096674, y: -0.2574012, z: 0.02705395, w: 0.9606344}
   m_LocalPosition: {x: 0.04401664, y: 0.018712051, z: -0.07623907}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2333919595105212640}

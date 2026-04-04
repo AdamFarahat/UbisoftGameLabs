@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -13,8 +15,7 @@ public class CowboyEnemy : ShooterEnemy
     private float time = 0f;
     private float nextLaneSwitchTime = 0f;
     private BulletDetector bulletDetector;
-    private int dodgedLaneIndex;
-    private Bullet dodgedBullet;
+    private List<Bullet> ignoredBullets = new();
     
     protected override void Awake()
     {
@@ -25,7 +26,9 @@ public class CowboyEnemy : ShooterEnemy
         bulletDetector = GetComponentInChildren<BulletDetector>();
         Assert.IsNotNull(bulletDetector);
 
-        GetComponent<Enemy>().OnTakeFromPool += ResetState;
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.OnTakeFromPool += ResetState;
+        enemy.AvoidsBullet.Add(b => ignoredBullets.Contains(b));
     }
 
     private void ResetState()
@@ -34,7 +37,6 @@ public class CowboyEnemy : ShooterEnemy
         time = 0f;
         nextLaneSwitchTime = laneStayPeriod;
         state = CowBoyState.Walking;
-        dodgedBullet = null;
     }
 
     private void Start()
@@ -45,18 +47,17 @@ public class CowboyEnemy : ShooterEnemy
 
     private void Update()
     {
-        // TODO cowboy can only dodge when walking. If shooting, change line to dodge then change back.
         time += Time.deltaTime;
         switch (state)
         {
             case CowBoyState.Walking:
-                if (BulletComingInRange())
+                if (AnyBulletsComingInRange())
                 {
-                    dodgedLaneIndex = lane.LaneIndex;
-                    ChangeLane();
-                    healthCollider.enabled = false;
                     state = CowBoyState.Dodging;
+                    Debug.Log("Dodge!");
+                    // TODO play one-shot dodge animation
                     time = 0f;
+                    break;
                 }
                 else if (time >= nextLaneSwitchTime)
                 {
@@ -79,60 +80,43 @@ public class CowboyEnemy : ShooterEnemy
                 }
                 break;
             case CowBoyState.Dodging:
-                //right now it goes back into walking but we could make it change the lane
-                //a second time back to where it was in order to continue shooting
-                if (time >= 2 * lane.SwitchLaneDuration)
+                AnyBulletsComingInRange(); // keep ignoring incoming bullets
+                if (time >= 0.5f) // TODO use animation duration
                 {
-                    healthCollider.enabled = true;
                     state = CowBoyState.Walking;
                     time = 0f;
                 }
-                else if (time >= lane.SwitchLaneDuration && !bulletDetector.NearbyBullets.Contains(dodgedBullet))
-                {
-                    dodgedBullet = null;
-                    ReturnToDodgedLane();
-                }
                 break;
         }
+
+        ignoredBullets = ignoredBullets.Where(b => b != null && bulletDetector.NearbyBullets.Contains(b)).ToList();
     }
 
-    private bool BulletComingInRange()
+    private bool AnyBulletsComingInRange()
     {
-
+        bool bulletsInRange = false;
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
             if (!b.isActiveAndEnabled || b.State != Bullet.ProjectileState.ShotByPlayer)
-            {
                 continue;
-            }
 
             if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
             {
-                dodgedBullet = b;
-                return true;
+                if (!ignoredBullets.Contains(b))
+                {
+                    ignoredBullets.Add(b);
+                    bulletsInRange = true;
+                }
             }
         }
 
-        return false;
+        return bulletsInRange;
     }
 
     private bool IsPredictedToHit(Bullet b)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
-        {
-            if (hit.collider == healthCollider)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private void ReturnToDodgedLane()
-    {
-        lane.MoveToLane(dodgedLaneIndex);
+        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit)
+            && hit.collider == healthCollider;
     }
 
     private void ChangeLane()

@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -24,6 +26,8 @@ public class Enemy : Poolable
     private LaneBound laneBound;
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
+
+    public readonly List<System.Func<Bullet, bool>> AvoidsBullet = new();
 
     private void Awake()
     {
@@ -59,6 +63,11 @@ public class Enemy : Poolable
 
         laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
+    }
+
+    public bool Avoids(Bullet b)
+    {
+        return AvoidsBullet.Any(f => f(b));
     }
 
     // returns true if enemy was killed by damage

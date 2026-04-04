@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4764769265610066615}
   - component: {fileID: 537776904807368309}
   - component: {fileID: 4784310554226288174}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 2994785536065714116}
   - component: {fileID: 4286858694259845589}
   - component: {fileID: 9192393799782616174}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Underlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: -1962428823259544596}
   - component: {fileID: 4036628962354280970}
   - component: {fileID: 5876243716024353468}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

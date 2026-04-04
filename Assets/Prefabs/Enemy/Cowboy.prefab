@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3292067822262237091}
   - component: {fileID: 7981659081502026489}
   - component: {fileID: 936547612651599108}
+  - component: {fileID: 1179252565960531119}
   m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
@@ -111,6 +112,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1179252565960531119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18428891239973683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f377bfba1ea264e9c6595ce35531ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunImmune
 --- !u!1 &1316036567848865185
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,8 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15589811bf248d34685271695c95809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CowboyEnemy
-  stunTime: 0.3
-  shotCooldown: 0.65
+  stunTime: 0.4
+  shotCooldown: 0.4
   shotDistanceThreshold: 20
   shootingRange: 10000
   bulletSpeed: 80
@@ -218,6 +231,7 @@ MonoBehaviour:
   laneIndex: 2
   laneDistance: 100
   switchLaneDuration: 0.3
+  perpendicularOffset: 0
 --- !u!114 &3092075550952801820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +274,9 @@ GameObject:
   - component: {fileID: 6153503223591455044}
   - component: {fileID: 102986475743016703}
   - component: {fileID: 4124908073915332896}
-  m_Layer: 1
+  - component: {fileID: 2380808449723796575}
+  - component: {fileID: 4747587879443670200}
+  m_Layer: 0
   m_Name: BulletDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +292,7 @@ Transform:
   m_GameObject: {fileID: 1786568229249719166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalPosition: {x: 0, y: 2.8, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -313,5 +329,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 12}
+  m_Size: {x: 10, y: 10, z: 14}
   m_Center: {x: 0, y: 2, z: -6}
+--- !u!114 &2380808449723796575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786568229249719166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7242f77ba90934591d814bb7316c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletImmune
+--- !u!114 &4747587879443670200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786568229249719166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f377bfba1ea264e9c6595ce35531ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunImmune

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BulletDetector : MonoBehaviour
 {
-    private readonly List<Bullet> bulletsNearby = new();
+    private List<Bullet> bulletsNearby = new();
     public List<Bullet> NearbyBullets => bulletsNearby;
 
     private void Awake()
@@ -13,14 +14,7 @@ public class BulletDetector : MonoBehaviour
 
     private void Update()
     {
-        List<int> oldBullets = new();
-        for (int i = 0; i < bulletsNearby.Count; i++)
-            if (bulletsNearby[i] == null)
-                oldBullets.Add(i);
-
-        oldBullets.Reverse();
-        foreach (int index in oldBullets)
-            bulletsNearby.RemoveAt(index);
+        bulletsNearby = bulletsNearby.Where(b => b != null).ToList();
     }
 
     private void OnTriggerEnter(Collider other)
