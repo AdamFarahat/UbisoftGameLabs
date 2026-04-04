@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 3771198681682225122}
   - component: {fileID: 8981878535914287841}
   - component: {fileID: 4201468847540797610}
-  - component: {fileID: 4662726939961968079}
   - component: {fileID: 1959101180621008228}
   m_Layer: 6
   m_Name: Cowboy
@@ -150,7 +149,6 @@ MonoBehaviour:
   speed: 10
   healthCollider: {fileID: 936547612651599108}
   laneStayPeriod: 2
-  ProjectileTresholdSpeed: 400
   chargeupTime: 0.5
 --- !u!114 &8805516181835096967
 MonoBehaviour:
@@ -239,18 +237,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &4662726939961968079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364641449687990512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7242f77ba90934591d814bb7316c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletImmune
 --- !u!114 &1959101180621008228
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,12 +28,12 @@ public class Bullet : MonoBehaviour
         ParriedByPlayer,
         ParriedByEnemy
     };
-    protected ProjectileState state;
+    private ProjectileState state;
     public ProjectileState State => state;
 
     private Transform origin;
-    protected bool createdFromPool = true;
-    protected Stunner stunner;
+    private bool createdFromPool = true;
+    private Stunner stunner;
 
     public float Speed => speed;
 
@@ -89,7 +89,7 @@ public class Bullet : MonoBehaviour
         lane.LaneDistance += speed * Time.deltaTime * direction.z;
     }
 
-    protected void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             return;
@@ -97,11 +97,8 @@ public class Bullet : MonoBehaviour
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
             return;
 
-        if (other.GetComponentInParent<BulletImmune>() != null)
-            return;
-
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy == null)
+        if (enemy == null || enemy.immuneToBullet?.Invoke(this) == true)
             return;
 
         AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
@@ -123,8 +120,11 @@ public class Bullet : MonoBehaviour
         Despawn();
     }
 
-    protected void Despawn()
+    public void Despawn()
     {
+        if (!enabled)
+            return;
+
         enabled = false;
         sphereCollider.enabled = false;
 
@@ -146,7 +146,6 @@ public class Bullet : MonoBehaviour
 
     public void Parry(Transform newOrigin, float speedMult, ProjectileState projectileState)
     {
-
         state = projectileState;
 
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
@@ -164,6 +163,8 @@ public class Bullet : MonoBehaviour
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
 
         stunner.enabled = !stunner.enabled;
+
+        // TODO flash vfx
     }
 
     private void OnEnemyKill(Enemy enemy)

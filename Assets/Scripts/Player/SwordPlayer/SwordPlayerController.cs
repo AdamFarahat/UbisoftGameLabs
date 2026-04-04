@@ -417,6 +417,7 @@ public class SwordPlayerController : PlayerController
     }
 
     private void DoBlockActivity() {
+        AddContinuousMultiplier(blockingMultiplierGain);
         playerStats.AddSwordSuper(2f);
         StartCoroutine(BlockCooldown());
     }
