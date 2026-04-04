@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Singleton. Tracks global difficulty (0–1) that advances on a sigmoid
-/// over wave count. Enemy scripts query this for their speed multiplier.
-/// </summary>
 public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager Instance { get; private set; }
@@ -15,6 +11,7 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float sigmoidSteepness = 0.4f;
 
     public float Difficulty { get; private set; }
+    public float DifficultyMultiplier => GetDifficultyMultiplier();
 
     private void Awake()
     {
@@ -24,12 +21,27 @@ public class DifficultyManager : MonoBehaviour
 
     public void OnWaveStarted(int waveNumber)
     {
-        Difficulty = Sigmoid(waveNumber);
+        Difficulty = Sigmoid(waveNumber) * GetDifficultyMultiplier();
+        Difficulty = Mathf.Clamp01(Difficulty);
         Debug.Log($"[Difficulty] Wave {waveNumber} → difficulty = {Difficulty:F3}");
     }
-
     private float Sigmoid(float x)
     {
         return 1f / (1f + Mathf.Exp(-sigmoidSteepness * (x - sigmoidMidpointWave)));
+    }
+
+    public enum GameDifficulty { Easy, Medium, Hard }
+
+    [SerializeField] private GameDifficulty gameDifficulty = GameDifficulty.Medium;
+
+    private float GetDifficultyMultiplier()
+    {
+        return gameDifficulty switch
+        {
+            GameDifficulty.Easy => 0.25f,
+            GameDifficulty.Medium => 1f,
+            GameDifficulty.Hard => 1.75f,
+            _ => 1f
+        };
     }
 }
