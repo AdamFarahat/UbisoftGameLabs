@@ -513,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079410394069299028, guid: e5c5ac4bbb32f474bb53aab735976dc6, type: 3}
       propertyPath: laneDistance
-      value: 40
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8249334843413989259, guid: e5c5ac4bbb32f474bb53aab735976dc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -525,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8249334843413989259, guid: e5c5ac4bbb32f474bb53aab735976dc6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8249334843413989259, guid: e5c5ac4bbb32f474bb53aab735976dc6, type: 3}
       propertyPath: m_LocalRotation.w

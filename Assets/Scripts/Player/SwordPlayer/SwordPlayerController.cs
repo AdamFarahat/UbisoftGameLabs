@@ -388,7 +388,7 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (state == SwordPlayerStates.Attacking && enemy.immuneToSword?.Invoke() == false
+            if (state == SwordPlayerStates.Attacking && enemy.ImmuneToSword?.Invoke() == false
                 && !enemy.HasShield() && enemy.OnParried())
             {
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
@@ -397,7 +397,7 @@ public class SwordPlayerController : PlayerController
                 AddScore(enemy.Score);
             }
         }
-        else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
+        else if (collider.TryGetComponent(out Bullet projectile) && !projectile.IsComingFromPlayer())
         {
             
             if (state == SwordPlayerStates.Parrying)

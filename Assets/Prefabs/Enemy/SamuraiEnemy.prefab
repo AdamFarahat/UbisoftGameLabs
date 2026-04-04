@@ -290,6 +290,8 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     duration: 0.5
   - name: Parry
     frames:
@@ -378,7 +380,7 @@ MonoBehaviour:
   stunTime: 0.85
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
-  stunnedDuration: 1
+  stunnedDuration: 1.25
   numberOfSlashes: 2
   slashCooldown: 1.15
   slashDistance: 15
@@ -610,6 +612,8 @@ MonoBehaviour:
   - name: Stunned
     frames:
     - {fileID: 21300000, guid: 37780a42a9507a84daa407aecd68c5c7, type: 3}
+    - {fileID: 21300000, guid: 7773bf07ace01c3488c68e65e967cb09, type: 3}
+    - {fileID: 21300000, guid: a30bb964b05be134ba44f11b05853d07, type: 3}
     - {fileID: 21300000, guid: 7773bf07ace01c3488c68e65e967cb09, type: 3}
     - {fileID: 21300000, guid: a30bb964b05be134ba44f11b05853d07, type: 3}
     - {fileID: 21300000, guid: 7773bf07ace01c3488c68e65e967cb09, type: 3}
@@ -897,6 +901,8 @@ MonoBehaviour:
   - name: Stunned
     frames:
     - {fileID: 21300000, guid: c799064ca9ebecb418a94943a7e94bd5, type: 3}
+    - {fileID: 21300000, guid: fc72b403f1d59b44ba4afd54f57c72f9, type: 3}
+    - {fileID: 21300000, guid: b7123e7fd5a894643a54c87d591044a3, type: 3}
     - {fileID: 21300000, guid: fc72b403f1d59b44ba4afd54f57c72f9, type: 3}
     - {fileID: 21300000, guid: b7123e7fd5a894643a54c87d591044a3, type: 3}
     - {fileID: 21300000, guid: fc72b403f1d59b44ba4afd54f57c72f9, type: 3}

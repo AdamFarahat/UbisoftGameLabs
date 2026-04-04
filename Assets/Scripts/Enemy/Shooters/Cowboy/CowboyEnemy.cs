@@ -31,7 +31,7 @@ public class CowboyEnemy : ShooterEnemy
 
         Enemy enemy = GetComponent<Enemy>();
         enemy.OnTakeFromPool += ResetState;
-        enemy.immuneToBullet = (_, _) => true;
+        enemy.ImmuneToBullet = (_, _) => true;
 
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);

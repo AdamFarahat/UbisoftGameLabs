@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO parried bullet from player shouldn't kill samurai, just stun it
 public class SamuraiEnemy : MonoBehaviour
 {
     [SerializeField] private Collider healthCollider;
@@ -53,8 +52,9 @@ public class SamuraiEnemy : MonoBehaviour
         Enemy enemy = GetComponent<Enemy>();
         Assert.IsNotNull(enemy);
         enemy.OnTakeFromPool += ResetState;
-        enemy.immuneToBullet = IsImmuneToBullet;
-        enemy.immuneToSword = CheckImmuneToSword;
+        enemy.ImmuneToBullet = IsImmuneToBullet;
+        enemy.ImmuneToSword = CheckImmuneToSword;
+        enemy.StunFromBullet = StunFromBullet;
 
         billboards = GetComponentsInChildren<Billboard>();
         Assert.IsTrue(billboards.Length > 0);
@@ -193,8 +193,7 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool IsImmuneToBullet(Bullet b, Collider c)
     {
-        return state != SamuraiState.Stunned
-            && (b.State != Bullet.ProjectileState.ParriedByPlayer || c != healthCollider);
+        return c != healthCollider;
     }
 
     private bool CheckImmuneToSword()
@@ -206,6 +205,28 @@ public class SamuraiEnemy : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private bool StunFromBullet()
+    {
+        if (state != SamuraiState.Walking)
+            return false;
+
+        state = SamuraiState.Stunned;
+
+        // TODO stun sfx
+        foreach (var animator in animators)
+            animator.PlayOneShot("Stunned");
+
+        IEnumerator Routine()
+        {
+            yield return new WaitForSeconds(stunnedDuration);
+            state = SamuraiState.Walking;
+        }
+
+        StartCoroutine(Routine());
+
+        return true;
     }
 
     private void WalkForward()
@@ -276,7 +297,6 @@ public class SamuraiEnemy : MonoBehaviour
 
         IEnumerator Routine()
         {
-            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
             yield return new WaitForSeconds(stunnedDuration);
             state = SamuraiState.Slashing;
 
