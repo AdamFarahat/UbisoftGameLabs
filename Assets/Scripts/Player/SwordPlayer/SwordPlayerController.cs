@@ -38,6 +38,7 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float attackingMultiplierGain = 0.6f;
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
+    public float BulletParryMultiplierGain => bulletParryMultiplierGain;
 
     [Header("Super")]
     [SerializeField] private Transform swordWaveSpawnPos;

@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -42,7 +39,6 @@ public class SamuraiEnemy : MonoBehaviour
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
         GetComponent<Enemy>().OnTakeFromPool += ResetState;
-
     }
 
     private void ResetState()
@@ -81,19 +77,20 @@ public class SamuraiEnemy : MonoBehaviour
                 WalkForward();
                 break;
             case SamuraiState.Parrying:
-                if (parriedBullet) {
-                    
-                    parriedBullet.Parry(null, ParryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);                    
+                if (parriedBullet)
+                {
+
+                    parriedBullet.Parry(null, ParryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
                     parriedBullet = null;
                 }
                 //TODO: SlashingAnimation
-               
 
                 HealthCollider.enabled = true;
                 state = SamuraiState.Walking;
                 break;
             case SamuraiState.Slashing:
-                if (canSlash) {
+                if (canSlash)
+                {
                     canSlash = false;
                     swordHitBox.gameObject.SetActive(true);
                     //TODO: Play Slashing Animation
@@ -105,11 +102,13 @@ public class SamuraiEnemy : MonoBehaviour
                         swordHitBox.gameObject.SetActive(false);
                         canSlash = true;
                     }
-                    
-                } if (time > SlashInterval) {
+
+                }
+                if (time > SlashInterval)
+                {
                     time = 0;
                     canSlash = true;
-                    swordHitBox.gameObject.SetActive(false);  
+                    swordHitBox.gameObject.SetActive(false);
                 }
                 break;
         }
@@ -136,19 +135,8 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool IsPredictedToHit(Bullet b)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
-        {
-            if (hit.collider == HealthCollider)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit) && hit.collider == HealthCollider;
     }
-
-    
 
     private void WalkForward()
     {
@@ -157,8 +145,7 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool IsInSlashingRangeRange()
     {
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= SlashDistance
-            && lane.LaneDistance <= LaneSet.VisibleEndLine;
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= SlashDistance;
     }
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
@@ -212,6 +199,5 @@ public class SamuraiEnemy : MonoBehaviour
                 swordPlayer.Stun(StunTime);
             } 
         }
-        
     }
 }

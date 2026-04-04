@@ -50,6 +50,7 @@ MonoBehaviour:
   laneIndex: 0
   laneDistance: 0
   switchLaneDuration: 0.1
+  perpendicularOffset: 0
 --- !u!1 &2689023575481687779
 GameObject:
   m_ObjectHideFlags: 0
