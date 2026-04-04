@@ -938,6 +938,30 @@ PrefabInstance:
       propertyPath: highlightCameraDepth
       value: -725.9
       objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: waveStartDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: sigmoidMidpoint
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: finalMaxSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: finalMinSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: initialMaxSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: initialMinSpawnTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5280642865565879772, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: superText
       value: 
@@ -1126,6 +1150,10 @@ PrefabInstance:
       propertyPath: swordPlayerHUD
       value: 
       objectReference: {fileID: 1689381882}
+    - target: {fileID: 8822520588068914511, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: sigmoidMidpointWave
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -1166,67 +1194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!1001 &2060094152
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826671818913854118, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6679675405416162139, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
-      propertyPath: m_Name
-      value: Flyer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bc70aab034e632b4cad833c32bcc76eb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1792512711}
   - {fileID: 716044417}
-  - {fileID: 2060094152}
