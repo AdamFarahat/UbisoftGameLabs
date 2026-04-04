@@ -17,7 +17,8 @@
       {"enemyType": 2, "lane": 1},
       {"enemyType": 3, "lane": 3},
       {"enemyType": 3, "lane": 4},
-      {"enemyType": 4, "lane": 2}
+      {"enemyType": 4, "lane": 2},
+      {"enemyType": 5, "lane": 2}
     ]}
   ],
   "waves": [
