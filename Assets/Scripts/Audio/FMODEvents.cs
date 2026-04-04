@@ -60,6 +60,16 @@ public class FMODEvents : MonoBehaviour
 
     #endregion
 
+    #region OST
+    [field: Header("OST")]
+
+    [field: SerializeField] public EventReference OSTGame { get; private set; }
+    [field: SerializeField] public EventReference OSTMenu { get; private set; }
+
+    [field: SerializeField] public EventReference OSTutorial { get; private set; }
+
+    #endregion
+
     public static FMODEvents Instance { get; private set; }
 
     private void Awake()
