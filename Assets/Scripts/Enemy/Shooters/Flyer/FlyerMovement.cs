@@ -8,20 +8,30 @@ public class FlyerMovement : MonoBehaviour, ISpeedRefreshable
 
     private LaneBound lane;
 
+    [SerializeField] private float surpassingAcceleration = 50f;
+    private bool playersSurpassed = false;
+
     private void Awake()
     {
         lane = GetComponent<LaneBound>();
         Assert.IsNotNull(lane);
-        GetComponent<Enemy>().OnTakeFromPool += ResetState;
+
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.OnTakeFromPool += ResetState;
+        enemy.SurpassedPlayers += () => { playersSurpassed = true; };
     }
 
     private void ResetState()
     {
         lane.LaneDistance = LaneSet.SpawnLine;
+        playersSurpassed = false;
     }
 
     private void Update()
     {
+        if (playersSurpassed)
+            speed += surpassingAcceleration * Time.deltaTime;
+
         lane.LaneDistance -= speed * Time.deltaTime;
         
         if (lane.LaneDistance <= LaneSet.HeartLine)
