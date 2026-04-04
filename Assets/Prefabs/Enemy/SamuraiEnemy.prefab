@@ -375,12 +375,10 @@ MonoBehaviour:
   stunTime: 1
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
-  shakeInterval: 0.1
-  shakeOffset: 0.025
-  stunnedDuration: 0.5
+  stunnedDuration: 0.9
   numberOfSlashes: 2
-  slashCooldown: 1
-  slashDistance: 5
+  slashCooldown: 1.1
+  slashDistance: 15
   slashDuration: 0.5
 --- !u!114 &6079410394069299028
 MonoBehaviour:
@@ -681,8 +679,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 20}
-  m_Center: {x: 0, y: 3, z: -10}
+  m_Size: {x: 10, y: 6, z: 30}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &8229327653007482502
 GameObject:
   m_ObjectHideFlags: 0
