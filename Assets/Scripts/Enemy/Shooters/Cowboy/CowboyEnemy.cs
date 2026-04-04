@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,17 +9,19 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float ProjectileTresholdSpeed = 400f;
-    [SerializeField] private float checkIfCanShootInterval = 0.5f;
+    [SerializeField] private float chargeupTime = 0.5f;
 
     private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state;
-    private float time = 0f;
-    private float nextLaneSwitchTime = 0f;
     private BulletDetector bulletDetector;
     private List<Bullet> ignoredBullets = new();
     private SpriteAnimator[] animators;
 
+    private float laneStayTimeLeft = 0f;
+    private float shotCooldownLeft = 0f;
+    private Coroutine chargeRoutine;
     private float dodgeDuration;
+    private Coroutine dodgeRoutine;
 
     protected override void Awake()
     {
@@ -43,20 +46,20 @@ public class CowboyEnemy : ShooterEnemy
     private void ResetState()
     {
         lane.LaneDistance = LaneSet.SpawnLine;
-        time = 0f;
-        nextLaneSwitchTime = laneStayPeriod;
         state = CowBoyState.Walking;
+        shotCooldownLeft = shotCooldown;
+        laneStayTimeLeft = laneStayPeriod;
     }
 
     private void Start()
     {
-        nextLaneSwitchTime = laneStayPeriod;
         state = CowBoyState.Walking;
+        shotCooldownLeft = shotCooldown;
+        laneStayTimeLeft = laneStayPeriod;
     }
 
     private void Update()
     {
-        time += Time.deltaTime;
         switch (state)
         {
             case CowBoyState.Walking:
@@ -64,36 +67,55 @@ public class CowboyEnemy : ShooterEnemy
                 {
                     state = CowBoyState.Dodging;
                     AnimateDodge();
-                    time = 0f;
                     break;
                 }
-                else if (time >= nextLaneSwitchTime)
+                else
                 {
-                    ChangeLane();
-                    time = 0f;
-                }
-                else if (time >= checkIfCanShootInterval && IsInShootingRange())
-                {
-                    state = CowBoyState.Charging;
-                    AnimateCharge();
-                    time = 0f;
+                    laneStayTimeLeft -= Time.deltaTime;
+                    if (laneStayTimeLeft <= 0f && lane.LaneDistance > LaneSet.EnemyMoveBufferLine)
+                    {
+                        ChangeLane();
+                        laneStayTimeLeft = laneStayPeriod;
+                    }
+                    else if (IsInShootingRange())
+                    {
+                        shotCooldownLeft -= Time.deltaTime;
+                        if (shotCooldownLeft <= 0f)
+                        {
+                            state = CowBoyState.Charging;
+                            AnimateCharge();
+                            shotCooldownLeft = shotCooldown;
+                        }
+                    }
                 }
                 WalkForward();
                 break;
             case CowBoyState.Charging:
-                if (time >= shotCooldown)
+                if (chargeRoutine == null)
                 {
-                    time = 0f;
-                    Shoot();
-                    state = CowBoyState.Walking;
+                    IEnumerator Routine()
+                    {
+                        yield return new WaitForSeconds(chargeupTime);
+                        Shoot();
+                        state = CowBoyState.Walking;
+                        chargeRoutine = null;
+                    }
+
+                    chargeRoutine = StartCoroutine(Routine());
                 }
                 break;
             case CowBoyState.Dodging:
                 AnyBulletsComingInRange(); // keep ignoring incoming bullets
-                if (time >= dodgeDuration)
+                if (dodgeRoutine == null)
                 {
-                    state = CowBoyState.Walking;
-                    time = 0f;
+                    IEnumerator Routine()
+                    {
+                        yield return new WaitForSeconds(dodgeDuration);
+                        state = CowBoyState.Walking;
+                        dodgeRoutine = null;
+                    }
+
+                    dodgeRoutine = StartCoroutine(Routine());
                 }
                 break;
         }
@@ -157,6 +179,4 @@ public class CowboyEnemy : ShooterEnemy
     {
         lane.LaneDistance -= speed * Time.deltaTime;
     }
-
-    
 }
