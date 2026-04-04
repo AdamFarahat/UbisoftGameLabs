@@ -15,7 +15,6 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         shooterAI = animator.GetComponent<GunGruntEnemyAI>();
-        shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
         time = 0f;
         firstShoot = true;
     }
@@ -30,9 +29,8 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
         if (time >= shooterAI.ShootingCooldown || firstShoot)
         {
             shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
-            firstShoot = false;
             time = 0f;
-            if (shootingTarget)
+            if (shootingTarget || firstShoot)
             {
                 if (projObj != null)
                 {
@@ -51,6 +49,8 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
                     Debug.Log("Projectile not set.");
                 }
             }
+
+            firstShoot = false;
         }
 
         if (!shootingTarget)
