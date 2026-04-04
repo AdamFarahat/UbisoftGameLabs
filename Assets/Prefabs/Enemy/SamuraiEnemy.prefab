@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 7389374849341678290}
   - component: {fileID: 1565715468963483970}
   - component: {fileID: 7781234345631339751}
+  - component: {fileID: 4335510775573414878}
   m_Layer: 6
   m_Name: SamuraiEnemy
   m_TagString: Enemy
@@ -350,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 4157729187534825596}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 150}
+  m_LocalPosition: {x: 0, y: 0, z: 150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -380,6 +381,7 @@ MonoBehaviour:
   stunTime: 0.85
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
+  surpassingAcceleration: 50
   stunnedDuration: 1.25
   numberOfSlashes: 2
   slashCooldown: 1.15
@@ -470,6 +472,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &4335510775573414878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157729187534825596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
+  minSpeed: 25
+  maxSpeed: 80
 --- !u!1 &4336789449968177408
 GameObject:
   m_ObjectHideFlags: 0

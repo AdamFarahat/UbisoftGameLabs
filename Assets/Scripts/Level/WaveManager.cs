@@ -90,11 +90,11 @@ public class WaveManager : MonoBehaviour
                 type = 0;
             else if (randomInt <=50) 
                 type = 1;
-            else if (randomInt <=70) 
+            else if (randomInt <=65) 
                 type = 2;
-            else if (randomInt <=85) 
+            else if (randomInt <=80) 
                 type = 3;
-            else if (randomInt <=100) 
+            else if (randomInt <=90) 
                 type = 4; 
             else 
                 type = 5;  //will update for samurai enemy                
@@ -123,7 +123,7 @@ public class WaveManager : MonoBehaviour
         enemiesSpawned = 0;
         waitingForClear = false;
         waveStartTime = Time.time;
-        nextSpawnTime = Time.time;
+        nextSpawnTime = Time.time + GetSpawnInterval();
 
         Debug.Log($"Starting wave {waveNumber} '{currentWave.label}' | difficulty={currentWave.difficulty:F2}");
     }
