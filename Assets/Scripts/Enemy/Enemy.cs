@@ -56,8 +56,6 @@ public class Enemy : Poolable
     {
         health = maxHealth;
         dead = health <= 0;
-
-        laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 

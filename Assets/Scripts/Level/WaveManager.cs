@@ -56,13 +56,13 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.enemyCount)
+        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.spawnEntries.Length)
         {
             SpawnFromWave();
             enemiesSpawned++;
             nextSpawnTime = Time.time + GetSpawnInterval();
 
-            if (enemiesSpawned >= currentWave.enemyCount)
+            if (enemiesSpawned >= currentWave.spawnEntries.Length)
                 waitingForClear = true;
         }
     }
@@ -76,8 +76,9 @@ public class WaveManager : MonoBehaviour
 
     void SpawnFromWave()
     {
-        int type = currentWave.enemyTypes[Random.Range(0, currentWave.enemyTypes.Length)];
-        spawner.GetEnemy(type);
+        SpawnEntry entry = currentWave.spawnEntries[enemiesSpawned % currentWave.spawnEntries.Length];
+        int lane = entry.lane == -1 ? Random.Range(0, LaneSet.LaneCount) : entry.lane;
+        spawner.GetEnemy(entry.enemyType, lane);
     }
 
     void StartNextWave()
