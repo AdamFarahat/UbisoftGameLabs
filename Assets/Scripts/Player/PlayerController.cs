@@ -33,6 +33,7 @@ public abstract class PlayerController : MonoBehaviour
     public UnityEvent OnDiscreteMultiplierChange;
 
     protected PlayerInput playerInput;
+    public PlayerInput PlayerInput => playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;

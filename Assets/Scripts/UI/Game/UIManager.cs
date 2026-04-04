@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image healthBarUI;
     [SerializeField] private Image vignetteUI;
     [SerializeField] private Image superUI;
+    [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
 
     [Header("Player Specific HUDs")]
@@ -52,11 +54,32 @@ public class UIManager : MonoBehaviour
         InitializeMaterials();
         SubscribeToEvents();
 
+        Assert.IsNotNull(gunPlayerController);
+        Assert.IsNotNull(swordPlayerController);
+        Assert.IsNotNull(scoreManagerSO);
+        Assert.IsNotNull(playerStats);
+
+        gunPlayerController.StartButtonPressed += OnPause;
+        swordPlayerController.StartButtonPressed += OnPause;
         // Set initial fill amounts
         UpdateGunMultiplierUI();
         UpdateSwordMultiplierUI();
     }
 
+    public void OnPause()
+    {
+        Debug.Log("Start button pressed. Toggling pause menu.");
+        gunPlayerController.PlayerInput.enabled = false;
+        swordPlayerController.PlayerInput.enabled = false;
+        pauseMenuScreen.ShowPauseMenu();
+    }
+
+    public void OnResume()
+    {
+        Debug.Log("Resuming game from pause menu.");
+        gunPlayerController.PlayerInput.enabled = true;
+        swordPlayerController.PlayerInput.enabled = true;
+    }
     private void CacheSystemReferences()
     {
         gunPlayerController = GunPlayerController.Instance;
