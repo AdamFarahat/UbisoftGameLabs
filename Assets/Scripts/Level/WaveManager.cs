@@ -60,13 +60,13 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.enemyCount)
+        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.spawnEntries.Length)
         {
             SpawnFromWave();
             enemiesSpawned++;
             nextSpawnTime = Time.time + GetSpawnInterval();
 
-            if (enemiesSpawned >= currentWave.enemyCount)
+            if (enemiesSpawned >= currentWave.spawnEntries.Length)
                 waitingForClear = true;
         }
     }
@@ -75,12 +75,31 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waveStartDelay);
         delayStarted = false;
+        StartNextWave();
     }
 
     void SpawnFromWave()
     {
-        int type = currentWave.enemyTypes[Random.Range(0, currentWave.enemyTypes.Length)];
-        spawner.GetEnemy(type);
+        SpawnEntry entry = currentWave.spawnEntries[enemiesSpawned % currentWave.spawnEntries.Length];
+        int lane = entry.lane == -1 ? Random.Range(0, LaneSet.LaneCount) : entry.lane;
+        int type = entry.enemyType;
+        if (type == -1)
+        {
+            int randomInt = Random.Range(0, 101); 
+            if (randomInt <= 25)
+                type = 0;
+            else if (randomInt <=50) 
+                type = 1;
+            else if (randomInt <=70) 
+                type = 2;
+            else if (randomInt <=85) 
+                type = 3;
+            else if (randomInt <=100) 
+                type = 4; 
+            else 
+                type = 5;  //will update for samurai enemy                
+        }
+        spawner.GetEnemy(type, lane);
     }
 
     void StartNextWave()
