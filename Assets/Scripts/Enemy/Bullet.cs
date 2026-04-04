@@ -76,6 +76,7 @@ public class Bullet : MonoBehaviour
         enabled = true;
         createdFromPool = (state == ProjectileState.ShotByEnemy);
         stunner.enabled = (state == ProjectileState.ShotByEnemy || state == ProjectileState.ParriedByEnemy);
+        stunner.ResetState();
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, transform.position);
     }
 
