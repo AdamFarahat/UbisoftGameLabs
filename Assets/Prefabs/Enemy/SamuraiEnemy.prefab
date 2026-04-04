@@ -270,16 +270,19 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     duration: 0.5
+  - name: Windup
+    frames:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    duration: 0.5
   - name: Slash
     frames:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
     - {fileID: 21300000, guid: ead63a634ba956e41853ae96e157f3a3, type: 3}
-    duration: 1
+    duration: 0.3
   - name: Stunned
     frames:
     - {fileID: 0}
@@ -379,6 +382,7 @@ MonoBehaviour:
   numberOfSlashes: 2
   slashCooldown: 1.15
   slashDistance: 15
+  windupDuration: 0.5
   slashDuration: 0.5
 --- !u!114 &6079410394069299028
 MonoBehaviour:
@@ -590,16 +594,19 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b2d111ff47af2854c8a6223453cd171f, type: 3}
     - {fileID: 21300000, guid: 136aa8ca738ce0c4ab23f17da7cdfa50, type: 3}
     duration: 0.5
-  - name: Slash
+  - name: Windup
     frames:
     - {fileID: 21300000, guid: 4f04060fa8dd42f4fa2760a531ec06d9, type: 3}
     - {fileID: 21300000, guid: 220ed1a7551b4434e8d279b985adcdf8, type: 3}
     - {fileID: 21300000, guid: 68f7b078b4a2cfb43a5a49d97a3ee507, type: 3}
+    duration: 0.5
+  - name: Slash
+    frames:
     - {fileID: 21300000, guid: 0cefdde2c2e2bb446b814be4bdd6bdcd, type: 3}
     - {fileID: 21300000, guid: 59cb9d41a805a7047947a579fe5fe32c, type: 3}
     - {fileID: 21300000, guid: 2dda00f1076c7fd43a71fa18393f764e, type: 3}
     - {fileID: 21300000, guid: 5077d5f728e869b40876f69b9c698ac3, type: 3}
-    duration: 1
+    duration: 0.3
   - name: Stunned
     frames:
     - {fileID: 21300000, guid: 37780a42a9507a84daa407aecd68c5c7, type: 3}
@@ -874,16 +881,19 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7390eebcc78162948b260434ac5d3613, type: 3}
     - {fileID: 21300000, guid: 6f2e772de99fb8241a6c690e7925e73a, type: 3}
     duration: 0.5
-  - name: Slash
+  - name: Windup
     frames:
     - {fileID: 21300000, guid: ab8f7b5db3cbcc84c8f38789a8d73432, type: 3}
     - {fileID: 21300000, guid: 06e2944552cd7754d929328a3da83f0e, type: 3}
     - {fileID: 21300000, guid: 9a751016430d56049818de4f8442d2fa, type: 3}
+    duration: 0.5
+  - name: Slash
+    frames:
     - {fileID: 21300000, guid: ae6debb8c124b5d478d1eecf21f2f41c, type: 3}
     - {fileID: 21300000, guid: 23c42f4abb7f6c545be355d58759dc8f, type: 3}
     - {fileID: 21300000, guid: 23e5d1e68ef1cf54ba836b707badf4ed, type: 3}
     - {fileID: 0}
-    duration: 1
+    duration: 0.3
   - name: Stunned
     frames:
     - {fileID: 21300000, guid: c799064ca9ebecb418a94943a7e94bd5, type: 3}

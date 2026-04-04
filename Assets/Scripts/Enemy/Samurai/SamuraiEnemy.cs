@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO split attack animation into windup and slash for individual speed adjustment
 // TODO parried bullet from player shouldn't kill samurai, just stun it
 public class SamuraiEnemy : MonoBehaviour
 {
@@ -19,7 +18,8 @@ public class SamuraiEnemy : MonoBehaviour
     [SerializeField] private int numberOfSlashes = 2;
     [SerializeField] private float slashCooldown = 1f;
     [SerializeField] private float slashDistance = 5f;
-    [SerializeField] private float slashDuration = 0.5f;
+    [SerializeField] private float windupDuration = 0.5f;
+    [SerializeField] private float slashDuration = 0.3f;
 
     private enum SamuraiState { Walking, Slashing, Stunned, Leaving };
     private SamuraiState state = SamuraiState.Walking;
@@ -65,6 +65,7 @@ public class SamuraiEnemy : MonoBehaviour
         foreach (var animator in animators)
         {
             animator.SetAnimationDuration("Stunned", stunnedDuration);
+            animator.SetAnimationDuration("Windup", windupDuration);
             animator.SetAnimationDuration("Slash", slashDuration);
         }
 
@@ -120,10 +121,15 @@ public class SamuraiEnemy : MonoBehaviour
                     IEnumerator Routine()
                     {
                         swordHitBox.gameObject.SetActive(true);
+                        
+                        foreach (var animator in animators)
+                            animator.PlayOneShot("Windup");
+                        yield return new WaitForSeconds(windupDuration);
+
                         foreach (var animator in animators)
                             animator.PlayOneShot("Slash");
-
                         yield return new WaitForSeconds(slashDuration);
+
                         swordHitBox.gameObject.SetActive(false);
                         gunPlayerSlashed = false;
                         swordPlayerSlashed = false;
@@ -215,7 +221,8 @@ public class SamuraiEnemy : MonoBehaviour
 
     public void OnSwordHitBoxTriggerStay(Collider collider)
     {
-        if (animators[0].LocalFrame < animators[0].GetAnimationFrameCount("Slash") - 1)
+        if (animators[0].CurrentAnimationName == "Windup"
+                || animators[0].LocalFrame < animators[0].GetAnimationFrameCount("Slash") - 1)
             return;
 
         if (!swordPlayerSlashed && collider.TryGetComponentInHierarchy(out SwordPlayerController swordPlayer))

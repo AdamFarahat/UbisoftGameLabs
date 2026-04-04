@@ -26,6 +26,8 @@ public class SpriteAnimator : MonoBehaviour
     public float LastAnimationStartTime => lastAnimationStartTime;
 
     private string currentAnimationName;
+    public string CurrentAnimationName => currentAnimationName;
+
     private bool isLooping;
     private float pausedTime;
 
