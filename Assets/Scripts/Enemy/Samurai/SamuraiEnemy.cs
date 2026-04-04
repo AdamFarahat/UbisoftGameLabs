@@ -62,13 +62,6 @@ public class SamuraiEnemy : MonoBehaviour
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);
 
-        foreach (var animator in animators)
-        {
-            animator.SetAnimationDuration("Stunned", stunnedDuration);
-            animator.SetAnimationDuration("Windup", windupDuration);
-            animator.SetAnimationDuration("Slash", slashDuration);
-        }
-
         shotgunImmunity = GetComponent<ShotgunImmune>();
         Assert.IsNotNull(shotgunImmunity);
         shotgunImmunity.HitByShotgun += OnHitByShotgun;
@@ -77,6 +70,16 @@ public class SamuraiEnemy : MonoBehaviour
         Assert.IsNotNull(laserImmunity);
 
         Assert.IsTrue(slashCooldown >= stunTime + 0.25f);
+    }
+
+    private void Start()
+    {
+        foreach (var animator in animators)
+        {
+            animator.SetAnimationDuration("Stunned", stunnedDuration);
+            animator.SetAnimationDuration("Windup", windupDuration);
+            animator.SetAnimationDuration("Slash", slashDuration);
+        }
     }
 
     private void ResetState()

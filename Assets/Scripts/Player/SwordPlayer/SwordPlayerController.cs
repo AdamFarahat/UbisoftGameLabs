@@ -83,7 +83,6 @@ public class SwordPlayerController : PlayerController
         Assert.IsNotNull(swordHitBox);
         animator = GetComponent<SpriteAnimator>();
         Assert.IsNotNull(animator);
-        animator.SetAnimationDuration("Attack", attackDuration);
 
         LaneBound laneBound = GetComponent<LaneBound>();
         Assert.IsNotNull(laneBound);
@@ -106,6 +105,7 @@ public class SwordPlayerController : PlayerController
     protected override void Start()
     {
         base.Start();
+        animator.SetAnimationDuration("Attack", attackDuration);
     }
 
     protected override void OnEnable()
