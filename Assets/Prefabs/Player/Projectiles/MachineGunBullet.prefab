@@ -49,15 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66f296b87516d04f950cb4bf2450e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  canPenetrateShield: 0
+  canPenetrateShield: 1
   damage: 10
   impactEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 90658782
+      Data2: 1078374022
+      Data3: 1989879686
+      Data4: -820542591
+    Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
   parryColliderScaleUp: 1.5
   speed: 200
 --- !u!54 &59578646894539134

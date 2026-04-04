@@ -62,20 +62,24 @@ public class SamuraiEnemy : MonoBehaviour
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);
 
+        shotgunImmunity = GetComponent<ShotgunImmune>();
+        Assert.IsNotNull(shotgunImmunity);
+        shotgunImmunity.HitByShotgun += OnHitByShotgun;
+
+        laserImmunity = GetComponent<LaserImmune>();
+        Assert.IsNotNull(laserImmunity);
+
+        Assert.IsTrue(slashCooldown >= stunTime + 0.25f);
+    }
+
+    private void Start()
+    {
         foreach (var animator in animators)
         {
             animator.SetAnimationDuration("Stunned", stunnedDuration);
             animator.SetAnimationDuration("Windup", windupDuration);
             animator.SetAnimationDuration("Slash", slashDuration);
         }
-
-        shotgunImmunity = GetComponent<ShotgunImmune>();
-        Assert.IsNotNull(shotgunImmunity);
-
-        laserImmunity = GetComponent<LaserImmune>();
-        Assert.IsNotNull(laserImmunity);
-
-        Assert.IsTrue(slashCooldown >= stunTime + 0.25f);
     }
 
     private void ResetState()
@@ -162,7 +166,6 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool DestroyIncomingBullets()
     {
-        // TODO this is not always working
         return HandleIncomingBullets(b => b.Despawn());
     }
 
@@ -175,11 +178,6 @@ public class SamuraiEnemy : MonoBehaviour
             {
                 callback(b);
                 handled = true;
-            }
-            else
-            {
-                if (Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit))
-                    Debug.Log(hit.collider.name);
             }
         }
 
@@ -227,6 +225,11 @@ public class SamuraiEnemy : MonoBehaviour
         StartCoroutine(Routine());
 
         return true;
+    }
+
+    private void OnHitByShotgun()
+    {
+        // TODO flash vfx
     }
 
     private void WalkForward()

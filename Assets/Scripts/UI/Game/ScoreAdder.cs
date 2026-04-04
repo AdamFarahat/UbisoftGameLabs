@@ -30,6 +30,9 @@ public class ScoreAdder : MonoBehaviour
 
     private void ScoreAdded(int delta)
     {
+        if (!isActiveAndEnabled)
+            return;
+
         score += delta;
         if (fadeCoroutine != null)
             StopCoroutine(fadeCoroutine);

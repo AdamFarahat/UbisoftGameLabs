@@ -10,7 +10,7 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float chargeupTime = 0.5f;
 
     private enum CowBoyState { Walking, Charging, Dodging };
-    private CowBoyState state;
+    private CowBoyState state = CowBoyState.Walking;
     private BulletDetector bulletDetector;
     private SpriteAnimator[] animators;
 
@@ -35,21 +35,21 @@ public class CowboyEnemy : ShooterEnemy
 
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);
+    }
+
+    private void Start()
+    {
         dodgeDuration = animators[0].GetAnimationDuration("Dodge");
         foreach (var animator in animators)
             animator.SetAnimationDuration("Charge", shotCooldown);
+
+        shotCooldownLeft = shotCooldown;
+        laneStayTimeLeft = laneStayPeriod;
     }
 
     private void ResetState()
     {
         lane.LaneDistance = LaneSet.SpawnLine;
-        state = CowBoyState.Walking;
-        shotCooldownLeft = shotCooldown;
-        laneStayTimeLeft = laneStayPeriod;
-    }
-
-    private void Start()
-    {
         state = CowBoyState.Walking;
         shotCooldownLeft = shotCooldown;
         laneStayTimeLeft = laneStayPeriod;
