@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 public class GameOver : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI swordScore;
     [SerializeField] private TextMeshProUGUI overallScoreText;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button mainMenuButton;
+
+    [SerializeField]private EventSystem eventSystem;
 
     private void Awake()
     {
@@ -18,8 +22,11 @@ public class GameOver : MonoBehaviour
         Assert.IsNotNull(swordScore);
         Assert.IsNotNull(overallScoreText);
         Assert.IsNotNull(restartButton);
+        Assert.IsNotNull(mainMenuButton);
+        Assert.IsNotNull(eventSystem);
 
         restartButton.onClick.AddListener(Restart);
+        mainMenuButton.onClick.AddListener(MainMenu);
     }
 
     public void ShowGameOverScreen()
@@ -28,12 +35,20 @@ public class GameOver : MonoBehaviour
         swordScore.text = SwordPlayerController.Instance.Score.ToString();
     
         int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
-        overallScoreText.text = score.ToString(); 
+        overallScoreText.text = score.ToString();
+
+        //Set the first selected button to restartButton
+        eventSystem.SetSelectedGameObject(restartButton.gameObject); 
     }
 
     public void Restart(){
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void MainMenu(){
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

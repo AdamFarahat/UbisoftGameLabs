@@ -15,7 +15,6 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         shooterAI = animator.GetComponent<GunGruntEnemyAI>();
-        shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
         time = 0f;
         firstShoot = true;
     }
@@ -30,19 +29,19 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
         if (time >= shooterAI.ShootingCooldown || firstShoot)
         {
             shootingTarget = PlayerController.AnyPlayerInLane(shooterAI.shootingIndex);
-            firstShoot = false;
             time = 0f;
-            if (shootingTarget)
+            if (shootingTarget || firstShoot)
             {
                 if (projObj != null)
                 {
-                    GameObject proj = ProjectilePool.SharedInstance.Spawn(shooterAI.projSpawnPoint.position, Quaternion.identity);
-                    if (proj != null && proj.TryGetComponent(out ProjectileBase projectileComponent))
+                    GameObject proj = ProjectilePool.SharedInstance.Spawn();
+                    if (proj != null && proj.TryGetComponent(out Bullet projectileComponent))
                     {
                         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyWeaponShot, shooterAI.transform.position);
                         Vector3 direction = LaneSet.Instance.GetLanePosition(animator.GetComponent<LaneBound>().LaneIndex, LaneSet.PlayerLine) - shooterAI.projSpawnPoint.position;
                         direction.y = 0f;
-                        projectileComponent.Initialize(shooterAI.projSpawnPoint, direction, shooterAI.BulletSpeed);
+                        projectileComponent.Initialize(shooterAI.projSpawnPoint, shooterAI.projSpawnPoint.position, direction,
+                                                       shooterAI.BulletSpeed, Bullet.ProjectileState.ShotByEnemy);
                     }
                 }
                 else
@@ -50,6 +49,8 @@ public class GunGruntShootingBehavior : StateMachineBehaviour
                     Debug.Log("Projectile not set.");
                 }
             }
+
+            firstShoot = false;
         }
 
         if (!shootingTarget)

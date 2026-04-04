@@ -30,9 +30,11 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField] private float shakeInterval = 0.02f;
 
     public int Score => score;
-    public UnityEvent OnDiscreteMultiplierChange;
+    public UnityAction<int> ScoreAdded;
+    public UnityAction OnDiscreteMultiplierChange;
 
     protected PlayerInput playerInput;
+    public PlayerInput PlayerInput => playerInput;
     protected LaneBound laneBound;
     protected Rigidbody rb;
     protected Collider playerCollider;
@@ -238,7 +240,9 @@ public abstract class PlayerController : MonoBehaviour
 
     public void AddScore(int score)
     {
-        this.score += Mathf.CeilToInt(score * GetDiscreteMultiplier());
+        int delta = Mathf.CeilToInt(score * GetDiscreteMultiplier());
+        this.score += delta;
+        ScoreAdded?.Invoke(delta);
     }
 
     public float GetBaseDiscreteMultiplier()

@@ -11,6 +11,8 @@ public class MachineGun : Gun
     [SerializeField] private float overheatDecreaseRate = 0.4f; // 1 / duration
     [SerializeField] private float overheatCooldown = 2f;
 
+    [SerializeField] private float speed = 200f;
+
     private bool shooting = false;
     private float overheatLevel = 0f;
     private bool overheating = false;
@@ -60,8 +62,10 @@ public class MachineGun : Gun
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunShot, transform.position);
 
         Bullet bullet = InstantiateShot<Bullet>();
+        bullet.Initialize(null, FirePosition.position, Quaternion.Euler(0f, spread, 0f) * transform.forward,
+                          speed, Bullet.ProjectileState.ShotByPlayer);
         bullet.damage = bulletDamage;
-        bullet.transform.forward = Quaternion.Euler(0f, spread, 0f) * transform.forward;
+        bullet.transform.forward = bullet.Direction;
 
         shooting = true;
     }

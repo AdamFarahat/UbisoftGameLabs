@@ -3,7 +3,6 @@ using UnityEngine.Assertions;
 
 public class FlyerMovement : MonoBehaviour, ISpeedRefreshable
 {
-    [SerializeField] private float initialLaneDistance = 200f;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float damage = 12f;
 

@@ -1,38 +1,45 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BulletDetector : MonoBehaviour
 {
-    private readonly List<Bullet> bulletsNearby = new();
-    private readonly List<ShotgunBlast> shotgunBlast = new();
+    private List<Bullet> bulletsNearby = new();
     public List<Bullet> NearbyBullets => bulletsNearby;
+
+    private List<ShotgunBlast> nearbyShotgunBlasts = new();
+    public List<ShotgunBlast> NearbyShotgunBlasts => nearbyShotgunBlasts;
 
     private void Awake()
     {
-        this.GetComponentInHierarchy<Enemy>().OnTakeFromPool += () => { bulletsNearby.Clear(); };
+        this.GetComponentInHierarchy<Enemy>().OnTakeFromPool += ResetState;
+    }
+
+    private void ResetState()
+    {
+        bulletsNearby.Clear();
+        nearbyShotgunBlasts.Clear();
     }
 
     private void Update()
     {
-        List<int> oldBullets = new();
-        for (int i = 0; i < bulletsNearby.Count; i++)
-            if (bulletsNearby[i] == null)
-                oldBullets.Add(i);
-
-        oldBullets.Reverse();
-        foreach (int index in oldBullets)
-            bulletsNearby.RemoveAt(index);
+        bulletsNearby = bulletsNearby.Where(b => b != null).ToList();
+        nearbyShotgunBlasts = nearbyShotgunBlasts.Where(s => s != null).ToList();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Bullet b))
             bulletsNearby.Add(b);
+        else if (other.TryGetComponent(out ShotgunBlast s))
+            nearbyShotgunBlasts.Add(s);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out Bullet b))
             bulletsNearby.Remove(b);
+        else if (other.TryGetComponent(out ShotgunBlast s))
+            nearbyShotgunBlasts.Remove(s);
     }
 }

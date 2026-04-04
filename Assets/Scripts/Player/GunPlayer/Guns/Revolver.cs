@@ -8,6 +8,7 @@ public class Revolver : Gun
     [SerializeField] private GameObject laserShotPrefab;
     [SerializeField] private float laserChargeTime = 0.4f;
     [SerializeField] private float laserCooldownTime = 0.6f;
+    [SerializeField] private float speed = 170f;
 
     private bool charging = false;
     private float chargeStartTime = 0f;
@@ -42,7 +43,9 @@ public class Revolver : Gun
 
         if (Time.time - chargeStartTime < laserChargeTime)
         {
-            InstantiateShot<Bullet>().damage = bulletDamage;
+            Bullet bullet = InstantiateShot<Bullet>();
+            bullet.damage = bulletDamage;
+            bullet.Initialize(null, FirePosition.position, transform.forward, speed, Bullet.ProjectileState.ShotByPlayer);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
         }
         else

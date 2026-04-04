@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 3789725283045998290}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:
@@ -251,8 +252,8 @@ GameObject:
   - component: {fileID: 1581637196576062325}
   - component: {fileID: 1373232332848855569}
   - component: {fileID: 7783204410356858617}
-  - component: {fileID: 6943622942986127534}
   - component: {fileID: -7959300819016341085}
+  - component: {fileID: 3741178521431315189}
   m_Layer: 6
   m_Name: Kamikaze
   m_TagString: Enemy
@@ -368,6 +369,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7959300819016341085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980648615144976386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
+  minSpeed: 2
+  maxSpeed: 8
 --- !u!65 &3741178521431315189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -387,22 +402,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
-  m_Center: {x: 0, y: 3.3, z: 0}
---- !u!114 &-7959300819016341085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8980648615144976386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 2
-  maxSpeed: 8
+  m_Size: {x: 5, y: 10, z: 5}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &9058942917174341909
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteAnimator
   spriteRenderer: {fileID: 2325828356199168874}
+  image: {fileID: 0}
   animations:
   - name: Idle
     frames:
