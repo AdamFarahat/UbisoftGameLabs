@@ -39,8 +39,9 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool == null)
-            ResetState();
+        health = maxHealth;
+        dead = health <= 0;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
     private void Update()

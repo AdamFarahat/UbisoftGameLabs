@@ -52,10 +52,11 @@ public class TutorialSwitchLanes : TutorialBase
 
     protected override void PreTutorial()
     {
-        foreach (SpriteRenderer lane in manager.DisabledLanes)
+        foreach (GameObject lane in manager.DisabledLanes)
         {
-            StartCoroutine(FadeAnimation.FadeInRoutine(lane, laneFadeInDuration));
-            lane.gameObject.SetActive(true);
+            lane.SetActive(true);
+            foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
         }
     }
 }

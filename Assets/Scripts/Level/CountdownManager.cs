@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CountdownManager : MonoBehaviour
 {
-    // TODO fade out of tutorial
     [Header("Fade In")]
     [SerializeField] private RawImage fadeInImage;
     [SerializeField] private float fadeInDuration = 2f;
