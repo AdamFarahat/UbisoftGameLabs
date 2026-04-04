@@ -45,7 +45,7 @@ public class Revolver : Gun
         {
             Bullet bullet = InstantiateShot<Bullet>();
             bullet.damage = bulletDamage;
-            bullet.Initialize(null, transform.forward, speed, Bullet.ProjectileState.ShotByPlayer);
+            bullet.Initialize(null, FirePosition.position, transform.forward, speed, Bullet.ProjectileState.ShotByPlayer);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
         }
         else

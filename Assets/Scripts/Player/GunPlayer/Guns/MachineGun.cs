@@ -62,7 +62,7 @@ public class MachineGun : Gun
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunShot, transform.position);
 
         Bullet bullet = InstantiateShot<Bullet>();
-        bullet.Initialize(null, Quaternion.Euler(0f, spread, 0f) * transform.forward,speed,Bullet.ProjectileState.ShotByPlayer);
+        bullet.Initialize(null, FirePosition.position, Quaternion.Euler(0f, spread, 0f) * transform.forward,speed,Bullet.ProjectileState.ShotByPlayer);
         bullet.damage = bulletDamage;
         bullet.transform.forward = bullet.Direction;
 

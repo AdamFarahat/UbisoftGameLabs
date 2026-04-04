@@ -28,7 +28,7 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
 
     protected void Shoot()
     {
-        GameObject go = ProjectilePool.SharedInstance.Spawn(spawnPoint.position, Quaternion.identity);
+        GameObject go = ProjectilePool.SharedInstance.Spawn();
         Assert.IsNotNull(go);
 
         Bullet projectile = go.GetComponent<Bullet>();
@@ -37,7 +37,7 @@ public class ShooterEnemy : MonoBehaviour, ISpeedRefreshable
         Vector3 playerPosition = LaneSet.Instance.GetLanePosition(lane.LaneIndex, LaneSet.PlayerLine);
         playerPosition.y = LaneSet.PlayerTargetHeight;
         Vector3 direction = playerPosition - spawnPoint.position;
-        projectile.Initialize(spawnPoint, direction, bulletSpeed, Bullet.ProjectileState.ShotByEnemy);
+        projectile.Initialize(spawnPoint, spawnPoint.position, direction, bulletSpeed, Bullet.ProjectileState.ShotByEnemy);
 
         Stunner stunner = go.GetComponent<Stunner>();
         Assert.IsNotNull(stunner);
