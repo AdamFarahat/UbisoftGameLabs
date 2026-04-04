@@ -37,7 +37,6 @@ Transform:
   - {fileID: 2031503981637231860}
   - {fileID: 8411481307117260910}
   - {fileID: 4412868135416647284}
-  - {fileID: 2811592484196593557}
   - {fileID: 2411667295261915576}
   - {fileID: 7559269735715545421}
   - {fileID: 8188549765879087915}
@@ -134,68 +133,6 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
---- !u!1001 &2426193119706196677
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4149798499193065890}
-    m_Modifications:
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.19058
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 30.20498
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1517492160040422415, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-      propertyPath: m_Name
-      value: ObjectCaptureCollider
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
---- !u!4 &2811592484196593557 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 481702359763223888, guid: a56c98a6f0bfe4f478fcf3988cfcc376, type: 3}
-  m_PrefabInstance: {fileID: 2426193119706196677}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2547667264754997289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,6 +758,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7121497403253817212}
     - target: {fileID: 9089175420580484333, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 7528878339980686641}
+    - target: {fileID: 9089175420580484333, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: restartButton
       value: 
       objectReference: {fileID: 136889373030266078}
@@ -968,26 +909,6 @@ PrefabInstance:
     - target: {fileID: 3974237691823482190, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Path
-      value: event:/Music/GameTheme
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data1
-      value: 1282672608
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data2
-      value: 1220114297
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data3
-      value: -1172368235
-      objectReference: {fileID: 0}
-    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
-      propertyPath: <OSTGame>k__BackingField.Guid.Data4
-      value: -1672902217
       objectReference: {fileID: 0}
     - target: {fileID: 6008748549651680452, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_Name

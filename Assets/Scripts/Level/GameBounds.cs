@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectsManager : MonoBehaviour
+public class GameBounds : MonoBehaviour
 {
     private void OnTriggerExit(Collider other)
     {

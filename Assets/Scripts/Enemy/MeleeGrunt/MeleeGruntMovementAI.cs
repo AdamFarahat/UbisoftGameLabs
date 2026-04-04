@@ -11,6 +11,9 @@ public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
 
     private PlayerStats playerStats;
 
+    [SerializeField] private float surpassingAcceleration = 50f;
+    private bool playersSurpassed = false;
+
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
@@ -18,18 +21,23 @@ public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
         playerStats = FindFirstObjectByType<PlayerStats>();
         Assert.IsNotNull(playerStats);
 
-        GetComponent<Enemy>().OnTakeFromPool += ResetState;
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.OnTakeFromPool += ResetState;
+        enemy.SurpassedPlayers += () => { playersSurpassed = true; };
     }
 
     private void ResetState()
     {
         laneBound.LaneDistance = LaneSet.SpawnLine;
+        playersSurpassed = false;
     }
 
     private void Update()
     {
+        if (playersSurpassed)
+            speed += surpassingAcceleration * Time.deltaTime;
+
         laneBound.LaneDistance -= speed * Time.deltaTime;
-        // laneBound.LaneDistance -= enemy.CurrentSpeed * Time.deltaTime;
 
         if (laneBound.LaneDistance <= LaneSet.HeartLine)
         {
@@ -42,5 +50,4 @@ public class MeleeGruntMovementAI : MonoBehaviour, ISpeedRefreshable
         if (TryGetComponent(out EnemySpeedConfig cfg))
             speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
     }
-
 }

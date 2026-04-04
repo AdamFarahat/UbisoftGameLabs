@@ -384,6 +384,7 @@ MonoBehaviour:
   laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 0.1
+  perpendicularOffset: 0
 --- !u!114 &3450926691260433750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DemoEnemy
   damage: 10
   speed: 18
+  surpassingAcceleration: 50
 --- !u!114 &1581637196576062325
 MonoBehaviour:
   m_ObjectHideFlags: 0
