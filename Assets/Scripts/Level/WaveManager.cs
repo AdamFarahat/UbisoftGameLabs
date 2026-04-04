@@ -97,7 +97,7 @@ public class WaveManager : MonoBehaviour
             else if (randomInt <=90) 
                 type = 4; 
             else 
-                type = 5;  //will update for samurai enemy                
+                type = 5;
         }
         spawner.GetEnemy(type, lane);
     }
@@ -113,8 +113,9 @@ public class WaveManager : MonoBehaviour
         }
 
         float d = DifficultyManager.Instance.Difficulty;
-        minSpawnTime = Mathf.Lerp(initialMinSpawnTime, finalMinSpawnTime, d);
-        maxSpawnTime = Mathf.Lerp(initialMaxSpawnTime, finalMaxSpawnTime, d);
+        float m = DifficultyManager.Instance.DifficultyMultiplier;
+        minSpawnTime = Mathf.Lerp(initialMinSpawnTime, finalMinSpawnTime, d) / m;
+        maxSpawnTime = Mathf.Lerp(initialMaxSpawnTime, finalMaxSpawnTime, d) / m;
 
         waveNumber++;
         DifficultyManager.Instance?.OnWaveStarted(waveNumber);
