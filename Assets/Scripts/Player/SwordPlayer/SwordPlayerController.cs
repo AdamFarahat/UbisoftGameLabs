@@ -38,6 +38,8 @@ public class SwordPlayerController : PlayerController
     [SerializeField] private float attackingMultiplierGain = 0.6f;
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
+    
+    public float MeleeParryMultiplierGain => meleeParryMultiplierGain;
     public float BulletParryMultiplierGain => bulletParryMultiplierGain;
 
     [Header("Super")]
@@ -386,7 +388,8 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            if (state == SwordPlayerStates.Attacking && !enemy.HasShield() && enemy.OnParried())
+            if (state == SwordPlayerStates.Attacking && enemy.ImmuneToSword?.Invoke() == false
+                && !enemy.HasShield() && enemy.OnParried())
             {
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordHit, transform.position);
                 playerStats.AddSwordSuper(4f);
@@ -394,7 +397,7 @@ public class SwordPlayerController : PlayerController
                 AddScore(enemy.Score);
             }
         }
-        else if (collider.TryGetComponent(out Bullet projectile) && projectile.State != Bullet.ProjectileState.ShotByPlayer)
+        else if (collider.TryGetComponent(out Bullet projectile) && !projectile.IsComingFromPlayer())
         {
             
             if (state == SwordPlayerStates.Parrying)
@@ -417,6 +420,7 @@ public class SwordPlayerController : PlayerController
     }
 
     private void DoBlockActivity() {
+        AddContinuousMultiplier(blockingMultiplierGain);
         playerStats.AddSwordSuper(2f);
         StartCoroutine(BlockCooldown());
     }

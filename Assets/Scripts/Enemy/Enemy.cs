@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -25,6 +24,10 @@ public class Enemy : Poolable
     private LaneBound laneBound;
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
+
+    public System.Func<Bullet, Collider, bool> ImmuneToBullet;
+    public System.Func<bool> ImmuneToSword;
+    public System.Func<bool> StunFromBullet;
 
     private void Awake()
     {

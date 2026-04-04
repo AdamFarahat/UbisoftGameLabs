@@ -66,7 +66,7 @@ public class ShotgunBlast : MonoBehaviour
     {
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield()
-            && enemy.GetComponentInParent<ShotgunImmune>() == null)
+            && (!enemy.TryGetComponentInHierarchy(out ShotgunImmune si) || !si.isActiveAndEnabled))
         {
             enemiesHit.Add(enemy);
             if (enemy.TakeDamage(damage))
