@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1019dcb567e88742a0d8016e27f191e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerMovement
-  speed: 10
+  speed: 2
   damage: 12
   surpassingAcceleration: 50
 --- !u!114 &1211474539738667709
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlyerShooting
   stunTime: 0.3
-  shotCooldown: 0.65
+  shotCooldown: 0.95
   shotDistanceThreshold: 20
   shootingRange: 10000
   bulletSpeed: 80

@@ -377,7 +377,7 @@ MonoBehaviour:
   attackDuration: 0.2
   blockCooldown: 3
   parryBulletSpeedMult: 2
-  parryWindow: 0.5
+  parryWindow: 0.25
   blockingMultiplierGain: 0.2
   attackingMultiplierGain: 0.6
   meleeParryMultiplierGain: 0.8
