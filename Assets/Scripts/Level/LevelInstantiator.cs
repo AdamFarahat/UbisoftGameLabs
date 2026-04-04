@@ -10,7 +10,7 @@ public class LevelInstantiator : MonoBehaviour
         switch (currentSceneName)
         {
             case "Game":
-                AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
+                AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameStart);
                 break;
             case "Menu":
                 AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTMenu);

@@ -212,20 +212,34 @@ MonoBehaviour:
       Data3: -1825921614
       Data4: 1370417989
     Path: event:/UI/UIButtonCancel
+  <OSTGameStart>k__BackingField:
+    Guid:
+      Data1: -1112594230
+      Data2: 1316691393
+      Data3: 1454632325
+      Data4: 1256656752
+    Path: event:/Music/MusicGameStart
   <OSTGame>k__BackingField:
     Guid:
-      Data1: -2098203943
-      Data2: 1322497174
-      Data3: -1944179016
-      Data4: -67184678
-    Path: event:/Music/MusicInfinite
+      Data1: -126148015
+      Data2: 1317272872
+      Data3: 397859501
+      Data4: 701081655
+    Path: event:/Music/MusicGame
+  <OSTGameUlt>k__BackingField:
+    Guid:
+      Data1: -662081272
+      Data2: 1186491159
+      Data3: -252027742
+      Data4: 1629182650
+    Path: event:/Music/MusicGameUlt
   <OSTMenu>k__BackingField:
     Guid:
       Data1: 389314522
       Data2: 1087999440
       Data3: 1110430364
       Data4: 1106813001
-    Path: event:/Music/MusicFull
+    Path: event:/Music/MusicMenu
   <OSTutorial>k__BackingField:
     Guid:
       Data1: 855290678
@@ -233,6 +247,13 @@ MonoBehaviour:
       Data3: -572350565
       Data4: 1114894036
     Path: event:/Music/MusicTutorial
+  <OSTGameOver>k__BackingField:
+    Guid:
+      Data1: 2120997115
+      Data2: 1164459856
+      Data3: -759329654
+      Data4: 1762471052
+    Path: event:/Music/MusicGameOver
 --- !u!1 &6008748549651680452
 GameObject:
   m_ObjectHideFlags: 0
