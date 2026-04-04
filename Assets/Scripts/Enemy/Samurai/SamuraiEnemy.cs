@@ -4,20 +4,20 @@ using UnityEngine.Assertions;
 
 public class SamuraiEnemy : MonoBehaviour
 {
-    [SerializeField] private Collider HealthCollider;
-    [SerializeField] private float ProjectileTresholdSpeed = 400f;
-    [SerializeField] private float WalkingSpeed = 10f;
-    [SerializeField] private float CheckIfCanSlashInterval = 1f;
-    [SerializeField] private float SlashInterval = 1.5f;
-    [SerializeField] private float StunTime = 1f;
-    [SerializeField] private int NumberOfSlashes = 2;
-    [SerializeField] private float SlashDistance = 10f;
+    [SerializeField] private Collider healthCollider;
+    [SerializeField] private float projectileTresholdSpeed = 400f;
+    [SerializeField] private float walkingSpeed = 10f;
+    [SerializeField] private float checkIfCanSlashInterval = 1f;
+    [SerializeField] private float slashInterval = 1.5f;
+    [SerializeField] private float stunTime = 1f;
+    [SerializeField] private int numberOfSlashes = 2;
+    [SerializeField] private float slashDistance = 10f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
-    [SerializeField] private float ParryMultipliyer = 1.1f;
-    [SerializeField] private float stunTime;
+    [SerializeField] private float parryMultipliyer = 1.1f;
     [SerializeField] private float shakeInterval = 0.1f;
     [SerializeField] private float shakeOffset = 0.025f;
-    private enum SamuraiState { Walking, Slashing, Parrying, Stunned};
+
+    private enum SamuraiState { Walking, Slashing, Parrying, Stunned };
     private SamuraiState state;
     private float time = 0f;
     private BulletDetector bulletDetector;
@@ -65,11 +65,11 @@ public class SamuraiEnemy : MonoBehaviour
             case SamuraiState.Walking:
                 if (BulletComingInRange())
                 {
-                    HealthCollider.enabled = false;
+                    healthCollider.enabled = false;
                     state = SamuraiState.Parrying;
                     time = 0f;
                 }
-                else if (time >= CheckIfCanSlashInterval && IsInSlashingRangeRange() && !(numberOfSlashesDone > NumberOfSlashes))
+                else if (time >= checkIfCanSlashInterval && IsInSlashingRange() && numberOfSlashesDone < numberOfSlashes)
                 {
                     state = SamuraiState.Slashing;
                     time = 0f;
@@ -80,12 +80,12 @@ public class SamuraiEnemy : MonoBehaviour
                 if (parriedBullet)
                 {
 
-                    parriedBullet.Parry(null, ParryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
+                    parriedBullet.Parry(null, parryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
                     parriedBullet = null;
                 }
                 //TODO: SlashingAnimation
 
-                HealthCollider.enabled = true;
+                healthCollider.enabled = true;
                 state = SamuraiState.Walking;
                 break;
             case SamuraiState.Slashing:
@@ -94,7 +94,7 @@ public class SamuraiEnemy : MonoBehaviour
                     canSlash = false;
                     swordHitBox.gameObject.SetActive(true);
                     //TODO: Play Slashing Animation
-                    if (++numberOfSlashesDone > NumberOfSlashes)
+                    if (++numberOfSlashesDone > numberOfSlashes)
                     {
 
                         time = 0f;
@@ -104,7 +104,7 @@ public class SamuraiEnemy : MonoBehaviour
                     }
 
                 }
-                if (time > SlashInterval)
+                if (time > slashInterval)
                 {
                     time = 0;
                     canSlash = true;
@@ -123,7 +123,7 @@ public class SamuraiEnemy : MonoBehaviour
                 continue;
             }
 
-            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
+            if (IsPredictedToHit(b) && b.Speed <= projectileTresholdSpeed)
             {
                 parriedBullet = b;
                 return true;
@@ -135,24 +135,26 @@ public class SamuraiEnemy : MonoBehaviour
 
     private bool IsPredictedToHit(Bullet b)
     {
-        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit) && hit.collider == HealthCollider;
+        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit) && hit.collider == healthCollider;
     }
 
     private void WalkForward()
     {
-        lane.LaneDistance -= WalkingSpeed * Time.deltaTime;
+        lane.LaneDistance -= walkingSpeed * Time.deltaTime;
     }
 
-    private bool IsInSlashingRangeRange()
+    private bool IsInSlashingRange()
     {
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= SlashDistance;
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= slashDistance
+            && lane.LaneDistance >= LaneSet.PlayerLine;
     }
 
     public void OnSwordHitBoxTriggerEnter(Collider collider)
     {
-        if (collider.TryGetComponent(out GunPlayerController gunPlayer)) {
+        if (collider.TryGetComponent(out GunPlayerController gunPlayer))
+        {
             //TODO: Stun or take damage
-            gunPlayer.Stun(StunTime);
+            gunPlayer.Stun(stunTime);
         }
 
         if (collider.TryGetComponent(out SwordPlayerController swordPlayer))
@@ -164,7 +166,7 @@ public class SamuraiEnemy : MonoBehaviour
                 IEnumerator Routine()
                 {
                     AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
-                    
+
                     //TODO: animation 
 
                     //Vector3 initialCameraOffset = spriteBillboard.cameraOffset;
@@ -172,15 +174,15 @@ public class SamuraiEnemy : MonoBehaviour
                     for (float t = 0f; t < stunTime; t += Time.deltaTime)
                     {
                         Debug.Log("Routine of stun:" + t);
-                        /*if (t > shakeCounter * shakeInterval)
+                        if (t > shakeCounter * shakeInterval)
                         {
                             shakeCounter = Mathf.CeilToInt(t / shakeInterval);
-                            Vector3 cameraOffset = initialCameraOffset;
-                            Vector2 shake = UnityEngine.Random.insideUnitCircle * shakeOffset;
-                            cameraOffset.x += shake.x;
-                            cameraOffset.y += shake.y;
+                            //Vector3 cameraOffset = initialCameraOffset;
+                            //Vector2 shake = Random.insideUnitCircle * shakeOffset;
+                            //cameraOffset.x += shake.x;
+                            //cameraOffset.y += shake.y;
                             //spriteBillboard.cameraOffset = cameraOffset;
-                        }*/
+                        }
 
                         yield return null;
                     }
@@ -195,9 +197,10 @@ public class SamuraiEnemy : MonoBehaviour
                 state = SamuraiState.Stunned;
                 stunRoutine = StartCoroutine(Routine());
             }
-            else { 
-                swordPlayer.Stun(StunTime);
-            } 
+            else
+            {
+                swordPlayer.Stun(stunTime);
+            }
         }
     }
 }
