@@ -8,6 +8,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private Transform colliderRoot;
     [SerializeField] private GameObject vfx;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
     [SerializeField] private float gravity = 300f;
@@ -24,6 +25,7 @@ public class Grenade : MonoBehaviour
     {
         Assert.IsNotNull(colliderRoot);
         Assert.IsNotNull(vfx);
+        Assert.IsNotNull(spriteRenderer);
 
         vfx.SetActive(false);
     }
@@ -44,11 +46,14 @@ public class Grenade : MonoBehaviour
         if (exploding) return;
 
         if (transform.position.y <= 0f)
+        {
             Explode();
+            return;
+        }
 
         Vector3 position = transform.position;
         position.z += forwardVelocity * Time.deltaTime;
-        position.y += verticalVelocity * Time.deltaTime;
+        position.y = Mathf.Max(position.y + verticalVelocity * Time.deltaTime, 0f);
         transform.position = position;
         verticalVelocity -= gravity * Time.deltaTime;
     }
@@ -88,6 +93,7 @@ public class Grenade : MonoBehaviour
     {
         IEnumerator Explosion()
         {
+            spriteRenderer.gameObject.SetActive(false);
             vfx.SetActive(true);
 
             for (float t = 0f; t < explosionDuration; t += Time.deltaTime)
@@ -101,6 +107,7 @@ public class Grenade : MonoBehaviour
         }
 
         exploding = true;
+        transform.position = new(transform.position.x, 0f, transform.position.z);
 
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 

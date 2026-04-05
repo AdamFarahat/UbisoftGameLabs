@@ -50,147 +50,259 @@ MonoBehaviour:
       Data2: 1181862997
       Data3: -824476249
       Data4: 1147259068
-    Path: event:/Players/PlayerGeneralHurt
+    Path: event:/Players/General/PlayerGeneralStunned
   <PlayerDash>k__BackingField:
     Guid:
       Data1: 1457382070
       Data2: 1249065136
       Data3: 118152635
       Data4: -1433705990
-    Path: event:/Players/PlayerGeneralDash
+    Path: event:/Players/General/PlayerGeneralDash
+  <PlayerDamaged>k__BackingField:
+    Guid:
+      Data1: -477810789
+      Data2: 1324276971
+      Data3: -1089212253
+      Data4: -32823740
+    Path: event:/Players/General/PlayerLoseLife
+  <PlayerDeath>k__BackingField:
+    Guid:
+      Data1: 1076866187
+      Data2: 1324555887
+      Data3: 881261231
+      Data4: 1333206047
+    Path: event:/Players/General/PlayerDeath
+  <PlayerCooldownReady>k__BackingField:
+    Guid:
+      Data1: 809235410
+      Data2: 1181447469
+      Data3: 508176047
+      Data4: -613457378
+    Path: event:/Players/General/PlayerCooldownReady
   <PlayerRevolverShot>k__BackingField:
     Guid:
       Data1: -237387748
       Data2: 1206679153
       Data3: 546449038
       Data4: 1156238603
-    Path: event:/PlayerWeapons/PlayerRevolverShot
+    Path: event:/Players/Gun/PlayerRevolverShot
   <PlayerRevolverAltShot>k__BackingField:
     Guid:
       Data1: 167299772
       Data2: 1152193592
       Data3: 500736156
       Data4: -177089594
-    Path: event:/PlayerWeapons/PlayerRifleOverheat
+    Path: event:/Players/Gun/PlayerRifleOverheat
   <PlayerRevolverImpact>k__BackingField:
     Guid:
       Data1: 90658782
       Data2: 1078374022
       Data3: 1989879686
       Data4: -820542591
-    Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
+    Path: event:/Players/Gun/PlayerRevolverBulletImpact
+  <PlayerRevolverCharge>k__BackingField:
+    Guid:
+      Data1: 2943322
+      Data2: 1214422984
+      Data3: -1333406532
+      Data4: 1919199099
+    Path: event:/Players/Gun/PlayerRevolverChargeUp
   <PlayerRevolverNotReady>k__BackingField:
     Guid:
       Data1: 1969619031
       Data2: 1173442005
       Data3: -1119069253
       Data4: -895948633
-    Path: event:/PlayerWeapons/PlayerRevolverNotReady
+    Path: event:/Players/Gun/PlayerRevolverNotReady
   <PlayerRevolverSelect>k__BackingField:
     Guid:
       Data1: 1076003823
       Data2: 1279739258
       Data3: -1885382211
       Data4: -668057458
-    Path: event:/PlayerWeapons/PlayerRevolverSelect
+    Path: event:/Players/Gun/PlayerRevolverSelect
   <PlayerShotgunShot>k__BackingField:
     Guid:
       Data1: -17541028
       Data2: 1276222511
       Data3: -495441730
       Data4: -1032015244
-    Path: event:/PlayerWeapons/PlayerShotgunShot
+    Path: event:/Players/Gun/PlayerShotgunShot
+  <PlayerShotgunCharge>k__BackingField:
+    Guid:
+      Data1: 2099168752
+      Data2: 1091944436
+      Data3: -775635531
+      Data4: 1552822330
+    Path: event:/Players/Gun/PlayerShotgunCharge
   <PlayerShotgunSelect>k__BackingField:
     Guid:
       Data1: 988885455
       Data2: 1273136077
       Data3: 1725795461
       Data4: 1236247330
-    Path: event:/PlayerWeapons/PlayerShotgunSelect
+    Path: event:/Players/Gun/PlayerShotgunSelect
   <PlayerMachinegunShot>k__BackingField:
     Guid:
       Data1: -1595991602
       Data2: 1138323884
       Data3: -1387455846
       Data4: 2112771498
-    Path: event:/PlayerWeapons/PlayerRifleShot
+    Path: event:/Players/Gun/PlayerRifleShot
   <PlayerMachinegunOverheat>k__BackingField:
     Guid:
-      Data1: 167299772
-      Data2: 1152193592
-      Data3: 500736156
-      Data4: -177089594
-    Path: event:/PlayerWeapons/PlayerRifleOverheat
+      Data1: 792228260
+      Data2: 1255257035
+      Data3: -813965692
+      Data4: -538612684
+    Path: event:/Players/Gun/PlayerRifleNotReady
+  <PlayerMachinegunNotReady>k__BackingField:
+    Guid:
+      Data1: 792228260
+      Data2: 1255257035
+      Data3: -813965692
+      Data4: -538612684
+    Path: event:/Players/Gun/PlayerRifleNotReady
+  <PlayerMachinegunReady>k__BackingField:
+    Guid:
+      Data1: -234151893
+      Data2: 1222155299
+      Data3: 1403633045
+      Data4: 39406748
+    Path: event:/Players/Gun/PlayerRifleReady
+  <PlayerMachinegunOverheatLoop>k__BackingField:
+    Guid:
+      Data1: -405688274
+      Data2: 1282748738
+      Data3: -2051165274
+      Data4: -1713791612
+    Path: event:/Players/Gun/PlayerRifleOverheatLoop
   <PlayerMachinegunSelect>k__BackingField:
     Guid:
       Data1: -2082601145
       Data2: 1340393529
       Data3: 2141118087
       Data4: -412552335
-    Path: event:/PlayerWeapons/PlayerRifleSelect
+    Path: event:/Players/Gun/PlayerRifleSelect
   <PlayerGrenadeThrow>k__BackingField:
     Guid:
       Data1: 1917402141
       Data2: 1096397505
       Data3: -869755234
       Data4: 1800542975
-    Path: event:/PlayerWeapons/PlayerGrenadeThrow
+    Path: event:/Players/Gun/PlayerGrenadeThrow
   <PlayerGrenadeExplode>k__BackingField:
     Guid:
       Data1: 115624427
       Data2: 1214022194
       Data3: -2098313322
       Data4: 1418859912
-    Path: event:/PlayerWeapons/PlayerGrenadeExplode
+    Path: event:/Players/Gun/PlayerGrenadeExplode
   <PlayerSwordSlash>k__BackingField:
     Guid:
       Data1: 693652536
       Data2: 1288883743
       Data3: -1662414182
       Data4: 13236103
-    Path: event:/PlayerWeapons/PlayerSwordSlash
+    Path: event:/Players/Sword/PlayerSwordSlash
   <PlayerSwordHit>k__BackingField:
     Guid:
       Data1: -1317212057
       Data2: 1214736076
       Data3: 1164651163
       Data4: 1957029962
-    Path: event:/PlayerWeapons/PlayerSwordHit
+    Path: event:/Players/Sword/PlayerSwordHit
   <PlayerSwordParry>k__BackingField:
     Guid:
       Data1: 242281762
       Data2: 1277387645
       Data3: 292240524
       Data4: 2139597516
-    Path: event:/PlayerWeapons/PlayerSwordParry
+    Path: event:/Players/Sword/PlayerSwordParry
+  <PlayerSwordBlock>k__BackingField:
+    Guid:
+      Data1: 416746489
+      Data2: 1287556100
+      Data3: 529394356
+      Data4: 1391217317
+    Path: event:/Players/Sword/PlayerSwordBlock
   <PlayerJump>k__BackingField:
     Guid:
       Data1: 1095529407
       Data2: 1174220026
       Data3: -505668221
       Data4: 1221349409
-    Path: event:/Players/PlayerGeneralJump
+    Path: event:/Players/Sword/PlayerGeneralJump
   <EnemyWeaponShot>k__BackingField:
     Guid:
       Data1: -327730630
       Data2: 1140212501
       Data3: 127052165
       Data4: 1706519949
-    Path: event:/Enemies/EnemyGeneralShoot
+    Path: event:/Enemies/General/EnemyGeneralShoot
   <EnemyHurt>k__BackingField:
     Guid:
       Data1: 1599863940
       Data2: 1224990851
       Data3: -1832026188
       Data4: -1712828106
-    Path: event:/Enemies/EnemyGeneralHurt
+    Path: event:/Enemies/General/EnemyGeneralHurt
   <EnemySpawn>k__BackingField:
     Guid:
       Data1: 1666709823
       Data2: 1305560115
       Data3: -713791870
       Data4: 655864701
-    Path: event:/Enemies/EnemyGeneralSpawn
+    Path: event:/Enemies/General/EnemyGeneralSpawn
+  <EnemyDeath>k__BackingField:
+    Guid:
+      Data1: 183307922
+      Data2: 1268484543
+      Data3: -801189198
+      Data4: -1597923862
+    Path: event:/Enemies/General/EnemyDeath
+  <EnemyShieldBroken>k__BackingField:
+    Guid:
+      Data1: 1652638022
+      Data2: 1141844506
+      Data3: 2032744333
+      Data4: -2028880823
+    Path: event:/Enemies/General/EnemyShieldBroken
+  <EnemyShieldHit>k__BackingField:
+    Guid:
+      Data1: -1771746488
+      Data2: 1118006314
+      Data3: -1671544691
+      Data4: 1027841332
+    Path: event:/Enemies/General/EnemyShieldDeflect
+  <SamuraiSwordSlash>k__BackingField:
+    Guid:
+      Data1: -261032772
+      Data2: 1124936143
+      Data3: 758019505
+      Data4: 277070659
+    Path: event:/Enemies/Samurai/EnemySamuraiSlash
+  <SamuraiSwordParry>k__BackingField:
+    Guid:
+      Data1: -1784118466
+      Data2: 1157875095
+      Data3: -2140136283
+      Data4: -1763233578
+    Path: event:/Enemies/Samurai/EnemySamuraiParry
+  <SamuraiStunned>k__BackingField:
+    Guid:
+      Data1: -1270810515
+      Data2: 1180339044
+      Data3: 655415448
+      Data4: -424478798
+    Path: event:/Enemies/Samurai/EnemySamuraiStunned
+  <KamikazeExplode>k__BackingField:
+    Guid:
+      Data1: 1645780191
+      Data2: 1154426929
+      Data3: 1550334848
+      Data4: 286673133
+    Path: event:/Enemies/Kamikaze/KamikazEnemyExplosion
   <UIHover>k__BackingField:
     Guid:
       Data1: 316438731
@@ -212,6 +324,62 @@ MonoBehaviour:
       Data3: -1825921614
       Data4: 1370417989
     Path: event:/UI/UIButtonCancel
+  <UICountdown>k__BackingField:
+    Guid:
+      Data1: 2072469046
+      Data2: 1132931399
+      Data3: 232733627
+      Data4: -1592748260
+    Path: event:/UI/UICountdown
+  <UITip>k__BackingField:
+    Guid:
+      Data1: 1196607841
+      Data2: 1288576347
+      Data3: 1109073308
+      Data4: 264236577
+    Path: event:/UI/UINewTip
+  <OSTGameStart>k__BackingField:
+    Guid:
+      Data1: -1112594230
+      Data2: 1316691393
+      Data3: 1454632325
+      Data4: 1256656752
+    Path: event:/Music/MusicGameStart
+  <OSTGame>k__BackingField:
+    Guid:
+      Data1: -126148015
+      Data2: 1317272872
+      Data3: 397859501
+      Data4: 701081655
+    Path: event:/Music/MusicGame
+  <OSTGameUlt>k__BackingField:
+    Guid:
+      Data1: -662081272
+      Data2: 1186491159
+      Data3: -252027742
+      Data4: 1629182650
+    Path: event:/Music/MusicGameUlt
+  <OSTMenu>k__BackingField:
+    Guid:
+      Data1: 389314522
+      Data2: 1087999440
+      Data3: 1110430364
+      Data4: 1106813001
+    Path: event:/Music/MusicMenu
+  <OSTutorial>k__BackingField:
+    Guid:
+      Data1: 855290678
+      Data2: 1179675921
+      Data3: -572350565
+      Data4: 1114894036
+    Path: event:/Music/MusicTutorial
+  <OSTGameOver>k__BackingField:
+    Guid:
+      Data1: 2120997115
+      Data2: 1164459856
+      Data3: -759329654
+      Data4: 1762471052
+    Path: event:/Music/MusicGameOver
 --- !u!1 &6008748549651680452
 GameObject:
   m_ObjectHideFlags: 0

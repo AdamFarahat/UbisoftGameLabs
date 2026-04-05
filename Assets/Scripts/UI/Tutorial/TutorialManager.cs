@@ -1,10 +1,16 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
+    [Header("Fade Out")]
+    [SerializeField] private float fadeOutDuration = 2f;
+    [SerializeField] private RawImage fadeOutImage;
+    private bool fadingOut = false;
+
     [Header("Special Tutorials")]
     [SerializeField] private TutorialSwitchLanes tutorialSwitchLanes;
     [SerializeField] private TutorialPrimaryAction tutorialPrimaryAction;
@@ -27,14 +33,18 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private GameObject swordPlayerMultiplierUI;
     public GameObject SwordPlayerMultiplierUI => swordPlayerMultiplierUI;
-    [SerializeField] private SpriteRenderer[] disabledLanes;
-    public SpriteRenderer[] DisabledLanes => disabledLanes;
+    [SerializeField] private GameObject[] disabledLanes;
+    public GameObject[] DisabledLanes => disabledLanes;
 
     private TutorialBase[] tutorials;
     private int tutorialIndex = -1;
 
+    [SerializeField] private DifficultyMenu difficultyMenu;
+
     private void Awake()
     {
+        Assert.IsNotNull(fadeOutImage);
+
         Assert.IsNotNull(tutorialSwitchLanes);
         Assert.IsNotNull(tutorialPrimaryAction);
         Assert.IsNotNull(tutorialSecondaryAction);
@@ -47,11 +57,15 @@ public class TutorialManager : MonoBehaviour
         Assert.IsNotNull(gunPlayerMultiplierUI);
         Assert.IsNotNull(swordPlayerMultiplierUI);
 
+        Assert.IsNotNull(difficultyMenu);
+
         tutorials = GetComponentsInChildren<TutorialBase>();
     }
 
     private void Start()
     {
+        fadeOutImage.color = Color.clear;
+
         if (GunPlayerController.Instance != null)
         {
             GunPlayerController.Instance.StartButtonPressed += OnStartButtonPressed;
@@ -83,8 +97,8 @@ public class TutorialManager : MonoBehaviour
         gunPlayerMultiplierUI.SetActive(false);
         swordPlayerMultiplierUI.SetActive(false);
 
-        foreach (SpriteRenderer lane in disabledLanes)
-            lane.gameObject.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+        foreach (GameObject lane in disabledLanes)
+            lane.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
 
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);
@@ -96,14 +110,17 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UITip, Vector3.zero);
             tutorials[tutorialIndex].DoTutorial();
+        }
         else
-            StartGame();
+            SetDifficulty();
     }
 
     public void ExitTutorial()
     {
-        SceneManager.LoadScene("Menu");
+        ExitScene("Menu");
     }
 
     private void OnStartButtonPressed()
@@ -111,8 +128,36 @@ public class TutorialManager : MonoBehaviour
         tutorials[tutorialIndex].OnStartPressed();
     }
 
-    private void StartGame()
+    private void SetDifficulty()
     {
-        SceneManager.LoadScene("Game");
+        difficultyMenu.ShowDifficultyMenu();
+    }
+
+    public void StartGame()
+    {
+        ExitScene("Game");
+    }
+
+    private void ExitScene(string sceneName)
+    {
+        if (fadingOut)
+            return;
+
+        fadingOut = true;
+
+        IEnumerator Routine()
+        {
+            for (float t = 0f; t < fadeOutDuration; t += Time.deltaTime)
+            {
+                fadeOutImage.color = new Color(0f, 0f, 0f, Mathf.Clamp01(t / fadeOutDuration));
+                yield return null;
+            }
+
+            fadeOutImage.color = Color.black;
+
+            SceneManager.LoadScene(sceneName);
+        }
+
+        StartCoroutine(Routine());
     }
 }

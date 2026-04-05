@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image superUI;
     [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
+    [SerializeField] private float scoreIncreaseTime = 1f;
 
     [Header("Player Specific HUDs")]
     [SerializeField] private PlayerHUD gunPlayerHUD;
@@ -28,6 +30,8 @@ public class UIManager : MonoBehaviour
     // State Variables
     private float currentHealthVisual = 1.0f;
     private const float LERP_SPEED = 0.1f;
+    private int targetScore = 0;
+    private float currentScore = 0f;
 
     // Shader Property IDs
     private readonly int amountID = Shader.PropertyToID("_Amount");
@@ -69,6 +73,7 @@ public class UIManager : MonoBehaviour
     public void OnPause()
     {
         Debug.Log("Start button pressed. Toggling pause menu.");
+        if(SceneManager.GetActiveScene().name != "Game") return;
         gunPlayerController.PlayerInput.enabled = false;
         swordPlayerController.PlayerInput.enabled = false;
         pauseMenuScreen.ShowPauseMenu();
@@ -105,13 +110,13 @@ public class UIManager : MonoBehaviour
         if (gunPlayerController != null)
         {
             gunPlayerController.OnGrenadeCooldownReady += gunPlayerHUD.TriggerCooldownPulse;
-            gunPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateGunMultiplierUI);
+            gunPlayerController.OnDiscreteMultiplierChange += UpdateGunMultiplierUI;
         }
 
         if (swordPlayerController != null)
         {
             swordPlayerController.OnBlockCooldownReady += swordPlayerHUD.TriggerCooldownPulse;
-            swordPlayerController.OnDiscreteMultiplierChange.AddListener(UpdateSwordMultiplierUI);
+            swordPlayerController.OnDiscreteMultiplierChange += UpdateSwordMultiplierUI;
         }
 
         if (playerStats != null)
@@ -154,7 +159,11 @@ public class UIManager : MonoBehaviour
     {
         if (scoreManagerSO != null)
         {
-            scoreText.text = ScoreManagerSO.CalculateOverallTeamScore().ToString();
+            targetScore = ScoreManagerSO.CalculateOverallTeamScore();
+            float scoreIncreaseSpeed = (targetScore - currentScore) / scoreIncreaseTime;
+            currentScore += Time.deltaTime * scoreIncreaseSpeed;
+            currentScore = Mathf.Min(currentScore, targetScore);
+            scoreText.text = Mathf.RoundToInt(currentScore).ToString();
         }
     }
 
@@ -228,13 +237,13 @@ public class UIManager : MonoBehaviour
         if (gunPlayerController != null)
         {
             gunPlayerController.OnGrenadeCooldownReady -= gunPlayerHUD.TriggerCooldownPulse;
-            gunPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateGunMultiplierUI);
+            gunPlayerController.OnDiscreteMultiplierChange -= UpdateGunMultiplierUI;
         }
 
         if (swordPlayerController != null)
         {
             swordPlayerController.OnBlockCooldownReady -= swordPlayerHUD.TriggerCooldownPulse;
-            swordPlayerController.OnDiscreteMultiplierChange.RemoveListener(UpdateSwordMultiplierUI);
+            swordPlayerController.OnDiscreteMultiplierChange -= UpdateSwordMultiplierUI;
         }
 
         if (playerStats != null)

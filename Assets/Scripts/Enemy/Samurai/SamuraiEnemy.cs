@@ -1,33 +1,49 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class SamuraiEnemy : MonoBehaviour
+public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 {
-    [SerializeField] private Collider HealthCollider;
-    [SerializeField] private float ProjectileTresholdSpeed = 400f;
-    [SerializeField] private float WalkingSpeed = 10f;
-    [SerializeField] private float CheckIfCanSlashInterval = 1f;
-    [SerializeField] private float SlashInterval = 1.5f;
-    [SerializeField] private float StunTime = 1f;
-    [SerializeField] private int NumberOfSlashes = 2;
-    [SerializeField] private float SlashDistance = 10f;
+    [SerializeField] private float damage = 12f;
+    [SerializeField] private Collider healthCollider;
+    [SerializeField] private float walkingSpeed = 10f;
+    [SerializeField] private float stunTime = 1f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
-    [SerializeField] private float ParryMultipliyer = 1.1f;
+    [SerializeField] private float parrySpeedMultipliyer = 1.1f;
+    [SerializeField] private float surpassingAcceleration = 50f;
+    [SerializeField] private GameObject blockSparksPrefab;
+    [SerializeField] private Transform blockSparksPosition;
+    [SerializeField] private GameObject swordDraggingSparks;
 
-    private enum SamuraiState { Walking, Slashing, Parrying};
-    private SamuraiState state;
-    private float time = 0f;
+    [Header("Stunned")]
+    [SerializeField] private float stunnedDuration = 0.5f;
+
+    [Header("Slashing")]
+    [SerializeField] private int numberOfSlashes = 2;
+    [SerializeField] private float slashCooldown = 1f;
+    [SerializeField] private float slashDistance = 5f;
+    [SerializeField] private float windupDuration = 0.5f;
+    [SerializeField] private float slashDuration = 0.3f;
+
+    private enum SamuraiState { Walking, Slashing, Stunned, Leaving };
+    private SamuraiState state = SamuraiState.Walking;
     private BulletDetector bulletDetector;
-    private Bullet parriedBullet;
     private int numberOfSlashesDone;
     private PlayerStats playerStats;
-    private bool canSlash = true;
     protected LaneBound lane;
-    
+
+    private bool gunPlayerSlashed = false;
+    private bool swordPlayerSlashed = false;
+
+    private Billboard[] billboards;
+    private SpriteAnimator[] animators;
+
+    private Coroutine parryRoutine;
+    private Coroutine slashRoutine;
+
+    private ShotgunImmune shotgunImmunity;
+    private LaserImmune laserImmunity;
+
     protected void Awake()
     {
         lane = GetComponent<LaneBound>();
@@ -37,133 +53,310 @@ public class SamuraiEnemy : MonoBehaviour
         Assert.IsNotNull(playerStats);
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
-        GetComponent<Enemy>().OnTakeFromPool += ResetState;
+        Assert.IsNotNull(healthCollider);
 
-    }
+        Assert.IsNotNull(blockSparksPrefab);
+        Assert.IsNotNull(blockSparksPosition);
+        Assert.IsNotNull(swordDraggingSparks);
+        swordDraggingSparks.SetActive(true);
 
-    private void ResetState()
-    {
-        state = SamuraiState.Walking;
-        canSlash = true;
-        numberOfSlashesDone = 0;
-        parriedBullet = null;
-        lane.LaneDistance = LaneSet.SpawnLine;
-        time = 0f;
+        Enemy enemy = GetComponent<Enemy>();
+        Assert.IsNotNull(enemy);
+        enemy.OnTakeFromPool += ResetState;
+        enemy.ImmuneToBullet = IsImmuneToBullet;
+        enemy.ImmuneToSword = CheckImmuneToSword;
+        enemy.StunFromBullet = StunFromBullet;
+
+        billboards = GetComponentsInChildren<Billboard>();
+        Assert.IsTrue(billboards.Length > 0);
+
+        animators = GetComponentsInChildren<SpriteAnimator>();
+        Assert.IsTrue(animators.Length > 0);
+
+        shotgunImmunity = GetComponent<ShotgunImmune>();
+        Assert.IsNotNull(shotgunImmunity);
+        shotgunImmunity.HitByShotgun += OnHitByShotgun;
+
+        laserImmunity = GetComponent<LaserImmune>();
+        Assert.IsNotNull(laserImmunity);
+
+        Assert.IsTrue(slashCooldown >= stunTime + 0.25f);
     }
 
     private void Start()
     {
-        state = SamuraiState.Walking;
+        foreach (var animator in animators)
+        {
+            animator.SetAnimationDuration("Stunned", stunnedDuration);
+            animator.SetAnimationDuration("Windup", windupDuration);
+            animator.SetAnimationDuration("Slash", slashDuration);
+        }
+    }
+
+    private void ResetState()
+    {
+        SetState(SamuraiState.Walking);
+        numberOfSlashesDone = 0;
+        lane.LaneDistance = LaneSet.SpawnLine;
+        swordHitBox.gameObject.SetActive(false);
+        if (slashRoutine != null)
+        {
+            StopCoroutine(slashRoutine);
+            slashRoutine = null;
+        }
+        gunPlayerSlashed = false;
+        swordPlayerSlashed = false;
+    }
+
+    private void SetState(SamuraiState state)
+    {
+        this.state = state;
+        swordDraggingSparks.SetActive(state == SamuraiState.Walking || state == SamuraiState.Leaving);
     }
 
     private void Update()
     {
-        // TODO cowboy can only dodge when walking. If shooting, change line to dodge then change back.
-        time += Time.deltaTime;
         switch (state)
         {
             case SamuraiState.Walking:
-                if (BulletComingInRange())
+                if (ParryIncomingBullets())
                 {
-                    HealthCollider.enabled = false;
-                    state = SamuraiState.Parrying;
-                    time = 0f;
-                }
-                else if (time >= CheckIfCanSlashInterval && IsInSlashingRangeRange() && !(numberOfSlashesDone > NumberOfSlashes))
-                {
-                    state = SamuraiState.Slashing;
-                    time = 0f;
-                }
-                WalkForward();
-                break;
-            case SamuraiState.Parrying:
-                if (parriedBullet) {
-                    
-                    parriedBullet.Parry(null, ParryMultipliyer, Bullet.ProjectileState.ParriedByEnemy);                    
-                    parriedBullet = null;
-                }
-                //TODO: SlashingAnimation
-               
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
 
-                HealthCollider.enabled = true;
-                state = SamuraiState.Walking;
+                    if (parryRoutine == null)
+                    {
+                        float parryDuration = animators[0].GetAnimationDuration("Parry");
+                        foreach (SpriteAnimator animator in animators)
+                            animator.PlayOneShot("Parry");
+
+                        swordDraggingSparks.SetActive(false);
+
+                        IEnumerator ParryEndRoutine()
+                        {
+                            yield return new WaitForSeconds(parryDuration);
+
+                            SetState(state);  // refresh sparks state
+                            parryRoutine = null;
+                        }
+
+                        parryRoutine = StartCoroutine(ParryEndRoutine());
+                    }
+                }
+
+                if (IsInSlashingRange())
+                    SetState(SamuraiState.Slashing);
+                else
+                    WalkForward();
                 break;
             case SamuraiState.Slashing:
-                if (canSlash) {
-                    canSlash = false;
-                    swordHitBox.gameObject.SetActive(true);
-                    //TODO: Play Slashing Animation
-                    if (++numberOfSlashesDone > NumberOfSlashes)
-                    {
+                if (DestroyIncomingBullets())
+                {
+                    // TODO sfx
+                }
 
-                        time = 0f;
-                        state = SamuraiState.Walking;
+                if (slashRoutine == null)
+                {
+                    IEnumerator Routine()
+                    {
+                        swordHitBox.gameObject.SetActive(true);
+                        
+                        foreach (var animator in animators)
+                            animator.PlayOneShot("Windup");
+                        yield return new WaitForSeconds(windupDuration);
+                        foreach (var animator in animators)
+                            animator.PlayOneShot("Slash");
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
+                        yield return new WaitForSeconds(slashDuration);
+
                         swordHitBox.gameObject.SetActive(false);
-                        canSlash = true;
+                        gunPlayerSlashed = false;
+                        swordPlayerSlashed = false;
+
+                        if (++numberOfSlashesDone >= numberOfSlashes)
+                            SetState(SamuraiState.Leaving);
+                        else
+                            yield return new WaitForSeconds(slashCooldown);
+                        slashRoutine = null;
                     }
-                    
-                } if (time > SlashInterval) {
-                    time = 0;
-                    canSlash = true;
-                    swordHitBox.gameObject.SetActive(false);  
+
+                    slashRoutine = StartCoroutine(Routine());
                 }
                 break;
+            case SamuraiState.Leaving:
+                if (DestroyIncomingBullets())
+                {
+                    // TODO sfx
+                }
+
+                walkingSpeed += surpassingAcceleration * Time.deltaTime;
+                WalkForward();
+                break;
         }
+
+        if (lane.LaneDistance <= LaneSet.HeartLine)
+            playerStats.TakeDamage(damage);
     }
 
-    private bool BulletComingInRange()
+    private bool ParryIncomingBullets()
     {
+        return HandleIncomingBullets(b => { 
+            b.Parry(null, parrySpeedMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
+            Instantiate(blockSparksPrefab, b.transform.position, Quaternion.identity);
+        });
+    }
+
+    private bool DestroyIncomingBullets()
+    {
+        return HandleIncomingBullets(b => b.Despawn());
+    }
+
+    private bool HandleIncomingBullets(System.Action<Bullet> callback)
+    {
+        bool handled = false;
         foreach (Bullet b in bulletDetector.NearbyBullets)
         {
-            if (!b.enabled || b.State != Bullet.ProjectileState.ShotByPlayer)
+            if (b.enabled && b.State == Bullet.ProjectileState.ShotByPlayer && IsPredictedToHit(b))
             {
-                continue;
-            }
-
-            if (IsPredictedToHit(b) && b.Speed <= ProjectileTresholdSpeed)
-            {
-                parriedBullet = b;
-                return true;
+                callback(b);
+                handled = true;
             }
         }
 
-        return false;
+        return handled;
     }
 
     private bool IsPredictedToHit(Bullet b)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(b.transform.position, b.transform.forward, out hit))
-        {
-            if (hit.collider == HealthCollider)
-            {
-                return true;
-            }
-        }
+        return Physics.Raycast(b.transform.position, b.transform.forward, out RaycastHit hit) && hit.collider == healthCollider;
+    }
 
+    private bool IsImmuneToBullet(Bullet b, Collider c)
+    {
+        return c != healthCollider;
+    }
+
+    private bool CheckImmuneToSword()
+    {
+        if (state != SamuraiState.Stunned)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
+            Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
+            return true;
+        }
         return false;
     }
 
-    
+    private bool StunFromBullet()
+    {
+        if (state != SamuraiState.Walking)
+            return false;
+
+        SetState(SamuraiState.Stunned);
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
+        foreach (var animator in animators)
+            animator.PlayOneShot("Stunned");
+
+        IEnumerator Routine()
+        {
+            yield return new WaitForSeconds(stunnedDuration);
+            SetState(SamuraiState.Walking);
+        }
+
+        StartCoroutine(Routine());
+
+        return true;
+    }
+
+    private void OnHitByShotgun()
+    {
+        // TODO flash vfx
+        Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
+    }
 
     private void WalkForward()
     {
-        lane.LaneDistance -= WalkingSpeed * Time.deltaTime;
+        lane.LaneDistance -= walkingSpeed * Time.deltaTime;
     }
 
-    private bool IsInSlashingRangeRange()
+    private bool IsInSlashingRange()
     {
-        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= SlashDistance
-            && lane.LaneDistance <= LaneSet.VisibleEndLine;
+        return PlayerController.AnyPlayerInLane(lane.LaneIndex) && lane.LaneDistance <= slashDistance
+            && lane.LaneDistance >= LaneSet.PlayerLine;
     }
 
-    public void OnSwordHitBoxTriggerEnter(Collider collider)
+    public void OnSwordHitBoxTriggerStay(Collider collider)
     {
-        PlayerController player = collider.GetComponent<PlayerController>();
-        
-        if (player) {
-            //TODO: Stun or take damage
-            player.Stun(StunTime);
-        } 
+        if (animators[0].CurrentAnimationName == "Windup"
+                || animators[0].LocalFrame < animators[0].GetAnimationFrameCount("Slash") - 1)
+            return;
+
+        if (!swordPlayerSlashed && collider.TryGetComponentInHierarchy(out SwordPlayerController swordPlayer))
+        {
+            swordPlayerSlashed = true;
+            if (swordPlayer.TryBlock())
+            {
+                swordPlayer.AddContinuousMultiplier(swordPlayer.MeleeParryMultiplierGain);
+                StunSamurai();
+            }
+            else
+            {
+                swordPlayer.Stun(stunTime);
+            }
+        }
+        else if (!gunPlayerSlashed && collider.TryGetComponentInHierarchy(out GunPlayerController gunPlayer))
+        {
+            gunPlayerSlashed = true;
+
+            IEnumerator Routine()
+            {
+                yield return null;
+                if (state != SamuraiState.Stunned)
+                    gunPlayer.Stun(stunTime);
+            }
+            
+            StartCoroutine(Routine());
+        }
+    }
+
+    private void StunSamurai()
+    {
+        SetState(SamuraiState.Stunned);
+        shotgunImmunity.enabled = false;
+        laserImmunity.enabled = false;
+
+        swordHitBox.gameObject.SetActive(false);
+        gunPlayerSlashed = false;
+        swordPlayerSlashed = false;
+
+        if (slashRoutine != null)
+        {
+            StopCoroutine(slashRoutine);
+            slashRoutine = null;
+        }
+
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
+
+        foreach (var animator in animators)
+            animator.PlayOneShot("Stunned");
+
+        IEnumerator Routine()
+        {
+            yield return new WaitForSeconds(stunnedDuration);
+            SetState(SamuraiState.Slashing);
+
+            if (++numberOfSlashesDone >= numberOfSlashes)
+                SetState(SamuraiState.Leaving);
+            else
+                yield return new WaitForSeconds(slashCooldown);
+        }
+
+        StartCoroutine(Routine());
+    }
+
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            walkingSpeed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
     }
 }

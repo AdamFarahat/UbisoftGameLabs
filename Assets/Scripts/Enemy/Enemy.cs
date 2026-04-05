@@ -25,6 +25,13 @@ public class Enemy : Poolable
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
 
+    public System.Func<Bullet, Collider, bool> ImmuneToBullet;
+    public System.Func<bool> ImmuneToSword;
+    public System.Func<bool> StunFromBullet;
+
+    public UnityAction SurpassedPlayers;
+    private bool playersSurpassed = false;
+
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
@@ -35,14 +42,20 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool == null)
-            ResetState();
+        health = maxHealth;
+        dead = health <= 0;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
     private void Update()
     {
         if (laneBound.LaneDistance <= LaneSet.HeartLine)
             Death();
+        else if (laneBound.LaneDistance <= LaneSet.LastPlayerLine && !playersSurpassed)
+        {
+            SurpassedPlayers?.Invoke();
+            playersSurpassed = true;
+        }
     }
 
     public override void TakeFromPool()
@@ -50,14 +63,13 @@ public class Enemy : Poolable
         base.TakeFromPool();
         ResetState();
         OnTakeFromPool?.Invoke();
+        playersSurpassed = false;
     }
 
     private void ResetState()
     {
         health = maxHealth;
         dead = health <= 0;
-
-        laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
@@ -96,6 +108,7 @@ public class Enemy : Poolable
 
         IEnumerator DeathRoutine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyDeath, transform.position);
             if (spriteRenderer != null)
             {
                 Color color = spriteRenderer.color;

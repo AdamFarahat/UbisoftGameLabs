@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5473658397883171689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4214508490912154976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6666655679547764896}
+  m_Layer: 0
+  m_Name: MeleeSparksPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6666655679547764896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214508490912154976}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 12, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5473658397883171689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].duration
-      value: 0.1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[1].duration
@@ -125,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[2].duration
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[3].duration
@@ -141,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].frames.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[1].frames.Array.size
@@ -149,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[2].frames.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[3].frames.Array.size
@@ -166,31 +197,51 @@ PrefabInstance:
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[0].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 87996f192b34de743904205cb81b383a, type: 3}
+      objectReference: {fileID: 21300000, guid: 0cadfd503b7bfc2449524385473a025e, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[0].frames.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: b5edaf01244381e4a9ffeedb8647f6b7, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[1].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 98e553d1ef90f30499f2f65373e19823, type: 3}
+      objectReference: {fileID: 21300000, guid: 80b2a714eacccdd47b03160a54ee7328, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[2].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: db29d4d2b16a0fb428e6fc95c1c7a36a, type: 3}
+      objectReference: {fileID: 21300000, guid: 6d6f41ffcbabee045bf682fcb7571835, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[2].frames.Array.data[1]'
       value: 
-      objectReference: {fileID: 21300000, guid: 8c54570c4330cd84db0fa0a18dd7e9ae, type: 3}
+      objectReference: {fileID: 21300000, guid: 2eb9917289ee0bb4bb076c4c9a4b4dd0, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[2].frames.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e2c45b2a4f9b291468b9f903dce7dbb9, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[2].frames.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e2c45b2a4f9b291468b9f903dce7dbb9, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[2].frames.Array.data[4]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 135b59a58bc163e4eab519045960abe5, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[2].frames.Array.data[5]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 135b59a58bc163e4eab519045960abe5, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[3].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 4d13affc3089b77419da5c8d14cdc433, type: 3}
+      objectReference: {fileID: 21300000, guid: 8dde7923396617b43b549598fcceb66f, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[4].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 268d4e214c2b193419bcba875a80a77f, type: 3}
+      objectReference: {fileID: 21300000, guid: ac93ca9ba1dfaf347a4f24614d94390d, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[5].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 3b17be01f4a09314fa7ef7b4420bd8c9, type: 3}
+      objectReference: {fileID: 21300000, guid: 8b7934d769b072f46a6e4066c8639c35, type: 3}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Actions
       value: 
@@ -260,9 +311,21 @@ PrefabInstance:
       value: 'UI/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
       objectReference: {fileID: 0}
     - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_Size.x
+      value: 22.330103
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_Size.y
+      value: 37.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 87996f192b34de743904205cb81b383a, type: 3}
+      objectReference: {fileID: 21300000, guid: 0cadfd503b7bfc2449524385473a025e, type: 3}
+    - target: {fileID: 6526805294932354313, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7226625706337693208, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -282,6 +345,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6997613030992412885}
+    - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6666655679547764896}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: 3
@@ -338,23 +404,22 @@ MonoBehaviour:
   spriteBillboard: {fileID: 285721901106026720}
   shakeOffset: 0.2
   shakeInterval: 0.02
-  OnDiscreteMultiplierChange:
-    m_PersistentCalls:
-      m_Calls: []
   moveEnabled: 1
   swordHitBox: {fileID: 0}
+  meleeSparksPosition: {fileID: 6666655679547764896}
   jumpSpeed: 100
   fallAcceleration: 500
   attackDuration: 0.2
   blockCooldown: 3
+  blockSparksPrefab: {fileID: 1559615547839024259, guid: 2d317ae5f80548c4f8ad74ab50a35a0b, type: 3}
   parryBulletSpeedMult: 2
-  parryWindow: 0.5
+  parryWindow: 0.25
+  parrySparksPrefab: {fileID: 1559615547839024259, guid: ab62ad5cc6cf3d04599c6ad205d5beed, type: 3}
   blockingMultiplierGain: 0.2
   attackingMultiplierGain: 0.6
   meleeParryMultiplierGain: 0.8
   bulletParryMultiplierGain: 0.6
   swordWaveSpawnPos: {fileID: 6997613030992412885}
-  activateSuperWaitTime: 0.1
   slashEnabled: 1
   blockEnabled: 1
   jumpEnabled: 1

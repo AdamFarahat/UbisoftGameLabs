@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 6, z: 6}
-  m_Center: {x: 0, y: 1, z: 2.5}
+  m_Size: {x: 5, y: 6, z: 13}
+  m_Center: {x: 0, y: 1, z: 4.5}
 --- !u!114 &6902141690967284359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbb3b5e8b351394e9c433f970b7ce4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordHitBox
+  swordWavePrefab: {fileID: 0}
 --- !u!54 &5164602721427898370
 Rigidbody:
   m_ObjectHideFlags: 0

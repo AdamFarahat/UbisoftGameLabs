@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FMODUnity;
 
 public class MachineGun : Gun
 {
@@ -41,8 +42,12 @@ public class MachineGun : Gun
                 overheatLevel = 0f;
                 overheating = true;
                 AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunOverheat, transform.position);
+                FMOD.Studio.EventInstance overheatLoop = AudioManager.Instance.PlayLooping(FMODEvents.Instance.PlayerMachinegunOverheatLoop, gameObject);
                 yield return new WaitForSeconds(overheatCooldown);
                 overheating = false;
+                overheatLoop.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                overheatLoop.release();
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunReady, transform.position);
             }
 
             StartCoroutine(Overheat());
@@ -52,8 +57,10 @@ public class MachineGun : Gun
     public override void StartFiring()
     {
         if (overheating)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunNotReady, transform.position);
             return;
-
+        }
         if (!PreStartFiring())
             return;
         
@@ -62,7 +69,8 @@ public class MachineGun : Gun
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerMachinegunShot, transform.position);
 
         Bullet bullet = InstantiateShot<Bullet>();
-        bullet.Initialize(null, Quaternion.Euler(0f, spread, 0f) * transform.forward,speed,Bullet.ProjectileState.ShotByPlayer);
+        bullet.Initialize(null, FirePosition.position, Quaternion.Euler(0f, spread, 0f) * transform.forward,
+                          speed, Bullet.ProjectileState.ShotByPlayer);
         bullet.damage = bulletDamage;
         bullet.transform.forward = bullet.Direction;
 

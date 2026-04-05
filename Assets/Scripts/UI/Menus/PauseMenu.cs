@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private PauseMenuFader pauseMenuFader;
+    [SerializeField] private GameObject optionsMenu;
 
     void Awake()
     {
@@ -76,7 +77,8 @@ public class PauseMenu : MonoBehaviour
     public void OnOptionsButtonClicked()
     {
         // TODO: Implement options menu logic here
-        Debug.Log("Options button clicked");
+        gameObject.SetActive(false);
+        optionsMenu.SetActive(true);
     }
 
     public void OnRestartButtonClicked()

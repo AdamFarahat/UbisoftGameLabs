@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -130,9 +129,9 @@ public class GunPlayerController : PlayerController
         if (Stunned)
             return;
 
-        holster.StartFiring();
-        holdingGunInput = HoldingState.FirstFrame;
         grenadeBelt.CancelThrow();
+        holdingGunInput = HoldingState.FirstFrame;
+        holster.StartFiring();
     }
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
@@ -186,13 +185,12 @@ public class GunPlayerController : PlayerController
         if (Stunned)
             return;
 
-        grenadeBelt.ChargeThrow();
         if (holdingGunInput != HoldingState.Released)
         {
             holdingGunInput = HoldingState.Released;
             holster.StopFiring();
         }
-
+        grenadeBelt.ChargeThrow();
     }
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)

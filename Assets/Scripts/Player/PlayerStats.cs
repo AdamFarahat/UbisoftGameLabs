@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -78,6 +79,7 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDamaged, Vector3.zero);
         currentHealth -= damage;
         healthPercent = currentHealth / maxHealth;
 
@@ -93,6 +95,8 @@ public class PlayerStats : MonoBehaviour
     {
         // Pause the game, disable the characters, show game over screen (UIManager.Instance.ShowGameOverScreen()).
         Time.timeScale = 0f;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDeath, Vector3.zero);
+        AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameOver);
         GameObject.Find("GunPlayer").SetActive(false);
         GameObject.Find("SwordPlayer").SetActive(false);
         uiManager.ShowGameOverScreen();
@@ -209,6 +213,9 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator SuperDuration()
     {
+        if(SceneManager.GetActiveScene().name == "Game"){
+            AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameUlt);
+        }
         float timer = superDuration;
         while (timer >= 0)
         {
@@ -219,6 +226,9 @@ public class PlayerStats : MonoBehaviour
             gunSuperPercent = currentGunSuper / statDenominator;
             swordSuperPercent = currentSwordSuper / statDenominator;
             yield return null;
+        }
+        if(SceneManager.GetActiveScene().name == "Game"){
+            AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
         }
         superCoroutine = null;
         SuperEnded?.Invoke();

@@ -67,18 +67,24 @@ public class ShotgunBlast : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
-            enemiesHit.Add(enemy);
-            if (enemy.TakeDamage(damage))
+            // TODO Do Shotgun Impact SFX here
+            if (enemy.TryGetComponentInHierarchy(out ShotgunImmune si) && si.isActiveAndEnabled)
             {
-                OnEnemyKill(enemy);
-                //TODO Do Shotgun Impact SFX here
+                si.HitByShotgun?.Invoke();
+            }
+            else
+            {
+                enemiesHit.Add(enemy);
+                if (enemy.TakeDamage(damage))
+                {
+                    OnEnemyKill(enemy);
+                }
             }
         }
     }
 
     private void OnEnemyKill(Enemy enemy)
     {
-        // TODO handle more complex gun player multiplier logic ?
         GunPlayerController.Instance.AddContinuousMultiplier(GunPlayerController.Instance.GunKillMultiplierGain);
         GunPlayerController.Instance.AddScore(enemy.Score);
     }

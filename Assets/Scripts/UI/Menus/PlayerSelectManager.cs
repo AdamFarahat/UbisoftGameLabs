@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerSelectManager : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class PlayerSelectManager : MonoBehaviour
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
 
+    [SerializeField] private DifficultyMenu difficultyMenu;
+
     [Header("Events")]
     public UnityEvent onReturnToMenuRequested;
-    public UnityEvent onAllPlayersReady;
+
+    public UnityEvent onGoingToTutorial;
 
     private PlayerInputManager inputManager;
     
@@ -128,9 +132,19 @@ public class PlayerSelectManager : MonoBehaviour
         if (playerReadyStates[0] && playerReadyStates[1])
         {            
             // Lock inputs during animations 
-            IsAcceptingInput = false; 
-
-            onAllPlayersReady?.Invoke();
+            IsAcceptingInput = false;
+            
+            // Show difficulty menu after a short delay to allow players to see the final heart fill
+            if(SceneManager.GetActiveScene().name == "PlayerSelect")
+            {
+                DOVirtual.DelayedCall(0.5f, () => difficultyMenu.ShowDifficultyMenu());
+            }
+            else
+            {
+                // Do the outro animation and head to tutorial scene
+                onGoingToTutorial?.Invoke();
+            }
+            
         }
     }
 
