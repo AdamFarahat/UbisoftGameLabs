@@ -374,6 +374,7 @@ public class SwordPlayerController : PlayerController
         }
         blockCooldownPercent = 0f;
         canBlock = true;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerCooldownReady, transform.position);
         OnBlockCooldownReady?.Invoke();
     }
 

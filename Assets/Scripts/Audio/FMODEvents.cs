@@ -7,8 +7,10 @@ public class FMODEvents : MonoBehaviour
     #region PLAYER
     [field: Header("PLAYER")]
     [field: SerializeField] public EventReference PlayerStunned { get; private set; }
-
     [field: SerializeField] public EventReference PlayerDash { get; private set; }
+    [field: SerializeField] public EventReference PlayerDamaged { get; private set; }
+    [field: SerializeField] public EventReference PlayerDeath { get; private set; }
+    [field: SerializeField] public EventReference PlayerCooldownReady { get; private set; }
 
     #endregion
     
@@ -20,9 +22,14 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerRevolverNotReady { get; private set; }
     [field: SerializeField] public EventReference PlayerRevolverSelect { get; private set; }
     [field: SerializeField] public EventReference PlayerShotgunShot { get; private set; }
+    [field: SerializeField] public EventReference PlayerShotgunCharge { get; private set; }
     [field: SerializeField] public EventReference PlayerShotgunSelect { get; private set; }
     [field: SerializeField] public EventReference PlayerMachinegunShot { get; private set; }
     [field: SerializeField] public EventReference PlayerMachinegunOverheat { get; private set; }
+
+    [field: SerializeField] public EventReference PlayerMachinegunNotReady { get; private set; }
+    [field: SerializeField] public EventReference PlayerMachinegunReady { get; private set; }
+    [field: SerializeField] public EventReference PlayerMachinegunOverheatLoop { get; private set; }
     [field: SerializeField] public EventReference PlayerMachinegunSelect { get; private set; }
     [field: SerializeField] public EventReference PlayerGrenadeThrow { get; private set; }
     [field: SerializeField] public EventReference PlayerGrenadeExplode { get; private set; }
@@ -38,6 +45,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerSwordHit { get; private set; }
 
     [field: SerializeField] public EventReference PlayerSwordParry { get; private set; }
+    [field: SerializeField] public EventReference PlayerSwordBlock { get; private set; }
 
     [field: SerializeField] public EventReference PlayerJump { get; private set; }
 
