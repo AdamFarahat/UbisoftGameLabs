@@ -14,6 +14,9 @@ public class GunGruntEnemyAI : MonoBehaviour
     [SerializeField] private float bulletSpeed = 80f;
     public float BulletSpeed => bulletSpeed;
 
+    [SerializeField] private float laneIndexShootingTreshold = 0.1f;
+    public float LaneIndexShootingTreshold => laneIndexShootingTreshold;
+
     public int shootingIndex;
     public Transform projSpawnPoint;
     public float ResearchCooldown => researchCooldown;
