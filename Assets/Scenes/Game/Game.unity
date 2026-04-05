@@ -947,6 +947,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: bossWaveInterval
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: finalMaxSpawnTime
       value: 0.3
       objectReference: {fileID: 0}
@@ -1146,6 +1150,10 @@ PrefabInstance:
       propertyPath: swordPlayerHUD
       value: 
       objectReference: {fileID: 1689381882}
+    - target: {fileID: 8822520588068914511, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: gameDifficulty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8822520588068914511, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: sigmoidMidpointWave
       value: 5
