@@ -138,7 +138,7 @@ public class WaveManager : MonoBehaviour
         if (waveList.waves == null || waveList.waves.Length == 0)
             return null;
 
-        if (waveNumber % bossWaveInterval == 0)
+        if (PlayerStats.IsSuperActive())
         {
             List<Wave> bossWaves = new();
             foreach (var w in waveList.waves)
