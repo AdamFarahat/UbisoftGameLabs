@@ -6,19 +6,19 @@ using UnityEngine.Events;
 
 public class DifficultyMenu : MonoBehaviour
 {
-    [SerializeField] private Button buttonOnEnable;
-
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private Button easyButton;
     [SerializeField] private Button mediumButton;
     [SerializeField] private Button hardButton;
 
+    [SerializeField] private GunPlayerController gunPlayerController;
+    [SerializeField] private SwordPlayerController swordPlayerController;
+
     public UnityEvent onAllPlayersReady;
 
     void Awake()
     {
-        Assert.IsNotNull(buttonOnEnable);
         Assert.IsNotNull(eventSystem);
         Assert.IsNotNull(easyButton);
         Assert.IsNotNull(mediumButton);
@@ -39,8 +39,12 @@ public class DifficultyMenu : MonoBehaviour
 
     public void ShowDifficultyMenu()
     {
+        if(gunPlayerController != null)
+            gunPlayerController.PlayerInput.enabled = false;
+        if(swordPlayerController != null)
+            swordPlayerController.PlayerInput.enabled = false;
         gameObject.SetActive(true);
-        eventSystem.SetSelectedGameObject(buttonOnEnable.gameObject);
+        eventSystem.SetSelectedGameObject(mediumButton.gameObject);
     }
 
     // Update is called once per frame

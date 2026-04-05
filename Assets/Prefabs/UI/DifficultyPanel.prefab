@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 3271657526363950679}
   - component: {fileID: 2918500100099743117}
   - component: {fileID: 5312994351043587233}
+  - component: {fileID: 6030749551710014258}
   m_Layer: 5
   m_Name: DifficultyPanel
   m_TagString: Untagged
@@ -819,6 +820,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6030749551710014258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625934282832530840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc52ac85b7397c71684f511686b3256f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyMenu
+  eventSystem: {fileID: 0}
+  easyButton: {fileID: 6251391089527282869}
+  mediumButton: {fileID: 7286021885702886819}
+  hardButton: {fileID: 5847461133705756179}
+  onAllPlayersReady:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7829073387854679192
 GameObject:
   m_ObjectHideFlags: 0

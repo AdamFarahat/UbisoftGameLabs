@@ -130,17 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &736133081 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9209515420902902140, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
-  m_PrefabInstance: {fileID: 2079540575}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af22c685c62db794390744f30133348e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectAnimations
 --- !u!114 &1091730653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7286021885702886819, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
@@ -152,11 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!1 &1115549177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5625934282832530840, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
-  m_PrefabInstance: {fileID: 1595215257}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1293112049 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4882910713309590503, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
@@ -323,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.r
       value: 0.52156866
       objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1293112049}
     - target: {fileID: 6251391089527282869, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.52163756
@@ -398,71 +386,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5625934282832530840, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1595215259}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
 --- !u!224 &1595215258 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4185483438150262322, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
   m_PrefabInstance: {fileID: 1595215257}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1595215259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115549177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc52ac85b7397c71684f511686b3256f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DifficultyMenu
-  buttonOnEnable: {fileID: 1091730653}
-  eventSystem: {fileID: 1293112049}
-  easyButton: {fileID: 1414986148}
-  mediumButton: {fileID: 1091730653}
-  hardButton: {fileID: 135752374}
-  onAllPlayersReady:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 736133081}
-        m_TargetAssemblyTypeName: PlayerSelectAnimations, Assembly-CSharp
-        m_MethodName: TriggerAnimateOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2016396843}
-        m_TargetAssemblyTypeName: SceneManagement, Assembly-CSharp
-        m_MethodName: PrepareSceneLoad
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Game
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2016396843 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4635150139705323916, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
-  m_PrefabInstance: {fileID: 2079540575}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a15382717c7375429eeea20804f703b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
 --- !u!1001 &2079540575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -506,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 1316876650873954950, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
       propertyPath: difficultyMenu
       value: 
-      objectReference: {fileID: 1595215259}
+      objectReference: {fileID: 0}
     - target: {fileID: 1628067153796394560, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

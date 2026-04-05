@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PlayerSelectManager : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class PlayerSelectManager : MonoBehaviour
     [Header("Events")]
     public UnityEvent onReturnToMenuRequested;
 
+    public UnityEvent onGoingToTutorial;
+
     private PlayerInputManager inputManager;
     
     // The cursors check this to see if they are allowed to move or select
@@ -34,7 +37,6 @@ public class PlayerSelectManager : MonoBehaviour
     void Awake()
     {
         Assert.IsNotNull(heartUIImage);
-        Assert.IsNotNull(difficultyMenu);
     }
 
     void Start()
@@ -133,7 +135,16 @@ public class PlayerSelectManager : MonoBehaviour
             IsAcceptingInput = false;
             
             // Show difficulty menu after a short delay to allow players to see the final heart fill
-            DOVirtual.DelayedCall(0.5f, () => difficultyMenu.ShowDifficultyMenu());
+            if(SceneManager.GetActiveScene().name == "PlayerSelect")
+            {
+                DOVirtual.DelayedCall(0.5f, () => difficultyMenu.ShowDifficultyMenu());
+            }
+            else
+            {
+                // Do the outro animation and head to tutorial scene
+                onGoingToTutorial?.Invoke();
+            }
+            
         }
     }
 
