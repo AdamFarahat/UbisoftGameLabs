@@ -212,6 +212,27 @@ MonoBehaviour:
       Data3: -1825921614
       Data4: 1370417989
     Path: event:/UI/UIButtonCancel
+  <OSTGame>k__BackingField:
+    Guid:
+      Data1: 1282672608
+      Data2: 1220114297
+      Data3: -1172368235
+      Data4: -1672902217
+    Path: event:/Music/GameTheme
+  <OSTMenu>k__BackingField:
+    Guid:
+      Data1: -2035935274
+      Data2: 1219487226
+      Data3: -263832399
+      Data4: -1240017921
+    Path: event:/Music/MenuTheme
+  <OSTutorial>k__BackingField:
+    Guid:
+      Data1: 1876388045
+      Data2: 1300886968
+      Data3: -846542176
+      Data4: -1003617732
+    Path: event:/Music/TutorialTheme
 --- !u!1 &6008748549651680452
 GameObject:
   m_ObjectHideFlags: 0

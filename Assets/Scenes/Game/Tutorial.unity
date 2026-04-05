@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialFlyer (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5940242026918304919, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9435be75a113694bb647af4e8f409e1, type: 2}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneIndex
       value: 4
@@ -335,7 +339,7 @@ Canvas:
   m_GameObject: {fileID: 52160955}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 2100979860}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -362,6 +366,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1851449806}
+  - {fileID: 1498419612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -381,6 +386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed098b3cdb86e54a903d9da9f252ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
+  fadeOutDuration: 2
+  fadeOutImage: {fileID: 1498419613}
   tutorialSwitchLanes: {fileID: 319319579}
   tutorialPrimaryAction: {fileID: 48410744}
   tutorialSecondaryAction: {fileID: 2076460341}
@@ -392,9 +399,9 @@ MonoBehaviour:
   gunPlayerMultiplierUI: {fileID: 1147496394}
   swordPlayerMultiplierUI: {fileID: 1180164310}
   disabledLanes:
-  - {fileID: 862012017}
-  - {fileID: 1283396148}
-  - {fileID: 1386812026}
+  - {fileID: 321485626}
+  - {fileID: 1475295043}
+  - {fileID: 691284926}
 --- !u!1001 &63417074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,6 +418,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 4375332442956995952, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28
@@ -661,8 +672,8 @@ MonoBehaviour:
     a power-hungry space force. You must not let the lifeforce of the Cassini Bind
     drain! Press <sprite name="wStart"> to continue...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -767,17 +778,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialGunGrunt (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 217862202071491783, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c5fc7760a9581a94f94634bceffddfb4, type: 2}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.057175703
+      value: -0.31186748
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5379812
+      value: 2.934443
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09903125
+      value: 0.54017043
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -989,6 +1004,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319319577}
   m_CullTransparentMesh: 1
+--- !u!1 &321485626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5949950543070396424, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &323597106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1073,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b2d83c2ae724c74b8765f4df35075cb, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -1265,6 +1289,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0251554c735c9d04d901fc674ef0d005, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -1367,8 +1395,8 @@ MonoBehaviour:
   m_text: Welcome to the tutorial! Press <sprite name="wSelect"> to quit the tutorial
     at any time. Press <sprite name="wStart"> to continue...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1561,8 +1589,8 @@ MonoBehaviour:
   m_text: Shoot, slash, blow up, and parry enemies to increase your <b>multiplier</b>
     and <b>score</b>! Press <sprite name="wStart"> to continue...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1733,8 +1761,8 @@ MonoBehaviour:
   m_text: Now you can <b>slash sword beams</b> and <b>throw unlimited grenades</b>!
     You also benefit from <b>invulnerablility</b> and higher multipliers!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1810,6 +1838,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684966716}
   m_CullTransparentMesh: 1
+--- !u!1 &691284926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6972485739486795717, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &716625161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,8 +1903,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press <sprite name="bUp"> to <b>jump</b>!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1976,6 +2009,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialFlyer
       objectReference: {fileID: 0}
+    - target: {fileID: 5940242026918304919, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 057b0d4d7a6979742884dfc887ff9b33, type: 2}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneIndex
       value: 2
@@ -2099,8 +2136,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press <sprite name="wLeft">/<sprite name="wRight"> to <b>switch lanes</b>!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2261,6 +2298,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7689b3f5534b3da4fb14e894f39f7b27, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -2301,11 +2342,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   m_PrefabInstance: {fileID: 821803669}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &862012017 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7670241746385231164, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-  m_PrefabInstance: {fileID: 1332198090}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &863545336
 GameObject:
@@ -2416,6 +2452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialFlyer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5940242026918304919, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f5ac9e8a8a114584da4bbf14db325302, type: 2}
     - target: {fileID: 7738136655800228586, guid: 0e837da320cdc384298facf6e726f304, type: 3}
       propertyPath: laneIndex
       value: 3
@@ -2535,8 +2575,8 @@ MonoBehaviour:
   m_text: 'Both players: press <sprite name="wA">+<sprite name="wB"> all at the same
     time to activate your <b>Super Ability</b>!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2645,17 +2685,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialGunGrunt (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 217862202071491783, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 93384451ad63d3b44b2eec38672bd97d, type: 2}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.057175703
+      value: -0.31186748
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5379812
+      value: 2.934443
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09903125
+      value: 0.54017043
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2764,6 +2808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialSuper
   transitionDuration: 0.3
   paddingDuration: 0.5
+  fillSuperDuration: 0.5
   deathAnimationDuration: 0.5
   spawnDistance: 200
   firstDescription: {fileID: 1227614095}
@@ -2780,11 +2825,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279461960}
   m_CullTransparentMesh: 1
---- !u!212 &1283396148 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 240503114214707802, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-  m_PrefabInstance: {fileID: 1332198090}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1298592583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2849,6 +2889,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -2920,6 +2964,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelCore
       objectReference: {fileID: 0}
+    - target: {fileID: 3118867844033765256, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4149798499193065890, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2958,6 +3006,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4149798499193065890, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6478757971781719933, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -3000,8 +3052,11 @@ PrefabInstance:
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3118867844033765256, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+    - target: {fileID: 8822520588068914511, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1959008800550532140, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
     - {fileID: 3474197631917115062, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -3009,11 +3064,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
---- !u!212 &1386812026 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6351037079046392561, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-  m_PrefabInstance: {fileID: 1332198090}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1413922010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3078,6 +3128,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3b2d83c2ae724c74b8765f4df35075cb, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -3137,6 +3191,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialEnemyLife
   fadeInDuration: 0.1
+--- !u!1 &1475295043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4302666121755479918, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1498419611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498419612}
+  - component: {fileID: 1498419614}
+  - component: {fileID: 1498419613}
+  m_Layer: 5
+  m_Name: FadeOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1498419612
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498419611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 52160959}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1498419613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498419611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1498419614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498419611}
+  m_CullTransparentMesh: 1
 --- !u!1 &1556591195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3303,8 +3434,8 @@ MonoBehaviour:
   m_text: The <b>revolver</b> can shoot fast... the <b>machine gun</b> can break
     energy shields... and the <b>shotgun</b> can hit many enemies at once!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3509,6 +3640,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7689b3f5534b3da4fb14e894f39f7b27, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -3611,8 +3746,8 @@ MonoBehaviour:
   m_text: Press <sprite name="oUp">/<sprite name="oDown"> to <b>switch guns</b>!
     Try charging them up by holding <sprite name="oA">...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3745,17 +3880,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialGunGrunt (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 217862202071491783, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1db15e91ab83f6745bd7b2c6f984259a, type: 2}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.057175703
+      value: -0.31186748
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5379812
+      value: 2.934443
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09903125
+      value: 0.54017043
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3927,17 +4066,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialGunGrunt (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 217862202071491783, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 029ddc910e5b18d4a99fbe8e6fe1efda, type: 2}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.057175703
+      value: -0.31186748
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5379812
+      value: 2.934443
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09903125
+      value: 0.54017043
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4193,6 +4336,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -4396,6 +4543,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0251554c735c9d04d901fc674ef0d005, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -4526,6 +4677,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8182054838365208467, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4666,8 +4821,8 @@ MonoBehaviour:
     Beware your cooldown meter... Time your
     blocks right to <b>parry</b>, and hold your throw to <b>aim</b>!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4884,11 +5039,12 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Press <sprite name="oA"> to <b>shoot</b>!
 
+
     Press <sprite name="bA">
     to <b>slash</b>!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5046,8 +5202,8 @@ MonoBehaviour:
   m_text: You're ready to play! Press <sprite name="wStart"> to start a new game,
     or <sprite name="wSelect"> to return to the main menu...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
-  m_sharedMaterial: {fileID: -2411924466164121598, guid: 8884bf2db8fa41841a6e97aadc12241a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5317,15 +5473,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.057175703
+      value: -0.31186748
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5379812
+      value: 2.934443
       objectReference: {fileID: 0}
     - target: {fileID: 2422183165077395321, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.09903125
+      value: 0.54017043
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5377,5 +5533,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1332198090}
-  - {fileID: 52160959}
   - {fileID: 553620751}
+  - {fileID: 52160959}

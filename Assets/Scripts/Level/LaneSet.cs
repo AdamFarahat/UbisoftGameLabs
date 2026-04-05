@@ -47,6 +47,7 @@ public class LaneSet : MonoBehaviour
     [SerializeField] private Sprite gunHighlight;
     [SerializeField] private Sprite swordHighlight;
     [SerializeField] private Sprite sharedHighlight;
+    [SerializeField] private Sprite emptyHighlight;
 
     [SerializeField] private float highlightIndexThreshold = 0.1f;
     private int gunLaneIndex = -1;
@@ -73,10 +74,14 @@ public class LaneSet : MonoBehaviour
         Assert.IsNotNull(gunHighlight);
         Assert.IsNotNull(swordHighlight);
         Assert.IsNotNull(sharedHighlight);
+        Assert.IsNotNull(emptyHighlight);
     }
 
     private void Start()
     {
+        foreach (var highlight in highlights)
+            highlight.sprite = emptyHighlight;
+
         if (GunPlayerController.Instance != null)
         {
             gunLaneIndex = Mathf.FloorToInt(GunPlayerController.LaneIndex);
@@ -119,7 +124,7 @@ public class LaneSet : MonoBehaviour
     {
         SpriteRenderer highlight = highlights[gunLaneIndex];
 
-        if (highlight.sprite == null)
+        if (highlight.sprite == emptyHighlight)
             highlight.sprite = gunHighlight;
         else if (highlight.sprite == swordHighlight)
             highlight.sprite = sharedHighlight;
@@ -129,7 +134,7 @@ public class LaneSet : MonoBehaviour
     {
         SpriteRenderer highlight = highlights[swordLaneIndex];
 
-        if (highlight.sprite == null)
+        if (highlight.sprite == emptyHighlight)
             highlight.sprite = swordHighlight;
         else if (highlight.sprite == gunHighlight)
             highlight.sprite = sharedHighlight;
@@ -140,7 +145,7 @@ public class LaneSet : MonoBehaviour
         SpriteRenderer highlight = highlights[gunLaneIndex];
 
         if (highlight.sprite == gunHighlight)
-            highlight.sprite = null;
+            highlight.sprite = emptyHighlight;
         else if (highlight.sprite == sharedHighlight)
             highlight.sprite = swordHighlight;
     }
@@ -150,7 +155,7 @@ public class LaneSet : MonoBehaviour
         SpriteRenderer highlight = highlights[swordLaneIndex];
 
         if (highlight.sprite == swordHighlight)
-            highlight.sprite = null;
+            highlight.sprite = emptyHighlight;
         else if (highlight.sprite == sharedHighlight)
             highlight.sprite = gunHighlight;
     }
@@ -177,6 +182,11 @@ public class LaneSet : MonoBehaviour
     public Quaternion GetLaneDirection()
     {
         return Quaternion.LookRotation(transform.forward);
+    }
+
+    public int GetLaneIndex(float worldX)
+    {
+        return Mathf.RoundToInt(worldX / laneSeparation) + Mathf.FloorToInt(0.5f * LaneCount);
     }
 
     public static float ScreenAngleOfVector(Vector3 vector)

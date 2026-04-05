@@ -7,6 +7,7 @@ public class LaneBound : MonoBehaviour
     [SerializeField] private float laneIndex = 0f;
     [SerializeField] private float laneDistance = 0f;
     [SerializeField] private float switchLaneDuration = 0.1f;
+    [SerializeField] private float perpendicularOffset = 0f;
     public float SwitchLaneDuration => switchLaneDuration;
 
     public UnityAction<float> DashStart;
@@ -20,10 +21,17 @@ public class LaneBound : MonoBehaviour
         get => Mathf.RoundToInt(laneIndex);
         set { SetLaneIndex(value); }
     }
+
     public float LaneDistance
     {
         get => laneDistance;
         set { laneDistance = value; SyncLane(); }
+    }
+    
+    public float PerpendicularOffset
+    {
+        get => perpendicularOffset;
+        set { perpendicularOffset = value; SyncLane(); }
     }
 
     private void Start()
@@ -55,6 +63,7 @@ public class LaneBound : MonoBehaviour
     private void SyncLane()
     {
         Vector3 position = LaneSet.Instance.GetLanePosition(laneIndex, laneDistance);
+        position += perpendicularOffset * (LaneSet.Instance.GetLaneDirection() * Vector3.right);
         position.y = transform.position.y;
         transform.position = position;
     }

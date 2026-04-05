@@ -25,6 +25,10 @@ public class Enemy : Poolable
     private SpriteRenderer spriteRenderer;
     private EnergyShield energyShield;
 
+    public System.Func<Bullet, Collider, bool> ImmuneToBullet;
+    public System.Func<bool> ImmuneToSword;
+    public System.Func<bool> StunFromBullet;
+
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
@@ -35,8 +39,9 @@ public class Enemy : Poolable
 
     private void Start()
     {
-        if (enemyPool == null)
-            ResetState();
+        health = maxHealth;
+        dead = health <= 0;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
     private void Update()

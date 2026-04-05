@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4149798499193065890}
+  - component: {fileID: 4521628411096027030}
   m_Layer: 0
   m_Name: LevelCore
   m_TagString: Untagged
@@ -42,6 +43,18 @@ Transform:
   - {fileID: 8188549765879087915}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4521628411096027030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743872348207576581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556e7a2e20f6ccaa498203b2e413b250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelInstantiator
 --- !u!1 &7359249237826747535
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +247,34 @@ PrefabInstance:
     - target: {fileID: 3574007375464895268, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
       propertyPath: m_Name
       value: SwordPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: 8b39a7a8-2ff3-49d7-8129-16b708fd8ffc
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: c4cd6bbc-557e-4892-88f6-422138fec86c
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911390643130646689, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808800396723600905, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 150.59303
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178535141561378288, guid: 0337c4bb609c2a14099975d337b5bc3e, type: 3}
+      propertyPath: discreteMultiplierIndex
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -927,6 +968,26 @@ PrefabInstance:
     - target: {fileID: 3974237691823482190, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Path
+      value: event:/Music/GameTheme
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data1
+      value: 1282672608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data2
+      value: 1220114297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data3
+      value: -1172368235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284722892464933513, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
+      propertyPath: <OSTGame>k__BackingField.Guid.Data4
+      value: -1672902217
       objectReference: {fileID: 0}
     - target: {fileID: 6008748549651680452, guid: 565087e7bd2c1f24f92d104763e19c07, type: 3}
       propertyPath: m_Name
