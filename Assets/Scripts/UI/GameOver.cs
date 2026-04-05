@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class GameOver : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class GameOver : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     [SerializeField]private EventSystem eventSystem;
+
+    [SerializeField] private float delayBeforeSelectingRestartButton = 1f;
+
+    private Coroutine selectRestartButtonCoroutine;
+
+    
 
     private void Awake()
     {
@@ -36,9 +43,14 @@ public class GameOver : MonoBehaviour
     
         int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
         overallScoreText.text = score.ToString();
-
-        //Set the first selected button to restartButton
-        eventSystem.SetSelectedGameObject(restartButton.gameObject); 
+        IEnumerator GameOverCoroutine()
+        {
+            yield return new WaitForSecondsRealtime(delayBeforeSelectingRestartButton);
+            Debug.Log("Selecting Restart Button");
+            eventSystem.SetSelectedGameObject(restartButton.gameObject);
+            selectRestartButtonCoroutine = null; 
+        }
+        selectRestartButtonCoroutine = StartCoroutine(GameOverCoroutine());
     }
 
     public void Restart(){
