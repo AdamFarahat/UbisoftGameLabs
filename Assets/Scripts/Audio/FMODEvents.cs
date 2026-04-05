@@ -68,6 +68,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference UIHover { get; private set; }
     [field: SerializeField] public EventReference UIPress { get; private set; }
     [field: SerializeField] public EventReference UICancel { get; private set; }
+    [field: SerializeField] public EventReference UICountdown { get; private set; }
+    [field: SerializeField] public EventReference UITip { get; private set; }
 
     #endregion
 

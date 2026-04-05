@@ -233,6 +233,13 @@ MonoBehaviour:
       Data3: 655415448
       Data4: -424478798
     Path: event:/Enemies/Samurai/EnemySamuraiStunned
+  <KamikazeExplode>k__BackingField:
+    Guid:
+      Data1: 1645780191
+      Data2: 1154426929
+      Data3: 1550334848
+      Data4: 286673133
+    Path: event:/Enemies/Kamikaze/KamikazEnemyExplosion
   <UIHover>k__BackingField:
     Guid:
       Data1: 316438731
@@ -254,6 +261,20 @@ MonoBehaviour:
       Data3: -1825921614
       Data4: 1370417989
     Path: event:/UI/UIButtonCancel
+  <UICountdown>k__BackingField:
+    Guid:
+      Data1: 2072469046
+      Data2: 1132931399
+      Data3: 232733627
+      Data4: -1592748260
+    Path: event:/UI/UICountdown
+  <UITip>k__BackingField:
+    Guid:
+      Data1: 1196607841
+      Data2: 1288576347
+      Data3: 1109073308
+      Data4: 264236577
+    Path: event:/UI/UINewTip
   <OSTGameStart>k__BackingField:
     Guid:
       Data1: -1112594230

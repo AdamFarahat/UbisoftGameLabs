@@ -110,7 +110,10 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UITip, Vector3.zero);
             tutorials[tutorialIndex].DoTutorial();
+        }
         else
             SetDifficulty();
     }
