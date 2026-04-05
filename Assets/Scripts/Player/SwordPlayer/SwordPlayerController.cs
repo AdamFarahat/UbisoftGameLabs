@@ -218,7 +218,7 @@ public class SwordPlayerController : PlayerController
         void SetY(float y)
         {
             transform.position = new(transform.position.x, Mathf.Max(y, 0f), transform.position.z);
-            // TODO shadow.enabled = y > 0f;
+            Shadow.transform.position = new(Shadow.transform.position.x, 0f, Shadow.transform.position.z);
         }
 
         IEnumerator Routine()
