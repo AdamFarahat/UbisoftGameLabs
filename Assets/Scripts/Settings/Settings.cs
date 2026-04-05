@@ -21,7 +21,7 @@ public class Settings : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
     private void OnDestroy()
     {
