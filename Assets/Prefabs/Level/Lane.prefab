@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4130934856876578680}
   - component: {fileID: 6383867360584889487}
-  - component: {fileID: 7982738934488394772}
   m_Layer: 0
   m_Name: Lane
   m_TagString: LaneCollider
@@ -52,18 +51,6 @@ MonoBehaviour:
   laneDistance: 0
   switchLaneDuration: 0.1
   perpendicularOffset: 0
---- !u!114 &7982738934488394772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 92604994299409787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7daf31b13de5c46a5b212ec170f957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lane
 --- !u!1 &662407490881059203
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +192,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1287720257
   m_SortingLayer: -2
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 60aa6b02e571a2a46a5d3fb5facbf5c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
