@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image superUI;
     [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
-    [SerializeField] private float scoreIncreaseSpeed = 20f;
+    [SerializeField] private float scoreIncreaseTime = 1f;
 
     [Header("Player Specific HUDs")]
     [SerializeField] private PlayerHUD gunPlayerHUD;
@@ -160,6 +160,7 @@ public class UIManager : MonoBehaviour
         if (scoreManagerSO != null)
         {
             targetScore = ScoreManagerSO.CalculateOverallTeamScore();
+            float scoreIncreaseSpeed = (targetScore - currentScore) / scoreIncreaseTime;
             currentScore += Time.deltaTime * scoreIncreaseSpeed;
             currentScore = Mathf.Min(currentScore, targetScore);
             scoreText.text = Mathf.RoundToInt(currentScore).ToString();

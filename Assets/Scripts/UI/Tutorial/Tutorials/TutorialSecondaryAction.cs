@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-// TODO show second description only after pressing the throw/block
+// TODO show second description only after pressing the throw/block - be more descriptive about how block cooldown works
 public class TutorialSecondaryAction : TutorialBase
 {
     [SerializeField] private GameObject grenadeEntitiesRoot;

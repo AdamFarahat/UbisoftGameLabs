@@ -893,8 +893,8 @@ MonoBehaviour:
   shakeOffset: 0.2
   shakeInterval: 0.02
   moveEnabled: 1
-  gunKillMultiplierGain: 0.05
-  grenadeKillMultiplierGain: 0.5
+  gunKillMultiplierGain: 0.5
+  grenadeKillMultiplierGain: 1
   shootEnabled: 1
   throwEnabled: 1
   toggleGunEnabled: 1

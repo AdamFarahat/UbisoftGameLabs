@@ -475,8 +475,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1050627350823725058}
   - component: {fileID: 6842799289908108745}
-  - component: {fileID: 4204725184833534070}
   - component: {fileID: 5059195329542076546}
+  - component: {fileID: 9144390555030017228}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -550,14 +550,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4204725184833534070
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090637173807289167}
-  m_Enabled: 1
 --- !u!114 &5059195329542076546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +594,20 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &9144390555030017228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090637173807289167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 1145946986639054722}
 --- !u!1 &3095954695651170870
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +852,7 @@ MonoBehaviour:
   - {fileID: 6878704145888145585}
   cursorOverlapOffset: 20
   heartUIImage: {fileID: 1688623947162770554}
+  difficultyMenu: {fileID: 0}
   onReturnToMenuRequested:
     m_PersistentCalls:
       m_Calls:
@@ -873,7 +880,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onAllPlayersReady:
+  onGoingToTutorial:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4635150139705323916}
@@ -885,7 +892,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
+          m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 9209515420902902140}
@@ -897,7 +904,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8264779115457819241
