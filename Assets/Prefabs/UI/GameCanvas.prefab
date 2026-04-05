@@ -1893,13 +1893,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   scoreText: {fileID: 5384073636444206587}
   healthBarUI: {fileID: 1644242477858575745}
-  vignetteUI: {fileID: 3310502522484381943}
+  vignetteUI: {fileID: 0}
   superUI: {fileID: 161865433639030024}
   pauseMenuScreen: {fileID: 0}
-  gameOverScreen: {fileID: 0}
+  gameOverScreen: {fileID: 9089175420580484333}
   scoreIncreaseTime: 1
-  gunPlayerHUD: {fileID: 4868340195412220918}
-  swordPlayerHUD: {fileID: 2977168203496582162}
+  gunPlayerHUD: {fileID: 0}
+  swordPlayerHUD: {fileID: 0}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
