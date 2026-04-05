@@ -852,6 +852,7 @@ MonoBehaviour:
   - {fileID: 6878704145888145585}
   cursorOverlapOffset: 20
   heartUIImage: {fileID: 1688623947162770554}
+  difficultyMenu: {fileID: 0}
   onReturnToMenuRequested:
     m_PersistentCalls:
       m_Calls:
@@ -879,7 +880,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onAllPlayersReady:
+  onGoingToTutorial:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4635150139705323916}
@@ -891,7 +892,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Game
+          m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 9209515420902902140}
@@ -903,7 +904,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Tutorial
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8264779115457819241

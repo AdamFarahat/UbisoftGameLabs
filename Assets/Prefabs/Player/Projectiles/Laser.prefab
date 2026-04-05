@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserShot
   duration: 0.25
+  fullDamage: 25
+  penetrationDamageLoss: 6
+  fakeParent: {fileID: 0}
 --- !u!198 &2496027480168472491
 ParticleSystem:
   m_ObjectHideFlags: 0
