@@ -17,9 +17,9 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private Slider MusicVolumeSlider;
     [SerializeField] private Slider SFXVolumeSlider;
     [SerializeField] private Button BackBtn;
+    [SerializeField] private Button ResetScoreBtn;
 
     [SerializeField] private GameObject PauseMenu;
-    [SerializeField] private static float offset = 0.5f;
 
     [SerializeField] private EventSystem eventSystem;
 
@@ -40,8 +40,14 @@ public class OptionsManager : MonoBehaviour
         UIScalingSlider.onValueChanged.RemoveListener(OnUIScalingSliderChange);
         EnemyEmissionSlider.onValueChanged.RemoveListener(OnEnemyEmissionSliderChange);
         UIEmissionSlider.onValueChanged.RemoveListener(OnFUIEmissionSliderChange);
-        QualitySlider.onValueChanged.RemoveListener(OnFontSizeSliderChange);
+        QualitySlider.onValueChanged.RemoveListener(OnQualitySliderChange);
         BackBtn.onClick.RemoveListener(OnBackBtnClick);
+        ResetScoreBtn.onClick.RemoveListener(OnResetClick);
+    }
+
+    private void OnResetClick()
+    {
+        //TODO: implement reset score functionality
     }
 
     private void OnBackBtnClick()
@@ -60,53 +66,64 @@ public class OptionsManager : MonoBehaviour
 
     private void OnFontSizeSliderChange(float value)
     {
-        Settings.fontSizePourcentage = 1 + (value - 0.5f);
+        Settings.Instance.fontSizePourcentage = value;
     }
     private void OnUIScalingSliderChange(float value)
     {
-        Settings.UIScalingPourcentage = 1 + (value - 0.5f);
+        Settings.Instance.UIScalingPourcentage = value;
     }
     private void OnEnemyEmissionSliderChange(float value)
     {
-        Settings.EnemyEmissionPourcentage = 1 + (value - 0.5f);
+        Settings.Instance.EnemyEmissionIntensity = value;
+        Settings.OnUpdateEmissionPercentage();
 
     }
     private void OnFUIEmissionSliderChange(float value)
     {
-        Settings.EnemyEmissionPourcentage = 1 + (value - 0.5f);
+        Settings.Instance.EnemyEmissionIntensity = value;
 
+    }
+    private void OnSFXVolumeSliderChange(float value)
+    {
+        //TODO: implement SFX volume change
+    }
+    private void OnMasterVolumeSliderChange(float value)
+    {
+        //TODO: implement master volume change
+    }
+    private void OnMusicVolumeSliderSliderChange(float value)
+    {
+        //TODO: implement music volume change
     }
     private void OnQualitySliderChange(float value)
     {
-        Debug.Log($"Quality slider changed to {value}");
+        Debug.Log("Quality slider changed to " + value);
+        QualitySettings.SetQualityLevel((int) value);
     }
 
-    private void Highlight(GameObject gameObject)
-    {
-       
-        Debug.Log($"Highlighting {gameObject.name}");
-    }
+    
 
     private void OnEnable()
     {       
         gameObject.SetActive(true);
 
-        FontSizeSlider.value = Settings.fontSizePourcentage - offset;
-        UIScalingSlider.value = Settings.UIScalingPourcentage - offset;
-        EnemyEmissionSlider.value = Settings.EnemyEmissionPourcentage - offset;
-        UIEmissionSlider.value = Settings.UIEmissionPourcentage - offset;
+        FontSizeSlider.value = Settings.Instance.fontSizePourcentage;
+        UIScalingSlider.value = Settings.Instance.UIScalingPourcentage;
+        EnemyEmissionSlider.value = Settings.Instance.EnemyEmissionIntensity;
+        UIEmissionSlider.value = Settings.Instance.UIEmissionIntensity;
+        QualitySlider.value = QualitySettings.GetQualityLevel();
 
         FontSizeSlider.onValueChanged.AddListener(OnFontSizeSliderChange);
         UIScalingSlider.onValueChanged.AddListener(OnUIScalingSliderChange);
         EnemyEmissionSlider.onValueChanged.AddListener(OnEnemyEmissionSliderChange);
         UIEmissionSlider.onValueChanged.AddListener(OnFUIEmissionSliderChange);
-        QualitySlider.onValueChanged.AddListener(OnFontSizeSliderChange);
-
-        
-        
-
-
+        QualitySlider.onValueChanged.AddListener(OnQualitySliderChange);
+        MasterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeSliderChange);
+        MusicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeSliderSliderChange);
+        SFXVolumeSlider.onValueChanged.AddListener(OnSFXVolumeSliderChange);
+        ResetScoreBtn.onClick.AddListener(OnResetClick);
         BackBtn.onClick.AddListener(OnBackBtnClick);
+        
 
         IEnumerator setSelectedButtonNextFrame()
         {

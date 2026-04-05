@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class GameOver : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class GameOver : MonoBehaviour
     [SerializeField] private MenuFader blackScreenFader;
 
     [SerializeField] private EventSystem eventSystem;
+
+    [SerializeField] private float timebeforeMenuAccessible = 1f;
 
     private void Awake()
     {
@@ -40,8 +43,14 @@ public class GameOver : MonoBehaviour
         int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
         overallScoreText.text = score.ToString();
 
-        //Set the first selected button to restartButton
-        eventSystem.SetSelectedGameObject(restartButton.gameObject); 
+        IEnumerator setSelectedButton()
+        {
+            // Wait for the end of the frame to ensure the UI is fully active
+            yield return new WaitForSecondsRealtime(timebeforeMenuAccessible);
+            eventSystem.SetSelectedGameObject(restartButton.gameObject);
+        }
+
+        StartCoroutine(setSelectedButton());
     }
 
     public void Restart(){

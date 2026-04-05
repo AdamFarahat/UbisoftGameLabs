@@ -50,6 +50,8 @@ public class Shotgun : Gun
                 break;
             blast.heightScale = altShot.heightScale;
         }
+
+        MuzzleFlash.Play();
     }
 
     public override void CancelFiring()

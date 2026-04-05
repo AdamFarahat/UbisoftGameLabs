@@ -6,6 +6,7 @@ public class ShotgunBlast : MonoBehaviour
 {
     [SerializeField] private new ParticleSystem particleSystem;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask nearLayer;
     [SerializeField] private Collider[] ignoreColliders;
     private readonly HashSet<Enemy> enemiesHit = new();
 
