@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private PauseMenuFader pauseMenuFader;
     [SerializeField] private GameObject optionsMenu;
 
     void Awake()
@@ -21,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         Assert.IsNotNull(optionsButton);
         Assert.IsNotNull(restartButton);
         Assert.IsNotNull(mainMenuButton);
+        Assert.IsNotNull(pauseMenuFader);
     }
 
     void OnDisable()
@@ -37,6 +39,8 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Showing pause menu");
         Time.timeScale = 0f; // Pause the game
 
+        pauseMenuFader.FadeIn();
+        
         // Set the first selected button to resumeButton
         gameObject.SetActive(true);
 
@@ -58,7 +62,7 @@ public class PauseMenu : MonoBehaviour
     public void OnResumeButtonClicked()
     {
         Time.timeScale = 1f;
-        gameObject.SetActive(false);
+        pauseMenuFader.FadeOut();
 
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);

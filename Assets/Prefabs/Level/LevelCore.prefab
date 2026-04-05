@@ -921,10 +921,6 @@ PrefabInstance:
       propertyPath: superTextTMP
       value: 
       objectReference: {fileID: 1728553017944006739}
-    - target: {fileID: 3165994353810697349, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3390272287381113074, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_fontAsset
       value: 
