@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5473658397883171689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4214508490912154976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6666655679547764896}
+  m_Layer: 0
+  m_Name: MeleeSparksPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6666655679547764896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214508490912154976}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 12, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5473658397883171689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &771891864670845371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +345,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6997613030992412885}
+    - targetCorrespondingSourceObject: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6666655679547764896}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5143171945364128094, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       insertIndex: 3
@@ -372,12 +406,15 @@ MonoBehaviour:
   shakeInterval: 0.02
   moveEnabled: 1
   swordHitBox: {fileID: 0}
+  meleeSparksPosition: {fileID: 6666655679547764896}
   jumpSpeed: 100
   fallAcceleration: 500
   attackDuration: 0.2
   blockCooldown: 3
+  blockSparksPrefab: {fileID: 1559615547839024259, guid: 2d317ae5f80548c4f8ad74ab50a35a0b, type: 3}
   parryBulletSpeedMult: 2
   parryWindow: 0.5
+  parrySparksPrefab: {fileID: 1559615547839024259, guid: ab62ad5cc6cf3d04599c6ad205d5beed, type: 3}
   blockingMultiplierGain: 0.2
   attackingMultiplierGain: 0.6
   meleeParryMultiplierGain: 0.8
