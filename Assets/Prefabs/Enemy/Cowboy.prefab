@@ -146,7 +146,7 @@ MonoBehaviour:
   shootingRange: 10000
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
-  speed: 10
+  speed: 5
   healthCollider: {fileID: 936547612651599108}
   laneStayPeriod: 2
   chargeupTime: 0.5
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 40
   health: 40
-  score: 10
+  score: 500
   invulnerable: 0
   deathAnimationDuration: 0.1
 --- !u!114 &3771198681682225122

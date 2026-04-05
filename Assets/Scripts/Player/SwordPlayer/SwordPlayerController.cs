@@ -13,10 +13,13 @@ public class SwordPlayerController : PlayerController
     public static int LaneIndex => instance ? instance.GetLaneIndex() : -1;
 
     [SerializeField] private SwordHitBox swordHitBox;
+    [SerializeField] private Transform meleeSparksPosition;
 
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
-    [SerializeField] private float fallAcceleration = 500f;
+    [SerializeField] private float fallAcceleration = 300f;
+    [SerializeField] private float droppingAcceleration = 800f;
+    private bool droppingDown = false;
 
     [Header("Attcking")]
     [SerializeField] private float attackDuration = 0.2f;
@@ -28,17 +31,20 @@ public class SwordPlayerController : PlayerController
     public float blockCooldown = 3f;
     private float blockCooldownPercent = 0f;
     public Action OnBlockCooldownReady;
+    [SerializeField] private GameObject blockSparksPrefab;
 
     [Header("Parrying")]
     [SerializeField] private float parryBulletSpeedMult = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
+    [SerializeField] private int parryScore = 25;
+    [SerializeField] private GameObject parrySparksPrefab;
 
     [Header("Scoring")]
     [SerializeField] private float blockingMultiplierGain = 0.2f;
     [SerializeField] private float attackingMultiplierGain = 0.6f;
     [SerializeField] private float meleeParryMultiplierGain = 0.8f;
     [SerializeField] private float bulletParryMultiplierGain = 0.6f;
-    
+
     public float MeleeParryMultiplierGain => meleeParryMultiplierGain;
     public float BulletParryMultiplierGain => bulletParryMultiplierGain;
 
@@ -90,6 +96,9 @@ public class SwordPlayerController : PlayerController
         laneBound.DashEnd += OnDashEnd;
 
         Assert.IsNotNull(swordWaveSpawnPos);
+
+        Assert.IsNotNull(blockSparksPrefab);
+        Assert.IsNotNull(parrySparksPrefab);
 
         if (PlayerSelect.swordPlayerDevice != null)
         {
@@ -208,7 +217,8 @@ public class SwordPlayerController : PlayerController
 
         void SetY(float y)
         {
-            transform.position = new(transform.position.x, y, transform.position.z);
+            transform.position = new(transform.position.x, Mathf.Max(y, 0f), transform.position.z);
+            Shadow.transform.position = new(Shadow.transform.position.x, 0f, Shadow.transform.position.z);
         }
 
         IEnumerator Routine()
@@ -221,11 +231,16 @@ public class SwordPlayerController : PlayerController
             SetY(y);
             float velocity = jumpSpeed;
 
+            float Acceleration()
+            {
+                return droppingDown ? droppingAcceleration : fallAcceleration;
+            }
+
             // Animate jump
             while (velocity > 0f)
             {
                 y += velocity * Time.deltaTime;
-                velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
+                velocity = Mathf.Max(velocity - Acceleration() * Time.deltaTime, 0f);
                 SetY(y);
                 yield return null;
             }
@@ -234,17 +249,19 @@ public class SwordPlayerController : PlayerController
             while (y > 0f)
             {
                 y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
-                velocity -= fallAcceleration * Time.deltaTime;
+                velocity -= Acceleration() * Time.deltaTime;
                 SetY(y);
                 yield return null;
             }
 
             y = 0f;
             SetY(y);
-            jumpRoutine = null;
 
             animator.defaultName = "Idle";
             PlayDefaultCycleAnimation();
+
+            jumpRoutine = null;
+            droppingDown = false;
         }
 
         jumpRoutine = StartCoroutine(Routine());
@@ -255,7 +272,8 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-        Debug.Log("Duck");
+        if (jumpRoutine != null)
+            droppingDown = true;
     }
 
     private void Attack(InputAction.CallbackContext ctx)
@@ -367,6 +385,7 @@ public class SwordPlayerController : PlayerController
         }
         blockCooldownPercent = 0f;
         canBlock = true;
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerCooldownReady, transform.position);
         OnBlockCooldownReady?.Invoke();
     }
 
@@ -388,7 +407,7 @@ public class SwordPlayerController : PlayerController
         Enemy enemy = collider.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            
+
             if (state == SwordPlayerStates.Attacking && enemy.ImmuneToSword?.Invoke() != true
                 && !enemy.HasShield() && enemy.OnParried())
             {
@@ -400,37 +419,49 @@ public class SwordPlayerController : PlayerController
         }
         else if (collider.TryGetComponent(out Bullet projectile) && !projectile.IsComingFromPlayer())
         {
-            
             if (state == SwordPlayerStates.Parrying)
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
                 ReflectBackBullet(projectile);
-                DoParryActivity();
+                AddContinuousMultiplier(bulletParryMultiplierGain);
+                DoParryActivity(projectile.transform.position);
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordBlock, transform.position);
                 ReflectBackBullet(projectile);
-                DoBlockActivity();
+                AddContinuousMultiplier(blockingMultiplierGain);
+                DoBlockActivity(projectile.transform.position);
             }
         }
     }
 
-    private void DoParryActivity()
+    private void DoParryActivity(Vector3 position)
     {
         parryTimer = 0f;
         playerStats.AddSwordSuper(5f);
+        AddScore(parryScore);
+        Instantiate(parrySparksPrefab, position, Quaternion.identity);
     }
 
-    private void DoBlockActivity() {
+    private void DoBlockActivity(Vector3 position)
+    {
         AddContinuousMultiplier(blockingMultiplierGain);
         playerStats.AddSwordSuper(2f);
         StartCoroutine(BlockCooldown());
+        Instantiate(blockSparksPrefab, position, Quaternion.identity);
     }
-    public bool TryBlock() {
-        if (state == SwordPlayerStates.Parrying) {
-            DoParryActivity();
+
+    public bool TryBlock()
+    {
+        if (state == SwordPlayerStates.Parrying)
+        {
+            DoParryActivity(meleeSparksPosition.position);
             return true;
-        } else if (state == SwordPlayerStates.Blocking && canBlock) {
-            DoBlockActivity();
+        }
+        else if (state == SwordPlayerStates.Blocking && canBlock)
+        {
+            DoBlockActivity(meleeSparksPosition.position);
             return true;
         }
         return false;
@@ -438,7 +469,7 @@ public class SwordPlayerController : PlayerController
 
     private void ReflectBackBullet(Bullet projectile)
     {
-        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult, Bullet.ProjectileState.ParriedByPlayer); 
+        projectile.Parry(swordHitBox.transform, parryBulletSpeedMult, Bullet.ProjectileState.ParriedByPlayer);
     }
 
     public void OnBulletParryKill(int score)

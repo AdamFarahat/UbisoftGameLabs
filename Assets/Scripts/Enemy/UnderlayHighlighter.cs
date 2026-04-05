@@ -18,6 +18,10 @@ public class UnderlayHighlighter : MonoBehaviour
 
     private void Start()
     {
+        foreach (var material in materials)
+        {
+            Settings.LoadMaterialIfNotProcessed(material);
+        }
         underlaySprite.material = materials[lane.LaneIndex];
     }
 

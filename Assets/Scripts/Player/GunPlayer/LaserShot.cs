@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 class LaserShot : MonoBehaviour
 {
@@ -12,11 +13,14 @@ class LaserShot : MonoBehaviour
     public Transform fakeParent;
     private readonly HashSet<Enemy> enemiesHitThisFrame = new();
 
+    public UnityAction LaserEnd;
+
     private void Start()
     {
         IEnumerator Routine()
         {
             yield return new WaitForSeconds(duration);
+            LaserEnd?.Invoke();
             Destroy(gameObject);
         }
 

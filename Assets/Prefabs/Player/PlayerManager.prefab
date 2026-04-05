@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5427202431646004849}
   - component: {fileID: 1198080415023660266}
+  - component: {fileID: 7001526329540443062}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -44,3 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b041d3942eb22f3f8443d22881fb8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSelect
+--- !u!114 &7001526329540443062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900973483427637870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c507e5e7e6d70eb9d27e9313dfee0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyTracker

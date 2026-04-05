@@ -29,6 +29,10 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField] private float shakeOffset = 0.1f;
     [SerializeField] private float shakeInterval = 0.02f;
 
+    [Header("Misc")]
+    [SerializeField] private SpriteRenderer shadow;
+    protected SpriteRenderer Shadow => shadow;
+
     public int Score => score;
     public UnityAction<int> ScoreAdded;
     public UnityAction OnDiscreteMultiplierChange;
@@ -73,6 +77,7 @@ public abstract class PlayerController : MonoBehaviour
         Assert.IsNotNull(stunParticleSystem);
         Assert.IsNotNull(spriteRenderer);
         Assert.IsNotNull(spriteBillboard);
+        Assert.IsNotNull(shadow);
     }
 
     protected virtual void Start()

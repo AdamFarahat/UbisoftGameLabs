@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         if (currentMusic.isValid())
         {
-             if (currentMusicRef.Path == music.Path)
+             if (currentMusicRef.Equals(music))
              {
                  return; // Same music is already playing, do nothing
              }
@@ -48,6 +48,16 @@ public class AudioManager : MonoBehaviour
             currentMusic.start();
             currentMusicRef = music;
         }
+    }
+
+    public FMOD.Studio.EventInstance PlayLooping(EventReference sound, GameObject obj)
+    {
+        FMOD.Studio.EventInstance instance = RuntimeManager.CreateInstance(sound);
+
+        RuntimeManager.AttachInstanceToGameObject(instance, obj);
+
+        instance.start();
+        return instance;
     }
 
     private void OnDestroy()

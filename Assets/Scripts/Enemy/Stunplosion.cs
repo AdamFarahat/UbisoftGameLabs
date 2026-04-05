@@ -16,6 +16,11 @@ public class Stunplosion : MonoBehaviour
         aoe.localScale = Vector3.zero;
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.KamikazeExplode, transform.position);
+    }
+
     private void Update()
     {
         age += Time.deltaTime;

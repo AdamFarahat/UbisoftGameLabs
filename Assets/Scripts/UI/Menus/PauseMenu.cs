@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     [SerializeField] private EventSystem eventSystem;
+    [SerializeField] private PauseMenuFader pauseMenuFader;
+    [SerializeField] private GameObject optionsMenu;
 
     void Awake()
     {
@@ -20,30 +22,22 @@ public class PauseMenu : MonoBehaviour
         Assert.IsNotNull(optionsButton);
         Assert.IsNotNull(restartButton);
         Assert.IsNotNull(mainMenuButton);
+        Assert.IsNotNull(pauseMenuFader);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
         restartButton.onClick.RemoveListener(OnRestartButtonClicked);
         mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
     }
-
-    public void ShowPauseMenu()
+    private void OnEnable()
     {
-        
-        Debug.Log("Showing pause menu");
-        Time.timeScale = 0f; // Pause the game
-
-        // Set the first selected button to resumeButton
-        gameObject.SetActive(true);
-
         resumeButton.onClick.AddListener(OnResumeButtonClicked);
         optionsButton.onClick.AddListener(OnOptionsButtonClicked);
         restartButton.onClick.AddListener(OnRestartButtonClicked);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
-
         IEnumerator setSelectedButtonNextFrame()
         {
             // Wait for the end of the frame to ensure the UI is fully active
@@ -53,11 +47,21 @@ public class PauseMenu : MonoBehaviour
 
         StartCoroutine(setSelectedButtonNextFrame());
     }
+    public void ShowPauseMenu()
+    {
+        
+        Debug.Log("Showing pause menu");
+        pauseMenuFader.FadeIn();
+        Time.timeScale = 0f; // Pause the game
+
+        // Set the first selected button to resumeButton
+        gameObject.SetActive(true);
+    }
     
     public void OnResumeButtonClicked()
     {
         Time.timeScale = 1f;
-        gameObject.SetActive(false);
+        pauseMenuFader.FadeOut();
 
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
@@ -72,7 +76,8 @@ public class PauseMenu : MonoBehaviour
     public void OnOptionsButtonClicked()
     {
         // TODO: Implement options menu logic here
-        Debug.Log("Options button clicked");
+        gameObject.SetActive(false);
+        optionsMenu.SetActive(true);
     }
 
     public void OnRestartButtonClicked()
