@@ -21,9 +21,10 @@ public class PlayerSelectManager : MonoBehaviour
     private readonly int leftAmountID = Shader.PropertyToID("_LeftAmount");
     private readonly int rightAmountID = Shader.PropertyToID("_RightAmount");
 
+    [SerializeField] private DifficultyMenu difficultyMenu;
+
     [Header("Events")]
     public UnityEvent onReturnToMenuRequested;
-    public UnityEvent onAllPlayersReady;
 
     private PlayerInputManager inputManager;
     
@@ -33,6 +34,7 @@ public class PlayerSelectManager : MonoBehaviour
     void Awake()
     {
         Assert.IsNotNull(heartUIImage);
+        Assert.IsNotNull(difficultyMenu);
     }
 
     void Start()
@@ -128,9 +130,10 @@ public class PlayerSelectManager : MonoBehaviour
         if (playerReadyStates[0] && playerReadyStates[1])
         {            
             // Lock inputs during animations 
-            IsAcceptingInput = false; 
-
-            onAllPlayersReady?.Invoke();
+            IsAcceptingInput = false;
+            
+            // Show difficulty menu after a short delay to allow players to see the final heart fill
+            DOVirtual.DelayedCall(0.5f, () => difficultyMenu.ShowDifficultyMenu());
         }
     }
 

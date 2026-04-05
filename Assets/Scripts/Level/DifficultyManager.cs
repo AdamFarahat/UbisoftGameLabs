@@ -34,6 +34,30 @@ public class DifficultyManager : MonoBehaviour
 
     [SerializeField] private GameDifficulty gameDifficulty = GameDifficulty.Medium;
 
+    public GameDifficulty DifficultySetting => gameDifficulty;
+
+    public void ApplyDifficultySettings(string difficulty)
+    {
+       switch (difficulty)
+        {
+            case "Easy":
+                gameDifficulty = GameDifficulty.Easy;
+                break;
+            case "Normal":
+                gameDifficulty = GameDifficulty.Medium;
+                break;
+            case "Hard":
+                gameDifficulty = GameDifficulty.Hard;
+                break;
+            default:
+                Debug.LogWarning($"Unknown difficulty setting: {difficulty}. Defaulting to Medium.");
+                gameDifficulty = GameDifficulty.Medium;
+                break;
+        }
+
+        Debug.Log($"[DifficultyManager] Difficulty set to {gameDifficulty}");
+    }
+
     private float GetDifficultyMultiplier()
     {
         return gameDifficulty switch

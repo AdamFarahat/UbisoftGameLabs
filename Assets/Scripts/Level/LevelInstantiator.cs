@@ -23,6 +23,8 @@ public class LevelInstantiator : MonoBehaviour
                 break;
         }
 
+        DifficultyManager.Instance.ApplyDifficultySettings(PlayerSelect.Instance.gameObject.GetComponent<DifficultyTracker>().Difficulty);
+
     }
 
     // Update is called once per frame
