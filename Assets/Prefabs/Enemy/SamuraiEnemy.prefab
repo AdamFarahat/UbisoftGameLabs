@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1743157943295395450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5775365722164194449}
+  m_Layer: 0
+  m_Name: BlockSparksPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5775365722164194449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743157943295395450}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 9, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8249334843413989259}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3554411529905857521
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +393,7 @@ Transform:
   - {fileID: 4734146711435085640}
   - {fileID: 4200959010006378491}
   - {fileID: 5856313698783848416}
+  - {fileID: 5775365722164194449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7973500647695261623
@@ -382,6 +414,8 @@ MonoBehaviour:
   swordHitBox: {fileID: 477437890740594109}
   parrySpeedMultipliyer: 1.1
   surpassingAcceleration: 50
+  blockSparksPrefab: {fileID: 1559615547839024259, guid: a7171dd5dca1b6d478ccc4b8fa3d7fe9, type: 3}
+  blockSparksPosition: {fileID: 5775365722164194449}
   stunnedDuration: 1.25
   numberOfSlashes: 2
   slashCooldown: 1.15
