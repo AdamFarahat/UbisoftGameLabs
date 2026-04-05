@@ -263,6 +263,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   multiplierUI: {fileID: 6539550765771174107}
   cooldownUI: {fileID: 6925459390677526918}
+--- !u!1 &659252922489815556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3904694376931498914}
+  - component: {fileID: 3851096055318120253}
+  - component: {fileID: 7005245637846142149}
+  m_Layer: 5
+  m_Name: Countdown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &3904694376931498914
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659252922489815556}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4934685864622737607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 400}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3851096055318120253
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659252922489815556}
+  m_CullTransparentMesh: 1
+--- !u!114 &7005245637846142149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659252922489815556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &748255240697447920
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +936,7 @@ GameObject:
   - component: {fileID: 7305919445823622487}
   - component: {fileID: 5369418078156620309}
   - component: {fileID: 1987066883688285533}
+  - component: {fileID: 366969275057159198}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -885,6 +961,8 @@ RectTransform:
   - {fileID: 2584363874681766684}
   - {fileID: 70267474524604395}
   - {fileID: 7093702494016589453}
+  - {fileID: 5393367933817184437}
+  - {fileID: 3904694376931498914}
   - {fileID: 8047676394727526899}
   - {fileID: 7223891211443970652}
   - {fileID: 4773839832677843610}
@@ -973,13 +1051,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   scoreText: {fileID: 5384073636444206587}
   healthBarUI: {fileID: 1644242477858575745}
-  vignetteUI: {fileID: 3310502522484381943}
+  vignetteUI: {fileID: 0}
   superUI: {fileID: 161865433639030024}
   pauseMenuScreen: {fileID: 0}
   gameOverScreen: {fileID: 9089175420580484333}
   scoreIncreaseTime: 1
-  gunPlayerHUD: {fileID: 4868340195412220918}
-  swordPlayerHUD: {fileID: 2977168203496582162}
+  gunPlayerHUD: {fileID: 0}
+  swordPlayerHUD: {fileID: 0}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,6 +1085,27 @@ MonoBehaviour:
   swordPowerBarPercent: 0
   swordCooldownPercent: 0
   swordMultiplierPercent: 0
+--- !u!114 &366969275057159198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459126833240657986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002933174e176e047a64e06ddd12e130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CountdownManager
+  fadeInImage: {fileID: 1055629132207305267}
+  fadeInDuration: 2
+  fadeInExponent: 2
+  fadeInDelayFactor: 0.5
+  countdownImage: {fileID: 7005245637846142149}
+  countdown3: {fileID: 21300000, guid: 15f34f6d67f56a54cb25ce27c7e4fd06, type: 3}
+  countdown2: {fileID: 21300000, guid: efcb622ef0dcd11489f02afaecb545ea, type: 3}
+  countdown1: {fileID: 21300000, guid: 55b79fd35c0d2714e9da522463291870, type: 3}
+  countdownIndividualDuration: 1
 --- !u!1 &3165994353810697349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1119,8 @@ GameObject:
   - component: {fileID: 3309595946492354557}
   - component: {fileID: 7750231704124478123}
   - component: {fileID: 9089175420580484333}
+  - component: {fileID: 7943164165342991751}
+  - component: {fileID: 5676721865232499598}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -1072,7 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.80784315}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.88235295}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -1133,7 +1234,34 @@ MonoBehaviour:
   overallScoreText: {fileID: 0}
   restartButton: {fileID: 0}
   mainMenuButton: {fileID: 1907529508597224870}
+  gameOverFader: {fileID: 5676721865232499598}
+  blackScreenFader: {fileID: 0}
   eventSystem: {fileID: 0}
+--- !u!225 &7943164165342991751
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165994353810697349}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5676721865232499598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3165994353810697349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa94b551d7ea80418c9ff2f3939b1d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuFader
+  fadeDuration: 0.3
 --- !u!1 &3975746589533214841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,6 +3047,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7736379085755833715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5393367933817184437}
+  - component: {fileID: 9000126955646964322}
+  - component: {fileID: 1055629132207305267}
+  m_Layer: 5
+  m_Name: FadeIn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5393367933817184437
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736379085755833715}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4934685864622737607}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9000126955646964322
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736379085755833715}
+  m_CullTransparentMesh: 1
+--- !u!114 &1055629132207305267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7736379085755833715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7791254443931918924
 GameObject:
   m_ObjectHideFlags: 0
