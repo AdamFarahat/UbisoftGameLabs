@@ -29,7 +29,7 @@ public class Shotgun : Gun
         charging = PreStartFiring();
         chargeStartTime = Time.time;
         // TODO play charge up vfx
-        // TODO play charge up sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerShotgunCharge, transform.position);
     }
 
     public override void StopFiring()
