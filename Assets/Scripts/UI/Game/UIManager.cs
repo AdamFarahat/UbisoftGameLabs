@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(scoreText, "Score Text is missing!");
         Assert.IsNotNull(gunPlayerHUD, "Gun Player HUD is missing!");
         Assert.IsNotNull(swordPlayerHUD, "Sword Player HUD is missing!");
+        Assert.IsNotNull(vignetteUI, "Vignette UI is missing!");
     }
 
     void Start()
