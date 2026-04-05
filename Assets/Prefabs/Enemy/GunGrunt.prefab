@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 1308856832007123742}
   - component: {fileID: 681042347012851451}
   - component: {fileID: 8799615496796102343}
-  - component: {fileID: 2590929679270273919}
   m_Layer: 6
   m_Name: GunGrunt
   m_TagString: Enemy
@@ -383,8 +382,10 @@ MonoBehaviour:
   spawnArrivalDuration: 5
   minLaneDistance: 100
   researchCooldown: 3
-  shootingCooldown: 1
-  bulletSpeed: 80
+  maxShootingCooldown: 1.5
+  minShootingCooldown: 0.3
+  minBulletSpeed: 50
+  maxBulletSpeed: 200
   shootingIndex: 0
   projSpawnPoint: {fileID: 8791062963000604154}
 --- !u!114 &1308856832007123742
@@ -441,17 +442,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 10, z: 5}
   m_Center: {x: 0, y: 5, z: 0}
---- !u!114 &2590929679270273919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6679675405416162139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 50
-  maxSpeed: 100

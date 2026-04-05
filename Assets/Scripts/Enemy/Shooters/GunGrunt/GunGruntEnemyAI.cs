@@ -2,16 +2,20 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class GunGruntEnemyAI : MonoBehaviour
+public class GunGruntEnemyAI : MonoBehaviour, ISpeedRefreshable
 {
     [SerializeField] private float spawnArrivalDuration = 3f;
 
     [SerializeField] private float minLaneDistance = 100f;
     [SerializeField] private float researchCooldown = 3f;
+    private float shootingCooldown;
 
-    [SerializeField] private float shootingCooldown = 1f;
     public float ShootingCooldown => shootingCooldown;
-    [SerializeField] private float bulletSpeed = 80f;
+    private float bulletSpeed;
+    [SerializeField] private float maxShootingCooldown = 2f;
+    [SerializeField] private float minShootingCooldown = 0.3f;
+    [SerializeField] private float minBulletSpeed = 50f;
+    [SerializeField] private float maxBulletSpeed = 120f;
     public float BulletSpeed => bulletSpeed;
 
     public int shootingIndex;
@@ -54,5 +58,12 @@ public class GunGruntEnemyAI : MonoBehaviour
         }
 
         arrivalRoutine = StartCoroutine(ArrivalRoutine());
+    }
+
+public void RefreshSpeed()
+    {
+        float d = Mathf.Clamp01(DifficultyManager.Instance.Difficulty);
+        shootingCooldown = Mathf.Lerp(maxShootingCooldown, minShootingCooldown, d);
+        bulletSpeed = Mathf.Lerp(minBulletSpeed, maxBulletSpeed, d);
     }
 }

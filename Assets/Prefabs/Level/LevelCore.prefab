@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6314761081725675962, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: gameDifficulty
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8420282347879567900, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
