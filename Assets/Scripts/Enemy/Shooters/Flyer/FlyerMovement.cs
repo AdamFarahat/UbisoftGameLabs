@@ -40,8 +40,10 @@ public class FlyerMovement : MonoBehaviour, ISpeedRefreshable
     
     public void RefreshSpeed()
     {
+        float d = DifficultyManager.Instance.Difficulty;
         if (TryGetComponent(out EnemySpeedConfig cfg))
-            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
+            speed = cfg.EvaluateSpeed(d);
+        if (TryGetComponent(out FlyerShooting flyerShooting))
+            flyerShooting.RefreshShotCooldown(d);
     }
-
 }

@@ -320,7 +320,6 @@ GameObject:
   - component: {fileID: 1308856832007123742}
   - component: {fileID: 681042347012851451}
   - component: {fileID: 8799615496796102343}
-  - component: {fileID: 2590929679270273919}
   m_Layer: 6
   m_Name: GunGrunt
   m_TagString: Enemy
@@ -384,8 +383,10 @@ MonoBehaviour:
   spawnArrivalDuration: 5
   minLaneDistance: 100
   researchCooldown: 3
-  shootingCooldown: 1
-  bulletSpeed: 80
+  maxShootingCooldown: 1.5
+  minShootingCooldown: 0.3
+  minBulletSpeed: 50
+  maxBulletSpeed: 200
   shootingIndex: 0
   projSpawnPoint: {fileID: 8791062963000604154}
 --- !u!114 &1308856832007123742
