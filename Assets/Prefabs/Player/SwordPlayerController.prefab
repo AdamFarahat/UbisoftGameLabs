@@ -413,7 +413,7 @@ MonoBehaviour:
   blockCooldown: 3
   blockSparksPrefab: {fileID: 1559615547839024259, guid: 2d317ae5f80548c4f8ad74ab50a35a0b, type: 3}
   parryBulletSpeedMult: 2
-  parryWindow: 0.5
+  parryWindow: 0.25
   parrySparksPrefab: {fileID: 1559615547839024259, guid: ab62ad5cc6cf3d04599c6ad205d5beed, type: 3}
   blockingMultiplierGain: 0.2
   attackingMultiplierGain: 0.6

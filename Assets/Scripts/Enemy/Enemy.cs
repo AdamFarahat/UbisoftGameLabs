@@ -108,6 +108,7 @@ public class Enemy : Poolable
 
         IEnumerator DeathRoutine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyDeath, transform.position);
             if (spriteRenderer != null)
             {
                 Color color = spriteRenderer.color;

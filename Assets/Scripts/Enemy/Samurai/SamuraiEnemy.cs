@@ -120,7 +120,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             case SamuraiState.Walking:
                 if (ParryIncomingBullets())
                 {
-                    // TODO sfx
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
 
                     if (parryRoutine == null)
                     {
@@ -162,9 +162,9 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
                         foreach (var animator in animators)
                             animator.PlayOneShot("Windup");
                         yield return new WaitForSeconds(windupDuration);
-
                         foreach (var animator in animators)
                             animator.PlayOneShot("Slash");
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
                         yield return new WaitForSeconds(slashDuration);
 
                         swordHitBox.gameObject.SetActive(false);
@@ -235,7 +235,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     {
         if (state != SamuraiState.Stunned)
         {
-            // TODO sfx
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
             Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
             return true;
         }
@@ -249,7 +249,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 
         SetState(SamuraiState.Stunned);
 
-        // TODO stun sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
         foreach (var animator in animators)
             animator.PlayOneShot("Stunned");
 
@@ -331,7 +331,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             slashRoutine = null;
         }
 
-        // TODO stun sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
 
         foreach (var animator in animators)
             animator.PlayOneShot("Stunned");
