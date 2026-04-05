@@ -410,12 +410,14 @@ public class SwordPlayerController : PlayerController
         {
             if (state == SwordPlayerStates.Parrying)
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordParry, transform.position);
                 ReflectBackBullet(projectile);
                 AddContinuousMultiplier(bulletParryMultiplierGain);
                 DoParryActivity(projectile.transform.position);
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordBlock, transform.position);
                 ReflectBackBullet(projectile);
                 AddContinuousMultiplier(blockingMultiplierGain);
                 DoBlockActivity(projectile.transform.position);
