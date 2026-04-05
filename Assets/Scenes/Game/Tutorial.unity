@@ -845,6 +845,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 190
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -1108,6 +1112,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251405713322530568, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7779360012964385895, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
@@ -3019,6 +3027,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251405713322530568, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7779360012964385895, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: laneIndex
       value: 2
@@ -3292,15 +3304,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6478757971781719933, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3506244
+      value: -0.48576698
       objectReference: {fileID: 0}
     - target: {fileID: 6478757971781719933, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.215605
+      value: 4.4871974
       objectReference: {fileID: 0}
     - target: {fileID: 6478757971781719933, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.7672995
+      value: 2.0013733
       objectReference: {fileID: 0}
     - target: {fileID: 7374067249993109602, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4247,6 +4259,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251405713322530568, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7779360012964385895, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: laneIndex
       value: 3
@@ -4433,6 +4449,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251405713322530568, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7779360012964385895, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: laneIndex
       value: 1
@@ -4511,6 +4531,10 @@ PrefabInstance:
       propertyPath: laneDistance
       value: 220
       objectReference: {fileID: 0}
+    - target: {fileID: 2348815166759920774, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
     - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
       propertyPath: speed
       value: 15
@@ -5832,6 +5856,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3004282078810202236, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251405713322530568, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
