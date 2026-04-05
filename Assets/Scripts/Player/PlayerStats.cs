@@ -225,7 +225,9 @@ public class PlayerStats : MonoBehaviour
             swordSuperPercent = currentSwordSuper / statDenominator;
             yield return null;
         }
-        AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
+        if(SceneManager.GetActiveScene().name == "Game"){
+            AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
+        }
         superCoroutine = null;
         SuperEnded?.Invoke();
     }
