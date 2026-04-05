@@ -25,30 +25,19 @@ public class PauseMenu : MonoBehaviour
         Assert.IsNotNull(pauseMenuFader);
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
         restartButton.onClick.RemoveListener(OnRestartButtonClicked);
         mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
     }
-
-    public void ShowPauseMenu()
+    private void OnEnable()
     {
-        
-        Debug.Log("Showing pause menu");
-        Time.timeScale = 0f; // Pause the game
-
-        pauseMenuFader.FadeIn();
-        
-        // Set the first selected button to resumeButton
-        gameObject.SetActive(true);
-
         resumeButton.onClick.AddListener(OnResumeButtonClicked);
         optionsButton.onClick.AddListener(OnOptionsButtonClicked);
         restartButton.onClick.AddListener(OnRestartButtonClicked);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
-
         IEnumerator setSelectedButtonNextFrame()
         {
             // Wait for the end of the frame to ensure the UI is fully active
@@ -57,6 +46,16 @@ public class PauseMenu : MonoBehaviour
         }
 
         StartCoroutine(setSelectedButtonNextFrame());
+    }
+    public void ShowPauseMenu()
+    {
+        
+        Debug.Log("Showing pause menu");
+        pauseMenuFader.FadeIn();
+        Time.timeScale = 0f; // Pause the game
+
+        // Set the first selected button to resumeButton
+        gameObject.SetActive(true);
     }
     
     public void OnResumeButtonClicked()
