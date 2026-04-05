@@ -10,6 +10,8 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float parrySpeedMultipliyer = 1.1f;
     [SerializeField] private float surpassingAcceleration = 50f;
+    [SerializeField] private GameObject blockSparksPrefab;
+    [SerializeField] private Transform blockSparksPosition;
 
     [Header("Stunned")]
     [SerializeField] private float stunnedDuration = 0.5f;
@@ -49,6 +51,9 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
         Assert.IsNotNull(healthCollider);
+
+        Assert.IsNotNull(blockSparksPrefab);
+        Assert.IsNotNull(blockSparksPosition);
 
         Enemy enemy = GetComponent<Enemy>();
         Assert.IsNotNull(enemy);
@@ -163,7 +168,10 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 
     private bool ParryIncomingBullets()
     {
-        return HandleIncomingBullets(b => b.Parry(null, parrySpeedMultipliyer, Bullet.ProjectileState.ParriedByEnemy));
+        return HandleIncomingBullets(b => { 
+            b.Parry(null, parrySpeedMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
+            Instantiate(blockSparksPrefab, b.transform.position, Quaternion.identity);
+        });
     }
 
     private bool DestroyIncomingBullets()
@@ -201,7 +209,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         if (state != SamuraiState.Stunned)
         {
             // TODO sfx
-            // TODO flash vfx
+            Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
             return true;
         }
         return false;
@@ -232,6 +240,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     private void OnHitByShotgun()
     {
         // TODO flash vfx
+        Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
     }
 
     private void WalkForward()

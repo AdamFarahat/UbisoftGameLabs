@@ -171,8 +171,6 @@ public class Bullet : MonoBehaviour
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
 
         stunner.enabled = !stunner.enabled;
-
-        // TODO flash vfx
     }
 
     private void OnEnemyKill(Enemy enemy)
