@@ -154,15 +154,16 @@ public class WaveManager : MonoBehaviour
 
         List<Wave> candidates = new();
         foreach (var w in waveList.waves)
-            if (w.difficulty >= lo && w.difficulty <= hi)
+            if (w.difficulty >= lo && w.difficulty <= hi && !w.isBossWave)
                 candidates.Add(w);
 
         if (candidates.Count == 0)
         {
-            Wave closest = waveList.waves[0];
-            float bestDist = Mathf.Abs(closest.difficulty - d);
+            Wave closest = null;
+            float bestDist = float.MaxValue;
             foreach (var w in waveList.waves)
             {
+                if (w.isBossWave) continue;
                 float dist = Mathf.Abs(w.difficulty - d);
                 if (dist < bestDist) { bestDist = dist; closest = w; }
             }

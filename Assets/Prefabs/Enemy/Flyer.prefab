@@ -318,8 +318,8 @@ MonoBehaviour:
   bulletSpeed: 80
   spawnPoint: {fileID: 4117253480536495139}
   speed: 5
-  maxShotCooldown: 0.5
-  minShotCooldown: 0.01
+  maxShotCooldown: 1.25
+  minShotCooldown: 0.5
   minBulletSpeed: 75
   maxBulletSpeed: 160
 --- !u!114 &8525619152686538179
