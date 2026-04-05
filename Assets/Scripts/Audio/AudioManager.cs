@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         if (currentMusic.isValid())
         {
-             if (currentMusicRef.Path == music.Path)
+             if (currentMusicRef.Equals(music))
              {
                  return; // Same music is already playing, do nothing
              }

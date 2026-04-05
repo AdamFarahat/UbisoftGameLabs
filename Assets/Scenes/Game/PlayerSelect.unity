@@ -311,6 +311,66 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1293112049}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2079540577}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2079540578}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PrepareSceneLoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TriggerAnimateOut
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneManagement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayerSelectAnimations, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6030749551710014258, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
+      propertyPath: onAllPlayersReady.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6251391089527282869, guid: 0d9dcc2fc4655ab38a67a0f3b578a2a5, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.52163756
@@ -542,6 +602,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4119990429303165602, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
   m_PrefabInstance: {fileID: 2079540575}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2079540577 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4635150139705323916, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+  m_PrefabInstance: {fileID: 2079540575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a15382717c7375429eeea20804f703b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneManagement
+--- !u!114 &2079540578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9209515420902902140, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+  m_PrefabInstance: {fileID: 2079540575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af22c685c62db794390744f30133348e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectAnimations
 --- !u!1001 &7961010327220798957
 PrefabInstance:
   m_ObjectHideFlags: 0
