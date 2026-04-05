@@ -1138,6 +1138,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 150.59303
       objectReference: {fileID: 0}
+    - target: {fileID: 8567448586144742873, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: jumpSpeed
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567448586144742873, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: fallAcceleration
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567448586144742873, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: droppingAcceleration
+      value: 1600
+      objectReference: {fileID: 0}
     - target: {fileID: 8810186853916138172, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: vignetteUI
       value: 

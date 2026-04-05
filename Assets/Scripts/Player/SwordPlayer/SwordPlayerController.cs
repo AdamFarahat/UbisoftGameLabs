@@ -17,7 +17,9 @@ public class SwordPlayerController : PlayerController
 
     [Header("Jumping")]
     [SerializeField] private float jumpSpeed = 100f;
-    [SerializeField] private float fallAcceleration = 500f;
+    [SerializeField] private float fallAcceleration = 300f;
+    [SerializeField] private float droppingAcceleration = 800f;
+    private bool droppingDown = false;
 
     [Header("Attcking")]
     [SerializeField] private float attackDuration = 0.2f;
@@ -215,7 +217,8 @@ public class SwordPlayerController : PlayerController
 
         void SetY(float y)
         {
-            transform.position = new(transform.position.x, y, transform.position.z);
+            transform.position = new(transform.position.x, Mathf.Max(y, 0f), transform.position.z);
+            // TODO shadow.enabled = y > 0f;
         }
 
         IEnumerator Routine()
@@ -228,11 +231,16 @@ public class SwordPlayerController : PlayerController
             SetY(y);
             float velocity = jumpSpeed;
 
+            float Acceleration()
+            {
+                return droppingDown ? droppingAcceleration : fallAcceleration;
+            }
+
             // Animate jump
             while (velocity > 0f)
             {
                 y += velocity * Time.deltaTime;
-                velocity = Mathf.Max(velocity - fallAcceleration * Time.deltaTime, 0f);
+                velocity = Mathf.Max(velocity - Acceleration() * Time.deltaTime, 0f);
                 SetY(y);
                 yield return null;
             }
@@ -241,17 +249,19 @@ public class SwordPlayerController : PlayerController
             while (y > 0f)
             {
                 y = Mathf.Max(y + velocity * Time.deltaTime, 0f);
-                velocity -= fallAcceleration * Time.deltaTime;
+                velocity -= Acceleration() * Time.deltaTime;
                 SetY(y);
                 yield return null;
             }
 
             y = 0f;
             SetY(y);
-            jumpRoutine = null;
 
             animator.defaultName = "Idle";
             PlayDefaultCycleAnimation();
+
+            jumpRoutine = null;
+            droppingDown = false;
         }
 
         jumpRoutine = StartCoroutine(Routine());
@@ -262,7 +272,8 @@ public class SwordPlayerController : PlayerController
         if (Stunned)
             return;
 
-        Debug.Log("Duck");
+        if (jumpRoutine != null)
+            droppingDown = true;
     }
 
     private void Attack(InputAction.CallbackContext ctx)
