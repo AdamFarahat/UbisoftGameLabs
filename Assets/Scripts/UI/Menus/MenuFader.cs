@@ -15,7 +15,7 @@ public class MenuFader : MonoBehaviour
         canvasGroup.alpha = 0f; 
     }
 
-    public void FadeIn(Action onComplete = null)
+    public void FadeToOpaque(Action onComplete = null)
     {
         canvasGroup.DOKill();
         gameObject.SetActive(true);
@@ -27,14 +27,15 @@ public class MenuFader : MonoBehaviour
         });
     }
 
-    public void FadeOut(Action onComplete = null) 
+    public void FadeToTransparent(Action onComplete = null) 
     {
         canvasGroup.DOKill();
         canvasGroup.interactable = false;
-        
+    
+        canvasGroup.alpha = 1f;
         canvasGroup.DOFade(0f, fadeDuration).SetUpdate(true).OnComplete(() => 
         {
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
             onComplete?.Invoke(); 
         });
     }

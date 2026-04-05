@@ -994,6 +994,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.02705395
       objectReference: {fileID: 0}
+    - target: {fileID: 3967836720285640508, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: fadeDuration
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4033532511070084457, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

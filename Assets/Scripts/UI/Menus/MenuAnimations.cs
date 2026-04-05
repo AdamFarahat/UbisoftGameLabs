@@ -11,6 +11,8 @@ public class MenuAnimations : MonoBehaviour
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private float staggerDelay = 0.2f;
     [SerializeField] private UIAnimation title;
+    [SerializeField] private MenuFader menuFader;
+    
     private ButtonUIAnimation[] buttons;
 
     // Fired when the menu finishes its outward animation
@@ -32,7 +34,9 @@ public class MenuAnimations : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(AnimateInSequence());
+        menuFader.FadeToTransparent();
+        StartCoroutine(AnimateInSequence());        
+
     }
 
     public void AnimateButtonsOut()
