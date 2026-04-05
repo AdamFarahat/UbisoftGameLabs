@@ -19,7 +19,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float sigmoidSteepness = 0.06f;
     [SerializeField] private float sigmoidMidpoint = 90f;
     [SerializeField] private float waveStartDelay = 3f;
-    [SerializeField] private int bossWaveInterval = 5;
     private bool delayStarted = false;
 
     [Header("Wave Difficulty Selection")]

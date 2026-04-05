@@ -347,7 +347,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6314761081725675962, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: gameDifficulty
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314761081725675962, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidSteepness
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314761081725675962, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidMidpointWave
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidMidpoint
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8049746163911720896, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
+      propertyPath: sigmoidSteepness
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 8420282347879567900, guid: e411c3fc41ca8c74aab1e39bfe8beee6, type: 3}
       propertyPath: m_LocalRotation.w
