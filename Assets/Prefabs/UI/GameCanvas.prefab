@@ -978,8 +978,8 @@ MonoBehaviour:
   pauseMenuScreen: {fileID: 0}
   gameOverScreen: {fileID: 9089175420580484333}
   scoreIncreaseTime: 1
-  gunPlayerHUD: {fileID: 4868340195412220918}
-  swordPlayerHUD: {fileID: 2977168203496582162}
+  gunPlayerHUD: {fileID: 0}
+  swordPlayerHUD: {fileID: 0}
 --- !u!114 &1987066883688285533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,6 +1134,7 @@ MonoBehaviour:
   restartButton: {fileID: 0}
   mainMenuButton: {fileID: 1907529508597224870}
   eventSystem: {fileID: 0}
+  delayBeforeSelectingRestartButton: 1
 --- !u!1 &3975746589533214841
 GameObject:
   m_ObjectHideFlags: 0

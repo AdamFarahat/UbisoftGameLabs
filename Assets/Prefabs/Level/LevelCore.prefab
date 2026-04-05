@@ -1134,10 +1134,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: vignetteUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: gunPlayerHUD
       value: 
       objectReference: {fileID: 1870532556028239792}
