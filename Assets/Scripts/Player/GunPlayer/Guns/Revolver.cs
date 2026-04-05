@@ -32,7 +32,7 @@ public class Revolver : Gun
         charging = PreStartFiring();
         chargeStartTime = Time.time;
         // TODO start charge up animation
-        // TODO start charge up sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverCharge, transform.position);
     }
 
     public override void StopFiring()

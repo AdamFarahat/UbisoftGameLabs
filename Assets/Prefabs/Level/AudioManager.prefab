@@ -100,6 +100,13 @@ MonoBehaviour:
       Data3: 1989879686
       Data4: -820542591
     Path: event:/Players/Gun/PlayerRevolverBulletImpact
+  <PlayerRevolverCharge>k__BackingField:
+    Guid:
+      Data1: 2943322
+      Data2: 1214422984
+      Data3: -1333406532
+      Data4: 1919199099
+    Path: event:/Players/Gun/PlayerRevolverChargeUp
   <PlayerRevolverNotReady>k__BackingField:
     Guid:
       Data1: 1969619031

@@ -19,6 +19,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerRevolverShot { get; private set; }
     [field: SerializeField] public EventReference PlayerRevolverAltShot { get; private set; }
     [field: SerializeField] public EventReference PlayerRevolverImpact { get; private set; }
+    [field: SerializeField] public EventReference PlayerRevolverCharge { get; private set; }
     [field: SerializeField] public EventReference PlayerRevolverNotReady { get; private set; }
     [field: SerializeField] public EventReference PlayerRevolverSelect { get; private set; }
     [field: SerializeField] public EventReference PlayerShotgunShot { get; private set; }
