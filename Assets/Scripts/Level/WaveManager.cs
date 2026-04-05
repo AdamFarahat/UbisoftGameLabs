@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float sigmoidSteepness = 0.06f;
     [SerializeField] private float sigmoidMidpoint = 90f;
     [SerializeField] private float waveStartDelay = 3f;
+    [SerializeField] private int bossWaveInterval = 5;
     private bool delayStarted = false;
 
     [Header("Wave Difficulty Selection")]
@@ -52,7 +53,7 @@ public class WaveManager : MonoBehaviour
 
         if (waitingForClear)
         {
-            if (waitingForClear && spawner.CurrentEnemies <= 0 && !delayStarted)
+            if (waitingForClear && spawner.CurrentEnemies <= 1 && !delayStarted)
             {
                 delayStarted = true;
                 StartCoroutine(DelayedNextWave());
@@ -136,6 +137,17 @@ public class WaveManager : MonoBehaviour
 
         if (waveList.waves == null || waveList.waves.Length == 0)
             return null;
+
+        if (waveNumber % bossWaveInterval == 0)
+        {
+            List<Wave> bossWaves = new();
+            foreach (var w in waveList.waves)
+                if (w.isBossWave)
+                    bossWaves.Add(w);
+
+            if (bossWaves.Count > 0)
+                return bossWaves[Random.Range(0, bossWaves.Count)];
+        }
 
         float d = DifficultyManager.Instance != null ? DifficultyManager.Instance.Difficulty : 0f;
         float lo = d - difficultySelectionRange;

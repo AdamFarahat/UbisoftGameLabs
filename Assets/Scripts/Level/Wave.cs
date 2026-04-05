@@ -3,6 +3,7 @@ public class Wave
 {
     public string label;
     public float difficulty;
+    public bool isBossWave;
     public SpawnEntry[] spawnEntries;
 }
 
