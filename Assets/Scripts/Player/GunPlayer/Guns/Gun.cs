@@ -10,6 +10,9 @@ public class Gun : MonoBehaviour
     [SerializeField] protected int bulletDamage = 10;
     [SerializeField] protected float firingCooldown = 0.5f;
 
+    private ParticleSystem muzzleFlash;
+    protected ParticleSystem MuzzleFlash => muzzleFlash;
+
     private GunAnimationManager animator;
     private float cooldown = 0.0f;
 
@@ -21,6 +24,9 @@ public class Gun : MonoBehaviour
 
         animator = GetComponentInParent<GunAnimationManager>();
         Assert.IsNotNull(animator);
+
+        muzzleFlash = firePosition.GetComponentInChildren<ParticleSystem>();
+        Assert.IsNotNull(muzzleFlash);
     }
 
     protected virtual void Update()

@@ -74,6 +74,8 @@ public class MachineGun : Gun
         bullet.damage = bulletDamage;
         bullet.transform.forward = bullet.Direction;
 
+        MuzzleFlash.Play();
+
         shooting = true;
     }
 
