@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   scoreText: {fileID: 5384073636444206587}
   healthBarUI: {fileID: 1644242477858575745}
-  vignetteUI: {fileID: 0}
+  vignetteUI: {fileID: 3310502522484381943}
   superUI: {fileID: 161865433639030024}
   pauseMenuScreen: {fileID: 0}
   gameOverScreen: {fileID: 9089175420580484333}
