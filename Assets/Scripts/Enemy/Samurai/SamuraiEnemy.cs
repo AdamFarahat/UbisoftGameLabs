@@ -4,6 +4,7 @@ using UnityEngine.Assertions;
 
 public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 {
+    [SerializeField] private float damage = 12f;
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float stunTime = 1f;
@@ -191,6 +192,9 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
                 WalkForward();
                 break;
         }
+
+        if (lane.LaneDistance <= LaneSet.HeartLine)
+            playerStats.TakeDamage(damage);
     }
 
     private bool ParryIncomingBullets()

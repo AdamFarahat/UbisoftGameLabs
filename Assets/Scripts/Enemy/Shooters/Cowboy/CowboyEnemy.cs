@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 
 public class CowboyEnemy : ShooterEnemy
 {
+    [SerializeField] private float damage = 12f;
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float chargeupTime = 0.5f;
@@ -126,6 +127,9 @@ public class CowboyEnemy : ShooterEnemy
                 }
                 break;
         }
+
+        if (lane.LaneDistance <= LaneSet.HeartLine)
+            PlayerStats.Instance.TakeDamage(damage);
     }
 
     private void AnimateDodge()
