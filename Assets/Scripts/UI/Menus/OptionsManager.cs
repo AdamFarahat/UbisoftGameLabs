@@ -94,7 +94,8 @@ public class OptionsManager : MonoBehaviour
         UIScalingSlider.onValueChanged.AddListener(OnUIScalingSliderChange);
         EnemyEmissionSlider.onValueChanged.AddListener(OnEnemyEmissionSliderChange);
         UIEmissionSlider.onValueChanged.AddListener(OnFUIEmissionSliderChange);
-        QualitySlider.onValueChanged.AddListener(OnFontSizeSliderChange);         BackBtn.onClick.AddListener(OnBackBtnClick);
+        QualitySlider.onValueChanged.AddListener(OnFontSizeSliderChange);         
+        BackBtn.onClick.AddListener(OnBackBtnClick);
         IEnumerator setSelectedButtonNextFrame()
         {
             // Wait for the end of the frame to ensure the UI is fully active

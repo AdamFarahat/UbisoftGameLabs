@@ -13,16 +13,24 @@ public class UnderlayHighlighter : MonoBehaviour
     {
         Assert.IsNotNull(lane);
         Assert.IsNotNull(underlaySprite);
-        Assert.IsTrue(materials.Count == LaneSet.LaneCount);
+        Assert.IsTrue(materials.Count == LaneSet.LaneCount); 
     }
 
     private void Start()
     {
         underlaySprite.material = materials[lane.LaneIndex];
+
+        var originalEmissionColor = underlaySprite.material.GetColor("_EmissionColor");
+
+        underlaySprite.material.SetColor("_EmissionColor", originalEmissionColor * Settings.EnemyEmissionPourcentage);
     }
 
     private void Update()
     {
         underlaySprite.material = materials[lane.LaneIndex];
+
+        var originalEmissionColor = underlaySprite.material.GetColor("_EmissionColor");
+
+        underlaySprite.material.SetColor("_EmissionColor", originalEmissionColor * Settings.EnemyEmissionPourcentage);
     }
 }
