@@ -44,8 +44,14 @@ TagManager:
   - name: Background
     uniqueID: 1287720257
     locked: 0
+  - name: Shadows
+    uniqueID: 145107719
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Game Icons
+    uniqueID: 404495911
     locked: 0
   m_RenderingLayers:
   - Default

@@ -717,6 +717,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+    - target: {fileID: 1479831671600091517, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 7528878339980686641}
     - target: {fileID: 1549113328608229255, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -921,10 +925,6 @@ PrefabInstance:
       propertyPath: superTextTMP
       value: 
       objectReference: {fileID: 1728553017944006739}
-    - target: {fileID: 3165994353810697349, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3390272287381113074, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_fontAsset
       value: 
