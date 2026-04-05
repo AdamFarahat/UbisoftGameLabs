@@ -50,6 +50,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public FMOD.Studio.EventInstance PlayLooping(EventReference sound, GameObject obj)
+    {
+        FMOD.Studio.EventInstance instance = RuntimeManager.CreateInstance(sound);
+
+        RuntimeManager.AttachInstanceToGameObject(instance, obj);
+
+        instance.start();
+        return instance;
+    }
+
     private void OnDestroy()
     {
         if (currentMusic.isValid())
