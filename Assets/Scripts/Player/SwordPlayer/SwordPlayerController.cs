@@ -32,6 +32,7 @@ public class SwordPlayerController : PlayerController
     [Header("Parrying")]
     [SerializeField] private float parryBulletSpeedMult = 2.0f;
     [SerializeField] private float parryWindow = 0.5f;
+    [SerializeField] private int parryScore = 25;
 
     [Header("Scoring")]
     [SerializeField] private float blockingMultiplierGain = 0.2f;
@@ -404,11 +405,13 @@ public class SwordPlayerController : PlayerController
             if (state == SwordPlayerStates.Parrying)
             {
                 ReflectBackBullet(projectile);
+                AddContinuousMultiplier(bulletParryMultiplierGain);
                 DoParryActivity();
             }
             else if (state == SwordPlayerStates.Blocking && canBlock)
             {
                 ReflectBackBullet(projectile);
+                AddContinuousMultiplier(blockingMultiplierGain);
                 DoBlockActivity();
             }
         }
@@ -418,6 +421,7 @@ public class SwordPlayerController : PlayerController
     {
         parryTimer = 0f;
         playerStats.AddSwordSuper(5f);
+        AddScore(parryScore);
     }
 
     private void DoBlockActivity() {

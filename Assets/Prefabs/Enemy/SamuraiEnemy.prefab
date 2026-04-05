@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 10
   health: 10
-  score: 10
+  score: 500
   invulnerable: 0
   deathAnimationDuration: 0.1
 --- !u!114 &7389374849341678290
