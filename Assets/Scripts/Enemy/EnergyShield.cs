@@ -45,6 +45,7 @@ public class EnergyShield : MonoBehaviour
         if (shieldHealth <= 0)
             return;
 
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyShieldHit, transform.position);    
         shieldHealth -= damage;
         if (shieldHealth <= 0)
             Die();
@@ -60,7 +61,7 @@ public class EnergyShield : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        // TODO sfx ?
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyShieldBroken, transform.position);
         if (gameObject.activeSelf)
             StartCoroutine(Routine());
     }

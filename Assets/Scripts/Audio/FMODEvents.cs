@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using FMODUnity;
 using UnityEngine;
 
@@ -43,12 +44,22 @@ public class FMODEvents : MonoBehaviour
     #endregion
 
     #region ENEMIES
-    [field: Header("ENEMIES")]
+    [field: Header("GENERAL ENEMIES")]
     [field: SerializeField] public EventReference EnemyWeaponShot { get; private set; }
 
     [field: SerializeField] public EventReference EnemyHurt { get; private set; }
     [field: SerializeField] public EventReference EnemySpawn { get; private set; }
+    [field: SerializeField] public EventReference EnemyDeath { get; private set; }
+    [field: SerializeField] public EventReference EnemyShieldBroken { get; private set; }
+    [field: SerializeField] public EventReference EnemyShieldHit { get; private set; }
 
+    [field: Header("SAMURAI ENEMY")]
+    [field: SerializeField] public EventReference SamuraiSwordSlash { get; private set; }
+    [field: SerializeField] public EventReference SamuraiSwordParry { get; private set; }
+    [field: SerializeField] public EventReference SamuraiStunned { get; private set; }
+
+    [field: Header("Kamikaze Enemy")]
+    [field: SerializeField] public EventReference KamikazeExplode { get; private set; }
 
     #endregion
 

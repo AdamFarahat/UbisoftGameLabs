@@ -176,21 +176,63 @@ MonoBehaviour:
       Data2: 1140212501
       Data3: 127052165
       Data4: 1706519949
-    Path: event:/Enemies/EnemyGeneralShoot
+    Path: event:/Enemies/General/EnemyGeneralShoot
   <EnemyHurt>k__BackingField:
     Guid:
       Data1: 1599863940
       Data2: 1224990851
       Data3: -1832026188
       Data4: -1712828106
-    Path: event:/Enemies/EnemyGeneralHurt
+    Path: event:/Enemies/General/EnemyGeneralHurt
   <EnemySpawn>k__BackingField:
     Guid:
       Data1: 1666709823
       Data2: 1305560115
       Data3: -713791870
       Data4: 655864701
-    Path: event:/Enemies/EnemyGeneralSpawn
+    Path: event:/Enemies/General/EnemyGeneralSpawn
+  <EnemyDeath>k__BackingField:
+    Guid:
+      Data1: 183307922
+      Data2: 1268484543
+      Data3: -801189198
+      Data4: -1597923862
+    Path: event:/Enemies/General/EnemyDeath
+  <EnemyShieldBroken>k__BackingField:
+    Guid:
+      Data1: 1652638022
+      Data2: 1141844506
+      Data3: 2032744333
+      Data4: -2028880823
+    Path: event:/Enemies/General/EnemyShieldBroken
+  <EnemyShieldHit>k__BackingField:
+    Guid:
+      Data1: -1771746488
+      Data2: 1118006314
+      Data3: -1671544691
+      Data4: 1027841332
+    Path: event:/Enemies/General/EnemyShieldDeflect
+  <SamuraiSwordSlash>k__BackingField:
+    Guid:
+      Data1: -261032772
+      Data2: 1124936143
+      Data3: 758019505
+      Data4: 277070659
+    Path: event:/Enemies/Samurai/EnemySamuraiSlash
+  <SamuraiSwordParry>k__BackingField:
+    Guid:
+      Data1: -1784118466
+      Data2: 1157875095
+      Data3: -2140136283
+      Data4: -1763233578
+    Path: event:/Enemies/Samurai/EnemySamuraiParry
+  <SamuraiStunned>k__BackingField:
+    Guid:
+      Data1: -1270810515
+      Data2: 1180339044
+      Data3: 655415448
+      Data4: -424478798
+    Path: event:/Enemies/Samurai/EnemySamuraiStunned
   <UIHover>k__BackingField:
     Guid:
       Data1: 316438731
