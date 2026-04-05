@@ -42,12 +42,12 @@ public class AudioManager : MonoBehaviour
             currentMusic.start();
             currentMusicRef = music;
         }
-        // else
-        // {
-        //     currentMusic = RuntimeManager.CreateInstance(music);
-        //     currentMusic.start();
-        //     currentMusicRef = music;
-        // }
+        else
+        {
+            currentMusic = RuntimeManager.CreateInstance(music);
+            currentMusic.start();
+            currentMusicRef = music;
+        }
     }
 
     public FMOD.Studio.EventInstance PlayLooping(EventReference sound, GameObject obj)
