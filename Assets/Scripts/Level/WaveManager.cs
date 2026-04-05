@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float sigmoidSteepness = 0.06f;
     [SerializeField] private float sigmoidMidpoint = 90f;
     [SerializeField] private float waveStartDelay = 3f;
+    [SerializeField] private int bossWaveInterval = 5;
     private bool delayStarted = false;
 
     [Header("Wave Difficulty Selection")]
@@ -52,7 +53,7 @@ public class WaveManager : MonoBehaviour
 
         if (waitingForClear)
         {
-            if (waitingForClear && spawner.CurrentEnemies <= 0 && !delayStarted)
+            if (waitingForClear && spawner.CurrentEnemies <= 1 && !delayStarted)
             {
                 delayStarted = true;
                 StartCoroutine(DelayedNextWave());
@@ -60,13 +61,13 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.enemyCount)
+        if (Time.time >= nextSpawnTime && enemiesSpawned < currentWave.spawnEntries.Length)
         {
             SpawnFromWave();
             enemiesSpawned++;
             nextSpawnTime = Time.time + GetSpawnInterval();
 
-            if (enemiesSpawned >= currentWave.enemyCount)
+            if (enemiesSpawned >= currentWave.spawnEntries.Length)
                 waitingForClear = true;
         }
     }
@@ -75,12 +76,31 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waveStartDelay);
         delayStarted = false;
+        StartNextWave();
     }
 
     void SpawnFromWave()
     {
-        int type = currentWave.enemyTypes[Random.Range(0, currentWave.enemyTypes.Length)];
-        spawner.GetEnemy(type);
+        SpawnEntry entry = currentWave.spawnEntries[enemiesSpawned % currentWave.spawnEntries.Length];
+        int lane = entry.lane == -1 ? Random.Range(0, LaneSet.LaneCount) : entry.lane;
+        int type = entry.enemyType;
+        if (type == -1)
+        {
+            int randomInt = Random.Range(0, 101); 
+            if (randomInt <= 25)
+                type = 0;
+            else if (randomInt <=50) 
+                type = 1;
+            else if (randomInt <=65) 
+                type = 2;
+            else if (randomInt <=80) 
+                type = 3;
+            else if (randomInt <=90) 
+                type = 4; 
+            else 
+                type = 5;
+        }
+        spawner.GetEnemy(type, lane);
     }
 
     void StartNextWave()
@@ -94,8 +114,9 @@ public class WaveManager : MonoBehaviour
         }
 
         float d = DifficultyManager.Instance.Difficulty;
-        minSpawnTime = Mathf.Lerp(initialMinSpawnTime, finalMinSpawnTime, d);
-        maxSpawnTime = Mathf.Lerp(initialMaxSpawnTime, finalMaxSpawnTime, d);
+        float m = DifficultyManager.Instance.DifficultyMultiplier;
+        minSpawnTime = Mathf.Lerp(initialMinSpawnTime, finalMinSpawnTime, d) / m;
+        maxSpawnTime = Mathf.Lerp(initialMaxSpawnTime, finalMaxSpawnTime, d) / m;
 
         waveNumber++;
         DifficultyManager.Instance?.OnWaveStarted(waveNumber);
@@ -104,7 +125,7 @@ public class WaveManager : MonoBehaviour
         enemiesSpawned = 0;
         waitingForClear = false;
         waveStartTime = Time.time;
-        nextSpawnTime = Time.time;
+        nextSpawnTime = Time.time + GetSpawnInterval();
 
         Debug.Log($"Starting wave {waveNumber} '{currentWave.label}' | difficulty={currentWave.difficulty:F2}");
     }
@@ -116,6 +137,17 @@ public class WaveManager : MonoBehaviour
 
         if (waveList.waves == null || waveList.waves.Length == 0)
             return null;
+
+        if (PlayerStats.Instance.IsSuperActive())
+        {
+            List<Wave> bossWaves = new();
+            foreach (var w in waveList.waves)
+                if (w.isBossWave)
+                    bossWaves.Add(w);
+
+            if (bossWaves.Count > 0)
+                return bossWaves[Random.Range(0, bossWaves.Count)];
+        }
 
         float d = DifficultyManager.Instance != null ? DifficultyManager.Instance.Difficulty : 0f;
         float lo = d - difficultySelectionRange;

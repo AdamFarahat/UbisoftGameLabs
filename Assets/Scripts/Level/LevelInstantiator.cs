@@ -10,7 +10,7 @@ public class LevelInstantiator : MonoBehaviour
         switch (currentSceneName)
         {
             case "Game":
-                AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
+                AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameStart);
                 break;
             case "Menu":
                 AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTMenu);
@@ -18,8 +18,11 @@ public class LevelInstantiator : MonoBehaviour
             case "Tutorial":
                 AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTutorial);
                 break;
+            case "PlayerSelect":
+                DifficultyManager.Instance.ApplyDifficultySettings(PlayerSelect.Instance.gameObject.GetComponent<DifficultyTracker>().Difficulty);
+                break;
             default:
-                Debug.LogWarning($"No specific music assigned for scene '{currentSceneName}'.");
+                Debug.LogWarning($"No specific requirements assigned for scene '{currentSceneName}'.");
                 break;
         }
 

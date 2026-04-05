@@ -28,7 +28,7 @@ public class Shotgun : Gun
     {
         charging = PreStartFiring();
         chargeStartTime = Time.time;
-        // TODO play charge up animation
+        // TODO play charge up vfx
         // TODO play charge up sfx
     }
 

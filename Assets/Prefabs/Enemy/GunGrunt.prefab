@@ -402,6 +402,7 @@ MonoBehaviour:
   laneIndex: 2
   laneDistance: 200
   switchLaneDuration: 1
+  perpendicularOffset: 0
 --- !u!114 &681042347012851451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 10
   health: 20
-  score: 20
+  score: 200
   invulnerable: 0
   deathAnimationDuration: 0.1
 --- !u!65 &8799615496796102343
@@ -452,5 +453,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 2
-  maxSpeed: 8
+  minSpeed: 50
+  maxSpeed: 100

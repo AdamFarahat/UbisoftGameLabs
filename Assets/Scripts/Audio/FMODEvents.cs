@@ -63,10 +63,13 @@ public class FMODEvents : MonoBehaviour
     #region OST
     [field: Header("OST")]
 
+    [field: SerializeField] public EventReference OSTGameStart { get; private set; }
     [field: SerializeField] public EventReference OSTGame { get; private set; }
+    [field: SerializeField] public EventReference OSTGameUlt { get; private set; }
     [field: SerializeField] public EventReference OSTMenu { get; private set; }
 
     [field: SerializeField] public EventReference OSTutorial { get; private set; }
+    [field: SerializeField] public EventReference OSTGameOver { get; private set; }
 
     #endregion
 

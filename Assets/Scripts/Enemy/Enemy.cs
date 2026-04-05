@@ -29,6 +29,9 @@ public class Enemy : Poolable
     public System.Func<bool> ImmuneToSword;
     public System.Func<bool> StunFromBullet;
 
+    public UnityAction SurpassedPlayers;
+    private bool playersSurpassed = false;
+
     private void Awake()
     {
         laneBound = GetComponent<LaneBound>();
@@ -48,6 +51,11 @@ public class Enemy : Poolable
     {
         if (laneBound.LaneDistance <= LaneSet.HeartLine)
             Death();
+        else if (laneBound.LaneDistance <= LaneSet.LastPlayerLine && !playersSurpassed)
+        {
+            SurpassedPlayers?.Invoke();
+            playersSurpassed = true;
+        }
     }
 
     public override void TakeFromPool()
@@ -55,14 +63,13 @@ public class Enemy : Poolable
         base.TakeFromPool();
         ResetState();
         OnTakeFromPool?.Invoke();
+        playersSurpassed = false;
     }
 
     private void ResetState()
     {
         health = maxHealth;
         dead = health <= 0;
-
-        laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 

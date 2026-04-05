@@ -9,6 +9,12 @@ public class CowboyEnemy : ShooterEnemy
     [SerializeField] private float laneStayPeriod = 2f;
     [SerializeField] private float chargeupTime = 0.5f;
 
+    [SerializeField] private float surpassingAcceleration = 50f;
+    private bool playersSurpassed = false;
+
+    [SerializeField] private bool stayOutOfShotgunRange = false;
+    [SerializeField] private float shotgunRange = 75f;
+
     private enum CowBoyState { Walking, Charging, Dodging };
     private CowBoyState state = CowBoyState.Walking;
     private BulletDetector bulletDetector;
@@ -32,6 +38,7 @@ public class CowboyEnemy : ShooterEnemy
         Enemy enemy = GetComponent<Enemy>();
         enemy.OnTakeFromPool += ResetState;
         enemy.ImmuneToBullet = (_, _) => true;
+        enemy.SurpassedPlayers += () => { playersSurpassed = true; };
 
         animators = GetComponentsInChildren<SpriteAnimator>();
         Assert.IsTrue(animators.Length > 0);
@@ -53,6 +60,7 @@ public class CowboyEnemy : ShooterEnemy
         state = CowBoyState.Walking;
         shotCooldownLeft = shotCooldown;
         laneStayTimeLeft = laneStayPeriod;
+        playersSurpassed = false;
     }
 
     private void Update()
@@ -60,6 +68,9 @@ public class CowboyEnemy : ShooterEnemy
         switch (state)
         {
             case CowBoyState.Walking:
+                if (playersSurpassed)
+                    speed += surpassingAcceleration * Time.deltaTime;
+
                 if (AnyProjectilesComingInRange())
                 {
                     state = CowBoyState.Dodging;
@@ -162,6 +173,7 @@ public class CowboyEnemy : ShooterEnemy
 
     private void WalkForward()
     {
-        lane.LaneDistance -= speed * Time.deltaTime;
+        if (!stayOutOfShotgunRange || lane.LaneDistance > shotgunRange)
+           lane.LaneDistance -= speed * Time.deltaTime;
     }
 }
