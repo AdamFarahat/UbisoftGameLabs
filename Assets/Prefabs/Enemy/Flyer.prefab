@@ -320,6 +320,8 @@ MonoBehaviour:
   speed: 5
   maxShotCooldown: 0.5
   minShotCooldown: 0.01
+  minBulletSpeed: 75
+  maxBulletSpeed: 160
 --- !u!114 &8525619152686538179
 MonoBehaviour:
   m_ObjectHideFlags: 0
