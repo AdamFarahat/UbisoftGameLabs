@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
-    [SerializeField] private Transform colliderRoot;
+    [SerializeField] private Collider explosionCollider;
     [SerializeField] private GameObject vfx;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float explosionDuration = 0.5f;
@@ -22,10 +22,11 @@ public class Grenade : MonoBehaviour
 
     private void Awake()
     {
-        Assert.IsNotNull(colliderRoot);
+        Assert.IsNotNull(explosionCollider);
         Assert.IsNotNull(vfx);
         Assert.IsNotNull(spriteRenderer);
 
+        explosionCollider.enabled = false;
         vfx.SetActive(false);
     }
 
@@ -99,7 +100,8 @@ public class Grenade : MonoBehaviour
         }
 
         exploding = true;
-        transform.position = new(transform.position.x, 0f, transform.position.z);
+        transform.position = new(transform.position.x, Mathf.Max(transform.position.y, 0f), transform.position.z);
+        explosionCollider.enabled = true;
 
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 
