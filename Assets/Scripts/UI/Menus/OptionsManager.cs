@@ -36,12 +36,44 @@ public class OptionsManager : MonoBehaviour
 
         
     }
+
+    private void OnEnable()
+    {
+        gameObject.SetActive(true);
+
+        FontSizeSlider.value = Settings.Instance.fontSizePourcentage;
+        UIScalingSlider.value = Settings.Instance.uiScalingPourcentage;
+        EnemyEmissionSlider.value = Settings.Instance.enemyEmissionIntensity;
+        UIEmissionSlider.value = Settings.Instance.uiEmissionIntensity;
+        QualitySlider.value = QualitySettings.GetQualityLevel();
+
+        FontSizeSlider.onValueChanged.AddListener(OnFontSizeSliderChange);
+        UIScalingSlider.onValueChanged.AddListener(OnUIScalingSliderChange);
+        EnemyEmissionSlider.onValueChanged.AddListener(OnEnemyEmissionSliderChange);
+        UIEmissionSlider.onValueChanged.AddListener(OnUIEmissionSliderChange);
+        QualitySlider.onValueChanged.AddListener(OnQualitySliderChange);
+        MasterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeSliderChange);
+        MusicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeSliderSliderChange);
+        SFXVolumeSlider.onValueChanged.AddListener(OnSFXVolumeSliderChange);
+        ResetScoreBtn.onClick.AddListener(OnResetClick);
+        BackBtn.onClick.AddListener(OnBackBtnClick);
+
+
+        IEnumerator setSelectedButtonNextFrame()
+        {
+            // Wait for the end of the frame to ensure the UI is fully active
+            yield return new WaitForEndOfFrame();
+            eventSystem.SetSelectedGameObject(FontSizeSlider.gameObject);
+        }
+        StartCoroutine(setSelectedButtonNextFrame());
+    }
+
     void OnDisable()
     {
         FontSizeSlider.onValueChanged.RemoveListener(OnFontSizeSliderChange);
         UIScalingSlider.onValueChanged.RemoveListener(OnUIScalingSliderChange);
         EnemyEmissionSlider.onValueChanged.RemoveListener(OnEnemyEmissionSliderChange);
-        UIEmissionSlider.onValueChanged.RemoveListener(OnFUIEmissionSliderChange);
+        UIEmissionSlider.onValueChanged.RemoveListener(OnUIEmissionSliderChange);
         QualitySlider.onValueChanged.RemoveListener(OnQualitySliderChange);
         BackBtn.onClick.RemoveListener(OnBackBtnClick);
         ResetScoreBtn.onClick.RemoveListener(OnResetClick);
@@ -58,7 +90,8 @@ public class OptionsManager : MonoBehaviour
         {
             SceneManager.LoadScene("Menu");
         }
-        else { 
+        else
+        {
             gameObject.SetActive(false);
             if (PauseMenu != null)
                 PauseMenu.SetActive(true);
@@ -70,72 +103,44 @@ public class OptionsManager : MonoBehaviour
     {
         Settings.Instance.fontSizePourcentage = value;
     }
+
     private void OnUIScalingSliderChange(float value)
     {
-        Settings.Instance.UIScalingPourcentage = value;
+        Settings.Instance.uiScalingPourcentage = value;
     }
+    
     private void OnEnemyEmissionSliderChange(float value)
     {
-        Settings.Instance.EnemyEmissionIntensity = value;
-        Settings.OnUpdateEmissionPercentage();
+        Settings.Instance.enemyEmissionIntensity = value;
+        Settings.OnUpdateEnemyEmissionPercentage();
 
     }
-    private void OnFUIEmissionSliderChange(float value)
+    
+    private void OnUIEmissionSliderChange(float value)
     {
-        Settings.Instance.EnemyEmissionIntensity = value;
+        Settings.Instance.uiEmissionIntensity = value;
+        Settings.OnUpdateUIEmissionPercentage();
 
     }
+    
     private void OnSFXVolumeSliderChange(float value)
     {
         AudioManager.Instance.ChangeSFXVolume(value);
     }
+    
     private void OnMasterVolumeSliderChange(float value)
     {
         AudioManager.Instance.ChangeMasterVolume(value);
     }
+    
     private void OnMusicVolumeSliderSliderChange(float value)
     {
         AudioManager.Instance.ChangeMusicVolume(value);
     }
+    
     private void OnQualitySliderChange(float value)
     {
         Debug.Log("Quality slider changed to " + value);
-        QualitySettings.SetQualityLevel((int) value);
+        QualitySettings.SetQualityLevel((int)value);
     }
-
-    
-
-    private void OnEnable()
-    {       
-        gameObject.SetActive(true);
-
-        FontSizeSlider.value = Settings.Instance.fontSizePourcentage;
-        UIScalingSlider.value = Settings.Instance.UIScalingPourcentage;
-        EnemyEmissionSlider.value = Settings.Instance.EnemyEmissionIntensity;
-        UIEmissionSlider.value = Settings.Instance.UIEmissionIntensity;
-        QualitySlider.value = QualitySettings.GetQualityLevel();
-
-        FontSizeSlider.onValueChanged.AddListener(OnFontSizeSliderChange);
-        UIScalingSlider.onValueChanged.AddListener(OnUIScalingSliderChange);
-        EnemyEmissionSlider.onValueChanged.AddListener(OnEnemyEmissionSliderChange);
-        UIEmissionSlider.onValueChanged.AddListener(OnFUIEmissionSliderChange);
-        QualitySlider.onValueChanged.AddListener(OnQualitySliderChange);
-        MasterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeSliderChange);
-        MusicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeSliderSliderChange);
-        SFXVolumeSlider.onValueChanged.AddListener(OnSFXVolumeSliderChange);
-        ResetScoreBtn.onClick.AddListener(OnResetClick);
-        BackBtn.onClick.AddListener(OnBackBtnClick);
-        
-
-        IEnumerator setSelectedButtonNextFrame()
-        {
-            // Wait for the end of the frame to ensure the UI is fully active
-            yield return new WaitForEndOfFrame();
-            eventSystem.SetSelectedGameObject(FontSizeSlider.gameObject);
-        }
-        StartCoroutine(setSelectedButtonNextFrame());
-    }
-
-
-
 }

@@ -20,7 +20,7 @@ public class UnderlayHighlighter : MonoBehaviour
     {
         foreach (var material in materials)
         {
-            Settings.LoadMaterialIfNotProcessed(material);
+            Settings.LoadEnemyMaterialIfNotProcessed(material);
         }
         underlaySprite.material = materials[lane.LaneIndex];
     }
