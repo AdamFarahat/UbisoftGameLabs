@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 1308856832007123742}
   - component: {fileID: 681042347012851451}
   - component: {fileID: 8799615496796102343}
+  - component: {fileID: 2590929679270273919}
   m_Layer: 6
   m_Name: GunGrunt
   m_TagString: Enemy
@@ -387,6 +388,7 @@ MonoBehaviour:
   minShootingCooldown: 0.3
   minBulletSpeed: 50
   maxBulletSpeed: 200
+  laneIndexShootingTreshold: 0.1
   shootingIndex: 0
   projSpawnPoint: {fileID: 8791062963000604154}
 --- !u!114 &1308856832007123742
@@ -441,7 +443,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 5}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 5, z: 0}
 --- !u!114 &2590929679270273919
 MonoBehaviour:
