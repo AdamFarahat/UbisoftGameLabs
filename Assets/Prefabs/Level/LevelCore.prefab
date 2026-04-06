@@ -928,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2473879085737156632, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -407.00003
+      value: -407
       objectReference: {fileID: 0}
     - target: {fileID: 2536008214693815233, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1207,10 +1207,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3316695642865500085}
     - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-      propertyPath: pauseMenuScreen
-      value: 
-      objectReference: {fileID: 3065204290558245072}
-    - target: {fileID: 5369418078156620309, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: gunPlayerController
       value: 
       objectReference: {fileID: 0}
@@ -1412,7 +1408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6906445257376517656, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -192.61417
+      value: -192.61414
       objectReference: {fileID: 0}
     - target: {fileID: 6958113531512259841, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_fontAsset
@@ -1456,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7687357249026037854, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -147.61417
+      value: -147.61414
       objectReference: {fileID: 0}
     - target: {fileID: 7755386513681996777, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1612,17 +1608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &3065204290558245072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1894282643429711993, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}
-  m_PrefabInstance: {fileID: 3512828637775321257}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 986f94c0243744aacaf1518d09c5032c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
 --- !u!114 &3641813064841930185 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 165017622238035296, guid: 3fe03b863394e1443aa8e75e3f687ebc, type: 3}

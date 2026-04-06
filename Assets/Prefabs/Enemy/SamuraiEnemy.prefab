@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2664129d298c83541a218b1b51dfea7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SamuraiEnemy
+  damage: 12
   healthCollider: {fileID: 3182745716975533089}
   walkingSpeed: 10
   stunTime: 0.85

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[ExecuteAlways]
 public class UnderlayHighlighter : MonoBehaviour
 {
     [SerializeField] private LaneBound lane;
@@ -22,6 +21,11 @@ public class UnderlayHighlighter : MonoBehaviour
         {
             Settings.LoadEnemyMaterialIfNotProcessed(material);
         }
+        underlaySprite.material = materials[lane.LaneIndex];
+    }
+
+    private void OnValidate()
+    {
         underlaySprite.material = materials[lane.LaneIndex];
     }
 
