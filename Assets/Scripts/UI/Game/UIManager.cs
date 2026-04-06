@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerHUD gunPlayerHUD;
     [SerializeField] private PlayerHUD swordPlayerHUD;
 
+    [Header("Hyperion Gun Sprites")]
+    [SerializeField] private Holster playerHolster;
+    [SerializeField] private Image weaponIcon;
+    [SerializeField] private Sprite[] weaponSprites;
+
     // Cached References
     private GunPlayerController gunPlayerController;
     private SwordPlayerController swordPlayerController;
@@ -132,6 +137,7 @@ public class UIManager : MonoBehaviour
         UpdateSuperMeter();
         UpdateScore();
         UpdateHealth();
+        UpdateHyperionGunSprite();
     }
 
     // UPDATE UI'S
@@ -174,6 +180,15 @@ public class UIManager : MonoBehaviour
             currentHealthVisual = Mathf.Lerp(currentHealthVisual, playerStats.GetHealthPercentage(), LERP_SPEED);
             healthBarUI.material.SetFloat(amountID, currentHealthVisual);
         }
+    }
+
+    private void UpdateHyperionGunSprite()
+    {
+        if (playerHolster != null && weaponSprites.Length > 0)
+            {
+                int index = playerHolster.ActiveGunIndex;
+                weaponIcon.sprite = weaponSprites[index];
+            }
     }
 
     // EVENT HANDLERS 
