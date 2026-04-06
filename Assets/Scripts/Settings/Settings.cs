@@ -27,16 +27,36 @@ public class Settings : MonoBehaviour
     private readonly Dictionary<Material, UIEmission> defaultUIEmissions = new();
     private readonly Dictionary<Material, UIEmission> multipliedUIEmissions = new();
 
-    public static Settings Instance { get; private set; }
+    private static Settings _instance;
+    public static Settings Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<Settings>();
+
+                if (_instance == null)
+                {
+                    GameObject go = new("Settings");
+                    _instance = go.AddComponent<Settings>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return _instance;
+        }
+        private set => _instance = value;
+    }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this);
             return;
         }
-        Instance = this;
+
+        _instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
