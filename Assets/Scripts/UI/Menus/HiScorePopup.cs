@@ -10,7 +10,7 @@ public class HiScorePopup : MonoBehaviour
     [SerializeField] private float bounceScale = 1.15f;
     [SerializeField] private float bounceDuration = 0.6f;
 
-    void Start()
+    void OnEnable()
     {
         // Create sequences and ignore timeScale entirely
         Sequence seqGun = DOTween.Sequence().SetUpdate(true);
