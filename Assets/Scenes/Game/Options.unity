@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &1352005636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1986015862435542669, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+  m_PrefabInstance: {fileID: 1137273255464650126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
 --- !u!1001 &1137273255464650126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,6 +358,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3231413355679538039, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231413355679538039, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231413355679538039, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231413355679538039, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4115424571021940667, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -507,6 +534,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6845127146266249204, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 1352005636}
     - target: {fileID: 6847762346174701838, guid: da064ebe318e0f7479c7d122842822e8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
