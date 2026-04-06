@@ -43,14 +43,7 @@ public class GameOver : MonoBehaviour
         int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
         overallScoreText.text = score.ToString();
 
-        IEnumerator setSelectedButton()
-        {
-            // Wait for the end of the frame to ensure the UI is fully active
-            yield return new WaitForSecondsRealtime(timebeforeMenuAccessible);
-            eventSystem.SetSelectedGameObject(restartButton.gameObject);
-        }
-
-        StartCoroutine(setSelectedButton());
+        eventSystem.SetSelectedGameObject(restartButton.gameObject);
     }
 
     public void Restart(){

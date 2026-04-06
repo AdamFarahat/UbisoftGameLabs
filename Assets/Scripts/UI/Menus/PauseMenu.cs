@@ -38,11 +38,11 @@ public class PauseMenu : MonoBehaviour
         
         Debug.Log("Showing pause menu");
         Time.timeScale = 0f; // Pause the game
+        // Set the first selected button to resumeButton
+        gameObject.SetActive(true);
 
         pauseFader.FadeToOpaque();
         
-        // Set the first selected button to resumeButton
-        gameObject.SetActive(true);
 
         resumeButton.onClick.AddListener(OnResumeButtonClicked);
         optionsButton.onClick.AddListener(OnOptionsButtonClicked);
@@ -70,7 +70,10 @@ public class PauseMenu : MonoBehaviour
     public void OnResumeButtonClicked()
     {
         Time.timeScale = 1f;
-        pauseFader.FadeToTransparent();
+        pauseFader.FadeToTransparent(() => 
+        {
+            gameObject.SetActive(false);
+        });
 
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);

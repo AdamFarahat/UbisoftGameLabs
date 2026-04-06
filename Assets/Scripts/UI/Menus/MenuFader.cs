@@ -24,7 +24,6 @@ public class MenuFader : MonoBehaviour
         if (canvasGroup == null)
         {
             canvasGroup = GetComponent<CanvasGroup>();
-            canvasGroup.alpha = 0f; 
         }
 
         canvasGroup.DOKill();
