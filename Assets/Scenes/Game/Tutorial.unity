@@ -5649,7 +5649,10 @@ PrefabInstance:
 
 
         Press <sprite name="bA">
-        to <b>slash</b>!'
+        to <b>slash</b>!
+
+
+        Don''t get <b>stunned</b> by the enemies!'
       objectReference: {fileID: 0}
     - target: {fileID: 2261769771574237402, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_fontSizeBase
