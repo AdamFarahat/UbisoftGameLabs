@@ -39,6 +39,8 @@ public class TutorialManager : MonoBehaviour
     private TutorialBase[] tutorials;
     private int tutorialIndex = -1;
 
+    [SerializeField] private DifficultyMenu difficultyMenu;
+
     private void Awake()
     {
         Assert.IsNotNull(fadeOutImage);
@@ -54,6 +56,8 @@ public class TutorialManager : MonoBehaviour
         Assert.IsNotNull(scoreUI);
         Assert.IsNotNull(gunPlayerMultiplierUI);
         Assert.IsNotNull(swordPlayerMultiplierUI);
+
+        Assert.IsNotNull(difficultyMenu);
 
         tutorials = GetComponentsInChildren<TutorialBase>();
     }
@@ -106,9 +110,12 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialIndex++;
         if (tutorialIndex < tutorials.Length)
+        {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UITip, Vector3.zero);
             tutorials[tutorialIndex].DoTutorial();
+        }
         else
-            StartGame();
+            SetDifficulty();
     }
 
     public void ExitTutorial()
@@ -121,7 +128,12 @@ public class TutorialManager : MonoBehaviour
         tutorials[tutorialIndex].OnStartPressed();
     }
 
-    private void StartGame()
+    private void SetDifficulty()
+    {
+        difficultyMenu.ShowDifficultyMenu();
+    }
+
+    public void StartGame()
     {
         ExitScene("Game");
     }

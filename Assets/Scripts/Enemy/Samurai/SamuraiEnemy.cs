@@ -4,12 +4,16 @@ using UnityEngine.Assertions;
 
 public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 {
+    [SerializeField] private float damage = 12f;
     [SerializeField] private Collider healthCollider;
     [SerializeField] private float walkingSpeed = 10f;
     [SerializeField] private float stunTime = 1f;
     [SerializeField] private EnemySwordHitbox swordHitBox;
     [SerializeField] private float parrySpeedMultipliyer = 1.1f;
     [SerializeField] private float surpassingAcceleration = 50f;
+    [SerializeField] private GameObject blockSparksPrefab;
+    [SerializeField] private Transform blockSparksPosition;
+    [SerializeField] private GameObject swordDraggingSparks;
 
     [Header("Stunned")]
     [SerializeField] private float stunnedDuration = 0.5f;
@@ -34,6 +38,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     private Billboard[] billboards;
     private SpriteAnimator[] animators;
 
+    private Coroutine parryRoutine;
     private Coroutine slashRoutine;
 
     private ShotgunImmune shotgunImmunity;
@@ -49,6 +54,11 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         Assert.IsNotNull(lane);
         Assert.IsNotNull(swordHitBox);
         Assert.IsNotNull(healthCollider);
+
+        Assert.IsNotNull(blockSparksPrefab);
+        Assert.IsNotNull(blockSparksPosition);
+        Assert.IsNotNull(swordDraggingSparks);
+        swordDraggingSparks.SetActive(true);
 
         Enemy enemy = GetComponent<Enemy>();
         Assert.IsNotNull(enemy);
@@ -85,7 +95,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 
     private void ResetState()
     {
-        state = SamuraiState.Walking;
+        SetState(SamuraiState.Walking);
         numberOfSlashesDone = 0;
         lane.LaneDistance = LaneSet.SpawnLine;
         swordHitBox.gameObject.SetActive(false);
@@ -98,6 +108,12 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         swordPlayerSlashed = false;
     }
 
+    private void SetState(SamuraiState state)
+    {
+        this.state = state;
+        swordDraggingSparks.SetActive(state == SamuraiState.Walking || state == SamuraiState.Leaving);
+    }
+
     private void Update()
     {
         switch (state)
@@ -105,13 +121,30 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             case SamuraiState.Walking:
                 if (ParryIncomingBullets())
                 {
-                    // TODO sfx
-                    foreach (SpriteAnimator animator in animators)
-                        animator.PlayOneShot("Parry");
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
+
+                    if (parryRoutine == null)
+                    {
+                        float parryDuration = animators[0].GetAnimationDuration("Parry");
+                        foreach (SpriteAnimator animator in animators)
+                            animator.PlayOneShot("Parry");
+
+                        swordDraggingSparks.SetActive(false);
+
+                        IEnumerator ParryEndRoutine()
+                        {
+                            yield return new WaitForSeconds(parryDuration);
+
+                            SetState(state);  // refresh sparks state
+                            parryRoutine = null;
+                        }
+
+                        parryRoutine = StartCoroutine(ParryEndRoutine());
+                    }
                 }
 
                 if (IsInSlashingRange())
-                    state = SamuraiState.Slashing;
+                    SetState(SamuraiState.Slashing);
                 else
                     WalkForward();
                 break;
@@ -130,9 +163,9 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
                         foreach (var animator in animators)
                             animator.PlayOneShot("Windup");
                         yield return new WaitForSeconds(windupDuration);
-
                         foreach (var animator in animators)
                             animator.PlayOneShot("Slash");
+                        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
                         yield return new WaitForSeconds(slashDuration);
 
                         swordHitBox.gameObject.SetActive(false);
@@ -140,7 +173,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
                         swordPlayerSlashed = false;
 
                         if (++numberOfSlashesDone >= numberOfSlashes)
-                            state = SamuraiState.Leaving;
+                            SetState(SamuraiState.Leaving);
                         else
                             yield return new WaitForSeconds(slashCooldown);
                         slashRoutine = null;
@@ -159,11 +192,17 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
                 WalkForward();
                 break;
         }
+
+        if (lane.LaneDistance <= LaneSet.HeartLine)
+            playerStats.TakeDamage(damage);
     }
 
     private bool ParryIncomingBullets()
     {
-        return HandleIncomingBullets(b => b.Parry(null, parrySpeedMultipliyer, Bullet.ProjectileState.ParriedByEnemy));
+        return HandleIncomingBullets(b => { 
+            b.Parry(null, parrySpeedMultipliyer, Bullet.ProjectileState.ParriedByEnemy);
+            Instantiate(blockSparksPrefab, b.transform.position, Quaternion.identity);
+        });
     }
 
     private bool DestroyIncomingBullets()
@@ -200,8 +239,8 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     {
         if (state != SamuraiState.Stunned)
         {
-            // TODO sfx
-            // TODO flash vfx
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
+            Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
             return true;
         }
         return false;
@@ -212,16 +251,16 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         if (state != SamuraiState.Walking)
             return false;
 
-        state = SamuraiState.Stunned;
+        SetState(SamuraiState.Stunned);
 
-        // TODO stun sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
         foreach (var animator in animators)
             animator.PlayOneShot("Stunned");
 
         IEnumerator Routine()
         {
             yield return new WaitForSeconds(stunnedDuration);
-            state = SamuraiState.Walking;
+            SetState(SamuraiState.Walking);
         }
 
         StartCoroutine(Routine());
@@ -232,6 +271,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
     private void OnHitByShotgun()
     {
         // TODO flash vfx
+        Instantiate(blockSparksPrefab, blockSparksPosition.position, Quaternion.identity);
     }
 
     private void WalkForward()
@@ -281,7 +321,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
 
     private void StunSamurai()
     {
-        state = SamuraiState.Stunned;
+        SetState(SamuraiState.Stunned);
         shotgunImmunity.enabled = false;
         laserImmunity.enabled = false;
 
@@ -295,7 +335,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             slashRoutine = null;
         }
 
-        // TODO stun sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiStunned, transform.position);
 
         foreach (var animator in animators)
             animator.PlayOneShot("Stunned");
@@ -303,10 +343,10 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
         IEnumerator Routine()
         {
             yield return new WaitForSeconds(stunnedDuration);
-            state = SamuraiState.Slashing;
+            SetState(SamuraiState.Slashing);
 
             if (++numberOfSlashesDone >= numberOfSlashes)
-                state = SamuraiState.Leaving;
+                SetState(SamuraiState.Leaving);
             else
                 yield return new WaitForSeconds(slashCooldown);
         }

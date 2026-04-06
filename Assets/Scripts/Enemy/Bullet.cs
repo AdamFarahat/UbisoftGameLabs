@@ -100,9 +100,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
-            return;
-
         if (state == ProjectileState.ParriedByEnemy || state == ProjectileState.ShotByEnemy)
             return;
 
@@ -174,8 +171,6 @@ public class Bullet : MonoBehaviour
         sphereCollider.radius = parryColliderScaleUp * normalColliderRadius;
 
         stunner.enabled = !stunner.enabled;
-
-        // TODO flash vfx
     }
 
     private void OnEnemyKill(Enemy enemy)

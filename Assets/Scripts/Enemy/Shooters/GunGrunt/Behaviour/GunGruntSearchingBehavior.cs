@@ -4,7 +4,6 @@ public class GunGruntSearchingBehavior : StateMachineBehaviour
 {
     public string LaneTag = "LaneCollider";
     public string foundTriggerName = "PlayerSeen";
-    public float distanceTreshold = 0.1f;
 
     GunGruntEnemyAI shooterAI;
     private float researchTime = 0f;
@@ -31,7 +30,7 @@ public class GunGruntSearchingBehavior : StateMachineBehaviour
             laneBound.MoveToLane(shooterAI.shootingIndex);
         }
 
-        if (Mathf.Abs(laneBound.LaneIndex - shooterAI.shootingIndex) <= distanceTreshold)
+        if (Mathf.Abs(laneBound.LaneIndex - shooterAI.shootingIndex) <= shooterAI.LaneIndexShootingTreshold)
         {
             if (GunPlayerController.LaneIndex == shooterAI.shootingIndex || SwordPlayerController.LaneIndex == shooterAI.shootingIndex)
             {

@@ -127,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 2978410399742050359}
     - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_ActionEvents.Array.data[16].m_ActionId
@@ -144,6 +144,14 @@ PrefabInstance:
     - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
       propertyPath: m_ActionEvents.Array.data[17].m_ActionName
       value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash,/Gamepad/select]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6864494790772817345, guid: d2347e190a256fd40be503e5e276a207, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash,/Gamepad/select]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

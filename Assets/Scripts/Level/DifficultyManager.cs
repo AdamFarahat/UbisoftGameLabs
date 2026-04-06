@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Singleton. Tracks global difficulty (0–1) that advances on a sigmoid
-/// over wave count. Enemy scripts query this for their speed multiplier.
-/// </summary>
 public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager Instance { get; private set; }
@@ -15,6 +11,7 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] private float sigmoidSteepness = 0.4f;
 
     public float Difficulty { get; private set; }
+    public float DifficultyMultiplier => GetDifficultyMultiplier();
 
     private void Awake()
     {
@@ -24,12 +21,51 @@ public class DifficultyManager : MonoBehaviour
 
     public void OnWaveStarted(int waveNumber)
     {
-        Difficulty = Sigmoid(waveNumber);
+        Difficulty = Sigmoid(waveNumber) * GetDifficultyMultiplier();
+        Difficulty = Mathf.Clamp01(Difficulty);
         Debug.Log($"[Difficulty] Wave {waveNumber} → difficulty = {Difficulty:F3}");
     }
-
     private float Sigmoid(float x)
     {
         return 1f / (1f + Mathf.Exp(-sigmoidSteepness * (x - sigmoidMidpointWave)));
+    }
+
+    public enum GameDifficulty { Easy, Medium, Hard }
+
+    [SerializeField] private GameDifficulty gameDifficulty = GameDifficulty.Medium;
+
+    public GameDifficulty DifficultySetting => gameDifficulty;
+
+    public void ApplyDifficultySettings(string difficulty)
+    {
+       switch (difficulty)
+        {
+            case "Easy":
+                gameDifficulty = GameDifficulty.Easy;
+                break;
+            case "Normal":
+                gameDifficulty = GameDifficulty.Medium;
+                break;
+            case "Hard":
+                gameDifficulty = GameDifficulty.Hard;
+                break;
+            default:
+                Debug.LogWarning($"Unknown difficulty setting: {difficulty}. Defaulting to Medium.");
+                gameDifficulty = GameDifficulty.Medium;
+                break;
+        }
+
+        Debug.Log($"[DifficultyManager] Difficulty set to {gameDifficulty}");
+    }
+
+    private float GetDifficultyMultiplier()
+    {
+        return gameDifficulty switch
+        {
+            GameDifficulty.Easy => 0.5f,
+            GameDifficulty.Medium => 1.0f,
+            GameDifficulty.Hard => 1.50f,
+            _ => 1f
+        };
     }
 }

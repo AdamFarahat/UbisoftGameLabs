@@ -14,6 +14,8 @@ public class Revolver : Gun
     private float chargeStartTime = 0f;
     private bool onCooldown = false;
 
+    private Coroutine muzzleFlashRoutine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,7 +34,7 @@ public class Revolver : Gun
         charging = PreStartFiring();
         chargeStartTime = Time.time;
         // TODO start charge up animation
-        // TODO start charge up sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverCharge, transform.position);
     }
 
     public override void StopFiring()
@@ -47,10 +49,13 @@ public class Revolver : Gun
             bullet.damage = bulletDamage;
             bullet.Initialize(null, FirePosition.position, transform.forward, speed, Bullet.ProjectileState.ShotByPlayer);
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverShot, transform.position);
+
+            MuzzleFlash.Play();
         }
         else
         {
-            InstantiateShot<LaserShot>(laserShotPrefab).fakeParent = FirePosition;
+            LaserShot laser = InstantiateShot<LaserShot>(laserShotPrefab);
+            laser.fakeParent = FirePosition;
             onCooldown = true;
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverAltShot, transform.position);
             IEnumerator Cooldown()
@@ -60,6 +65,27 @@ public class Revolver : Gun
             }
 
             StartCoroutine(Cooldown());
+
+            IEnumerator MuzzleFlashRoutine()
+            {
+                while (true)
+                {
+                    MuzzleFlash.Play();
+                    yield return new WaitForSeconds(MuzzleFlash.main.duration);
+                }
+            }
+
+            if (muzzleFlashRoutine != null)
+                StopCoroutine(muzzleFlashRoutine);
+
+            laser.LaserEnd += () => {
+                if (muzzleFlashRoutine != null)
+                {
+                    StopCoroutine(muzzleFlashRoutine);
+                    muzzleFlashRoutine = null;
+                }
+            };
+            muzzleFlashRoutine = StartCoroutine(MuzzleFlashRoutine());
         }
     }
 

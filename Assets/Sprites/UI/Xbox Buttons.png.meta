@@ -558,6 +558,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Xbox Buttons_21
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931ed995e46a34c4a9fdbce9d314c029
+      internalID: 1851175180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -588,6 +610,7 @@ TextureImporter:
       Xbox Buttons_19: -853524696
       Xbox Buttons_2: -1993805286
       Xbox Buttons_20: 1224768338
+      Xbox Buttons_21: 1851175180
       Xbox Buttons_3: -704500867
       Xbox Buttons_4: 148167513
       Xbox Buttons_5: -1162234303

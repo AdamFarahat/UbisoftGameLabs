@@ -6,7 +6,9 @@ public class ShotgunBlast : MonoBehaviour
 {
     [SerializeField] private new ParticleSystem particleSystem;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask nearLayer;
     [SerializeField] private Collider[] ignoreColliders;
+    [SerializeField] private Collider movingCollider;
     private readonly HashSet<Enemy> enemiesHit = new();
 
     public float coneAngle = 45f;
@@ -21,6 +23,7 @@ public class ShotgunBlast : MonoBehaviour
     private void Awake()
     {
         Assert.IsNotNull(particleSystem);
+        Assert.IsNotNull(movingCollider);
 
         foreach (Collider collider in ignoreColliders)
             collider.enabled = false;
@@ -36,7 +39,7 @@ public class ShotgunBlast : MonoBehaviour
         invVerticalScale = 1f / particleSystem.shape.scale.y;
 
         particleSystem.Play();
-        transform.localScale = new(range, range, range);
+        particleSystem.transform.localScale *= range;
     }
 
     private void Update()
@@ -47,39 +50,31 @@ public class ShotgunBlast : MonoBehaviour
         age += Time.deltaTime;
 
         float a = Mathf.Clamp01(age * invDuration);
-        float interpRange = Mathf.Lerp(0f, range, a);
-        Vector3 forward = transform.forward;
-        forward.y *= invVerticalScale;
-        forward.Normalize();
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, interpRange, enemyLayer);
-        foreach (Collider hit in hits)
-        {
-            Vector3 displacement = hit.transform.position - transform.position;
-            displacement.y *= invVerticalScale;
-            if (Vector3.Angle(displacement, forward) < coneAngle && Vector3.Dot(displacement, forward) <= interpRange) // enemy is within cone range
-                OnTriggerEnter(hit);
-        }
+        Vector3 pos = movingCollider.transform.position;
+        pos.z = Mathf.Lerp(0, range, a);
+        movingCollider.transform.position = pos;
+
+        float w = Mathf.Tan(Mathf.Deg2Rad * coneAngle) * pos.z;
+        Vector3 scale = movingCollider.transform.localScale;
+        scale.x = w;
+        scale.y = w * heightScale;
+        movingCollider.transform.localScale = scale;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
+
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
+            enemiesHit.Add(enemy);
             // TODO Do Shotgun Impact SFX here
             if (enemy.TryGetComponentInHierarchy(out ShotgunImmune si) && si.isActiveAndEnabled)
-            {
                 si.HitByShotgun?.Invoke();
-            }
-            else
-            {
-                enemiesHit.Add(enemy);
-                if (enemy.TakeDamage(damage))
-                {
-                    OnEnemyKill(enemy);
-                }
-            }
+            else if (enemy.TakeDamage(damage))
+                OnEnemyKill(enemy);
         }
     }
 

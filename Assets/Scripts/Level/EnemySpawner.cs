@@ -30,10 +30,13 @@ public class EnemySpawner : MonoBehaviour
 
     public int CurrentEnemies => currentEnemies;
 
-    public GameObject GetEnemy(int type)
+    public GameObject GetEnemy(int type, int lane)
     {
         currentEnemies++;
-        return enemyPools[type].Get();
+        GameObject enemy = enemyPools[type].Get();
+        if (enemy.TryGetComponent(out LaneBound laneBound))
+            laneBound.LaneIndex = lane;
+        return enemy;
     }
 
     private GameObject CreateEnemy(int type)

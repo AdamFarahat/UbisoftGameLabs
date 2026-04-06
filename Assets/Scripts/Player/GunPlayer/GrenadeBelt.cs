@@ -81,7 +81,7 @@ public class GrenadeBelt : MonoBehaviour
             throwChargeTime = 0f;
 
             animator.StartGrenadeAim();
-            // TODO sfx ?
+            // TODO Start playing grenade aiming SFX
         }
     }
 
@@ -89,7 +89,7 @@ public class GrenadeBelt : MonoBehaviour
     {
         SetThrowing(false);
         animator.StopGrenadeAim();
-        // TODO sfx ?
+        // TODO Stop playing grenade aiming SFX
     }
 
     public void Throw()

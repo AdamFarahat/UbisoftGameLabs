@@ -70,8 +70,6 @@ public class Enemy : Poolable
     {
         health = maxHealth;
         dead = health <= 0;
-
-        laneBound.LaneIndex = Random.Range(0, LaneSet.LaneCount);
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemySpawn, transform.position);
     }
 
@@ -110,6 +108,7 @@ public class Enemy : Poolable
 
         IEnumerator DeathRoutine()
         {
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyDeath, transform.position);
             if (spriteRenderer != null)
             {
                 Color color = spriteRenderer.color;

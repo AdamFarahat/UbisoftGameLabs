@@ -15,11 +15,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image superUI;
     [SerializeField] private PauseMenu pauseMenuScreen;
     [SerializeField] private GameOver gameOverScreen;
-    [SerializeField] private float scoreIncreaseSpeed = 20f;
+    [SerializeField] private float scoreIncreaseTime = 1f;
 
     [Header("Player Specific HUDs")]
     [SerializeField] private PlayerHUD gunPlayerHUD;
     [SerializeField] private PlayerHUD swordPlayerHUD;
+
+    [Header("Hyperion Gun Sprites")]
+    [SerializeField] private Holster playerHolster;
+    [SerializeField] private Image weaponIcon;
+    [SerializeField] private Sprite[] weaponSprites;
 
     // Cached References
     private GunPlayerController gunPlayerController;
@@ -50,6 +55,7 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(scoreText, "Score Text is missing!");
         Assert.IsNotNull(gunPlayerHUD, "Gun Player HUD is missing!");
         Assert.IsNotNull(swordPlayerHUD, "Sword Player HUD is missing!");
+        Assert.IsNotNull(vignetteUI, "Vignette UI is missing!");
     }
 
     void Start()
@@ -72,7 +78,6 @@ public class UIManager : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("Start button pressed. Toggling pause menu.");
         if(SceneManager.GetActiveScene().name != "Game") return;
         gunPlayerController.PlayerInput.enabled = false;
         swordPlayerController.PlayerInput.enabled = false;
@@ -132,6 +137,7 @@ public class UIManager : MonoBehaviour
         UpdateSuperMeter();
         UpdateScore();
         UpdateHealth();
+        UpdateHyperionGunSprite();
     }
 
     // UPDATE UI'S
@@ -160,6 +166,7 @@ public class UIManager : MonoBehaviour
         if (scoreManagerSO != null)
         {
             targetScore = ScoreManagerSO.CalculateOverallTeamScore();
+            float scoreIncreaseSpeed = (targetScore - currentScore) / scoreIncreaseTime;
             currentScore += Time.deltaTime * scoreIncreaseSpeed;
             currentScore = Mathf.Min(currentScore, targetScore);
             scoreText.text = Mathf.RoundToInt(currentScore).ToString();
@@ -173,6 +180,15 @@ public class UIManager : MonoBehaviour
             currentHealthVisual = Mathf.Lerp(currentHealthVisual, playerStats.GetHealthPercentage(), LERP_SPEED);
             healthBarUI.material.SetFloat(amountID, currentHealthVisual);
         }
+    }
+
+    private void UpdateHyperionGunSprite()
+    {
+        if (playerHolster != null && weaponSprites.Length > 0)
+            {
+                int index = playerHolster.ActiveGunIndex;
+                weaponIcon.sprite = weaponSprites[index];
+            }
     }
 
     // EVENT HANDLERS 
