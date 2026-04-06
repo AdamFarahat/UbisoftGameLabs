@@ -17,7 +17,7 @@ public class Settings : MonoBehaviour
 
         public UIEmission(Material m, string property)
         {
-            this.color = m.GetColor(property);
+            color = m.GetColor(property);
             this.property = property;
         }
     }
@@ -43,10 +43,16 @@ public class Settings : MonoBehaviour
     private void OnDestroy()
     {
         foreach (var m in defaultEnemyEmissions)
-            m.Key.SetColor(m.Value.property, m.Value.color);
+        {
+            if (m.Key != null)
+                m.Key.SetColor(m.Value.property, m.Value.color);
+        }
 
         foreach (var m in defaultUIEmissions)
-            m.Key.SetColor(m.Value.property, m.Value.color);
+        {
+            if (m.Key != null)
+                m.Key.SetColor(m.Value.property, m.Value.color);
+        }
     }
 
     private static void ApplyEnemyMultipliedMaterial(Material m)

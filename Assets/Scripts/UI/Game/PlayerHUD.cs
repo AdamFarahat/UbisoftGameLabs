@@ -19,8 +19,14 @@ public class PlayerHUD : MonoBehaviour
 
     public void Initialize()
     {
-        if (multiplierUI != null) multiplierUI.material = new Material(multiplierUI.material);
-        if (cooldownUI != null) cooldownUI.material = new Material(cooldownUI.material);
+        if (multiplierUI != null)
+            multiplierUI.material = new Material(multiplierUI.material);
+
+        if (cooldownUI != null)
+        {
+            cooldownUI.material = new Material(cooldownUI.material);
+            Settings.LoadUIMaterialIfNotProcessed(cooldownUI.material, "_Emission");
+        }
     }
 
     public void UpdateCooldown(float cooldownPercent)
