@@ -10,15 +10,24 @@ public class MenuFader : MonoBehaviour
 
     void Awake()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        // Start invisible        
-        canvasGroup.alpha = 0f; 
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup.alpha = 0f; // Start invisible
+        }
     }
 
     public void FadeToOpaque(Action onComplete = null)
     {
-        canvasGroup.DOKill();
         gameObject.SetActive(true);
+
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup.alpha = 0f; 
+        }
+
+        canvasGroup.DOKill();
         canvasGroup.interactable = true;
         // Animate even when timescale is set to 0
         canvasGroup.DOFade(1f, fadeDuration).SetUpdate(true).OnComplete(() => 
@@ -29,6 +38,10 @@ public class MenuFader : MonoBehaviour
 
     public void FadeToTransparent(Action onComplete = null) 
     {
+        if (canvasGroup == null)
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
         canvasGroup.DOKill();
         canvasGroup.interactable = false;
     

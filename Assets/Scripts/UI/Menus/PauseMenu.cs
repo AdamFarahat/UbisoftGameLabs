@@ -61,7 +61,6 @@ public class PauseMenu : MonoBehaviour
     {
         
         Debug.Log("Showing pause menu");
-        pauseFader.FadeToOpaque();
         Time.timeScale = 0f; // Pause the game
 
         // Set the first selected button to resumeButton
