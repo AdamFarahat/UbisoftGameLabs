@@ -147,6 +147,7 @@ MonoBehaviour:
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
   speed: 5
+  damage: 12
   healthCollider: {fileID: 936547612651599108}
   laneStayPeriod: 2
   chargeupTime: 0.5

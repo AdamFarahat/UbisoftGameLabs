@@ -60,6 +60,9 @@ MonoBehaviour:
     Path: event:/PlayerWeapons/PlayerRevolverBulletImpact
   parryColliderScaleUp: 1.5
   speed: 200
+  boundsX: {x: -100, y: 100}
+  boundsY: {x: -50, y: 50}
+  boundsZ: {x: -200, y: 500}
 --- !u!54 &59578646894539134
 Rigidbody:
   m_ObjectHideFlags: 0
