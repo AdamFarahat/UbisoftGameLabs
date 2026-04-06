@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro; 
 using DG.Tweening;
+using UnityEngine.Assertions;
 
 public class MultiplierTextManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class MultiplierTextManager : MonoBehaviour
 
     void Awake()
     {
+        Assert.IsNotNull(superText);
+        Assert.IsNotNull(superTextTMP);
+
         foreach (var text in texts)
         {
             text.gameObject.SetActive(false);
