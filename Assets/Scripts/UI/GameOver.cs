@@ -13,8 +13,10 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI overallScoreText;
     [SerializeField] private Button restartButton;
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private MenuFader gameOverFader;
+    [SerializeField] private MenuFader blackScreenFader;
 
-    [SerializeField]private EventSystem eventSystem;
+    [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private float delayBeforeSelectingRestartButton = 1f;
 
@@ -38,6 +40,7 @@ public class GameOver : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        gameOverFader.FadeToOpaque();
         gunScore.text = GunPlayerController.Instance.Score.ToString();
         swordScore.text = SwordPlayerController.Instance.Score.ToString();
     
@@ -55,22 +58,17 @@ public class GameOver : MonoBehaviour
 
     public void Restart(){
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        blackScreenFader.FadeToOpaque(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        });
     }
 
     public void MainMenu(){
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    
+        blackScreenFader.FadeToOpaque(() =>
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        });
     }
 }
