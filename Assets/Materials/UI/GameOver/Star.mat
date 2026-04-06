@@ -56,6 +56,6 @@ Material:
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _CooldownColor: {r: 1, g: 0.7767295, b: 0.8103731, a: 0.4901961}
-    - _Emission: {r: 1.9480386, g: 0.58558536, b: 0.14089571, a: 1}
+    - _Emission: {r: 1.4980392, g: 0.4503144, b: 0.10834862, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
