@@ -195,8 +195,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8526617770775972719, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2175,8 +2174,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8526617770775972719, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2797,8 +2795,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8526617770775972719, guid: 0e837da320cdc384298facf6e726f304, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5339,8 +5336,8 @@ PrefabInstance:
       value: 'Press <sprite name="bUp"> to <b>jump</b>!
 
 
-        Sprite <sprite
-        name="bDown"> to <b>drop quickly</b> in the air!'
+        Press <sprite name="bDown">
+        to <b>drop quickly</b> in the air!'
       objectReference: {fileID: 0}
     - target: {fileID: 4440763013817764427, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_Pivot.x
