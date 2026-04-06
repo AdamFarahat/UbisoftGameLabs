@@ -90,7 +90,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: a785fba21704e56428fbd2891b61fd25, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -178,6 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4496502139177846877}
+  - component: {fileID: 5865618427390432438}
   m_Layer: 0
   m_Name: Crosshairs
   m_TagString: Untagged
@@ -201,6 +202,21 @@ Transform:
   - {fileID: 3572197058494347263}
   m_Father: {fileID: 6200452433833200671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5865618427390432438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230984329135190683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aa05ad155019e44b90a08d5b3d6af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEmissionRegister
+  materials:
+  - mat: {fileID: 2100000, guid: a785fba21704e56428fbd2891b61fd25, type: 2}
+    property: _EmissionColor
 --- !u!1 &4814459147427044228
 GameObject:
   m_ObjectHideFlags: 0
