@@ -41,6 +41,9 @@ public class OptionsManager : MonoBehaviour
         Assert.IsNotNull(masterVolumeSlider);
         Assert.IsNotNull(musicVolumeSlider);
         Assert.IsNotNull(sfxVolumeSlider);
+
+        Assert.IsNotNull(pauseMenu);
+        Assert.IsNotNull(eventSystem);
     }
 
     private void OnEnable()
