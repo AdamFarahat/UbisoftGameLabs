@@ -2285,6 +2285,10 @@ MonoBehaviour:
     - bUp
     - gUp
     frameLength: 0.5
+  - names:
+    - bDown
+    - gDown
+    frameLength: 0.5
 --- !u!1001 &747643069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3318,6 +3322,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.0013733
       objectReference: {fileID: 0}
+    - target: {fileID: 6516402689731084535, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -147.61414
+      objectReference: {fileID: 0}
     - target: {fileID: 7374067249993109602, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.907375
@@ -3341,6 +3349,14 @@ PrefabInstance:
     - target: {fileID: 7901831345079089668, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.z
       value: 3.171629
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918879489773344940, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -92.614136
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005302640356431537, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -192.61414
       objectReference: {fileID: 0}
     - target: {fileID: 8810186853916138172, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: gameOverScreen
