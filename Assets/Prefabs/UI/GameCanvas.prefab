@@ -1342,6 +1342,7 @@ MonoBehaviour:
   gameOverFader: {fileID: 5676721865232499598}
   blackScreenFader: {fileID: 0}
   eventSystem: {fileID: 0}
+  delayBeforeSelectingRestartButton: 1
   timebeforeMenuAccessible: 1
 --- !u!225 &7943164165342991751
 CanvasGroup:

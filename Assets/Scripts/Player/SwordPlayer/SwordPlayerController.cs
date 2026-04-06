@@ -299,6 +299,7 @@ public class SwordPlayerController : PlayerController
             {
                 //Shoot a sword wave projectile that does not trigger hitbox but can hit multiple enemies in the same lane
                 swordHitBox.ShootSwordWave();
+                AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSwordWave, transform.position);
             }
             IEnumerator Routine()
             {

@@ -33,6 +33,8 @@ public class OptionsManager : MonoBehaviour
         Assert.IsNotNull(MasterVolumeSlider);
         Assert.IsNotNull(MusicVolumeSlider);
         Assert.IsNotNull(SFXVolumeSlider);
+
+        
     }
     void OnDisable()
     {
@@ -85,15 +87,15 @@ public class OptionsManager : MonoBehaviour
     }
     private void OnSFXVolumeSliderChange(float value)
     {
-        //TODO: implement SFX volume change
+        AudioManager.Instance.ChangeSFXVolume(value);
     }
     private void OnMasterVolumeSliderChange(float value)
     {
-        //TODO: implement master volume change
+        AudioManager.Instance.ChangeMasterVolume(value);
     }
     private void OnMusicVolumeSliderSliderChange(float value)
     {
-        //TODO: implement music volume change
+        AudioManager.Instance.ChangeMusicVolume(value);
     }
     private void OnQualitySliderChange(float value)
     {
