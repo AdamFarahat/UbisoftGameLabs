@@ -5,14 +5,19 @@ using UnityEngine.Assertions;
 
 public abstract class TutorialBase : MonoBehaviour
 {
-    [Header("Tutorial Base")]
-    [SerializeField] private float transitionDuration = 0.3f;
-    [SerializeField] private float paddingDuration = 0.5f;
+    [SerializeField] private HologramText startingText;
+    [SerializeField] private HologramText endingText;
+
+    protected HologramText StartingText => startingText;
+    protected HologramText EndingText => endingText;
 
     protected TutorialManager manager;
 
     protected virtual void Awake()
     {
+        Assert.IsNotNull(startingText);
+        Assert.IsNotNull(endingText);
+
         manager = GetComponentInParent<TutorialManager>();
         Assert.IsNotNull(manager);
     }
@@ -22,18 +27,12 @@ public abstract class TutorialBase : MonoBehaviour
         IEnumerator Routine()
         {
             PreTutorial();
-            yield return FadeInRoutine(gameObject);
-            yield return new WaitForSeconds(paddingDuration);
+            yield return startingText.SpawnRoutine();
             StartTutorial();
         }
 
         gameObject.SetActive(true);
         StartCoroutine(Routine());
-    }
-
-    protected IEnumerator FadeInRoutine(GameObject go)
-    {
-        yield return FadeRoutine(go, 0f, 1f);
     }
 
     protected virtual void PreTutorial()
@@ -51,33 +50,11 @@ public abstract class TutorialBase : MonoBehaviour
         IEnumerator Routine()
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIPress, Vector3.zero);
-            yield return new WaitForSeconds(paddingDuration);
-            yield return FadeOutRoutine(gameObject);
+            yield return endingText.DespawnRoutine();
             gameObject.SetActive(false);
             manager.NextTutorial();
         }
         StartCoroutine(Routine());
-    }
-
-    protected IEnumerator FadeOutRoutine(GameObject go)
-    {
-        yield return FadeRoutine(go, 1f, 0f);
-    }
-
-    private IEnumerator FadeRoutine(GameObject go, float iy, float fy)
-    {
-        RectTransform rt = go.GetComponent<RectTransform>();
-        rt.localScale = new(1f, iy, 1f);
-
-        for (float t = 0f; t < transitionDuration; t += Time.deltaTime)
-        {
-            float y = Mathf.Lerp(iy, fy, Mathf.Clamp01(t / transitionDuration));
-            rt.localScale = new(1f, y, 1f);
-
-            yield return null;
-        }
-
-        rt.localScale = new(1f, fy, 1f);
     }
 
     public virtual void OnStartPressed()
