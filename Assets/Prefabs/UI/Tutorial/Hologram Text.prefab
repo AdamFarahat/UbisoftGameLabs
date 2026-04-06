@@ -351,3 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b59284080f20b4792c704380503f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HologramText
+  boxRoot: {fileID: 357655518283311520}
+  numberOfFlickers: 2
+  flickerOnDuration: 0.05
+  flickerOffDuration: 0.05
+  paddingDuration: 0.1
