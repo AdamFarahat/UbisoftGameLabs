@@ -25,7 +25,7 @@ public class TutorialSwitchGuns : TutorialBase
         meleeGrunts = meleeGruntsRoot.GetComponentsInChildren<TutorialEnemyLife>();
 
         Assert.IsTrue(StartingText != EndingText);
-        EndingText.enabled = false;
+        EndingText.gameObject.SetActive(false);
 
         foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
             meleeGrunt.gameObject.SetActive(false);

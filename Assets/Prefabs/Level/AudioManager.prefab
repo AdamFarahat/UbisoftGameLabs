@@ -79,6 +79,20 @@ MonoBehaviour:
       Data3: 508176047
       Data4: -613457378
     Path: event:/Players/General/PlayerCooldownReady
+  <PlayerSuper>k__BackingField:
+    Guid:
+      Data1: 32048824
+      Data2: 1332961781
+      Data3: -762844016
+      Data4: 914919601
+    Path: event:/Players/General/PlayerUlt
+  <PlayerSuperEnd>k__BackingField:
+    Guid:
+      Data1: -45226219
+      Data2: 1221815277
+      Data3: -649094746
+      Data4: 877866977
+    Path: event:/Players/General/PlayerUltEnd
   <PlayerRevolverShot>k__BackingField:
     Guid:
       Data1: -237387748
@@ -233,6 +247,13 @@ MonoBehaviour:
       Data3: -505668221
       Data4: 1221349409
     Path: event:/Players/Sword/PlayerGeneralJump
+  <PlayerSwordWave>k__BackingField:
+    Guid:
+      Data1: 1635186591
+      Data2: 1135793040
+      Data3: -985937004
+      Data4: -1362889415
+    Path: event:/Players/Sword/SwordUltSlash
   <EnemyWeaponShot>k__BackingField:
     Guid:
       Data1: -327730630

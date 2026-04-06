@@ -41,8 +41,10 @@ public class OptionsManager : MonoBehaviour
         Assert.IsNotNull(masterVolumeSlider);
         Assert.IsNotNull(musicVolumeSlider);
         Assert.IsNotNull(sfxVolumeSlider);
-
-        Assert.IsNotNull(pauseMenu);
+        if (pauseMenu == null) { 
+            Debug.LogWarning("Pause menu reference is not set in OptionsManager. " +
+                "This is only a problem if the options menu is used in-game and not from the main menu.");
+        }
         Assert.IsNotNull(eventSystem);
     }
 
