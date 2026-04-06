@@ -1,21 +1,37 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
     public float fontSizePourcentage = 1f;
-    public float UIScalingPourcentage = 1f;
-    public float EnemyEmissionIntensity = 1f;
-    public float UIEmissionIntensity = 1f;
+    public float uiScalingPourcentage = 1f;
+    private float enemyEmissionIntensity = 1f;
+    private float uiEmissionIntensity = 1f;
 
-    private readonly Dictionary<Material, Color> defaultEmissions = new();
-    private readonly Dictionary<Material, Color> multipliedEmissions = new();
-    
+    private class UIEmission
+    {
+        public Color color;
+        public string property;
+
+        public UIEmission(Material m, string property)
+        {
+            color = m.GetColor(property);
+            this.property = property;
+        }
+    }
+
+    private readonly Dictionary<Material, UIEmission> defaultEnemyEmissions = new();
+    private readonly Dictionary<Material, UIEmission> multipliedEnemyEmissions = new();
+    private readonly Dictionary<Material, UIEmission> defaultUIEmissions = new();
+    private readonly Dictionary<Material, UIEmission> multipliedUIEmissions = new();
+
     public static Settings Instance { get; private set; }
+
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
             return;
@@ -23,32 +39,70 @@ public class Settings : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
     private void OnDestroy()
     {
-        foreach (var m in defaultEmissions.Keys)
+        foreach (var m in defaultEnemyEmissions)
         {
-            m.SetColor("_EmissionColor", Instance.defaultEmissions[m]);
+            if (m.Key != null)
+                m.Key.SetColor(m.Value.property, m.Value.color);
+        }
+
+        foreach (var m in defaultUIEmissions)
+        {
+            if (m.Key != null)
+                m.Key.SetColor(m.Value.property, m.Value.color);
         }
     }
 
-    public static void LoadMaterialIfNotProcessed(Material m)
+    private static void ApplyEnemyMultipliedMaterial(Material m)
     {
-        if (!Instance.defaultEmissions.ContainsKey(m))
-        {
-            Instance.defaultEmissions[m] = m.GetColor("_EmissionColor");
-        }
-        Instance.multipliedEmissions[m] = ScaleIntensity(Instance.defaultEmissions[m], Instance.EnemyEmissionIntensity);
-        m.SetColor("_EmissionColor", Instance.multipliedEmissions[m]);
+        UIEmission e = Instance.multipliedEnemyEmissions[m];
+        e.color = ScaleIntensity(Instance.defaultEnemyEmissions[m].color, Instance.enemyEmissionIntensity);
+        m.SetColor(e.property, e.color);
     }
 
-    public static void OnUpdateEmissionPercentage()
+    public static void LoadEnemyMaterialIfNotProcessed(Material m, string emissionProperty = "_EmissionColor")
     {
-        foreach (var m in Instance.multipliedEmissions.Keys.ToList())
+        if (!Instance.defaultEnemyEmissions.ContainsKey(m))
         {
-            Instance.multipliedEmissions[m] = Instance.defaultEmissions[m] * Instance.EnemyEmissionIntensity;
-            m.SetColor("_EmissionColor", Instance.multipliedEmissions[m]);
+            Instance.defaultEnemyEmissions[m] = new UIEmission(m, emissionProperty);
+            Instance.multipliedEnemyEmissions[m] = new UIEmission(m, emissionProperty);
         }
+        ApplyEnemyMultipliedMaterial(m);
     }
+
+    public static void OnUpdateEnemyEmissionPercentage(float value)
+    {
+        Instance.enemyEmissionIntensity = value;
+        foreach (var m in Instance.multipliedEnemyEmissions.Keys)
+            ApplyEnemyMultipliedMaterial(m);
+    }
+
+    private static void ApplyUIMultipliedMaterial(Material m)
+    {
+        UIEmission e = Instance.multipliedUIEmissions[m];
+        e.color = ScaleIntensity(Instance.defaultUIEmissions[m].color, Instance.uiEmissionIntensity);
+        m.SetColor(e.property, e.color);
+    }
+
+    public static void LoadUIMaterialIfNotProcessed(Material m, string emissionProperty)
+    {
+        if (!Instance.defaultUIEmissions.ContainsKey(m))
+        {
+            Instance.defaultUIEmissions[m] = new UIEmission(m, emissionProperty);
+            Instance.multipliedUIEmissions[m] = new UIEmission(m, emissionProperty);
+        }
+        ApplyUIMultipliedMaterial(m);
+    }
+
+    public static void OnUpdateUIEmissionPercentage(float value)
+    {
+        Instance.uiEmissionIntensity = value;
+        foreach (var m in Instance.multipliedUIEmissions.Keys)
+            ApplyUIMultipliedMaterial(m);
+    }
+
     private static Color ScaleIntensity(Color emissionColor, float intensityScale)
     {
         float intensity = emissionColor.maxColorComponent;

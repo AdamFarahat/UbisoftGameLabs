@@ -86,7 +86,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -216,16 +216,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b855487c291393b439452baf92a0c7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OptionsManager
-  FontSizeSlider: {fileID: 4357494571705351265}
-  UIScalingSlider: {fileID: 2248402293541864665}
-  EnemyEmissionSlider: {fileID: 4062522552406709203}
-  UIEmissionSlider: {fileID: 5603932198472346687}
-  QualitySlider: {fileID: 969836181237806750}
-  MasterVolumeSlider: {fileID: 353240906177580489}
-  MusicVolumeSlider: {fileID: 7940973536337843852}
-  SFXVolumeSlider: {fileID: 8574830267687996503}
-  BackBtn: {fileID: 5902390370223590651}
-  ResetScoreBtn: {fileID: 6547627535239800530}
+  fontSizeSlider: {fileID: 4357494571705351265}
+  uiScalingSlider: {fileID: 2248402293541864665}
+  enemyEmissionSlider: {fileID: 4062522552406709203}
+  uiEmissionSlider: {fileID: 5603932198472346687}
+  qualitySlider: {fileID: 969836181237806750}
+  masterVolumeSlider: {fileID: 353240906177580489}
+  musicVolumeSlider: {fileID: 7940973536337843852}
+  sfxVolumeSlider: {fileID: 8574830267687996503}
+  backBtn: {fileID: 5902390370223590651}
+  resetDataBtn: {fileID: 6547627535239800530}
   PauseMenu: {fileID: 0}
   eventSystem: {fileID: 0}
 --- !u!1 &157675733576769871
@@ -2334,7 +2334,7 @@ GameObject:
   - component: {fileID: 8335345034526257754}
   - component: {fileID: 3043682630384234607}
   m_Layer: 5
-  m_Name: resetScoreTxt
+  m_Name: resetDataTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2387,7 +2387,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reset Score
+  m_text: Reset Data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4608,7 +4608,7 @@ GameObject:
   - component: {fileID: 939885741682756375}
   - component: {fileID: 6547627535239800530}
   m_Layer: 5
-  m_Name: ResetScoreBtn
+  m_Name: ResetDataBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5122,9 +5122,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7948169090246780560}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

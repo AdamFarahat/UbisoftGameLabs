@@ -78,7 +78,6 @@ public class UIManager : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("Start button pressed. Toggling pause menu.");
         if(SceneManager.GetActiveScene().name != "Game") return;
         gunPlayerController.PlayerInput.enabled = false;
         swordPlayerController.PlayerInput.enabled = false;
