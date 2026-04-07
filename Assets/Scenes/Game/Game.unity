@@ -1046,6 +1046,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4284939702098327284, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4400832102197778791, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: highlightCameraDepth
       value: -725.9
@@ -1620,7 +1624,7 @@ PrefabInstance:
       objectReference: {fileID: 712595016}
     - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_text
-      value: 016666666
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_horizontalMapping
@@ -1714,7 +1718,7 @@ VFXRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
 --- !u!2083052967 &1985904071
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -1733,11 +1737,14 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 6
+      - m_Value: 6.77
         m_Name: FlameHeightInverted
-        m_Overridden: 0
-      - m_Value: 10.042
+        m_Overridden: 1
+      - m_Value: 1
         m_Name: FlameLength
+        m_Overridden: 1
+      - m_Value: 0.5
+        m_Name: FillAmount
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -1745,9 +1752,9 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 1, z: 1, w: 1}
+      - m_Value: {x: 1, y: 1, z: 1, w: 0}
         m_Name: OuterColor
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: {x: 1, y: 0.39532003, z: 0.103773475, w: 1}
         m_Name: TopColor
         m_Overridden: 0
@@ -1774,7 +1781,7 @@ Transform:
   m_GameObject: {fileID: 1985904069}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14, z: 0}
+  m_LocalPosition: {x: 0.50235, y: -0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
