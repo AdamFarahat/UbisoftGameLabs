@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 109421191}
   - component: {fileID: 109421190}
   - component: {fileID: 109421189}
+  - component: {fileID: 109421192}
   m_Layer: 0
   m_Name: Sword Fire VFX
   m_TagString: Untagged
@@ -213,6 +214,9 @@ VisualEffect:
       - m_Value: 1.32
         m_Name: NoiseVolume
         m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -260,6 +264,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109421192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109421188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21b0d9e98a09c94cad54b321e56967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireUpdater
 --- !u!114 &397429073 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4496362721439115930, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -533,6 +549,7 @@ GameObject:
   - component: {fileID: 1409705923}
   - component: {fileID: 1409705922}
   - component: {fileID: 1409705921}
+  - component: {fileID: 1409705924}
   m_Layer: 0
   m_Name: Gun Fire VFX
   m_TagString: Untagged
@@ -616,6 +633,9 @@ VisualEffect:
       - m_Value: 1.32
         m_Name: NoiseVolume
         m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -663,6 +683,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409705924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409705920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21b0d9e98a09c94cad54b321e56967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireUpdater
 --- !u!224 &1547513934 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 139542205372769404, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -887,11 +919,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 601443131451342902, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.9
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 601443131451342902, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 249.8
+      value: 249.79999
       objectReference: {fileID: 0}
     - target: {fileID: 653407572220087791, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1311,11 +1343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785855061791984286, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.9
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 2785855061791984286, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 299.1
+      value: 299.09998
       objectReference: {fileID: 0}
     - target: {fileID: 2801929108647586306, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -1607,11 +1639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745073906388044215, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.9
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 4745073906388044215, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 249.8
+      value: 249.79999
       objectReference: {fileID: 0}
     - target: {fileID: 4790452833513509685, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: waveStartDelay
@@ -2091,7 +2123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7315498921305135226, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.9
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 7315498921305135226, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2347,7 +2379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216134336608548771, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 73.100006
+      value: 73.099976
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4570924912930231222, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -2383,6 +2415,7 @@ GameObject:
   - component: {fileID: 1985904072}
   - component: {fileID: 1985904071}
   - component: {fileID: 1985904070}
+  - component: {fileID: 1985904073}
   m_Layer: 0
   m_Name: Score Fire VFX
   m_TagString: Untagged
@@ -2466,6 +2499,9 @@ VisualEffect:
       - m_Value: 8
         m_Name: MaxFlameLength
         m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -2510,6 +2546,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1985904073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985904069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21b0d9e98a09c94cad54b321e56967a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireUpdater
 --- !u!1 &2044270245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1959008800550532140, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
