@@ -1145,12 +1145,23 @@ MonoBehaviour:
   fadeInDelayFactor: 0.5
   countdownIndividualDuration: 1
   heartSlideOffDuration: 1
-  heartSlideOffSpeed: 50
+  heartSlideOffDistance: -300
+  playerSpriteFadeInDuration: 0.5
+  uiSlideInDuration: 1
   heartRoot: {fileID: 6630333897175242140}
   backSprite: {fileID: 3492167330260374310}
   rightSprite: {fileID: 951532511922001173}
   leftSprite: {fileID: 2275707974304101510}
   fullSprite: {fileID: 2808207130929125352}
+  bottomBar:
+  - {fileID: 6104122553809406443}
+  - {fileID: 8442249318472091249}
+  - {fileID: 648628205261469771}
+  - {fileID: 4173331506949576580}
+  bottomBarOffset: -200
+  topBar:
+  - {fileID: 4046812139433040653}
+  topBarOffset: 200
 --- !u!1 &2791762706592161554
 GameObject:
   m_ObjectHideFlags: 0
