@@ -508,6 +508,7 @@ MonoBehaviour:
   score: 100
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!114 &1373232332848855569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +571,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 65357303025461256}
     m_Modifications:
+    - target: {fileID: 604540831672376746, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 604540831672376746, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 763874545
+      objectReference: {fileID: 0}
     - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

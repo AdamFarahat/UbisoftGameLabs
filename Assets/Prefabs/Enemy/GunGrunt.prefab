@@ -424,6 +424,7 @@ MonoBehaviour:
   score: 200
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!65 &8799615496796102343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -457,8 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 10
-  maxSpeed: 20
+  minSpeed: 15
+  maxSpeed: 30
 --- !u!1 &9044228054929241445
 GameObject:
   m_ObjectHideFlags: 0

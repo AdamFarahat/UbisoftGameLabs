@@ -329,11 +329,11 @@ MonoBehaviour:
   damage: 10
   impactEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 34780270
+      Data2: 1181862997
+      Data3: -824476249
+      Data4: 1147259068
+    Path: event:/Players/General/PlayerGeneralStunned
   parryColliderScaleUp: 1.5
   speed: 190
   boundsX: {x: -100, y: 100}
