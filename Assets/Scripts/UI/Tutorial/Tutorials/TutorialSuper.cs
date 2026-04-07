@@ -30,7 +30,7 @@ public class TutorialSuper : TutorialBase
         Assert.IsTrue(StartingText != EndingText);
         Assert.IsNotNull(meleeGruntPrefab);
 
-        EndingText.enabled = false;
+        EndingText.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
