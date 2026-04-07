@@ -79,7 +79,8 @@ public class TutorialManager : MonoBehaviour
             GunPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
             GunPlayerController.Instance.shootEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
             GunPlayerController.Instance.throwEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
-            GunPlayerController.Instance.toggleGunEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
+            GunPlayerController.Instance.toggleGunDownEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
+            GunPlayerController.Instance.toggleGunUpEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
         }
 
         if (SwordPlayerController.Instance != null)

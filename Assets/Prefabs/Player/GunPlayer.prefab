@@ -1281,7 +1281,8 @@ MonoBehaviour:
   grenadeKillMultiplierGain: 1
   shootEnabled: 1
   throwEnabled: 1
-  toggleGunEnabled: 1
+  toggleGunDownEnabled: 1
+  toggleGunUpEnabled: 1
 --- !u!114 &5377950481972986741
 MonoBehaviour:
   m_ObjectHideFlags: 0
