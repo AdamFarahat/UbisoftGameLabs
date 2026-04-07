@@ -436,10 +436,6 @@ MonoBehaviour:
     frames:
     - {fileID: 0}
     duration: 0.1
-  - name: Dash Left
-    frames:
-    - {fileID: 0}
-    duration: 0.1
   - name: Grenade Aim
     frames:
     - {fileID: 0}
@@ -448,6 +444,18 @@ MonoBehaviour:
     frames:
     - {fileID: 0}
     - {fileID: 0}
+    duration: 0.1
+  - name: Revolver Dash Left
+    frames:
+    - {fileID: 0}
+    duration: 0.1
+  - name: Shotgun Dash Left
+    frames:
+    - {fileID: 0}
+    duration: 0.1
+  - name: Machine Gun Dash Left
+    frames:
+    - {fileID: 21300000, guid: d8c6756ae42f1734fa8f633a8714bcd0, type: 3}
     duration: 0.1
   defaultName: Revolver Idle
 --- !u!1 &6126231153073736137
@@ -823,7 +831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.size
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].name
@@ -863,15 +871,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[9].name
-      value: Dash Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: animations.Array.data[10].name
       value: Grenade Aim
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: animations.Array.data[11].name
+      propertyPath: animations.Array.data[10].name
       value: Grenade Throw
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[11].name
+      value: Revolver Dash Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[12].name
+      value: Shotgun Dash Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[13].name
+      value: Machine Gun Dash Left
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].duration
@@ -922,6 +938,14 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[12].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[13].duration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[0].frames.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -963,11 +987,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[10].frames.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: animations.Array.data[11].frames.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[12].frames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: animations.Array.data[13].frames.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[0].frames.Array.data[0]'
@@ -1044,19 +1076,31 @@ PrefabInstance:
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[9].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 7aa80fb48cba8a048bf7e30d7457c2e9, type: 3}
+      objectReference: {fileID: 21300000, guid: 442b756b79020b54088cc8f6fcd6f214, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[10].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 442b756b79020b54088cc8f6fcd6f214, type: 3}
+      objectReference: {fileID: 21300000, guid: 5dad0416edbba6b4ea2b319c0e443d81, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[10].frames.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 9afd95a3403a5ca448962c1291ca20f1, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[11].frames.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 5dad0416edbba6b4ea2b319c0e443d81, type: 3}
+      objectReference: {fileID: 21300000, guid: 1a6a7fe9202217d4ab30fc3edfff8123, type: 3}
     - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: 'animations.Array.data[11].frames.Array.data[1]'
       value: 
-      objectReference: {fileID: 21300000, guid: 9afd95a3403a5ca448962c1291ca20f1, type: 3}
+      objectReference: {fileID: 21300000, guid: 7aa80fb48cba8a048bf7e30d7457c2e9, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[12].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: e47829c7cd0665046a8d3c3d79f2f9fd, type: 3}
+    - target: {fileID: 5623632362010145058, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: 'animations.Array.data[13].frames.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: eb5484b3d2e46674d93f815436a1f2fc, type: 3}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_Actions
       value: 

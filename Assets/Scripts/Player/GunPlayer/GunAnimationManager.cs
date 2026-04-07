@@ -65,7 +65,7 @@ public class GunAnimationManager : MonoBehaviour
         if (deltaLane > 0f)
             PlayCycle($"{gunNames[gunIndex]} Dash Right");
         else if (deltaLane < 0f)
-            PlayCycle($"Dash Left");
+            PlayCycle($"{gunNames[gunIndex]} Dash Left");
     }
 
     private void OnDashEnd()
