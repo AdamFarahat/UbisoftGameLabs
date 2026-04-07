@@ -320,11 +320,14 @@ MonoBehaviour:
   fadeInDuration: 2
   fadeInExponent: 2
   fadeInDelayFactor: 0.5
-  countdownImage: {fileID: 1433012901}
-  countdown3: {fileID: 21300000, guid: 15f34f6d67f56a54cb25ce27c7e4fd06, type: 3}
-  countdown2: {fileID: 21300000, guid: efcb622ef0dcd11489f02afaecb545ea, type: 3}
-  countdown1: {fileID: 21300000, guid: 55b79fd35c0d2714e9da522463291870, type: 3}
   countdownIndividualDuration: 1
+  heartSlideOffDuration: 1
+  heartSlideOffSpeed: -10
+  heartRoot: {fileID: 0}
+  backSprite: {fileID: 0}
+  rightSprite: {fileID: 0}
+  leftSprite: {fileID: 0}
+  fullSprite: {fileID: 0}
 --- !u!114 &1276863640 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7528878339980686641, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -336,17 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
---- !u!114 &1433012901 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2262835127516154498, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-  m_PrefabInstance: {fileID: 1792512711}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &1547513934 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 139542205372769404, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -553,7 +545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -151.67923
+      value: -151.6792
       objectReference: {fileID: 0}
     - target: {fileID: 264266071360089453, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,7 +669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1377103012561967414, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -409.03775
+      value: -409.03772
       objectReference: {fileID: 0}
     - target: {fileID: 1437111176451783528, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -781,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785855061791984286, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -244.79874
+      value: -244.7987
       objectReference: {fileID: 0}
     - target: {fileID: 2801929108647586306, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -1097,7 +1089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201594331612658883, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -237.33365
+      value: -237.33362
       objectReference: {fileID: 0}
     - target: {fileID: 5684439844047260740, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: gameOverFader
