@@ -9,7 +9,6 @@ public class Grenade : MonoBehaviour
     [SerializeField] private Transform colliderRoot;
     [SerializeField] private GameObject vfx;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
     [SerializeField] private float gravity = 300f;
 
@@ -95,14 +94,7 @@ public class Grenade : MonoBehaviour
         {
             spriteRenderer.gameObject.SetActive(false);
             vfx.SetActive(true);
-
-            for (float t = 0f; t < explosionDuration; t += Time.deltaTime)
-            {
-                float scale = Mathf.Lerp(1f, aoeRadiusScale, Mathf.Clamp01(t / explosionDuration));
-                colliderRoot.localScale = new(scale, scale, scale);
-                yield return null;
-            }
-
+            yield return new WaitForSeconds(explosionDuration);
             Destroy(gameObject);
         }
 
