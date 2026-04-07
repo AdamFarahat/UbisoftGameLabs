@@ -16,6 +16,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] private MenuFader gameOverFader;
     [SerializeField] private MenuFader blackScreenFader;
 
+
+    [SerializeField] private GameObject HighScoreTeam;
+    [SerializeField] private GameObject HighScoreGun;
+    [SerializeField] private GameObject HighScoreSword;
+
     [SerializeField] private EventSystem eventSystem;
 
     [SerializeField] private float delayBeforeSelectingRestartButton = 1f;
@@ -38,6 +43,10 @@ public class GameOver : MonoBehaviour
         Assert.IsNotNull(gunFireVFX);
         Assert.IsNotNull(swordFireVFX);
 
+        Assert.IsNotNull(HighScoreTeam);
+        Assert.IsNotNull(HighScoreGun); 
+        Assert.IsNotNull(HighScoreSword);
+
         restartButton.onClick.AddListener(Restart);
         mainMenuButton.onClick.AddListener(MainMenu);
     }
@@ -59,12 +68,27 @@ public class GameOver : MonoBehaviour
         gunFireVFX.SetActive(true);
         swordFireVFX.SetActive(true);
     
-        int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
+        int score = ScoreManagerSO.CalculateOverallFinalTeamScore(out bool isHighScoreTeam, out bool isHighScoreGun, out bool isHighScoreSword);
+        if(isHighScoreGun)
+        {
+            HighScoreGun.SetActive(true);
+        }
+        if(isHighScoreSword)
+        {
+            HighScoreSword.SetActive(true);
+        }
+        if(isHighScoreTeam)
+        {
+            HighScoreTeam.SetActive(true);
+        }
+
+
         overallScoreText.text = score.ToString();
+        
+
         IEnumerator GameOverCoroutine()
         {
             yield return new WaitForSecondsRealtime(delayBeforeSelectingRestartButton);
-            Debug.Log("Selecting Restart Button");
             eventSystem.SetSelectedGameObject(restartButton.gameObject);
             selectRestartButtonCoroutine = null; 
         }
