@@ -66,16 +66,6 @@ public class LaneBound : MonoBehaviour
         position += perpendicularOffset * (LaneSet.Instance.GetLaneDirection() * Vector3.right);
         position.y = transform.position.y;
         transform.position = position;
-
-        int laneInt = Mathf.FloorToInt(laneIndex);
-        string targetLayer = $"Lane {laneInt}";
-        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>(true);
-        foreach (var renderer in renderers)
-        {
-            string currentLayer = renderer.sortingLayerName;
-            if (currentLayer.StartsWith("Lane ") || currentLayer == "Default")
-                renderer.sortingLayerName = targetLayer;
-        }
     }
 
     public void MoveToLane(int toIndex)

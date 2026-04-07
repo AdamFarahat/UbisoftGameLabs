@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 763874545
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 02aeba2d8e1586644b3c0e5c9f2dc308, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -261,8 +261,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 763874545
-  m_SortingLayer: -3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a92b1f5e6bfbcf4081c66e8a1a99995, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -407,7 +407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 145107719
-  m_SortingLayer: -6
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 869c8450386ad0c40882be511154cc3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -560,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 25
-  maxSpeed: 80
+  minSpeed: 15
+  maxSpeed: 25
 --- !u!1001 &5663846591562425685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -570,14 +570,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 65357303025461256}
     m_Modifications:
-    - target: {fileID: 604540831672376746, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_SortingLayer
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 604540831672376746, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 763874545
-      objectReference: {fileID: 0}
     - target: {fileID: 6068918593151897362, guid: 055eb0419bd09d04f956ed5c73fef29c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
