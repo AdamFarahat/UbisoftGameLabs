@@ -123,12 +123,18 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnMoveLeft(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (moveEnabled)
             MoveToLane((int index) => { return index - 1; });
     }
 
     private void OnMoveRight(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (moveEnabled)
             MoveToLane((int index) => { return index + 1; });
     }
@@ -298,6 +304,9 @@ public abstract class PlayerController : MonoBehaviour
 
     protected void SuperInitiatedA(InputAction.CallbackContext _)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (Stunned)
             return;
 
@@ -308,6 +317,9 @@ public abstract class PlayerController : MonoBehaviour
 
     protected void SuperInitiatedB(InputAction.CallbackContext _)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (Stunned)
             return;
 

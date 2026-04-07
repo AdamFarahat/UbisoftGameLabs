@@ -120,6 +120,9 @@ public class GunPlayerController : PlayerController
 
     private void PressFire(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (InputBlockedBySuper)
             return;
 
@@ -138,6 +141,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseFire(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!shootEnabled)
             return;
 
@@ -150,6 +156,9 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!toggleGunUpEnabled)
             return;
 
@@ -163,6 +172,9 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!toggleGunDownEnabled)
             return;
 
@@ -176,6 +188,9 @@ public class GunPlayerController : PlayerController
 
     private void PressThrow(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (InputBlockedBySuper)
             return;
 
@@ -197,6 +212,9 @@ public class GunPlayerController : PlayerController
 
     private void ReleaseThrow(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!throwEnabled)
             return;
 

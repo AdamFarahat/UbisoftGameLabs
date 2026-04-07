@@ -205,6 +205,9 @@ public class SwordPlayerController : PlayerController
 
     private void Jump(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!jumpEnabled)
             return;
         PressedJump?.Invoke();
@@ -269,6 +272,9 @@ public class SwordPlayerController : PlayerController
 
     private void Duck(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (Stunned)
             return;
 
@@ -278,6 +284,9 @@ public class SwordPlayerController : PlayerController
 
     private void Attack(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (InputBlockedBySuper)
             return;
 
@@ -315,6 +324,9 @@ public class SwordPlayerController : PlayerController
 
     public void Block(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (InputBlockedBySuper)
             return;
 
@@ -335,6 +347,9 @@ public class SwordPlayerController : PlayerController
 
     public void CancelBlock(InputAction.CallbackContext ctx)
     {
+        if (!PlayerInput.enabled)
+            return;
+
         if (!blockEnabled)
             return;
 
