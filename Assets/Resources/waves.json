@@ -1,16 +1,16 @@
 {
   "prefixWaves": [
     { "label": "Warmup1", "difficulty": 0.05, "isBossWave": false, "spawnEntries": [
-      {"enemyType": 0, "lane": 0},
-      {"enemyType": 0, "lane": 4},
-      {"enemyType": 0, "lane": 2},
-      {"enemyType": 0, "lane": 3},
-      {"enemyType": 0, "lane": 1},
-      {"enemyType": 1, "lane": 0},
-      {"enemyType": 1, "lane": 1},
-      {"enemyType": 1, "lane": 4},
-      {"enemyType": 1, "lane": 2},
-      {"enemyType": 1, "lane": 3}
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1}
     ] },
     { "label": "Warmup2", "difficulty": 0.10, "isBossWave": false, "spawnEntries": [
       {"enemyType": 2, "lane": -1},
