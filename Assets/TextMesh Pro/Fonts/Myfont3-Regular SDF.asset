@@ -170,6 +170,24 @@ MonoBehaviour:
   m_AtlasPopulationMode: 1
   InternalDynamicOS: 0
   m_GlyphTable:
+<<<<<<< HEAD
+=======
+  - m_Index: 18
+    m_Metrics:
+      m_Width: 49.421875
+      m_Height: 57.59375
+      m_HorizontalBearingX: 7.015625
+      m_HorizontalBearingY: 55.53125
+      m_HorizontalAdvance: 63.546875
+    m_GlyphRect:
+      m_X: 10
+      m_Y: 10
+      m_Width: 50
+      m_Height: 59
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
   - m_Index: 10
     m_Metrics:
       m_Width: 44.09375
@@ -185,6 +203,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+<<<<<<< HEAD
   - m_Index: 11
     m_Metrics:
       m_Width: 40.5
@@ -200,6 +219,8 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+=======
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
   - m_Index: 13
     m_Metrics:
       m_Width: 49.6875
@@ -215,6 +236,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+<<<<<<< HEAD
   - m_Index: 18
     m_Metrics:
       m_Width: 49.421875
@@ -242,6 +264,35 @@ MonoBehaviour:
       m_Y: 10
       m_Width: 15
       m_Height: 34
+=======
+  - m_Index: 11
+    m_Metrics:
+      m_Width: 40.5
+      m_Height: 61.640625
+      m_HorizontalBearingX: 7.203125
+      m_HorizontalBearingY: 57.234375
+      m_HorizontalAdvance: 55.078125
+    m_GlyphRect:
+      m_X: 10
+      m_Y: 247
+      m_Width: 41
+      m_Height: 63
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 41
+    m_Metrics:
+      m_Width: 54.359375
+      m_Height: 58.3125
+      m_HorizontalBearingX: 6.65625
+      m_HorizontalBearingY: 57.328125
+      m_HorizontalAdvance: 67.765625
+    m_GlyphRect:
+      m_X: 74
+      m_Y: 88
+      m_Width: 56
+      m_Height: 59
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
@@ -260,6 +311,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+<<<<<<< HEAD
   - m_Index: 27
     m_Metrics:
       m_Width: 28.796875
@@ -275,6 +327,8 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+=======
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
   - m_Index: 37
     m_Metrics:
       m_Width: 44.375
@@ -305,6 +359,7 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+<<<<<<< HEAD
   - m_Index: 41
     m_Metrics:
       m_Width: 54.359375
@@ -317,39 +372,90 @@ MonoBehaviour:
       m_Y: 88
       m_Width: 56
       m_Height: 59
+=======
+  - m_Index: 27
+    m_Metrics:
+      m_Width: 28.796875
+      m_Height: 58.578125
+      m_HorizontalBearingX: 6.65625
+      m_HorizontalBearingY: 56.515625
+      m_HorizontalAdvance: 42.203125
+    m_GlyphRect:
+      m_X: 64
+      m_Y: 329
+      m_Width: 30
+      m_Height: 60
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 20
+    m_Metrics:
+      m_Width: 14.3125
+      m_Height: 33.109375
+      m_HorizontalBearingX: 7.015625
+      m_HorizontalBearingY: 41.84375
+      m_HorizontalAdvance: 28.34375
+    m_GlyphRect:
+      m_X: 147
+      m_Y: 10
+      m_Width: 15
+      m_Height: 34
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
+<<<<<<< HEAD
+=======
+    m_Unicode: 56
+    m_GlyphIndex: 18
+    m_Scale: 1
+  - m_ElementType: 1
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Unicode: 48
     m_GlyphIndex: 10
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< HEAD
     m_Unicode: 49
     m_GlyphIndex: 11
     m_Scale: 1
   - m_ElementType: 1
+=======
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Unicode: 51
     m_GlyphIndex: 13
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< HEAD
     m_Unicode: 56
     m_GlyphIndex: 18
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 58
     m_GlyphIndex: 20
+=======
+    m_Unicode: 49
+    m_GlyphIndex: 11
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 83
+    m_GlyphIndex: 41
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 67
     m_GlyphIndex: 25
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< HEAD
     m_Unicode: 69
     m_GlyphIndex: 27
     m_Scale: 1
   - m_ElementType: 1
+=======
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Unicode: 79
     m_GlyphIndex: 37
     m_Scale: 1
@@ -358,8 +464,17 @@ MonoBehaviour:
     m_GlyphIndex: 40
     m_Scale: 1
   - m_ElementType: 1
+<<<<<<< HEAD
     m_Unicode: 83
     m_GlyphIndex: 41
+=======
+    m_Unicode: 69
+    m_GlyphIndex: 27
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 58
+    m_GlyphIndex: 20
+>>>>>>> 7cccb0e (feat: change project name to Cassini M)
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: 5092474156887100407}
