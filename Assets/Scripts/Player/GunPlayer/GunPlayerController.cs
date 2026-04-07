@@ -38,11 +38,13 @@ public class GunPlayerController : PlayerController
     // Begin tutorial settings
     public bool shootEnabled = true;
     public bool throwEnabled = true;
-    public bool toggleGunEnabled = true;
+    public bool toggleGunDownEnabled = true;
+    public bool toggleGunUpEnabled = true;
 
     public UnityAction PressedShoot;
     public UnityAction PressedThrow;
-    public UnityAction PressedToggle;
+    public UnityAction PressedToggleDown;
+    public UnityAction PressedToggleUp;
     // End tutorial settings
 
     protected override void Awake()
@@ -148,10 +150,10 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunUp(InputAction.CallbackContext ctx)
     {
-        if (!toggleGunEnabled)
+        if (!toggleGunUpEnabled)
             return;
 
-        PressedToggle?.Invoke();
+        PressedToggleUp?.Invoke();
 
         if (Stunned)
             return;
@@ -161,10 +163,10 @@ public class GunPlayerController : PlayerController
 
     private void ToggleGunDown(InputAction.CallbackContext ctx)
     {
-        if (!toggleGunEnabled)
+        if (!toggleGunDownEnabled)
             return;
 
-        PressedToggle?.Invoke();
+        PressedToggleDown?.Invoke();
 
         if (Stunned)
             return;
