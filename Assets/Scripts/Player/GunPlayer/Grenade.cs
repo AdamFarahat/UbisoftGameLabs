@@ -6,9 +6,10 @@ using UnityEngine.Assertions;
 public class Grenade : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
-    [SerializeField] private Collider explosionCollider;
+    [SerializeField] private Transform colliderRoot;
     [SerializeField] private GameObject vfx;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private float aoeRadiusScale = 100f;
     [SerializeField] private float explosionDuration = 0.5f;
     [SerializeField] private float gravity = 300f;
 
@@ -22,11 +23,10 @@ public class Grenade : MonoBehaviour
 
     private void Awake()
     {
-        Assert.IsNotNull(explosionCollider);
+        Assert.IsNotNull(colliderRoot);
         Assert.IsNotNull(vfx);
         Assert.IsNotNull(spriteRenderer);
 
-        explosionCollider.enabled = false;
         vfx.SetActive(false);
     }
 
@@ -95,13 +95,19 @@ public class Grenade : MonoBehaviour
         {
             spriteRenderer.gameObject.SetActive(false);
             vfx.SetActive(true);
-            yield return new WaitForSeconds(explosionDuration);
+
+            for (float t = 0f; t < explosionDuration; t += Time.deltaTime)
+            {
+                float scale = Mathf.Lerp(1f, aoeRadiusScale, Mathf.Clamp01(t / explosionDuration));
+                colliderRoot.localScale = new(scale, scale, scale);
+                yield return null;
+            }
+
             Destroy(gameObject);
         }
 
         exploding = true;
-        transform.position = new(transform.position.x, Mathf.Max(transform.position.y, 0f), transform.position.z);
-        explosionCollider.enabled = true;
+        transform.position = new(transform.position.x, 0f, transform.position.z);
 
         AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerGrenadeExplode, transform.position);
 

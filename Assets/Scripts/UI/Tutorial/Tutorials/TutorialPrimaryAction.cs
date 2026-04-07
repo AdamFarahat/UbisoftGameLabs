@@ -10,7 +10,6 @@ public class TutorialPrimaryAction : TutorialBase
     [SerializeField] private float spawnDistance = 200f;
     [SerializeField] private float spawnDelay = 1.5f;
     [SerializeField] private float meleeGruntSpeed = 30f;
-    [SerializeField] private float meleeGruntStunTime = 0.3f;
     [SerializeField] private int spawnCount = 3;
 
     private bool pressedShoot = true;
@@ -99,8 +98,5 @@ public class TutorialPrimaryAction : TutorialBase
         Assert.IsNotNull(tutorialEnemy);
         grunts.Add(tutorialEnemy);
         tutorialEnemy.Die += () => { grunts.Remove(tutorialEnemy); };
-
-        Stunner stunner = go.AddComponent<Stunner>();
-        stunner.stunTime = meleeGruntStunTime;
     }
 }

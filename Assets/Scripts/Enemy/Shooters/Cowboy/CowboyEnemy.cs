@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class CowboyEnemy : ShooterEnemy
+public class CowboyEnemy : ShooterEnemy, ISpeedRefreshable
 {
     [SerializeField] private float damage = 12f;
     [SerializeField] private Collider healthCollider;
@@ -179,5 +179,11 @@ public class CowboyEnemy : ShooterEnemy
     {
         if (!stayOutOfShotgunRange || lane.LaneDistance > shotgunRange)
            lane.LaneDistance -= speed * Time.deltaTime;
+    }
+
+    public void RefreshSpeed()
+    {
+        if (TryGetComponent(out EnemySpeedConfig cfg))
+            speed = cfg.EvaluateSpeed(DifficultyManager.Instance.Difficulty);
     }
 }

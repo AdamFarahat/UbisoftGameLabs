@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class AudioManager : MonoBehaviour
     private Bus masterBus;
     private Bus musicBus;
     private Bus sfxBus;
+
+    public void StopAllSFX()
+    {
+        //Stop all sound effects immediately
+        sfxBus.stopAllEvents(STOP_MODE.IMMEDIATE);
+    }
 
     private void Awake()
     {
@@ -88,5 +95,20 @@ public class AudioManager : MonoBehaviour
         {
             Instance = null;
         }
+    }
+
+    public float GetMasterVolume()
+    {
+        return masterBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
+    }
+
+    public float GetMusicVolume()
+    {
+        return musicBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
     }
 }

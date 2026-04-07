@@ -107,8 +107,6 @@ public class Bullet : MonoBehaviour
         if (enemy == null || enemy.ImmuneToBullet?.Invoke(this, other) == true)
             return;
 
-        AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
-
         EnergyShield shield = enemy.GetShield();
         if (shield != null)
         {
@@ -116,9 +114,12 @@ public class Bullet : MonoBehaviour
                 shield.TakeDamage(damage);
         }
         else if (enemy.StunFromBullet?.Invoke() == true)
-        { }
-        else if (enemy.TakeDamage(damage))
+        {
+            AudioManager.Instance.PlayOneShot(impactEvent, transform.position);
+        }
+        else if (enemy.TakeDamage(damage)){
             OnEnemyKill(enemy);
+        }
 
         Despawn();
     }
