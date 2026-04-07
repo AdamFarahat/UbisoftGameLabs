@@ -236,7 +236,8 @@ MonoBehaviour:
   anticipationPositionPin: {fileID: 7319754868183021343}
   overshootPositionPin: {fileID: 7319754868183021343}
   anticipationDuration: 0.2
-  actionDuration: 0.3
+  actionOutDuration: 0.3
+  actionInDuration: 0.6
   overshootDuration: 0.2
 --- !u!1 &7222441640550138190
 GameObject:
