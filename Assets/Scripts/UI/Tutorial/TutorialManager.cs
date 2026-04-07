@@ -19,6 +19,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TutorialJump tutorialJump;
 
     [Header("UI Elements")]
+    [SerializeField] private GameObject powerBarUI;
+    public GameObject PowerBarUI => powerBarUI;
+    [SerializeField] private GameObject heartUI;
+    public GameObject HeartUI => heartUI;
     [SerializeField] private GameObject gunPlayerCooldownUI;
     public GameObject GunPlayerCooldownUI => gunPlayerCooldownUI;
 
@@ -51,6 +55,8 @@ public class TutorialManager : MonoBehaviour
         Assert.IsNotNull(tutorialSwitchGuns);
         Assert.IsNotNull(tutorialJump);
 
+        Assert.IsNotNull(powerBarUI);
+        Assert.IsNotNull(heartUI);
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
         Assert.IsNotNull(scoreUI);
@@ -91,6 +97,8 @@ public class TutorialManager : MonoBehaviour
         PlayerStats.Instance.ResetSwordSuper();
         PlayerStats.Instance.damageEnabled = false;
 
+        powerBarUI.SetActive(false);
+        heartUI.SetActive(false);
         gunPlayerCooldownUI.SetActive(false);
         swordPlayerCooldownUI.SetActive(false);
         scoreUI.SetActive(false);
