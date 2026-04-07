@@ -107,10 +107,10 @@ public class TutorialManager : MonoBehaviour
         swordPlayerMultiplierUI.SetActive(false);
 
         foreach (GameObject lane in disabledLanes)
-            lane.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+            lane.SetActive(!tutorialSwitchGuns.isActiveAndEnabled);
 
         foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-            lane.gameObject.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+            lane.gameObject.SetActive(!tutorialSwitchGuns.isActiveAndEnabled);
 
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);

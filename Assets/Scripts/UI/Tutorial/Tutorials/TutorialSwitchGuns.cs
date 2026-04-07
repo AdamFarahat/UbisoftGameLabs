@@ -10,6 +10,9 @@ public class TutorialSwitchGuns : TutorialBase
     [SerializeField] private GameObject holdToBreakShieldGruntsRoot;
     [SerializeField] private GameObject useShotgunGruntsRoot;
 
+    [Header("Animation")]
+    [SerializeField] private float laneFadeInDuration = 0.5f;
+
     [Header("Descriptions")]
     [SerializeField] private HologramText holdForLaserText;
     [SerializeField] private HologramText downForMachineGunText;
@@ -116,6 +119,21 @@ public class TutorialSwitchGuns : TutorialBase
 
             // HoldToHitMoreEnemies
             state = State.HoldToHitMoreEnemies;
+
+            foreach (GameObject lane in manager.DisabledLanes)
+            {
+                lane.SetActive(true);
+                foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                    StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
+            }
+
+            foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                lane.gameObject.SetActive(true);
+                foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                    StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
+            }
+
             yield return holdToHitMoreEnemiesText.SpawnRoutine();
             useShotgunGruntsRoot.SetActive(true);
             yield return new WaitUntil(() => shotgunEnemies.All(g => g == null || g.Dead));

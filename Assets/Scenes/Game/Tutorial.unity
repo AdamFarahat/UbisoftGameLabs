@@ -583,7 +583,7 @@ PrefabInstance:
     - target: {fileID: 8182054838365208467, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
+      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1408,7 +1408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialSwitchLanes
   startingText: {fileID: 125021754}
   endingText: {fileID: 125021754}
-  laneFadeInDuration: 0.5
 --- !u!222 &319319580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2223,7 +2222,7 @@ PrefabInstance:
     - target: {fileID: 8182054838365208467, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
+      objectReference: {fileID: 2100000, guid: 3b2d83c2ae724c74b8765f4df35075cb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2853,7 +2852,7 @@ PrefabInstance:
     - target: {fileID: 8182054838365208467, guid: 00a686a0957330849909ccd491fb74ca, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
+      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3657,6 +3656,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -17
       objectReference: {fileID: 0}
+    - target: {fileID: 9216134336608548771, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 73.099976
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 0}
@@ -4139,6 +4142,7 @@ MonoBehaviour:
   holdForLaserGruntsRoot: {fileID: 1642221303}
   holdToBreakShieldGruntsRoot: {fileID: 1067496687}
   useShotgunGruntsRoot: {fileID: 676076250}
+  laneFadeInDuration: 0.5
   holdForLaserText: {fileID: 203556380}
   downForMachineGunText: {fileID: 1304526895}
   holdToBreakShieldText: {fileID: 190314513}
@@ -4820,7 +4824,7 @@ PrefabInstance:
     - target: {fileID: 4375332442956995952, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
+      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -4864,10 +4868,6 @@ PrefabInstance:
     - target: {fileID: 5280235852196756382, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_Name
       value: TutorialShieldMeleeGrunt (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984116428568158438, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
-      propertyPath: shieldMaxHealth
-      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 6843507327698051992, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_Enabled
@@ -4929,7 +4929,7 @@ PrefabInstance:
     - target: {fileID: 4375332442956995952, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 18caf5cff0580cc4f9add60bee636fe5, type: 2}
+      objectReference: {fileID: 2100000, guid: 9a61b8960b91b7e4cb850659e8c4aacf, type: 2}
     - target: {fileID: 4750681836825274038, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -4973,10 +4973,6 @@ PrefabInstance:
     - target: {fileID: 5280235852196756382, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_Name
       value: TutorialShieldMeleeGrunt (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984116428568158438, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
-      propertyPath: shieldMaxHealth
-      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 6843507327698051992, guid: 61dd39b4ec1447a40bad7125405f1751, type: 3}
       propertyPath: m_Enabled

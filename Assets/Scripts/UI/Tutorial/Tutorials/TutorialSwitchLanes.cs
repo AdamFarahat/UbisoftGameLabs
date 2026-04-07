@@ -1,11 +1,7 @@
 using System.Collections;
-using UnityEngine;
 
 public class TutorialSwitchLanes : TutorialBase
 {
-    [Header("Animation")]
-    [SerializeField] private float laneFadeInDuration = 0.5f;
-
     private int gunStartingIndex = -1;
     private int swordStartingIndex = -1;
 
@@ -48,22 +44,5 @@ public class TutorialSwitchLanes : TutorialBase
         }
 
         StartCoroutine(Routine());
-    }
-
-    protected override void PreTutorial()
-    {
-        foreach (GameObject lane in manager.DisabledLanes)
-        {
-            lane.SetActive(true);
-            foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
-                StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
-        }
-
-        foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-        {
-            lane.gameObject.SetActive(true);
-            foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
-                StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
-        }
     }
 }
