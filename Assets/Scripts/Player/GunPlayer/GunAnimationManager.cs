@@ -16,12 +16,12 @@ public class GunAnimationManager : MonoBehaviour
 
     private string gunIdle = "";
 
-    private SpriteAnimator animator;
+    private SpriteAnimator[] animators;
 
     private void Awake()
     {
-        animator = GetComponent<SpriteAnimator>();
-        Assert.IsNotNull(animator);
+        animators = GetComponentsInChildren<SpriteAnimator>();
+        Assert.IsTrue(animators.Length > 0);
 
         Assert.IsTrue(gunNames.Length == 3);
 
@@ -36,45 +36,69 @@ public class GunAnimationManager : MonoBehaviour
         PlayIdle();
     }
 
+    private void PlayCycle(string name)
+    {
+        foreach (var animator in animators)
+            animator.PlayCycle(name);
+    }
+
+    private void SetDefaultName(string name)
+    {
+        foreach (var animator in animators)
+            animator.defaultName = name;
+    }
+
+    private void PlayDefaultCycle()
+    {
+        foreach (var animator in animators)
+            animator.PlayDefaultCycle();
+    }
+
+    private void PlayOneShot(string name)
+    {
+        foreach (var animator in animators)
+            animator.PlayOneShot(name);
+    }
+
     private void OnDashStart(float deltaLane)
     {
         if (deltaLane > 0f)
-            animator.PlayCycle($"{gunNames[gunIndex]} Dash Right");
+            PlayCycle($"{gunNames[gunIndex]} Dash Right");
         else if (deltaLane < 0f)
-            animator.PlayCycle($"Dash Left");
+            PlayCycle($"Dash Left");
     }
 
     private void OnDashEnd()
     {
-        animator.PlayDefaultCycle();
+        PlayDefaultCycle();
     }
 
     public void PlayIdle()
     {
         gunIdle = $"{gunNames[gunIndex]} Idle";
-        animator.defaultName = gunIdle;
-        animator.PlayDefaultCycle();
+        SetDefaultName(gunIdle);
+        PlayDefaultCycle();
     }
 
     public void PlayShoot()
     {
-        animator.PlayOneShot($"{gunNames[gunIndex]} Shoot");
+        PlayOneShot($"{gunNames[gunIndex]} Shoot");
     }
 
     public void StartGrenadeAim()
     {
-        animator.defaultName = "Grenade Aim";
-        animator.PlayDefaultCycle();
+        SetDefaultName("Grenade Aim");
+        PlayDefaultCycle();
     }
 
     public void StopGrenadeAim()
     {
-        animator.defaultName = gunIdle;
-        animator.PlayDefaultCycle();
+        SetDefaultName(gunIdle);
+        PlayDefaultCycle();
     }
 
     public void PlayGrenadeThrow()
     {
-        animator.PlayOneShot("Grenade Throw");
+        PlayOneShot("Grenade Throw");
     }
 }
