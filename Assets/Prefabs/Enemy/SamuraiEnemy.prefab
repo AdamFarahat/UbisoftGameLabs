@@ -458,6 +458,7 @@ MonoBehaviour:
   score: 500
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!114 &7389374849341678290
 MonoBehaviour:
   m_ObjectHideFlags: 0

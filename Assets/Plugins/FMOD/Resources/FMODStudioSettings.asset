@@ -234,8 +234,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../ubisoft-game-labs-fmod-project/ubisoft-game-labs-audio.fspro
-  sourceBankPath: ../ubisoft-game-labs-fmod-project/Build
+  sourceProjectPath: ../../docs/Gamelab 2026/Audio/ubisoft-game-labs-fmod-project-mixed/ubisoft-game-labs-audio.fspro
+  sourceBankPath: ../../docs/Gamelab 2026/Audio/ubisoft-game-labs-fmod-project-mixed/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
