@@ -10,6 +10,11 @@ public class Settings : MonoBehaviour
     private float uiEmissionIntensity = 1f;
     public float UIEmissionIntensity => uiEmissionIntensity;
 
+    private const float defaultEnemyEmissionIntensity = 1f;
+    private const float defaultUIEmissionIntensity = 1f;
+    private const string UI_EMISSION = "UIEmissionIntensity";
+    private const string ENEMY_EMISSION = "EnemyEmissionIntensity";
+
     private class UIEmission
     {
         public Color color;
@@ -28,6 +33,8 @@ public class Settings : MonoBehaviour
     private readonly Dictionary<Material, UIEmission> multipliedUIEmissions = new();
 
     private static Settings _instance;
+    
+    
     public static Settings Instance
     {
         get
@@ -50,13 +57,16 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
+
         if (_instance != null && _instance != this)
         {
             Destroy(this);
             return;
         }
-
+        
         _instance = this;
+        _instance.enemyEmissionIntensity = PlayerPrefs.GetFloat(ENEMY_EMISSION, defaultEnemyEmissionIntensity);
+        _instance.uiEmissionIntensity = PlayerPrefs.GetFloat(UI_EMISSION, defaultUIEmissionIntensity);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -73,6 +83,10 @@ public class Settings : MonoBehaviour
             if (m.Key != null)
                 m.Key.SetColor(m.Value.property, m.Value.color);
         }
+
+        PlayerPrefs.SetFloat(ENEMY_EMISSION, enemyEmissionIntensity);
+        PlayerPrefs.SetFloat(UI_EMISSION, uiEmissionIntensity);
+        PlayerPrefs.Save();
     }
 
     private static void ApplyEnemyMultipliedMaterial(Material m)
