@@ -62,9 +62,9 @@ public class DifficultyManager : MonoBehaviour
     {
         return gameDifficulty switch
         {
-            GameDifficulty.Easy => 0.5f,
-            GameDifficulty.Medium => 1.0f,
-            GameDifficulty.Hard => 1.50f,
+            GameDifficulty.Easy => 0.25f,
+            GameDifficulty.Medium => 0.5f,
+            GameDifficulty.Hard => 1f,
             _ => 1f
         };
     }

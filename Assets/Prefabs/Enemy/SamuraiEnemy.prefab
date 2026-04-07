@@ -521,8 +521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 25
-  maxSpeed: 50
+  minSpeed: 5
+  maxSpeed: 15
 --- !u!1 &4336789449968177408
 GameObject:
   m_ObjectHideFlags: 0
