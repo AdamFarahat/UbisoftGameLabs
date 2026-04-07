@@ -349,8 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 25
-  maxSpeed: 80
+  minSpeed: 10
+  maxSpeed: 20
 --- !u!114 &2974193712685510071
 MonoBehaviour:
   m_ObjectHideFlags: 0
