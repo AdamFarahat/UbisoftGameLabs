@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -88,5 +89,20 @@ public class AudioManager : MonoBehaviour
         {
             Instance = null;
         }
+    }
+
+    public float GetMasterVolume()
+    {
+        return masterBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
+    }
+
+    public float GetMusicVolume()
+    {
+        return musicBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
+    }
+
+    public float GetSFXVolume()
+    {
+        return sfxBus.getVolume(out float volume) == FMOD.RESULT.OK ? volume : 1f;
     }
 }
