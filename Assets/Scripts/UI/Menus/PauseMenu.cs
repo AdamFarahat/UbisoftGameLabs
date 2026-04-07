@@ -13,7 +13,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
 
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private PauseMenuFader pauseMenuFader;
+    [SerializeField] private MenuFader pauseFader;
+    [SerializeField] private MenuFader blackScreenFader;
     [SerializeField] private GameObject optionsMenu;
 
     void Awake()
@@ -22,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         Assert.IsNotNull(optionsButton);
         Assert.IsNotNull(restartButton);
         Assert.IsNotNull(mainMenuButton);
-        Assert.IsNotNull(pauseMenuFader);
+        Assert.IsNotNull(pauseFader);
     }
 
     private void OnDisable()
@@ -34,6 +35,13 @@ public class PauseMenu : MonoBehaviour
     }
     private void OnEnable()
     {
+        Time.timeScale = 0f; // Pause the game
+        // Set the first selected button to resumeButton
+        gameObject.SetActive(true);
+
+        pauseFader.FadeToOpaque();
+        
+
         resumeButton.onClick.AddListener(OnResumeButtonClicked);
         optionsButton.onClick.AddListener(OnOptionsButtonClicked);
         restartButton.onClick.AddListener(OnRestartButtonClicked);
@@ -47,11 +55,10 @@ public class PauseMenu : MonoBehaviour
 
         StartCoroutine(setSelectedButtonNextFrame());
     }
+
     public void ShowPauseMenu()
     {
         
-        Debug.Log("Showing pause menu");
-        pauseMenuFader.FadeIn();
         Time.timeScale = 0f; // Pause the game
 
         // Set the first selected button to resumeButton
@@ -61,7 +68,10 @@ public class PauseMenu : MonoBehaviour
     public void OnResumeButtonClicked()
     {
         Time.timeScale = 1f;
-        pauseMenuFader.FadeOut();
+        pauseFader.FadeToTransparent(() => 
+        {
+            gameObject.SetActive(false);
+        });
 
         resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
         optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
@@ -83,12 +93,19 @@ public class PauseMenu : MonoBehaviour
     public void OnRestartButtonClicked()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        blackScreenFader.FadeToOpaque(() =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);      
+        });
+
     }
 
     public void OnMainMenuButtonClicked()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        blackScreenFader.FadeToOpaque(() =>
+        {
+            SceneManager.LoadScene("Menu");
+        });
     }
 }

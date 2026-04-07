@@ -101,7 +101,9 @@ MonoBehaviour:
   restartButton: {fileID: 2480081608582849922}
   mainMenuButton: {fileID: 4349501545299365565}
   eventSystem: {fileID: 0}
-  pauseMenuFader: {fileID: 1339021601261668283}
+  pauseFader: {fileID: 1339021601261668283}
+  blackScreenFader: {fileID: 0}
+  optionsMenu: {fileID: 0}
 --- !u!114 &8446527652220364016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa94b551d7ea80418c9ff2f3939b1d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenuFader
+  fadeDuration: 0.3
 --- !u!1 &1331303520898542963
 GameObject:
   m_ObjectHideFlags: 0

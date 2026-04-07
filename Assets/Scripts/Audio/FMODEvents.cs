@@ -11,6 +11,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerDamaged { get; private set; }
     [field: SerializeField] public EventReference PlayerDeath { get; private set; }
     [field: SerializeField] public EventReference PlayerCooldownReady { get; private set; }
+    [field: SerializeField] public EventReference PlayerSuper { get; private set; }
+    [field: SerializeField] public EventReference PlayerSuperEnd { get; private set; }
 
     #endregion
     
@@ -49,6 +51,8 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerSwordBlock { get; private set; }
 
     [field: SerializeField] public EventReference PlayerJump { get; private set; }
+
+    [field: SerializeField] public EventReference PlayerSwordWave { get; private set; }
 
     #endregion
 
