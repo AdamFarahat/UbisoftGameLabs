@@ -198,6 +198,13 @@ MonoBehaviour:
       Data3: 2141118087
       Data4: -412552335
     Path: event:/Players/Gun/PlayerRifleSelect
+  <PlayerGrenadeHold>k__BackingField:
+    Guid:
+      Data1: -623641429
+      Data2: 1124441374
+      Data3: -1369605224
+      Data4: 39374778
+    Path: event:/Players/Gun/GrenadeHold
   <PlayerGrenadeThrow>k__BackingField:
     Guid:
       Data1: 1917402141

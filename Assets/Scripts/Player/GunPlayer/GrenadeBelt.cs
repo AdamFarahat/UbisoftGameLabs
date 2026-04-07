@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using FMODUnity;
 
 public class GrenadeBelt : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class GrenadeBelt : MonoBehaviour
     private GunAnimationManager animator;
 
     public float ThrowCooldown => throwCooldown;
+
+    private FMOD.Studio.EventInstance throwSFX;
 
     public void SetThrowCooldown(float cooldown)
     {
@@ -81,7 +84,7 @@ public class GrenadeBelt : MonoBehaviour
             throwChargeTime = 0f;
 
             animator.StartGrenadeAim();
-            // TODO Start playing grenade aiming SFX
+            throwSFX = AudioManager.Instance.PlayLooping(FMODEvents.Instance.PlayerGrenadeHold, this.gameObject);
         }
     }
 
@@ -89,7 +92,7 @@ public class GrenadeBelt : MonoBehaviour
     {
         SetThrowing(false);
         animator.StopGrenadeAim();
-        // TODO Stop playing grenade aiming SFX
+        throwSFX.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
     public void Throw()
