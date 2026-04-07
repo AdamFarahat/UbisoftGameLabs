@@ -102,8 +102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -236,7 +236,8 @@ MonoBehaviour:
   anticipationPositionPin: {fileID: 7319754868183021343}
   overshootPositionPin: {fileID: 7319754868183021343}
   anticipationDuration: 0.2
-  actionDuration: 0.3
+  actionOutDuration: 0.3
+  actionInDuration: 0.6
   overshootDuration: 0.2
 --- !u!1 &7222441640550138190
 GameObject:

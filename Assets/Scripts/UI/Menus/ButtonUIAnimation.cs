@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Runtime.CompilerServices;
+using System.Reflection;
 
 public class ButtonUIAnimation : UIAnimation
 {
@@ -30,7 +32,8 @@ public class ButtonUIAnimation : UIAnimation
 
     public void HoverBack()
     {
-        if (isExiting) return; 
+        if (isExiting) return;
+        
 
         rectTransform.DOKill();
         rectTransform.DOAnchorPos(cachedStartingPos, hoverDuration).SetEase(Ease.OutQuad);
