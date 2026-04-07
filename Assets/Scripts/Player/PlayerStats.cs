@@ -96,10 +96,13 @@ public class PlayerStats : MonoBehaviour
         // Pause the game, disable the characters, show game over screen (UIManager.Instance.ShowGameOverScreen()).
         Time.timeScale = 0f;
         AudioManager.Instance.StopAllSFX();
-        GameObject.Find("GunPlayer").SetActive(false);
-        GameObject.Find("SwordPlayer").SetActive(false);
-        uiManager.ShowGameOverScreen();
 
+        if (GunPlayerController.Instance != null)
+            GunPlayerController.Instance.gameObject.SetActive(false);
+        if (SwordPlayerController.Instance != null)
+            SwordPlayerController.Instance.gameObject.SetActive(false);
+
+        uiManager.ShowGameOverScreen();
     }
 
     public void ResetGunSuper()
