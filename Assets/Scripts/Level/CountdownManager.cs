@@ -168,13 +168,14 @@ public class CountdownManager : MonoBehaviour
 
         for (int i = 0; i < topBar.Length; i++)
             topBar[i].transform.position = topBarStartingPositions[i] - topBarOffset * Vector3.up;
-
+        
         StartGame();
     }
 
     private void StartGame()
     {
         // TODO level start sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UICountdown, Vector3.zero);
         FindFirstObjectByType<WaveManager>().StartWaves();
     }
 }
