@@ -20,6 +20,7 @@ public class Enemy : Poolable
 
     public bool invulnerable = false;
     public float deathAnimationDuration = 0.1f;
+    public float hurtAnimationDuration = 0.1f;
 
     private LaneBound laneBound;
     private SpriteRenderer spriteRenderer;
@@ -28,6 +29,8 @@ public class Enemy : Poolable
     public System.Func<Bullet, Collider, bool> ImmuneToBullet;
     public System.Func<bool> ImmuneToSword;
     public System.Func<bool> StunFromBullet;
+
+    private Coroutine hurtRoutine;
 
     public UnityAction SurpassedPlayers;
     private bool playersSurpassed = false;
@@ -38,6 +41,8 @@ public class Enemy : Poolable
         Assert.IsNotNull(laneBound);
         spriteRenderer = this.GetComponentInHierarchy<SpriteRenderer>();
         energyShield = this.GetComponentInHierarchy<EnergyShield>();
+
+        Assert.IsNotNull(spriteRenderer);
     }
 
     private void Start()
@@ -78,7 +83,7 @@ public class Enemy : Poolable
     {
         if (Dead || invulnerable) return false;
 
-        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyHurt, transform.position);
+        int prevHealth = health;
         health = System.Math.Max(health - damage, 0);
         if (health == 0)
         {
@@ -86,7 +91,19 @@ public class Enemy : Poolable
             return true;
         }
         else
+        {
+            if (health < prevHealth)
+            {
+                if (hurtRoutine != null)
+                {
+                    StopCoroutine(hurtRoutine);
+                    spriteRenderer.color = Color.white;
+                }
+
+                hurtRoutine = StartCoroutine(HurtRoutine());
+            }
             return false;
+        }
     }
 
     public bool OnParried()
@@ -109,12 +126,9 @@ public class Enemy : Poolable
         IEnumerator DeathRoutine()
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyDeath, transform.position);
-            if (spriteRenderer != null)
-            {
-                Color color = spriteRenderer.color;
-                yield return FadeAnimation.FadeOutRoutine(spriteRenderer, deathAnimationDuration);
-                spriteRenderer.color = color;
-            }
+            Color color = spriteRenderer.color;
+            yield return FadeAnimation.FadeOutRoutine(spriteRenderer, deathAnimationDuration);
+            spriteRenderer.color = color;
         }
 
         if (TryGetComponent(out Poolable poolable))
@@ -131,6 +145,12 @@ public class Enemy : Poolable
         }
 
         Die?.Invoke();
+    }
+
+    IEnumerator HurtRoutine()
+    {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.EnemyHurt, transform.position);
+        yield return FadeAnimation.FlickerBlackRoutine(spriteRenderer, hurtAnimationDuration);
     }
 
     public EnergyShield GetShield()
