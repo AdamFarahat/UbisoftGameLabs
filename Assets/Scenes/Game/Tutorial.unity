@@ -5634,7 +5634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialScore
   startingText: {fileID: 867737902}
   endingText: {fileID: 867737902}
-  scoreGainDuration: 6
+  scoreGainDuration: 4
   multiplierGainPerSecond: 2
 --- !u!1 &2096562390 stripped
 GameObject:
