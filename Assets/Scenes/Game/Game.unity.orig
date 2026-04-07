@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13344958ae7263343be58a68673748e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireTextLinker
-  textBoxToTrack: {fileID: 1792512712}
+  textBoxToTrack: {fileID: 1148120598}
   fireVFX: {fileID: 1985904071}
   scaleMultiplier: 0.05
 --- !u!4 &1074712601
@@ -346,6 +346,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1148120597 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6989056825521299548, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1792512711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1148120598 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6396564888915589720, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1792512711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1148120601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148120597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &1168653978 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 164879126226630899, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -586,10 +610,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< HEAD
+=======
+    - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -151.67921
       objectReference: {fileID: 0}
+>>>>>>> origin/fire
     - target: {fileID: 264266071360089453, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -748,7 +787,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396743335961792871, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
       value: 0
+=======
+      value: -409.03772
+>>>>>>> origin/fire
       objectReference: {fileID: 0}
     - target: {fileID: 1437111176451783528, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -860,7 +903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785855061791984286, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
+      value: -244.7987
+=======
       value: -244.79872
+>>>>>>> origin/fire
       objectReference: {fileID: 0}
     - target: {fileID: 2801929108647586306, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -1142,10 +1189,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4955517406841801305, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: m_text
-      value: 8031
-      objectReference: {fileID: 0}
     - target: {fileID: 4977544110137116219, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_DeselectOnBackgroundClick
       value: 0
@@ -1200,7 +1243,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201594331612658883, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201594331612658883, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: -237.33362
+=======
+      value: -237.33363
+>>>>>>> origin/fire
       objectReference: {fileID: 0}
     - target: {fileID: 5684439844047260740, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: gameOverFader
@@ -1662,14 +1713,7 @@ PrefabInstance:
       propertyPath: weaponIcon
       value: 
       objectReference: {fileID: 712595016}
-    - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-      propertyPath: m_horizontalMapping
-      value: 0
-      objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 9038469855245964968, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1685,19 +1729,31 @@ PrefabInstance:
     - target: {fileID: 9038469855245964968, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -17
+=======
+    - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824805095606037842, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_horizontalMapping
+      value: 0
+>>>>>>> origin/fire
       objectReference: {fileID: 0}
     - target: {fileID: 9196308343883604397, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -43.999878
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 9216134336608548771, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 73.100006
       objectReference: {fileID: 0}
+    m_RemovedComponents: [{fileID: 1230310165877976160, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3},
+      {fileID: 6579277078186002946, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}]
+=======
     m_RemovedComponents:
     - {fileID: 4570924912930231222, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-    - {fileID: 1230310165877976160, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-    - {fileID: 6579277078186002946, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+>>>>>>> origin/fire
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 139542205372769404, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -1707,6 +1763,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 164879126226630899, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1168653984}
+    - targetCorrespondingSourceObject: {fileID: 6989056825521299548, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1148120601}
     - targetCorrespondingSourceObject: {fileID: 1959008800550532140, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       insertIndex: 5
       addedObject: {fileID: 2044270252}
@@ -1714,11 +1773,7 @@ PrefabInstance:
       insertIndex: 6
       addedObject: {fileID: 2044270251}
   m_SourcePrefab: {fileID: 100100000, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
---- !u!224 &1792512712 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4197696511529709810, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
-  m_PrefabInstance: {fileID: 1792512711}
-  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!114 &1960906909 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1989770765338891101, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -1730,6 +1785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0214bea638f9c1a4aba79f6cf812310f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MultiplierText
+=======
 --- !u!1 &1985904069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,7 +1871,7 @@ VisualEffect:
       - m_Value: 6.77
         m_Name: FlameHeightInverted
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 1
         m_Name: FlameLength
         m_Overridden: 1
       - m_Value: 0.5
@@ -1862,6 +1918,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> origin/fire
 --- !u!1 &2044270245 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1959008800550532140, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
