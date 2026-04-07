@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public float fontSizePourcentage = 1f;
-    public float uiScalingPourcentage = 1f;
     private float enemyEmissionIntensity = 1f;
+    public float EnemyEmissionIntensity => enemyEmissionIntensity;
     private float uiEmissionIntensity = 1f;
+    public float UIEmissionIntensity => uiEmissionIntensity;
 
     private class UIEmission
     {
