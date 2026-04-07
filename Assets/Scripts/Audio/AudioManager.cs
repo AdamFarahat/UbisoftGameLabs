@@ -12,6 +12,12 @@ public class AudioManager : MonoBehaviour
     private Bus musicBus;
     private Bus sfxBus;
 
+    public void StopAllSFX()
+    {
+        //Stop all sound effects immediately
+        sfxBus.stopAllEvents(STOP_MODE.IMMEDIATE);
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
