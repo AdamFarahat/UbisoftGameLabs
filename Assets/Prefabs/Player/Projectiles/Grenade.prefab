@@ -5049,10 +5049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grenade
   damage: 50
-  colliderRoot: {fileID: 7402969355613599613}
+  explosionCollider: {fileID: 314679639856700504}
   vfx: {fileID: 5608689683623904691}
   spriteRenderer: {fileID: 6931506684278526903}
-  aoeRadiusScale: 50
   explosionDuration: 0.5
   gravity: 400
   initialDirection: {x: 0, y: 1, z: 1}
@@ -5083,7 +5082,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &3730759874568407862
 GameObject:
   m_ObjectHideFlags: 0
@@ -9989,7 +9988,7 @@ GameObject:
   - component: {fileID: 7402969355613599613}
   - component: {fileID: 314679639856700504}
   m_Layer: 7
-  m_Name: Collider
+  m_Name: Explosion Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10005,7 +10004,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 60.000004, y: 60.000004, z: 60.000004}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 628427985577759386}
@@ -10057,7 +10056,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5365959794034537424}
@@ -19863,8 +19862,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7003854210423016578}
+  - component: {fileID: 3617460147481924696}
   m_Layer: 7
-  m_Name: Mesh
+  m_Name: Grenade Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19885,3 +19885,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 628427985577759386}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3617460147481924696
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174605265513673593}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
