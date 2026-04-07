@@ -164,6 +164,22 @@ PrefabInstance:
       propertyPath: laneIndex
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 331136443408828763, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2988431
+      objectReference: {fileID: 0}
+    - target: {fileID: 331136443408828763, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.595417
+      objectReference: {fileID: 0}
+    - target: {fileID: 331136443408828763, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.117612
+      objectReference: {fileID: 0}
+    - target: {fileID: 666912083027255643, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: cameraOffset.y
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4701785225046342354, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -342,11 +358,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 20
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 14a6a163-a0b1-4c68-a84e-2f3fdd03340c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 9f4593e1-c445-4caf-be04-cfbcff9cd9b1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 65fc550b-ce7a-4916-ba87-ecd09f11d9f2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 382ec127-fa37-468c-b1b6-b50bb110b581
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: 739cfae3-e0cb-401c-a9b3-3b69a4d98f2e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 540d4f07-2428-4916-89a5-4f30ba88ed31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 8b39a7a8-2ff3-49d7-8129-16b708fd8ffc
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[12].m_ActionId
-      value: 14a6a163-a0b1-4c68-a84e-2f3fdd03340c
+      value: c4cd6bbc-557e-4892-88f6-422138fec86c
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_ActionId
@@ -373,8 +417,36 @@ PrefabInstance:
       value: c4cd6bbc-557e-4892-88f6-422138fec86c
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
-      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
       value: 'Player/UpEffect[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: 'Player/DownEffect[/Keyboard/s,/DualSenseGamepadHID/dpad/down]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: 'Player/Attack[/Keyboard/q]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Player/Block/Parry[/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID1/buttonEast,/Keyboard/e]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: 'Player/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: 'UI/Start[/Keyboard/enter,/DualShock4GamepadHID/start]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: 'Player/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: 'UI/Select[/Keyboard/backslash,/DualShock4GamepadHID/select]'
       objectReference: {fileID: 0}
     - target: {fileID: 6194096744229258362, guid: f6151ecb9dc23df48a6ffd3dc07c236b, type: 3}
       propertyPath: m_ActionEvents.Array.data[13].m_ActionName
@@ -497,13 +569,13 @@ MonoBehaviour:
   spriteBillboard: {fileID: 285721901106026720}
   shakeOffset: 0.2
   shakeInterval: 0.02
+  shadow: {fileID: 615814634147067384}
   moveEnabled: 1
   swordHitBox: {fileID: 0}
   meleeSparksPosition: {fileID: 6666655679547764896}
   jumpSpeed: 90
   fallAcceleration: 250
   droppingAcceleration: 1600
-  shadow: {fileID: 615814634147067384}
   attackDuration: 0.2
   blockCooldown: 3
   blockSparksPrefab: {fileID: 1559615547839024259, guid: 2d317ae5f80548c4f8ad74ab50a35a0b, type: 3}
