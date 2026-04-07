@@ -48,7 +48,7 @@ public class OptionsManager : MonoBehaviour
         }
         Assert.IsNotNull(eventSystem);
     }
-
+    
     private void OnEnable()
     {
         gameObject.SetActive(true);
@@ -81,6 +81,7 @@ public class OptionsManager : MonoBehaviour
 
     void OnDisable()
     {
+
         enemyEmissionSlider.onValueChanged.RemoveListener(OnEnemyEmissionSliderChange);
         uiEmissionSlider.onValueChanged.RemoveListener(OnUIEmissionSliderChange);
         qualitySlider.onValueChanged.RemoveListener(OnQualitySliderChange);
