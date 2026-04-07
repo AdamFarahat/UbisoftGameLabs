@@ -38,7 +38,7 @@ public class CowboyEnemy : ShooterEnemy
 
         Enemy enemy = GetComponent<Enemy>();
         enemy.OnTakeFromPool += ResetState;
-        enemy.ImmuneToBullet = (_, _) => true;
+        enemy.ImmuneToBullet = (Bullet b, Collider c) => b.State == Bullet.ProjectileState.ShotByPlayer;
         enemy.SurpassedPlayers += () => { playersSurpassed = true; };
 
         animators = GetComponentsInChildren<SpriteAnimator>();
