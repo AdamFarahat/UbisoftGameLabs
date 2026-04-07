@@ -2316,7 +2316,7 @@ PrefabInstance:
     - target: {fileID: 2261769771574237402, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_text
       value: Shoot, slash, blow up, and parry enemies to increase your <b>multiplier</b>
-        and <b>score</b>! Press <sprite name="wStart"> to continue...
+        and <b>score</b>!
       objectReference: {fileID: 0}
     - target: {fileID: 2261769771574237402, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_fontSizeBase
@@ -2409,26 +2409,6 @@ PrefabInstance:
     - target: {fileID: 5181993134647029585, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8223198056262856802, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
-      propertyPath: animations.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8223198056262856802, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
-      propertyPath: animations.Array.data[0].frameLength
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8223198056262856802, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
-      propertyPath: animations.Array.data[0].names.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8223198056262856802, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
-      propertyPath: 'animations.Array.data[0].names.Array.data[0]'
-      value: wStart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8223198056262856802, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
-      propertyPath: 'animations.Array.data[0].names.Array.data[1]'
-      value: gStart
       objectReference: {fileID: 0}
     - target: {fileID: 8249743288925981708, guid: 63b63bba645202d4a97622ef7ace840d, type: 3}
       propertyPath: m_Name

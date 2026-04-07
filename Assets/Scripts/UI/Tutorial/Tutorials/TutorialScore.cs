@@ -44,13 +44,10 @@ public class TutorialScore : TutorialBase
 
                 yield return null;
             }
+
+            EndTutorial();
         }
 
         StartCoroutine(Routine());
-    }
-
-    public override void OnStartPressed()
-    {
-        EndTutorial();
     }
 }
