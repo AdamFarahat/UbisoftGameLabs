@@ -64,8 +64,6 @@ public class ShotgunBlast : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
