@@ -89,6 +89,7 @@ MonoBehaviour:
   score: 10
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!65 &5251405713322530568
 BoxCollider:
   m_ObjectHideFlags: 0

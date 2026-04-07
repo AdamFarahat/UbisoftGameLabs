@@ -22,7 +22,8 @@ public class GameOver : MonoBehaviour
 
     private Coroutine selectRestartButtonCoroutine;
 
-    
+    [SerializeField] private GameObject gunFireVFX;
+    [SerializeField] private GameObject swordFireVFX;
 
     private void Awake()
     {
@@ -34,8 +35,17 @@ public class GameOver : MonoBehaviour
         Assert.IsNotNull(mainMenuButton);
         Assert.IsNotNull(eventSystem);
 
+        Assert.IsNotNull(gunFireVFX);
+        Assert.IsNotNull(swordFireVFX);
+
         restartButton.onClick.AddListener(Restart);
         mainMenuButton.onClick.AddListener(MainMenu);
+    }
+
+    private void Start()
+    {
+        gunFireVFX.SetActive(false);
+        swordFireVFX.SetActive(false);
     }
 
     public void ShowGameOverScreen()
@@ -45,6 +55,9 @@ public class GameOver : MonoBehaviour
         gameOverFader.FadeToOpaque();
         gunScore.text = GunPlayerController.Instance.Score.ToString();
         swordScore.text = SwordPlayerController.Instance.Score.ToString();
+
+        gunFireVFX.SetActive(true);
+        swordFireVFX.SetActive(true);
     
         int score = ScoreManagerSO.CalculateOverallFinalTeamScore();
         overallScoreText.text = score.ToString();
