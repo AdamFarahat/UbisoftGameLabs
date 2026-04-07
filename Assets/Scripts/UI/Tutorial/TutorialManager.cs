@@ -19,6 +19,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TutorialJump tutorialJump;
 
     [Header("UI Elements")]
+    [SerializeField] private GameObject powerBarUI;
+    public GameObject PowerBarUI => powerBarUI;
+    [SerializeField] private GameObject heartUI;
+    public GameObject HeartUI => heartUI;
     [SerializeField] private GameObject gunPlayerCooldownUI;
     public GameObject GunPlayerCooldownUI => gunPlayerCooldownUI;
 
@@ -51,6 +55,8 @@ public class TutorialManager : MonoBehaviour
         Assert.IsNotNull(tutorialSwitchGuns);
         Assert.IsNotNull(tutorialJump);
 
+        Assert.IsNotNull(powerBarUI);
+        Assert.IsNotNull(heartUI);
         Assert.IsNotNull(gunPlayerCooldownUI);
         Assert.IsNotNull(swordPlayerCooldownUI);
         Assert.IsNotNull(scoreUI);
@@ -73,7 +79,8 @@ public class TutorialManager : MonoBehaviour
             GunPlayerController.Instance.moveEnabled = !tutorialSwitchLanes.isActiveAndEnabled;
             GunPlayerController.Instance.shootEnabled = !tutorialPrimaryAction.isActiveAndEnabled;
             GunPlayerController.Instance.throwEnabled = !tutorialSecondaryAction.isActiveAndEnabled;
-            GunPlayerController.Instance.toggleGunEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
+            GunPlayerController.Instance.toggleGunDownEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
+            GunPlayerController.Instance.toggleGunUpEnabled = !tutorialSwitchGuns.isActiveAndEnabled;
         }
 
         if (SwordPlayerController.Instance != null)
@@ -91,6 +98,8 @@ public class TutorialManager : MonoBehaviour
         PlayerStats.Instance.ResetSwordSuper();
         PlayerStats.Instance.damageEnabled = false;
 
+        powerBarUI.SetActive(false);
+        heartUI.SetActive(false);
         gunPlayerCooldownUI.SetActive(false);
         swordPlayerCooldownUI.SetActive(false);
         scoreUI.SetActive(false);
@@ -98,10 +107,10 @@ public class TutorialManager : MonoBehaviour
         swordPlayerMultiplierUI.SetActive(false);
 
         foreach (GameObject lane in disabledLanes)
-            lane.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+            lane.SetActive(!tutorialSwitchGuns.isActiveAndEnabled);
 
         foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
-            lane.gameObject.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+            lane.gameObject.SetActive(!tutorialSwitchGuns.isActiveAndEnabled);
 
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);

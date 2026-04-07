@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -7,33 +6,77 @@ using UnityEngine.Assertions;
 public class TutorialSwitchGuns : TutorialBase
 {
     [Header("General")]
-    [SerializeField] private GameObject meleeGruntsRoot;
+    [SerializeField] private GameObject holdForLaserGruntsRoot;
+    [SerializeField] private GameObject holdToBreakShieldGruntsRoot;
+    [SerializeField] private GameObject useShotgunGruntsRoot;
+
+    [Header("Animation")]
+    [SerializeField] private float laneFadeInDuration = 0.5f;
 
     [Header("Descriptions")]
-    [SerializeField] private float secondDescriptionWait = 1f;
+    [SerializeField] private HologramText holdForLaserText;
+    [SerializeField] private HologramText downForMachineGunText;
+    [SerializeField] private HologramText holdToBreakShieldText;
+    [SerializeField] private HologramText downForShotgunText;
+    [SerializeField] private HologramText holdToHitMoreEnemiesText;
+    [SerializeField] private HologramText generalToggleText;
 
-    private TutorialEnemyLife[] meleeGrunts;
+    enum State
+    {
+        HoldForLaser,
+        DownForMachineGun,
+        HoldToBreakShield,
+        DownForShotgun,
+        HoldToHitMoreEnemies,
+        GeneralToggle
+    }
 
-    private readonly HashSet<int> gunsNotSeen = new();
-    private bool transitionsSwitched = false;
+    private State state = State.HoldForLaser;
+
+    private Enemy[] laserEnemies;
+    private Enemy[] machineGunEnemies;
+    private Enemy[] shotgunEnemies;
+
+    private GunPlayerController gunPlayer;
+    
+    private bool switchedToMachineGun = false;
+    private bool switchedToShotgun = false;
+    private bool switchedAgain = false;
 
     protected override void Awake()
     {
         base.Awake();
         
-        Assert.IsNotNull(meleeGruntsRoot);
-        meleeGrunts = meleeGruntsRoot.GetComponentsInChildren<TutorialEnemyLife>();
+        Assert.IsNotNull(holdForLaserGruntsRoot);
+        Assert.IsNotNull(holdToBreakShieldGruntsRoot);
+        Assert.IsNotNull(useShotgunGruntsRoot);
 
-        Assert.IsTrue(StartingText != EndingText);
-        EndingText.gameObject.SetActive(false);
+        Assert.IsNotNull(holdForLaserText);
+        Assert.IsNotNull(downForMachineGunText);
+        Assert.IsNotNull(holdToBreakShieldText);
+        Assert.IsNotNull(downForShotgunText);
+        Assert.IsNotNull(holdToHitMoreEnemiesText);
+        Assert.IsNotNull(generalToggleText);
 
-        foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
-            meleeGrunt.gameObject.SetActive(false);
+        downForMachineGunText.gameObject.SetActive(false);
+        holdToBreakShieldText.gameObject.SetActive(false);
+        downForShotgunText.gameObject.SetActive(false);
+        holdToHitMoreEnemiesText.gameObject.SetActive(false);
+        generalToggleText.gameObject.SetActive(false);
+
+        holdForLaserGruntsRoot.SetActive(false);
+        laserEnemies = holdForLaserGruntsRoot.GetComponentsInChildren<Enemy>();
+
+        holdToBreakShieldGruntsRoot.SetActive(false);
+        machineGunEnemies = holdToBreakShieldGruntsRoot.GetComponentsInChildren<Enemy>();
+
+        useShotgunGruntsRoot.SetActive(false);
+        shotgunEnemies = useShotgunGruntsRoot.GetComponentsInChildren<Enemy>();
     }
 
     protected override void StartTutorial()
     {
-        GunPlayerController gunPlayer = GunPlayerController.Instance;
+        gunPlayer = GunPlayerController.Instance;
 
         if (gunPlayer == null)
         {
@@ -41,27 +84,67 @@ public class TutorialSwitchGuns : TutorialBase
             return;
         }
 
-        gunPlayer.PressedShoot += PressedShoot;
-
-        for (int i = 0; i < gunPlayer.Holster.NumberOfGuns; i++)
-        {
-            if (i != gunPlayer.Holster.ActiveGunIndex)  // player already used revolver, no need to check for it here
-                gunsNotSeen.Add(i);
-        }
-
-        gunPlayer.toggleGunEnabled = true;
-        gunPlayer.PressedToggle += ShowSecondDescription;
+        gunPlayer.PressedToggleDown += PressedToggleDown;
+        gunPlayer.PressedToggleUp += PressedToggleUp;
 
         float age = Time.time;
         IEnumerator Routine()
         {
-            while (gunsNotSeen.Count > 0)
-                yield return null;
+            // HoldForLaser
+            state = State.HoldForLaser;
+            holdForLaserGruntsRoot.SetActive(true);
+            yield return new WaitUntil(() => laserEnemies.All(g => g == null || g.Dead));
+            yield return holdForLaserText.DespawnRoutine();
 
-            foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
-                meleeGrunt.gameObject.SetActive(true);
+            // DownForMachine
+            state = State.DownForMachineGun;
+            yield return downForMachineGunText.SpawnRoutine();
+            gunPlayer.toggleGunDownEnabled = true;
+            yield return new WaitUntil(() => switchedToMachineGun);
+            yield return downForMachineGunText.DespawnRoutine();
 
-            yield return new WaitUntil(() => meleeGrunts.All(g => g == null || g.Dead));
+            // HoldToBreakShield
+            state = State.HoldToBreakShield;
+            yield return holdToBreakShieldText.SpawnRoutine();
+            holdToBreakShieldGruntsRoot.SetActive(true);
+            yield return new WaitUntil(() => machineGunEnemies.All(g => g == null || g.Dead));
+            yield return holdToBreakShieldText.DespawnRoutine();
+
+            // DownForShotgun
+            state = State.DownForShotgun;
+            yield return downForShotgunText.SpawnRoutine();
+            gunPlayer.toggleGunDownEnabled = true;
+            yield return new WaitUntil(() => switchedToShotgun);
+            yield return downForShotgunText.DespawnRoutine();
+
+            // HoldToHitMoreEnemies
+            state = State.HoldToHitMoreEnemies;
+
+            foreach (GameObject lane in manager.DisabledLanes)
+            {
+                lane.SetActive(true);
+                foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                    StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
+            }
+
+            foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                lane.gameObject.SetActive(true);
+                foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                    StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
+            }
+
+            yield return holdToHitMoreEnemiesText.SpawnRoutine();
+            useShotgunGruntsRoot.SetActive(true);
+            yield return new WaitUntil(() => shotgunEnemies.All(g => g == null || g.Dead));
+            yield return holdToHitMoreEnemiesText.DespawnRoutine();
+
+            // GeneralToggle
+            state = State.GeneralToggle;
+            yield return generalToggleText.SpawnRoutine();
+            gunPlayer.toggleGunUpEnabled = true;
+            gunPlayer.toggleGunDownEnabled = true;
+            yield return new WaitUntil(() => switchedAgain);
 
             EndTutorial();
         }
@@ -69,24 +152,27 @@ public class TutorialSwitchGuns : TutorialBase
         StartCoroutine(Routine());
     }
 
-    private void ShowSecondDescription()
+    private void PressedToggleDown()
     {
-        if (transitionsSwitched)
-            return;
-        transitionsSwitched = true;
-
-        IEnumerator Transition()
+        if (state == State.DownForMachineGun)
         {
-            yield return new WaitForSeconds(secondDescriptionWait);
-            yield return StartingText.DespawnRoutine();
-            yield return EndingText.SpawnRoutine();
+            gunPlayer.toggleGunDownEnabled = false;
+            switchedToMachineGun = true;
         }
-
-        StartCoroutine(Transition());
+        else if (state == State.DownForShotgun)
+        {
+            gunPlayer.toggleGunDownEnabled = false;
+            switchedToShotgun = true;
+        }
+        else if (state == State.GeneralToggle)
+        {
+            switchedAgain = true;
+        }
     }
 
-    private void PressedShoot()
+    private void PressedToggleUp()
     {
-        gunsNotSeen.Remove(GunPlayerController.Instance.Holster.ActiveGunIndex);
+        if (state == State.GeneralToggle)
+            switchedAgain = true;
     }
 }

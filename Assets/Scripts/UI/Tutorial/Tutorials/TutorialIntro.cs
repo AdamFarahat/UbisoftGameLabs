@@ -4,7 +4,8 @@ public class TutorialIntro : TutorialBase
 {
     protected override void StartTutorial()
     {
-        // NOP
+        manager.PowerBarUI.SetActive(true);
+        manager.HeartUI.SetActive(true);
     }
 
     public override void OnStartPressed()

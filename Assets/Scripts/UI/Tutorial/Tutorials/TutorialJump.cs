@@ -4,29 +4,22 @@ using UnityEngine.Assertions;
 
 public class TutorialJump : TutorialBase
 {
-    [SerializeField] private GameObject gunGruntsRoot;
-    [SerializeField] private float spawnDelay = 0.3f;
+    [SerializeField] private TutorialGunGrunt gunGrunt;
     [SerializeField] private float shootingDuration = 6f;
     [SerializeField] private float endingPadding = 2f;
-
-    private TutorialGunGrunt[] gunGrunts;
 
     private bool pressedJump = false;
 
     protected override void Awake()
     {
         base.Awake();
-        Assert.IsNotNull(gunGruntsRoot);
-
-        gunGrunts = gunGruntsRoot.GetComponentsInChildren<TutorialGunGrunt>();
-        Assert.IsTrue(gunGrunts.Length == LaneSet.LaneCount);
+        Assert.IsNotNull(gunGrunt);
     }
 
     private void OnDisable()
     {
-        foreach (TutorialGunGrunt gunGrunt in gunGrunts)
-            if (gunGrunt != null)
-                gunGrunt.gameObject.SetActive(false);
+        if (gunGrunt != null)
+            gunGrunt.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
@@ -48,15 +41,10 @@ public class TutorialJump : TutorialBase
             while (!pressedJump)
                 yield return null;
 
-            foreach (TutorialGunGrunt gunGrunt in gunGrunts)
-            {
-                gunGrunt.Spawn();
-                yield return new WaitForSeconds(spawnDelay);
-            }
+            gunGrunt.Spawn();
             yield return new WaitForSeconds(shootingDuration);
 
-            foreach (TutorialGunGrunt gunGrunt in gunGrunts)
-                gunGrunt.Despawn();
+            gunGrunt.Despawn();
             yield return new WaitForSeconds(endingPadding);
 
             EndTutorial();
