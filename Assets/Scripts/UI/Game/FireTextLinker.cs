@@ -17,7 +17,6 @@ public class FireTextLinker : MonoBehaviour
         {
             float minLimit = fireVFX.GetFloat("MinFlameLength");
             float maxLimit = fireVFX.GetFloat("MaxFlameLength");
-            float resetX = fireVFX.GetFloat("ResetX");
 
             float currentWidth = textBoxToTrack.rect.width;
             float calculatedScale = currentWidth * scaleMultiplier;
