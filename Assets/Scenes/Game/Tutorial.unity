@@ -394,6 +394,8 @@ MonoBehaviour:
   tutorialSecondaryAction: {fileID: 2076460341}
   tutorialSwitchGuns: {fileID: 1556591197}
   tutorialJump: {fileID: 1886666466}
+  powerBarUI: {fileID: 1532162312}
+  heartUI: {fileID: 1951729049}
   gunPlayerCooldownUI: {fileID: 1632895591}
   swordPlayerCooldownUI: {fileID: 2096562390}
   scoreUI: {fileID: 1141389509}
@@ -2993,7 +2995,6 @@ MonoBehaviour:
   meleeGruntPrefab: {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
   meleeGruntSpawnDelay: 1
   meleeGruntSpeed: 24
-  gunGruntPrefab: {fileID: 106214315365850937, guid: cc86c394fc1290f4592faa21ece94cf3, type: 3}
 --- !u!222 &1279461963
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3997,6 +3998,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498419611}
   m_CullTransparentMesh: 1
+--- !u!1 &1532162312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7239008737995280706, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556591195
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,6 +5314,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TutorialIntro
   startingText: {fileID: 1669641769}
   endingText: {fileID: 1669641769}
+--- !u!1 &1951729049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 660540321499057965, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+  m_PrefabInstance: {fileID: 1332198090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2043092381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}

@@ -15,10 +15,6 @@ public class TutorialSuper : TutorialBase
     [SerializeField] private float meleeGruntSpawnDelay = 1f;
     [SerializeField] private float meleeGruntSpeed = 24f;
 
-    [Header("Gun Grunts")]
-    [SerializeField] private GameObject gunGruntPrefab;
-    private readonly TutorialGunGrunt[] laneToGunGrunts = new TutorialGunGrunt[LaneSet.LaneCount];
-
     private readonly List<Enemy> spawnedGrunts = new();
 
     private bool superActivated = false;
@@ -62,8 +58,6 @@ public class TutorialSuper : TutorialBase
                     SpawnMeleeWave();
                 }
 
-                SpawnMissingGunGrunts();
-
                 yield return null;
             }
 
@@ -106,33 +100,7 @@ public class TutorialSuper : TutorialBase
         enemy.deathAnimationDuration = deathAnimationDuration;
         spawnedGrunts.Add(enemy);
     }
-
-    private void SpawnMissingGunGrunts()
-    {
-        for (int i = 0; i < LaneSet.LaneCount; i++)
-            if (laneToGunGrunts[i] == null)
-                SpawnGunGrunt(i);
-    }
-
-    private void SpawnGunGrunt(int laneIndex)
-    {
-        GameObject go = Instantiate(gunGruntPrefab);
-
-        LaneBound lane = go.GetComponent<LaneBound>();
-        lane.LaneIndex = laneIndex;
-        lane.LaneDistance = spawnDistance;
-
-        Enemy enemy = go.GetComponent<Enemy>();
-        Assert.IsNotNull(enemy);
-        enemy.deathAnimationDuration = deathAnimationDuration;
-        spawnedGrunts.Add(enemy);
-
-        TutorialGunGrunt gunGrunt = go.GetComponent<TutorialGunGrunt>();
-        Assert.IsNotNull(gunGrunt);
-        gunGrunt.Spawn();
-        laneToGunGrunts[laneIndex] = gunGrunt;
-    }
-
+    
     private void ShowSecondDescription()
     {
         if (superActivated)
