@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 [CreateAssetMenu(fileName = "ScoreManagerSO", menuName = "Scriptable Objects/ScoreManagerSO")]
 public class ScoreManagerSO : ScriptableObject
 {
+    private const string HIGH_SCORE_TEAM = "HIGH_SCORE_TEAM";
+    private const string HIGH_SCORE_GUN_PLAYER = "HIGH_SCORE_GUN_PLAYER";
+    private const string HIGH_SCORE_SWORD_PLAYER = "HIGH_SCORE_GUN_SWORD_PLAYER";
+
     public float TEAM_MULTIPLIER_BASE = 20f;
 
     private readonly float MIN_MULTIPLIER = 1f;
@@ -40,11 +45,14 @@ public class ScoreManagerSO : ScriptableObject
     /// For now, we do not store the score somewhere the calculation cannot be done outside of the level.
     /// </summary>
     /// <returns>Final score that should be displayed</returns>
-    public static int CalculateOverallFinalTeamScore()
+    public static int CalculateOverallFinalTeamScore(out bool isHighScoreTeam, out bool isHighScoreGun, out bool isHighScoreSword)
     {
+        isHighScoreTeam = false;
+        isHighScoreGun = false;
+        isHighScoreSword = false;
         float totalScore = CalculateOverallTeamScore();
 
-        Debug.Log("TotalScore: " + totalScore);
+        
         
         float average = totalScore / (float)(numberOfPlayers);
         
@@ -52,9 +60,60 @@ public class ScoreManagerSO : ScriptableObject
             + Mathf.Abs(SwordPlayerController.Instance.Score - average);
 
         float teamMultiplier = sumOfStdDev <= _instance.SumOfSTDDevTreshold ?
-_instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
+            _instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / _instance.SumOfSTDDevTreshold
               : _instance.MIN_MULTIPLIER + _instance.TEAM_MULTIPLIER_BASE / (sumOfStdDev);
-        Debug.Log("return value: " + (int)(teamMultiplier * totalScore));
-        return (int)(teamMultiplier * totalScore);
+        int finalScore = (int)(teamMultiplier * totalScore);
+
+
+        if (finalScore >= GetHighScoreTeam()) {
+            SaveHighScoreTeam(finalScore);
+            isHighScoreTeam = true;
+        }
+        if (GunPlayerController.Instance.Score >= GetHighScoreGunPlayer()) { 
+            SaveHighScoreGun(GunPlayerController.Instance.Score);
+            isHighScoreGun = true;
+
+        } 
+        if (SwordPlayerController.Instance.Score >= GetHighScoreSwordPlayer()) {
+            SaveHighScoreSword(SwordPlayerController.Instance.Score);
+            isHighScoreSword = true;
+
+        }
+        return finalScore;
     }
+
+    
+
+    private static int GetHighScoreTeam()
+    {
+        return PlayerPrefs.GetInt(HIGH_SCORE_TEAM, 0);
+    }
+    private static int GetHighScoreGunPlayer()
+    {
+        return PlayerPrefs.GetInt(HIGH_SCORE_GUN_PLAYER, 0);
+    }
+    private static int GetHighScoreSwordPlayer()
+    {
+        return PlayerPrefs.GetInt(HIGH_SCORE_SWORD_PLAYER, 0);
+    }
+
+    private static void SaveHighScoreTeam(int score)
+    {
+        PlayerPrefs.SetInt(HIGH_SCORE_TEAM, score);
+        PlayerPrefs.Save();
+    }
+
+    private static void SaveHighScoreGun(int score)
+    {
+        PlayerPrefs.SetInt(HIGH_SCORE_GUN_PLAYER, score);
+        PlayerPrefs.Save();
+    }
+
+    private static void SaveHighScoreSword(int score)
+    {
+        PlayerPrefs.SetInt(HIGH_SCORE_SWORD_PLAYER, score);
+        PlayerPrefs.Save();
+    }
+
+
 }
