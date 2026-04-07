@@ -92,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1214044853849577375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -101,12 +101,12 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161776477749886229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00014866445}
-  m_LocalScale: {x: 1.89, y: 1.89, z: 1.89}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00025054513}
+  m_LocalScale: {x: 2.6572561, y: 2.6572561, z: 2.6572564}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4584660439847511908}
-  m_Father: {fileID: 8047676394727526899}
+  m_Father: {fileID: 1665042266983819459}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -581,6 +581,7 @@ RectTransform:
   m_Children:
   - {fileID: 7093702494016589453}
   - {fileID: 8047676394727526899}
+  - {fileID: 1214044853849577375}
   - {fileID: 7223891211443970652}
   m_Father: {fileID: 4934685864622737607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1347,7 +1348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8907119196174070267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2457,7 +2458,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4465670778997849646}
-  - {fileID: 1214044853849577375}
   - {fileID: 4078240770961397919}
   - {fileID: 8149809549354127646}
   - {fileID: 3862421497064466943}
@@ -2551,11 +2551,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203fce23f21d86b49b596cb9c7264a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOver
-  scoreManagerSO: {fileID: 0}
-  gunScore: {fileID: 0}
-  swordScore: {fileID: 0}
-  overallScoreText: {fileID: 0}
-  restartButton: {fileID: 0}
+  scoreManagerSO: {fileID: 11400000, guid: 1f1029d06d4379d4a8a058c8ee057ff3, type: 2}
+  gunScore: {fileID: 168038837719550157}
+  swordScore: {fileID: 5914553562647865301}
+  overallScoreText: {fileID: 165017622238035296}
+  restartButton: {fileID: 3541596360066493559}
   mainMenuButton: {fileID: 1907529508597224870}
   gameOverFader: {fileID: 5676721865232499598}
   blackScreenFader: {fileID: 0}
@@ -4228,7 +4228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6632659877366535610
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6431,7 +6431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5292742633575552047
 RectTransform:
   m_ObjectHideFlags: 0
