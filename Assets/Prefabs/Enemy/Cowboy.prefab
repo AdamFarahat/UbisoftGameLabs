@@ -187,6 +187,7 @@ MonoBehaviour:
   score: 500
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!114 &3771198681682225122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b27898a022906468c51cc3c1a28563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
-  minSpeed: 25
-  maxSpeed: 50
+  minSpeed: 15
+  maxSpeed: 30
 --- !u!114 &8981878535914287841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +400,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 763874545
-  m_SortingLayer: -3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b5a299d5b33953b409c47427c7535ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -557,7 +558,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 763874545
-  m_SortingLayer: -3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8341ace7f775b2642b6642a482f12641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -714,7 +715,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 763874545
-  m_SortingLayer: -3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cb12a9419de9fa0428ce089a96d3a9c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
