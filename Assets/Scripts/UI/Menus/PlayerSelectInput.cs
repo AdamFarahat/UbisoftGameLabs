@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections.Generic;
+using UnityEngine.UI;
 public class PlayerSelectInput : MonoBehaviour
 {
     private RectTransform cursorIcon; 
@@ -12,6 +13,8 @@ public class PlayerSelectInput : MonoBehaviour
 
     public int CurrentIndex => currentIndex;
 
+    public List<Sprite> gplayer1CursorSprites;
+    public List<Sprite> gplayer2CursorSprites;
     // 
     public void SetupCursor(RectTransform[] slots, Transform canvasTransform, PlayerSelectManager myManager, int playerID, GameObject dummyCursor)
     {
@@ -33,6 +36,7 @@ public class PlayerSelectInput : MonoBehaviour
             
             // Set the dummy cursor transform to this player's cursor transform 
             cursorIcon = dummyCursor.GetComponent<RectTransform>();
+            cursorIcon.GetComponentInChildren<Image>().sprite = playerID == 0 ? gplayer1CursorSprites[0] : gplayer2CursorSprites[0];
         }
 
         if (characterSlots != null && characterSlots.Length > 0 && cursorIcon != null)
@@ -83,10 +87,12 @@ public class PlayerSelectInput : MonoBehaviour
             //Check which slot the other player is in. Then set the device for the character based on that
             if (currentIndex == 0)
             {
+                cursorIcon.GetComponentInChildren<Image>().sprite = myPlayerID == 0 ? gplayer1CursorSprites[1] : gplayer2CursorSprites[1];
                 OnSwordPlayerSelect(context);
             }
             else if (currentIndex == 2)
             {
+                cursorIcon.GetComponentInChildren<Image>().sprite = myPlayerID == 0 ? gplayer1CursorSprites[2] : gplayer2CursorSprites[2];
                 OnGunPlayerSelect(context);
             }
             
@@ -142,10 +148,12 @@ public class PlayerSelectInput : MonoBehaviour
                 //Check which slot the player is in. Then unset the device for that character based on that
                 if (currentIndex == 0)
                 {
+                    cursorIcon.GetComponentInChildren<Image>().sprite = myPlayerID == 0 ? gplayer1CursorSprites[0] : gplayer2CursorSprites[0];
                     OnSwordPlayerDeselect(context);
                 }
                 else if (currentIndex == 2)
                 {
+                    cursorIcon.GetComponentInChildren<Image>().sprite = myPlayerID == 0 ? gplayer1CursorSprites[0] : gplayer2CursorSprites[0];
                     OnGunPlayerDeselect(context);
                 } 
             }

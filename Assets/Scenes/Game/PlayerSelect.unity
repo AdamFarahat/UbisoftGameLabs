@@ -581,6 +581,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2193993306701931465, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193993306701931465, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325449409569316013, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2325449409569316013, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 2436245862821722707, guid: 64aadca619a7e9b58931c83c3f60552d, type: 3}
       propertyPath: m_Name
       value: PlayerSelectCore
