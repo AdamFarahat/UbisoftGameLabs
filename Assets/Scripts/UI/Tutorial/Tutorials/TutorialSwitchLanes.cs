@@ -58,5 +58,12 @@ public class TutorialSwitchLanes : TutorialBase
             foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
                 StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
         }
+
+        foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            lane.gameObject.SetActive(true);
+            foreach (SpriteRenderer spriteRenderer in lane.GetComponentsInChildren<SpriteRenderer>())
+                StartCoroutine(FadeAnimation.FadeInRoutine(spriteRenderer, laneFadeInDuration));
+        }
     }
 }
