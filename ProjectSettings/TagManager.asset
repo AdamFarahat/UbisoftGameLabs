@@ -47,21 +47,6 @@ TagManager:
   - name: Shadows
     uniqueID: 145107719
     locked: 0
-  - name: Lane 0
-    uniqueID: 175467439
-    locked: 0
-  - name: Lane 1
-    uniqueID: 725858061
-    locked: 0
-  - name: Lane 2
-    uniqueID: 763874545
-    locked: 0
-  - name: Lane 3
-    uniqueID: 2206350189
-    locked: 0
-  - name: Lane 4
-    uniqueID: 422675631
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -50,7 +50,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51db70f694f4a34e97b053f0e9f8200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSelectCursor
-  cursorIcon: {fileID: 5994321246490726734}
+  gplayer1CursorSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gplayer2CursorSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &6515076261528024335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +131,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ef211be8-b0d0-408e-a0db-4d60148a8246
     m_ActionName: 'PlayerSelect/Cancel[/XInputControllerWindows/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e743d5e-cdab-41fd-8ca4-c3797e7821a7
+    m_ActionName: 'PlayerSelect/Reset[/DualSenseGamepadHID/select,/DualSenseGamepadHID1/select]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerSelect

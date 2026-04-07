@@ -40,6 +40,8 @@ public class GameOver : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerDeath, Vector3.zero);
+        AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameOver);
         gameOverFader.FadeToOpaque();
         gunScore.text = GunPlayerController.Instance.Score.ToString();
         swordScore.text = SwordPlayerController.Instance.Score.ToString();
