@@ -214,7 +214,7 @@ VisualEffect:
       - m_Value: 1.32
         m_Name: NoiseVolume
         m_Overridden: 1
-      - m_Value: 3.2209413
+      - m_Value: 21.280952
         m_Name: UnscaledTime
         m_Overridden: 1
     m_Vector2f:
@@ -633,7 +633,7 @@ VisualEffect:
       - m_Value: 1.32
         m_Name: NoiseVolume
         m_Overridden: 1
-      - m_Value: 3.2209413
+      - m_Value: 21.280952
         m_Name: UnscaledTime
         m_Overridden: 1
     m_Vector2f:
@@ -891,11 +891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.90005
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 112239674306042334, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 196.9
+      value: 196.90002
       objectReference: {fileID: 0}
     - target: {fileID: 264266071360089453, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -911,11 +911,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 385621731675926870, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 400.90005
+      value: 400.90002
       objectReference: {fileID: 0}
     - target: {fileID: 385621731675926870, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 253.69998
+      value: 253.69995
       objectReference: {fileID: 0}
     - target: {fileID: 601443131451342902, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -971,7 +971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 952842141404030599, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 413.6
+      value: 413.59998
       objectReference: {fileID: 0}
     - target: {fileID: 952842141404030599, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1107,7 +1107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338951051390974129, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -346.57803
+      value: -346.578
       objectReference: {fileID: 0}
     - target: {fileID: 1377103012561967414, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1299,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2595957642493512838, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 408.2
+      value: 408.19995
       objectReference: {fileID: 0}
     - target: {fileID: 2595957642493512838, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1435,7 +1435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3411400602329274760, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 276.1
+      value: 276.09998
       objectReference: {fileID: 0}
     - target: {fileID: 3411400602329274760, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1763,7 +1763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5201594331612658883, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -292.25803
+      value: -292.25806
       objectReference: {fileID: 0}
     - target: {fileID: 5684439844047260740, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: gunFireVFX
@@ -1943,7 +1943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516402689731084535, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -183.61803
+      value: -183.61804
       objectReference: {fileID: 0}
     - target: {fileID: 6579277078186002946, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_Padding.m_Top
@@ -2127,7 +2127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7315498921305135226, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 137.4
+      value: 137.40002
       objectReference: {fileID: 0}
     - target: {fileID: 7341134461716589325, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2253,6 +2253,14 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7877042454580343463, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: gunSuperPercent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877042454580343463, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: swordSuperPercent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7918879489773344940, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2303,7 +2311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005302640356431537, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -237.93802
+      value: -237.93799
       objectReference: {fileID: 0}
     - target: {fileID: 8019695434285657088, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2500,7 +2508,7 @@ VisualEffect:
       - m_Value: 8
         m_Name: MaxFlameLength
         m_Overridden: 1
-      - m_Value: 3.2209413
+      - m_Value: 21.280952
         m_Name: UnscaledTime
         m_Overridden: 1
     m_Vector2f:

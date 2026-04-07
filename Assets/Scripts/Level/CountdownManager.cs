@@ -50,12 +50,18 @@ public class CountdownManager : MonoBehaviour
     private void Start()
     {
         if (SwordPlayerController.Instance != null)
+        {
             swordPlayerSpriteRenderers = SwordPlayerController.Instance.GetComponentsInChildren<SpriteRenderer>();
+            SwordPlayerController.Instance.PlayerInput.enabled = false;
+        }
         else
             swordPlayerSpriteRenderers = new SpriteRenderer[0];
 
         if (GunPlayerController.Instance != null)
+        {
             gunPlayerSpriteRenderers = GunPlayerController.Instance.GetComponentsInChildren<SpriteRenderer>();
+            GunPlayerController.Instance.PlayerInput.enabled = false;
+        }
         else
             gunPlayerSpriteRenderers = new SpriteRenderer[0];
 
@@ -136,6 +142,12 @@ public class CountdownManager : MonoBehaviour
         backSprite.enabled = false;
         fullSprite.enabled = false;
 
+        if (SwordPlayerController.Instance != null)
+            SwordPlayerController.Instance.PlayerInput.enabled = true;
+
+        if (GunPlayerController.Instance != null)
+            GunPlayerController.Instance.PlayerInput.enabled = true;
+
         Vector3[] bottomBarStartingPositions = new Vector3[bottomBar.Length];
         for (int i = 0; i < bottomBar.Length; i++)
             bottomBarStartingPositions[i] = bottomBar[i].transform.position;
@@ -168,7 +180,7 @@ public class CountdownManager : MonoBehaviour
 
         for (int i = 0; i < topBar.Length; i++)
             topBar[i].transform.position = topBarStartingPositions[i] - topBarOffset * Vector3.up;
-        
+
         StartGame();
     }
 
