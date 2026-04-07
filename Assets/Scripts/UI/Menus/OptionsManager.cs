@@ -34,6 +34,9 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private float masterVolumeSliderDefaultValue = 0.5f;
     [SerializeField] private float musicVolumeSliderDefaultValue = 0.5f;
     [SerializeField] private float sfxVolumeSliderDefaultValue = 0.5f;
+
+    [SerializeField] private Color selectedColor = Color.yellow;
+    [SerializeField] private Color normalColor = Color.white;
     void Awake()
     {
         Assert.IsNotNull(enemyEmissionSlider);
@@ -168,5 +171,39 @@ public class OptionsManager : MonoBehaviour
     {
         Debug.Log("Quality slider changed to " + value);
         QualitySettings.SetQualityLevel((int)value);
+    }
+
+
+
+    public void OnSliderSelected(BaseEventData eventData)
+    {
+        Debug.Log("Slider selected: " + eventData.selectedObject.name);
+        // The slider that was selected:
+        GameObject sliderGO = eventData.selectedObject;
+
+        Slider slider = sliderGO.GetComponent<Slider>();
+        if (slider != null)
+        {
+            // Access its fill image
+            Image fill = slider.fillRect.GetComponent<Image>();
+            if (fill != null)
+            {
+                fill.color = selectedColor;
+            }
+        }
+    }
+
+    public void OnSliderDeselected(BaseEventData eventData)
+    {
+        GameObject sliderGO = eventData.selectedObject;
+        Slider slider = sliderGO.GetComponent<Slider>();
+        if (slider != null)
+        {
+            Image fill = slider.fillRect.GetComponent<Image>();
+            if (fill != null)
+            {
+                fill.color = normalColor;
+            }
+        }
     }
 }

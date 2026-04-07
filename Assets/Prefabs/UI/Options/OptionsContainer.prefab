@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1779783329306863735}
   - component: {fileID: 4062522552406709203}
+  - component: {fileID: 494636310259888792}
   m_Layer: 5
   m_Name: GameplayEmissionSlider
   m_TagString: Untagged
@@ -89,6 +90,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &494636310259888792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129037070529094380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &140421522601628946
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9372549}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -234,6 +280,8 @@ MonoBehaviour:
   masterVolumeSliderDefaultValue: 0.5
   musicVolumeSliderDefaultValue: 0.5
   sfxVolumeSliderDefaultValue: 0.5
+  selectedColor: {r: 0, g: 0, b: 0, a: 1}
+  normalColor: {r: 0.6431373, g: 0, b: 1, a: 1}
 --- !u!114 &5716508767719044371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,6 +1458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3289450584264428858}
   - component: {fileID: 969836181237806750}
+  - component: {fileID: 4267585071337967763}
   m_Layer: 5
   m_Name: QualitySlider
   m_TagString: Untagged
@@ -1489,6 +1538,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4267585071337967763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809791206343919521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4041068776290446037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2608995429174638189}
   - component: {fileID: 353240906177580489}
+  - component: {fileID: 1481849184895818726}
   m_Layer: 5
   m_Name: MasterSlider
   m_TagString: Untagged
@@ -1653,6 +1748,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1481849184895818726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4417013701389024502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4442599073980020587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6209372676394842099}
   - component: {fileID: 8574830267687996503}
+  - component: {fileID: 1997528216964426553}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -2178,6 +2319,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1997528216964426553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716614419786956136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6043980990543624038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,6 +2574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5685781769886477608}
   - component: {fileID: 7940973536337843852}
+  - component: {fileID: 6900978925798819432}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -2467,6 +2654,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6900978925798819432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6313648032260335539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6461302042082560113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,6 +3533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7860716053735217051}
   - component: {fileID: 5603932198472346687}
+  - component: {fileID: 854544670912380430}
   m_Layer: 5
   m_Name: UIEmissionSlider
   m_TagString: Untagged
@@ -3380,6 +3613,51 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &854544670912380430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8390134157855431936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderSelected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3193224403468217280}
+          m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
+          m_MethodName: OnSliderDeselected
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8395998670931465885
 GameObject:
   m_ObjectHideFlags: 0
