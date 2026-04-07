@@ -530,9 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   fontSizePourcentage: 1
-  UIScalingPourcentage: 1
-  EnemyEmissionIntensity: 1
-  UIEmissionIntensity: 1
+  uiScalingPourcentage: 1
 --- !u!1001 &1792512711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -851,7 +849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3411400602329274760, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -327.9182
+      value: -327.91824
       objectReference: {fileID: 0}
     - target: {fileID: 3420388289671849330, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1303,7 +1301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7190862911727841449, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.559708
+      value: -50.559723
       objectReference: {fileID: 0}
     - target: {fileID: 7282104196365530511, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
