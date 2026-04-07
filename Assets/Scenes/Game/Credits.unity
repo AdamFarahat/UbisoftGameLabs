@@ -370,8 +370,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ziyan Pan - Artist
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -506,8 +506,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Raphael Robatto - Sound Designer & Composer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -717,8 +717,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Special Thanks
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -928,8 +928,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ryan De Barros - Programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1139,8 +1139,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jack McDonald - Artist
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1366,6 +1366,10 @@ PrefabInstance:
       value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_fontColor.b
       value: 0.2509804
       objectReference: {fileID: 0}
@@ -1378,8 +1382,16 @@ PrefabInstance:
       value: 0.90196085
       objectReference: {fileID: 0}
     - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4282429158
+      objectReference: {fileID: 0}
+    - target: {fileID: 1287828986964055496, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3702628742004900546, guid: 15b989599c3cfb24ba026306fac79394, type: 3}
       propertyPath: m_Pivot.x
@@ -2147,8 +2159,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Pierre Bausi\xE8re - Mentor"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2463,8 +2475,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Team
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2742,8 +2754,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sara Loudagh - Programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2878,8 +2890,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3014,8 +3026,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Youssef Ben Mouny - Programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3150,8 +3162,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Diana Edvi - Programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3330,8 +3342,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ariel Chouinard - Mentor
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3541,8 +3553,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Adam Farahat - Programmer
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
-  m_sharedMaterial: {fileID: -2656136551466467864, guid: ba8adaf0efe6217429b3c5696266b0b2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
+  m_sharedMaterial: {fileID: 3832443488421527473, guid: 037ee1efb6cda6144a6aa5aae3ee2e97, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
