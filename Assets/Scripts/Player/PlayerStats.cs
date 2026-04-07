@@ -216,6 +216,7 @@ public class PlayerStats : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Game"){
             AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGameUlt);
         }
+        FMOD.Studio.EventInstance superLoop = AudioManager.Instance.PlayLooping(FMODEvents.Instance.PlayerSuper, gameObject);
         float timer = superDuration;
         while (timer >= 0)
         {
@@ -230,6 +231,9 @@ public class PlayerStats : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Game"){
             AudioManager.Instance.PlayMusic(FMODEvents.Instance.OSTGame);
         }
+        superLoop.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        superLoop.release();
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerSuperEnd, Vector3.zero);
         superCoroutine = null;
         SuperEnded?.Invoke();
     }

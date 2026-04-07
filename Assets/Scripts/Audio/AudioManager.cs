@@ -1,13 +1,16 @@
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    private FMOD.Studio.EventInstance currentMusic;
-
+    private EventInstance currentMusic;
     private EventReference currentMusicRef;
+    private Bus masterBus;
+    private Bus musicBus;
+    private Bus sfxBus;
 
     private void Awake()
     {
@@ -20,6 +23,26 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        masterBus = RuntimeManager.GetBus("bus:/");
+        musicBus = RuntimeManager.GetBus("bus:/Music");
+        sfxBus = RuntimeManager.GetBus("bus:/SFX");
+    }
+
+    public void ChangeMasterVolume(float volume)
+    {
+        Debug.Log($"Changing master volume to {volume}");
+        masterBus.setVolume(Mathf.Clamp01(volume));
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        musicBus.setVolume(Mathf.Clamp01(volume));
+    }
+
+    public void ChangeSFXVolume(float volume)
+    {
+        sfxBus.setVolume(Mathf.Clamp01(volume));
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
@@ -31,31 +54,24 @@ public class AudioManager : MonoBehaviour
     {
         if (currentMusic.isValid())
         {
-             if (currentMusicRef.Equals(music))
-             {
-                 return; // Same music is already playing, do nothing
-             }
+            if (currentMusicRef.Equals(music))
+            {
+                return;
+            }
 
-            currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
             currentMusic.release();
-            currentMusic = RuntimeManager.CreateInstance(music);
-            currentMusic.start();
-            currentMusicRef = music;
         }
-        else
-        {
-            currentMusic = RuntimeManager.CreateInstance(music);
-            currentMusic.start();
-            currentMusicRef = music;
-        }
+
+        currentMusic = RuntimeManager.CreateInstance(music);
+        currentMusic.start();
+        currentMusicRef = music;
     }
 
-    public FMOD.Studio.EventInstance PlayLooping(EventReference sound, GameObject obj)
+    public EventInstance PlayLooping(EventReference sound, GameObject obj)
     {
-        FMOD.Studio.EventInstance instance = RuntimeManager.CreateInstance(sound);
-
+        EventInstance instance = RuntimeManager.CreateInstance(sound);
         RuntimeManager.AttachInstanceToGameObject(instance, obj);
-
         instance.start();
         return instance;
     }
@@ -64,7 +80,7 @@ public class AudioManager : MonoBehaviour
     {
         if (currentMusic.isValid())
         {
-            currentMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            currentMusic.stop(STOP_MODE.ALLOWFADEOUT);
             currentMusic.release();
         }
 

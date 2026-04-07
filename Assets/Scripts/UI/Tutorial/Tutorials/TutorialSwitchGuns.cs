@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -11,9 +10,7 @@ public class TutorialSwitchGuns : TutorialBase
     [SerializeField] private GameObject meleeGruntsRoot;
 
     [Header("Descriptions")]
-    [SerializeField] private TextMeshProUGUI firstDescription;
     [SerializeField] private float secondDescriptionWait = 1f;
-    [SerializeField] private TextMeshProUGUI secondDescription;
 
     private TutorialEnemyLife[] meleeGrunts;
 
@@ -27,10 +24,8 @@ public class TutorialSwitchGuns : TutorialBase
         Assert.IsNotNull(meleeGruntsRoot);
         meleeGrunts = meleeGruntsRoot.GetComponentsInChildren<TutorialEnemyLife>();
 
-        Assert.IsNotNull(firstDescription);
-        Assert.IsNotNull(secondDescription);
-
-        secondDescription.GetComponent<RectTransform>().localScale = new(1f, 0f, 1f);
+        Assert.IsTrue(StartingText != EndingText);
+        EndingText.gameObject.SetActive(false);
 
         foreach (TutorialEnemyLife meleeGrunt in meleeGrunts)
             meleeGrunt.gameObject.SetActive(false);
@@ -83,8 +78,8 @@ public class TutorialSwitchGuns : TutorialBase
         IEnumerator Transition()
         {
             yield return new WaitForSeconds(secondDescriptionWait);
-            yield return FadeOutRoutine(firstDescription.gameObject);
-            yield return FadeInRoutine(secondDescription.gameObject);
+            yield return StartingText.DespawnRoutine();
+            yield return EndingText.SpawnRoutine();
         }
 
         StartCoroutine(Transition());

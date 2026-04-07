@@ -147,8 +147,9 @@ MonoBehaviour:
   bulletSpeed: 80
   spawnPoint: {fileID: 3079979570998515900}
   speed: 5
+  damage: 12
   healthCollider: {fileID: 936547612651599108}
-  laneStayPeriod: 2
+  laneStayPeriod: 3
   chargeupTime: 0.5
   surpassingAcceleration: 50
   stayOutOfShotgunRange: 0
@@ -181,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ce876dc819945409a2a1030f9a0e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  maxHealth: 40
-  health: 40
+  maxHealth: 1
+  health: 1
   score: 500
   invulnerable: 0
   deathAnimationDuration: 0.1
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
   minSpeed: 25
-  maxSpeed: 80
+  maxSpeed: 50
 --- !u!114 &8981878535914287841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,8 +398,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 763874545
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b5a299d5b33953b409c47427c7535ec7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -555,8 +556,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 763874545
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8341ace7f775b2642b6642a482f12641, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -712,8 +713,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 763874545
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cb12a9419de9fa0428ce089a96d3a9c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

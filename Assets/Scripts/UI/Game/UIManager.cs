@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         Assert.IsNotNull(scoreText, "Score Text is missing!");
         Assert.IsNotNull(gunPlayerHUD, "Gun Player HUD is missing!");
         Assert.IsNotNull(swordPlayerHUD, "Sword Player HUD is missing!");
+        Assert.IsNotNull(vignetteUI, "Vignette UI is missing!");
     }
 
     void Start()
@@ -77,7 +78,6 @@ public class UIManager : MonoBehaviour
 
     public void OnPause()
     {
-        Debug.Log("Start button pressed. Toggling pause menu.");
         if(SceneManager.GetActiveScene().name != "Game") return;
         gunPlayerController.PlayerInput.enabled = false;
         swordPlayerController.PlayerInput.enabled = false;

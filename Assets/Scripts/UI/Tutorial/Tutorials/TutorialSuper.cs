@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,10 +9,6 @@ public class TutorialSuper : TutorialBase
     [SerializeField] private float fillSuperDuration = 0.5f;
     [SerializeField] private float deathAnimationDuration = 0.5f;
     [SerializeField] private float spawnDistance = 200f;
-
-    [Header("Descriptions")]
-    [SerializeField] private TextMeshProUGUI firstDescription;
-    [SerializeField] private TextMeshProUGUI secondDescription;
 
     [Header("Melee Grunts")]
     [SerializeField] private GameObject meleeGruntPrefab;
@@ -32,11 +27,10 @@ public class TutorialSuper : TutorialBase
     protected override void Awake()
     {
         base.Awake();
-        Assert.IsNotNull(firstDescription);
-        Assert.IsNotNull(secondDescription);
+        Assert.IsTrue(StartingText != EndingText);
         Assert.IsNotNull(meleeGruntPrefab);
 
-        secondDescription.GetComponent<RectTransform>().localScale = new(1f, 0f, 1f);
+        EndingText.gameObject.SetActive(false);
     }
 
     protected override void StartTutorial()
@@ -147,8 +141,8 @@ public class TutorialSuper : TutorialBase
 
         IEnumerator Transition()
         {
-            yield return FadeOutRoutine(firstDescription.gameObject);
-            yield return FadeInRoutine(secondDescription.gameObject);
+            yield return StartingText.DespawnRoutine();
+            yield return EndingText.SpawnRoutine();
         }
 
         StartCoroutine(Transition());

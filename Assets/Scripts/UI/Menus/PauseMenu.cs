@@ -35,8 +35,6 @@ public class PauseMenu : MonoBehaviour
     }
     private void OnEnable()
     {
-        
-        Debug.Log("Showing pause menu");
         Time.timeScale = 0f; // Pause the game
         // Set the first selected button to resumeButton
         gameObject.SetActive(true);
@@ -57,10 +55,10 @@ public class PauseMenu : MonoBehaviour
 
         StartCoroutine(setSelectedButtonNextFrame());
     }
+
     public void ShowPauseMenu()
     {
         
-        Debug.Log("Showing pause menu");
         Time.timeScale = 0f; // Pause the game
 
         // Set the first selected button to resumeButton
