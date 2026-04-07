@@ -17,24 +17,52 @@
       {"enemyType": 2, "lane": -1},
       {"enemyType": 2, "lane": -1},
       {"enemyType": 2, "lane": -1},
-      {"enemyType": 0, "lane": -1},
-      {"enemyType": 0, "lane": -1}
+      {"enemyType": 2, "lane": -1},
+      {"enemyType": 2, "lane": -1},
+      {"enemyType": 2, "lane": -1},
+      {"enemyType": 2, "lane": -1},
+      {"enemyType": 2, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1}
     ]},
         { "label": "Warmup3", "difficulty": 0.10, "isBossWave": false, "spawnEntries": [
-      {"enemyType": 1, "lane": 1},
       {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1},
+      {"enemyType": 0, "lane": -1},
       {"enemyType": 3, "lane": 0},
+      {"enemyType": 3, "lane": 1},
       {"enemyType": 3, "lane": 2},
+      {"enemyType": 3, "lane": 3},
       {"enemyType": 3, "lane": 4}
     ]},
         { "label": "Warmup4", "difficulty": 0.10, "isBossWave": false, "spawnEntries": [
       {"enemyType": 3, "lane": -1},
+      {"enemyType": 3, "lane": -1},
+      {"enemyType": 3, "lane": -1},
+      {"enemyType": 3, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
       {"enemyType": 4, "lane": 1},
-      {"enemyType": 4, "lane": 3}
+      {"enemyType": 4, "lane": 3},
+      {"enemyType": 4, "lane": 0}
     ]},
         { "label": "Warmup5", "difficulty": 0.10, "isBossWave": false, "spawnEntries": [
       {"enemyType": 2, "lane": -1},
       {"enemyType": 2, "lane": -1},
+      {"enemyType": 3, "lane": -1},
+      {"enemyType": 3, "lane": -1},
+      {"enemyType": 1, "lane": -1},
+      {"enemyType": 1, "lane": -1},
       {"enemyType": 5, "lane": 1},
       {"enemyType": 5, "lane": 2},
       {"enemyType": 5, "lane": 4}
@@ -46,9 +74,17 @@
       {"enemyType": -1, "lane": -1},
       {"enemyType": -1, "lane": -1},
       {"enemyType": -1, "lane": -1},
+      {"enemyType": -1, "lane": -1},
+      {"enemyType": -1, "lane": -1},
+      {"enemyType": -1, "lane": -1},
       {"enemyType": -1, "lane": -1}
     ] },
     { "label": "medium",   "difficulty": 0.5, "isBossWave": false, "spawnEntries": [
+      {"enemyType": -1, "lane": 0},
+      {"enemyType": -1, "lane": 1},
+      {"enemyType": -1, "lane": 2},
+      {"enemyType": -1, "lane": 3},
+      {"enemyType": -1, "lane": 4},
       {"enemyType": -1, "lane": 0},
       {"enemyType": -1, "lane": 1},
       {"enemyType": -1, "lane": 2},
@@ -60,7 +96,11 @@
       {"enemyType": -1, "lane": 1},
       {"enemyType": -1, "lane": 2},
       {"enemyType": -1, "lane": 3},
-      {"enemyType": -1, "lane": 4}
+      {"enemyType": -1, "lane": 4},
+      {"enemyType": -1, "lane": 3},
+      {"enemyType": -1, "lane": 2},
+      {"enemyType": -1, "lane": 1},
+      {"enemyType": -1, "lane": 0}
     ]},
       { "label": "bosswave",   "difficulty": 0.9, "isBossWave": true, "spawnEntries": [
       {"enemyType": 0, "lane": 0},
