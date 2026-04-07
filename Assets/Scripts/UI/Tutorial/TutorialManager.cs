@@ -100,6 +100,9 @@ public class TutorialManager : MonoBehaviour
         foreach (GameObject lane in disabledLanes)
             lane.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
 
+        foreach (LaneBar lane in FindObjectsByType<LaneBar>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            lane.gameObject.SetActive(!tutorialSwitchLanes.isActiveAndEnabled);
+
         foreach (TutorialBase tutorial in tutorials)
             tutorial.gameObject.SetActive(false);
 
