@@ -419,7 +419,7 @@ MonoBehaviour:
     duration: 0.1
   - name: Machine Gun Dash Right
     frames:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: 2c2ddc5678416c140a68f6e630a52698, type: 3}
     duration: 0.1
   - name: Shotgun Idle
     frames:
