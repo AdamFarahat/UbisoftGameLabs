@@ -121,7 +121,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             case SamuraiState.Walking:
                 if (ParryIncomingBullets())
                 {
-                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordSlash, transform.position);
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
 
                     if (parryRoutine == null)
                     {
