@@ -234,8 +234,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../docs/Gamelab 2026/Audio/ubisoft-game-labs-fmod-project-mixed/ubisoft-game-labs-audio.fspro
-  sourceBankPath: ../../docs/Gamelab 2026/Audio/ubisoft-game-labs-fmod-project-mixed/Build
+  sourceProjectPath: ../ubisoft-game-labs-fmod-project-mixed/ubisoft-game-labs-audio.fspro
+  sourceBankPath: ../ubisoft-game-labs-fmod-project-mixed/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -257,8 +257,11 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - Music
+  - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

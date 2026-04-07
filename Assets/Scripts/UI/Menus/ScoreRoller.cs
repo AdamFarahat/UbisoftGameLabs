@@ -18,12 +18,37 @@ public class ScoreRoller : MonoBehaviour
         gunPlayer = GunPlayerController.Instance;
         swordPlayer = SwordPlayerController.Instance;
 
-        int gunScore = gunPlayer.Score;
-        AnimateScore(gunScore, gunScoreText);
+        if (gunPlayer != null)
+        {
+            int gunScore = gunPlayer.Score;
+            AnimateScore(gunScore, gunScoreText);
+        }
 
-        int swordScore = swordPlayer.Score;
-        AnimateScore(swordScore, swordScoreText);
+        if (swordPlayer != null)
+        {
+            int swordScore = swordPlayer.Score;
+            AnimateScore(swordScore, swordScoreText);
+        }
     }
+
+    private void Start()
+    {
+        gunPlayer = GunPlayerController.Instance;
+        swordPlayer = SwordPlayerController.Instance;
+
+        if (gunPlayer != null)
+        {
+            int gunScore = gunPlayer.Score;
+            AnimateScore(gunScore, gunScoreText);
+        }
+
+        if (swordPlayer != null)
+        {
+            int swordScore = swordPlayer.Score;
+            AnimateScore(swordScore, swordScoreText);
+        }
+    }
+
     void AnimateScore(int finalScore, TextMeshProUGUI scoreText)
     {
         // Reset state

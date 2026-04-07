@@ -1171,7 +1171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2595957642493512838, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 104.90001
+      value: 104.900024
       objectReference: {fileID: 0}
     - target: {fileID: 2670373026086530784, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1345,6 +1345,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3879762655336555703, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: topBar.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879762655336555703, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: bottomBar.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3879762655336555703, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: 'topBar.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1985904069}
+    - target: {fileID: 3879762655336555703, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: 'bottomBar.Array.data[4]'
+      value: 
+      objectReference: {fileID: 109421188}
+    - target: {fileID: 3879762655336555703, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: 'bottomBar.Array.data[5]'
+      value: 
+      objectReference: {fileID: 109421188}
     - target: {fileID: 3899649818108597673, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2988431
@@ -1435,6 +1455,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4149798499193065890, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197696511529709810, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197696511529709810, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4284939702098327284, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -1565,6 +1593,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -237.33359
       objectReference: {fileID: 0}
+    - target: {fileID: 5684439844047260740, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: gunFireVFX
+      value: 
+      objectReference: {fileID: 1409705920}
+    - target: {fileID: 5684439844047260740, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
+      propertyPath: swordFireVFX
+      value: 
+      objectReference: {fileID: 109421188}
     - target: {fileID: 5762478402765786440, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -1595,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5958816311978202660, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -49.999985
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6054590985515289925, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
       propertyPath: m_fontAsset
@@ -2197,11 +2233,14 @@ VisualEffect:
       - m_Value: 6.77
         m_Name: FlameHeightInverted
         m_Overridden: 1
-      - m_Value: 5
+      - m_Value: 5.2005
         m_Name: FlameLength
         m_Overridden: 1
       - m_Value: 0.5
         m_Name: FillAmount
+        m_Overridden: 1
+      - m_Value: 8
+        m_Name: MaxFlameLength
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
