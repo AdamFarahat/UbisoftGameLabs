@@ -325,6 +325,7 @@ MonoBehaviour:
   score: 10
   invulnerable: 0
   deathAnimationDuration: 0.1
+  hurtAnimationDuration: 0.1
 --- !u!54 &8485515423568085778
 Rigidbody:
   m_ObjectHideFlags: 0
