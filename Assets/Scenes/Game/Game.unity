@@ -214,6 +214,9 @@ VisualEffect:
       - m_Value: 1.32
         m_Name: NoiseVolume
         m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -431,71 +434,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432829545}
   m_CullTransparentMesh: 1
---- !u!1001 &597296906
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65357303025461256, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2305194917688610957, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: laneDistance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3450926691260433750, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: damage
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8980648615144976386, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
-      propertyPath: m_Name
-      value: MeleeGrunt
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d6ad94a507bed2640a8f608e2878c90b, type: 3}
 --- !u!114 &712595016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590525642292955731, guid: 4e8d1c04a6a65dd44a0c7fb6b15a36ae, type: 3}
@@ -694,6 +632,9 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: 1.32
         m_Name: NoiseVolume
+        m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -2558,6 +2499,9 @@ VisualEffect:
       - m_Value: 8
         m_Name: MaxFlameLength
         m_Overridden: 1
+      - m_Value: 3.2209413
+        m_Name: UnscaledTime
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -2699,4 +2643,3 @@ SceneRoots:
   - {fileID: 1409705923}
   - {fileID: 109421191}
   - {fileID: 1074712601}
-  - {fileID: 597296906}
