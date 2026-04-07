@@ -151,7 +151,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             case SamuraiState.Slashing:
                 if (DestroyIncomingBullets())
                 {
-                    // TODO sfx
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
                 }
 
                 if (slashRoutine == null)
@@ -185,7 +185,7 @@ public class SamuraiEnemy : MonoBehaviour, ISpeedRefreshable
             case SamuraiState.Leaving:
                 if (DestroyIncomingBullets())
                 {
-                    // TODO sfx
+                    AudioManager.Instance.PlayOneShot(FMODEvents.Instance.SamuraiSwordParry, transform.position);
                 }
 
                 walkingSpeed += surpassingAcceleration * Time.deltaTime;

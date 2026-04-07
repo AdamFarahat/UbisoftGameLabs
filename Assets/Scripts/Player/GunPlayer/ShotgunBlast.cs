@@ -70,7 +70,7 @@ public class ShotgunBlast : MonoBehaviour
         if (enemy != null && !enemiesHit.Contains(enemy) && !enemy.HasShield())
         {
             enemiesHit.Add(enemy);
-            // TODO Do Shotgun Impact SFX here
+            AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerRevolverImpact, transform.position);
             if (enemy.TryGetComponentInHierarchy(out ShotgunImmune si) && si.isActiveAndEnabled)
                 si.HitByShotgun?.Invoke();
             else if (enemy.TakeDamage(damage))

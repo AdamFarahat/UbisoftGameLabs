@@ -192,7 +192,7 @@ public abstract class PlayerController : MonoBehaviour
 
         SetContinuousMultiplier(1f);
 
-        // TODO stun sfx
+        AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);
         IEnumerator Routine()
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.PlayerStunned, transform.position);

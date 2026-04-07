@@ -34,6 +34,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference PlayerMachinegunReady { get; private set; }
     [field: SerializeField] public EventReference PlayerMachinegunOverheatLoop { get; private set; }
     [field: SerializeField] public EventReference PlayerMachinegunSelect { get; private set; }
+    [field : SerializeField] public EventReference PlayerGrenadeHold { get; private set; }
     [field: SerializeField] public EventReference PlayerGrenadeThrow { get; private set; }
     [field: SerializeField] public EventReference PlayerGrenadeExplode { get; private set; }
 
