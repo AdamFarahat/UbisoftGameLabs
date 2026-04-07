@@ -149,7 +149,7 @@ MonoBehaviour:
   speed: 5
   damage: 12
   healthCollider: {fileID: 936547612651599108}
-  laneStayPeriod: 2
+  laneStayPeriod: 3
   chargeupTime: 0.5
   surpassingAcceleration: 50
   stayOutOfShotgunRange: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpeedConfig
   minSpeed: 25
-  maxSpeed: 80
+  maxSpeed: 50
 --- !u!114 &8981878535914287841
 MonoBehaviour:
   m_ObjectHideFlags: 0
