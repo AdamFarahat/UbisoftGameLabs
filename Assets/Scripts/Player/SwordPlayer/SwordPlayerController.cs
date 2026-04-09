@@ -129,7 +129,23 @@ public class SwordPlayerController : PlayerController
         playerInput.actions["Attack"].performed += Attack;
         playerInput.actions["Block/Parry"].started += Block;
         playerInput.actions["Block/Parry"].canceled += CancelBlock;
+
     }
+
+    public void ReConnectInput()
+    {
+
+        if (PlayerSelect.swordPlayerDevice != null)
+        {
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(PlayerSelect.swordPlayerDevice, playerInput.user);
+        }
+        else
+        {
+            Debug.LogError("Sword player device is null");
+        }
+    }
+
 
     protected override void OnDisable()
     {

@@ -90,6 +90,21 @@ public class GunPlayerController : PlayerController
         grenadeBelt.OnCooldownReady += HandleGrenadeReady;
     }
 
+    public void ReConnectInput()
+    {
+
+
+        if (PlayerSelect.gunPlayerDevice != null)
+        {
+            playerInput.user.UnpairDevices();
+            InputUser.PerformPairingWithDevice(PlayerSelect.gunPlayerDevice, playerInput.user);
+        }
+        else
+        {
+            Debug.LogError("Gun player device is null");
+        }
+    }
+
     protected override void OnDisable()
     {
         base.OnDisable();

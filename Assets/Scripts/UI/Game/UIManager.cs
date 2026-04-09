@@ -89,6 +89,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("Resuming game from pause menu.");
         gunPlayerController.PlayerInput.enabled = true;
         swordPlayerController.PlayerInput.enabled = true;
+        gunPlayerController.ReConnectInput();
+        swordPlayerController.ReConnectInput();
     }
     private void CacheSystemReferences()
     {
