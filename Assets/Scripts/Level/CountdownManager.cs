@@ -143,10 +143,16 @@ public class CountdownManager : MonoBehaviour
         fullSprite.enabled = false;
 
         if (SwordPlayerController.Instance != null)
+        {
             SwordPlayerController.Instance.PlayerInput.enabled = true;
+            SwordPlayerController.Instance.ReConnectInput();
+        }
 
         if (GunPlayerController.Instance != null)
+        {
             GunPlayerController.Instance.PlayerInput.enabled = true;
+            GunPlayerController.Instance.ReConnectInput();
+        }
 
         Vector3[] bottomBarStartingPositions = new Vector3[bottomBar.Length];
         for (int i = 0; i < bottomBar.Length; i++)
