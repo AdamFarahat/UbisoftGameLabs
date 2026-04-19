@@ -92,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1214044853849577375
 RectTransform:
   m_ObjectHideFlags: 0
@@ -100,17 +100,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161776477749886229}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: -0.00025054513}
-  m_LocalScale: {x: 2.6572561, y: 2.6572561, z: 2.6572564}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4584660439847511908}
-  m_Father: {fileID: 1665042266983819459}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_Father: {fileID: 3553008514586460535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 99.99997, y: 145.25348}
   m_SizeDelta: {x: 62.547, y: 36.793}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5199404478702830039
@@ -581,7 +581,6 @@ RectTransform:
   m_Children:
   - {fileID: 7093702494016589453}
   - {fileID: 8047676394727526899}
-  - {fileID: 1214044853849577375}
   - {fileID: 7223891211443970652}
   m_Father: {fileID: 4934685864622737607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1436,7 +1435,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1214044853849577375}
   m_Father: {fileID: 8047676394727526899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2458,7 +2458,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4465670778997849646}
-  - {fileID: 1214044853849577375}
   - {fileID: 4078240770961397919}
   - {fileID: 8149809549354127646}
   - {fileID: 3862421497064466943}
@@ -2565,8 +2564,6 @@ MonoBehaviour:
   HighScoreSword: {fileID: 1540666837885796719}
   eventSystem: {fileID: 0}
   delayBeforeSelectingRestartButton: 1
-  gunFireVFX: {fileID: 0}
-  swordFireVFX: {fileID: 0}
 --- !u!114 &1602481213295147402
 MonoBehaviour:
   m_ObjectHideFlags: 0

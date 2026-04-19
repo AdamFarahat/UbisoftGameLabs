@@ -84,15 +84,15 @@ public class ScoreManagerSO : ScriptableObject
 
     
 
-    private static int GetHighScoreTeam()
+    public static int GetHighScoreTeam()
     {
         return PlayerPrefs.GetInt(HIGH_SCORE_TEAM, 0);
     }
-    private static int GetHighScoreGunPlayer()
+    public static int GetHighScoreGunPlayer()
     {
         return PlayerPrefs.GetInt(HIGH_SCORE_GUN_PLAYER, 0);
     }
-    private static int GetHighScoreSwordPlayer()
+    public static int GetHighScoreSwordPlayer()
     {
         return PlayerPrefs.GetInt(HIGH_SCORE_SWORD_PLAYER, 0);
     }

@@ -11,6 +11,11 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gunScore;
     [SerializeField] private TextMeshProUGUI swordScore;
     [SerializeField] private TextMeshProUGUI overallScoreText;
+
+    [Header("HighScore Texts")]
+    [SerializeField] private TextMeshProUGUI HighScoreGunText;
+    [SerializeField] private TextMeshProUGUI HighScoreSwordText;
+    [Space]
     [SerializeField] private Button restartButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private MenuFader gameOverFader;
@@ -33,6 +38,9 @@ public class GameOver : MonoBehaviour
         Assert.IsNotNull(gunScore);
         Assert.IsNotNull(swordScore);
         Assert.IsNotNull(overallScoreText);
+        Assert.IsNotNull(HighScoreGunText);
+        Assert.IsNotNull(HighScoreSwordText);
+
         Assert.IsNotNull(restartButton);
         Assert.IsNotNull(mainMenuButton);
         Assert.IsNotNull(eventSystem);
@@ -67,7 +75,9 @@ public class GameOver : MonoBehaviour
             HighScoreTeam.SetActive(true);
         }
 
-
+        // Directly getting the highscore saved into the persistence system.
+        HighScoreSwordText.text = ScoreManagerSO.GetHighScoreSwordPlayer().ToString();
+        HighScoreGunText.text = ScoreManagerSO.GetHighScoreGunPlayer().ToString();
         overallScoreText.text = score.ToString();
         
 
